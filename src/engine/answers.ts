@@ -89,8 +89,10 @@ export const PRIORITY_LABEL: Record<Priority, { label: string; hint: string }> =
   reliability: { label: 'Peace of mind', hint: 'Service network, resale, proven platform' },
 }
 
-/** Features a buyer can insist on. Matched loosely against each car's feature list. */
-export const MUST_HAVES: { id: string; label: string; tier: number }[] = [
+/** Features a buyer can insist on. Matched loosely against each car's feature list.
+ *  `soft`: our data records this feature on too few cars to rule the others out, so a car without it
+ *  is marked down instead of dropped. */
+export const MUST_HAVES: { id: string; label: string; tier: number; soft?: boolean }[] = [
   { id: '6-airbags', label: '6 airbags', tier: 0 },
   { id: 'sunroof', label: 'Sunroof', tier: 0.7 },
   { id: 'adas', label: 'ADAS', tier: 0.85 },
@@ -98,7 +100,7 @@ export const MUST_HAVES: { id: string; label: string; tier: number }[] = [
   { id: 'ventilated-seats', label: 'Ventilated seats', tier: 0.8 },
   { id: 'wireless-carplay', label: 'Wireless CarPlay / AA', tier: 0.45 },
   { id: 'cruise', label: 'Cruise control', tier: 0.5 },
-  { id: 'auto-climate', label: 'Auto climate', tier: 0.45 },
+  { id: 'auto-climate', label: 'Auto climate', tier: 0.45, soft: true },
   { id: 'hud', label: 'Head-up display', tier: 0.85 },
-  { id: 'connected-car', label: 'Connected car', tier: 0.5 },
+  { id: 'connected-car', label: 'Connected car', tier: 0.5, soft: true },
 ]
