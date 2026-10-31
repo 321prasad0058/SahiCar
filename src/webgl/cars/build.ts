@@ -16,7 +16,7 @@ export interface Decal {
   /** stacking: decals drawn on top of others sit a little further out */
   layer?: number
 }
-export type WheelStyle = 'turbine' | 'twin' | 'aero' | 'multi'
+export type WheelStyle = 'turbine' | 'twin' | 'aero' | 'multi' | 'blade'
 
 export interface CarSpec {
   id: string
@@ -292,6 +292,8 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     const n = rings.length
     for (let k = 0; k < n; k++) {
       const i = end > 0 ? n - 1 - k : k
+      // a front/rear outline may wrap round a corner, but never run back along the flank over a wheel
+      if (Math.abs(rings[i].x - rings[end > 0 ? n - 1 : 0].x) > 0.3) return null
       const zi = ringZ(rings[i].ring, y)
       if (zi >= az) {
         if (k === 0) return new THREE.Vector3(rings[i].x, y, z)
@@ -722,9 +724,9 @@ function rimGeometry(spec: CarSpec, hi: boolean) {
   out.push({ g: cyl(R * 0.18, 0.04, face - 0.004, 20), mat: 'face' })
   const spokes: THREE.BufferGeometry[] = []
   const n = spec.wheel.spokes
-  const blade = (angle: number, w: number, len: number, z: number, sweep = 0) => {
+  const blade = (angle: number, w: number, len: number, z: number, sweep = 0, off = 0) => {
     const b = new THREE.BoxGeometry(w, len, 0.022, 1, 6, 1)
-    b.translate(0, R * 0.18 + len / 2, z)
+    b.translate(off, R * 0.18 + len / 2, z)
     if (sweep) {
       // bend the blade round as it goes out, like a turbine
       const pos = b.attributes.position as THREE.BufferAttribute
@@ -748,6 +750,18 @@ function rimGeometry(spec: CarSpec, hi: boolean) {
       case 'turbine':
         blade(a, R * 0.32, len, face - 0.008, 0.6)
         break
+      case 'blade': {
+        // off-centre spokes, two machined faces split by a dark groove, a wedge where each meets the rim
+        blade(a, R * 0.14, len * 0.98, face - 0.006, 0.06, R * 0.02)
+        blade(a, R * 0.14, len * 0.98, face - 0.006, 0.06, R * 0.2)
+        const t = new THREE.CylinderGeometry(R * 0.2, R * 0.2, 0.02, 3)
+        t.rotateX(Math.PI / 2)
+        t.rotateZ(Math.PI)
+        t.translate(R * 0.14, R * 0.8, face - 0.008)
+        t.rotateZ(a + 0.08)
+        spokes.push(t)
+        break
+      }
       case 'aero':
         blade(a, R * 0.36, len, face - 0.006, 0.25)
         break
