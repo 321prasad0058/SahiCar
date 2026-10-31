@@ -6,7 +6,7 @@
 //
 // Built to stay smooth anywhere:
 // - no downloads: every car, texture and the studio lighting are procedural;
-// - no post-processing, and nothing animates between swaps — a still frame costs nothing to keep on screen;
+// - no post-processing; the road is one scrolling texture and the wheels spin with it;
 // - only the first car is built up front, the rest one per idle moment;
 // - resolution adapts to the frame rate; rendering stops when the hero is scrolled away or the tab is hidden;
 //   a lost WebGL context hands over to the static poster.
@@ -27,6 +27,31 @@ const SHOTS: { theta: number; elev: number; look: number; zoom: number }[] = [
   { theta: 0.72, elev: 0.07, look: 0.82, zoom: 0.98 }, // SUV
   { theta: 0.46, elev: 0.12, look: 0.84, zoom: 1.06 }, // MPV
 ]
+
+/** A light concrete road, tiled every `len` metres: faint texture, edge lines and a dashed centre line. */
+function roadTexture(len: number) {
+  const c = document.createElement('canvas')
+  c.width = 512
+  c.height = 64
+  const g = c.getContext('2d')!
+  g.fillStyle = '#cdc7bb'
+  g.fillRect(0, 0, 512, 64)
+  // a little grain so the movement reads
+  for (let i = 0; i < 900; i++) {
+    g.fillStyle = Math.random() < 0.5 ? 'rgba(255,255,255,0.18)' : 'rgba(80,70,55,0.06)'
+    g.fillRect(Math.random() * 512, Math.random() * 64, 2, 1)
+  }
+  g.fillStyle = '#faf8f3'
+  g.fillRect(0, 3, 512, 3)
+  g.fillRect(0, 58, 512, 3)
+  for (let x = 0; x < 512; x += 128) g.fillRect(x + 16, 30, 64, 4)
+  const t = new THREE.CanvasTexture(c)
+  t.colorSpace = THREE.SRGBColorSpace
+  t.wrapS = THREE.RepeatWrapping
+  t.repeat.set(160 / len, 1)
+  t.anisotropy = 8
+  return t
+}
 
 /** the studio colour: the wall and the floor melt into it at the horizon */
 const STUDIO = new THREE.Color('#efece6')
@@ -57,6 +82,11 @@ export class HeroWorld {
   private last = performance.now()
 
   lights = 0
+  /** driving speed, 0..1; the road scrolls and the wheels turn with it */
+  speed = 0
+  private road: THREE.Texture
+  private roadLen = 12
+  private elapsed = 0
   private cam: { theta: number; elev: number; look: number; zoom: number }
   /** where on the canvas the car should sit: centre and size as fractions of the canvas */
   private focus = { x: 0.7, y: 0.5, w: 0.45, h: 0.45 }
@@ -83,6 +113,13 @@ export class HeroWorld {
     const floor = new THREE.Mesh(new THREE.CircleGeometry(80, 64), new THREE.MeshStandardMaterial({ color: '#e6e1d8', roughness: 0.95, metalness: 0 }))
     floor.rotation.x = -Math.PI / 2
     this.scene.add(floor)
+
+    // a pale road with dashed lane lines that flows under the car — the drive, in daylight
+    this.road = roadTexture(this.roadLen)
+    const road = new THREE.Mesh(new THREE.PlaneGeometry(160, 7.5), new THREE.MeshStandardMaterial({ map: this.road, roughness: 0.9, metalness: 0 }))
+    road.rotation.x = -Math.PI / 2
+    road.position.y = 0.002
+    this.scene.add(road)
     const key = new THREE.DirectionalLight('#ffffff', 1.4)
     key.position.set(5, 10, 6)
     this.scene.add(key, new THREE.HemisphereLight('#ffffff', '#d6cfc2', 0.9))
@@ -191,11 +228,13 @@ export class HeroWorld {
     if (reducedMotion || skipSweep) {
       Object.assign(this.cam, s)
       this.lights = 0.6
+      this.speed = reducedMotion ? 0 : 1
       this.needsRender = true
       return tl
     }
     tl.to(this.cam, { ...s, duration: 1.6, ease: 'power3.out' }, 0)
     tl.to(this, { lights: 0.6, duration: 0.8, ease: 'power2.out' }, 0.4)
+    tl.to(this, { speed: 1, duration: 1.4, ease: 'power2.inOut' }, 0.2)
     return tl
   }
 
@@ -256,16 +295,22 @@ export class HeroWorld {
     this.last = now
     // parallax settles over a few frames after the pointer stops
     const settling = Math.abs(this.pointer.tx - this.pointer.x) + Math.abs(this.pointer.ty - this.pointer.y) > 0.002
-    const moving = gsap.isTweening(this.cam) || gsap.isTweening(this) || this.cars.some((c) => c && gsap.isTweening(c.group.position))
+    const driving = this.speed > 0.001
+    const moving = driving || gsap.isTweening(this.cam) || gsap.isTweening(this) || this.cars.some((c) => c && gsap.isTweening(c.group.position))
     if (!moving && !settling && !this.needsRender) return
     if (moving) this.adapt(dt)
     this.needsRender = false
 
-    // wheels turn with the car's real movement, so a parked car is still
+    // the road flows past at driving speed; the wheels turn with the road plus any roll-in / roll-off
+    const sec = Math.min(0.05, dt / 1000)
+    this.elapsed += sec
+    const v = this.speed * 14 * sec
+    this.road.offset.x = (this.road.offset.x + v / this.roadLen) % 1
     this.cars.forEach((car, i) => {
       if (!car?.group.visible) return
-      car.spin(car.group.position.x - this.lastX[i])
+      car.spin(v + (car.group.position.x - this.lastX[i]))
       this.lastX[i] = car.group.position.x
+      car.group.position.y = Math.sin(this.elapsed * 7.5 + i) * 0.004 * this.speed
       car.setLights(this.lights)
     })
 
