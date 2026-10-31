@@ -592,12 +592,23 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
   const tyreG = tyreGeometry(spec.tyreR, spec.tyreW, spec.rim, hi ? 44 : 24)
   const rimG = rimGeometry(spec, hi)
   disposables.push(tyreG, ...rimG.map((r) => r.g))
+  // At speed a camera never sees spokes, it sees their average; this disc fades in as the wheels turn faster,
+  // so a moving rim smears instead of strobing.
+  const blurTex = rimBlurTexture(spec)
+  const blurMat = new THREE.MeshStandardMaterial({ map: blurTex, metalness: 0.7, roughness: 0.38, transparent: true, opacity: 0, depthWrite: false })
+  const blurG = new THREE.CircleGeometry(spec.tyreR * spec.rim * 0.96, hi ? 40 : 24)
+  blurG.translate(0, 0, spec.tyreW / 2 - 0.012 + 0.004)
+  disposables.push(blurTex, blurMat, blurG)
+  let blur = 0
   for (const ax of axles) {
     add(S.well, new THREE.BoxGeometry(archR * 2, archR, W - 0.5), new THREE.Matrix4().makeTranslation(ax, archY + archR * 0.45, 0))
     for (const side of [-1, 1]) {
       const w = new THREE.Group()
       w.add(new THREE.Mesh(tyreG, S.tyre))
       for (const r of rimG) w.add(new THREE.Mesh(r.g, r.mat === 'face' ? S.rimFace : r.mat === 'dark' ? S.rimDark : S.brake))
+      const bd = new THREE.Mesh(blurG, blurMat)
+      bd.visible = false
+      w.add(bd)
       if (side < 0) w.rotation.y = Math.PI
       w.position.set(ax, spec.tyreR, side * (W / 2 - spec.tyreW / 2 - 0.03))
       group.add(w)
@@ -684,7 +695,13 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
       for (const g of glows) (g.sprite.material as THREE.SpriteMaterial).opacity = v * g.k
     },
     spin(dx) {
-      for (const w of wheels) w.rotation.z += (w.rotation.y ? 1 : -1) * (dx / spec.tyreR)
+      const a = dx / spec.tyreR
+      for (const w of wheels) w.rotation.z += (w.rotation.y ? 1 : -1) * a
+      // blur by angle per frame: spokes read sharply below ~0.08 rad a frame and strobe above ~0.3
+      const t = Math.max(0, Math.min(1, (Math.abs(a) - 0.08) / 0.22))
+      blur += (t * t * (3 - 2 * t) - blur) * 0.15
+      blurMat.opacity = blur * 0.92
+      for (const w of wheels) w.children[w.children.length - 1].visible = blur > 0.01
     },
     dispose() {
       disposables.forEach((d) => d.dispose())
@@ -704,6 +721,87 @@ function tyreGeometry(R: number, w: number, rim: number, seg: number) {
   const g = new THREE.LatheGeometry(prof, seg)
   g.rotateX(Math.PI / 2)
   return g
+}
+
+/** The rim as a fast camera sees it: the spoke pattern averaged round one spoke's turn, plus faint smear rings. */
+function rimBlurTexture(spec: CarSpec) {
+  const N = 256
+  const k = N / 2 / 0.98 // pixels per rim radius
+  const src = document.createElement('canvas')
+  src.width = src.height = N
+  const g = src.getContext('2d')!
+  g.translate(N / 2, N / 2)
+  g.fillStyle = '#3a4147'
+  g.beginPath()
+  g.arc(0, 0, N / 2, 0, Math.PI * 2)
+  g.fill()
+  g.fillStyle = '#d7dee4'
+  const n = spec.wheel.spokes
+  const len = 0.78
+  const bar = (a: number, w: number, l: number, off = 0) => {
+    g.save()
+    g.rotate(a)
+    g.fillRect((off - w / 2) * k, -(0.18 + l) * k, w * k, l * k)
+    g.restore()
+  }
+  for (let i = 0; i < n; i++) {
+    const a = (i / n) * Math.PI * 2
+    switch (spec.wheel.style) {
+      case 'twin':
+        bar(a - 0.09, 0.085, len)
+        bar(a + 0.09, 0.085, len)
+        break
+      case 'turbine':
+        bar(a, 0.32, len)
+        break
+      case 'aero':
+        bar(a, 0.36, len)
+        break
+      case 'blade':
+        bar(a, 0.14, len * 0.98, 0.02)
+        bar(a, 0.14, len * 0.98, 0.2)
+        g.save()
+        g.rotate(a)
+        g.beginPath()
+        g.moveTo(0.14 * k - 0.17 * k, -0.9 * k)
+        g.lineTo(0.14 * k + 0.17 * k, -0.9 * k)
+        g.lineTo(0.14 * k, -0.7 * k)
+        g.fill()
+        g.restore()
+        break
+      default:
+        bar(a, 0.065, len)
+    }
+  }
+  g.beginPath()
+  g.arc(0, 0, 0.18 * k, 0, Math.PI * 2)
+  g.fill()
+
+  // average over one spoke period: drawing copy j at alpha 1/(j+1) leaves the exact mean
+  const c = document.createElement('canvas')
+  c.width = c.height = N
+  const o = c.getContext('2d')!
+  const steps = 32
+  for (let j = 0; j < steps; j++) {
+    o.save()
+    o.globalAlpha = 1 / (j + 1)
+    o.translate(N / 2, N / 2)
+    o.rotate(((j / steps) * Math.PI * 2) / n)
+    o.drawImage(src, -N / 2, -N / 2)
+    o.restore()
+  }
+  // a few thin concentric smears, the way machined faces streak in a photo
+  o.translate(N / 2, N / 2)
+  for (let j = 0; j < 14; j++) {
+    o.strokeStyle = Math.random() < 0.5 ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.07)'
+    o.lineWidth = 1 + Math.random() * 2
+    o.beginPath()
+    o.arc(0, 0, (0.22 + Math.random() * 0.74) * k, 0, Math.PI * 2)
+    o.stroke()
+  }
+  const t = new THREE.CanvasTexture(c)
+  t.colorSpace = THREE.SRGBColorSpace
+  return t
 }
 
 function rimGeometry(spec: CarSpec, hi: boolean) {
