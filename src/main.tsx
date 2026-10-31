@@ -17,3 +17,11 @@ createRoot(document.getElementById('root')!).render(
 if (import.meta.env.PROD && 'serviceWorker' in navigator) {
   addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}))
 }
+
+// analytics after load, when the browser is idle (production only)
+if (import.meta.env.PROD && import.meta.env.VITE_FIREBASE_MEASUREMENT_ID) {
+  addEventListener('load', () => {
+    const go = () => import('./fb/analytics').then((m) => m.startAnalytics()).catch(() => {})
+    'requestIdleCallback' in window ? requestIdleCallback(go, { timeout: 4000 }) : setTimeout(go, 2000)
+  })
+}

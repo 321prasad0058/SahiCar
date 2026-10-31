@@ -1,6 +1,6 @@
 // Firebase on the free Spark plan: Authentication for accounts, Firestore for saved answers and garages.
 // Without a config the app still works end to end — sign-in is hidden and everything stays in this browser.
-import { initializeApp, type FirebaseApp } from 'firebase/app'
+import { getApps, initializeApp, type FirebaseApp } from 'firebase/app'
 import { connectAuthEmulator, getAuth, type Auth } from 'firebase/auth'
 import { connectFirestoreEmulator, initializeFirestore, type Firestore } from 'firebase/firestore'
 
@@ -13,12 +13,16 @@ export let auth: Auth | null = null
 export let db: Firestore | null = null
 
 if (firebaseEnabled) {
-  app = initializeApp({
-    apiKey: env.VITE_FIREBASE_API_KEY ?? 'demo-key',
-    authDomain: env.VITE_FIREBASE_AUTH_DOMAIN ?? `${env.VITE_FIREBASE_PROJECT_ID ?? 'demo-sahicar'}.firebaseapp.com`,
-    projectId: env.VITE_FIREBASE_PROJECT_ID ?? 'demo-sahicar',
-    appId: env.VITE_FIREBASE_APP_ID,
-  })
+  // analytics may have started the app already
+  app =
+    getApps()[0] ??
+    initializeApp({
+      apiKey: env.VITE_FIREBASE_API_KEY ?? 'demo-key',
+      authDomain: env.VITE_FIREBASE_AUTH_DOMAIN ?? `${env.VITE_FIREBASE_PROJECT_ID ?? 'demo-sahicar'}.firebaseapp.com`,
+      projectId: env.VITE_FIREBASE_PROJECT_ID ?? 'demo-sahicar',
+      appId: env.VITE_FIREBASE_APP_ID,
+      measurementId: env.VITE_FIREBASE_MEASUREMENT_ID,
+    })
   auth = getAuth(app)
   db = initializeFirestore(app, { ignoreUndefinedProperties: true })
   if (emulators) {
