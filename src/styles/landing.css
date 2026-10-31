@@ -1,0 +1,618 @@
+/* ── landing: the night drive behind, the story in front */
+.hero-canvas,
+.hero-poster,
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.hero-canvas {
+  z-index: 0;
+  display: block;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease);
+  touch-action: pan-y;
+}
+.hero-canvas.on {
+  opacity: 1;
+}
+
+/* the poster: pure CSS, shown instantly, and the whole show on devices that skip the 3D */
+.hero-poster {
+  z-index: 0;
+  overflow: hidden;
+  background: radial-gradient(50% 45% at 74% 52%, rgba(42, 212, 255, 0.16), transparent 70%),
+    radial-gradient(40% 30% at 80% 75%, rgba(60, 240, 110, 0.08), transparent 70%), var(--bg);
+  transition: opacity 1.2s var(--ease);
+}
+.hero-poster.gone {
+  opacity: 0;
+}
+.poster-road {
+  position: absolute;
+  left: -20%;
+  right: -20%;
+  bottom: -10%;
+  height: 55%;
+  transform: perspective(600px) rotateX(62deg);
+  transform-origin: bottom;
+  background: repeating-linear-gradient(90deg, transparent 0 46%, rgba(160, 180, 190, 0.35) 46% 47%, transparent 47% 100%) 0 0 / 100% 120px,
+    linear-gradient(90deg, transparent 8%, rgba(42, 212, 255, 0.8) 8.3%, transparent 8.6%, transparent 91.4%, rgba(60, 240, 110, 0.8) 91.7%, transparent 92%),
+    linear-gradient(#070b10, #04070b);
+  animation: road 1.2s linear infinite;
+}
+@keyframes road {
+  to {
+    background-position: 0 120px, 0 0, 0 0;
+  }
+}
+.poster-bar {
+  position: absolute;
+  right: 16%;
+  top: 46%;
+  width: 22%;
+  height: 4px;
+  border-radius: 4px;
+  background: #dff6ff;
+  box-shadow: 0 0 18px 4px rgba(42, 212, 255, 0.8), 0 0 80px 20px rgba(42, 212, 255, 0.25);
+}
+@media (prefers-reduced-motion: reduce) {
+  .poster-road {
+    animation: none;
+  }
+}
+.hero-vignette {
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(4, 7, 11, 0.9) 0%, rgba(4, 7, 11, 0.45) 40%, transparent 62%),
+    linear-gradient(0deg, rgba(4, 7, 11, 0.95) 0%, transparent 22%), linear-gradient(180deg, rgba(4, 7, 11, 0.7) 0%, transparent 18%);
+}
+
+.loader {
+  display: none;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: 92px 0 36px;
+}
+.hero-wrap {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+  width: 100%;
+  max-width: 1360px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.92fr);
+  gap: clamp(20px, 3vw, 48px);
+  align-items: stretch;
+}
+.hero-text {
+  align-self: center;
+  min-width: 0;
+}
+.hero-title {
+  font-size: clamp(42px, 5.6vw, 92px);
+  line-height: 0.95;
+  white-space: nowrap;
+  letter-spacing: -0.045em;
+  margin: 18px 0 22px;
+  display: grid;
+}
+[data-hero],
+.hero-in {
+  visibility: hidden;
+}
+.hero-sub .less,
+.sc-tab-label .short {
+  display: none;
+}
+.hero-sub {
+  max-width: 540px;
+  font-size: clamp(15px, 1.4vw, 18px);
+  color: #c6d4de;
+}
+.hero-cta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+.btn-xl {
+  height: 60px;
+  padding: 0 34px;
+  font-size: 17px;
+}
+.hero-stats {
+  display: flex;
+  gap: clamp(20px, 3.4vw, 44px);
+  margin-top: 44px;
+  flex-wrap: wrap;
+}
+.hero-stats div {
+  display: grid;
+}
+.hero-stats b {
+  font-family: var(--display);
+  font-size: clamp(24px, 2.6vw, 34px);
+  font-weight: 800;
+}
+.hero-stats span {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* the stage: the 3D car fills .car-zone (the canvas frames it there); the card explains it */
+.stage {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 14px;
+  min-height: min(76vh, 760px);
+}
+.car-zone {
+  flex: 1;
+  min-height: 260px;
+  cursor: grab;
+  touch-action: pan-y;
+}
+.style-card {
+  padding: 16px 18px 18px;
+  border-radius: 20px;
+  background: rgba(8, 14, 20, 0.62);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(14px) saturate(1.2);
+  box-shadow: 0 30px 80px -40px rgba(0, 0, 0, 0.8);
+}
+.sc-tabs {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.sc-tab {
+  display: grid;
+  gap: 7px;
+  text-align: left;
+  padding: 2px 0;
+  color: var(--dim);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: color 0.3s;
+}
+.sc-tab:hover,
+.sc-tab.on {
+  color: var(--ink);
+}
+.sc-tab-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sc-tab-bar {
+  position: relative;
+  height: 3px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+.sc-tab.past .sc-tab-bar {
+  background: rgba(42, 212, 255, 0.35);
+}
+.sc-tab.on .sc-tab-bar {
+  background: rgba(42, 212, 255, 0.18);
+}
+.sc-tab-fill {
+  position: absolute;
+  inset: 0;
+  transform-origin: left;
+  background: linear-gradient(90deg, var(--cyan), var(--green));
+  animation-name: scfill;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+.style-card.paused .sc-tab-fill {
+  animation-play-state: paused;
+}
+@keyframes scfill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.sc-body {
+  display: grid;
+  gap: 10px;
+}
+.sc-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.sc-kicker {
+  font-size: clamp(30px, 3.4vw, 44px);
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+.sc-nav {
+  display: flex;
+  gap: 6px;
+}
+.sc-nav .icon-btn {
+  width: 34px;
+  height: 34px;
+}
+.sc-line {
+  color: #c6d4de;
+  font-size: 14.5px;
+  line-height: 1.5;
+  min-height: 2.9em;
+}
+.sc-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.sc-facts div {
+  display: grid;
+  padding: 9px 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line);
+}
+.sc-facts b {
+  font-family: var(--display);
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.stage,
+.style-card {
+  min-width: 0;
+}
+.sc-facts span {
+  font-size: 11.5px;
+  color: var(--muted);
+}
+.sc-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Phones and tablets: the whole hero — headline, buttons, car and card — is exactly one screen. The text and
+   card take what they need; the car stage flexes into whatever height is left. */
+@media (max-width: 960px) {
+  .hero {
+    height: 100vh;
+    height: 100svh;
+    min-height: 540px;
+    align-items: stretch;
+    padding: 74px 0 12px;
+  }
+  .hero-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    height: 100%;
+  }
+  .hero-vignette {
+    background: linear-gradient(180deg, rgba(4, 7, 11, 0.92) 0%, rgba(4, 7, 11, 0.55) 34%, transparent 50%), linear-gradient(0deg, rgba(4, 7, 11, 0.9) 0%, transparent 30%);
+  }
+  .hero-stats,
+  .hero-sub .more,
+  .sc-tab-label .long {
+    display: none;
+  }
+  .hero-sub .less,
+  .sc-tab-label .short {
+    display: inline;
+  }
+  .hero-title {
+    white-space: normal;
+    font-size: clamp(34px, 10vw, 64px);
+    margin: 10px 0 10px;
+  }
+  .hero-sub {
+    font-size: 14.5px;
+    line-height: 1.5;
+  }
+  .hero-cta {
+    margin-top: 14px;
+    flex-wrap: nowrap;
+  }
+  .hero-cta {
+    gap: 8px;
+  }
+  .hero-cta .btn {
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 42px;
+    padding: 0 12px;
+    font-size: 13.5px;
+  }
+  .hero-cta .btn svg {
+    flex: none;
+  }
+  .stage {
+    flex: 1;
+    min-height: 0;
+    gap: 6px;
+  }
+  .car-zone {
+    flex: 1;
+    min-height: 110px;
+  }
+  .style-card {
+    padding: 11px 13px 12px;
+    border-radius: 16px;
+  }
+  .sc-tabs {
+    margin-bottom: 8px;
+  }
+  .sc-tab-label {
+    font-size: 11px;
+  }
+  .sc-body {
+    gap: 7px;
+  }
+  .sc-kicker {
+    font-size: 28px;
+  }
+  .sc-line {
+    min-height: 0;
+    font-size: 13px;
+  }
+  .sc-facts div {
+    padding: 6px 8px;
+  }
+  .sc-facts b {
+    font-size: 13.5px;
+  }
+  .sc-facts span {
+    font-size: 10.5px;
+  }
+}
+/* the narrowest phones (320 px) */
+@media (max-width: 350px) {
+  .sc-facts b {
+    font-size: 12px;
+  }
+  .sc-facts span {
+    font-size: 9.5px;
+  }
+  .hero-cta .btn {
+    font-size: 12.5px;
+    padding: 0 9px;
+  }
+}
+/* short phones: drop the lines the card can live without */
+@media (max-width: 960px) and (max-height: 760px) {
+  .sc-foot .mono,
+  .eyebrow.hero-in {
+    display: none;
+  }
+  .sc-line {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+@media (max-width: 960px) and (max-height: 640px) {
+  .sc-line,
+  .sc-foot {
+    display: none;
+  }
+}
+
+.section-title {
+  font-size: clamp(34px, 5.5vw, 72px);
+  letter-spacing: -0.035em;
+  margin: 14px 0 16px;
+  max-width: 900px;
+}
+.section-sub {
+  max-width: 600px;
+  font-size: 17px;
+}
+
+/* body styles: each caption lights up while the 3D car wears that shape */
+.shapes {
+  padding: 18vh 0 10vh;
+}
+.shape-list {
+  margin-top: 8vh;
+  display: grid;
+  gap: 28vh;
+  padding-bottom: 20vh;
+}
+.shape-item {
+  max-width: 440px;
+  opacity: 0.25;
+  transform: translateX(-12px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+.shape-item.on {
+  opacity: 1;
+  transform: none;
+}
+.shape-k {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(36px, 6vw, 80px);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.shape-item.on .shape-k {
+  background: linear-gradient(100deg, var(--cyan), var(--green));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.shape-item p {
+  font-size: 18px;
+  color: #c6d4de;
+  margin-bottom: 8px;
+}
+
+.how,
+.versus,
+.soon {
+  padding: 14vh 0;
+  background: linear-gradient(180deg, transparent, rgba(4, 7, 11, 0.86) 12%, rgba(4, 7, 11, 0.86) 88%, transparent);
+}
+.how-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 40px;
+}
+.how-card {
+  padding: 26px;
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+.how-card::before,
+.soon-card::before,
+.pick-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(400px circle at var(--mx, 50%) var(--my, 0%), rgba(42, 212, 255, 0.12), transparent 50%);
+}
+.how-n {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  color: var(--dim);
+  font-size: 13px;
+}
+.how-i {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  color: var(--cyan);
+  background: rgba(42, 212, 255, 0.1);
+  border: 1px solid rgba(42, 212, 255, 0.25);
+  margin-bottom: 18px;
+}
+.how-card h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.formula {
+  margin-top: 24px;
+  padding: 26px;
+  display: grid;
+  gap: 14px;
+}
+.formula-eq {
+  font-family: var(--mono);
+  font-size: clamp(15px, 2vw, 22px);
+}
+.formula-eq .c {
+  color: var(--cyan);
+}
+.formula-eq .g {
+  color: var(--green);
+}
+.formula-eq .a {
+  color: var(--amber);
+}
+.formula-dims {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.vs {
+  margin-top: 34px;
+  overflow: hidden;
+}
+.vs-row {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1.4fr;
+  gap: 16px;
+  padding: 16px 22px;
+  border-top: 1px solid var(--line);
+  align-items: center;
+}
+.vs-head {
+  border-top: 0;
+  font-family: var(--display);
+  font-weight: 700;
+}
+.vs-row span:last-child {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-weight: 600;
+}
+.vs-row svg {
+  color: var(--green);
+  flex: none;
+}
+@media (max-width: 640px) {
+  .vs-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  .vs-row > :first-child {
+    grid-column: 1 / -1;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .vs-head > :first-child {
+    display: none;
+  }
+}
+
+.soon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 14px;
+  margin: 34px 0 24px;
+}
+.soon-card {
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+.soon-card h3 {
+  font-size: 21px;
+}
+.soon-when {
+  font-size: 12px;
+  color: var(--cyan);
+}
+
+.final {
+  padding: 22vh 0 18vh;
+  text-align: center;
+}
+.final-in {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+}
