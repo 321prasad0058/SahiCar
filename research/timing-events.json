@@ -1,0 +1,82 @@
+[
+  {
+    "title": "Diwali festive offers (Diwali falls on 8 Nov 2026)",
+    "when": "2026-11 (first two weeks)",
+    "impact": "Festive discounts, exchange bonuses and dealer stock offers peak around Diwali. Demand is high, so waiting periods on popular models (Thar, Scorpio N, new launches) can stretch.",
+    "advice": "If the car you want is a carry-over model with no update due, negotiate hard in early November. If its facelift or next generation is less than 3–4 months away (see upcoming.json), a festive discount rarely makes up for the resale hit of buying the outgoing model.",
+    "sources": ["https://www.autocarindia.com/upcoming-cars"]
+  },
+  {
+    "title": "Year-end clearance discounts and model-year change",
+    "when": "2026-12 (MY changes on 1 Jan 2027)",
+    "impact": "Dealers clear MY2026 stock in December with the year's biggest discounts. A car registered in Dec 2026 but manufactured early in 2026 is valued as a year older at resale than a Jan 2027 car.",
+    "advice": "Buy in December if you plan to keep the car 7+ years: the discount usually beats the depreciation. If you sell every 3–4 years, take delivery of a January 2027 (MY2027) car, or insist on a VIN showing late-2026 manufacture and get the MY loss priced into the discount.",
+    "sources": ["https://india.entrepreneur.com/news-and-trends/why-should-you-buy-your-cars-in-december-price-hikes-might/484021"]
+  },
+  {
+    "title": "January 2027 price hikes (expected)",
+    "when": "2027-01-01 (announcements usually come in Nov–Dec)",
+    "impact": "Most OEMs raise prices every January, typically 1–4%, citing input costs. Several brands already raised prices in mid-2026. No January 2027 hike had been announced as of 30 Oct 2026.",
+    "advice": "If you're buying a model with no update due, booking and invoicing before 31 Dec 2026 usually avoids the January increase. Ask the dealer for price protection in writing if delivery will slip into January.",
+    "sources": [
+      "https://www.outlookbusiness.com/news/cars-set-to-get-expensive-from-january-as-oems-announce-price-hikes",
+      "https://businesstoday.in/auto/story/your-favourite-cars-to-cost-more-from-july-jsw-mg-motor-follows-others-in-price-hike-538514-2026-06-22"
+    ]
+  },
+  {
+    "title": "Bharat Mobility Global Expo 2027 (expected early 2027)",
+    "when": "2027-Q1 (expected)",
+    "impact": "Several big reveals are reported for the expo, including Tata's Avinya EV, a Hyundai MPV and possibly production versions of Mahindra's Vision S and BE 07. Brands often announce prices and timelines there.",
+    "advice": "If you are shopping for a mid-size SUV or EV in Jan–Feb 2027, wait for the expo announcements before you sign, because they can change which model is the best buy.",
+    "sources": [
+      "https://www.autocarindia.com/car-news/tata-to-launch-2-new-models-4-facelifts-in-fy2027-439754",
+      "https://www.cartoq.com/car-news/hyundai-aggressive-suv-expansion-india-2027/"
+    ]
+  },
+  {
+    "title": "Financial year-end (March 2027) discounts",
+    "when": "2027-03",
+    "impact": "OEMs push volumes to meet annual targets, so discounts rise in March. This also comes right before CAFE 3 starts (1 Apr 2027), and some low-efficiency variants may be cleared or discontinued.",
+    "advice": "March is a good second chance after December to get discounts on carry-over models. Check whether the variant you want is being discontinued under CAFE 3, because a discontinued variant can hurt resale and spares support.",
+    "sources": ["https://swarajyamag.com/business/india-notifies-stricter-cafe-iii-fuel-efficiency-norms-for-passenger-vehicles-from-2027"]
+  },
+  {
+    "title": "CAFE 3 fuel-efficiency norms take effect",
+    "when": "2027-04-01 (notified 30 Sep 2026; runs to 31 Mar 2032)",
+    "impact": "Fleet-average limits get stricter: 3.996 L/100 km in FY28, tightening to 3.327 L/100 km by FY32. The proposed relief for light petrol cars (≤909 kg) was dropped in the final rules. OEMs will push strong hybrids, CNG and EVs, and entry-level petrol cars may see price increases or variants cut. No measured price impact has been published yet.",
+    "advice": "If you want a small petrol hatchback or a diesel or large petrol SUV, prices are unlikely to fall after April 2027, so buying earlier is reasonable. If you're open to a hybrid, more affordable strong hybrids (Fronx hybrid, Seltos hybrid, Creta hybrid) are expected in 2027 as a result.",
+    "sources": [
+      "https://swarajyamag.com/business/india-notifies-stricter-cafe-iii-fuel-efficiency-norms-for-passenger-vehicles-from-2027",
+      "https://www.deccanherald.com/india/govt-notifies-new-cafe-3-norms-for-passenger-vehicles-4164941",
+      "https://www.manoramayearbook.in/current-affairs/india/2026/10/01/cafe-norms-notified-explained.html"
+    ]
+  },
+  {
+    "title": "April 2027 price revisions",
+    "when": "2027-04-01",
+    "impact": "April is the second usual price-hike window, after January. This year it coincides with CAFE 3 compliance costs.",
+    "advice": "If you plan to buy in Q2 2027, budget for 1–3% higher prices. Booking in March with price protection may help.",
+    "sources": ["https://www.rushlane.com/mahindra-thar-price-hike-april-2026-up-to-rs-43500-old-vs-new-price-table-12544018.html?nonamp=1"]
+  },
+  {
+    "title": "Bharat NCAP 2.0 crash-test protocol",
+    "when": "2027-10 (current protocol expires around 20–30 Sep 2027; draft AIS-197 Rev 1)",
+    "impact": "Mandatory crash tests rise from 3 to 5, including full-frontal and rear impact. 5 stars needs ≥70/100 points (2027–29). ESC and side curtain airbags become prerequisites for testing, and ADAS is assessed. Cars tested earlier keep their old-protocol ratings, so stars from before and after Oct 2027 are not directly comparable. This is still a draft.",
+    "advice": "Don't delay a purchase for this: existing 5-star BNCAP cars stay safe. When comparing a 2028 launch with an older model, remember that a star rating under the new protocol is harder to earn than an old one.",
+    "sources": [
+      "https://www.autocarindia.com/industry/bharat-ncap-20-to-come-into-effect-from-october-2027-gadkari-440653",
+      "https://www.team-bhp.com/news/bharat-ncap-20-launch-october-2027-include-adas"
+    ]
+  },
+  {
+    "title": "EV incentives: 5% GST continues; no central car subsidy; state road-tax waivers vary",
+    "when": "Ongoing; some state waivers end 2026-12-31 (e.g. Telangana, per a single unverified source)",
+    "impact": "Electric cars still pay 5% GST, compared with 18% or 40% on ICE cars after GST 2.0. PM E-DRIVE gives no purchase subsidy for private electric cars. Road-tax and registration waivers are set by each state: Delhi's EV Policy 2026 waives them for EVs priced at or below ₹30 lakh ex-showroom.",
+    "advice": "Check your state's EV road-tax waiver and its expiry date before deciding when to buy, because it can be worth ₹1–3 lakh. If a waiver ends on 31 Dec 2026, register before then. Battery-as-a-Service pricing (e Vitara, Syros EV, Windsor) lowers the upfront cost, but compare the total per-km cost.",
+    "sources": [
+      "https://www.meraev.com/blog/pm-e-drive-2026-update-india-ev-subsidy-car-buyers",
+      "https://www.dtnext.in/news/business/delhi-government-notifies-delhi-ev-policy-2026",
+      "https://www.meraev.com/blog/ev-subsidy-india-2026-state-wise-guide"
+    ]
+  }
+]
