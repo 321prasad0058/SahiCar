@@ -11,6 +11,8 @@
 // 6. The best configuration per model is kept, and the top three are picked with a diversity rule.
 import type { Answers, Priority } from './answers.ts'
 import { MUST_HAVES } from './answers.ts'
+
+const SOFT_MUST = new Set(MUST_HAVES.filter((m) => m.soft).map((m) => m.id))
 import { tco, type Tco } from './costs.ts'
 import type { Body, Car, Fuel, OnRoadData, Powertrain } from '../data/types.ts'
 
@@ -407,8 +409,9 @@ export function sahiScore(cars: Car[], a: Answers, data: OnRoadData): Result {
     const maxSeats = Math.max(...car.seats)
     const seatsNeeded = a.people >= 6 ? 7 : a.people
     if (maxSeats < seatsNeeded) { drop(`Fewer than ${seatsNeeded} seats`, car); continue }
-    const missing = a.mustHave.filter((id) => !hasFeature(car, id))
+    const missing = a.mustHave.filter((id) => !SOFT_MUST.has(id) && !hasFeature(car, id))
     if (missing.length) { drop('Missing a must-have feature', car); continue }
+    const unconfirmed = a.mustHave.filter((id) => SOFT_MUST.has(id) && !hasFeature(car, id))
 
     const candidates = configs(car, a, budgetEx)
     // a car is only dropped when none of its configurations survive, for its most common reason
@@ -448,6 +451,7 @@ export function sahiScore(cars: Car[], a: Answers, data: OnRoadData): Result {
       if (c.trimCompromise) penalties.push({ label: 'Budget forces a lower trim', factor: 0.95 })
       if (a.kids && !safety.tested) penalties.push({ label: 'Untested car with kids on board', factor: 0.95 })
       if (c.pt.fuel === 'cng' && a.cngNearby === 'no') penalties.push({ label: 'No CNG nearby', factor: 0.8 })
+      for (const id of unconfirmed) penalties.push({ label: `${MUST_HAVES.find((m) => m.id === id)?.label ?? id} not confirmed`, factor: 0.94 })
 
       const known = [car.dims.groundClearance, car.dims.boot, car.dims.wheelbase, c.pt.efficiency, car.safety.adult, c.pt.powerPs, car.dims.kerbWeight, car.variants.length || null]
       const confidence = known.filter((v) => v != null).length / known.length
@@ -527,4 +531,34 @@ export function withStretchHint(cars: Car[], a: Answers, data: OnRoadData, res: 
   const top = more.ranked[0]
   if (top && top.car.id !== res.picks[0].car.id && top.score - res.picks[0].score >= 2.5) return { ...res, stretchHint: { car: top, extra } }
   return res
+}
+
+export type Relaxation = { label: string; patch: Partial<Answers>; fits: number }
+
+/** When nothing fits: the single changes that would bring cars back, the one that brings back most first. */
+export function relaxations(cars: Car[], a: Answers, data: OnRoadData): Relaxation[] {
+  const out: Relaxation[] = []
+  const tryPatch = (label: string, patch: Partial<Answers>) => {
+    const fits = sahiScore(cars, { ...a, ...patch }, data).ranked.length
+    if (fits) out.push({ label, patch, fits })
+  }
+  for (const id of a.mustHave) {
+    const m = MUST_HAVES.find((x) => x.id === id)
+    tryPatch(`Drop “${m?.label ?? id}”`, { mustHave: a.mustHave.filter((x) => x !== id) })
+  }
+  if (a.mustHave.length > 1) tryPatch('Drop all must-haves', { mustHave: [] })
+  if (a.bodies.length) tryPatch('Any body style', { bodies: [] })
+  if (a.avoidFuels.length) tryPatch('Allow every fuel', { avoidFuels: [] })
+  if (a.gearbox !== 'any') tryPatch('Either gearbox', { gearbox: 'any' })
+  if (a.avoidBrands.length) tryPatch('Allow every brand', { avoidBrands: [] })
+  // the smallest budget rise that lets something in, in 10% steps up to the slider's ₹1 crore
+  for (let b = a.budget * 1.1; b <= 10000000 * 1.0001; b *= 1.1) {
+    const budget = b < 2000000 ? Math.round(b / 25000) * 25000 : Math.round(b / 100000) * 100000
+    const fits = sahiScore(cars, { ...a, budget }, data).ranked.length
+    if (fits) {
+      out.push({ label: `Raise budget to ₹${parseFloat((budget / 100000).toFixed(2))} L`, patch: { budget }, fits })
+      break
+    }
+  }
+  return out.sort((x, y) => y.fits - x.fits).slice(0, 4)
 }

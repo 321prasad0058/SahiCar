@@ -1,16 +1,18 @@
 import { useEffect, useLayoutEffect, useMemo, useRef } from 'react'
 import { Link, Navigate } from 'react-router-dom'
 import { CarImage } from '../components/CarImage'
+import { Fixes } from '../components/Fixes'
 import { Icon } from '../components/Icon'
 import { ScoreRing } from '../components/ScoreRing'
 import { toast } from '../components/Toast'
 import { cars, onroad, upcoming } from '../data'
 import { BODY_LABEL, FUEL_LABEL } from '../data/types'
 import { stateOf } from '../engine/costs'
-import { DIM_LABEL, GEAR_LABEL, sahiScore, withStretchHint, type Dim, type Scored } from '../engine/sahiscore'
+import { DIM_LABEL, GEAR_LABEL, relaxations, sahiScore, withStretchHint, type Dim, type Scored } from '../engine/sahiscore'
 import { expectedLabel, timingFor } from '../engine/timing'
 import { inr, lakh } from '../lib/format'
 import { reducedMotion } from '../lib/perf'
+import { trackNoMatch } from '../lib/track'
 import { gsap } from '../lib/scroll'
 import { fb, useAuth } from '../state/auth'
 import { useStore } from '../state/store'
@@ -119,6 +121,11 @@ export default function Results() {
 
   const res = useMemo(() => withStretchHint(cars, answers, onroad, sahiScore(cars, answers, onroad)), [answers])
   const st = stateOf(onroad, answers.state)
+  const fixes = useMemo(() => (res.picks.length ? [] : relaxations(cars, answers, onroad)), [res, answers])
+
+  useEffect(() => {
+    if (done && !res.picks.length) trackNoMatch('results', 'results', answers, res)
+  }, [done, res, answers])
 
   useEffect(() => {
     if (user && done) fb().then((m) => m.saveProfile(user, answers)).catch(() => {})
@@ -145,7 +152,7 @@ export default function Results() {
           <h1>{res.picks.length ? <>Your right car is the <span className="grad">{res.picks[0].car.model}</span>.</> : 'Nothing fits — yet.'}</h1>
           <p className="muted">
             We scored {res.considered} models and {res.ranked.length} fit your must-haves and budget of {lakh(answers.budget)} on-road in {st.name}.
-            Here are the three that fit your life best.
+            {res.picks.length ? ' Here are the three that fit your life best.' : ''}
           </p>
           <div className="profile-chips">
             <span className="chip">{answers.dailyKm} km/day</span>
@@ -163,8 +170,13 @@ export default function Results() {
           </div>
         ) : (
           <div className="card empty-res">
-            <p>Your must-haves and budget rule out every car. Most often it’s a top-trim feature (ADAS, ventilated seats) on a tight budget.</p>
-            <Link to="/sahifit" className="btn btn-primary">Adjust my answers</Link>
+            <p>
+              Your choices rule out every car
+              {res.eliminated[0] ? <> — mostly <b>{res.eliminated[0].reason.toLowerCase()}</b> ({res.eliminated[0].count} cars)</> : null}. Change one of
+              these and your matches appear here straight away:
+            </p>
+            <Fixes fixes={fixes} />
+            <Link to="/sahifit" className="btn btn-ghost">Edit all my answers</Link>
           </div>
         )}
 

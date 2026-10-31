@@ -355,3 +355,27 @@
   display: flex;
   justify-content: space-between;
 }
+
+/* nothing fits: one-tap fixes */
+.fixes {
+  display: grid;
+  gap: 8px;
+  width: 100%;
+}
+.fix {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--line-2);
+  background: var(--surface);
+  font-weight: 600;
+  font-size: 14px;
+  text-align: left;
+  transition: border-color 0.2s, background 0.2s;
+}
+.fix:hover {
+  border-color: var(--ink);
+}

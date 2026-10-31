@@ -2,15 +2,17 @@
 // and a blurred "leading so far" teaser keeps them going to the end.
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Fixes } from '../components/Fixes'
 import { Icon } from '../components/Icon'
 import { brands, cars, onroad, states } from '../data'
 import { BODY_LABEL, FUEL_LABEL, type Body, type Fuel } from '../data/types'
 import { MUST_HAVES, PRIORITY_LABEL, type Answers, type Level, type Priority } from '../engine/answers'
 import { emi } from '../engine/costs'
-import { sahiScore } from '../engine/sahiscore'
+import { relaxations, sahiScore } from '../engine/sahiscore'
 import { inr, lakh } from '../lib/format'
 import { reducedMotion } from '../lib/perf'
 import { gsap } from '../lib/scroll'
+import { trackNoMatch } from '../lib/track'
 import { useStore } from '../state/store'
 
 // ── controls
@@ -325,6 +327,11 @@ export default function Wizard() {
   const live = useMemo(() => sahiScore(cars, answers, onroad), [answers])
   const fits = live.ranked.length
   const lead = live.ranked[0]
+  // nothing fits: the single changes that would bring cars back
+  const fixes = useMemo(() => (fits ? [] : relaxations(cars, answers, onroad)), [fits, answers])
+  useEffect(() => {
+    if (!fits) trackNoMatch('quiz', STEPS[step].id, answers, live)
+  }, [fits, step, answers, live])
 
   // counter tween
   const shown = useRef({ v: cars.length })
@@ -403,7 +410,10 @@ export default function Wizard() {
               <p className="dim small">Finish SahiFit to reveal your top three — with the exact variant, the 5-year cost and whether to wait.</p>
             </>
           ) : (
-            <p className="muted">Nothing fits yet. Try raising the budget or relaxing a must-have.</p>
+            <>
+              <p className="muted">Nothing fits yet. One of these brings cars back:</p>
+              <Fixes fixes={fixes} />
+            </>
           )}
           {live.eliminated.slice(0, 3).map((e) => (
             <div key={e.reason} className="elim-line small">
@@ -419,7 +429,7 @@ export default function Wizard() {
           <button className="btn btn-ghost" onClick={() => (step ? go(step - 1) : nav('/'))}>
             <Icon name="back" /> {step ? 'Back' : 'Home'}
           </button>
-          <button className="btn btn-primary" onClick={() => go(step + 1)} disabled={!fits && step === STEPS.length - 1}>
+          <button className="btn btn-primary" onClick={() => go(step + 1)}>
             {step === STEPS.length - 1 ? 'Reveal my cars' : 'Next'} <Icon name="arrow" />
           </button>
         </div>
