@@ -22,40 +22,18 @@
 .hero-poster {
   z-index: 0;
   overflow: hidden;
-  background: radial-gradient(50% 45% at 74% 52%, rgba(42, 212, 255, 0.16), transparent 70%),
-    radial-gradient(40% 30% at 80% 75%, rgba(60, 240, 110, 0.08), transparent 70%), var(--bg);
+  /* the same seamless studio as the 3D: a pale wall falling into a slightly warmer floor */
+  background: linear-gradient(180deg, #f5f3ee 0%, #f1eee8 52%, #e6e2da 100%);
   transition: opacity 1.2s var(--ease);
 }
 .hero-poster.gone {
   opacity: 0;
 }
 .poster-road {
-  position: absolute;
-  left: -20%;
-  right: -20%;
-  bottom: -10%;
-  height: 55%;
-  transform: perspective(600px) rotateX(62deg);
-  transform-origin: bottom;
-  background: repeating-linear-gradient(90deg, transparent 0 46%, rgba(160, 180, 190, 0.35) 46% 47%, transparent 47% 100%) 0 0 / 100% 120px,
-    linear-gradient(90deg, transparent 8%, rgba(42, 212, 255, 0.8) 8.3%, transparent 8.6%, transparent 91.4%, rgba(60, 240, 110, 0.8) 91.7%, transparent 92%),
-    linear-gradient(#070b10, #04070b);
-  animation: road 1.2s linear infinite;
-}
-@keyframes road {
-  to {
-    background-position: 0 120px, 0 0, 0 0;
-  }
+  display: none;
 }
 .poster-bar {
-  position: absolute;
-  right: 16%;
-  top: 46%;
-  width: 22%;
-  height: 4px;
-  border-radius: 4px;
-  background: #dff6ff;
-  box-shadow: 0 0 18px 4px rgba(42, 212, 255, 0.8), 0 0 80px 20px rgba(42, 212, 255, 0.25);
+  display: none;
 }
 @media (prefers-reduced-motion: reduce) {
   .poster-road {
@@ -65,8 +43,8 @@
 .hero-vignette {
   z-index: 1;
   pointer-events: none;
-  background: linear-gradient(90deg, rgba(4, 7, 11, 0.9) 0%, rgba(4, 7, 11, 0.45) 40%, transparent 62%),
-    linear-gradient(0deg, rgba(4, 7, 11, 0.95) 0%, transparent 22%), linear-gradient(180deg, rgba(4, 7, 11, 0.7) 0%, transparent 18%);
+  /* keep the headline crisp where it overlaps the studio */
+  background: linear-gradient(90deg, rgba(245, 243, 238, 0.96) 0%, rgba(245, 243, 238, 0.82) 34%, rgba(245, 243, 238, 0) 54%);
 }
 
 .loader {
@@ -114,9 +92,9 @@
   display: none;
 }
 .hero-sub {
-  max-width: 540px;
-  font-size: clamp(15px, 1.4vw, 18px);
-  color: #c6d4de;
+  max-width: 520px;
+  font-size: clamp(15px, 1.3vw, 18px);
+  color: var(--muted);
 }
 .hero-cta {
   display: flex;
@@ -165,10 +143,9 @@
 .style-card {
   padding: 16px 18px 18px;
   border-radius: 20px;
-  background: rgba(8, 14, 20, 0.62);
+  background: var(--surface);
   border: 1px solid var(--line);
-  backdrop-filter: blur(14px) saturate(1.2);
-  box-shadow: 0 30px 80px -40px rgba(0, 0, 0, 0.8);
+    box-shadow: var(--shadow-md);
 }
 .sc-tabs {
   display: grid;
@@ -200,20 +177,20 @@
   position: relative;
   height: 3px;
   border-radius: 3px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--line);
   overflow: hidden;
 }
 .sc-tab.past .sc-tab-bar {
-  background: rgba(42, 212, 255, 0.35);
+  background: var(--line-2);
 }
 .sc-tab.on .sc-tab-bar {
-  background: rgba(42, 212, 255, 0.18);
+  background: var(--line);
 }
 .sc-tab-fill {
   position: absolute;
   inset: 0;
   transform-origin: left;
-  background: linear-gradient(90deg, var(--cyan), var(--green));
+  background: var(--ink);
   animation-name: scfill;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
@@ -253,7 +230,7 @@
   height: 34px;
 }
 .sc-line {
-  color: #c6d4de;
+  color: var(--muted);
   font-size: 14.5px;
   line-height: 1.5;
   min-height: 2.9em;
@@ -267,7 +244,7 @@
   display: grid;
   padding: 9px 10px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--surface-2);
   border: 1px solid var(--line);
 }
 .sc-facts b {
@@ -310,7 +287,7 @@
     height: 100%;
   }
   .hero-vignette {
-    background: linear-gradient(180deg, rgba(4, 7, 11, 0.92) 0%, rgba(4, 7, 11, 0.55) 34%, transparent 50%), linear-gradient(0deg, rgba(4, 7, 11, 0.9) 0%, transparent 30%);
+    background: linear-gradient(180deg, rgba(245, 243, 238, 0.96) 0%, rgba(245, 243, 238, 0.7) 34%, rgba(245, 243, 238, 0) 50%);
   }
   .hero-stats,
   .hero-sub .more,
@@ -466,15 +443,21 @@
 }
 .shape-item p {
   font-size: 18px;
-  color: #c6d4de;
+  color: var(--muted);
   margin-bottom: 8px;
 }
 
 .how,
 .versus,
 .soon {
-  padding: 14vh 0;
-  background: linear-gradient(180deg, transparent, rgba(4, 7, 11, 0.86) 12%, rgba(4, 7, 11, 0.86) 88%, transparent);
+  padding: 12vh 0;
+  background: var(--bg);
+}
+.how,
+.soon {
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
 .how-grid {
   display: grid;
@@ -491,11 +474,7 @@
 .how-card::before,
 .soon-card::before,
 .pick-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(400px circle at var(--mx, 50%) var(--my, 0%), rgba(42, 212, 255, 0.12), transparent 50%);
+  display: none;
 }
 .how-n {
   position: absolute;
@@ -511,8 +490,8 @@
   display: grid;
   place-items: center;
   color: var(--cyan);
-  background: rgba(42, 212, 255, 0.1);
-  border: 1px solid rgba(42, 212, 255, 0.25);
+  background: var(--accent-soft);
+  border: 0;
   margin-bottom: 18px;
 }
 .how-card h3 {

@@ -29,8 +29,8 @@
   transform-style: preserve-3d;
 }
 .pick-card.first {
-  border-color: rgba(60, 240, 110, 0.45);
-  box-shadow: 0 0 0 1px rgba(60, 240, 110, 0.15), 0 30px 80px -30px rgba(60, 240, 110, 0.45);
+  border-color: var(--ink);
+  box-shadow: var(--shadow-lg);
 }
 .pick-rank {
   position: absolute;
@@ -38,12 +38,9 @@
   top: 12px;
   left: 12px;
   font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
   padding: 5px 10px;
   border-radius: 8px;
-  background: rgba(4, 7, 11, 0.7);
-  backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 0.92);
 }
 .pick-card.first .pick-rank {
   color: var(--green);
@@ -56,8 +53,8 @@
   right: 14px;
   bottom: -40px;
   border-radius: 50%;
-  background: rgba(6, 12, 18, 0.92);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
   z-index: 2;
 }
 .pick-body {
@@ -84,7 +81,7 @@
   display: grid;
   padding: 10px 12px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--surface-2);
   border: 1px solid var(--line);
 }
 .pick-money b {
@@ -112,7 +109,7 @@
   margin-top: 3px;
 }
 .caveats li {
-  color: #e6cfa6;
+  color: var(--amber);
 }
 .caveats svg {
   color: var(--amber);
@@ -133,22 +130,22 @@
   align-items: center;
 }
 .timing.buy {
-  border-color: rgba(60, 240, 110, 0.35);
-  background: rgba(60, 240, 110, 0.05);
+  border-color: transparent;
+  background: var(--green-soft);
 }
 .timing.buy .timing-head {
   color: var(--green);
 }
 .timing.consider {
-  border-color: rgba(42, 212, 255, 0.35);
-  background: rgba(42, 212, 255, 0.05);
+  border-color: transparent;
+  background: var(--accent-soft);
 }
 .timing.consider .timing-head {
   color: var(--cyan);
 }
 .timing.wait {
-  border-color: rgba(255, 181, 71, 0.45);
-  background: rgba(255, 181, 71, 0.06);
+  border-color: transparent;
+  background: var(--amber-soft);
 }
 .timing.wait .timing-head {
   color: var(--amber);
@@ -177,7 +174,7 @@
   align-items: center;
   gap: 16px;
   padding: 18px 20px;
-  border-color: rgba(42, 212, 255, 0.4);
+  border-color: var(--line-2);
 }
 .stretch > svg {
   color: var(--cyan);
@@ -217,7 +214,7 @@
 }
 .lg-2::before,
 .bar-2 {
-  background: #9b7bff;
+  background: var(--amber);
 }
 .why-row {
   display: grid;
@@ -347,8 +344,7 @@
   gap: 6px;
 }
 .media-tabs .chip {
-  background: rgba(4, 7, 11, 0.7);
-  backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 0.92);
 }
 .detail-head h1 {
   margin: 2px 0 8px;
@@ -378,7 +374,7 @@
   color: var(--amber);
 }
 .cta-small {
-  border-color: rgba(42, 212, 255, 0.4);
+  border-color: var(--line-2);
 }
 .cta-small svg {
   color: var(--cyan) !important;
@@ -392,7 +388,7 @@
 .studio {
   position: relative;
   aspect-ratio: 16 / 10;
-  background: radial-gradient(90% 80% at 50% 70%, #10202c, #05090d 70%);
+  background: radial-gradient(90% 80% at 50% 62%, #fbfaf7, #e6e2da 78%);
 }
 .studio canvas {
   width: 100%;
@@ -419,13 +415,13 @@
   align-items: center;
 }
 .views .chip {
-  background: rgba(4, 7, 11, 0.7);
+  background: rgba(255, 255, 255, 0.92);
 }
 .swatch {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.25);
+  border: 2px solid rgba(21, 23, 27, 0.12);
   transition: transform 0.2s;
 }
 .swatch.on {
@@ -506,10 +502,10 @@
   background: var(--card-solid);
 }
 button.v-row:hover {
-  background: rgba(42, 212, 255, 0.05);
+  background: var(--surface-2);
 }
 .v-row.on {
-  background: rgba(42, 212, 255, 0.1);
+  background: var(--accent-soft);
   box-shadow: inset 3px 0 0 var(--cyan);
 }
 .kv {
@@ -588,7 +584,7 @@ button.v-row:hover {
   position: sticky;
   top: 76px;
   z-index: 5;
-  background: rgba(8, 14, 20, 0.92);
+  background: rgba(245, 243, 238, 0.95);
 }
 .search {
   position: relative;
@@ -793,7 +789,7 @@ button.v-row:hover {
 /* ── about */
 .lead {
   font-size: 19px;
-  color: #c6d4de;
+  color: var(--ink-2);
   margin-bottom: 30px;
 }
 .promise {
@@ -806,7 +802,7 @@ button.v-row:hover {
   display: grid;
   gap: 14px;
   padding-left: 22px;
-  color: #c6d4de;
+  color: var(--ink-2);
 }
 .steps b {
   color: var(--ink);
@@ -832,7 +828,7 @@ button.v-row:hover {
   gap: 10px;
   padding-left: 18px;
   margin: 0 0 14px;
-  color: #c6d4de;
+  color: var(--ink-2);
 }
 .about-cta {
   margin-top: 40px;
