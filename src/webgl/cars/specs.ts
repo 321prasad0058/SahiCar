@@ -161,7 +161,7 @@ export const CITY: CarSpec = {
   ],
   plates: { front: 0.57, rear: 0.9 },
   mirrors: 'body',
-  paint: '#e7eaec', // Platinum White Pearl
+  paint: '#4a4f56', // Meteoroid Grey
   plate: 'DL 3C SC 2026',
 }
 

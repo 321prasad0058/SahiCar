@@ -25,13 +25,13 @@ export class Studio {
     this.renderer.setPixelRatio(Math.min(devicePixelRatio, high ? 2 : 1.25))
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping
     this.renderer.outputColorSpace = THREE.SRGBColorSpace
-    this.scene.environment = bakeEnvironment(this.renderer, 'studio')
+    this.scene.environment = bakeEnvironment(this.renderer, 'daylight')
     this.scene.environmentIntensity = 1
     this.scene.add(new THREE.HemisphereLight('#cfeeff', '#0a0d12', 0.35))
     const key = new THREE.DirectionalLight('#ffffff', 0.9)
     key.position.set(5, 7, 4)
     this.scene.add(key)
-    const ring = new THREE.Mesh(new THREE.RingGeometry(3.15, 3.2, 96), new THREE.MeshBasicMaterial({ color: '#2ad4ff', transparent: true, opacity: 0.35 }))
+    const ring = new THREE.Mesh(new THREE.RingGeometry(3.15, 3.2, 96), new THREE.MeshBasicMaterial({ color: '#b9b3a6', transparent: true, opacity: 0.5 }))
     ring.rotation.x = -Math.PI / 2
     this.scene.add(ring)
 

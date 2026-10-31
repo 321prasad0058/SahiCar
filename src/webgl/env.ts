@@ -3,9 +3,9 @@
 // a cool rim light); "night" is a dark street with a warm and a cool glow for the hero drive.
 import * as THREE from 'three'
 
-export function bakeEnvironment(renderer: THREE.WebGLRenderer, mood: 'studio' | 'night') {
+export function bakeEnvironment(renderer: THREE.WebGLRenderer, mood: 'studio' | 'night' | 'daylight') {
   const room = new THREE.Scene()
-  const box = new THREE.Mesh(new THREE.BoxGeometry(30, 14, 30), new THREE.MeshBasicMaterial({ color: mood === 'studio' ? '#0b0f14' : '#03050a', side: THREE.BackSide }))
+  const box = new THREE.Mesh(new THREE.BoxGeometry(30, 14, 30), new THREE.MeshBasicMaterial({ color: mood === 'daylight' ? '#cfcac0' : mood === 'studio' ? '#0b0f14' : '#03050a', side: THREE.BackSide }))
   box.position.y = 5
   room.add(box)
   const panel = (w: number, h: number, color: string, intensity: number, pos: [number, number, number], look: [number, number, number]) => {
@@ -14,7 +14,14 @@ export function bakeEnvironment(renderer: THREE.WebGLRenderer, mood: 'studio' | 
     m.lookAt(...look)
     room.add(m)
   }
-  if (mood === 'studio') {
+  if (mood === 'daylight') {
+    // a bright white photo studio: big overhead scrim, two tall side softboxes, a pale floor bounce
+    panel(18, 10, '#ffffff', 3.2, [0, 12, 0], [0, 0, 0])
+    panel(10, 6, '#ffffff', 2.2, [0, 4, 13], [0, 2, 0])
+    panel(10, 6, '#fff8ee', 1.6, [0, 4, -13], [0, 2, 0])
+    panel(8, 6, '#ffffff', 1.8, [13, 4, 0], [0, 1, 0])
+    panel(30, 30, '#e9e4da', 0.9, [0, -0.5, 0], [0, 1, 0])
+  } else if (mood === 'studio') {
     panel(14, 8, '#ffffff', 6, [0, 11, 0], [0, 0, 0]) // big overhead softbox: the long highlight along the roof and bonnet
     panel(16, 1.4, '#ffffff', 4, [0, 4, 12], [0, 2, 0]) // side strips: the crisp line along the doors
     panel(16, 1.4, '#ffffff', 4, [0, 4, -12], [0, 2, 0])
