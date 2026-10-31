@@ -1,0 +1,32 @@
+rules_version = '2';
+
+// SahiCar keeps very little about a person: their SahiFit answers and the cars they saved.
+// Every document lives under the owner's uid and only that signed-in user can read or write it.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function owner(userId) { return signedIn() && request.auth.uid == userId; }
+    function small() { return request.resource.size() <= 40; }
+
+    match /users/{userId} {
+      allow read, delete: if owner(userId);
+      allow create, update: if owner(userId) && small()
+        && request.resource.data.keys().hasOnly(['name', 'email', 'photo', 'answers', 'updatedAt', 'createdAt'])
+        && (!('answers' in request.resource.data) || request.resource.data.answers is map);
+
+      // saved cars: one document per car id
+      match /garage/{carId} {
+        allow read, delete: if owner(userId);
+        allow create, update: if owner(userId) && carId.size() <= 64
+          && request.resource.data.keys().hasOnly(['carId', 'score', 'note', 'savedAt'])
+          && request.resource.data.carId == carId;
+      }
+    }
+
+    // nothing else is readable or writable
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

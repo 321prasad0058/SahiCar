@@ -1,0 +1,14 @@
+node_modules
+dist
+.DS_Store
+*.log
+*.tsbuildinfo
+.env
+.env.local
+.env.*.local
+.firebase
+
+# regenerable scratch
+research/official-candidates.json
+research/sheets/
+research/*.log

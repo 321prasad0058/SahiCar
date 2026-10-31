@@ -1,0 +1,12 @@
+{
+  "name": "SahiCar — the right car, honestly",
+  "short_name": "SahiCar",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#04070b",
+  "theme_color": "#04070b",
+  "icons": [
+    { "src": "/icon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/icon.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

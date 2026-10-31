@@ -1,0 +1,45 @@
+{
+  "name": "sahicar",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "SahiCar — a free, unbiased car advisor for India. The SahiFit wizard and the SahiScore engine pick the right car, variant and fuel for you.",
+  "scripts": {
+    "dev": "vite --host",
+    "data": "node scripts/build-data.mjs",
+    "images": "node scripts/fetch-images.mjs",
+    "build": "node scripts/build-data.mjs && tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b",
+    "test:engine": "node --experimental-strip-types scripts/engine-check.ts",
+    "emulators": "firebase emulators:start --only auth,firestore,hosting --project demo-sahicar",
+    "deploy": "npm run build && firebase deploy --only hosting,firestore",
+    "official:collect": "node scripts/official-images.mjs collect",
+    "official:pick": "node scripts/official-images.mjs pick",
+    "official:sheet": "node scripts/official-images.mjs sheet"
+  },
+  "dependencies": {
+    "firebase": "^12.19.0",
+    "gsap": "^3.15.0",
+    "lenis": "^1.3.27",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router-dom": "^7.18.4",
+    "three": "^0.186.1",
+    "zustand": "^5.0.15"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@types/three": "^0.186.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "firebase-tools": "^14.27.0",
+    "puppeteer-core": "^25.16.0",
+    "sharp": "^0.35.5",
+    "typescript": "~6.0.2",
+    "vite": "^8.3.5"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
