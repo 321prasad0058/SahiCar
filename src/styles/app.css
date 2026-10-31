@@ -84,17 +84,20 @@
   align-items: center;
   gap: 10px;
 }
-.logo img {
-  border-radius: 9px;
+.logo-mark {
+  flex: none;
+  display: block;
 }
 .logo-word {
   font-family: var(--display);
-  font-weight: 800;
+  font-weight: 700;
   font-size: 20px;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  color: var(--ink);
 }
+/* one word, two weights: "Sahi" carries it, "Car" follows */
 .logo-word span {
-  color: var(--cyan);
+  font-weight: 450;
 }
 
 /* nav */
