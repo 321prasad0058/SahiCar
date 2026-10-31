@@ -697,8 +697,8 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     spin(dx) {
       const a = dx / spec.tyreR
       for (const w of wheels) w.rotation.z += (w.rotation.y ? 1 : -1) * a
-      // blur by angle per frame: spokes read sharply below ~0.08 rad a frame and strobe above ~0.3
-      const t = Math.max(0, Math.min(1, (Math.abs(a) - 0.08) / 0.22))
+      // blur by angle per frame: spokes read sharply below ~0.22 rad a frame and strobe above ~0.45
+      const t = Math.max(0, Math.min(1, (Math.abs(a) - 0.22) / 0.23))
       blur += (t * t * (3 - 2 * t) - blur) * 0.15
       blurMat.opacity = blur * 0.92
       for (const w of wheels) w.children[w.children.length - 1].visible = blur > 0.01

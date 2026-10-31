@@ -304,7 +304,7 @@ export class HeroWorld {
     // the road flows past at driving speed; the wheels turn with the road plus any roll-in / roll-off
     const sec = Math.min(0.05, dt / 1000)
     this.elapsed += sec
-    const v = this.speed * 14 * sec
+    const v = this.speed * 3.5 * sec
     this.road.offset.x = (this.road.offset.x + v / this.roadLen) % 1
     this.cars.forEach((car, i) => {
       if (!car?.group.visible) return
