@@ -40,13 +40,7 @@ export function Silhouette({ body }: { body: Body }) {
   const d = SIL[body === 'compact-suv' || body === 'pickup' ? 'suv' : body === 'coupe' ? 'sedan' : body] ?? SIL.suv
   return (
     <svg viewBox="0 0 150 80" className="silhouette" aria-hidden>
-      <defs>
-        <linearGradient id="sil" x1="0" x2="1">
-          <stop offset="0" stopColor="#2ad4ff" />
-          <stop offset="1" stopColor="#3cf06e" />
-        </linearGradient>
-      </defs>
-      <path d={d} fill="none" stroke="url(#sil)" strokeWidth="1.6" strokeLinejoin="round" />
+      <path d={d} fill="none" stroke="#b5afa3" strokeWidth="1.4" strokeLinejoin="round" />
     </svg>
   )
 }

@@ -117,7 +117,7 @@ const STEPS: Step[] = [
             <Cards value={a.stretch} cols={3} onChange={(v) => set({ stretch: v })} options={[{ v: 0, label: 'Not a rupee' }, { v: 0.05, label: 'Up to 5%' }, { v: 0.1, label: 'Up to 10%' }]} />
           </Field>
           <Field label="How will you pay?">
-            <Cards value={a.payment} onChange={(v) => set({ payment: v })} options={[{ v: 'loan', label: 'Car loan', icon: '🏦' }, { v: 'cash', label: 'Full payment', icon: '💰' }]} />
+            <Cards value={a.payment} onChange={(v) => set({ payment: v })} options={[{ v: 'loan', label: 'Car loan' }, { v: 'cash', label: 'Full payment' }]} />
           </Field>
           {a.payment === 'loan' && (
             <div className="loan-box card">
@@ -149,10 +149,10 @@ const STEPS: Step[] = [
         </Field>
         <Field label="What kind of place?">
           <Cards value={a.place} onChange={(v) => set({ place: v })} options={[
-            { v: 'metro', label: 'Metro', hint: 'Mumbai, Delhi-NCR, Bengaluru…', icon: '🏙️' },
-            { v: 'city', label: 'City', hint: 'Pune, Jaipur, Indore, Kochi…', icon: '🌆' },
-            { v: 'town', label: 'Small town', hint: 'District HQ, taluka', icon: '🏘️' },
-            { v: 'rural', label: 'Village / rural', hint: 'Nearest dealer is far', icon: '🌾' },
+            { v: 'metro', label: 'Metro', hint: 'Mumbai, Delhi-NCR, Bengaluru…' },
+            { v: 'city', label: 'City', hint: 'Pune, Jaipur, Indore, Kochi…' },
+            { v: 'town', label: 'Small town', hint: 'District HQ, taluka' },
+            { v: 'rural', label: 'Village / rural', hint: 'Nearest dealer is far' },
           ]} />
         </Field>
       </>
@@ -187,10 +187,10 @@ const STEPS: Step[] = [
     render: (a, set) => (
       <>
         <Cards value={a.roads} onChange={(v) => set({ roads: v })} options={[
-          { v: 'smooth', label: 'Smooth', hint: 'Good city roads, expressways', icon: '🛣️' },
-          { v: 'mixed', label: 'Mixed', hint: 'Speed breakers, some potholes', icon: '🚧' },
-          { v: 'rough', label: 'Rough', hint: 'Broken patches, big speed breakers', icon: '🪨' },
-          { v: 'unpaved', label: 'Unpaved', hint: 'Village roads, kaccha tracks', icon: '🌾' },
+          { v: 'smooth', label: 'Smooth', hint: 'Good city roads, expressways' },
+          { v: 'mixed', label: 'Mixed', hint: 'Speed breakers, some potholes' },
+          { v: 'rough', label: 'Rough', hint: 'Broken patches, big speed breakers' },
+          { v: 'unpaved', label: 'Unpaved', hint: 'Village roads, kaccha tracks' },
         ]} />
         <div className="toggles">
           <Toggle on={a.flooding} label="Waterlogging in monsoon" hint="We’ll want more ground clearance" onChange={(v) => set({ flooding: v })} />
@@ -210,7 +210,6 @@ const STEPS: Step[] = [
           <div className="big-number">{a.people}<span className="dim"> {a.people === 1 ? 'person' : 'people'}</span></div>
           <button className="icon-btn" aria-label="More" onClick={() => set({ people: Math.min(8, a.people + 1) })}>+</button>
         </div>
-        <div className="people-row" aria-hidden>{Array.from({ length: a.people }, (_, i) => <span key={i}>🧑</span>)}</div>
         <div className="toggles">
           <Toggle on={a.sevenOccasional} label="Sometimes 6–7 of us" hint="A third row would help now and then" onChange={(v) => set({ sevenOccasional: v })} />
           <Toggle on={a.elders} label="Elderly parents ride often" hint="Easy ingress, comfortable rear seat" onChange={(v) => set({ elders: v })} />
@@ -233,10 +232,10 @@ const STEPS: Step[] = [
     render: (a, set) => (
       <>
         <Field label="Traffic">
-          <Cards value={a.traffic} onChange={(v) => set({ traffic: v })} options={[{ v: 'heavy', label: 'Bumper to bumper', icon: '🚦' }, { v: 'light', label: 'Mostly moving', icon: '🟢' }]} />
+          <Cards value={a.traffic} onChange={(v) => set({ traffic: v })} options={[{ v: 'heavy', label: 'Bumper to bumper' }, { v: 'light', label: 'Mostly moving' }]} />
         </Field>
         <Field label="Parking">
-          <Cards value={a.parking} onChange={(v) => set({ parking: v })} options={[{ v: 'tight', label: 'Tight lanes, tight spots', icon: '📏' }, { v: 'easy', label: 'Plenty of room', icon: '🅿️' }]} />
+          <Cards value={a.parking} onChange={(v) => set({ parking: v })} options={[{ v: 'tight', label: 'Tight lanes, tight spots' }, { v: 'easy', label: 'Plenty of room' }]} />
         </Field>
         <Field label="Gearbox">
           <Cards value={a.gearbox} cols={3} onChange={(v) => set({ gearbox: v })} options={[{ v: 'any', label: 'Recommend one' }, { v: 'auto', label: 'Automatic only' }, { v: 'manual', label: 'Manual only' }]} />
@@ -255,9 +254,9 @@ const STEPS: Step[] = [
       <>
         <Field label="Could you charge an EV?">
           <Cards value={a.charging} cols={3} onChange={(v) => set({ charging: v })} options={[
-            { v: 'home', label: 'At home', hint: 'Own parking with a socket', icon: '🏠' },
-            { v: 'work', label: 'At work', hint: 'Office or society charger', icon: '🏢' },
-            { v: 'none', label: 'Neither', hint: 'Street or shared parking', icon: '🚫' },
+            { v: 'home', label: 'At home', hint: 'Own parking with a socket' },
+            { v: 'work', label: 'At work', hint: 'Office or society charger' },
+            { v: 'none', label: 'Neither', hint: 'Street or shared parking' },
           ]} />
         </Field>
         <Field label="Is there a CNG pump near you?">

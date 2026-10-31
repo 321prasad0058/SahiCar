@@ -15,14 +15,14 @@ import { gsap } from '../lib/scroll'
 import { fb, useAuth } from '../state/auth'
 import { useStore } from '../state/store'
 
-const RANK = ['Best match', 'Runner-up', 'Smart alternative']
+const RANK = ['Best match', 'Runner-up', 'Worth a look']
 
 function Pick({ s, i }: { s: Scored; i: number }) {
   const a = useStore((x) => x.answers)
   const saved = useStore((x) => x.garage.includes(s.car.id))
   const timing = useMemo(() => timingFor(s, upcoming, a), [s, a])
   return (
-    <article className={`pick-card card ${i === 0 ? 'first' : ''}`} data-tilt>
+    <article className={`pick-card card ${i === 0 ? 'first' : ''}`}>
       <div className="pick-rank mono">{String(i + 1).padStart(2, '0')} · {RANK[i]}</div>
       <div className="pick-media">
         <CarImage official={s.car.official} image={s.car.image} wiki={s.car.wiki} body={s.car.body} alt={`${s.car.brand} ${s.car.model}`} eager />

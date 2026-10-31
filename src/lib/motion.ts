@@ -7,13 +7,13 @@ export function setupReveals(root: HTMLElement) {
     if (reducedMotion) return
     root.querySelectorAll<HTMLElement>('[data-split]').forEach((el) => {
       const split = SplitText.create(el, { type: 'words,chars', mask: 'words' })
-      gsap.from(split.chars, { yPercent: 110, rotate: 5, duration: 1, ease: 'expo.out', stagger: 0.018, scrollTrigger: { trigger: el, start: 'top 86%' } })
+      gsap.from(split.words, { yPercent: 100, duration: 0.8, ease: 'power3.out', stagger: 0.04, scrollTrigger: { trigger: el, start: 'top 88%' } })
     })
     root.querySelectorAll<HTMLElement>('[data-reveal]').forEach((el) => {
-      gsap.from(el, { y: 44, autoAlpha: 0, filter: 'blur(8px)', duration: 1, ease: 'power3.out', clearProps: 'filter', scrollTrigger: { trigger: el, start: 'top 88%' } })
+      gsap.from(el, { y: 20, autoAlpha: 0, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 90%' } })
     })
     root.querySelectorAll<HTMLElement>('[data-stagger]').forEach((el) => {
-      gsap.from(el.children, { y: 28, autoAlpha: 0, duration: 0.8, ease: 'power3.out', stagger: 0.07, scrollTrigger: { trigger: el, start: 'top 90%' } })
+      gsap.from(el.children, { y: 16, autoAlpha: 0, duration: 0.6, ease: 'power2.out', stagger: 0.06, scrollTrigger: { trigger: el, start: 'top 92%' } })
     })
   }, root)
   return () => ctx.revert()

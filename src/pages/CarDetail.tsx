@@ -261,12 +261,12 @@ export default function CarDetail() {
             <div className="card pad">
               <Bar
                 parts={[
-                  { label: 'On-road price', v: or.total - or.tcs, c: '#2ad4ff' },
-                  { label: pt.fuel === 'ev' ? 'Charging' : 'Fuel', v: cost.energy, c: '#3cf06e' },
-                  { label: 'Service & tyres', v: cost.maintenance + cost.tyres, c: '#ffb547' },
-                  { label: 'Insurance renewals', v: cost.insurance, c: '#9b7bff' },
-                  { label: 'Loan interest', v: cost.interest, c: '#ff5a6a' },
-                  { label: 'Resale value back', v: -cost.resale, c: '#5d7080' },
+                  { label: 'On-road price', v: or.total - or.tcs, c: '#15171b' },
+                  { label: pt.fuel === 'ev' ? 'Charging' : 'Fuel', v: cost.energy, c: '#0b6b4f' },
+                  { label: 'Service & tyres', v: cost.maintenance + cost.tyres, c: '#c58a2a' },
+                  { label: 'Insurance renewals', v: cost.insurance, c: '#2f5bb7' },
+                  { label: 'Loan interest', v: cost.interest, c: '#b83a2e' },
+                  { label: 'Resale value back', v: -cost.resale, c: '#c9c3b7' },
                 ]}
               />
               <div className="kv total"><span>Net cost over {cost.years} years · {Math.round(cost.totalKm / 1000)}k km</span><b>{inr(cost.total)}</b></div>

@@ -4,7 +4,7 @@ import { Icon } from '../components/Icon'
 import summary from '../data/summary.json'
 import { expectedLabel, monthsUntil } from '../engine/timing'
 import { lakh } from '../lib/format'
-import { setupCounts, setupMagnetic, setupReveals, setupTilt } from '../lib/motion'
+import { setupCounts, setupReveals } from '../lib/motion'
 import { canRun3D, reducedMotion, whenIdle } from '../lib/perf'
 import { SplitText, gsap, startScroll } from '../lib/scroll'
 import { useStore } from '../state/store'
@@ -192,15 +192,13 @@ export default function Landing() {
   useLayoutEffect(() => {
     if (reducedMotion || !card.current) return
     const ctx = gsap.context(() => {
-      gsap.fromTo('.sc-anim', { y: 16, autoAlpha: 0, filter: 'blur(6px)' }, { y: 0, autoAlpha: 1, filter: 'blur(0px)', duration: 0.45, stagger: 0.04, ease: 'power3.out', delay: 0.1, clearProps: 'filter' })
+      gsap.fromTo('.sc-anim', { y: 10, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.4, stagger: 0.04, ease: 'power2.out', delay: 0.1 })
     }, card)
     return () => ctx.revert()
   }, [active])
 
   useEffect(() => setupReveals(root.current!), [])
   useEffect(() => setupCounts(root.current!, 0.6), [])
-  useEffect(() => setupMagnetic(document.body), [])
-  useEffect(() => setupTilt(root.current!), [])
 
   // swipe the stage on touch screens
   const swipe = useRef<{ x: number; y: number } | null>(null)
@@ -248,13 +246,13 @@ export default function Landing() {
               <span className="less">Nine quick questions, and SahiScore finds the car that fits your life.</span>
             </p>
             <div className="hero-cta hero-in">
-              <Link to="/sahifit" className="btn btn-primary" data-magnetic>
+              <Link to="/sahifit" className="btn btn-primary">
                 Find my car in 2 minutes <Icon name="arrow" />
               </Link>
               {done ? (
-                <Link to="/results" className="btn btn-ghost" data-magnetic>See my matches</Link>
+                <Link to="/results" className="btn btn-ghost">See my matches</Link>
               ) : (
-                <Link to="/explore" className="btn btn-ghost" data-magnetic>Explore {summary.cars} cars</Link>
+                <Link to="/explore" className="btn btn-ghost">Explore {summary.cars} cars</Link>
               )}
             </div>
             <div className="hero-stats hero-in">
@@ -322,7 +320,7 @@ export default function Landing() {
           <h2 className="section-title" data-split>A car advisor that does the maths.</h2>
           <div className="how-grid" data-stagger>
             {STEPS.map((s, i) => (
-              <div key={s.h} className="how-card card" data-tilt>
+              <div key={s.h} className="how-card card">
                 <div className="how-n mono">0{i + 1}</div>
                 <div className="how-i"><Icon name={s.i} size={22} /></div>
                 <h3>{s.h}</h3>
@@ -381,7 +379,7 @@ export default function Landing() {
             {summary.soon.map((u) => {
               const m = monthsUntil(u.expected) ?? 0
               return (
-                <div key={u.id} className="soon-card card" data-tilt>
+                <div key={u.id} className="soon-card card">
                   <div className="soon-when mono">{m <= 0 ? 'this month' : `~${m} mo`} · {expectedLabel(u.expected)}</div>
                   <div className="dim small">{u.brand}</div>
                   <h3>{u.model}</h3>
@@ -402,7 +400,7 @@ export default function Landing() {
         <div className="wrap final-in">
           <h2 className="section-title" data-split>Two minutes. Three honest answers.</h2>
           <p className="muted" data-reveal>Free forever. No sign-up needed to see your results.</p>
-          <Link to="/sahifit" className="btn btn-primary btn-xl" data-magnetic data-reveal>
+          <Link to="/sahifit" className="btn btn-primary btn-xl" data-reveal>
             Start SahiFit <Icon name="arrow" />
           </Link>
         </div>
