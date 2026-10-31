@@ -6,6 +6,16 @@ tells you whether to buy now or wait for a launch.
 
 **Live:** [sahicar-in.web.app](https://sahicar-in.web.app)
 
+![SahiCar home: the right car, honestly, with a 3D car cycling through body styles](docs/screenshots/hero.jpg)
+
+| SahiFit quiz | Your SahiScore results |
+| --- | --- |
+| ![Step 1 of the SahiFit quiz: what can you spend, all-in](docs/screenshots/sahifit.jpg) | ![Results page: your right car is the Nexon, with the top three scored](docs/screenshots/results.jpg) |
+| **A car, scored for you** | **Every new car, one honest page** |
+| ![Car page with photo, price range, SahiScore and specs](docs/screenshots/car.jpg) | ![Explore page with filters and scored car cards](docs/screenshots/explore.jpg) |
+
+<p align="center"><img src="docs/screenshots/mobile.jpg" width="300" alt="SahiCar on a phone: the hero fits the screen with the car and its category card" /></p>
+
 The strategy, competitor research, 10 name options, a full description of the algorithm and the roadmap are in [docs/STRATEGY.md](docs/STRATEGY.md).
 
 ## Run it
