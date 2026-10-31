@@ -4,6 +4,8 @@
 **SahiScore** engine ranks every car, fuel, gearbox and variant on its 5-year cost, safety, your roads and your family. It then
 tells you whether to buy now or wait for a launch.
 
+**Live:** [sahicar-in.web.app](https://sahicar-in.web.app)
+
 The strategy, competitor research, 10 name options, a full description of the algorithm and the roadmap are in [docs/STRATEGY.md](docs/STRATEGY.md).
 
 ## Run it
