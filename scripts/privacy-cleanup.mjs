@@ -1,4 +1,4 @@
-// Data retention (DPDP Act): delete accounts nobody has signed in to for two years, and strip fields we no
+// Data retention (DPDP Act): delete accounts nobody has signed in to for six months, and strip fields we no
 // longer keep (the profile photo). Firebase's free plan has no scheduled jobs, so run this now and then:
 //
 //   npm run privacy:cleanup            show what would be deleted (changes nothing)
@@ -11,7 +11,7 @@ import { join } from 'node:path'
 import api from 'firebase-tools/lib/api.js'
 
 const PROJECT = JSON.parse(readFileSync(new URL('../.firebaserc', import.meta.url), 'utf8')).projects.default
-const INACTIVE_DAYS = 730
+const INACTIVE_DAYS = 183
 const apply = process.argv.includes('--apply')
 
 async function token() {
@@ -55,7 +55,7 @@ for (let next = ''; ; ) {
 }
 const withPhoto = docs.filter((d) => d.fields && 'photo' in d.fields)
 
-console.log(`${accounts.length} accounts · ${stale.length} inactive for ${INACTIVE_DAYS / 365} years · ${withPhoto.length} profiles still holding a photo`)
+console.log(`${accounts.length} accounts · ${stale.length} inactive for 6 months · ${withPhoto.length} profiles still holding a photo`)
 if (!apply) {
   if (stale.length || withPhoto.length) console.log('Dry run: nothing changed. Add --apply to delete.')
   process.exit(0)
