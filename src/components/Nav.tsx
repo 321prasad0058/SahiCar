@@ -31,6 +31,7 @@ export function Nav() {
           <NavLink to="/explore">Explore</NavLink>
           <NavLink to="/upcoming">Upcoming</NavLink>
           <NavLink to="/compare">Compare</NavLink>
+          <NavLink to="/emi">EMI</NavLink>
           <NavLink to="/about">How it works</NavLink>
         </nav>
         <div className="nav-end">
@@ -58,6 +59,7 @@ export function Nav() {
         <NavLink to="/explore">Explore all cars</NavLink>
         <NavLink to="/upcoming">Upcoming launches</NavLink>
         <NavLink to="/compare">Compare</NavLink>
+        <NavLink to="/emi">EMI calculator</NavLink>
         <NavLink to="/garage">My garage</NavLink>
         <NavLink to="/about">How it works</NavLink>
         {enabled && !user && <NavLink to="/login">Sign in</NavLink>}

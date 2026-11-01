@@ -18,6 +18,7 @@ const Upcoming = lazy(() => import('./pages/Upcoming'))
 const Garage = lazy(() => import('./pages/Garage'))
 const Login = lazy(() => import('./pages/Login'))
 const About = lazy(() => import('./pages/About'))
+const Emi = lazy(() => import('./pages/Emi'))
 const DevCars = import.meta.env.DEV ? lazy(() => import('./pages/DevCars')) : null
 
 const TITLES: Record<string, string> = {
@@ -30,6 +31,7 @@ const TITLES: Record<string, string> = {
   '/garage': 'My garage · SahiCar',
   '/login': 'Sign in · SahiCar',
   '/about': 'How SahiCar works',
+  '/emi': 'Car loan EMI calculator · SahiCar',
 }
 
 export default function App() {
@@ -61,6 +63,7 @@ export default function App() {
             <Route path="/garage" element={<Garage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/about" element={<About />} />
+            <Route path="/emi" element={<Emi />} />
             {DevCars && <Route path="/dev/cars" element={<DevCars />} />}
             <Route path="*" element={<NotFound />} />
           </Routes>

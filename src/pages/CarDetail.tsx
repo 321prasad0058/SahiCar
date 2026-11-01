@@ -205,6 +205,7 @@ export default function CarDetail() {
                 <Icon name="heart" size={16} /> {saved ? 'Saved' : 'Save'}
               </button>
               <button className="btn btn-ghost btn-sm" onClick={() => toggleCompareGated(car.id)}><Icon name="compare" size={16} /> Compare</button>
+              <Link to={`/emi?car=${car.id}`} className="btn btn-ghost btn-sm"><Icon name="wallet" size={16} /> EMI</Link>
             </div>
           </div>
         </div>

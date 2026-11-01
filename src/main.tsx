@@ -6,6 +6,7 @@ import './styles/app.css'
 import './styles/landing.css'
 import './styles/wizard.css'
 import './styles/pages.css'
+import './styles/emi.css'
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>

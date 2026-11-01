@@ -212,9 +212,9 @@ p {
   border-color: var(--ink);
 }
 .icon-btn.on {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: #fff;
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 /* ── cards and chips */
