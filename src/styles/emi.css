@@ -631,3 +631,40 @@
     font-size: 44px;
   }
 }
+
+/* compact top: the calculator, not the heading, should fill the first screen */
+.page.emi {
+  padding-top: 92px;
+}
+.emi-head {
+  gap: 6px;
+  margin-bottom: 20px;
+}
+.emi-head h1 {
+  font-size: clamp(30px, 3.6vw, 42px);
+  margin: 0;
+}
+.emi-title-short {
+  display: none;
+}
+@media (max-width: 960px) {
+  .page.emi {
+    padding-top: 80px;
+  }
+  .emi-head {
+    margin-bottom: 10px;
+  }
+  .emi-head .eyebrow,
+  .emi-head h1:not(.emi-title-short) {
+    display: none;
+  }
+  .emi-head .emi-title-short {
+    display: block;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+  }
+  .emi-in {
+    gap: 16px;
+    padding: 16px;
+  }
+}
