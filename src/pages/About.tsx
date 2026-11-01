@@ -99,7 +99,6 @@ export default function About() {
               <li><b>With a free account:</b> we store your name, email, profile photo (if you sign in with Google), quiz answers and saved cars in Google Firebase, in Mumbai, so they sync across your devices. Your activity is linked to a random account ID, not your email.</li>
               <li><b>What we never do:</b> sell your data, or share it with dealers, lenders, insurers or advertisers. No sales calls, ever.</li>
               <li><b>Your rights:</b> you can see and change your answers and saved cars any time, and delete your account and all its data from your garage in one step, under India’s Digital Personal Data Protection Act, 2023.</li>
-              <li><b>Questions or complaints:</b> open an issue at <a className="link-arrow" href="https://github.com/321prasad0058/SahiCar/issues" target="_blank" rel="noreferrer">github.com/321prasad0058/SahiCar</a>.</li>
             </ul>
           </div>
         </section>
