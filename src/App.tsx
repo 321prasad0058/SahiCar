@@ -1,8 +1,9 @@
 import { Suspense, lazy, useEffect } from 'react'
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import { Footer } from './components/Footer'
 import { Nav } from './components/Nav'
 import { Toasts } from './components/Toast'
+import { setGateNavigator } from './lib/gate'
 import { useStore } from './state/store'
 import Landing from './pages/Landing'
 
@@ -33,6 +34,8 @@ const TITLES: Record<string, string> = {
 
 export default function App() {
   const { pathname } = useLocation()
+  const navigate = useNavigate()
+  useEffect(() => setGateNavigator(navigate), [navigate])
   useEffect(() => {
     window.scrollTo(0, 0)
     if (TITLES[pathname]) document.title = TITLES[pathname]

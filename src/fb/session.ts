@@ -7,11 +7,13 @@ import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
+  deleteUser,
   signOut,
   updateProfile,
   type User,
 } from 'firebase/auth'
-import { auth } from './firebase'
+import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore'
+import { auth, db } from './firebase'
 
 export * from './user'
 
@@ -29,3 +31,16 @@ export async function signup(name: string, email: string, password: string) {
 export const reset = (email: string) => sendPasswordResetEmail(need(), email)
 export const logout = async () => void (auth && (await signOut(auth)))
 export const watch = (fn: (u: User | null) => void) => (auth ? onAuthStateChanged(auth, fn) : () => {})
+
+/** Right to erasure (DPDP Act): delete the saved cars, the profile, then the account itself. */
+export async function deleteAccount() {
+  const u = need().currentUser
+  if (!u) return
+  if (db) {
+    const garage = await getDocs(collection(db, 'users', u.uid, 'garage'))
+    await Promise.all(garage.docs.map((d) => deleteDoc(d.ref)))
+    await deleteDoc(doc(db, 'users', u.uid))
+  }
+  // Firebase asks for a recent sign-in before deleting an account; the caller explains that if it happens
+  await deleteUser(u)
+}

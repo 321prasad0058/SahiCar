@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import type { Car } from '../data/types'
 import { BODY_LABEL, FUEL_LABEL } from '../data/types'
 import { priceRange } from '../lib/format'
+import { toggleCompareGated, toggleSave } from '../lib/gate'
 import { useStore } from '../state/store'
 import { CarImage } from './CarImage'
 import { Icon } from './Icon'
@@ -40,11 +41,11 @@ export function CarCard({ car, score }: { car: Car; score?: number }) {
         <button
           className={`icon-btn ${saved ? 'on' : ''}`}
           aria-label={saved ? 'Remove from garage' : 'Save to garage'}
-          onClick={() => toast(useStore.getState().toggleGarage(car.id) ? `${car.model} saved to your garage` : `${car.model} removed`)}
+          onClick={() => toggleSave(car.id, (on) => toast(on ? `${car.model} saved to your garage` : `${car.model} removed`))}
         >
           <Icon name="heart" />
         </button>
-        <button className={`icon-btn ${comparing ? 'on' : ''}`} aria-label="Compare" onClick={() => useStore.getState().toggleCompare(car.id)}>
+        <button className={`icon-btn ${comparing ? 'on' : ''}`} aria-label="Compare" onClick={() => toggleCompareGated(car.id)}>
           <Icon name="compare" />
         </button>
       </div>

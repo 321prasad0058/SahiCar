@@ -12,7 +12,7 @@ import { relaxations, sahiScore } from '../engine/sahiscore'
 import { inr, lakh } from '../lib/format'
 import { reducedMotion } from '../lib/perf'
 import { gsap } from '../lib/scroll'
-import { trackNoMatch } from '../lib/track'
+import { track, trackNoMatch } from '../lib/track'
 import { useStore } from '../state/store'
 
 // ── controls
@@ -349,8 +349,11 @@ export default function Wizard() {
     return () => ctx.revert()
   }, [step])
 
+  useEffect(() => track('quiz_start', {}), [])
+
   const go = (n: number) => {
     if (n >= STEPS.length) {
+      track('quiz_complete', { fits, budget_lakh: Math.round(answers.budget / 10000) / 10 })
       useStore.getState().finish()
       nav('/results')
       return

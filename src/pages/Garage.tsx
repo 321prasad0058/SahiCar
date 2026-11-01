@@ -1,6 +1,7 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CarCard } from '../components/CarCard'
+import { toast } from '../components/Toast'
 import { carById } from '../data'
 import { fb, useAuth } from '../state/auth'
 import { useStore } from '../state/store'
@@ -39,6 +40,7 @@ export default function Garage() {
           <div className="card sync">
             <p className="muted">Signed in as {user.email}. Your garage and answers sync automatically.</p>
             <button className="btn btn-ghost btn-sm" onClick={() => logout()}>Sign out</button>
+            <DeleteAccount />
           </div>
         )}
         {list.length ? (
@@ -50,6 +52,34 @@ export default function Garage() {
           </div>
         )}
       </div>
+    </div>
+  )
+}
+
+/** Two-step delete, so a stray tap can't erase an account. */
+function DeleteAccount() {
+  const [step, setStep] = useState<'idle' | 'confirm' | 'busy'>('idle')
+  const [error, setError] = useState('')
+  const run = async () => {
+    setStep('busy')
+    setError('')
+    try {
+      await (await fb()).deleteAccount()
+      useStore.getState().reset()
+      useStore.getState().setGarage([])
+      toast('Your account and data have been deleted')
+    } catch (e) {
+      setStep('confirm')
+      setError((e as { code?: string }).code === 'auth/requires-recent-login' ? 'For your safety, sign out, sign in again, then delete.' : 'Couldn’t delete just now. Please try again.')
+    }
+  }
+  if (step === 'idle') return <button className="btn btn-ghost btn-sm" onClick={() => setStep('confirm')}>Delete my account</button>
+  return (
+    <div className="delete-confirm small">
+      <span>This permanently deletes your account, saved cars and quiz answers.</span>
+      <button className="btn btn-sm danger" disabled={step === 'busy'} onClick={run}>{step === 'busy' ? 'Deleting…' : 'Yes, delete everything'}</button>
+      <button className="btn btn-ghost btn-sm" onClick={() => { setStep('idle'); setError('') }}>Cancel</button>
+      {error && <span className="form-error">{error}</span>}
     </div>
   )
 }

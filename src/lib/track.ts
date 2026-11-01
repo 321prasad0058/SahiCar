@@ -11,6 +11,11 @@ export function track(name: string, params: Record<string, string | number>) {
   import('../fb/analytics').then((m) => m.log(name, params)).catch(() => {})
 }
 
+/** Link events to the account once someone signs in (pseudonymous uid only). */
+export function identify(uid: string | null) {
+  if (on) import('../fb/analytics').then((m) => m.identify(uid)).catch(() => {})
+}
+
 import type { Answers } from '../engine/answers'
 import type { Result } from '../engine/sahiscore'
 

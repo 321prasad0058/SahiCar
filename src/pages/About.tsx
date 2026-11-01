@@ -85,9 +85,22 @@ export default function About() {
               <li><b>Fuel and power prices:</b> public city prices for petrol, diesel and CNG (PPAC and the oil companies), and state electricity tariffs.</li>
               <li><b>Real-world mileage:</b> correction factors from claimed (ARAI/MIDC) figures by fuel type and city/highway mix.</li>
               <li><b>Upcoming launches:</b> carmaker announcements and well-sourced automotive news. Each one is marked confirmed, testing or rumoured.</li>
-              <li><b>Photos:</b> Wikimedia Commons, credited on every image. 3D views are illustrative body styles built at each car’s real proportions.</li>
+              <li><b>Photos:</b> openly licensed photos from Wikimedia Commons, credited to their photographers on every image. Where no free photo of the current model exists, we show an outline rather than an older model. 3D views are illustrative body styles built at each car’s real proportions.</li>
             </ul>
             <p className="small dim">We don’t copy reviews, photos or databases from other car portals. If you spot a wrong number, it’s our bug — tell us.</p>
+          </div>
+        </section>
+
+        <section id="privacy">
+          <h2 className="h-sec">Your data and privacy</h2>
+          <div className="card pad">
+            <ul className="src-list">
+              <li><b>Without an account:</b> your quiz answers, garage and compare list stay in this browser. We record anonymous page views and product events (for example “quiz finished” or “no car matched”, with the choices but never your name or email) to improve SahiCar.</li>
+              <li><b>With a free account:</b> we store your name, email, profile photo (if you sign in with Google), quiz answers and saved cars in Google Firebase, in Mumbai, so they sync across your devices. Your activity is linked to a random account ID, not your email.</li>
+              <li><b>What we never do:</b> sell your data, or share it with dealers, lenders, insurers or advertisers. No sales calls, ever.</li>
+              <li><b>Your rights:</b> you can see and change your answers and saved cars any time, and delete your account and all its data from your garage in one step, under India’s Digital Personal Data Protection Act, 2023.</li>
+              <li><b>Questions or complaints:</b> open an issue at <a className="link-arrow" href="https://github.com/321prasad0058/SahiCar/issues" target="_blank" rel="noreferrer">github.com/321prasad0058/SahiCar</a>.</li>
+            </ul>
           </div>
         </section>
 

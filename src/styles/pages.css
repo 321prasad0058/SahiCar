@@ -833,3 +833,53 @@ button.v-row:hover {
 .about-cta {
   margin-top: 40px;
 }
+
+/* sign-in consent and account deletion */
+.consent {
+  margin-top: 4px;
+  line-height: 1.5;
+}
+.consent a {
+  text-decoration: underline;
+}
+.delete-confirm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.btn.danger {
+  background: var(--red);
+  color: #fff;
+}
+
+/* results: the locked part of the podium */
+.unlock {
+  display: grid;
+  align-content: center;
+  gap: 14px;
+  padding: 28px;
+  min-height: 320px;
+  background: repeating-linear-gradient(135deg, var(--surface) 0 14px, var(--surface-2) 14px 28px);
+}
+.unlock-ghosts {
+  display: flex;
+  gap: 10px;
+}
+.unlock-ghosts span {
+  font-size: 13px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px dashed var(--line-2);
+  color: var(--muted);
+}
+.unlock h3 {
+  font-size: 22px;
+  text-wrap: balance;
+}
+@media (min-width: 1101px) {
+  .podium .unlock {
+    grid-column: span 2;
+  }
+}

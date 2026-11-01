@@ -11,6 +11,8 @@ import { onRoad, tco } from '../engine/costs'
 import { GEAR_LABEL, gearKind, sahiScore } from '../engine/sahiscore'
 import { expectedLabel } from '../engine/timing'
 import { inr, lakh, priceRange } from '../lib/format'
+import { toggleCompareGated, toggleSave } from '../lib/gate'
+import { track } from '../lib/track'
 import { useStore } from '../state/store'
 import type { Studio } from '../webgl/Studio'
 
@@ -91,6 +93,7 @@ export default function CarDetail() {
   const answers = useStore((s) => s.answers)
   const done = useStore((s) => s.done)
   const saved = useStore((s) => s.garage.includes(id ?? ''))
+  useEffect(() => void (car && track('car_view', { car: car.id, body: car.body })), [car])
   const [state, setState] = useState(answers.state)
   const [view, setView] = useState<'photo' | '3d'>('photo')
   const fuels = useMemo(() => (car ? [...new Set(car.powertrains.map((p) => p.fuel))] : []), [car])
@@ -198,10 +201,10 @@ export default function CarDetail() {
             )}
 
             <div className="detail-actions">
-              <button className={`btn ${saved ? 'btn-primary' : 'btn-ghost'} btn-sm`} onClick={() => toast(useStore.getState().toggleGarage(car.id) ? 'Saved to your garage' : 'Removed')}>
+              <button className={`btn ${saved ? 'btn-primary' : 'btn-ghost'} btn-sm`} onClick={() => toggleSave(car.id, (on) => toast(on ? 'Saved to your garage' : 'Removed'))}>
                 <Icon name="heart" size={16} /> {saved ? 'Saved' : 'Save'}
               </button>
-              <button className="btn btn-ghost btn-sm" onClick={() => useStore.getState().toggleCompare(car.id)}><Icon name="compare" size={16} /> Compare</button>
+              <button className="btn btn-ghost btn-sm" onClick={() => toggleCompareGated(car.id)}><Icon name="compare" size={16} /> Compare</button>
             </div>
           </div>
         </div>

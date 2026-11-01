@@ -2,6 +2,7 @@
 // The Firebase SDK is loaded lazily from fb/session; without a config it is never downloaded.
 import type { User } from 'firebase/auth'
 import { create } from 'zustand'
+import { identify } from '../lib/track'
 import { useStore } from './store'
 
 const env = import.meta.env
@@ -36,8 +37,10 @@ async function sync(u: User) {
   const local = useStore.getState()
   const [profile, garage] = await Promise.all([loadProfile(u.uid), loadGarage(u.uid)])
   const remote = garage.map((g) => g.carId)
-  for (const id of local.garage.filter((id) => !remote.includes(id))) await saveCar(u.uid, id)
-  useStore.getState().setGarage([...new Set([...remote, ...local.garage])])
+  // read the garage again now: a car saved just before signing in may have been added while we waited
+  const mine = useStore.getState().garage
+  useStore.getState().setGarage([...new Set([...remote, ...mine])])
+  for (const id of mine.filter((id) => !remote.includes(id))) await saveCar(u.uid, id)
   if (profile?.answers && !local.done) {
     useStore.getState().setAnswers(profile.answers)
     useStore.getState().finish()
@@ -50,6 +53,7 @@ if (enabled) {
     fb().then(({ watch }) =>
       watch((user) => {
         useAuth.setState({ user, ready: true })
+        identify(user?.uid ?? null)
         if (user) sync(user).catch(() => {})
       }),
     )

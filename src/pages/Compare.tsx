@@ -5,6 +5,7 @@ import { Icon } from '../components/Icon'
 import { carById, cars, onroad } from '../data'
 import { BODY_LABEL, FUEL_LABEL, type Car } from '../data/types'
 import { tco } from '../engine/costs'
+import { toggleCompareGated } from '../lib/gate'
 import { sahiScore } from '../engine/sahiscore'
 import { lakh } from '../lib/format'
 import { useStore } from '../state/store'
@@ -52,7 +53,7 @@ export default function Compare() {
         <div className="eyebrow">Compare</div>
         <h1>Side by side, <span className="grad">best in each row lit up</span>.</h1>
         <div className="compare-add">
-          <select className="select" value={add} onChange={(e) => { setAdd(''); if (e.target.value) useStore.getState().toggleCompare(e.target.value) }} aria-label="Add a car">
+          <select className="select" value={add} onChange={(e) => { setAdd(''); if (e.target.value) toggleCompareGated(e.target.value) }} aria-label="Add a car">
             <option value="">{list.length >= 3 ? 'Add a car (replaces the oldest)' : 'Add a car to compare…'}</option>
             {cars.filter((c) => !ids.includes(c.id)).map((c) => <option key={c.id} value={c.id}>{c.brand} {c.model}</option>)}
           </select>

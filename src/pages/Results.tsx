@@ -11,8 +11,9 @@ import { stateOf } from '../engine/costs'
 import { DIM_LABEL, GEAR_LABEL, relaxations, sahiScore, withStretchHint, type Dim, type Scored } from '../engine/sahiscore'
 import { expectedLabel, timingFor } from '../engine/timing'
 import { inr, lakh } from '../lib/format'
+import { gate, toggleCompareGated, toggleSave } from '../lib/gate'
 import { reducedMotion } from '../lib/perf'
-import { trackNoMatch } from '../lib/track'
+import { track, trackNoMatch } from '../lib/track'
 import { gsap } from '../lib/scroll'
 import { fb, useAuth } from '../state/auth'
 import { useStore } from '../state/store'
@@ -75,15 +76,32 @@ function Pick({ s, i }: { s: Scored; i: number }) {
           <button
             className={`icon-btn ${saved ? 'on' : ''}`}
             aria-label="Save"
-            onClick={() => toast(useStore.getState().toggleGarage(s.car.id) ? `${s.car.model} saved` : `${s.car.model} removed`)}
+            onClick={() => toggleSave(s.car.id, (on) => toast(on ? `${s.car.model} saved` : `${s.car.model} removed`))}
           >
             <Icon name="heart" />
           </button>
-          <button className="icon-btn" aria-label="Compare" onClick={() => useStore.getState().toggleCompare(s.car.id)}>
+          <button className="icon-btn" aria-label="Compare" onClick={() => toggleCompareGated(s.car.id)}>
             <Icon name="compare" />
           </button>
         </div>
       </div>
+    </article>
+  )
+}
+
+/** In place of picks #2 and #3 for visitors who haven't signed in. */
+function Unlock({ more }: { more: number }) {
+  return (
+    <article className="pick-card unlock card">
+      <div className="unlock-ghosts" aria-hidden>
+        <span>#2</span>
+        <span>#3</span>
+      </div>
+      <h3>{more === 1 ? 'Your #2 pick is ready' : more === 2 ? 'Your #2 and #3 picks are ready' : `Your #2 and #3 picks, and ${more - 2} more cars that fit, are ready`}</h3>
+      <p className="muted small">Create a free account to see every car that fits you, save them to your garage and compare them. No dealer calls — we never share your details.</p>
+      <button className="btn btn-primary" onClick={() => gate('results', () => {})}>
+        Sign in free to see them <Icon name="arrow" size={16} />
+      </button>
     </article>
   )
 }
@@ -117,6 +135,10 @@ export default function Results() {
   const answers = useStore((s) => s.answers)
   const done = useStore((s) => s.done)
   const user = useAuth((s) => s.user)
+  const authReady = useAuth((s) => s.ready)
+  const enabled = useAuth((s) => s.enabled)
+  // top match free; the rest of the ranking after a free sign-in (decided once the saved session has loaded)
+  const locked = enabled && authReady && !user
   const root = useRef<HTMLDivElement>(null)
 
   const res = useMemo(() => withStretchHint(cars, answers, onroad, sahiScore(cars, answers, onroad)), [answers])
@@ -125,7 +147,8 @@ export default function Results() {
 
   useEffect(() => {
     if (done && !res.picks.length) trackNoMatch('results', 'results', answers, res)
-  }, [done, res, answers])
+    if (done && res.picks.length) track('results_view', { top: res.picks[0].car.id, fits: res.ranked.length, signed_in: user ? 1 : 0 })
+  }, [done, res, answers, user])
 
   useEffect(() => {
     if (user && done) fb().then((m) => m.saveProfile(user, answers)).catch(() => {})
@@ -152,7 +175,7 @@ export default function Results() {
           <h1>{res.picks.length ? <>Your right car is the <span className="grad">{res.picks[0].car.model}</span>.</> : 'Nothing fits — yet.'}</h1>
           <p className="muted">
             We scored {res.considered} models and {res.ranked.length} fit your must-haves and budget of {lakh(answers.budget)} on-road in {st.name}.
-            {res.picks.length ? ' Here are the three that fit your life best.' : ''}
+            {!res.picks.length ? '' : locked ? ' Here’s the one that fits your life best.' : ' Here are the three that fit your life best.'}
           </p>
           <div className="profile-chips">
             <span className="chip">{answers.dailyKm} km/day</span>
@@ -166,7 +189,8 @@ export default function Results() {
 
         {res.picks.length ? (
           <div className="podium">
-            {res.picks.map((s, i) => <Pick key={s.car.id} s={s} i={i} />)}
+            {res.picks.map((s, i) => (locked && i > 0 ? null : <Pick key={s.car.id} s={s} i={i} />))}
+            {locked && res.ranked.length > 1 && <Unlock more={res.ranked.length - 1} />}
           </div>
         ) : (
           <div className="card empty-res">
@@ -194,11 +218,11 @@ export default function Results() {
         {res.picks.length > 0 && (
           <section className="res-section">
             <h2 className="h-sec">Why {res.picks[0].car.model} wins</h2>
-            <WhyBars picks={res.picks} weights={res.weights} />
+            <WhyBars picks={locked ? res.picks.slice(0, 1) : res.picks} weights={res.weights} />
           </section>
         )}
 
-        {rest.length > 0 && (
+        {!locked && rest.length > 0 && (
           <section className="res-section">
             <h2 className="h-sec">Also worth a look</h2>
             <div className="rank-list">

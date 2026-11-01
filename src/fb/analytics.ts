@@ -1,7 +1,7 @@
 // Google Analytics for Firebase, loaded only after the page is up and idle so it never slows the first paint.
 // Page views on route changes are recorded by GA's enhanced measurement (browser history events).
 import { getApps, initializeApp } from 'firebase/app'
-import { getAnalytics, isSupported, logEvent, type Analytics } from 'firebase/analytics'
+import { getAnalytics, isSupported, logEvent, setUserId, type Analytics } from 'firebase/analytics'
 
 const env = import.meta.env
 let ready: Promise<Analytics | null> | null = null
@@ -25,4 +25,10 @@ export function startAnalytics() {
 export async function log(name: string, params: Record<string, string | number>) {
   const a = await startAnalytics()
   if (a) logEvent(a, name, params)
+}
+
+/** Tie this browser's events to the signed-in account (Firebase's random uid, never an email). */
+export async function identify(uid: string | null) {
+  const a = await startAnalytics()
+  if (a) setUserId(a, uid)
 }
