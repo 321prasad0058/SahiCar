@@ -43,7 +43,8 @@ export default function Emi() {
   const initialCar = params.get('car') && carById.get(params.get('car')!) ? params.get('car')! : ''
 
   const [mode, setMode] = useState<'price' | 'car'>(initialCar ? 'car' : 'price')
-  const num = (k: string, lo: number, hi: number, d: number) => { const v = Number(params.get(k)); return v >= lo && v <= hi ? v : d }
+  // a value from the link, if present and sensible (Number(null) is 0, so check presence first)
+  const num = (k: string, lo: number, hi: number, d: number) => { const raw = params.get(k); const v = Number(raw); return raw != null && raw !== '' && v >= lo && v <= hi ? v : d }
   const [typed, setTyped] = useState(() => num('price', 100000, 50000000, 1000000))
   const [carId, setCarId] = useState(initialCar)
   const car = carId ? carById.get(carId) : undefined
