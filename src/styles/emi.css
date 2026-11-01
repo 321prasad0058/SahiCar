@@ -603,15 +603,12 @@
 }
 
 @media (max-width: 960px) {
-  /* result first, then the inputs, then the details */
+  /* like bank and portal calculators on phones: inputs first, the result straight after, then the details */
   .emi-out {
     display: contents;
   }
   .emi-grid {
     gap: 14px;
-  }
-  .emi-hero {
-    order: -1;
   }
   .emi-head {
     margin-bottom: 18px;

@@ -932,3 +932,30 @@ button.v-row:hover {
     padding: 8px 12px 14px;
   }
 }
+
+/* paint picker: real colours with the maker's names */
+.paints {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.paint-name {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 3px 10px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.9);
+}
+@media (max-width: 640px) {
+  .paints {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+  .paint-name {
+    align-self: flex-start;
+  }
+}

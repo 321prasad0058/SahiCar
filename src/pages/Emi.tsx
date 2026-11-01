@@ -66,11 +66,16 @@ export default function Emi() {
     mq.addEventListener('change', on)
     return () => mq.removeEventListener('change', on)
   }, [])
+  // the pinned EMI shows whenever the result card is off screen (above or below) once you've started scrolling,
+  // so the EMI stays in view while you change the inputs
   useEffect(() => {
     if (!hero.current) return
-    const io = new IntersectionObserver(([e]) => setHeroGone(!e.isIntersecting && e.boundingClientRect.top < 0), { rootMargin: '-70px 0px 0px 0px' })
+    let off = false
+    const update = () => setHeroGone(off && scrollY > 120)
+    const io = new IntersectionObserver(([e]) => ((off = !e.isIntersecting), update()), { rootMargin: '-70px 0px 0px 0px' })
     io.observe(hero.current)
-    return () => io.disconnect()
+    addEventListener('scroll', update, { passive: true })
+    return () => (io.disconnect(), removeEventListener('scroll', update))
   })
 
   useEffect(() => setVariantIdx(0), [carId])

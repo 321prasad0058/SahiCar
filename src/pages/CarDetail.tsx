@@ -17,12 +17,14 @@ import { useStore } from '../state/store'
 import type { Studio } from '../webgl/Studio'
 
 const SHOWCASE_IDS = ['tata-sierra-ev', 'tata-sierra', 'tata-altroz', 'honda-city', 'maruti-victoris', 'maruti-ertiga']
-const PAINTS = ['#e9edf0', '#0c0f13', '#8a1c22', '#14303d', '#5b6b75', '#1f3d2a', '#c27a2c', '#2a4fa0']
+// neutral grey for the generic body when the car has no verified colour list
+const NEUTRAL = '#5b6b75'
 
 function Studio3D({ car }: { car: Car }) {
   const canvas = useRef<HTMLCanvasElement>(null)
   const studio = useRef<Studio | null>(null)
-  const [paint, setPaint] = useState('')
+  const paints = car.colours ?? []
+  const [paint, setPaint] = useState(0)
   const [failed, setFailed] = useState(false)
   useEffect(() => {
     let s: Studio | null = null
@@ -34,8 +36,8 @@ function Studio3D({ car }: { car: Car }) {
         // the petrol/diesel Sierra shares the EV's body; it just wears a white plate
         const exact = SPEC_BY_ID[car.id] ?? (car.id === 'tata-sierra' ? { ...SIERRA_EV, ev: false, plate: 'MH 01 SC 2026' } : null)
         s = exact
-          ? new Studio(canvas.current!, exact, {})
-          : new Studio(canvas.current!, archetype(car.body, fuel), { generic: true, paint: PAINTS[3], size: car.dims })
+          ? new Studio(canvas.current!, exact, paints[0] ? { paint: paints[0].hex } : {})
+          : new Studio(canvas.current!, archetype(car.body, fuel), { generic: true, paint: paints[0]?.hex ?? NEUTRAL, size: car.dims })
         studio.current = s
       } catch {
         setFailed(true)
@@ -52,11 +54,25 @@ function Studio3D({ car }: { car: Car }) {
     <div className="studio">
       <canvas ref={canvas} aria-label={`3D view of a ${BODY_LABEL[car.body]} at the ${car.model}'s proportions. Drag to rotate.`} />
       <div className="studio-bar">
-        <div className="swatches">
-          {PAINTS.map((p) => (
-            <button key={p} className={`swatch ${p === paint ? 'on' : ''}`} style={{ background: p }} aria-label={`Paint ${p}`} onClick={() => { setPaint(p); studio.current?.setColor(p) }} />
-          ))}
-        </div>
+        {paints.length > 0 && (
+          <div className="paints">
+            <div className="swatches" role="radiogroup" aria-label="Paint colour">
+              {paints.map((p, i) => (
+                <button
+                  key={p.name}
+                  role="radio"
+                  aria-checked={i === paint}
+                  className={`swatch ${i === paint ? 'on' : ''}`}
+                  style={{ background: p.roof ? `linear-gradient(180deg, ${p.roof} 0 38%, ${p.hex} 38%)` : p.hex }}
+                  title={p.name}
+                  aria-label={p.name}
+                  onClick={() => { setPaint(i); studio.current?.setColor(p.hex) }}
+                />
+              ))}
+            </div>
+            <span className="paint-name small">{paints[paint]?.name}</span>
+          </div>
+        )}
         <div className="views">
           {(['front', 'side', 'rear', 'top'] as const).map((v) => <button key={v} className="chip" onClick={() => studio.current?.view(v)}>{v}</button>)}
           <button className="chip" onClick={() => studio.current?.toggleLights()}>lights</button>

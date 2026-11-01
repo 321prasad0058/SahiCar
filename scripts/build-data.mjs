@@ -132,6 +132,14 @@ for (const c of seen.values()) {
   if (images[c.id] === false) c.wiki = null
 }
 
+// paint colours offered in India, named as the maker names them; a car with no verified list gets none
+const colPath = join(research, 'colours.json')
+const colours = existsSync(colPath) ? read(colPath) : {}
+for (const c of seen.values()) {
+  const list = colours[c.id]?.colours ?? []
+  c.colours = list.map(({ name, hex, roof }) => (roof ? { name, hex, roof } : { name, hex }))
+}
+
 // official manufacturer images, self-hosted by scripts/official-images.mjs (preferred when present)
 const offPath = join(research, 'official-images.json')
 const official = existsSync(offPath) ? read(offPath) : {}

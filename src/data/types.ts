@@ -67,6 +67,8 @@ export interface Car {
   image?: { src: string; page: string } | null
   /** the manufacturer's own image, self-hosted; preferred over the Wikimedia photo */
   official?: Official | null
+  /** paint colours offered in India, with the maker's own names (research/colours.json) */
+  colours?: Paint[]
   sources: string[]
   verifiedOn: string
 }
@@ -142,4 +144,11 @@ export const FUEL_LABEL: Record<Fuel, string> = {
   'mild-hybrid': 'Mild hybrid',
   'strong-hybrid': 'Strong hybrid',
   ev: 'Electric',
+}
+
+export interface Paint {
+  name: string
+  hex: string
+  /** contrasting roof on dual-tone options */
+  roof?: string
 }
