@@ -1,3 +1,5 @@
+// first: read and tidy the share and campaign tags before the router sees the address
+import './lib/entry'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
@@ -7,6 +9,7 @@ import './styles/landing.css'
 import './styles/wizard.css'
 import './styles/pages.css'
 import './styles/emi.css'
+import './styles/growth.css'
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>

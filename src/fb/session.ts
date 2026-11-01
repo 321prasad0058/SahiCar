@@ -8,11 +8,13 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   deleteUser,
+  getAdditionalUserInfo,
   signOut,
   updateProfile,
   type User,
 } from 'firebase/auth'
 import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore'
+import { track } from '../lib/track'
 import { auth, db } from './firebase'
 
 export * from './user'
@@ -22,11 +24,19 @@ const need = () => {
   return auth
 }
 
-export const google = async () => void (await signInWithPopup(need(), new GoogleAuthProvider()))
-export const login = async (email: string, password: string) => void (await signInWithEmailAndPassword(need(), email, password))
+// GA4's recommended sign_up / login events, for the sign-up conversion (the method only, nothing about the person)
+export async function google() {
+  const cred = await signInWithPopup(need(), new GoogleAuthProvider())
+  track(getAdditionalUserInfo(cred)?.isNewUser ? 'sign_up' : 'login', { method: 'google' })
+}
+export async function login(email: string, password: string) {
+  await signInWithEmailAndPassword(need(), email, password)
+  track('login', { method: 'email' })
+}
 export async function signup(name: string, email: string, password: string) {
   const cred = await createUserWithEmailAndPassword(need(), email, password)
   await updateProfile(cred.user, { displayName: name })
+  track('sign_up', { method: 'email' })
 }
 export const reset = (email: string) => sendPasswordResetEmail(need(), email)
 export const logout = async () => void (auth && (await signOut(auth)))

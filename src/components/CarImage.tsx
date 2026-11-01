@@ -30,15 +30,17 @@ function resolve(title: string): Promise<Img> {
   return pending.get(title)!
 }
 
-const SIL: Record<string, string> = {
+export const SIL: Record<string, string> = {
   hatchback: 'M14 66h10a10 10 0 0120 0h52a10 10 0 0120 0h12c3 0 5-3 5-6v-8c0-4-2-6-6-7l-18-5-14-14c-3-3-6-4-10-4H42c-4 0-7 1-9 4l-9 14-8 3c-3 1-5 3-5 6v11c0 1 1 2 3 2z',
   sedan: 'M8 66h14a10 10 0 0120 0h58a10 10 0 0120 0h16c3 0 4-2 4-5v-7c0-3-2-5-5-6l-24-5-16-13c-3-2-6-3-10-3H58c-4 0-7 1-10 3L34 41l-20 4c-4 1-7 3-7 7v11c0 2 0 3 1 3z',
   suv: 'M10 66h10a11 11 0 0122 0h56a11 11 0 0122 0h14c3 0 4-2 4-5V48c0-4-2-6-6-7l-16-3-12-14c-2-3-5-4-9-4H34c-4 0-6 1-8 4l-6 15-8 2c-3 1-5 3-5 6v14c0 3 1 5 3 5z',
   mpv: 'M10 66h10a11 11 0 0122 0h58a11 11 0 0122 0h12c3 0 4-2 4-5V49c0-4-2-6-6-7l-14-3-18-17c-2-2-5-3-9-3H24c-5 0-8 3-9 7l-3 15c-3 1-5 3-5 6v14c0 3 1 5 3 5z',
 }
 
+export const silPath = (body: Body) => SIL[body === 'compact-suv' || body === 'pickup' ? 'suv' : body === 'coupe' ? 'sedan' : body] ?? SIL.suv
+
 export function Silhouette({ body }: { body: Body }) {
-  const d = SIL[body === 'compact-suv' || body === 'pickup' ? 'suv' : body === 'coupe' ? 'sedan' : body] ?? SIL.suv
+  const d = silPath(body)
   return (
     <svg viewBox="0 0 150 80" className="silhouette" aria-hidden>
       <path d={d} fill="none" stroke="#b5afa3" strokeWidth="1.4" strokeLinejoin="round" />

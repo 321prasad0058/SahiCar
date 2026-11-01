@@ -1,0 +1,316 @@
+/* ── sharing, the pay check in SahiFit, and How we score */
+
+/* share sheet */
+.share-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(21, 23, 27, 0.45);
+  backdrop-filter: blur(3px);
+}
+.share-sheet {
+  position: relative;
+  width: min(420px, 100%);
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+  padding: 18px;
+  display: grid;
+  gap: 14px;
+}
+.share-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: -4px -4px 0 0;
+}
+.share-top b {
+  font-size: 17px;
+}
+.share-preview {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 5;
+  max-height: 56dvh;
+  margin: 0 auto;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--bg);
+  border: 1px solid var(--line);
+}
+.share-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.share-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.share-actions .btn {
+  justify-content: center;
+}
+.share-actions.three {
+  grid-template-columns: repeat(3, 1fr);
+}
+.share-actions .btn-primary:first-child {
+  grid-column: 1 / -1;
+}
+.share-actions.three .btn:not(.btn-primary) {
+  padding-inline: 8px;
+  font-size: 14px;
+}
+.share-note {
+  margin: 0;
+  text-align: center;
+}
+.share-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  margin-top: 18px;
+}
+.share-btn {
+  padding: 14px 26px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 10px 24px -12px color-mix(in srgb, var(--accent) 80%, transparent);
+  transition: background 0.2s, transform 0.2s var(--ease), box-shadow 0.2s;
+}
+.share-btn:hover {
+  background: var(--accent-2);
+  border-color: var(--accent-2);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px -12px color-mix(in srgb, var(--accent) 85%, transparent);
+}
+@media (max-width: 640px) {
+  .share-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .share-cta .small {
+    width: 100%;
+    text-align: center;
+  }
+}
+.pledge-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 40px 0 0;
+  color: var(--accent);
+  font-weight: 600;
+}
+.pledge-line .link-arrow {
+  font-weight: 500;
+}
+
+/* a friend's shared match */
+.invite {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 60;
+  width: min(340px, calc(100vw - 32px));
+  padding: 16px 18px;
+  display: grid;
+  gap: 6px;
+  box-shadow: var(--shadow-lg);
+  animation: invite-in 0.5s var(--ease) both 0.6s;
+}
+.invite b {
+  font-size: 18px;
+  padding-right: 28px;
+}
+.invite-score {
+  color: var(--accent);
+}
+.invite p {
+  margin: 0 0 6px;
+}
+.invite .btn {
+  justify-self: start;
+}
+.invite-x {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+}
+@keyframes invite-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .invite {
+    animation: none;
+  }
+}
+
+/* take-home pay in SahiFit */
+.pay-check {
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  border: 1px solid transparent;
+}
+.pay-check.yes {
+  background: var(--green-soft);
+  border-color: color-mix(in srgb, var(--green) 30%, transparent);
+}
+.pay-check.yes b {
+  color: var(--green);
+}
+.pay-check.stretch {
+  background: var(--amber-soft);
+  border-color: color-mix(in srgb, var(--amber) 30%, transparent);
+}
+.pay-check.stretch b {
+  color: var(--amber);
+}
+.pay-check.no {
+  background: var(--red-soft);
+  border-color: color-mix(in srgb, var(--red) 30%, transparent);
+}
+.pay-check.no b {
+  color: var(--red);
+}
+.pay-check .link-arrow {
+  font: inherit;
+  font-weight: 600;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--accent);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.field-note svg {
+  vertical-align: -2px;
+}
+
+/* How we score */
+.hws h1 {
+  text-wrap: balance;
+}
+.hws-pledge {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 10px;
+  border-color: color-mix(in srgb, var(--accent) 30%, var(--line));
+  background: linear-gradient(160deg, var(--accent-soft), var(--surface) 55%);
+}
+.hws-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.hws-item p {
+  margin: 2px 0 0;
+}
+.hws-tick {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+}
+.hws-weights {
+  display: grid;
+  gap: 4px;
+  margin-top: 14px;
+}
+.hws-w > summary {
+  list-style: none;
+  display: grid;
+  grid-template-columns: minmax(110px, 170px) 1fr 44px;
+  align-items: center;
+  gap: 14px;
+  padding: 9px 0;
+  cursor: pointer;
+}
+.hws-w > summary::-webkit-details-marker {
+  display: none;
+}
+.hws-w p {
+  margin: 0 0 12px;
+}
+.hws-name {
+  font-weight: 600;
+  font-size: 14px;
+}
+.hws-bar {
+  height: 10px;
+  border-radius: 99px;
+  background: var(--bg-2);
+  overflow: hidden;
+}
+.hws-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+}
+.hws-pct {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+.hws-code {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 30px;
+}
+.hws-code > svg {
+  flex: none;
+  color: var(--accent);
+}
+.hws-code p {
+  margin: 2px 0 0;
+}
+.hws-code .btn {
+  margin-left: auto;
+  flex: none;
+}
+.hws .about-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.hws .reasons li span {
+  color: var(--ink-2);
+}
+@media (max-width: 640px) {
+  .hws-w > summary {
+    grid-template-columns: 1fr 44px;
+    gap: 4px 12px;
+  }
+  .hws-bar {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .hws-code {
+    flex-wrap: wrap;
+  }
+  .hws-code .btn {
+    margin-left: 0;
+  }
+}

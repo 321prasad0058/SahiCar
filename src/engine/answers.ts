@@ -14,6 +14,8 @@ export interface Answers {
   tenureYears: number
   /** loan interest, % a year */
   rate: number
+  /** monthly take-home pay, 0 when not given. Optional, kept in this browser only (never uploaded or tracked) */
+  income: number
   state: string
   place: 'metro' | 'city' | 'town' | 'rural'
   dailyKm: number
@@ -53,6 +55,7 @@ export const DEFAULT_ANSWERS: Answers = {
   downPayment: 300000,
   tenureYears: 5,
   rate: 9.25,
+  income: 0,
   state: 'MH',
   place: 'metro',
   dailyKm: 35,

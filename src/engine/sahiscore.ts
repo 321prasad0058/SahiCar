@@ -14,6 +14,7 @@ import { MUST_HAVES } from './answers.ts'
 
 const SOFT_MUST = new Set(MUST_HAVES.filter((m) => m.soft).map((m) => m.id))
 import { tco, type Tco } from './costs.ts'
+import { affordFor, COMFORT } from './afford.ts'
 import type { Body, Car, Fuel, OnRoadData, Powertrain } from '../data/types.ts'
 
 export type Dim = 'budget' | 'tco' | 'fuel' | 'safety' | 'space' | 'terrain' | 'drive' | 'performance' | 'features' | 'ownership' | 'fresh'
@@ -368,6 +369,8 @@ function explain(sc: Omit<Scored, 'reasons' | 'caveats' | 'badges'>, a: Answers,
   if (dims.drive >= 80 && weights.drive > 7) push('drive', `${GEAR_LABEL[sc.gear]} ${a.traffic === 'heavy' ? 'takes the pain out of traffic' : 'is easy to live with'}${a.parking === 'tight' ? '; compact enough for tight parking' : ''}`)
   if (dims.performance >= 70) push('performance', `${pt.powerPs ?? '—'} PS / ${pt.torqueNm ?? '—'} Nm — effortless overtakes`)
   if (dims.features >= 75) push('features', `Well loaded: ${car.features.slice(0, 3).join(', ')}`)
+  const pay = a.income > 0 ? affordFor(cost, a) : null
+  if (pay?.verdict === 'yes') reasons.push({ w: Infinity, text: a.payment === 'cash' ? `Comfortable on your pay: running costs are ${Math.round(pay.totalShare * 100)}% of it` : `Comfortable on your pay: the EMI is ${Math.round(pay.emiShare * 100)}% of your take-home` })
   if (dims.ownership >= 75) push('ownership', `Strong resale and ${car.network >= 4 ? 'a service network that reaches small towns' : 'reasonable service costs'}`)
 
   if (!extra.tested) caveats.push('Not crash-tested by Bharat NCAP or Global NCAP yet')
@@ -376,6 +379,9 @@ function explain(sc: Omit<Scored, 'reasons' | 'caveats' | 'badges'>, a: Answers,
   if (dims.space < 50) caveats.push(a.luggage === 'heavy' ? 'Boot is small for your luggage' : 'Rear space is tight for your family')
   if (dims.drive < 55 && a.traffic === 'heavy') caveats.push('Manual gearbox in heavy traffic gets tiring')
   if (dims.budget < 70 && cost.onRoad.total > a.budget) caveats.push(`On-road ${lakh(cost.onRoad.total)} is above your ${lakh(a.budget)} budget`)
+  if (pay && pay.verdict !== 'yes') caveats.push(a.payment === 'cash'
+    ? `${(cost.onRoad.total / a.income).toFixed(1)} months of your take-home pay — ${pay.verdict === 'no' ? 'too much' : 'a stretch'}`
+    : `The EMI is ${Math.round(pay.emiShare * 100)}% of your take-home pay — ${pay.verdict === 'no' ? 'too much' : 'a stretch'}`)
   if (sc.trimCompromise) caveats.push(`Your budget only reaches the ${sc.variant ?? 'lower'} trim — some features may be missing`)
   if (dims.fresh < 60) caveats.push('An ageing design — a new generation may not be far off')
 
@@ -451,6 +457,13 @@ export function sahiScore(cars: Car[], a: Answers, data: OnRoadData): Result {
       if (c.trimCompromise) penalties.push({ label: 'Budget forces a lower trim', factor: 0.95 })
       if (a.kids && !safety.tested) penalties.push({ label: 'Untested car with kids on board', factor: 0.95 })
       if (c.pt.fuel === 'cng' && a.cngNearby === 'no') penalties.push({ label: 'No CNG nearby', factor: 0.8 })
+      // take-home pay, when given: a car that would squeeze the month ranks lower (nothing changes without it)
+      // and the further past comfortable, the lower, so cheaper cars rise when the budget outruns the pay
+      if (a.income > 0) {
+        const pay = affordFor(cost, a)
+        const over = a.payment === 'cash' ? (Math.max(0, cost.onRoad.total / a.income - 6) / 6) * 0.15 : Math.max(0, pay.emiShare - COMFORT) * 0.6
+        if (over > 0) penalties.push({ label: pay.verdict === 'no' ? 'Too much of your monthly pay' : 'A stretch on your pay', factor: Math.max(0.7, 1 - over) })
+      }
       for (const id of unconfirmed) penalties.push({ label: `${MUST_HAVES.find((m) => m.id === id)?.label ?? id} not confirmed`, factor: 0.94 })
 
       const known = [car.dims.groundClearance, car.dims.boot, car.dims.wheelbase, c.pt.efficiency, car.safety.adult, c.pt.powerPs, car.dims.kerbWeight, car.variants.length || null]

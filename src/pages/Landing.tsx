@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react'
+import { Suspense, lazy, useCallback, useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { EmiTeaser } from '../components/EmiTeaser'
 import { Icon } from '../components/Icon'
@@ -6,10 +6,14 @@ import summary from '../data/summary.json'
 import { expectedLabel, monthsUntil } from '../engine/timing'
 import { lakh } from '../lib/format'
 import { setupCounts, setupReveals } from '../lib/motion'
+import { sharedMatch } from '../lib/entry'
 import { canRun3D, reducedMotion, whenIdle } from '../lib/perf'
 import { SplitText, gsap, startScroll } from '../lib/scroll'
 import { useStore } from '../state/store'
 import type { HeroWorld } from '../webgl/HeroWorld'
+
+// a friend's shared match needs the car database, so it loads only for visitors who came from a share link
+const SharedInvite = lazy(() => import('../components/SharedInvite').then((m) => ({ default: m.SharedInvite })))
 
 // Body styles, never named cars: SahiCar doesn't promote any model. The 3D car on stage is a shape for each
 // style; the facts are across every model of that style in our data. `car` is the 3D showcase index.
@@ -222,6 +226,7 @@ export default function Landing() {
   const st = STYLES[active]
   return (
     <div className="landing" ref={root}>
+      {sharedMatch && <Suspense fallback={null}><SharedInvite /></Suspense>}
       {/* hero: the cars change right here, no scrolling needed */}
       <section className="hero" ref={hero}>
         <div className={`hero-poster ${live3d ? 'gone' : ''}`} aria-hidden>

@@ -1,9 +1,10 @@
-import { useEffect, useLayoutEffect, useMemo, useRef } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Link, Navigate } from 'react-router-dom'
 import { CarImage } from '../components/CarImage'
 import { Fixes } from '../components/Fixes'
 import { Icon } from '../components/Icon'
 import { ScoreRing } from '../components/ScoreRing'
+import { ShareSheet } from '../components/ShareSheet'
 import { toast } from '../components/Toast'
 import { cars, onroad, upcoming } from '../data'
 import { BODY_LABEL, FUEL_LABEL } from '../data/types'
@@ -11,6 +12,7 @@ import { stateOf } from '../engine/costs'
 import { DIM_LABEL, GEAR_LABEL, relaxations, sahiScore, withStretchHint, type Dim, type Scored } from '../engine/sahiscore'
 import { expectedLabel, timingFor } from '../engine/timing'
 import { inr, lakh } from '../lib/format'
+import { cardPhoto, shareUrl, type CardData } from '../lib/shareCard'
 import { gate, toggleCompareGated, toggleSave } from '../lib/gate'
 import { reducedMotion } from '../lib/perf'
 import { track, trackNoMatch } from '../lib/track'
@@ -140,6 +142,7 @@ export default function Results() {
   // top match free; the rest of the ranking after a free sign-in (decided once the saved session has loaded)
   const locked = enabled && authReady && !user
   const root = useRef<HTMLDivElement>(null)
+  const [sharing, setSharing] = useState(false)
 
   const res = useMemo(() => withStretchHint(cars, answers, onroad, sahiScore(cars, answers, onroad)), [answers])
   const st = stateOf(onroad, answers.state)
@@ -164,6 +167,17 @@ export default function Results() {
     return () => ctx.revert()
   }, [res])
 
+  const top = res.picks[0]
+  const card: CardData | null = useMemo(() => top ? {
+    eyebrow: 'My right car is the',
+    title: `${top.car.brand} ${top.car.model}`,
+    sub: `${top.variant ?? 'Suggested trim'} · ${FUEL_LABEL[top.pt.fuel]} · ${GEAR_LABEL[top.gear]}`,
+    body: top.car.body,
+    photo: cardPhoto(top.car),
+    score: top.score,
+    lines: top.reasons.filter((r) => !r.startsWith('Comfortable on your pay')),
+  } : null, [top])
+
   if (!done) return <Navigate to="/sahifit" replace />
 
   const rest = res.ranked.filter((s) => !res.picks.includes(s)).slice(0, 12)
@@ -185,6 +199,14 @@ export default function Results() {
             <span className="chip">{answers.years}-yr ownership</span>
             <Link to="/sahifit" className="chip cyan"><Icon name="edit" size={12} /> Edit answers</Link>
           </div>
+          {card && (
+            <div className="share-cta">
+              <button className="btn share-btn" onClick={() => setSharing(true)}>
+                <Icon name="share" size={18} /> Share my match
+              </button>
+              <span className="muted small">Send it to family before you visit the showroom.</span>
+            </div>
+          )}
         </header>
 
         {res.picks.length ? (
@@ -256,12 +278,25 @@ export default function Results() {
           </section>
         )}
 
+        <p className="pledge-line small">
+          <Icon name="shield" size={14} /> No carmaker pays us. Rankings are never for sale. <Link to="/how-we-score" className="link-arrow">How we score</Link>
+        </p>
         <p className="dim small fine">
           Costs use {st.name} road tax and fuel prices (petrol ₹{st.fuel.petrol}/L, diesel ₹{st.fuel.diesel}/L, CNG ₹{st.fuel.cng}/kg,
           power ₹{st.fuel.electricity}/kWh), real-world mileage rather than ARAI claims, and estimated resale after {answers.years} years.
           Prices are ex-showroom Delhi; confirm with the dealer. <Link to="/about" className="link-arrow">How SahiScore works</Link>
         </p>
       </div>
+      {sharing && card && top && (
+        <ShareSheet
+          card={card}
+          kind="match"
+          item={top.car.id}
+          text={`My SahiCar match is the ${top.car.brand} ${top.car.model} (SahiScore ${Math.round(top.score)}/100). Find the right car for you, free — no dealer calls:`}
+          url={shareUrl('/', 'match', { m: top.car.id, s: String(Math.round(top.score)) })}
+          onClose={() => setSharing(false)}
+        />
+      )}
     </div>
   )
 }

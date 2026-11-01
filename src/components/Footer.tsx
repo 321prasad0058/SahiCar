@@ -19,6 +19,7 @@ export function Footer() {
           </div>
           <div>
             <h4>Trust</h4>
+            <Link to="/how-we-score">How we score</Link>
             <Link to="/about">How SahiScore works</Link>
             <Link to="/about#data">Where our data comes from</Link>
             <Link to="/about#promise">Our no-bias promise</Link>

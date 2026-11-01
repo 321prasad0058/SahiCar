@@ -24,6 +24,9 @@ const PATHS: Record<string, string> = {
   sun: 'M12 17a5 5 0 100-10 5 5 0 000 10z',
   calendar: 'M4 6h16v14H4zM4 10h16M8 3v4M16 3v4',
   edit: 'M4 20h4L19 9l-4-4L4 16v4z',
+  share: 'M12 15V3M8 7l4-4 4 4M5 12v7a1 1 0 001 1h12a1 1 0 001-1v-7',
+  link: 'M10 14a4.5 4.5 0 006.4 0l3-3a4.5 4.5 0 00-6.4-6.4l-1 1M14 10a4.5 4.5 0 00-6.4 0l-3 3a4.5 4.5 0 006.4 6.4l1-1',
+  download: 'M12 3v12M8 11l4 4 4-4M5 20h14',
   google: '',
 }
 

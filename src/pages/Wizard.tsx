@@ -7,6 +7,7 @@ import { Icon } from '../components/Icon'
 import { brands, cars, onroad, states } from '../data'
 import { BODY_LABEL, FUEL_LABEL, type Body, type Fuel } from '../data/types'
 import { MUST_HAVES, PRIORITY_LABEL, type Answers, type Level, type Priority } from '../engine/answers'
+import { afford, comfortableBudget, VERDICT_LABEL } from '../engine/afford'
 import { emi } from '../engine/costs'
 import { relaxations, sahiScore } from '../engine/sahiscore'
 import { inr, lakh } from '../lib/format'
@@ -85,6 +86,24 @@ function Field({ label, children, note }: { label: string; children: ReactNode; 
   )
 }
 
+/** Can they afford this budget? The verdict on the budget itself, and the budget that would be comfortable. */
+function PayCheck({ a, set }: { a: Answers; set: (p: Partial<Answers>) => void }) {
+  const cash = a.payment === 'cash'
+  const res = afford({ price: a.budget, down: a.downPayment, rate: a.rate, years: a.tenureYears, income: a.income, running: 0, cash })
+  const ok = comfortableBudget(a.income, a)
+  return (
+    <div className={`pay-check ${res.verdict}`}>
+      <b>{VERDICT_LABEL[res.verdict]}.</b>{' '}
+      {cash
+        ? <>{lakh(a.budget)} is {(a.budget / a.income).toFixed(1)} months of your pay.</>
+        : <>An EMI of {inr(res.emi)} is {Math.round(res.emiShare * 100)}% of your take-home pay.</>}{' '}
+      {res.verdict !== 'yes' && ok > B_MIN && (
+        <button className="link-arrow" onClick={() => set({ budget: ok })}>Use a comfortable {lakh(ok)}</button>
+      )}
+    </div>
+  )
+}
+
 // budget on a log scale, ₹3 L to ₹1 Cr
 const B_MIN = 300000
 const B_MAX = 10000000
@@ -134,6 +153,19 @@ const STEPS: Step[] = [
               </div>
             </div>
           )}
+          <Field label="Your monthly take-home pay (optional)" note={<><Icon name="shield" size={12} /> Stays on this device — never uploaded or shared. We use it to rank cars you can comfortably afford higher.</>}>
+            <div className="money-input">
+              <span>₹</span>
+              <input
+                inputMode="numeric"
+                aria-label="Monthly take-home pay"
+                placeholder="e.g. 80,000"
+                value={a.income ? a.income.toLocaleString('en-IN') : ''}
+                onChange={(e) => set({ income: Math.min(99999999, Number(e.target.value.replace(/\D/g, '')) || 0) })}
+              />
+            </div>
+          </Field>
+          {a.income > 0 && <PayCheck a={a} set={set} />}
         </>
       )
     },
@@ -353,7 +385,7 @@ export default function Wizard() {
 
   const go = (n: number) => {
     if (n >= STEPS.length) {
-      track('quiz_complete', { fits, budget_lakh: Math.round(answers.budget / 10000) / 10 })
+      track('quiz_complete', { fits, budget_lakh: Math.round(answers.budget / 10000) / 10, pay_given: answers.income > 0 ? 1 : 0 })
       useStore.getState().finish()
       nav('/results')
       return

@@ -6,6 +6,8 @@ import { db } from './firebase'
 
 export async function saveProfile(u: User, answers?: Answers) {
   if (!db) return
+  // take-home pay stays in this browser: it is only used for the affordability check
+  if (answers) answers = { ...answers, income: 0 }
   await setDoc(
     doc(db, 'users', u.uid),
     // no profile photo: we keep only what the features need (DPDP data minimisation)

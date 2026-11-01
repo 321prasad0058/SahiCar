@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /garage
+Disallow: /login
+Disallow: /results
+Disallow: /dev/
+
+Sitemap: https://sahicar-in.web.app/sitemap.xml
