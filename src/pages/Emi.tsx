@@ -123,7 +123,7 @@ export default function Emi() {
         <header className="emi-head">
           <div className="eyebrow">Car loan calculator</div>
           <h1>What will it cost you each month?</h1>
-          <h1 className="emi-title-short">Car loan EMI</h1>
+          <h1 className="emi-title-short">What will it cost you each month?</h1>
           <p className="muted emi-sub">Set the price, down payment and tenure. We price the loan at {LENDERS.length} banks and lenders for your credit score and show what you’d really pay — interest, fees and all.</p>
         </header>
 
