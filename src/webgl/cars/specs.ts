@@ -280,7 +280,7 @@ export function archetype(body: string, fuel?: string): CarSpec {
   return VICTORIS
 }
 
+/** traced models that have passed the side-by-side check against their photos */
+const READY: string[] = ['tata-nexon']
 // the five showcase cars; models being traced (exact.ts) join once they match their photos side by side
 export const SPEC_BY_ID: Record<string, CarSpec> = Object.fromEntries([...SHOWCASE, ...EXACT.filter((s) => READY.includes(s.id))].map((s) => [s.id, s]))
-/** traced models that have passed the side-by-side check against their photos */
-const READY: string[] = []
