@@ -16,7 +16,8 @@
     "deploy": "npm run build && firebase deploy --only hosting,firestore",
     "official:collect": "node scripts/official-images.mjs collect",
     "official:pick": "node scripts/official-images.mjs pick",
-    "official:sheet": "node scripts/official-images.mjs sheet"
+    "official:sheet": "node scripts/official-images.mjs sheet",
+    "privacy:cleanup": "node scripts/privacy-cleanup.mjs"
   },
   "dependencies": {
     "firebase": "^12.19.0",

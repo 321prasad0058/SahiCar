@@ -8,7 +8,8 @@ export async function saveProfile(u: User, answers?: Answers) {
   if (!db) return
   await setDoc(
     doc(db, 'users', u.uid),
-    { name: u.displayName ?? '', email: u.email ?? '', photo: u.photoURL ?? '', ...(answers ? { answers } : {}), updatedAt: serverTimestamp() },
+    // no profile photo: we keep only what the features need (DPDP data minimisation)
+    { name: u.displayName ?? '', email: u.email ?? '', ...(answers ? { answers } : {}), updatedAt: serverTimestamp() },
     { merge: true },
   )
 }
