@@ -104,7 +104,7 @@ export function trustScore(l: Lender) {
   if (t.dsib) s += 3
   if (l.type === 'Public bank') s += 2
   const r = (t.rating ?? '').toUpperCase()
-  s += /\bAAA\b/.test(r) ? 3 : /\bAA\+/.test(r) ? 2 : /\bAA\b/.test(r) ? 1.5 : /\bAA-|\bA\+/.test(r) ? 1 : 0
+  s += /\bAAA\b/.test(r) ? 3 : /\bAA\+/.test(r) ? 2 : /\bAA-/.test(r) ? 1 : /\bAA\b/.test(r) ? 1.5 : /\bA\+/.test(r) ? 0.75 : /\bA\b/.test(r) ? 0.5 : 0
   s += t.size === 'large' ? 1.5 : t.size === 'mid' ? 0.75 : 0
   s += t.complaints === 'low' ? 0.5 : t.complaints === 'high' ? -0.5 : 0
   return Math.max(0, Math.min(10, s))

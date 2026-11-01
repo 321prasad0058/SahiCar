@@ -959,3 +959,64 @@ button.v-row:hover {
     align-self: flex-start;
   }
 }
+
+/* phones: the colour name centred and bold above bigger, centred swatches */
+@media (max-width: 640px) {
+  .paints {
+    align-items: center;
+    gap: 8px;
+  }
+  .paint-name {
+    align-self: center;
+    font-size: 14px;
+    padding: 4px 14px;
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+  }
+  .paints .swatches {
+    max-width: 100%;
+    justify-content: safe center;
+    gap: 10px;
+    padding: 4px 6px;
+  }
+  .paints .swatch {
+    width: 34px;
+    height: 34px;
+  }
+  .paints .swatch.on {
+    transform: scale(1.12);
+    box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent);
+  }
+}
+/* desktop: name sits after the swatches */
+@media (min-width: 641px) {
+  .paints {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+}
+@media (max-width: 640px) {
+  /* keep the picker inside the card: the swatch row scrolls, the name stays centred */
+  .studio-bar,
+  .paints {
+    min-width: 0;
+    width: 100%;
+  }
+  .paints .swatches {
+    min-width: 0;
+    width: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+  }
+  .paints .swatch {
+    scroll-snap-align: center;
+  }
+  .paint-name {
+    max-width: calc(100% - 24px);
+  }
+}
+@media (max-width: 640px) {
+  .paints .swatches {
+    padding: 7px 8px;
+  }
+}

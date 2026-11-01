@@ -1,3 +1,4 @@
+import more from './lenders-more.json'
 // New-car loan pricing by lender, from each lender's published rates (sources below), checked 1 November 2026.
 // Indicative: the final rate depends on the lender's own credit checks. `verified: false` rows come from
 // aggregator data because the lender's own page couldn't be read; they're labelled as such in the app.
@@ -50,7 +51,7 @@ export type Lender = {
 export const RATES_AS_OF = '1 November 2026'
 export const REPO = { rate: 5.5, since: '7 October 2026' }
 
-export const LENDERS: Lender[] = [
+const BASE: Lender[] = [
   {
     id: 'pnb', name: 'Punjab National Bank', type: 'Public bank', kind: 'floating',
     rateFrom: 7.85, rateTo: 10.95, bands: { excellent: 7.9, good: 8.95, fair: 9.95 }, evDiscount: 0.05, maxTenure: 7,
@@ -131,3 +132,7 @@ export const LENDERS: Lender[] = [
     source: 'https://tatacapital.com/vehicle-loan/car-loan/interest-rates.html', verified: true,
   },
 ]
+
+// 22 more lenders and every lender's trust facts (RBI D-SIB list of 2 Dec 2025, long-term credit ratings,
+// balance-sheet size at 31 Mar 2026), researched 1 Nov 2026 with sources in each entry
+export const LENDERS: Lender[] = [...BASE, ...(more.add as Lender[])].map((l) => ({ ...l, trust: (more.trust as Record<string, Trust>)[l.id] ?? l.trust }))

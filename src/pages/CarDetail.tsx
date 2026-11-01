@@ -14,11 +14,24 @@ import { inr, lakh, priceRange } from '../lib/format'
 import { toggleCompareGated, toggleSave } from '../lib/gate'
 import { track } from '../lib/track'
 import { useStore } from '../state/store'
+import type { CarSpec } from '../webgl/cars/build'
 import type { Studio } from '../webgl/Studio'
 
 const SHOWCASE_IDS = ['tata-sierra-ev', 'tata-sierra', 'tata-altroz', 'honda-city', 'maruti-victoris', 'maruti-ertiga']
 // neutral grey for the generic body when the car has no verified colour list
 const NEUTRAL = '#5b6b75'
+
+/** A reference body adjusted to this car's own details: its sunroof (if any), roof rails on SUVs and MPVs,
+ *  and a body-colour roof (dual-tone paints colour it separately). */
+function fitTo(spec: CarSpec, car: Car): CarSpec {
+  const { u0, u1 } = spec.roof
+  const pano = car.features.includes('panoramic-sunroof')
+  const single = !pano && car.features.includes('sunroof')
+  const mid = (u0 + u1) / 2 + 0.04
+  const sunroof: [number, number] | undefined = pano ? [u0 + 0.05, u1 - 0.07] : single ? [mid - 0.08, mid + 0.08] : undefined
+  const tall = car.body === 'suv' || car.body === 'compact-suv' || car.body === 'mpv'
+  return { ...spec, sunroof, rails: tall ? spec.rails ?? 'black' : undefined, roof: { ...spec.roof, black: false } }
+}
 
 function Studio3D({ car }: { car: Car }) {
   const canvas = useRef<HTMLCanvasElement>(null)
@@ -37,7 +50,8 @@ function Studio3D({ car }: { car: Car }) {
         const exact = SPEC_BY_ID[car.id] ?? (car.id === 'tata-sierra' ? { ...SIERRA_EV, ev: false, plate: 'MH 01 SC 2026' } : null)
         s = exact
           ? new Studio(canvas.current!, exact, paints[0] ? { paint: paints[0].hex } : {})
-          : new Studio(canvas.current!, archetype(car.body, fuel), { generic: true, paint: paints[0]?.hex ?? NEUTRAL, size: car.dims })
+          : new Studio(canvas.current!, fitTo(archetype(car.body, fuel), car), { generic: true, paint: paints[0]?.hex ?? NEUTRAL, size: car.dims })
+        if (paints[0]) s.setColor(paints[0].hex, paints[0].roof)
         studio.current = s
       } catch {
         setFailed(true)
@@ -56,6 +70,7 @@ function Studio3D({ car }: { car: Car }) {
       <div className="studio-bar">
         {paints.length > 0 && (
           <div className="paints">
+            <span className="paint-name small" aria-live="polite">{paints[paint]?.name}</span>
             <div className="swatches" role="radiogroup" aria-label="Paint colour">
               {paints.map((p, i) => (
                 <button
@@ -66,11 +81,11 @@ function Studio3D({ car }: { car: Car }) {
                   style={{ background: p.roof ? `linear-gradient(180deg, ${p.roof} 0 38%, ${p.hex} 38%)` : p.hex }}
                   title={p.name}
                   aria-label={p.name}
-                  onClick={() => { setPaint(i); studio.current?.setColor(p.hex) }}
+                  onClick={(e) => { setPaint(i); studio.current?.setColor(p.hex, p.roof); e.currentTarget.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' }) }}
                 />
               ))}
             </div>
-            <span className="paint-name small">{paints[paint]?.name}</span>
+
           </div>
         )}
         <div className="views">
@@ -110,6 +125,12 @@ export default function CarDetail() {
   const done = useStore((s) => s.done)
   const saved = useStore((s) => s.garage.includes(id ?? ''))
   useEffect(() => void (car && track('car_view', { car: car.id, body: car.body })), [car])
+  // fetch the 3D code while the visitor reads, so "3D 360°" opens without a wait
+  useEffect(() => {
+    const warm = () => void Promise.all([import('../webgl/Studio'), import('../webgl/cars/specs')]).catch(() => {})
+    const id = 'requestIdleCallback' in window ? requestIdleCallback(warm, { timeout: 2500 }) : setTimeout(warm, 1200)
+    return () => ('cancelIdleCallback' in window ? cancelIdleCallback(id as number) : clearTimeout(id as number))
+  }, [])
   const [state, setState] = useState(answers.state)
   const [view, setView] = useState<'photo' | '3d'>('photo')
   const fuels = useMemo(() => (car ? [...new Set(car.powertrains.map((p) => p.fuel))] : []), [car])

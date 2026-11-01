@@ -1,0 +1,701 @@
+{
+ "add": [
+  {
+   "id": "bank-of-india",
+   "name": "Bank of India",
+   "type": "Public bank",
+   "kind": "floating",
+   "rateFrom": 7.85,
+   "rateTo": 10.6,
+   "maxTenure": 7,
+   "fee": {
+    "pct": 0.25,
+    "min": 2500,
+    "max": 10000
+   },
+   "prepay": "Not confirmed from lender page; RBI directions (eff. 1 Jan 2026) bar prepayment charges on floating-rate loans to individuals",
+   "source": "https://bankofindia.bank.in/documents/20121/28761619/Floating_ROI_wef-07102026.pdf/6061a188-7a6a-4c82-857f-b9ba3fe13ced",
+   "verified": false
+  },
+  {
+   "id": "central-bank-of-india",
+   "name": "Central Bank of India",
+   "type": "Public bank",
+   "kind": "floating",
+   "rateFrom": 7.9,
+   "rateTo": 9.55,
+   "maxTenure": 7,
+   "fee": {
+    "pct": 0.5,
+    "min": 2000,
+    "max": 20000
+   },
+   "prepay": "Not stated for Cent Vehicle; RBI directions (eff. 1 Jan 2026) bar prepayment charges on floating-rate loans to individuals",
+   "source": "https://centralbank.bank.in/en/retail-scheme-interest",
+   "verified": true
+  },
+  {
+   "id": "indian-overseas-bank",
+   "name": "Indian Overseas Bank",
+   "type": "Public bank",
+   "kind": "floating",
+   "rateFrom": 7.85,
+   "rateTo": 8.85,
+   "evDiscount": 0.05,
+   "maxTenure": 7,
+   "fee": {
+    "unknown": true
+   },
+   "prepay": "Not stated on lender page; RBI directions (eff. 1 Jan 2026) bar prepayment charges on floating-rate loans to individuals",
+   "source": "https://www.iob.bank.in/en/lending-interest-rates",
+   "verified": true
+  },
+  {
+   "id": "uco-bank",
+   "name": "UCO Bank",
+   "type": "Public bank",
+   "kind": "floating",
+   "rateFrom": 7.7,
+   "rateTo": 9.3,
+   "evDiscount": 0.1,
+   "maxTenure": 7,
+   "fee": {
+    "pct": 0.5,
+    "max": 5000
+   },
+   "prepay": "Not stated on lender page; RBI directions (eff. 1 Jan 2026) bar prepayment charges on floating-rate loans to individuals",
+   "note": "Includes the Oct 2026 repo rise of 0.25 points",
+   "source": "https://www.uco.bank.in/uco-vl-1",
+   "verified": true
+  },
+  {
+   "id": "bank-of-maharashtra",
+   "name": "Bank of Maharashtra",
+   "type": "Public bank",
+   "kind": "floating",
+   "rateFrom": 7.7,
+   "rateTo": 10.05,
+   "evDiscount": 0.25,
+   "maxTenure": 7,
+   "fee": {
+    "pct": 0.25,
+    "min": 1000,
+    "max": 15000
+   },
+   "prepay": "Nil (no pre-payment / pre-closure / part-payment charges)",
+   "note": "Rate page undated",
+   "source": "https://bankofmaharashtra.bank.in/retail-interest-rates",
+   "verified": true
+  },
+  {
+   "id": "punjab-and-sind-bank",
+   "name": "Punjab & Sind Bank",
+   "type": "Public bank",
+   "kind": "floating",
+   "rateFrom": 7.85,
+   "rateTo": 9.65,
+   "evDiscount": 0.3,
+   "maxTenure": 7,
+   "fee": {
+    "pct": 0.25,
+    "min": 1000,
+    "max": 15000
+   },
+   "prepay": "Nil for individuals/proprietorships",
+   "source": "https://punjabandsind.bank.in/content/prlr",
+   "verified": true
+  },
+  {
+   "id": "idbi-bank",
+   "name": "IDBI Bank",
+   "type": "Private bank",
+   "kind": "floating",
+   "rateFrom": 8,
+   "rateTo": 9.15,
+   "maxTenure": 7,
+   "fee": {
+    "flat": 2500
+   },
+   "prepay": "Not confirmed from lender page; RBI directions (eff. 1 Jan 2026) bar prepayment charges on floating-rate loans to individuals (some aggregators cite 1% foreclosure, likely fixed-rate or outdated)",
+   "note": "Includes the Oct 2026 repo rise of 0.25 points",
+   "source": "https://www.idbi.bank.in/interest-rates.aspx",
+   "verified": true
+  },
+  {
+   "id": "federal",
+   "name": "Federal Bank",
+   "type": "Private bank",
+   "kind": "fixed",
+   "rateFrom": 7.85,
+   "rateTo": 9,
+   "maxTenure": 7,
+   "fee": {
+    "unknown": true
+   },
+   "prepay": "Not stated on rate page (refers to 'Service Charge and Fees on Loans' doc, which could not be retrieved as PDF). Floating option: nil by RBI 2025 directions",
+   "source": "https://www.federal.bank.in/car-loan-interest-rate",
+   "verified": true
+  },
+  {
+   "id": "yes-bank",
+   "name": "Yes Bank",
+   "type": "Private bank",
+   "kind": "floating",
+   "rateFrom": 9.7,
+   "maxTenure": 7,
+   "fee": {
+    "pct": 1,
+    "max": 10000,
+    "upTo": true
+   },
+   "prepay": "Aggregator lists 3% of principal prepaid for part-prepayment; if loan is floating (EBR-linked) RBI 2025 directions bar prepayment charges for individuals",
+   "source": "https://www.bankbazaar.com/yes-bank-car-loan-interest-rates.html",
+   "verified": false
+  },
+  {
+   "id": "rbl",
+   "name": "RBL Bank",
+   "type": "Private bank",
+   "kind": "fixed",
+   "rateFrom": 9,
+   "rateTo": 10,
+   "maxTenure": 7,
+   "fee": {
+    "pct": 0.5
+   },
+   "prepay": "Pre-closure/part pre-closure: 6% of principal outstanding within 12 months, 5% for 12-36 months, nil after 36 months (+GST). Doc charges Rs 1,300",
+   "source": "https://webassets.rbl.bank.in/document/service-charges/pricing-range-car-loan.pdf",
+   "verified": true
+  },
+  {
+   "id": "south-indian-bank",
+   "name": "South Indian Bank",
+   "type": "Private bank",
+   "kind": "fixed",
+   "rateFrom": 8.75,
+   "maxTenure": 7,
+   "fee": {
+    "pct": 1,
+    "max": 10000,
+    "upTo": true
+   },
+   "prepay": "Aggregators conflict (nil vs 1-2%); product page snippet reportedly says no prepayment/foreclosure charges. Floating: nil by RBI rule",
+   "source": "https://www.southindianbank.com/UserFiles/file/ROI_Linked_to_Repo.pdf",
+   "verified": false
+  },
+  {
+   "id": "karur-vysya-bank",
+   "name": "Karur Vysya Bank",
+   "type": "Private bank",
+   "kind": "floating",
+   "rateFrom": 9.35,
+   "rateTo": 10.1,
+   "maxTenure": 7,
+   "fee": {
+    "flat": 3000
+   },
+   "prepay": "Not published. Floating repo-linked: nil by RBI rule",
+   "source": "https://www.bankbazaar.com/karur-vysya-car-loan-interest-rates.html",
+   "verified": false
+  },
+  {
+   "id": "city-union-bank",
+   "name": "City Union Bank",
+   "type": "Private bank",
+   "kind": "floating",
+   "rateFrom": 12.25,
+   "rateTo": 12.75,
+   "maxTenure": 5,
+   "fee": {
+    "pct": 1,
+    "min": 250
+   },
+   "prepay": "Not stated. Floating EBLR-linked: nil by RBI rule",
+   "note": "Published rate may be outdated",
+   "source": "https://www.cityunionbank.bank.in/assets/frontend/pdf/yohavahana.pdf",
+   "verified": true
+  },
+  {
+   "id": "karnataka-bank",
+   "name": "Karnataka Bank",
+   "type": "Private bank",
+   "kind": "floating",
+   "rateFrom": 8.35,
+   "maxTenure": 7,
+   "fee": {
+    "unknown": true
+   },
+   "prepay": "Page: may prepay/foreclose any time; charges 'as per loan agreement'. Floating: nil by RBI rule",
+   "source": "https://www.karnatakabank.bank.in/personal/loans/car-loan",
+   "verified": true
+  },
+  {
+   "id": "jk-bank",
+   "name": "J&K Bank",
+   "type": "Private bank",
+   "kind": "floating",
+   "rateFrom": 7.95,
+   "rateTo": 9.2,
+   "maxTenure": 7,
+   "fee": {
+    "pct": 0.5,
+    "min": 1500,
+    "max": 15000
+   },
+   "prepay": "4% of outstanding (+GST) only for fixed-rate loans shifted to other banks; nil for all other prepayments",
+   "note": "Benchmark rate not published; estimated",
+   "source": "https://jkb.bank.in/car-loan-scheme-purchase-fresh-cars-private-use",
+   "verified": false
+  },
+  {
+   "id": "csb-bank",
+   "name": "CSB Bank",
+   "type": "Private bank",
+   "kind": "floating",
+   "rateFrom": 9.3,
+   "maxTenure": 8,
+   "fee": {
+    "unknown": true
+   },
+   "prepay": "Not published",
+   "source": "https://www.csb.bank.in/vehicleloan",
+   "verified": true
+  },
+  {
+   "id": "tmb",
+   "name": "Tamilnad Mercantile Bank",
+   "type": "Private bank",
+   "kind": "floating",
+   "rateFrom": 9.75,
+   "rateTo": 11.4,
+   "maxTenure": 7,
+   "fee": {
+    "unknown": true
+   },
+   "prepay": "Not published on own site (aggregator: 0.25% pre-closure). Floating RLLR: nil by RBI rule",
+   "note": "Includes the Oct 2026 repo rise of 0.25 points",
+   "source": "https://dcmpx.remotevs.com/in/tmb/www/SL/doc/RLLR.pdf",
+   "verified": false
+  },
+  {
+   "id": "bandhan-bank",
+   "name": "Bandhan Bank",
+   "type": "Private bank",
+   "kind": "fixed",
+   "rateFrom": 8.86,
+   "rateTo": 15.51,
+   "maxTenure": 7,
+   "fee": {
+    "pct": 4,
+    "upTo": true
+   },
+   "prepay": "Fixed: foreclosure 4% of principal outstanding; part payment once a year after 6 months, up to 25% of POS free, 4% on excess. Floating: nil",
+   "source": "https://bandhan.bank.in/personal/loan/car-loan",
+   "verified": true
+  },
+  {
+   "id": "cholamandalam",
+   "name": "Cholamandalam Investment and Finance",
+   "type": "NBFC",
+   "kind": "fixed",
+   "rateFrom": 9,
+   "rateTo": 20,
+   "maxTenure": 7,
+   "fee": {
+    "pct": 2.5,
+    "upTo": true
+   },
+   "prepay": "Fixed-rate: 5% of principal outstanding + GST if foreclosed 7-12 months from agreement; 4% + GST after 12 months (Annexure 2, Vehicle Finance)",
+   "source": "https://files.cholamandalam.com/Interest_rate_policy_Dec25_c59964ecf9.pdf",
+   "verified": true
+  },
+  {
+   "id": "hero-fincorp",
+   "name": "Hero FinCorp",
+   "type": "NBFC",
+   "kind": "fixed",
+   "rateFrom": 9,
+   "maxTenure": 10,
+   "fee": {
+    "pct": 3,
+    "upTo": true
+   },
+   "prepay": "Allowed 'subject to terms in your agreement'; charge not published",
+   "source": "https://www.herofincorp.com/new-car-loan",
+   "verified": true
+  },
+  {
+   "id": "au-sfb",
+   "name": "AU Small Finance Bank",
+   "type": "Small finance bank",
+   "kind": "fixed",
+   "rateFrom": 8.75,
+   "rateTo": 17,
+   "maxTenure": 7,
+   "fee": {
+    "pct": 2,
+    "upTo": true
+   },
+   "prepay": "5% of balance if prepaid within 12 months, 4% after 12 months; NIL for floating-rate wheels loans to individuals for non-business purposes (per SOC note 7, revised 1 Jan 2026)",
+   "source": "https://www.au.bank.in/notice-board-language/schedule-of-charges--wheels/English.pdf",
+   "verified": false
+  },
+  {
+   "id": "equitas-sfb",
+   "name": "Equitas Small Finance Bank",
+   "type": "Small finance bank",
+   "kind": "fixed",
+   "rateFrom": 9,
+   "rateTo": 25,
+   "maxTenure": 7,
+   "fee": {
+    "pct": 2.25,
+    "upTo": true
+   },
+   "prepay": "Not found for new car loans",
+   "source": "https://equitas.bank.in/personal-banking/borrow/loan/new-car-loan",
+   "verified": false
+  }
+ ],
+ "trust": {
+  "sbi": {
+   "dsib": true,
+   "rating": "CRISIL AAA",
+   "size": "large",
+   "sources": [
+    "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/StateBankofIndia_July%2024_%202026_RR_400918.html",
+    "https://www.screener.in/company/SBIN/"
+   ]
+  },
+  "pnb": {
+   "rating": "CRISIL AAA",
+   "size": "mid",
+   "sources": [
+    "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/PunjabNationalBank_December%2012_%202025_RR_384839.html",
+    "https://www.screener.in/company/PNB/"
+   ]
+  },
+  "canara": {
+   "rating": "CRISIL AAA",
+   "size": "mid",
+   "sources": [
+    "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/CanaraBank_February%2018_%202026_RR_388733.html",
+    "https://www.screener.in/company/CANBK/"
+   ]
+  },
+  "bob": {
+   "rating": "CARE AAA",
+   "size": "large",
+   "sources": [
+    "https://nsearchives.nseindia.com/corporate/BANKBARODA_07102026200629_SERATING.pdf",
+    "https://www.screener.in/company/BANKBARODA/"
+   ]
+  },
+  "indian": {
+   "rating": "CRISIL AAA",
+   "size": "mid",
+   "sources": [
+    "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/IndianBank_March%2016_%202026_RR_391731.html",
+    "https://www.screener.in/company/INDIANB/"
+   ]
+  },
+  "union": {
+   "rating": "ICRA AAA",
+   "size": "mid",
+   "sources": [
+    "https://www.icra.in/Rating/GetRationalReportFilePdf?id=141539",
+    "https://www.screener.in/company/UNIONBANK/"
+   ]
+  },
+  "icici": {
+   "dsib": true,
+   "rating": "CRISIL AAA",
+   "size": "large",
+   "sources": [
+    "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/ICICIBankLimited_November%2019_%202025_RR_361536.html",
+    "https://www.screener.in/company/ICICIBANK/"
+   ]
+  },
+  "hdfc": {
+   "dsib": true,
+   "rating": "CRISIL AAA",
+   "size": "large",
+   "sources": [
+    "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/HDFCBankLimited_June%2023_%202026_RR_398560.html",
+    "https://www.screener.in/company/HDFCBANK/"
+   ]
+  },
+  "axis": {
+   "rating": "CRISIL AAA",
+   "size": "mid",
+   "sources": [
+    "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/AxisBankLimited_July%2013_%202026_RR_378479.html",
+    "https://www.screener.in/company/AXISBANK/"
+   ]
+  },
+  "idfc": {
+   "rating": "CRISIL AAA",
+   "size": "small",
+   "sources": [
+    "https://nsearchives.nseindia.com/corporate/IDFCFIRSTB_17102026180945_IDFCFIRSTB_Credit_Rating_Crisil_17102026.pdf",
+    "https://www.screener.in/company/IDFCFIRSTB/"
+   ]
+  },
+  "indusind": {
+   "rating": "CRISIL AA+",
+   "size": "mid",
+   "sources": [
+    "https://nsearchives.nseindia.com/corporate/INDUSINDBK4_19082026221924_Creditratngintimation19082026signed.pdf",
+    "https://www.screener.in/company/INDUSINDBK/"
+   ]
+  },
+  "mahindra-finance": {
+   "rating": "CRISIL AAA",
+   "size": "small",
+   "sources": [
+    "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/MahindraandMahindraFinancialServicesLimited_April%2022_%202026_RR_394086.html",
+    "https://www.screener.in/company/M%26MFIN/"
+   ]
+  },
+  "tata-capital": {
+   "rating": "CRISIL AAA",
+   "size": "small",
+   "sources": [
+    "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/TataCapitalLimited_July%2022_%202026_RR_400616.html",
+    "https://www.screener.in/company/TATACAP/"
+   ]
+  },
+  "bank-of-india": {
+   "rating": "CRISIL AA+",
+   "size": "mid",
+   "sources": [
+    "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/BankOfIndia_December%2018_%202025_RR_385360.html",
+    "https://www.screener.in/company/BANKINDIA/"
+   ]
+  },
+  "central-bank-of-india": {
+   "rating": "CRISIL AA+",
+   "size": "mid",
+   "sources": [
+    "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/CentralBankofIndia_August%2004_%202026_RR_399337.html",
+    "https://www.screener.in/company/CENTRALBK/"
+   ]
+  },
+  "indian-overseas-bank": {
+   "rating": "CRISIL AA+",
+   "size": "small",
+   "sources": [
+    "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/IndianOverseasBank_June%2025_%202026_RR_398662.html",
+    "https://www.screener.in/company/IOB/"
+   ]
+  },
+  "uco-bank": {
+   "rating": "IND AA",
+   "size": "small",
+   "sources": [
+    "https://nsearchives.nseindia.com/content/debt/WDM/UCOBANK_09102026172828_NSEBSEINDIARATING09102026.pdf",
+    "https://www.screener.in/company/UCOBANK/"
+   ]
+  },
+  "bank-of-maharashtra": {
+   "rating": "ICRA AA+",
+   "size": "small",
+   "sources": [
+    "https://filingreader.com/news-wire/mumbai/2026-07-21/icra-reaffirms-bank-of-maharashtra-rating-as-asset-quality-improves",
+    "https://www.screener.in/company/MAHABANK/"
+   ]
+  },
+  "punjab-and-sind-bank": {
+   "rating": "CRISIL AA",
+   "size": "small",
+   "sources": [
+    "https://nsearchives.nseindia.com/corporate/PSB_10092026192755_bsense10092026rating.pdf",
+    "https://www.screener.in/company/PSB/"
+   ]
+  },
+  "idbi-bank": {
+   "rating": "CRISIL AA+",
+   "size": "small",
+   "sources": [
+    "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/IDBIBankLimited_August%2020_%202026_RR_401897.html",
+    "https://www.screener.in/company/IDBI/"
+   ]
+  },
+  "kotak": {
+   "rating": "CRISIL AAA",
+   "size": "mid",
+   "sources": [
+    "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/KotakMahindraBankLimited_April%2006_%202026_RR_390924.html",
+    "https://www.screener.in/company/KOTAKBANK/"
+   ]
+  },
+  "federal": {
+   "rating": "CARE AA+",
+   "size": "small",
+   "sources": [
+    "https://nsearchives.nseindia.com/corporate/FEDERALBNK_10102026000314_FBL_Care_Ratings_091026_F.pdf",
+    "https://www.screener.in/company/FEDERALBNK/"
+   ]
+  },
+  "yes-bank": {
+   "rating": "CRISIL AA+",
+   "size": "small",
+   "sources": [
+    "https://nsearchives.nseindia.com/corporate/YESBANK_05082026083412_YBL_SE_Intimation_CRISIL_update_Signed.pdf",
+    "https://www.screener.in/company/YESBANK/"
+   ]
+  },
+  "rbl": {
+   "rating": "CRISIL AAA",
+   "size": "small",
+   "sources": [
+    "https://nsearchives.nseindia.com/corporate/RBLBANK_25062026174437_IntimationCreditRating_25062026_signed.pdf",
+    "https://www.screener.in/company/RBLBANK/"
+   ]
+  },
+  "south-indian-bank": {
+   "rating": "CARE AA-",
+   "size": "small",
+   "sources": [
+    "https://www.careratings.com/upload/CompanyFiles/PR/202607120755_The_South_Indian_Bank_Limited.pdf",
+    "https://www.screener.in/company/SOUTHBANK/"
+   ]
+  },
+  "karur-vysya-bank": {
+   "rating": "ICRA AA",
+   "size": "small",
+   "sources": [
+    "https://nsearchives.nseindia.com/corporate/KARURVYSYA_29062026194343_NSE_BSE_CR_-_Issuer_Rating_DSC.pdf",
+    "https://www.screener.in/company/KARURVYSYA/"
+   ]
+  },
+  "city-union-bank": {
+   "rating": "ICRA AA",
+   "size": "small",
+   "sources": [
+    "https://nsearchives.nseindia.com/corporate/CUB_16092026191908_CUB_Credit_Ratings-ICRA_16092026_Signed.pdf",
+    "https://www.screener.in/company/CUB/"
+   ]
+  },
+  "karnataka-bank": {
+   "rating": "CARE A+",
+   "size": "small",
+   "sources": [
+    "https://www.careratings.com/upload/CompanyFiles/PR/202608120812_Karnataka_Bank_Limited.pdf",
+    "https://www.screener.in/company/KTKBANK/"
+   ]
+  },
+  "jk-bank": {
+   "rating": "CRISIL AA-",
+   "size": "small",
+   "sources": [
+    "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/TheJammuandKashmirBankLimited_June%2011_%202026_RR_397847.html",
+    "https://www.screener.in/company/J%26KBANK/"
+   ]
+  },
+  "csb-bank": {
+   "rating": "CRISIL A",
+   "size": "small",
+   "sources": [
+    "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/CSBBankLimited_May%2020_%202026_RR_395911.html",
+    "https://www.screener.in/company/CSBBANK/"
+   ]
+  },
+  "tmb": {
+   "rating": "CRISIL A+",
+   "size": "small",
+   "sources": [
+    "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/TamilnadMercantileBankLimited_June%2010_%202026_RR_398212.html",
+    "https://www.screener.in/company/TMB/"
+   ]
+  },
+  "dcb": {
+   "rating": "CRISIL AA-",
+   "size": "small",
+   "sources": [
+    "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/DCBBankLimited_January%2021_%202026_RR_382458.html",
+    "https://www.screener.in/company/DCBBANK/"
+   ]
+  },
+  "bandhan-bank": {
+   "rating": "ICRA AA-",
+   "size": "small",
+   "sources": [
+    "https://nsearchives.nseindia.com/corporate/BANDHANBNK_25092026192844_SE_Disclosure_Credit_Rating_25092026_sd.pdf",
+    "https://www.screener.in/company/BANDHANBNK/"
+   ]
+  },
+  "au-sfb": {
+   "rating": "ICRA AA",
+   "size": "small",
+   "sources": [
+    "https://www.icra.in/Rating/GetRationalReportFilePdf?id=146130",
+    "https://www.screener.in/company/AUBANK/"
+   ]
+  },
+  "equitas-sfb": {
+   "rating": "CARE AA-",
+   "size": "small",
+   "sources": [
+    "https://nsearchives.nseindia.com/corporate/EQUITASBNK_08092026215852_Creditratingforupload08092026.pdf",
+    "https://www.screener.in/company/EQUITASBNK/"
+   ]
+  },
+  "ujjivan-sfb": {
+   "rating": "CARE AA-",
+   "size": "small",
+   "sources": [
+    "https://nsearchives.nseindia.com/corporate/UJJIVANBANK_24032026004215_146_Intimation_Rating_24032026.pdf",
+    "https://www.screener.in/company/UJJIVANSFB/"
+   ]
+  },
+  "kotak-prime": {
+   "rating": "CRISIL AAA",
+   "size": "small",
+   "sources": [
+    "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/KotakMahindraPrimeLimited_July%2009_%202026_RR_399282.html",
+    "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/KotakMahindraPrimeLimited_July%2009_%202026_RR_399282.html"
+   ]
+  },
+  "toyota-fs": {
+   "rating": "ICRA AAA",
+   "size": "small",
+   "sources": [
+    "https://www.icra.in/Rating/GetRationalReportFilePdf?id=142885",
+    "https://www.icra.in/Rating/GetRationalReportFilePdf?id=142885"
+   ]
+  },
+  "sundaram-finance": {
+   "rating": "CRISIL AAA",
+   "size": "small",
+   "sources": [
+    "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/SundaramFinanceLimited_May%2022_%202026_RR_396660.html",
+    "https://www.screener.in/company/SUNDARMFIN/"
+   ]
+  },
+  "cholamandalam": {
+   "rating": "CARE AA+",
+   "size": "small",
+   "sources": [
+    "https://www.careratings.com/upload/CompanyFiles/PR/202608120859_Cholamandalam_Investment_and_Finance_Company_Limited.pdf",
+    "https://www.screener.in/company/CHOLAFIN/"
+   ]
+  },
+  "bajaj-finance": {
+   "rating": "CRISIL AAA",
+   "size": "small",
+   "sources": [
+    "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/BajajFinanceLimited_April%2028_%202026_RR_394504.html",
+    "https://www.screener.in/company/BAJFINANCE/"
+   ]
+  },
+  "hero-fincorp": {
+   "rating": "ICRA AA+",
+   "size": "small",
+   "sources": [
+    "https://www.icra.in/Rating/GetRationalReportFilePdf?id=141916",
+    "https://www.icra.in/Rating/GetRationalReportFilePdf?id=141916"
+   ]
+  }
+ }
+}

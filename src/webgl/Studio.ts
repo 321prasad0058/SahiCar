@@ -69,10 +69,11 @@ export class Studio {
     this.camera.updateProjectionMatrix()
     // the framing was set for a 16:10 stage; on a narrower one (phones) step back so the whole car fits,
     // whichever way it's turned
-    const stretch = Math.max(1, 1.6 / this.camera.aspect)
+    const aspect = this.camera.aspect
     const target = this.controls.target
     const offset = this.camera.position.clone().sub(target)
-    const want = 10.1 * stretch
+    // just far enough that a ~4.5 m car fits the width with a margin, at any angle
+    const want = aspect >= 1.6 ? 10.1 : 8.2 * Math.sqrt(1.6 / aspect)
     if (Math.abs(offset.length() - want) > 0.05 && !this.userMoved) offset.setLength(want)
     this.camera.position.copy(target).add(offset)
     this.controls.maxDistance = Math.max(14, want * 1.3)
@@ -90,8 +91,10 @@ export class Studio {
     this.renderer.render(this.scene, this.camera)
   }
 
-  setColor(c: string) {
+  /** Body paint, and the roof: a dual-tone contrast, or otherwise the body colour (or black on black-roof models). */
+  setColor(c: string, roof?: string) {
     this.rig.paint.color.set(c)
+    this.rig.roof.color.set(roof ?? (this.rig.spec.roof.black ? '#0d0e10' : c))
     this.dirty = true
   }
   toggleLights() {

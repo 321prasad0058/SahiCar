@@ -69,6 +69,8 @@ export interface CarSpec {
 export interface CarRig {
   group: THREE.Group
   paint: THREE.MeshPhysicalMaterial
+  /** the roof's own paint: body colour, black, or a dual-tone contrast */
+  roof: THREE.MeshPhysicalMaterial
   spec: CarSpec
   setLights(v: number): void
   spin(dx: number): void
@@ -239,7 +241,10 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
   }
 
   const paint = new THREE.MeshPhysicalMaterial({ color: opt.paint ?? spec.paint, metalness: 0.55, roughness: 0.3, clearcoat: 1, clearcoatRoughness: 0.05 })
-  const disposables: { dispose(): void }[] = [paint]
+  // the roof has its own paint so dual-tone colours (contrasting roof) can be shown
+  const roofPaint = paint.clone()
+  if (spec.roof.black) roofPaint.color.set('#0d0e10')
+  const disposables: { dispose(): void }[] = [paint, roofPaint]
   const parts = new Map<THREE.Material, THREE.BufferGeometry[]>()
   const add = (mat: THREE.Material, g: THREE.BufferGeometry, m?: THREE.Matrix4) => {
     if (m) g.applyMatrix4(m)
@@ -375,7 +380,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     4,
   )
   disposables.push(glassHouse.geometry)
-  group.add(new THREE.Mesh(glassHouse.geometry, [S.glass, spec.roof.black ? S.gloss : paint, S.gloss, paint]))
+  group.add(new THREE.Mesh(glassHouse.geometry, [S.glass, roofPaint, S.gloss, paint]))
 
   // ── lights and decals
   const lightMats: { mat: THREE.MeshBasicMaterial; base: THREE.Color; k: number }[] = []
@@ -580,7 +585,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     let su = gh.u0
     let best = -1
     for (let u = gh.u0; u < spec.roof.u0 + 0.05; u += 0.002) if (ghTop(u) > best - 0.0005) { best = Math.max(best, ghTop(u)); su = u; if (ghTop(u) >= ghTop(spec.roof.u0) - 0.05) break }
-    add(spec.roof.black ? S.gloss : paint, new RoundedBoxGeometry(0.12, 0.025, roofHW(su) * 1.9, 2, 0.01), new THREE.Matrix4().makeTranslation(xOf(su) - 0.02, roofY(su) + 0.008, 0))
+    add(roofPaint, new RoundedBoxGeometry(0.12, 0.025, roofHW(su) * 1.9, 2, 0.01), new THREE.Matrix4().makeTranslation(xOf(su) - 0.02, roofY(su) + 0.008, 0))
   }
   if (spec.sunroof) {
     const [a, b] = spec.sunroof
@@ -689,6 +694,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
   return {
     group,
     paint,
+    roof: roofPaint,
     spec,
     setLights(v) {
       for (const l of lightMats) l.mat.color.copy(l.base).multiplyScalar(0.06 + v * l.k)
