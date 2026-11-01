@@ -5,7 +5,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { carById, cars, onroad, states } from '../data'
 import { LENDERS, RATES_AS_OF, REPO, SCORE_LABEL, type ScoreBand } from '../data/loans'
 import { onRoad } from '../engine/costs'
-import { quotes, schedule } from '../engine/loan'
+import { quotes, schedule, sortQuotes, trustScore, trustTier, type SortBy } from '../engine/loan'
 import { inr, lakh } from '../lib/format'
 import { reducedMotion } from '../lib/perf'
 import { gsap } from '../lib/scroll'
@@ -43,13 +43,14 @@ export default function Emi() {
   const initialCar = params.get('car') && carById.get(params.get('car')!) ? params.get('car')! : ''
 
   const [mode, setMode] = useState<'price' | 'car'>(initialCar ? 'car' : 'price')
-  const [typed, setTyped] = useState(1000000)
+  const num = (k: string, lo: number, hi: number, d: number) => { const v = Number(params.get(k)); return v >= lo && v <= hi ? v : d }
+  const [typed, setTyped] = useState(() => num('price', 100000, 50000000, 1000000))
   const [carId, setCarId] = useState(initialCar)
   const car = carId ? carById.get(carId) : undefined
   const [variantIdx, setVariantIdx] = useState(0)
   const [st, setSt] = useState(homeState)
-  const [downPct, setDownPct] = useState(20)
-  const [years, setYears] = useState(5)
+  const [downPct, setDownPct] = useState(() => num('down', 0, 80, 20))
+  const [years, setYears] = useState(() => num('years', 1, 7, 5))
   const [score, setScore] = useState<ScoreBand>('excellent')
   const [evManual, setEvManual] = useState(false)
   const [income, setIncome] = useState(0)
@@ -79,7 +80,7 @@ export default function Emi() {
   })
 
   useEffect(() => setVariantIdx(0), [carId])
-  useEffect(() => track('emi_open', { from: initialCar ? 'car' : 'direct' }), [initialCar])
+  useEffect(() => track('emi_open', { from: initialCar ? 'car' : params.get('from') ?? 'direct' }), [initialCar, params])
 
   // the price the loan is for: typed, or the chosen variant's on-road price in the chosen state
   const variants = car?.variants.length ? car.variants : car ? [{ name: 'Base', fuel: car.powertrains[0].fuel, transmission: '', price: car.price.min }] : []
@@ -94,8 +95,11 @@ export default function Emi() {
   const down = Math.round((price * downPct) / 100)
   const loan = Math.max(0, price - down)
 
-  const all = useMemo(() => quotes({ loan, years, score, ev }), [loan, years, score, ev])
+  const [sortBy, setSortBy] = useState<SortBy>('recommended')
+  const all = useMemo(() => sortQuotes(quotes({ loan, years, score, ev }), sortBy), [loan, years, score, ev, sortBy])
+  // the top pick follows the chosen order; "+₹x" compares against the cheapest eligible lender
   const best = all.find((q) => q.allowed) ?? all[0]
+  const cheapest = all.filter((q) => q.allowed).reduce((m, q) => (q.total < m.total ? q : m), best)
   const q = all.find((x) => x.lender.id === picked && x.allowed) ?? best
   const plan = useMemo(() => (q ? schedule(loan, q.rate, years, extra) : null), [loan, q, years, extra])
   const base = useMemo(() => (q ? schedule(loan, q.rate, years, 0) : null), [loan, q, years])
@@ -233,7 +237,7 @@ export default function Emi() {
                   <div className="emi-big"><Count value={q.emi} /><span>/month</span></div>
                   <div className="small muted">{q.lender.name} · <b>{q.rate.toFixed(2)}%</b>{q.published ? '' : ' (estimated for your score)'} · {years * 12} months{ev && q.lender.evDiscount ? ' · green-loan rate' : ''}</div>
                 </div>
-                {q !== best && <button className="btn btn-ghost btn-sm" onClick={() => setPicked(null)}>Back to the cheapest</button>}
+                {q !== best && <button className="btn btn-ghost btn-sm" onClick={() => setPicked(null)}>Back to the top pick</button>}
               </div>
               <div className="emi-stats">
                 <div><span className="dim small">Loan</span><b>{lakh(loan)}</b></div>
@@ -278,10 +282,20 @@ export default function Emi() {
                 <h2 className="h-card">Every lender, for your loan</h2>
                 <span className="dim small">{SCORE_LABEL[score]} score{ev ? ' · electric' : ''} · {lakh(loan)} for {years} yr</span>
               </div>
+              <div className="sort-by" role="radiogroup" aria-label="Sort lenders">
+                {([['recommended', 'Recommended'], ['cost', 'Lowest cost'], ['trust', 'Most trusted']] as const).map(([k, label]) => (
+                  <button key={k} role="radio" aria-checked={sortBy === k} className={`pick ${sortBy === k ? 'on' : ''}`} onClick={() => { setSortBy(k); setPicked(null) }}>{label}</button>
+                ))}
+              </div>
+              <p className="dim small sort-note">
+                {sortBy === 'recommended' ? 'Most trusted lenders first, cheapest first within each level.' : sortBy === 'cost' ? 'Interest over the full tenure plus the processing fee.' : 'By RBI systemic importance, government ownership, credit rating, size and complaints record.'}
+              </p>
               <div className="bank-list" role="list">
-                {shown.map((x, i) => {
+                {shown.map((x) => {
                   const on = x === q
-                  const more = x.total - best.total
+                  const more = x.total - cheapest.total
+                  const tier = trustTier(trustScore(x.lender))
+                  const t = x.lender.trust
                   return (
                     <button key={x.lender.id} role="listitem" className={`bank ${on ? 'on' : ''} ${x.allowed ? '' : 'off'}`} disabled={!x.allowed} onClick={() => { setPicked(x.lender.id); track('emi_lender', { lender: x.lender.id }) }}>
                       <span className="bank-name">
@@ -290,18 +304,43 @@ export default function Emi() {
                           {x.lender.type} · {x.lender.kind === 'floating' ? 'floating' : 'fixed'}{x.lender.evDiscount && ev ? ' · green-loan rate' : ''}
                           {!x.lender.verified && <span className="tag" title="The lender’s own page couldn’t be read; figures are from a rate-comparison site">aggregator data</span>}
                         </span>
+                        <span className="badges">
+                          <span className={`trust trust-${tier.replace(' ', '-').toLowerCase()}`}>{tier} trust</span>
+                          {x.lender.type === 'Public bank' && <span className="badge">Government-owned</span>}
+                          {t?.dsib && <span className="badge">RBI: systemically important</span>}
+                          {t?.rating && <span className="badge">{t.rating.replace(/\/.*$/, '')}</span>}
+                        </span>
                         {x.lender.note && <span className="bank-note dim small">{x.lender.note}</span>}
                       </span>
                       <span className="bank-rate"><b>{x.rate.toFixed(2)}%</b>{!x.published && <span className="dim small"> est.</span>}</span>
                       <span className="bank-emi">{x.allowed ? <>{inr(x.emi)}<span className="dim">/mo</span></> : <span className="dim small">{x.why}</span>}</span>
                       <span className="bank-cost small">
-                        {!x.allowed ? '' : i === 0 && x === best ? <span className="chip green">Lowest total cost</span> : <span className="dim">+{inr(more)} overall</span>}
+                        {!x.allowed ? '' : x === cheapest ? <span className="chip green">Lowest total cost</span> : <span className="dim">+{inr(more)} overall</span>}
                       </span>
                     </button>
                   )
                 })}
               </div>
-              {all.length > 6 && <button className="link-arrow more" onClick={() => setShowAll(!showAll)}>{showAll ? 'Show fewer' : `Show all ${all.length} lenders`}</button>}
+              <div className="rate-note">
+                <p className="small">
+                  <b>These are the lenders’ official published rates.</b> The rate you’re offered can be higher or lower depending on your
+                  credit profile and the lender’s checks — compare the final offer letter before you sign.
+                </p>
+                <details>
+                  <summary className="small">What decides your rate</summary>
+                  <ul className="small">
+                    <li><b>Credit score (CIBIL)</b> and repayment history — the biggest single factor; most lenders price 750+ best.</li>
+                    <li><b>Income and job</b> — salaried or self-employed, your employer’s category, and how stable your income is.</li>
+                    <li><b>Existing EMIs</b> — lenders cap how much of your income can go to loan repayments (FOIR, often 40–60%).</li>
+                    <li><b>Your relationship with the bank</b> — salary-account and existing customers often get lower rates or fee waivers.</li>
+                    <li><b>Loan amount, tenure and down payment</b> — a bigger down payment and shorter tenure usually earn a better rate.</li>
+                    <li><b>The car</b> — model and fuel; electric cars often get green-loan rates.</li>
+                    <li><b>Fixed or floating</b> — floating rates move with RBI’s repo rate; fixed rates don’t, but can carry prepayment charges.</li>
+                    <li><b>Offers and charges</b> — festive or dealer tie-up offers, processing fees, documentation and insurance add-ons.</li>
+                  </ul>
+                </details>
+              </div>
+              {all.length > (phone ? 3 : 6) && <button className="link-arrow more" onClick={() => setShowAll(!showAll)}>{showAll ? 'Show fewer' : `Show all ${all.length} lenders`}</button>}
               <p className="dim small">Sorted by interest over the full tenure plus the processing fee with GST, where the lender publishes it. “est.” marks a rate estimated for your score from the lender’s published range. Tap a lender to see your numbers with it.</p>
             </div>
 

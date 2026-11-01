@@ -95,3 +95,30 @@ export function schedule(loan: number, rate: number, years: number, extraPerYear
   }
   return { years: out, months, totalInterest, emi: pay }
 }
+
+/** Reliability from checkable facts only: RBI systemic importance, government ownership, credit rating,
+ *  size and complaint record. Higher is more reliable; 0–10. */
+export function trustScore(l: Lender) {
+  const t = l.trust ?? {}
+  let s = 0
+  if (t.dsib) s += 3
+  if (l.type === 'Public bank') s += 2
+  const r = (t.rating ?? '').toUpperCase()
+  s += /\bAAA\b/.test(r) ? 3 : /\bAA\+/.test(r) ? 2 : /\bAA\b/.test(r) ? 1.5 : /\bAA-|\bA\+/.test(r) ? 1 : 0
+  s += t.size === 'large' ? 1.5 : t.size === 'mid' ? 0.75 : 0
+  s += t.complaints === 'low' ? 0.5 : t.complaints === 'high' ? -0.5 : 0
+  return Math.max(0, Math.min(10, s))
+}
+export const trustTier = (score: number) => (score >= 6 ? 'Very high' : score >= 4 ? 'High' : score >= 2 ? 'Good' : 'Fair')
+
+export type SortBy = 'recommended' | 'cost' | 'trust'
+/** Recommended: most trusted tier first, cheapest within it. Ineligible lenders always last. */
+export function sortQuotes(list: Quote[], by: SortBy) {
+  const tierRank = (q: Quote) => ['Very high', 'High', 'Good', 'Fair'].indexOf(trustTier(trustScore(q.lender)))
+  return [...list].sort((a, b) => {
+    if (a.allowed !== b.allowed) return Number(b.allowed) - Number(a.allowed)
+    if (by === 'cost') return a.total - b.total
+    if (by === 'trust') return trustScore(b.lender) - trustScore(a.lender) || a.total - b.total
+    return tierRank(a) - tierRank(b) || a.total - b.total
+  })
+}

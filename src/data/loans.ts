@@ -8,10 +8,23 @@ export const SCORE_LABEL: Record<ScoreBand, string> = { excellent: '750+', good:
 
 type Bands = Partial<Record<ScoreBand, number>>
 
+export type Trust = {
+  /** on RBI's list of domestic systemically important banks */
+  dsib?: boolean
+  /** long-term credit rating, e.g. 'CRISIL AAA' */
+  rating?: string
+  /** balance-sheet size band */
+  size?: 'large' | 'mid' | 'small'
+  /** RBI Ombudsman complaints, relative to peers */
+  complaints?: 'low' | 'average' | 'high'
+  sources?: string[]
+}
+
 export type Lender = {
   id: string
   name: string
-  type: 'Public bank' | 'Private bank' | 'NBFC'
+  type: 'Public bank' | 'Private bank' | 'Small finance bank' | 'NBFC'
+  trust?: Trust
   kind: 'floating' | 'fixed'
   rateFrom: number
   /** top of the published range; when missing, the app estimates higher score bands from rateFrom */

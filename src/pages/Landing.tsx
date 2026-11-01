@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react'
 import { Link } from 'react-router-dom'
+import { EmiTeaser } from '../components/EmiTeaser'
 import { Icon } from '../components/Icon'
 import summary from '../data/summary.json'
 import { expectedLabel, monthsUntil } from '../engine/timing'
@@ -340,6 +341,16 @@ export default function Landing() {
             </div>
             <Link to="/about" className="link-arrow">Read the full method <Icon name="arrow" size={14} /></Link>
           </div>
+        </div>
+      </section>
+
+      {/* what it costs each month */}
+      <section className="emi-home">
+        <div className="wrap">
+          <div className="eyebrow" data-reveal>Car loan EMI</div>
+          <h2 className="section-title" data-split>What will it cost you each month?</h2>
+          <p className="section-sub muted" data-reveal>Your EMI at the best published rate, and every lender’s offer for your loan one tap away.</p>
+          <EmiTeaser />
         </div>
       </section>
 
