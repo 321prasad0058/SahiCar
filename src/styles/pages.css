@@ -883,3 +883,52 @@ button.v-row:hover {
     grid-column: span 2;
   }
 }
+
+/* 3D view on phones: the canvas gets its own space under the tabs, and the paint, view buttons and
+   caption sit in rows beneath it instead of on top of the car */
+@media (max-width: 640px) {
+  .media-tabs {
+    right: 12px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .studio {
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: column;
+    padding-top: 52px;
+  }
+  .studio canvas {
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+  .studio-bar {
+    position: static;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 6px 12px 0;
+  }
+  .swatches,
+  .views {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 3px 2px;
+  }
+  .swatch {
+    flex: none;
+    width: 28px;
+    height: 28px;
+  }
+  .views .chip {
+    flex: none;
+    padding: 6px 14px;
+    text-transform: capitalize;
+  }
+  .studio-note {
+    position: static;
+    padding: 8px 12px 14px;
+  }
+}

@@ -530,3 +530,107 @@
   width: 100%;
   min-width: 0;
 }
+
+/* foldable sections: open on desktop, tap to open on phones */
+.fold > summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.fold > summary::-webkit-details-marker {
+  display: none;
+}
+.fold > summary .h-card {
+  margin: 0;
+}
+.fold > summary::after {
+  content: '';
+  width: 9px;
+  height: 9px;
+  margin-right: 4px;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: rotate(45deg) translateY(-3px);
+  transition: transform 0.2s;
+}
+.fold[open] > summary::after {
+  transform: rotate(-135deg) translateY(-3px);
+}
+.fold[open] > summary {
+  margin-bottom: 12px;
+}
+
+/* slim EMI bar, pinned under the nav on phones once the result scrolls away */
+.emi-pin {
+  position: fixed;
+  z-index: 40;
+  top: 68px;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 10px max(16px, env(safe-area-inset-left, 0px));
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-110%);
+  opacity: 0;
+  transition: transform 0.3s var(--ease), opacity 0.3s;
+  pointer-events: none;
+}
+.emi-pin.show {
+  transform: none;
+  opacity: 1;
+}
+.emi-pin b {
+  font-size: 20px;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+}
+.emi-pin b span {
+  font-size: 13px;
+  font-weight: 500;
+}
+.emi-pin .muted {
+  margin-left: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 960px) {
+  /* result first, then the inputs, then the details */
+  .emi-out {
+    display: contents;
+  }
+  .emi-grid {
+    gap: 14px;
+  }
+  .emi-hero {
+    order: -1;
+  }
+  .emi-head {
+    margin-bottom: 18px;
+  }
+  .emi-head h1 {
+    font-size: 32px;
+  }
+  .emi-sub {
+    display: none;
+  }
+  .emi-in {
+    padding: 18px;
+    gap: 18px;
+  }
+  .emi-out .card,
+  .emi-grid > .card {
+    padding: 18px;
+  }
+  .emi-big {
+    font-size: 44px;
+  }
+}

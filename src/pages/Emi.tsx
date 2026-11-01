@@ -56,6 +56,22 @@ export default function Emi() {
   const [extra, setExtra] = useState(0)
   const [picked, setPicked] = useState<string | null>(null)
   const [showAll, setShowAll] = useState(false)
+  // phones: the result leads, a slim EMI bar stays pinned once it scrolls away, and the longer sections fold
+  const [phone, setPhone] = useState(() => typeof matchMedia !== 'undefined' && matchMedia('(max-width: 960px)').matches)
+  const hero = useRef<HTMLDivElement>(null)
+  const [heroGone, setHeroGone] = useState(false)
+  useEffect(() => {
+    const mq = matchMedia('(max-width: 960px)')
+    const on = () => setPhone(mq.matches)
+    mq.addEventListener('change', on)
+    return () => mq.removeEventListener('change', on)
+  }, [])
+  useEffect(() => {
+    if (!hero.current) return
+    const io = new IntersectionObserver(([e]) => setHeroGone(!e.isIntersecting && e.boundingClientRect.top < 0), { rootMargin: '-70px 0px 0px 0px' })
+    io.observe(hero.current)
+    return () => io.disconnect()
+  })
 
   useEffect(() => setVariantIdx(0), [carId])
   useEffect(() => track('emi_open', { from: initialCar ? 'car' : 'direct' }), [initialCar])
@@ -91,7 +107,7 @@ export default function Emi() {
     { k: 'fee', label: 'Fees', v: fee },
   ]
   const partsTotal = parts.reduce((s, p) => s + p.v, 0)
-  const shown = showAll ? all : all.slice(0, 6)
+  const shown = showAll ? all : all.slice(0, phone ? 3 : 6)
   const maxYear = Math.max(...base.years.map((y) => y.principal + y.interest))
   const saved = base.totalInterest - plan.totalInterest
   const monthsSaved = base.months - plan.months
@@ -102,8 +118,14 @@ export default function Emi() {
         <header className="emi-head">
           <div className="eyebrow">Car loan calculator</div>
           <h1>What will it cost you each month?</h1>
-          <p className="muted">Set the price, down payment and tenure. We price the loan at {LENDERS.length} banks and lenders for your credit score and show what you’d really pay — interest, fees and all.</p>
+          <p className="muted emi-sub">Set the price, down payment and tenure. We price the loan at {LENDERS.length} banks and lenders for your credit score and show what you’d really pay — interest, fees and all.</p>
         </header>
+
+        <div className={`emi-pin ${phone && heroGone ? 'show' : ''}`} aria-hidden={!(phone && heroGone)}>
+          <span className="dim small">EMI</span>
+          <b>{inr(q.emi)}<span className="dim">/mo</span></b>
+          <span className="small muted">{q.lender.name.replace(/ (Bank|of India)$/,'')} · {q.rate.toFixed(2)}% · {years} yr</span>
+        </div>
 
         <div className="emi-grid">
           {/* ── inputs */}
@@ -198,7 +220,7 @@ export default function Emi() {
 
           {/* ── results */}
           <section className="emi-out" aria-live="polite">
-            <div className="emi-hero card">
+            <div className="emi-hero card" ref={hero}>
               <div className="emi-hero-top">
                 <div>
                   <div className="dim small">Your EMI</div>
@@ -221,9 +243,9 @@ export default function Emi() {
               </div>
             </div>
 
-            {(
-              <div className="emi-afford card">
-                <h2 className="h-card">Can you afford it?</h2>
+            {
+              <details className="emi-afford card fold" open={!phone || income > 0}>
+                <summary><h2 className="h-card">Can you afford it?</h2></summary>
                 {income > 0 ? (
                   <>
                     <div className="meter" aria-label={`EMI is ${share.toFixed(0)}% of take-home pay`}>
@@ -242,8 +264,8 @@ export default function Emi() {
                   <li className={income > 0 && share <= 10 ? 'ok' : ''}><b>10%</b> of income or less on the EMI <span className="dim">— {income > 0 ? `${share.toFixed(0)}%` : 'add your pay'}</span></li>
                 </ul>
                 <p className="dim small">The 20/4/10 rule of thumb keeps a car from straining your finances. Missing one isn’t a red flag; missing all three is.</p>
-              </div>
-            )}
+              </details>
+            }
 
             <div className="emi-banks card">
               <div className="h-row">
@@ -277,8 +299,8 @@ export default function Emi() {
               <p className="dim small">Sorted by interest over the full tenure plus the processing fee with GST, where the lender publishes it. “est.” marks a rate estimated for your score from the lender’s published range. Tap a lender to see your numbers with it.</p>
             </div>
 
-            <div className="emi-years card">
-              <h2 className="h-card">Year by year</h2>
+            <details className="emi-years card fold" open={!phone}>
+              <summary><h2 className="h-card">Year by year</h2></summary>
               <div className="ybars" role="img" aria-label="Principal and interest paid each year">
                 {base.years.map((y) => (
                   <div key={y.year} className="ybar" title={`Year ${y.year}: ${inr(y.principal)} principal, ${inr(y.interest)} interest, ${inr(y.balance)} left`}>
@@ -293,10 +315,10 @@ export default function Emi() {
               </div>
               <div className="split-legend small"><span><i className="split-principal" />Principal</span><span><i className="split-interest" />Interest</span></div>
               <p className="dim small">Interest is front-loaded: in year 1 about {Math.round((base.years[0].interest / (base.years[0].interest + base.years[0].principal)) * 100)}% of what you pay is interest.</p>
-            </div>
+            </details>
 
-            <div className="emi-extra card">
-              <h2 className="h-card">Pay a little extra each year</h2>
+            <details className="emi-extra card fold" open={!phone}>
+              <summary><h2 className="h-card">Pay a little extra each year</h2></summary>
               <div className="emi-label-row">
                 <span className="dim small">Extra payment once a year (a bonus, say)</span>
                 <b>{extra ? inr(extra) : 'None'}</b>
@@ -308,7 +330,7 @@ export default function Emi() {
               ) : (
                 <p className="dim small">Paying extra cuts interest straight away. Since 1 Jan 2026, RBI rules bar prepayment charges on floating-rate loans to individuals; fixed-rate loans can still carry them.</p>
               )}
-            </div>
+            </details>
 
             <p className="dim small fine">
               Rates are each lender’s published new-car loan pricing, checked {RATES_AS_OF}, after RBI’s repo rise to {REPO.rate}% on {REPO.since}; your final rate depends on the lender’s own checks.

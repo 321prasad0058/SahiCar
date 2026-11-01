@@ -326,7 +326,8 @@ export class HeroWorld {
     const spanW = spec.L * Math.abs(Math.cos(theta)) + spec.W * Math.abs(Math.sin(theta))
     const rW = spanW / (2 * tanH * this.focus.w)
     const rH = (spec.H * 1.2) / (2 * tanV * this.focus.h * 0.95)
-    const r = Math.max(rW, rH) * c.zoom
+    // phones: leave breathing room either side instead of filling the screen edge to edge
+    const r = Math.max(rW, rH) * c.zoom * (this.camera.aspect < 1 ? 1.16 : 1)
     this.camera.position.set(Math.sin(theta) * Math.cos(elev) * r, c.look + Math.sin(elev) * r, Math.cos(theta) * Math.cos(elev) * r)
     this.camera.lookAt(0, c.look, 0)
 

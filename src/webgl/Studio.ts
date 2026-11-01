@@ -17,6 +17,7 @@ export class Studio {
   private ro: ResizeObserver
   private lights = 1
   private dirty = true
+  private userMoved = false
   private idleFrames = 0
 
   constructor(private canvas: HTMLCanvasElement, spec: CarSpec, opt: Omit<BuildOptions, 'detail'> = {}) {
@@ -50,7 +51,7 @@ export class Studio {
     this.controls.maxPolarAngle = Math.PI / 2.04
     this.controls.autoRotate = !reducedMotion
     this.controls.autoRotateSpeed = 0.8
-    this.controls.addEventListener('start', () => (this.controls.autoRotate = false))
+    this.controls.addEventListener('start', () => ((this.controls.autoRotate = false), (this.userMoved = true)))
     this.controls.addEventListener('change', () => (this.dirty = true))
 
     this.ro = new ResizeObserver(() => this.layout())
@@ -66,6 +67,15 @@ export class Studio {
     this.renderer.setSize(w, h, false)
     this.camera.aspect = w / h
     this.camera.updateProjectionMatrix()
+    // the framing was set for a 16:10 stage; on a narrower one (phones) step back so the whole car fits,
+    // whichever way it's turned
+    const stretch = Math.max(1, 1.6 / this.camera.aspect)
+    const target = this.controls.target
+    const offset = this.camera.position.clone().sub(target)
+    const want = 10.1 * stretch
+    if (Math.abs(offset.length() - want) > 0.05 && !this.userMoved) offset.setLength(want)
+    this.camera.position.copy(target).add(offset)
+    this.controls.maxDistance = Math.max(14, want * 1.3)
     this.dirty = true
   }
 
