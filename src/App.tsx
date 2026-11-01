@@ -3,6 +3,7 @@ import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import { Footer } from './components/Footer'
 import { Nav } from './components/Nav'
 import { Toasts } from './components/Toast'
+import { useFeedback } from './lib/feedback'
 import { setGateNavigator } from './lib/gate'
 import { useStore } from './state/store'
 import Landing from './pages/Landing'
@@ -20,6 +21,7 @@ const Login = lazy(() => import('./pages/Login'))
 const About = lazy(() => import('./pages/About'))
 const Emi = lazy(() => import('./pages/Emi'))
 const HowWeScore = lazy(() => import('./pages/HowWeScore'))
+const FeedbackSheet = lazy(() => import('./components/Feedback'))
 const DevCars = import.meta.env.DEV ? lazy(() => import('./pages/DevCars')) : null
 
 const TITLES: Record<string, string> = {
@@ -47,6 +49,7 @@ export default function App() {
   const dev = pathname.startsWith('/dev/')
   const bare = pathname === '/sahifit' || dev
   const comparing = useStore((st) => st.compare.length > 0)
+  const feedback = useFeedback((f) => f.open)
 
   return (
     <>
@@ -76,6 +79,11 @@ export default function App() {
       {comparing && (
         <Suspense fallback={null}>
           <CompareTray />
+        </Suspense>
+      )}
+      {feedback && (
+        <Suspense fallback={null}>
+          <FeedbackSheet />
         </Suspense>
       )}
       <Toasts />

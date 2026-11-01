@@ -18,6 +18,7 @@ import { track } from '../lib/track'
 import { auth, db } from './firebase'
 
 export * from './user'
+export * from './feedback'
 
 const need = () => {
   if (!auth) throw new Error('Sign-in is not configured on this deployment.')

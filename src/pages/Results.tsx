@@ -13,6 +13,7 @@ import { DIM_LABEL, GEAR_LABEL, relaxations, sahiScore, withStretchHint, type Di
 import { expectedLabel, timingFor } from '../engine/timing'
 import { inr, lakh } from '../lib/format'
 import { cardPhoto, shareUrl, type CardData } from '../lib/shareCard'
+import { openFeedback } from '../lib/feedback'
 import { gate, toggleCompareGated, toggleSave } from '../lib/gate'
 import { reducedMotion } from '../lib/perf'
 import { track, trackNoMatch } from '../lib/track'
@@ -223,6 +224,18 @@ export default function Results() {
             </p>
             <Fixes fixes={fixes} />
             <Link to="/sahifit" className="btn btn-ghost">Edit all my answers</Link>
+            <button className="link-arrow fb-link" onClick={() => openFeedback('no')}>Tell us what you were looking for</button>
+          </div>
+        )}
+
+        {res.picks.length > 0 && (
+          <div className="rate-match card">
+            <span><b>Does the {res.picks[0].car.model} make sense for you?</b> <span className="muted small">Your answer makes SahiScore better for everyone.</span></span>
+            <span className="rate-btns">
+              <button className="pick" onClick={() => openFeedback('yes', res.picks[0].car.id)}>Spot on</button>
+              <button className="pick" onClick={() => openFeedback('partly', res.picks[0].car.id)}>Partly</button>
+              <button className="pick" onClick={() => openFeedback('no', res.picks[0].car.id)}>Not really</button>
+            </span>
           </div>
         )}
 

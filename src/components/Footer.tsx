@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { openFeedback } from '../lib/feedback'
 import { Logo } from './Logo'
 
 export function Footer() {
@@ -23,6 +24,7 @@ export function Footer() {
             <Link to="/about">How SahiScore works</Link>
             <Link to="/about#data">Where our data comes from</Link>
             <Link to="/about#promise">Our no-bias promise</Link>
+            <button className="footer-link" onClick={() => openFeedback()}>Send feedback</button>
           </div>
         </div>
       </div>

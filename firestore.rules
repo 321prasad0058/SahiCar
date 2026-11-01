@@ -2,6 +2,7 @@ rules_version = '2';
 
 // SahiCar keeps very little about a person: their SahiFit answers and the cars they saved.
 // Every document lives under the owner's uid and only that signed-in user can read or write it.
+// Anonymous feedback can be written but never read back from the app.
 service cloud.firestore {
   match /databases/{database}/documents {
 
@@ -22,6 +23,19 @@ service cloud.firestore {
           && request.resource.data.keys().hasOnly(['carId', 'score', 'note', 'savedAt'])
           && request.resource.data.carId == carId;
       }
+    }
+
+    // feedback: anyone may send one short, well-formed note; nobody can read it from the app
+    match /feedback/{id} {
+      allow create: if request.resource.data.keys().hasOnly(['rating', 'topic', 'text', 'page', 'car', 'ctx', 'at'])
+        && request.resource.data.text is string && request.resource.data.text.size() <= 1000
+        && (request.resource.data.rating == null || request.resource.data.rating in ['yes', 'partly', 'no'])
+        && (request.resource.data.topic == null || request.resource.data.topic in ['pick', 'data', 'bug', 'idea'])
+        && (request.resource.data.rating != null || request.resource.data.text.size() > 0)
+        && request.resource.data.page is string && request.resource.data.page.size() <= 120
+        && (request.resource.data.car == null || (request.resource.data.car is string && request.resource.data.car.size() <= 64))
+        && request.resource.data.ctx is map && request.resource.data.ctx.size() <= 12
+        && request.resource.data.at == request.time;
     }
 
     // nothing else is readable or writable
