@@ -148,6 +148,41 @@ for (const c of seen.values()) {
   c.official = o && existsSync(join(root, 'public', o.src)) ? { src: o.src, sm: o.sm, transparent: !!o.transparent, page: o.page, brand: o.brand ?? c.brand } : null
 }
 
+// verified corrections (research/verified.json): crash ratings re-checked against Bharat NCAP / Global NCAP —
+// Euro NCAP and ANCAP results don't count as Indian ratings — plus dimensions, engine figures and each model's
+// best-value variant, every one with its source
+const verPath = join(research, 'verified.json')
+const verified = existsSync(verPath) ? read(verPath) : {}
+for (const c of seen.values()) {
+  const v = verified[c.id]
+  if (!v) continue
+  if (v.safety) {
+    const s = v.safety
+    c.safety = {
+      ...c.safety,
+      agency: s.agency,
+      adult: s.agency ? s.adult : null,
+      child: s.agency ? s.child : null,
+      year: s.agency ? s.year : null,
+      ...(s.airbagsStd != null ? { airbagsStd: s.airbagsStd } : {}),
+      ...(s.airbagsMax != null ? { airbagsMax: s.airbagsMax } : {}),
+      ...(s.esc != null ? { esc: s.esc } : {}),
+      ...(s.adas ? { adas: s.adas } : {}),
+      ...(s.preFacelift ? { preFacelift: true } : {}),
+      ...(s.oldProtocol ? { oldProtocol: true } : {}),
+      ...(s.source ? { source: s.source } : {}),
+    }
+  }
+  if (v.dims) c.dims = { ...c.dims, ...v.dims }
+  for (const p of v.powertrains ?? []) {
+    const same = c.powertrains.filter((x) => x.fuel === p.fuel)
+    if (same.length !== 1) continue // ambiguous: several engines on one fuel
+    if (p.powerPs != null) same[0].powerPs = p.powerPs
+    if (p.torqueNm != null) same[0].torqueNm = p.torqueNm
+  }
+  if (v.valueVariant) c.valueVariant = v.valueVariant
+}
+
 const cars = [...seen.values()].sort((a, b) => a.brand.localeCompare(b.brand) || a.price.min - b.price.min)
 writeFileSync(join(out, 'cars.json'), JSON.stringify(cars))
 

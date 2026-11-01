@@ -6,6 +6,7 @@
 // as [z, y]: metres across the car from the centre line, and height. Axle positions come from the photos.
 // No logos, badges or lettering are modelled. On the site these cars stand in for body styles, unnamed.
 import type { CarSpec } from './build'
+import { EXACT } from './exact'
 
 /** Electric SUV — Tata Sierra.ev (2026). 4340 × 1841 × 1715. */
 export const SIERRA_EV: CarSpec = {
@@ -279,4 +280,7 @@ export function archetype(body: string, fuel?: string): CarSpec {
   return VICTORIS
 }
 
-export const SPEC_BY_ID: Record<string, CarSpec> = Object.fromEntries(SHOWCASE.map((s) => [s.id, s]))
+// the five showcase cars; models being traced (exact.ts) join once they match their photos side by side
+export const SPEC_BY_ID: Record<string, CarSpec> = Object.fromEntries([...SHOWCASE, ...EXACT.filter((s) => READY.includes(s.id))].map((s) => [s.id, s]))
+/** traced models that have passed the side-by-side check against their photos */
+const READY: string[] = []

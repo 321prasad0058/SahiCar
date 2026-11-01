@@ -1020,3 +1020,38 @@ button.v-row:hover {
     padding: 7px 8px;
   }
 }
+
+/* best-value variant: warm amber, distinct from the green "selected" row */
+.value-pick {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 0 0 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--amber-soft);
+  border: 1px solid color-mix(in srgb, var(--amber) 30%, transparent);
+}
+.value-tag {
+  flex: none;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 99px;
+  background: var(--amber);
+  color: #fff;
+}
+.value-tag.sm {
+  margin-left: 8px;
+  font-size: 10.5px;
+  padding: 1px 7px;
+  vertical-align: 1px;
+}
+.v-row.best {
+  background: var(--amber-soft);
+  box-shadow: inset 3px 0 0 var(--amber);
+}
+.v-row.best.on {
+  box-shadow: inset 3px 0 0 var(--amber), inset 0 0 0 1px var(--accent);
+}

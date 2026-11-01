@@ -17,6 +17,7 @@ import { useStore } from '../state/store'
 import type { CarSpec } from '../webgl/cars/build'
 import type { Studio } from '../webgl/Studio'
 
+// cars with an exact 3D model (the rest show a reference body at their real size)
 const SHOWCASE_IDS = ['tata-sierra-ev', 'tata-sierra', 'tata-altroz', 'honda-city', 'maruti-victoris', 'maruti-ertiga']
 // neutral grey for the generic body when the car has no verified colour list
 const NEUTRAL = '#5b6b75'
@@ -264,15 +265,25 @@ export default function CarDetail() {
                 {states.map((s) => <option key={s.code} value={s.code}>{s.name}</option>)}
               </select>
             </div>
+            {car.valueVariant && (
+              <div className="value-pick">
+                <span className="value-tag">★ Best value</span>
+                <span>
+                  <b>{car.valueVariant.name}</b> · {lakh(car.valueVariant.price)} ex-showroom
+                  <span className="muted small"> — {car.valueVariant.reason || 'the cheapest variant with 6 airbags, a touchscreen with Android Auto/CarPlay and a rear camera'}</span>
+                </span>
+              </div>
+            )}
             <div className="variants card">
               <div className="v-row v-head small dim"><span>Variant</span><span>Gearbox</span><span>Ex-showroom</span><span>On-road*</span></div>
               {ladder.length ? (
                 ladder.map((v) => {
                   const p = car.powertrains.find((x) => x.fuel === v.fuel)
                   const o = onRoad(onroad, state, car.body, v.fuel, v.price, p?.cc ?? null)
+                  const best = car.valueVariant && v.name.toLowerCase() === car.valueVariant.name.toLowerCase() && (!car.valueVariant.fuel || car.valueVariant.fuel === v.fuel)
                   return (
-                    <button key={`${v.name}-${v.transmission}-${v.price}`} className={`v-row ${sel === v ? 'on' : ''}`} onClick={() => setPicked(v)}>
-                      <span>{v.name}</span>
+                    <button key={`${v.name}-${v.transmission}-${v.price}`} className={`v-row ${sel === v ? 'on' : ''} ${best ? 'best' : ''}`} onClick={() => setPicked(v)}>
+                      <span>{v.name}{best && <span className="value-tag sm">Best value</span>}</span>
                       <span className="dim">{GEAR_LABEL[gearKind(v.transmission, v.fuel)]}</span>
                       <span className="mono">{lakh(v.price)}</span>
                       <span className="mono">{lakh(o.total)}</span>

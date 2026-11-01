@@ -1,0 +1,6805 @@
+{
+ "maruti-s-presso": {
+  "safety": {
+   "agency": "GNCAP",
+   "adult": 1,
+   "child": 0,
+   "adultScore": 20.03,
+   "childScore": 3.52,
+   "year": 2022,
+   "airbagsStd": 2,
+   "airbagsMax": 2,
+   "esc": true,
+   "adas": "none",
+   "source": "https://www.globalncap.org/s/MarutiSuzukiS-Presso-2022-fact-sheet.pdf"
+  },
+  "dims": {
+   "length": 3565,
+   "width": 1520,
+   "height": 1567,
+   "wheelbase": 2380,
+   "boot": 240,
+   "fuelTank": 27
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 68.5,
+    "torqueNm": 91.1
+   },
+   {
+    "fuel": "cng",
+    "powerPs": 56.6,
+    "torqueNm": 82.1
+   }
+  ],
+  "sources": [
+   "https://www.marutisuzuki.com/s-presso",
+   "https://www.marutisuzuki.com/content/dam/msil/arena/in/en/assets/cars/s-presso/documents/S-presso-Brochure.pdf",
+   "https://www.globalncap.org/s/MarutiSuzukiS-Presso-2022-fact-sheet.pdf",
+   "https://www.cardekho.com/maruti/s-presso/variants.htm"
+  ]
+ },
+ "maruti-alto-k10": {
+  "safety": {
+   "agency": "GNCAP",
+   "adult": 2,
+   "child": 0,
+   "adultScore": 21.67,
+   "childScore": 3.52,
+   "year": 2023,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "source": "https://www.globalncap.org/s/MarutiSuzuki-Alto-factsheet2023.pdf"
+  },
+  "dims": {
+   "length": 3530,
+   "width": 1490,
+   "height": 1520,
+   "wheelbase": 2380,
+   "boot": 214,
+   "fuelTank": 27
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 68.5,
+    "torqueNm": 91.1
+   },
+   {
+    "fuel": "cng",
+    "powerPs": 56.6,
+    "torqueNm": 82.1
+   }
+  ],
+  "sources": [
+   "https://www.marutisuzuki.com/alto-k10",
+   "https://www.marutisuzuki.com/content/dam/msil/arena/in/en/assets/cars/alto-k10/documents/AltoK10-KV-Brochure.pdf",
+   "https://www.globalncap.org/s/MarutiSuzuki-Alto-factsheet2023.pdf",
+   "https://www.cardekho.com/maruti/alto-k10/variants.htm"
+  ]
+ },
+ "maruti-celerio": {
+  "safety": {
+   "agency": "GNCAP",
+   "adult": 3,
+   "child": 2,
+   "adultScore": 18.04,
+   "childScore": 18.57,
+   "year": 2025,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "source": "https://www.globalncap.org/s/MarutiSuzuki-Celerio-factsheet-6airbags-2025.pdf"
+  },
+  "dims": {
+   "length": 3695,
+   "width": 1655,
+   "height": 1555,
+   "wheelbase": 2435,
+   "boot": 292,
+   "fuelTank": 32
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 68.5,
+    "torqueNm": 91.1
+   },
+   {
+    "fuel": "cng",
+    "powerPs": 56.6,
+    "torqueNm": 82.1
+   }
+  ],
+  "sources": [
+   "https://www.marutisuzuki.com/celerio",
+   "https://www.marutisuzuki.com/content/dam/msil/arena/in/en/assets/cars/celerio/documents/Arena-Celerio-Brochure.pdf",
+   "https://www.globalncap.org/s/MarutiSuzuki-Celerio-factsheet-6airbags-2025.pdf",
+   "https://www.globalncap.org/impact-archive/mixed-results-for-maruti-suzuki",
+   "https://www.cardekho.com/maruti/celerio/variants.htm"
+  ]
+ },
+ "maruti-wagon-r": {
+  "safety": {
+   "agency": "GNCAP",
+   "adult": 1,
+   "child": 0,
+   "adultScore": 19.69,
+   "childScore": 3.4,
+   "year": 2023,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "source": "https://www.globalncap.org/s/Suzuki-Wagon-R-factsheet2023.pdf"
+  },
+  "dims": {
+   "length": 3655,
+   "width": 1620,
+   "height": 1675,
+   "wheelbase": 2435,
+   "groundClearance": 165,
+   "boot": 335,
+   "fuelTank": 32
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 68.5,
+    "torqueNm": 91.1
+   },
+   {
+    "fuel": "petrol",
+    "powerPs": 90.9,
+    "torqueNm": 113.7
+   },
+   {
+    "fuel": "cng",
+    "powerPs": 56.6,
+    "torqueNm": 82.1
+   }
+  ],
+  "sources": [
+   "https://www.marutisuzuki.com/wagonr",
+   "https://www.marutisuzuki.com/content/dam/msil/arena/in/en/assets/cars/wagonr/documents/Arena-Wagon-r-Brochure.pdf",
+   "https://www.globalncap.org/s/Suzuki-Wagon-R-factsheet2023.pdf",
+   "https://www.cardekho.com/maruti/wagon-r/variants.htm",
+   "https://www.autocarindia.com/cars/maruti-suzuki/wagonr-flex-fuel"
+  ]
+ },
+ "maruti-eeco": {
+  "safety": {
+   "agency": "GNCAP",
+   "adult": 0,
+   "child": 1,
+   "adultScore": 1.13,
+   "childScore": 24.2,
+   "year": 2016,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "source": "https://www.globalncap.org/s/Maruti-Suzuki-Eeco-NO-Airbags.pdf",
+   "oldProtocol": true
+  },
+  "dims": {
+   "length": 3675,
+   "width": 1475,
+   "height": 1825,
+   "wheelbase": 2350,
+   "fuelTank": 32
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 82.3,
+    "torqueNm": 105.5
+   },
+   {
+    "fuel": "cng",
+    "powerPs": 71.7,
+    "torqueNm": 95
+   }
+  ],
+  "sources": [
+   "https://www.marutisuzuki.com/eeco",
+   "https://www.marutisuzuki.com/content/dam/msil/arena/in/en/assets/cars/eeco/document/Arena-Eeco-Brochure.pdf",
+   "https://www.globalncap.org/s/Maruti-Suzuki-Eeco-NO-Airbags.pdf",
+   "https://www.globalncap.org/news/zero-stars-for-all-cars-in-latest-global-ncap-crash-tests",
+   "https://www.cardekho.com/maruti/eeco/variants.htm"
+  ]
+ },
+ "maruti-swift": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "older": false,
+   "source": "https://www.globalncap.org/s/MarutiSuzukiSwift-2022-fact-sheet.pdf"
+  },
+  "dims": {
+   "length": 3860,
+   "width": 1735,
+   "height": 1520,
+   "wheelbase": 2450,
+   "groundClearance": 163,
+   "boot": 265,
+   "fuelTank": 37
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 82.93,
+    "torqueNm": 112.4
+   },
+   {
+    "fuel": "cng",
+    "powerPs": 69.75,
+    "torqueNm": 101.8
+   }
+  ],
+  "valueVariant": {
+   "name": "ZXi Plus",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 828900,
+   "reason": "Only ZXi+ has the rear parking camera; 6 airbags standard and wireless AA/CarPlay from VXi.",
+   "source": "https://www.marutisuzuki.com/content/dam/msil/arena/in/en/assets/cars/swift/brochures/Swift%20Brochure%20-%20Vertical%20-%205th%20Oct.pdf"
+  },
+  "sources": [
+   "https://www.marutisuzuki.com/swift",
+   "https://www.marutisuzuki.com/content/dam/msil/arena/in/en/assets/cars/swift/brochures/Swift%20Brochure%20-%20Vertical%20-%205th%20Oct.pdf",
+   "https://www.globalncap.org/s/MarutiSuzukiSwift-2022-fact-sheet.pdf",
+   "https://www.cardekho.com/maruti/swift/variants.htm"
+  ]
+ },
+ "maruti-baleno": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 4,
+   "child": 3,
+   "adultScore": 26.52,
+   "childScore": 34.81,
+   "year": 2025,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.autocarindia.com/car-news/maruti-baleno-scores-4-stars-in-bncap-435681",
+   "preFacelift": true
+  },
+  "dims": {
+   "length": 3990,
+   "width": 1745,
+   "height": 1530,
+   "wheelbase": 2520,
+   "boot": 318,
+   "fuelTank": 37
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 82.93,
+    "torqueNm": 112.4
+   },
+   {
+    "fuel": "cng",
+    "powerPs": 69.75,
+    "torqueNm": 101.8
+   }
+  ],
+  "valueVariant": {
+   "name": "Zeta",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 799900,
+   "reason": "6 airbags standard; Delta gets wireless AA/CarPlay but rear camera starts at Zeta (9-inch SmartPlay Pro+).",
+   "source": "https://www.nexaexperience.com/content/dam/msil/nexa/in/en/assets/cars/newbaleno/download-brochure/The-Stunning-New-Baleno-Brochure.pdf"
+  },
+  "sources": [
+   "https://www.nexaexperience.com/baleno",
+   "https://www.nexaexperience.com/content/dam/msil/nexa/in/en/assets/cars/newbaleno/download-brochure/The-Stunning-New-Baleno-Brochure.pdf",
+   "https://www.autocarindia.com/car-news/maruti-baleno-scores-4-stars-in-bncap-435681",
+   "https://www.autocarindia.com/auto-features/every-car-tested-by-bharat-ncap-so-far-431936",
+   "https://www.autocarindia.com/auto-features-amp/2026-maruti-baleno-variants-and-features-explained-441020",
+   "https://www.cardekho.com/maruti/baleno/variants.htm"
+  ]
+ },
+ "maruti-dzire": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 29.46,
+   "childScore": 41.57,
+   "year": 2025,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "source": "https://www.autocarindia.com/auto-features/every-car-tested-by-bharat-ncap-so-far-431936"
+  },
+  "dims": {
+   "length": 3995,
+   "width": 1735,
+   "height": 1525,
+   "wheelbase": 2450,
+   "groundClearance": 163,
+   "boot": 382,
+   "fuelTank": 37
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 82.93,
+    "torqueNm": 112.4
+   },
+   {
+    "fuel": "cng",
+    "powerPs": 69.75,
+    "torqueNm": 101.8
+   }
+  ],
+  "valueVariant": {
+   "name": "ZXi",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 827700,
+   "reason": "6 airbags standard, wireless AA/CarPlay from VXi, reverse parking camera from ZXi (ZXi+ gets 360 camera).",
+   "source": "https://www.marutisuzuki.com/content/dam/msil/arena/in/en/assets/cars/dzire/brochures/DZire-brochure_.pdf"
+  },
+  "sources": [
+   "https://www.marutisuzuki.com/dzire",
+   "https://www.marutisuzuki.com/content/dam/msil/arena/in/en/assets/cars/dzire/brochures/DZire-brochure_.pdf",
+   "https://www.autocarindia.com/auto-features/every-car-tested-by-bharat-ncap-so-far-431936",
+   "https://www.globalncap.org/s/MarutiSuzuki-NewDzire-factsheet-2024.pdf",
+   "https://www.cardekho.com/maruti/dzire/variants.htm"
+  ]
+ },
+ "maruti-fronx": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "older": false,
+   "source": "https://www.globalncap.org/impact-archive/mixed-results-for-maruti-suzuki"
+  },
+  "dims": {
+   "length": 3995,
+   "width": 1765,
+   "height": 1550,
+   "wheelbase": 2520,
+   "boot": 308,
+   "fuelTank": 37
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 89.73,
+    "torqueNm": 113
+   },
+   {
+    "fuel": "cng",
+    "powerPs": 77.5,
+    "torqueNm": 98.5
+   },
+   {
+    "fuel": "mild-hybrid",
+    "powerPs": 100.06,
+    "torqueNm": 147.6
+   }
+  ],
+  "valueVariant": {
+   "name": "Zeta Turbo",
+   "fuel": "mild-hybrid",
+   "transmission": "MT",
+   "price": 975900,
+   "reason": "6 airbags standard; wireless AA/CarPlay from Delta, but rear view camera only on Zeta and Alpha (turbo-only trims).",
+   "source": "https://www.nexaexperience.com/content/dam/msil/nexa/in/en/assets/cars/fronx/documents/NEXA-Fronx-Brochure.pdf"
+  },
+  "sources": [
+   "https://www.nexaexperience.com/fronx",
+   "https://www.nexaexperience.com/content/dam/msil/nexa/in/en/assets/cars/fronx/documents/NEXA-Fronx-Brochure.pdf",
+   "https://www.globalncap.org/impact-archive/mixed-results-for-maruti-suzuki",
+   "https://www.rushlane.com/suzuki-fronx-scores-1-star-ancap-safety-rating-as-seatbelt-fails-12536612.html",
+   "https://www.cardekho.com/maruti/fronx/variants.htm"
+  ]
+ },
+ "maruti-brezza": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 30.41,
+   "childScore": 43,
+   "year": 2026,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "source": "https://www.bncap.in/vehicle/maruti-brezza/"
+  },
+  "dims": {
+   "length": 3995,
+   "width": 1790,
+   "height": 1685,
+   "wheelbase": 2500,
+   "fuelTank": 48
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 110,
+    "torqueNm": 170
+   },
+   {
+    "fuel": "petrol",
+    "powerPs": 103,
+    "torqueNm": 139
+   },
+   {
+    "fuel": "cng",
+    "powerPs": 88,
+    "torqueNm": 121.5
+   }
+  ],
+  "valueVariant": {
+   "name": "VXi Turbo",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 864900,
+   "reason": "Cheapest with 6 airbags (std), 7in touchscreen with wireless AA/CarPlay (VXi+) and reverse camera (VXi Turbo; non-turbo needs ZXi).",
+   "source": "https://www.marutisuzuki.com/content/dam/msil/arena/in/en/assets/cars/brezza/brochures/new_brezza_brochure.pdf"
+  },
+  "sources": [
+   "https://www.bncap.in/vehicle/maruti-brezza/",
+   "https://www.marutisuzuki.com/content/dam/msil/arena/in/en/assets/cars/brezza/brochures/new_brezza_brochure.pdf",
+   "https://www.marutisuzuki.com/brezza",
+   "https://www.carwale.com/maruti-suzuki-cars/brezza/"
+  ]
+ },
+ "maruti-ertiga": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "older": false,
+   "source": "https://www.autocarindia.com/car-news/africa-spec-maruti-ertiga-renault-triber-score-poorly-in-gncap-crash-tests-432408"
+  },
+  "dims": {
+   "length": 4435,
+   "width": 1735,
+   "height": 1690,
+   "wheelbase": 2740,
+   "boot": 209,
+   "fuelTank": 45
+  },
+  "powertrains": [
+   {
+    "fuel": "mild-hybrid",
+    "powerPs": 103,
+    "torqueNm": 139
+   },
+   {
+    "fuel": "cng",
+    "powerPs": 88,
+    "torqueNm": 121.5
+   }
+  ],
+  "valueVariant": {
+   "name": "ZXi",
+   "fuel": "mild-hybrid",
+   "transmission": "MT",
+   "price": 1101500,
+   "reason": "Cheapest with 6 airbags (std), 7in SmartPlay Studio touchscreen with AA/CarPlay and rear parking camera (both ZXi+).",
+   "source": "https://www.marutisuzuki.com/content/dam/msil/arena/in/en/assets/cars/ertiga/document/Arena-Ertiga-Brochure.pdf"
+  },
+  "sources": [
+   "https://www.marutisuzuki.com/content/dam/msil/arena/in/en/assets/cars/ertiga/document/Arena-Ertiga-Brochure.pdf",
+   "https://www.marutisuzuki.com/ertiga",
+   "https://www.carwale.com/maruti-suzuki-cars/ertiga/",
+   "https://www.autocarindia.com/car-news/africa-spec-maruti-ertiga-renault-triber-score-poorly-in-gncap-crash-tests-432408",
+   "https://www.rushlane.com/2025-maruti-ertiga-arrives-at-showroom-bigger-size-12528422.html"
+  ]
+ },
+ "maruti-victoris": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 31.66,
+   "childScore": 43,
+   "year": 2025,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.bncap.in/vehicle/maruti-suzuki-victoris/"
+  },
+  "dims": {
+   "length": 4360,
+   "width": 1795,
+   "height": 1655,
+   "wheelbase": 2600,
+   "fuelTank": 45
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 103,
+    "torqueNm": 139
+   },
+   {
+    "fuel": "cng",
+    "powerPs": 88,
+    "torqueNm": 121.5
+   },
+   {
+    "fuel": "strong-hybrid",
+    "powerPs": 116,
+    "torqueNm": 141
+   }
+  ],
+  "valueVariant": {
+   "name": "VXi",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1184900,
+   "reason": "6 airbags std, 7in SmartPlay Pro with wireless AA/CarPlay (all), reverse camera from VXi.",
+   "source": "https://www.marutisuzuki.com/content/dam/msil/arena/in/en/assets/cars/victoris/documents/Arena-Victoris-Brochure-Mobile.pdf"
+  },
+  "sources": [
+   "https://www.bncap.in/vehicle/maruti-suzuki-victoris/",
+   "https://www.bncap.in/wp-content/uploads/2025/09/FACT-SHEET_Victoris.pdf",
+   "https://www.marutisuzuki.com/content/dam/msil/arena/in/en/assets/cars/victoris/documents/Arena-Victoris-Brochure-Mobile.pdf",
+   "https://www.marutisuzuki.com/victoris",
+   "https://www.carwale.com/maruti-suzuki-cars/victoris/",
+   "https://www.cardekho.com/maruti/victoris/variants.htm",
+   "https://www.rushlane.com/maruti-suzuki-victoris-global-ncap-vs-bharat-ncap-ratings-compared-12530498.html"
+  ]
+ },
+ "maruti-grand-vitara": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "older": false,
+   "source": "https://www.bncap.in/"
+  },
+  "dims": {
+   "length": 4345,
+   "width": 1795,
+   "height": 1645,
+   "wheelbase": 2600,
+   "fuelTank": 45
+  },
+  "powertrains": [
+   {
+    "fuel": "mild-hybrid",
+    "powerPs": 103,
+    "torqueNm": 139
+   },
+   {
+    "fuel": "strong-hybrid",
+    "powerPs": 116,
+    "torqueNm": 141
+   }
+  ],
+  "valueVariant": {
+   "name": "Delta",
+   "fuel": "mild-hybrid",
+   "transmission": "MT",
+   "price": 1214700,
+   "reason": "6 airbags std; Delta adds 7in SmartPlay Pro touchscreen and reverse camera (Sigma has neither).",
+   "source": "https://www.nexaexperience.com/content/dam/msil/nexa/in/en/assets/cars/grand-vitara/sigma/documents/NEXA-Grand-Vitara-brochure.pdf"
+  },
+  "sources": [
+   "https://www.nexaexperience.com/content/dam/msil/nexa/in/en/assets/cars/grand-vitara/sigma/documents/NEXA-Grand-Vitara-brochure.pdf",
+   "https://www.nexaexperience.com/grand-vitara",
+   "https://www.carwale.com/maruti-suzuki-cars/grand-vitara/",
+   "https://parkplus.io/car-news/reports-maruti-grand-vitara-crash-tested-at-bharat-ncap"
+  ]
+ },
+ "maruti-xl6": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "older": false,
+   "source": "https://www.bncap.in/"
+  },
+  "dims": {
+   "length": 4485,
+   "width": 1775,
+   "height": 1745,
+   "wheelbase": 2740,
+   "fuelTank": 45
+  },
+  "powertrains": [
+   {
+    "fuel": "mild-hybrid",
+    "powerPs": 103,
+    "torqueNm": 139
+   },
+   {
+    "fuel": "cng",
+    "powerPs": 88,
+    "torqueNm": 121.5
+   }
+  ],
+  "valueVariant": {
+   "name": "Zeta",
+   "fuel": "mild-hybrid",
+   "transmission": "MT",
+   "price": 1162300,
+   "reason": "Base Zeta already has 6 airbags, 7in SmartPlay Studio with AA/CarPlay and rear camera.",
+   "source": "https://www.nexaexperience.com/content/dam/msil/nexa/in/en/assets/cars/xl6/Documents/NEXA-Xl6-Brochure.pdf"
+  },
+  "sources": [
+   "https://www.nexaexperience.com/content/dam/msil/nexa/in/en/assets/cars/xl6/Documents/NEXA-Xl6-Brochure.pdf",
+   "https://www.nexaexperience.com/xl6",
+   "https://www.carwale.com/maruti-suzuki-cars/xl6/",
+   "https://www.autocarindia.com/cars/maruti-suzuki/xl6/specifications"
+  ]
+ },
+ "maruti-jimny": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "older": false,
+   "source": "https://www.bncap.in/"
+  },
+  "dims": {
+   "length": 3985,
+   "width": 1645,
+   "height": 1720,
+   "wheelbase": 2590,
+   "groundClearance": 210,
+   "boot": 211,
+   "fuelTank": 40
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 105,
+    "torqueNm": 134
+   }
+  ],
+  "valueVariant": {
+   "name": "Zeta",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1259000,
+   "reason": "Base Zeta already has 6 airbags, 7in SmartPlay Pro with wireless AA/CarPlay and rear view camera.",
+   "source": "https://www.nexaexperience.com/content/dam/msil/nexa/in/en/assets/cars/jimny/documents/NEXA-Jimny-Brochure.pdf"
+  },
+  "sources": [
+   "https://www.nexaexperience.com/content/dam/msil/nexa/in/en/assets/cars/jimny/documents/NEXA-Jimny-Brochure.pdf",
+   "https://www.nexaexperience.com/jimny",
+   "https://www.carwale.com/maruti-suzuki-cars/jimny/"
+  ]
+ },
+ "maruti-e-vitara": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 31.49,
+   "childScore": 43,
+   "year": 2025,
+   "airbagsStd": 7,
+   "airbagsMax": 7,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.bncap.in/vehicle/maruti-suzuki-e-vitara/"
+  },
+  "dims": {
+   "length": 4275,
+   "width": 1800,
+   "height": 1640,
+   "wheelbase": 2700
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 144,
+    "torqueNm": 193
+   },
+   {
+    "fuel": "ev",
+    "powerPs": 174,
+    "torqueNm": 193
+   }
+  ],
+  "valueVariant": {
+   "name": "Zeta 61 kWh",
+   "fuel": "ev",
+   "transmission": "single-speed",
+   "price": 1794000,
+   "reason": "7 airbags std and wireless AA/CarPlay on all; reverse camera starts at Zeta (Delta has sensors only).",
+   "source": "https://www.nexaexperience.com/content/dam/msil/nexa/in/en/assets/cars/evitara/documents/e%20VITARA%20Web%20Brochure%20Sep%2726.pdf"
+  },
+  "sources": [
+   "https://www.bncap.in/vehicle/maruti-suzuki-e-vitara/",
+   "https://www.nexaexperience.com/content/dam/msil/nexa/in/en/assets/cars/evitara/documents/e%20VITARA%20Web%20Brochure%20Sep%2726.pdf",
+   "https://www.nexaexperience.com/e-vitara",
+   "https://www.carwale.com/maruti-suzuki-cars/e-vitara/",
+   "https://www.cardekho.com/overview/Maruti_e_Vitara/Maruti_e_Vitara_Alpha_Dual_Tone.htm"
+  ]
+ },
+ "maruti-invicto": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 30.43,
+   "childScore": 45,
+   "year": 2025,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "source": "https://www.bncap.in/vehicle/maruti-suzuki-invicto/"
+  },
+  "dims": {
+   "length": 4755,
+   "width": 1850,
+   "height": 1790,
+   "wheelbase": 2850,
+   "fuelTank": 52
+  },
+  "powertrains": [
+   {
+    "fuel": "strong-hybrid",
+    "powerPs": 189,
+    "torqueNm": 206
+   }
+  ],
+  "valueVariant": {
+   "name": "Zeta Plus 7-seater",
+   "fuel": "strong-hybrid",
+   "transmission": "e-CVT",
+   "price": 2502400,
+   "reason": "Base Zeta+ already has 6 airbags, 8in touchscreen with AA/CarPlay and rear view camera.",
+   "source": "https://www.nexaexperience.com/content/dam/msil/nexa/in/en/assets/cars/invicto/documents/NEXA-Invicto-Brochure.pdf"
+  },
+  "sources": [
+   "https://www.bncap.in/vehicle/maruti-suzuki-invicto/",
+   "https://www.autocarindia.com/car-news/maruti-invicto-receives-5-star-bharat-ncap-safety-rating-437418",
+   "https://www.nexaexperience.com/content/dam/msil/nexa/in/en/assets/cars/invicto/documents/NEXA-Invicto-Brochure.pdf",
+   "https://www.nexaexperience.com/invicto",
+   "https://www.carwale.com/maruti-suzuki-cars/invicto/"
+  ]
+ },
+ "mg-comet-ev": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 2,
+   "airbagsMax": 2,
+   "esc": false,
+   "adas": "none",
+   "older": false,
+   "source": "https://s7ap1.scene7.com/is/content/mgmotor/mgmotor/documents/MG%20Comet%20EV%20-%20Brochure.pdf"
+  },
+  "dims": {
+   "length": 2974,
+   "width": 1505,
+   "height": 1640,
+   "wheelbase": 2010
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 42,
+    "torqueNm": 110
+   }
+  ],
+  "valueVariant": {
+   "name": "Excite",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 899800,
+   "reason": "Max 2 airbags on all trims; Excite is cheapest with 10.25in touchscreen + wireless AA/CarPlay + reverse camera (Executive lacks both).",
+   "source": "https://s7ap1.scene7.com/is/content/mgmotor/mgmotor/documents/MG%20Comet%20EV%20-%20Brochure.pdf"
+  },
+  "sources": [
+   "https://www.mgmotor.co.in/vehicles/comet-ev-electric-car-in-india",
+   "https://s7ap1.scene7.com/is/content/mgmotor/mgmotor/documents/MG%20Comet%20EV%20-%20Brochure.pdf"
+  ]
+ },
+ "mg-astor": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 2,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://s7ap1.scene7.com/is/content/mgmotor/brand/mgmotor/homepage/tools/brochures/MG%20Astor%20-%20Brochure.pdf"
+  },
+  "dims": {
+   "length": 4323,
+   "width": 1809,
+   "height": 1650,
+   "wheelbase": 2585,
+   "fuelTank": 48
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 110,
+    "torqueNm": 144
+   }
+  ],
+  "valueVariant": {
+   "name": "Select",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1240100,
+   "reason": "Sprint/Shine have only 2 airbags and no wireless AA/CP; Select MT is cheapest with 6 airbags, wireless AA/CarPlay touchscreen and reverse camera.",
+   "source": "https://s7ap1.scene7.com/is/content/mgmotor/brand/mgmotor/homepage/tools/brochures/MG%20Astor%20-%20Brochure.pdf"
+  },
+  "sources": [
+   "https://www.mgmotor.co.in/vehicles/mgastor",
+   "https://s7ap1.scene7.com/is/content/mgmotor/brand/mgmotor/homepage/tools/brochures/MG%20Astor%20-%20Brochure.pdf"
+  ]
+ },
+ "mg-hector": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://s7ap1.scene7.com/is/content/mgmotor/mgmotor/documents/MG%20Hector%20-%20Brochure.pdf"
+  },
+  "dims": {
+   "length": 4699,
+   "width": 1835,
+   "height": 1760,
+   "wheelbase": 2750,
+   "fuelTank": 60
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 143,
+    "torqueNm": 250
+   }
+  ],
+  "valueVariant": {
+   "name": "Select Pro",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1494800,
+   "reason": "6 airbags standard; Select Pro is the first trim with 14in touchscreen + wireless AA/CarPlay and reverse camera (Style has neither).",
+   "source": "https://www.mgmotor.co.in/vehicles/mghector"
+  },
+  "sources": [
+   "https://www.mgmotor.co.in/vehicles/mghector",
+   "https://s7ap1.scene7.com/is/content/mgmotor/mgmotor/documents/MG%20Hector%20-%20Brochure.pdf"
+  ]
+ },
+ "mg-windsor-ev": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://s7ap1.scene7.com/is/content/mgmotor/mgmotor/documents/MG%20Windsor%20EV%20-%20Brochure.pdf"
+  },
+  "dims": {
+   "length": 4295,
+   "width": 1850,
+   "height": 1677,
+   "wheelbase": 2700,
+   "groundClearance": 186,
+   "boot": 604
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 136,
+    "torqueNm": 200
+   },
+   {
+    "fuel": "ev",
+    "powerPs": 136,
+    "torqueNm": 200
+   }
+  ],
+  "valueVariant": {
+   "name": "Exclusive 38",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 1614800,
+   "reason": "6 airbags standard; Excite has touchscreen + wireless AA/CP but no camera (rear sensors only); Exclusive is the cheapest with a (360) camera.",
+   "source": "https://s7ap1.scene7.com/is/content/mgmotor/mgmotor/documents/MG%20Windsor%20EV%20-%20Brochure.pdf"
+  },
+  "sources": [
+   "https://www.mgmotor.co.in/vehicles/windsor-ev-electric-car-in-india",
+   "https://s7ap1.scene7.com/is/content/mgmotor/mgmotor/documents/MG%20Windsor%20EV%20-%20Brochure.pdf",
+   "https://www.mgmotor.co.in/vehicles/windsor-ev-pro",
+   "https://www.carwale.com/mg-cars/windsor-ev/"
+  ]
+ },
+ "mg-hector-plus": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://s7ap1.scene7.com/is/content/mgmotor/mgmotor/documents/MG%20Hector%20-%20Brochure.pdf"
+  },
+  "dims": {
+   "length": 4699,
+   "width": 1835,
+   "height": 1760,
+   "wheelbase": 2750,
+   "fuelTank": 60
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 143,
+    "torqueNm": 250
+   }
+  ],
+  "valueVariant": {
+   "name": "Sharp Pro 7S",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1799800,
+   "reason": "Entry 7-seater already has 6 airbags, 14in wireless AA/CarPlay screen and reverse camera.",
+   "source": "https://www.mgmotor.co.in/vehicles/mghector"
+  },
+  "sources": [
+   "https://www.mgmotor.co.in/vehicles/mghector",
+   "https://s7ap1.scene7.com/is/content/mgmotor/mgmotor/documents/MG%20Hector%20-%20Brochure.pdf"
+  ]
+ },
+ "mg-zs-ev": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://s7ap1.scene7.com/is/content/mgmotor/mgmotor/documents/MG%20ZSEV%20-%20Brochure.pdf"
+  },
+  "dims": {
+   "length": 4323,
+   "width": 1809,
+   "height": 1649,
+   "wheelbase": 2585
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 177,
+    "torqueNm": 280
+   }
+  ],
+  "valueVariant": {
+   "name": "Executive",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 1799000,
+   "reason": "Base Executive already has 6 airbags, 10.1in touchscreen with wired AA/CarPlay and reverse camera.",
+   "source": "https://s7ap1.scene7.com/is/content/mgmotor/mgmotor/documents/MG%20ZSEV%20-%20Brochure.pdf"
+  },
+  "sources": [
+   "https://www.mgmotor.co.in/vehicles/mgzsev-electric-car-in-india",
+   "https://s7ap1.scene7.com/is/content/mgmotor/mgmotor/documents/MG%20ZSEV%20-%20Brochure.pdf"
+  ]
+ },
+ "mg-hector-tomahawk-ev": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://s7ap1.scene7.com/is/content/mgmotor/mgmotor/documents/MG%20Hector%20Tomahawk%20EV%20-%20Brochure.pdf"
+  },
+  "dims": {
+   "length": 4745,
+   "width": 1850,
+   "height": 1770,
+   "wheelbase": 2810,
+   "groundClearance": 230,
+   "boot": 610
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 204,
+    "torqueNm": 310
+   }
+  ],
+  "valueVariant": {
+   "name": "Excite 7S",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 1949800,
+   "reason": "Base Excite already has 6 airbags, 12.8in touchscreen with wireless AA/CarPlay and reverse camera.",
+   "source": "https://s7ap1.scene7.com/is/content/mgmotor/mgmotor/documents/MG%20Hector%20Tomahawk%20EV%20-%20Brochure.pdf"
+  },
+  "sources": [
+   "https://www.mgmotor.co.in/vehicles/hector-tomahawk/ev",
+   "https://s7ap1.scene7.com/is/content/mgmotor/mgmotor/documents/MG%20Hector%20Tomahawk%20EV%20-%20Brochure.pdf",
+   "https://www.cars24.com/news/auto/mg-hector-tomahawk-ev-deliveries-begin-phev-version-to-follow-in-november/"
+  ]
+ },
+ "mg-hector-tomahawk-phev": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://www.mgmotor.co.in/vehicles/hector-tomahawk/phev"
+  },
+  "dims": {
+   "boot": 192,
+   "fuelTank": 52
+  },
+  "powertrains": [
+   {
+    "fuel": "strong-hybrid",
+    "powerPs": 201,
+    "torqueNm": 237
+   }
+  ],
+  "valueVariant": {
+   "name": "Exclusive 7S",
+   "fuel": "strong-hybrid",
+   "transmission": "AT",
+   "price": 2569800,
+   "reason": "Lower of two trims; maker states 6 airbags + 360 camera on PHEV; touchscreen with AA/CarPlay assumed as on EV Exclusive (not confirmed for PHEV).",
+   "source": "https://www.cars24.com/news/auto/mg-hector-tomahawk-phev-full-price-list/"
+  },
+  "sources": [
+   "https://www.mgmotor.co.in/vehicles/hector-tomahawk/phev",
+   "https://www.cars24.com/news/auto/mg-hector-tomahawk-phev-full-price-list/"
+  ]
+ },
+ "mg-majestor": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://www.mgmotor.co.in/vehicles/mg-majestor-biggest-suv-india"
+  },
+  "dims": {
+   "length": 5046,
+   "width": 2016,
+   "height": 1870,
+   "wheelbase": 2950,
+   "groundClearance": 219,
+   "fuelTank": 75
+  },
+  "powertrains": [
+   {
+    "fuel": "diesel",
+    "powerPs": 215,
+    "torqueNm": 478
+   }
+  ],
+  "valueVariant": {
+   "name": "Savvy 4x2 7S",
+   "fuel": "diesel",
+   "transmission": "AT",
+   "price": 4349000,
+   "reason": "Single Savvy trim: 6 airbags, 12.3in touchscreen with wireless AA/CarPlay, reverse + 360 camera on all; 4x2 is the cheapest.",
+   "source": "https://s7ap1.scene7.com/is/content/mgmotor/mgmotor/documents/MG%20Majestor%20-%20Brochure.pdf"
+  },
+  "sources": [
+   "https://www.mgmotor.co.in/vehicles/mg-majestor-biggest-suv-india",
+   "https://s7ap1.scene7.com/is/content/mgmotor/mgmotor/documents/MG%20Majestor%20-%20Brochure.pdf",
+   "https://www.cardekho.com/mg/majestor/variants.htm"
+  ]
+ },
+ "mg-m9": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 7,
+   "airbagsMax": 7,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://mgmotor.scene7.com/is/content/mgmotor/mgselect/en/global/documents/mg-m9-brochure.pdf"
+  },
+  "dims": {
+   "length": 5270,
+   "width": 2000,
+   "height": 1840,
+   "wheelbase": 3200
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 245,
+    "torqueNm": 350
+   }
+  ],
+  "valueVariant": {
+   "name": "Presidential Limo",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 7994800,
+   "reason": "Only variant: 7 airbags, 31.24cm touchscreen, 360 camera; AA/CarPlay per CarDekho (not stated in maker brochure).",
+   "source": "https://mgmotor.scene7.com/is/content/mgmotor/mgselect/en/global/documents/mg-m9-brochure.pdf"
+  },
+  "sources": [
+   "https://www.mgselect.co.in/m9",
+   "https://mgmotor.scene7.com/is/content/mgmotor/mgselect/en/global/documents/mg-m9-brochure.pdf",
+   "https://www.cardekho.com/mg/m9/specs"
+  ]
+ },
+ "mg-cyberster": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 4,
+   "airbagsMax": 4,
+   "esc": null,
+   "adas": "L2",
+   "older": false,
+   "source": "https://mgmotor.scene7.com/is/content/mgmotor/mgselect/en/global/documents/mg-cyberster-brochure.pdf"
+  },
+  "dims": {
+   "length": 4535,
+   "width": 1913,
+   "height": 1329,
+   "wheelbase": 2691
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 510,
+    "torqueNm": 725
+   }
+  ],
+  "valueVariant": {
+   "name": "GT",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 8249800,
+   "reason": "Only variant: max 4 airbags, 7in touchscreen with wired AA/CarPlay, 360 camera.",
+   "source": "https://mgmotor.scene7.com/is/content/mgmotor/mgselect/en/global/documents/mg-cyberster-brochure.pdf"
+  },
+  "sources": [
+   "https://www.mgselect.co.in/cyberster",
+   "https://mgmotor.scene7.com/is/content/mgmotor/mgselect/en/global/documents/mg-cyberster-brochure.pdf"
+  ]
+ },
+ "citroen-c3": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 2,
+   "airbagsMax": 6,
+   "esc": false,
+   "adas": "none",
+   "older": false,
+   "source": "https://www.globalncap.org/news/stellantis-zeroes-out-on-safety-with-citron-c3"
+  },
+  "dims": {
+   "length": 3981,
+   "width": 1733,
+   "height": 1586,
+   "wheelbase": 2540,
+   "boot": 315,
+   "fuelTank": 45
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 82,
+    "torqueNm": 115
+   },
+   {
+    "fuel": "petrol",
+    "powerPs": 110,
+    "torqueNm": null
+   }
+  ],
+  "valueVariant": {
+   "name": "Shine",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 786000,
+   "reason": "Cheapest with 6 airbags + wireless AA/CarPlay touchscreen + camera; Feel(O) has 6 airbags and touchscreen but no rear camera, Live(O) has camera but 2 airbags. Shine's 360 camera is a mandatory dealer accessory at extra cost.",
+   "source": "https://www.citroen.in/models/c3.html"
+  },
+  "sources": [
+   "https://www.citroen.in/models/c3.html",
+   "https://www.citroen.in/content/dam/citroen/india/brochure-pdf/Final_C3_BROCHURE_Vertical_261026_compressed.pdf",
+   "https://www.cardekho.com/citroen/c3/price-in-new-delhi",
+   "https://www.cardekho.com/citroen/c3/specs",
+   "https://www.globalncap.org/news/stellantis-zeroes-out-on-safety-with-citron-c3"
+  ]
+ },
+ "citroen-basalt": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 4,
+   "child": 4,
+   "adultScore": 26.19,
+   "childScore": 35.9,
+   "year": 2024,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "source": "https://www.rushlane.com/citroen-basalt-crash-tested-4-star-bharat-ncap-safety-rating-12508738.html"
+  },
+  "dims": {
+   "length": 4352,
+   "width": 1765,
+   "height": 1593,
+   "wheelbase": 2651,
+   "groundClearance": 180,
+   "boot": 470,
+   "fuelTank": 45
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 82,
+    "torqueNm": 115
+   },
+   {
+    "fuel": "petrol",
+    "powerPs": 110,
+    "torqueNm": null
+   }
+  ],
+  "valueVariant": {
+   "name": "Max",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1134000,
+   "reason": "All variants have 6 airbags; Plus adds wireless AA/CarPlay but only reverse sensors; Max (NA) is cheapest with a camera (360, mandatory dealer accessory at extra cost).",
+   "source": "https://www.citroen.in/models/basalt.html"
+  },
+  "sources": [
+   "https://www.citroen.in/models/basalt.html",
+   "https://www.citroen.in/content/dam/citroen/india/brochure-pdf/september-2026-brochure/BasaltX_Brochure_Vertical_020926.pdf",
+   "https://www.cardekho.com/citroen/basalt/price-in-new-delhi",
+   "https://www.cardekho.com/citroen/basalt/specs",
+   "https://www.rushlane.com/citroen-basalt-crash-tested-4-star-bharat-ncap-safety-rating-12508738.html"
+  ]
+ },
+ "citroen-aircross": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 4,
+   "adultScore": 27.05,
+   "childScore": 40,
+   "year": 2025,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "source": "https://www.citroen.in/about-citroen/news/citroen-aircross-5star-rating.html"
+  },
+  "dims": {
+   "length": 4323,
+   "width": 1796,
+   "height": 1665,
+   "wheelbase": 2671,
+   "groundClearance": 200,
+   "boot": 444,
+   "fuelTank": 45
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 82,
+    "torqueNm": 115
+   },
+   {
+    "fuel": "petrol",
+    "powerPs": 110,
+    "torqueNm": null
+   }
+  ],
+  "valueVariant": {
+   "name": "Max",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1162000,
+   "reason": "6 airbags standard; Plus has wireless AA/CarPlay but no camera; Max (NA, 5-seat) is cheapest with camera (360, mandatory dealer accessory at extra cost).",
+   "source": "https://www.citroen.in/models/aircross.html"
+  },
+  "sources": [
+   "https://www.citroen.in/models/aircross.html",
+   "https://www.citroen.in/content/dam/citroen/india/brochure-pdf/september-2026-brochure/CR1140225_AircrossX_Vertical_Brochure_020926.pdf",
+   "https://www.cardekho.com/citroen/aircross/price-in-new-delhi",
+   "https://www.citroen.in/about-citroen/news/citroen-aircross-5star-rating.html"
+  ]
+ },
+ "citroen-ec3": {
+  "safety": {
+   "agency": "GNCAP",
+   "adult": 0,
+   "child": 1,
+   "adultScore": 20.86,
+   "childScore": 10.55,
+   "year": 2024,
+   "airbagsStd": 2,
+   "airbagsMax": 6,
+   "esc": false,
+   "adas": "none",
+   "source": "https://www.globalncap.org/news/stellantis-zeroes-out-on-safety-with-citron-c3"
+  },
+  "dims": {
+   "length": 3981,
+   "width": 1733,
+   "height": 1586,
+   "wheelbase": 2540,
+   "boot": 315
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 57,
+    "torqueNm": 143
+   }
+  ],
+  "valueVariant": {
+   "name": "Shine",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 1336000,
+   "reason": "Only variant with 6 airbags; also has 26 cm touchscreen with wireless AA/CarPlay and rear camera.",
+   "source": "https://www.citroen.in/content/dam/citroen/india/brochure-pdf/september-2026-brochure/EC3X_BROCHURE_Vertical_190826.pdf"
+  },
+  "sources": [
+   "https://www.citroen.in/models/new-e-c3.html",
+   "https://www.citroen.in/content/dam/citroen/india/brochure-pdf/september-2026-brochure/EC3X_BROCHURE_Vertical_190826.pdf",
+   "https://www.cardekho.com/citroen/ec3/price-in-new-delhi",
+   "https://www.cardekho.com/citroen/ec3/specs",
+   "https://www.globalncap.org/news/stellantis-zeroes-out-on-safety-with-citron-c3",
+   "https://autocarpro.in/news/citroen-ec3-scores-0-stars-in-global-ncap-crash-test-119728"
+  ]
+ },
+ "citroen-c5-aircross": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "older": false,
+   "source": "https://www.citroen.in/content/dam/citroen/india/brochure-pdf/c5.pdf"
+  },
+  "dims": {
+   "length": 4500,
+   "width": 1969,
+   "height": 1710,
+   "wheelbase": 2730,
+   "boot": 580,
+   "fuelTank": 52.5
+  },
+  "powertrains": [
+   {
+    "fuel": "diesel",
+    "powerPs": 177,
+    "torqueNm": 400
+   }
+  ],
+  "valueVariant": {
+   "name": "Shine",
+   "fuel": "diesel",
+   "transmission": "AT",
+   "price": 3732000,
+   "reason": "Single variant; 6 airbags, AA/CarPlay touchscreen, reversing camera standard.",
+   "source": "https://www.citroen.in/content/dam/citroen/india/brochure-pdf/c5.pdf"
+  },
+  "sources": [
+   "https://www.citroen.in/models/c5-aircross.html",
+   "https://www.citroen.in/content/dam/citroen/india/brochure-pdf/c5.pdf",
+   "https://www.cardekho.com/citroen/c5-aircross/price-in-new-delhi"
+  ]
+ },
+ "skoda-kylaq": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 30.88,
+   "childScore": 45,
+   "year": 2025,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "source": "https://www.autocarindia.com/car-news-amp/skoda-kylaq-scores-5-star-bharat-ncap-rating-434183"
+  },
+  "dims": {
+   "length": 3995,
+   "width": 1783,
+   "height": 1619,
+   "wheelbase": 2566,
+   "groundClearance": 189,
+   "boot": 446,
+   "fuelTank": 45
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 115,
+    "torqueNm": 178
+   }
+  ],
+  "valueVariant": {
+   "name": "Signature Plus",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1079000,
+   "reason": "Cheapest trim with 10-inch touchscreen (wireless AA/CP) plus rear parking camera; 6 airbags standard. Signature has a 7-inch wired AA/CP screen but no camera.",
+   "source": "https://www.autocarindia.com/auto-features-amp/skoda-kylaq-variants-price-and-features-and-colours-explained-interior-exterior-433459"
+  },
+  "sources": [
+   "https://www.skoda-auto.co.in/models/kylaq/kylaq",
+   "https://www.autocarindia.com/car-news-amp/skoda-kylaq-scores-5-star-bharat-ncap-rating-434183",
+   "https://www.cardekho.com/skoda/kylaq/specs",
+   "https://www.cardekho.com/skoda/kylaq/price-in-new-delhi",
+   "https://www.cardekho.com/skoda/kylaq/variants.htm",
+   "https://www.autocarindia.com/auto-features-amp/skoda-kylaq-variants-price-and-features-and-colours-explained-interior-exterior-433459",
+   "https://www.91wheels.com/cars/skoda/kylaq/mileage"
+  ]
+ },
+ "skoda-slavia": {
+  "safety": {
+   "agency": "GNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 29.71,
+   "childScore": 42,
+   "year": 2023,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "source": "https://www.globalncap.org/results"
+  },
+  "dims": {
+   "length": 4552,
+   "width": 1752,
+   "height": 1507,
+   "wheelbase": 2651,
+   "groundClearance": 179,
+   "boot": 521,
+   "fuelTank": 45
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 115,
+    "torqueNm": 178
+   },
+   {
+    "fuel": "petrol",
+    "powerPs": 150,
+    "torqueNm": 250
+   }
+  ],
+  "valueVariant": {
+   "name": "Signature",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1394000,
+   "reason": "Classic/Classic+ have a 7-inch wired AA/CP screen but only rear parking sensors; Signature is the first trim with a rear camera (and 10.1-inch wireless AA/CP screen). 6 airbags standard.",
+   "source": "https://www.timesdrive.in/news/skoda-slavia-facelift-variants-explained-which-trim-gets-what-article-156283393"
+  },
+  "sources": [
+   "https://www.skoda-auto.co.in/models/slavia/slavia",
+   "https://www.globalncap.org/results",
+   "https://www.autocarpro.in/news/skoda-slavia-and-vw-virtus-receive-top-safety-rating-in-2023-gncap-crash-tests-114595",
+   "https://www.carwale.com/skoda-cars/slavia-facelift/",
+   "https://www.cardekho.com/skoda/slavia/price-in-new-delhi",
+   "https://www.timesdrive.in/news/skoda-slavia-facelift-variants-explained-which-trim-gets-what-article-156283393",
+   "https://carhp.in/car-news/2026-skoda-slavia-facelift-every-variant-explained",
+   "https://www.zigwheels.com/skoda-cars/slavia/classic-plus"
+  ]
+ },
+ "skoda-kushaq": {
+  "safety": {
+   "agency": "GNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 29.64,
+   "childScore": 42,
+   "year": 2022,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "source": "https://www.globalncap.org/results"
+  },
+  "dims": {
+   "length": 4229,
+   "width": 1760,
+   "height": 1612,
+   "wheelbase": 2651,
+   "groundClearance": 188,
+   "boot": 385,
+   "fuelTank": 50
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 115,
+    "torqueNm": 178
+   },
+   {
+    "fuel": "petrol",
+    "powerPs": 150,
+    "torqueNm": 250
+   }
+  ],
+  "valueVariant": {
+   "name": "Signature",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1469000,
+   "reason": "Classic+ has rear parking sensors only; Signature adds a rear camera with a 10.1-inch wireless AA/CP touchscreen. 6 airbags standard.",
+   "source": "https://www.autocarindia.com/auto-features-amp/which-variant-of-the-new-skoda-kushaq-should-you-buy-440354"
+  },
+  "sources": [
+   "https://www.skoda-auto.co.in/models/kushaq/kushaq",
+   "https://www.globalncap.org/results",
+   "https://www.autocarindia.com/car-news/skoda-kushaq-vw-taigun-score-5-stars-under-new-gncap-testing-protocol-426057",
+   "https://www.cardekho.com/skoda/kushaq/specs",
+   "https://www.cardekho.com/skoda/kushaq/price-in-new-delhi",
+   "https://www.autocarindia.com/auto-features-amp/which-variant-of-the-new-skoda-kushaq-should-you-buy-440354",
+   "https://www.carlelo.com/news/2026-skoda-kushaq-facelift-mileage-price-reveal"
+  ]
+ },
+ "skoda-kodiaq": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 9,
+   "airbagsMax": 9,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 4758,
+   "width": 1864,
+   "height": 1679,
+   "wheelbase": 2791,
+   "boot": 281,
+   "fuelTank": 62
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 204,
+    "torqueNm": 320
+   }
+  ],
+  "valueVariant": {
+   "name": "Lounge 5S",
+   "fuel": "petrol",
+   "transmission": "DCT",
+   "price": 3699000,
+   "reason": "Base trim already has 9 airbags, 10.4-inch touchscreen with AA/CP and a rear parking camera (no ADAS / 360 camera).",
+   "source": "https://www.autocarpro.in/news/skoda-kodiaq-lounge-launched-at-rs-3999-lakh-128840"
+  },
+  "sources": [
+   "https://www.skoda-auto.co.in/models/kodiaq/kodiaq",
+   "https://www.cardekho.com/skoda/kodiaq/specs",
+   "https://www.cardekho.com/skoda/kodiaq/price-in-new-delhi",
+   "https://www.autocarindia.com/car-news/skoda-kodiaq-updated-for-2026-now-gets-adas-439688",
+   "https://www.rushlane.com/2026-skoda-kodiaq-launch-price-rs-36-99-l-gets-adas-with-sportline-lk-12546175.html?nonamp=1",
+   "https://www.autocarpro.in/news/skoda-kodiaq-lounge-launched-at-rs-3999-lakh-128840"
+  ]
+ },
+ "skoda-octavia-rs": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 10,
+   "airbagsMax": 10,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 4709,
+   "width": 1829,
+   "height": 1457,
+   "wheelbase": 2677,
+   "groundClearance": 128,
+   "boot": 600
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 265,
+    "torqueNm": 370
+   }
+  ],
+  "valueVariant": {
+   "name": "RS",
+   "fuel": "petrol",
+   "transmission": "DCT",
+   "price": 5669000,
+   "reason": "Single fully-loaded variant: 10 airbags, 13-inch touchscreen with wireless AA/CP, 360 camera.",
+   "source": "https://www.autocarindia.com/car-news-amp/skoda-octavia-rs-second-batch-launched-at-rs-5669-lakh-440658"
+  },
+  "sources": [
+   "https://www.skoda-auto.co.in/models/octavia-rs/octavia-rs",
+   "https://www.autocarindia.com/car-news-amp/skoda-octavia-rs-second-batch-launched-at-rs-5669-lakh-440658",
+   "https://www.cardekho.com/skoda/octavia-rs",
+   "https://carhp.in/car-news/skoda-octavia-rs-second-batch-bookings-open-with-only-50-units-on-offer",
+   "https://www.cardekho.com/india-car-news/2025-skoda-octavia-rs-launched-priced-at-rs-4999-lakh-35191.htm",
+   "https://www.autocarindia.com/car-reviews-amp/2025-skoda-octavia-rs-review-all-the-car-youll-ever-need-434697"
+  ]
+ },
+ "byd-atto-3": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 7,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://www.autocarindia.com/auto-features-amp/every-car-suv-tested-by-bharat-ncap-so-far-431936"
+  },
+  "dims": {
+   "length": 4455,
+   "width": 1875,
+   "height": 1615,
+   "wheelbase": 2720,
+   "groundClearance": 175,
+   "boot": 440
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 204,
+    "torqueNm": 310
+   },
+   {
+    "fuel": "ev",
+    "powerPs": 204,
+    "torqueNm": 310
+   }
+  ],
+  "valueVariant": {
+   "name": "Dynamic",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 2499000,
+   "reason": "Base variant already has 6 airbags, 12.8in touchscreen with Apple CarPlay/Android Auto, and 360-degree camera.",
+   "source": "https://www.bydautoindia.com/bydatto3"
+  },
+  "sources": [
+   "https://www.bydautoindia.com/bydatto3",
+   "https://api.bydautoindia.com/page/bydatto3",
+   "https://www.autocarindia.com/auto-features-amp/every-car-suv-tested-by-bharat-ncap-so-far-431936"
+  ]
+ },
+ "byd-emax-7": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://www.autocarindia.com/auto-features-amp/every-car-suv-tested-by-bharat-ncap-so-far-431936"
+  },
+  "dims": {
+   "length": 4710,
+   "width": 1810,
+   "height": 1690,
+   "wheelbase": 2800,
+   "groundClearance": 170,
+   "boot": 180
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 163,
+    "torqueNm": 310
+   },
+   {
+    "fuel": "ev",
+    "powerPs": 204,
+    "torqueNm": 310
+   }
+  ],
+  "valueVariant": {
+   "name": "Comfort 6S",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 2790000,
+   "reason": "Cheapest variant on the maker page; 6 airbags, 12.8in touchscreen with CarPlay/Android Auto and 360-degree camera are standard.",
+   "source": "https://www.bydautoindia.com/bydemax7"
+  },
+  "sources": [
+   "https://www.bydautoindia.com/bydemax7",
+   "https://api.bydautoindia.com/page/bydemax7",
+   "https://www.cardekho.com/byd/emax-7/variants.htm",
+   "https://www.autocarindia.com/auto-features-amp/every-car-suv-tested-by-bharat-ncap-so-far-431936"
+  ]
+ },
+ "byd-seal": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 9,
+   "airbagsMax": 9,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://www.autocarindia.com/auto-features-amp/every-car-suv-tested-by-bharat-ncap-so-far-431936"
+  },
+  "dims": {
+   "length": 4800,
+   "width": 1875,
+   "height": 1460,
+   "wheelbase": 2920,
+   "groundClearance": 149,
+   "boot": 400
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 204,
+    "torqueNm": 310
+   },
+   {
+    "fuel": "ev",
+    "powerPs": 313,
+    "torqueNm": 360
+   },
+   {
+    "fuel": "ev",
+    "powerPs": 530,
+    "torqueNm": 670
+   }
+  ],
+  "valueVariant": {
+   "name": "Dynamic Range",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 4150000,
+   "reason": "Base variant has 9 airbags, 15.6in touchscreen with wireless CarPlay/Android Auto, 360-degree camera and full ADAS.",
+   "source": "https://www.bydautoindia.com/bydseal"
+  },
+  "sources": [
+   "https://www.bydautoindia.com/bydseal",
+   "https://api.bydautoindia.com/page/bydseal",
+   "https://www.autocarindia.com/auto-features-amp/every-car-suv-tested-by-bharat-ncap-so-far-431936"
+  ]
+ },
+ "byd-sealion-7": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 11,
+   "airbagsMax": 11,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://www.autocarindia.com/auto-features-amp/every-car-suv-tested-by-bharat-ncap-so-far-431936"
+  },
+  "dims": {
+   "length": 4830,
+   "width": 1925,
+   "height": 1620,
+   "wheelbase": 2930,
+   "boot": 500
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 231,
+    "torqueNm": 380
+   },
+   {
+    "fuel": "ev",
+    "powerPs": 313,
+    "torqueNm": 380
+   },
+   {
+    "fuel": "ev",
+    "powerPs": 530,
+    "torqueNm": 690
+   }
+  ],
+  "valueVariant": {
+   "name": "Dynamic",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 4190000,
+   "reason": "Base variant has all airbags, 15.6in touchscreen with wireless CarPlay/Android Auto and 360-degree camera.",
+   "source": "https://www.bydautoindia.com/bydsealion7"
+  },
+  "sources": [
+   "https://www.bydautoindia.com/bydsealion7",
+   "https://api.bydautoindia.com/page/bydsealion7",
+   "https://www.autocarindia.com/auto-features-amp/every-car-suv-tested-by-bharat-ncap-so-far-431936",
+   "https://www.carwale.com/news/byd-sealion-7-scores-5-star-safety-rating-in-toughest-crash-tests/"
+  ]
+ },
+ "renault-kwid": {
+  "safety": {
+   "agency": "GNCAP",
+   "adult": 1,
+   "child": 2,
+   "adultScore": null,
+   "childScore": null,
+   "year": 2016,
+   "airbagsStd": 2,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "source": "https://www.globalncap.org/results",
+   "oldProtocol": true
+  },
+  "dims": {
+   "length": 3731,
+   "width": 1579,
+   "height": 1474,
+   "wheelbase": 2500,
+   "groundClearance": 184,
+   "boot": 279,
+   "fuelTank": 28
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 69,
+    "torqueNm": 92.5
+   }
+  ],
+  "valueVariant": {
+   "name": "Climber",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 514900,
+   "reason": "Only trim with 6 airbags and rear camera; 8in touchscreen with CarPlay/Android Auto is standard.",
+   "source": "https://cdn.group.renault.com/ren/in/kwid-my26/docs/Kwid_Brochure_Revised_03072026.pdf.asset.pdf/2fccc87f5b.pdf"
+  },
+  "sources": [
+   "https://cdn.group.renault.com/ren/in/kwid-my26/docs/Kwid_Brochure_Revised_03072026.pdf.asset.pdf/2fccc87f5b.pdf",
+   "https://in.co.rplug.renault.com/pricelist/BAE0",
+   "https://in.co.rplug.renault.com/pres/BAE0",
+   "https://www.globalncap.org/results",
+   "https://www.autocarindia.com/car-news-amp/crash-tests-403029",
+   "https://www.cardekho.com/renault/kwid/mileage"
+  ]
+ },
+ "renault-triber": {
+  "safety": {
+   "agency": "GNCAP",
+   "adult": 4,
+   "child": 3,
+   "adultScore": 11.62,
+   "childScore": 27,
+   "year": 2021,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "source": "https://www.globalncap.org/news/four-star-adult-crash-test-performance-for-renault-triber",
+   "oldProtocol": true
+  },
+  "dims": {
+   "length": 3985,
+   "width": 1734,
+   "height": 1643,
+   "wheelbase": 2636,
+   "groundClearance": 182,
+   "boot": 84,
+   "fuelTank": 40
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 72,
+    "torqueNm": 96
+   },
+   {
+    "fuel": "petrol",
+    "powerPs": 100,
+    "torqueNm": 180
+   }
+  ],
+  "valueVariant": {
+   "name": "Evolution",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 673605,
+   "reason": "6 airbags standard; Evolution adds 8in touchscreen with CarPlay/Android Auto and rear-view camera.",
+   "source": "https://cdn.group.renault.com/ren/in/triber2026/triber-turbo/triber-turbo-product-brochure.pdf.asset.pdf/c06d54e6d0.pdf"
+  },
+  "sources": [
+   "https://cdn.group.renault.com/ren/in/triber2026/triber-turbo/triber-turbo-product-brochure.pdf.asset.pdf/c06d54e6d0.pdf",
+   "https://in.co.rplug.renault.com/pricelist/BAE6",
+   "https://in.co.rplug.renault.com/pres/BAE6",
+   "https://www.globalncap.org/results",
+   "https://www.globalncap.org/news/four-star-adult-crash-test-performance-for-renault-triber",
+   "https://www.globalncap.org/news/one-and-two-star-disappointment-in-latest-african-crash-tests",
+   "https://www.autocarindia.com/car-news-amp/africa-spec-maruti-ertiga-renault-triber-score-poorly-in-gncap-crash-tests-432408",
+   "https://www.cardekho.com/renault/triber/mileage"
+  ]
+ },
+ "renault-kiger": {
+  "safety": {
+   "agency": "GNCAP",
+   "adult": 4,
+   "child": 2,
+   "adultScore": 12.34,
+   "childScore": 21.05,
+   "year": 2022,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "source": "https://www.globalncap.org/results",
+   "oldProtocol": true
+  },
+  "dims": {
+   "length": 3990,
+   "width": 1750,
+   "height": 1605,
+   "wheelbase": 2500,
+   "groundClearance": 205,
+   "boot": 405,
+   "fuelTank": 40
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 72,
+    "torqueNm": 96
+   },
+   {
+    "fuel": "petrol",
+    "powerPs": 100,
+    "torqueNm": 160
+   }
+  ],
+  "valueVariant": {
+   "name": "Evolution",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 659000,
+   "reason": "6 airbags standard; Evolution adds 8in touchscreen with CarPlay/Android Auto and rear-view camera.",
+   "source": "https://cdn.group.renault.com/ren/in/kiger-my26/kiger-my26-product-brochure.pdf.asset.pdf/6d8341dec0.pdf"
+  },
+  "sources": [
+   "https://cdn.group.renault.com/ren/in/kiger-my26/kiger-my26-product-brochure.pdf.asset.pdf/6d8341dec0.pdf",
+   "https://in.co.rplug.renault.com/pricelist/BAE5",
+   "https://in.co.rplug.renault.com/pres/BAE5",
+   "https://www.globalncap.org/results",
+   "https://www.cardekho.com/india-car-news/renault-kigers-near-perfect-score-in-global-ncap-crash-tests-28614.htm",
+   "https://www.cardekho.com/renault/kiger/mileage"
+  ]
+ },
+ "renault-duster": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 30.49,
+   "childScore": 45,
+   "year": 2026,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.autocarindia.com/car-news-amp/renault-duster-scores-5-star-safety-rating-in-bncap-crash-tests-439512"
+  },
+  "dims": {
+   "length": 4346,
+   "width": 1815,
+   "height": 1701,
+   "wheelbase": 2657,
+   "groundClearance": 212,
+   "boot": 518
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 100,
+    "torqueNm": 166
+   },
+   {
+    "fuel": "petrol",
+    "powerPs": 163,
+    "torqueNm": 280
+   },
+   {
+    "fuel": "strong-hybrid",
+    "powerPs": 160,
+    "torqueNm": null
+   }
+  ],
+  "valueVariant": {
+   "name": "Evolution 1.0 Turbo",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1169000,
+   "reason": "6 airbags standard; Evolution adds 10.1in openR link touchscreen with smartphone replication and rear-view camera.",
+   "source": "https://cdn.group.renault.com/ren/in/duster-adventure/brochures/duster-product-brochure-adv.pdf.asset.pdf/10f1f3b6bf.pdf"
+  },
+  "sources": [
+   "https://www.autocarindia.com/car-news-amp/renault-duster-scores-5-star-safety-rating-in-bncap-crash-tests-439512",
+   "https://www.autocarindia.com/auto-features-amp/every-car-suv-tested-by-bharat-ncap-so-far-431936",
+   "https://cdn.group.renault.com/ren/in/duster-adventure/brochures/duster-product-brochure-adv.pdf.asset.pdf/10f1f3b6bf.pdf",
+   "https://www.renault.co.in/cars/duster-strong-hybrid-e-tech.html",
+   "https://in.co.rplug.renault.com/pricelist/BAE9",
+   "https://in.co.rplug.renault.com/pres/BAE9",
+   "https://www.cardekho.com/renault/duster/variants.htm"
+  ]
+ },
+ "tesla-model-y": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 9,
+   "airbagsMax": 9,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://www.cardekho.com/overview/Tesla_Model_Y/Tesla_Model_Y_Premium_RWD.htm"
+  },
+  "dims": {
+   "length": 4790,
+   "width": 1982,
+   "height": 1624,
+   "wheelbase": 2890,
+   "groundClearance": 167,
+   "boot": 822
+  },
+  "sources": [
+   "https://www.cardekho.com/overview/Tesla_Model_Y/Tesla_Model_Y_Premium_RWD.htm",
+   "https://www.cardekho.com/tesla/model-y/specs",
+   "https://www.cardekho.com/tesla/model-y/price-in-new-delhi",
+   "https://www.rushlane.com/amp/tesla-model-y-entry-price-reduced-by-rs-9-lakhs-in-india-12547837.html"
+  ]
+ },
+ "tata-tiago": {
+  "safety": {
+   "agency": "GNCAP",
+   "adult": 4,
+   "child": 3,
+   "adultScore": null,
+   "childScore": null,
+   "year": 2020,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": false,
+   "adas": "none",
+   "source": "https://www.globalncap.org/news/tata-achieves-another-high-rating-result-with-four-stars-for-the-tigortiago",
+   "preFacelift": true,
+   "oldProtocol": true
+  },
+  "dims": {
+   "length": 3813,
+   "width": 1684,
+   "height": 1535,
+   "wheelbase": 2400,
+   "groundClearance": 170,
+   "boot": 242,
+   "fuelTank": 35
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 86,
+    "torqueNm": 113
+   },
+   {
+    "fuel": "cng",
+    "powerPs": 75.5,
+    "torqueNm": 96.5
+   }
+  ],
+  "valueVariant": {
+   "name": "Pure Plus",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 609990,
+   "reason": "Cheapest with 6 airbags (std) + 8-inch touchscreen with wireless AA/CarPlay + reverse camera (also first trim with ESP)",
+   "source": "https://www.carwale.com/tata-cars/tiago/"
+  },
+  "sources": [
+   "https://www.globalncap.org/news/tata-achieves-another-high-rating-result-with-four-stars-for-the-tigortiago",
+   "https://www.autocarindia.com/cars/tata/tiago-facelift",
+   "https://www.carwale.com/tata-cars/tiago/",
+   "https://www.cardekho.com/tata/tiago/specs",
+   "https://www.team-bhp.com/new-cars/tata/tiago-facelift/specifications/"
+  ]
+ },
+ "tata-aeris": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 3995,
+   "width": 1684,
+   "height": 1532,
+   "wheelbase": 2450,
+   "groundClearance": 170,
+   "boot": 419
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 86,
+    "torqueNm": 113
+   },
+   {
+    "fuel": "cng",
+    "powerPs": 75.5,
+    "torqueNm": 96.5
+   }
+  ],
+  "valueVariant": {
+   "name": "Pure Plus",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 674990,
+   "reason": "First trim with 8-inch touchscreen, wireless AA/CarPlay and reverse camera; 6 airbags std",
+   "source": "https://www.autocarindia.com/auto-features/which-tata-aeris-variant-should-you-buy-441116 ; https://www.carwale.com/tata-cars/aeris/"
+  },
+  "sources": [
+   "https://www.autocarindia.com/auto-features/which-tata-aeris-variant-should-you-buy-441116",
+   "https://www.carwale.com/tata-cars/aeris/",
+   "https://www.cardekho.com/tata/aeris/specs",
+   "https://www.autocarpro.in/news/tata-motors-unveils-aeris-compact-sedan-priced-from-rs-529-lakh-134897"
+  ]
+ },
+ "tata-punch": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 30.58,
+   "childScore": 45,
+   "year": 2026,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "source": "https://www.cardekho.com/india-car-news/new-2026-tata-punch-facelift-secures-5star-rating-from-bharat-ncap-full-crash-test-report-decode-here-35564.htm"
+  },
+  "dims": {
+   "length": 3876,
+   "width": 1742,
+   "height": 1615,
+   "wheelbase": 2445,
+   "groundClearance": 193,
+   "boot": 366,
+   "fuelTank": 37
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 88,
+    "torqueNm": 115
+   },
+   {
+    "fuel": "petrol",
+    "powerPs": 120,
+    "torqueNm": 170
+   },
+   {
+    "fuel": "cng",
+    "powerPs": 73.5,
+    "torqueNm": 103
+   }
+  ],
+  "valueVariant": {
+   "name": "Pure Plus",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 716990,
+   "reason": "First trim with 8-inch touchscreen, wireless AA/CarPlay, reverse camera; 6 airbags std",
+   "source": "https://www.carwale.com/tata-cars/punch/"
+  },
+  "sources": [
+   "https://www.cardekho.com/india-car-news/new-2026-tata-punch-facelift-secures-5star-rating-from-bharat-ncap-full-crash-test-report-decode-here-35564.htm",
+   "https://www.etvbharat.com/en/technology/tata-punch-facelift-scores-5-star-safety-rating-at-bharat-ncap-crash-test-enn26012106562",
+   "https://www.carwale.com/tata-cars/punch/",
+   "https://www.cardekho.com/tata/punch/specs",
+   "https://www.rushlane.com/new-tata-punch-variant-wise-features-revealed-6-trims-details-12537409.html"
+  ]
+ },
+ "tata-altroz": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 29.65,
+   "childScore": 44.9,
+   "year": 2025,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "source": "https://www.rushlane.com/tata-altroz-scores-5-star-safety-rating-in-bharat-ncap-crash-tests-12530479.html"
+  },
+  "dims": {
+   "length": 3990,
+   "width": 1755,
+   "height": 1523,
+   "wheelbase": 2501,
+   "groundClearance": 165,
+   "boot": 345,
+   "fuelTank": 37
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 88,
+    "torqueNm": 115
+   },
+   {
+    "fuel": "cng",
+    "powerPs": 73.5,
+    "torqueNm": 103
+   },
+   {
+    "fuel": "diesel",
+    "powerPs": 90,
+    "torqueNm": 200
+   }
+  ],
+  "valueVariant": {
+   "name": "Pure",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 714990,
+   "reason": "First trim with 7-inch touchscreen with AA/CarPlay and reverse camera; 6 airbags + ESP std",
+   "source": "https://www.carwale.com/tata-cars/altroz/"
+  },
+  "sources": [
+   "https://www.rushlane.com/tata-altroz-scores-5-star-safety-rating-in-bharat-ncap-crash-tests-12530479.html",
+   "https://www.carwale.com/tata-cars/altroz/",
+   "https://www.cardekho.com/tata/altroz/specs",
+   "https://www.rushlane.com/new-tata-altroz-mileage-revealed-compared-with-baleno-i20-glanza-12523519.html"
+  ]
+ },
+ "tata-tiago-ev": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": false,
+   "adas": "none",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 3825,
+   "width": 1684,
+   "height": 1562,
+   "wheelbase": 2400,
+   "boot": 240
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 61,
+    "torqueNm": 110
+   },
+   {
+    "fuel": "ev",
+    "powerPs": 75,
+    "torqueNm": 114
+   }
+  ],
+  "valueVariant": {
+   "name": "Pure Plus 19.2",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 864000,
+   "reason": "First trim with 8-inch touchscreen, wireless AA/CarPlay, reverse camera; 6 airbags std (launch price was 8.49 lakh)",
+   "source": "https://www.carwale.com/tata-cars/tiago-ev/ ; https://www.autocarindia.com/auto-features/which-tata-tiago-ev-variant-should-you-buy-440592"
+  },
+  "sources": [
+   "https://www.cardekho.com/india-car-news/new-tata-tiago-ev-facelift-launched-at-rs-699-lakh-heres-a-detailed-look-at-whats-new-36067.htm",
+   "https://www.autocarindia.com/auto-features/which-tata-tiago-ev-variant-should-you-buy-440592",
+   "https://www.carwale.com/tata-cars/tiago-ev/",
+   "https://www.cardekho.com/tata/tiago-ev/specs"
+  ]
+ },
+ "tata-nexon": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 29.41,
+   "childScore": 43.83,
+   "year": 2024,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L1",
+   "source": "https://www.cardekho.com/india-car-news/tata-nexon-crash-test-results-compared-bharat-ncap-vs-global-ncap-33360.htm"
+  },
+  "dims": {
+   "length": 3995,
+   "width": 1804,
+   "height": 1620,
+   "wheelbase": 2498,
+   "groundClearance": 208,
+   "boot": 382,
+   "fuelTank": 44
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 120,
+    "torqueNm": 170
+   },
+   {
+    "fuel": "cng",
+    "powerPs": 100,
+    "torqueNm": 170
+   },
+   {
+    "fuel": "diesel",
+    "powerPs": 115,
+    "torqueNm": 260
+   }
+  ],
+  "valueVariant": {
+   "name": "Pure Plus",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 906990,
+   "reason": "First trim with touchscreen + wireless AA/CarPlay + reverse camera (Smart Plus has wired AA/CP but no camera); 6 airbags + ESP std",
+   "source": "https://www.carwale.com/tata-cars/nexon/"
+  },
+  "sources": [
+   "https://www.cardekho.com/india-car-news/tata-nexon-crash-test-results-compared-bharat-ncap-vs-global-ncap-33360.htm",
+   "https://ackodrive.com/news/tata-nexon-curvv-curvv-ev-score-big-at-bharat-ncap-with-5-star-crash-test-rating/",
+   "https://www.globalncap.org/news/tata-does-it-again-five-stars-for-the-new-nexon",
+   "https://www.carwale.com/tata-cars/nexon/",
+   "https://www.cardekho.com/tata/nexon/specs",
+   "https://www.cardekho.com/tata/nexon/mileage",
+   "https://www.cardekho.com/india-car-news/2025-tata-nexon-now-updated-with-adas-new-red-dark-edition-launched-from-rs-1244-lakh-35188.htm"
+  ]
+ },
+ "tata-punch-ev": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 31.09,
+   "childScore": 45,
+   "year": 2026,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "source": "https://www.cardekho.com/india-car-news/5stars-for-tata-punch-ev-facelift-at-bharat-ncap-find-out-how-the-esuv-performed-here-36403.htm"
+  },
+  "dims": {
+   "length": 3880,
+   "width": 1742,
+   "height": 1622,
+   "wheelbase": 2445,
+   "groundClearance": 195,
+   "boot": 366
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 88,
+    "torqueNm": 154
+   },
+   {
+    "fuel": "ev",
+    "powerPs": 129,
+    "torqueNm": 154
+   }
+  ],
+  "valueVariant": {
+   "name": "Smart Plus 30",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 1039000,
+   "reason": "First trim with 8-inch touchscreen (wired AA/CarPlay) and reverse camera; 6 airbags + ESP std",
+   "source": "https://www.carwale.com/tata-cars/punch-ev/"
+  },
+  "sources": [
+   "https://www.cardekho.com/india-car-news/5stars-for-tata-punch-ev-facelift-at-bharat-ncap-find-out-how-the-esuv-performed-here-36403.htm",
+   "https://www.cardekho.com/india-car-news/tata-punch-ev-facelift-launched-priced-from-rs-969-lakh-35678.htm",
+   "https://www.carwale.com/tata-cars/punch-ev/",
+   "https://www.cardekho.com/tata/punch-ev/specs",
+   "https://www.businesstoday.in/auto/story/tata-punch-ev-facelift-gets-5-star-bharat-ncap-rating-in-crash-tests-check-safety-features-here-546174-2026-07-30"
+  ]
+ },
+ "tata-curvv": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 29.5,
+   "childScore": 43.66,
+   "year": 2024,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.bncap.in/vehicle/tata-curvv/"
+  },
+  "dims": {
+   "length": 4308,
+   "width": 1810,
+   "height": 1630,
+   "wheelbase": 2560,
+   "boot": 500,
+   "fuelTank": 44
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 120,
+    "torqueNm": 170
+   },
+   {
+    "fuel": "petrol",
+    "powerPs": 125,
+    "torqueNm": 225
+   },
+   {
+    "fuel": "diesel",
+    "powerPs": 118,
+    "torqueNm": 260
+   }
+  ],
+  "valueVariant": {
+   "name": "Pure X 1.2 Turbo Petrol",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1099000,
+   "reason": "Lowest trim with 6 airbags (std), 10.25in touchscreen with wireless AA/CP and HD reverse camera; Smart X has no touchscreen and only rear sensors",
+   "source": "https://www.autocarindia.com/car-news/tata-curvv-series-x-launched-at-rs-99-lakh-440646 ; https://www.carwale.com/tata-cars/curvv/colours/ (variant price list, fetched 2026-11-01) (lists Rs 11.00 lakh)"
+  },
+  "sources": [
+   "https://www.bncap.in/vehicle/tata-curvv/",
+   "https://www.cardekho.com/tata/curvv/specs",
+   "https://www.autocarindia.com/cars/tata/curvv/variants",
+   "https://www.carwale.com/tata-cars/curvv/colours/ (variant price list, fetched 2026-11-01)",
+   "https://www.carwale.com/tata-cars/curvv/mileage/",
+   "https://www.autocarindia.com/car-news/tata-curvv-series-x-launched-at-rs-99-lakh-440646"
+  ]
+ },
+ "tata-sierra": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 31.14,
+   "childScore": 44.73,
+   "year": 2026,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.bncap.in/vehicle/tata-sierra/"
+  },
+  "dims": {
+   "length": 4340,
+   "width": 1841,
+   "height": 1715,
+   "wheelbase": 2730,
+   "groundClearance": 205,
+   "boot": 622,
+   "fuelTank": 50
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 106,
+    "torqueNm": 145
+   },
+   {
+    "fuel": "petrol",
+    "powerPs": 160,
+    "torqueNm": 255
+   },
+   {
+    "fuel": "diesel",
+    "powerPs": 118,
+    "torqueNm": null
+   }
+  ],
+  "valueVariant": {
+   "name": "Pure 1.5 Petrol",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1314000,
+   "reason": "Smart+ lacks touchscreen and rear camera; Pure adds 10.25in touchscreen with wireless AA/CP and rear camera; 6 airbags std",
+   "source": "https://www.autocarindia.com/cars/tata/sierra/variants ; https://www.carwale.com/tata-cars/sierra/colours/ (variant price list, fetched 2026-11-01)"
+  },
+  "sources": [
+   "https://www.bncap.in/vehicle/tata-sierra/",
+   "https://www.cardekho.com/tata/tata-sierra-specifications.htm",
+   "https://www.autocarindia.com/cars/tata/sierra/variants",
+   "https://www.carwale.com/tata-cars/sierra/colours/ (variant price list, fetched 2026-11-01)",
+   "https://www.carwale.com/tata-cars/sierra/mileage/"
+  ]
+ },
+ "tata-nexon-ev": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 29.86,
+   "childScore": 44.95,
+   "year": 2024,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.businesstoday.in/technology/news/story/tata-nexonev-becomes-first-5-star-rated-ev-on-bharat-ncap-crash-test-433166-2024-06-13"
+  },
+  "dims": {
+   "length": 3995,
+   "width": 1802,
+   "height": 1625,
+   "wheelbase": 2498,
+   "groundClearance": 190,
+   "boot": 350
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 129,
+    "torqueNm": 215
+   },
+   {
+    "fuel": "ev",
+    "powerPs": 145,
+    "torqueNm": 215
+   }
+  ],
+  "valueVariant": {
+   "name": "Creative Plus MR (30 kWh)",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 1249000,
+   "reason": "Base trim already has 6 airbags, ESP, 7-inch touchscreen with wired AA/CarPlay and reverse camera",
+   "source": "https://www.carwale.com/tata-cars/nexon-ev/"
+  },
+  "sources": [
+   "https://www.businesstoday.in/technology/news/story/tata-nexonev-becomes-first-5-star-rated-ev-on-bharat-ncap-crash-test-433166-2024-06-13",
+   "https://www.autocarpro.in/news/tata-nexon-ev-to-get-adas-level-2-tech-128324",
+   "https://www.carwale.com/tata-cars/nexon-ev/",
+   "https://www.cardekho.com/tata/nexon-ev/specs",
+   "https://www.rushlane.com/tata-nexon-ev-45-kwh-scores-5-star-safety-rating-bharat-ncap-12522022.html"
+  ]
+ },
+ "tata-harrier": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 30.08,
+   "childScore": 44.54,
+   "year": 2023,
+   "airbagsStd": 6,
+   "airbagsMax": 7,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.bncap.in/vehicle/tata-safari-harrier/"
+  },
+  "dims": {
+   "length": 4605,
+   "width": 1922,
+   "height": 1718,
+   "wheelbase": 2741,
+   "boot": 445,
+   "fuelTank": 50
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 170,
+    "torqueNm": 280
+   },
+   {
+    "fuel": "diesel",
+    "powerPs": 170,
+    "torqueNm": 350
+   }
+  ],
+  "valueVariant": {
+   "name": "Pure X 1.5 Turbo-GDi Petrol",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1640000,
+   "reason": "Smart lacks touchscreen/camera; Pure X adds touchscreen with AA/CP, 360 camera and panoramic sunroof; 6 airbags std",
+   "source": "https://www.autocarindia.com/cars/tata/harrier/variants ; https://www.carwale.com/tata-cars/harrier/colours/ (variant price list, fetched 2026-11-01)"
+  },
+  "sources": [
+   "https://www.bncap.in/vehicle/tata-safari-harrier/",
+   "https://www.cars24.com/news/auto/tata-harrier-safari-petrol-bncap-crash-test-results-revealed-all-details-inside/",
+   "https://www.autocarindia.com/car-news/tata-harrier-safari-receive-5-star-bharat-ncap-rating-430139",
+   "https://www.cardekho.com/tata/harrier/specs",
+   "https://www.autocarindia.com/cars/tata/harrier/variants",
+   "https://www.carwale.com/tata-cars/harrier/colours/ (variant price list, fetched 2026-11-01)",
+   "https://www.carwale.com/tata-cars/harrier/mileage/"
+  ]
+ },
+ "tata-safari": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 30.08,
+   "childScore": 44.54,
+   "year": 2023,
+   "airbagsStd": 6,
+   "airbagsMax": 7,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.bncap.in/vehicle/tata-safari-harrier/"
+  },
+  "dims": {
+   "length": 4668,
+   "width": 1922,
+   "height": 1795,
+   "wheelbase": 2741,
+   "fuelTank": 50
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 170,
+    "torqueNm": 280
+   },
+   {
+    "fuel": "diesel",
+    "powerPs": 170,
+    "torqueNm": 350
+   }
+  ],
+  "valueVariant": {
+   "name": "Pure X 1.5 Turbo-GDi Petrol 7-seater",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1685000,
+   "reason": "Smart lacks touchscreen/camera; Pure X adds 10.25in touchscreen with wireless AA/CP, 360 camera, panoramic sunroof; 6 airbags std",
+   "source": "https://www.autocarindia.com/cars/tata/safari/variants ; https://www.carwale.com/tata-cars/safari/colours/ (variant price list, fetched 2026-11-01)"
+  },
+  "sources": [
+   "https://www.bncap.in/vehicle/tata-safari-harrier/",
+   "https://www.cars24.com/news/auto/tata-harrier-safari-petrol-bncap-crash-test-results-revealed-all-details-inside/",
+   "https://www.cardekho.com/tata/tata-safari-specifications.htm",
+   "https://www.autocarindia.com/cars/tata/safari/variants",
+   "https://www.carwale.com/tata-cars/safari/colours/ (variant price list, fetched 2026-11-01)",
+   "https://www.carwale.com/tata-cars/safari/mileage/"
+  ]
+ },
+ "tata-curvv-ev": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 30.81,
+   "childScore": 44.83,
+   "year": 2024,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.bncap.in/vehicle/tata-curvv-ev/"
+  },
+  "dims": {
+   "length": 4310,
+   "width": 1810,
+   "height": 1637,
+   "wheelbase": 2560,
+   "groundClearance": 186,
+   "boot": 500
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 167,
+    "torqueNm": 215
+   }
+  ],
+  "valueVariant": {
+   "name": "Accomplished X 55",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 1719000,
+   "reason": "Base and only lower trim; 6 airbags, 10.25in touchscreen with wireless AA/CP, 360 camera",
+   "source": "https://www.autocarindia.com/cars/tata/curvv-ev/variants ; https://www.cardekho.com/tata/curvv-ev/specs (Rs 17.19-19.69 lakh)"
+  },
+  "sources": [
+   "https://www.bncap.in/vehicle/tata-curvv-ev/",
+   "https://www.cardekho.com/tata/curvv-ev/specs",
+   "https://www.autocarindia.com/cars/tata/curvv-ev/variants",
+   "https://www.carwale.com/tata-cars/curvv-ev/colours/ (variant price list, fetched 2026-11-01)"
+  ]
+ },
+ "tata-sierra-ev": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://www.bncap.in/vehicle/tata-sierra/ (ICE Sierra applicability lists petrol/diesel only; no Sierra.ev page found on bncap.in)"
+  },
+  "dims": {
+   "length": 4340,
+   "width": 1841,
+   "height": 1750,
+   "wheelbase": 2730,
+   "groundClearance": 205,
+   "boot": 622
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 238,
+    "torqueNm": 315
+   },
+   {
+    "fuel": "ev",
+    "powerPs": 209,
+    "torqueNm": 315
+   },
+   {
+    "fuel": "ev",
+    "powerPs": null,
+    "torqueNm": 504
+   }
+  ],
+  "valueVariant": {
+   "name": "Pure 63 RWD",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 1879000,
+   "reason": "Base trim: 6 airbags, touchscreen with wireless AA/CP and rear parking camera per ZigWheels (CarDekho says AA/CP only from Pure S at Rs 19.99 lakh - conflict)",
+   "source": "https://www.zigwheels.com/news-features/general-news/2026-tata-sierra-ev-variants-explained-how-well-equipped-is-each-variant/58046/"
+  },
+  "sources": [
+   "https://www.cardekho.com/tata/tata-sierra-ev-specifications.htm",
+   "https://www.autocarindia.com/cars/tata/sierra-ev/specifications",
+   "https://www.autocarindia.com/cars/tata/sierra-ev/variants",
+   "https://www.cardekho.com/news/general/2026-tata-sierra-ev-variantwise-features-detailed-how-well-equipped-is-each-variant-and-which-one-should-you-buy-36236.htm",
+   "https://www.zigwheels.com/news-features/general-news/2026-tata-sierra-ev-variants-explained-how-well-equipped-is-each-variant/58046/",
+   "https://www.carwale.com/tata-cars/sierra-ev/colours/ (variant price list, fetched 2026-11-01)"
+  ]
+ },
+ "tata-harrier-ev": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 32,
+   "childScore": 45,
+   "year": 2025,
+   "airbagsStd": 6,
+   "airbagsMax": 7,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.bncap.in/vehicle/tata-harrier-ev/"
+  },
+  "dims": {
+   "length": 4607,
+   "width": 1922,
+   "height": 1740,
+   "wheelbase": 2741,
+   "groundClearance": 205,
+   "boot": 502
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 238,
+    "torqueNm": 315
+   },
+   {
+    "fuel": "ev",
+    "powerPs": 238,
+    "torqueNm": 315
+   },
+   {
+    "fuel": "ev",
+    "powerPs": 396,
+    "torqueNm": 504
+   }
+  ],
+  "valueVariant": {
+   "name": "Adventure S 65",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 2229000,
+   "reason": "Adventure 65 rear camera is disputed (Autocar says Adventure S adds rear camera); Adventure S 65 has 6 airbags, 12.3in touchscreen with AA/CP, rear camera",
+   "source": "https://www.autocarindia.com/cars/tata/harrier-ev/variants ; https://www.autocarindia.com/cars/tata/harrier-ev/adventure-s-65 ; https://www.carwale.com/tata-cars/harrier-ev/colours/ (variant price list, fetched 2026-11-01)"
+  },
+  "sources": [
+   "https://www.bncap.in/vehicle/tata-harrier-ev/",
+   "https://www.rushlane.com/tata-harrier-ev-bharat-ncap-crash-test-results-out-gets-5-star-rating-12525001.html",
+   "https://www.cardekho.com/tata/harrier-ev/specs",
+   "https://www.autocarindia.com/cars/tata/harrier-ev/variants",
+   "https://www.carwale.com/tata-cars/harrier-ev/colours/ (variant price list, fetched 2026-11-01)"
+  ]
+ },
+ "toyota-glanza": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://www.autocarindia.com/auto-features/every-car-tested-by-bharat-ncap-so-far-431936"
+  },
+  "dims": {
+   "length": 3990,
+   "width": 1745,
+   "height": 1530,
+   "wheelbase": 2520,
+   "fuelTank": 37
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 83,
+    "torqueNm": 112.4
+   },
+   {
+    "fuel": "cng",
+    "powerPs": 70,
+    "torqueNm": 101.8
+   }
+  ],
+  "valueVariant": {
+   "name": "G",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 873000,
+   "reason": "Cheapest with 6 airbags (std), 9-inch SmartPlay Pro+ with wireless AA/CarPlay and rear-view camera (E has no screen; S has 7-inch screen but no camera).",
+   "source": "https://www.toyotabharat.com/showroom/glanza/ ; price https://www.carwale.com/toyota-cars/glanza/"
+  },
+  "sources": [
+   "https://www.toyotabharat.com/showroom/glanza/",
+   "https://www.carwale.com/toyota-cars/glanza/",
+   "https://www.autocarindia.com/auto-features/every-car-tested-by-bharat-ncap-so-far-431936"
+  ]
+ },
+ "toyota-urban-cruiser-taisor": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "older": false,
+   "source": "https://www.autocarindia.com/auto-features/every-car-tested-by-bharat-ncap-so-far-431936"
+  },
+  "dims": {
+   "length": 3995,
+   "width": 1765,
+   "height": 1550,
+   "wheelbase": 2520,
+   "boot": 308,
+   "fuelTank": 37
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 89.7,
+    "torqueNm": 113
+   },
+   {
+    "fuel": "cng",
+    "powerPs": 77.5,
+    "torqueNm": 98.5
+   },
+   {
+    "fuel": "petrol",
+    "powerPs": 100.06,
+    "torqueNm": 147.6
+   }
+  ],
+  "valueVariant": {
+   "name": "G Turbo",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1045000,
+   "reason": "Rear view camera only from G (E/S/S+ lack it); G has 6 airbags (std) and 7-inch SmartPlay Cast with wireless AA/CarPlay.",
+   "source": "https://www.toyotabharat.com/documents/brochures/urban-cruiser-taisor/e-brochure-uc-taisor.pdf ; price https://www.carwale.com/toyota-cars/taisor/"
+  },
+  "sources": [
+   "https://www.toyotabharat.com/documents/brochures/urban-cruiser-taisor/e-brochure-uc-taisor.pdf",
+   "https://www.carwale.com/toyota-cars/taisor/",
+   "https://www.autocarindia.com/auto-features/every-car-tested-by-bharat-ncap-so-far-431936"
+  ]
+ },
+ "toyota-rumion": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "older": false,
+   "source": "https://www.autocarindia.com/auto-features/every-car-tested-by-bharat-ncap-so-far-431936"
+  },
+  "dims": {
+   "length": 4460,
+   "width": 1735,
+   "height": 1690,
+   "wheelbase": 2740,
+   "fuelTank": 45
+  },
+  "powertrains": [
+   {
+    "fuel": "mild-hybrid",
+    "powerPs": 103,
+    "torqueNm": 139
+   },
+   {
+    "fuel": "cng",
+    "powerPs": 87.8,
+    "torqueNm": 121.5
+   }
+  ],
+  "valueVariant": {
+   "name": "G",
+   "fuel": "mild-hybrid",
+   "transmission": "MT",
+   "price": 1193000,
+   "reason": "First grade with wireless AA/CarPlay touchscreen and rear parking camera; 6 airbags standard on all.",
+   "source": "https://www.toyotabharat.com/documents/brochures/e-brochure-rumion.pdf ; price https://www.carwale.com/toyota-cars/rumion/"
+  },
+  "sources": [
+   "https://www.toyotabharat.com/documents/brochures/e-brochure-rumion.pdf",
+   "https://www.toyotabharat.com/showroom/rumion/",
+   "https://www.carwale.com/toyota-cars/rumion/",
+   "https://www.autocarindia.com/auto-features/every-car-tested-by-bharat-ncap-so-far-431936"
+  ]
+ },
+ "toyota-urban-cruiser-hyryder": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "older": false,
+   "source": "https://www.autocarindia.com/auto-features/every-car-tested-by-bharat-ncap-so-far-431936"
+  },
+  "dims": {
+   "length": 4365,
+   "width": 1795,
+   "height": 1645,
+   "wheelbase": 2600,
+   "boot": 373,
+   "fuelTank": 45
+  },
+  "powertrains": [
+   {
+    "fuel": "mild-hybrid",
+    "powerPs": 103.06,
+    "torqueNm": 136.8
+   },
+   {
+    "fuel": "cng",
+    "powerPs": 87.8,
+    "torqueNm": 121.5
+   },
+   {
+    "fuel": "strong-hybrid",
+    "powerPs": 115.56,
+    "torqueNm": 122
+   }
+  ],
+  "valueVariant": {
+   "name": "S",
+   "fuel": "mild-hybrid",
+   "transmission": "MT",
+   "price": 1282000,
+   "reason": "Lowest listed maker grade: 6 airbags std, 7-inch SmartPlay Cast with AA/CarPlay and reverse parking camera.",
+   "source": "https://www.toyotabharat.com/showroom/urban-cruiser-hyryder/ ; price https://www.carwale.com/toyota-cars/hyryder/"
+  },
+  "sources": [
+   "https://www.toyotabharat.com/showroom/urban-cruiser-hyryder/",
+   "https://www.carwale.com/toyota-cars/hyryder/",
+   "https://www.autocarindia.com/auto-features/every-car-tested-by-bharat-ncap-so-far-431936",
+   "https://www.mycarhelpline.com/index.php?option=com_easyblog&view=entry&id=671&Itemid=91"
+  ]
+ },
+ "toyota-innova-hycross": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 30.47,
+   "childScore": 45,
+   "year": 2025,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.toyotabharat.com/news/2025/toyota-innova-hycross-secures-5-star-safety-rating-under-bharat-ncap.html ; https://www.autocarindia.com/auto-features/every-car-tested-by-bharat-ncap-so-far-431936"
+  },
+  "dims": {
+   "length": 4755,
+   "width": 1845,
+   "height": 1790,
+   "wheelbase": 2850,
+   "fuelTank": 52
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 171,
+    "torqueNm": 204
+   },
+   {
+    "fuel": "strong-hybrid",
+    "powerPs": 186,
+    "torqueNm": 191
+   }
+  ],
+  "valueVariant": {
+   "name": "GX 7-seater",
+   "fuel": "petrol",
+   "transmission": "CVT",
+   "price": 1953000,
+   "reason": "Base GX already has 6 airbags, 8-inch display audio with AA/CarPlay and reverse parking camera.",
+   "source": "https://www.toyotabharat.com/documents/brochures/e-brochure-hycross.pdf ; price https://www.carwale.com/toyota-cars/innova-hycross/"
+  },
+  "sources": [
+   "https://www.toyotabharat.com/documents/brochures/e-brochure-hycross.pdf",
+   "https://www.toyotabharat.com/showroom/innova-hycross/",
+   "https://www.toyotabharat.com/news/2025/toyota-innova-hycross-secures-5-star-safety-rating-under-bharat-ncap.html",
+   "https://www.autocarindia.com/auto-features/every-car-tested-by-bharat-ncap-so-far-431936",
+   "https://www.bncap.in/vehicle/toyota-innova-hycross/",
+   "https://www.carwale.com/toyota-cars/innova-hycross/"
+  ]
+ },
+ "toyota-innova-crysta": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 3,
+   "airbagsMax": 7,
+   "esc": true,
+   "adas": "none",
+   "older": false,
+   "source": "https://www.autocarindia.com/auto-features/every-car-tested-by-bharat-ncap-so-far-431936"
+  },
+  "dims": {
+   "length": 4735,
+   "width": 1830,
+   "height": 1795,
+   "wheelbase": 2750,
+   "groundClearance": 178,
+   "boot": 300,
+   "fuelTank": 55
+  },
+  "powertrains": [
+   {
+    "fuel": "diesel",
+    "powerPs": 150,
+    "torqueNm": 343
+   }
+  ],
+  "valueVariant": {
+   "name": "VX 7-seater",
+   "fuel": "diesel",
+   "transmission": "MT",
+   "price": 2493000,
+   "reason": "Only VX/ZX get more than 3 airbags (7); VX also has AA/CarPlay touchscreen and back monitor.",
+   "source": "https://www.toyotabharat.com/showroom/innova-crysta/ ; price https://www.carwale.com/toyota-cars/innova-crysta/ (SahiCar 25.24L)"
+  },
+  "sources": [
+   "https://www.toyotabharat.com/showroom/innova-crysta/",
+   "https://www.carwale.com/toyota-cars/innova-crysta/",
+   "https://www.autocarindia.com/cars/toyota/innova-crysta/specifications",
+   "https://www.autocarindia.com/auto-features/every-car-tested-by-bharat-ncap-so-far-431936"
+  ]
+ },
+ "toyota-urban-cruiser-ebella": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 7,
+   "airbagsMax": 7,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://www.autocarindia.com/auto-features/every-car-tested-by-bharat-ncap-so-far-431936"
+  },
+  "dims": {
+   "length": 4285,
+   "width": 1800,
+   "height": 1640,
+   "wheelbase": 2700
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 174,
+    "torqueNm": 193
+   }
+  ],
+  "valueVariant": {
+   "name": "E3 (61 kWh)",
+   "fuel": "ev",
+   "transmission": "single-speed",
+   "price": 2360000,
+   "reason": "Only grade on sale; 7 airbags, 10.1-inch screen with wireless AA/CarPlay, back camera + 360 camera.",
+   "source": "https://www.toyotabharat.com/showroom/urban-cruiser-ebella/ ; price https://www.carwale.com/toyota-cars/urban-cruiser-ebella/"
+  },
+  "sources": [
+   "https://www.toyotabharat.com/showroom/urban-cruiser-ebella/",
+   "https://www.carwale.com/toyota-cars/urban-cruiser-ebella/",
+   "https://www.autocarindia.com/auto-features/every-car-tested-by-bharat-ncap-so-far-431936"
+  ]
+ },
+ "toyota-hilux": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 7,
+   "airbagsMax": 7,
+   "esc": true,
+   "adas": "none",
+   "older": false,
+   "source": "https://www.toyotabharat.com/showroom/hilux/"
+  },
+  "dims": {
+   "length": 5320,
+   "width": 1855,
+   "height": 1815,
+   "wheelbase": 3085,
+   "fuelTank": 80
+  },
+  "powertrains": [
+   {
+    "fuel": "diesel",
+    "powerPs": 204,
+    "torqueNm": 500
+   }
+  ],
+  "valueVariant": {
+   "name": "GX 4x2 AT",
+   "fuel": "diesel",
+   "transmission": "AT",
+   "price": 3199000,
+   "reason": "Cheapest grade; 7 airbags std, 8-inch touchscreen with wired Android Auto/Apple CarPlay, back camera (VX swaps it for PVM)",
+   "source": "https://www.toyotabharat.com/showroom/hilux/ ; price https://www.carwale.com/toyota-cars/hilux/ (Mumbai ex-showroom)"
+  },
+  "sources": [
+   "https://www.toyotabharat.com/showroom/hilux/",
+   "https://www.carwale.com/toyota-cars/hilux/"
+  ]
+ },
+ "toyota-fortuner": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 7,
+   "airbagsMax": 7,
+   "esc": true,
+   "adas": "none",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 4795,
+   "width": 1855,
+   "height": 1835,
+   "wheelbase": 2745,
+   "boot": 296,
+   "fuelTank": 80
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 166,
+    "torqueNm": 245
+   },
+   {
+    "fuel": "diesel",
+    "powerPs": 204,
+    "torqueNm": 500
+   },
+   {
+    "fuel": "mild-hybrid",
+    "powerPs": 204,
+    "torqueNm": 500
+   }
+  ],
+  "valueVariant": {
+   "name": "4x2 Diesel MT",
+   "fuel": "diesel",
+   "transmission": "MT",
+   "price": 3540000,
+   "reason": "Diesel is the volume fuel; cheapest diesel with 7 airbags, 8-inch touchscreen with Android Auto/Apple CarPlay and reverse camera (petrol 4x2 AT at Rs 34.76 L has the same kit)",
+   "source": "https://www.carwale.com/toyota-cars/fortuner/ (Mumbai ex-showroom)"
+  },
+  "sources": [
+   "https://www.carwale.com/toyota-cars/fortuner/",
+   "https://www.carwale.com/toyota-cars/fortuner/4x2-at-27-petrol/",
+   "https://www.cardekho.com/toyota/fortuner/specs"
+  ]
+ },
+ "toyota-fortuner-legender": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 7,
+   "airbagsMax": 7,
+   "esc": true,
+   "adas": "none",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 4795,
+   "width": 1855,
+   "height": 1835,
+   "wheelbase": 2745,
+   "boot": 296,
+   "fuelTank": 80
+  },
+  "powertrains": [
+   {
+    "fuel": "diesel",
+    "powerPs": 204,
+    "torqueNm": 500
+   },
+   {
+    "fuel": "mild-hybrid",
+    "powerPs": 204,
+    "torqueNm": 500
+   }
+  ],
+  "valueVariant": {
+   "name": "4x2 AT",
+   "fuel": "diesel",
+   "transmission": "AT",
+   "price": 4292000,
+   "reason": "Cheapest Legender; 7 airbags, 8-inch touchscreen with Android Auto/Apple CarPlay; rear camera assumed from Fortuner base kit (not explicitly confirmed)",
+   "source": "https://www.carwale.com/toyota-cars/fortuner-legender/ (Mumbai ex-showroom)"
+  },
+  "sources": [
+   "https://www.carwale.com/toyota-cars/fortuner-legender/"
+  ]
+ },
+ "toyota-camry": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 9,
+   "airbagsMax": 9,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://www.toyotabharat.com/documents/brochures/e-brochure-camry-hybrid.pdf"
+  },
+  "dims": {
+   "length": 4920,
+   "width": 1840,
+   "height": 1455,
+   "wheelbase": 2825,
+   "fuelTank": 50
+  },
+  "powertrains": [
+   {
+    "fuel": "strong-hybrid",
+    "powerPs": 230,
+    "torqueNm": 221
+   }
+  ],
+  "valueVariant": {
+   "name": "Elegance",
+   "fuel": "strong-hybrid",
+   "transmission": "e-CVT",
+   "price": 4869000,
+   "reason": "Single equipment grade: 9 airbags, wireless AA/CarPlay, 360 panoramic monitor + back guide monitor",
+   "source": "https://www.toyotabharat.com/documents/brochures/e-brochure-camry-hybrid.pdf ; price https://www.carwale.com/toyota-cars/camry/"
+  },
+  "sources": [
+   "https://www.toyotabharat.com/showroom/camry/specifications.html",
+   "https://www.toyotabharat.com/documents/brochures/e-brochure-camry-hybrid.pdf",
+   "https://www.carwale.com/toyota-cars/camry/"
+  ]
+ },
+ "toyota-vellfire": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://www.toyotabharat.com/documents/brochures/e-brochure-vellfire.pdf"
+  },
+  "dims": {
+   "length": 5005,
+   "width": 1850,
+   "height": 1950,
+   "wheelbase": 3000,
+   "fuelTank": 60
+  },
+  "powertrains": [
+   {
+    "fuel": "strong-hybrid",
+    "powerPs": 193,
+    "torqueNm": 240
+   }
+  ],
+  "valueVariant": {
+   "name": "Hi",
+   "fuel": "strong-hybrid",
+   "transmission": "e-CVT",
+   "price": 11999000,
+   "reason": "Base grade has 6 airbags, 14-inch touchscreen with Apple CarPlay/Android Auto, panoramic view monitor",
+   "source": "https://www.toyotabharat.com/documents/brochures/e-brochure-vellfire.pdf ; price https://www.carwale.com/toyota-cars/vellfire/ (Rs 1.20 Cr Mumbai)"
+  },
+  "sources": [
+   "https://www.toyotabharat.com/documents/brochures/e-brochure-vellfire.pdf",
+   "https://www.toyotabharat.com/showroom/vellfire/",
+   "https://www.carwale.com/toyota-cars/vellfire/"
+  ]
+ },
+ "toyota-land-cruiser-300": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 10,
+   "airbagsMax": 10,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://www.toyotabharat.com/showroom/land-cruiser-300/"
+  },
+  "dims": {
+   "length": 4985,
+   "width": 1980,
+   "height": 1955,
+   "wheelbase": 2850,
+   "groundClearance": 230,
+   "fuelTank": 80
+  },
+  "powertrains": [
+   {
+    "fuel": "diesel",
+    "powerPs": 309,
+    "torqueNm": 700
+   }
+  ],
+  "valueVariant": {
+   "name": "ZX",
+   "fuel": "diesel",
+   "transmission": "AT",
+   "price": 21775000,
+   "reason": "Base ZX already has 10 airbags, AA/CarPlay infotainment and 360 PVM",
+   "source": "https://www.toyotabharat.com/showroom/land-cruiser-300/ ; price https://www.carwale.com/toyota-cars/land-cruiser/ (Rs 2.18 Cr Mumbai)"
+  },
+  "sources": [
+   "https://www.toyotabharat.com/showroom/land-cruiser-300/",
+   "https://www.carwale.com/toyota-cars/land-cruiser/"
+  ]
+ },
+ "honda-amaze-2nd-gen": {
+  "safety": {
+   "agency": "GNCAP",
+   "adult": 2,
+   "child": 0,
+   "adultScore": 27.85,
+   "childScore": 8.58,
+   "year": 2024,
+   "airbagsStd": 2,
+   "airbagsMax": 2,
+   "esc": false,
+   "adas": "none",
+   "source": "https://www.globalncap.org/news/mixed-results-in-global-ncaps-latest-crash-test-ratings"
+  },
+  "dims": {
+   "length": 3995,
+   "width": 1695,
+   "height": 1501,
+   "wheelbase": 2470,
+   "boot": 420,
+   "fuelTank": 35
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 90,
+    "torqueNm": 110
+   }
+  ],
+  "sources": [
+   "https://www.globalncap.org/news/mixed-results-in-global-ncaps-latest-crash-test-ratings",
+   "https://www.autocarindia.com/auto-features-amp/every-indian-car-suv-tested-by-global-ncap-under-new-protocols-431384",
+   "https://www.hondacarindia.com/web-data/brochures/pdfs/04022025_Amaze%20Spec_Leaflet%20Rev%20copy.pdf",
+   "https://www.carwale.com/honda-cars/amaze-2nd-gen/",
+   "https://www.hondacarindia.com/honda-amaze-2g"
+  ]
+ },
+ "honda-amaze": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 4,
+   "adultScore": 28.33,
+   "childScore": 40.81,
+   "year": 2025,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.carwale.com/news/honda-amaze-scores-5-star-bncap-rating/"
+  },
+  "dims": {
+   "length": 3995,
+   "width": 1733,
+   "height": 1500,
+   "wheelbase": 2470,
+   "boot": 416,
+   "fuelTank": 35
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 90,
+    "torqueNm": 110
+   }
+  ],
+  "valueVariant": {
+   "name": "VX",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 874000,
+   "reason": "V lacks a rear camera; VX is the lowest grade with 6 airbags (std), 8in touchscreen with wired+wireless AA/CarPlay and multi-angle rear camera (+LaneWatch).",
+   "source": "https://www.hondacarindia.com/web-data/brochures/pdfs/29042026_Amaze_Brochure_1may26.pdf ; price: https://www.carwale.com/honda-cars/amaze/ (Rs 8.74 lakh, as of Nov 2026)"
+  },
+  "sources": [
+   "https://www.carwale.com/news/honda-amaze-scores-5-star-bncap-rating/",
+   "https://www.rushlane.com/honda-amaze-3rd-gen-scores-5-star-safety-in-bharat-ncap-crash-tests-12535303.html",
+   "https://www.hondacarindia.com/web-data/brochures/pdfs/29042026_Amaze_Brochure_1may26.pdf",
+   "https://www.carwale.com/honda-cars/amaze/"
+  ]
+ },
+ "honda-elevate": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 4312,
+   "width": 1790,
+   "height": 1650,
+   "wheelbase": 2650,
+   "groundClearance": 220,
+   "boot": 458,
+   "fuelTank": 40
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 121,
+    "torqueNm": 145
+   }
+  ],
+  "valueVariant": {
+   "name": "V",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1229000,
+   "reason": "SV has no touchscreen or rear camera; V adds 8in touchscreen with wired+wireless AA/CarPlay and multi-angle rear camera; 6 airbags std.",
+   "source": "https://www.hondacarindia.com/web-data/brochures/pdfs/All%20New%20Elevate%20Brochure_Latest.pdf ; price: https://www.autocarindia.com/auto-features-amp/which-variant-of-the-2026-honda-elevate-facelift-should-you-buy-441146"
+  },
+  "sources": [
+   "https://www.hondacarindia.com/web-data/brochures/pdfs/All%20New%20Elevate%20Brochure_Latest.pdf",
+   "https://www.autocarindia.com/auto-features-amp/which-variant-of-the-2026-honda-elevate-facelift-should-you-buy-441146",
+   "https://www.rushlane.com/honda-elevate-scores-5-star-safety-rating-in-japan-ncap-crash-tests-12521623.html"
+  ]
+ },
+ "honda-city": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 4594,
+   "width": 1748,
+   "height": 1489,
+   "wheelbase": 2600,
+   "boot": 506,
+   "fuelTank": 40
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 121,
+    "torqueNm": 145
+   },
+   {
+    "fuel": "strong-hybrid",
+    "powerPs": 126,
+    "torqueNm": 253
+   }
+  ],
+  "valueVariant": {
+   "name": "SV",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1200000,
+   "reason": "Base SV already has 6 airbags, 8in touchscreen with wired AA/CarPlay and multi-angle rear camera.",
+   "source": "https://www.hondacarindia.com/web-data/brochures/The%20New%20City%20Brochure_21.pdf ; price: https://www.autocarindia.com/car-news/2026-honda-city-launched-at-rs-12-lakh-439789"
+  },
+  "sources": [
+   "https://www.hondacarindia.com/web-data/brochures/The%20New%20City%20Brochure_21.pdf",
+   "https://www.autocarindia.com/car-news/2026-honda-city-launched-at-rs-12-lakh-439789"
+  ]
+ },
+ "honda-zr-v": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 8,
+   "airbagsMax": 8,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 4567,
+   "width": 1840,
+   "height": 1621,
+   "wheelbase": 2655,
+   "fuelTank": 57
+  },
+  "powertrains": [
+   {
+    "fuel": "strong-hybrid",
+    "powerPs": 184,
+    "torqueNm": 315
+   }
+  ],
+  "valueVariant": {
+   "name": "e:HEV",
+   "fuel": "strong-hybrid",
+   "transmission": "e-CVT",
+   "price": 4799000,
+   "reason": "Single variant: 8 airbags, touchscreen with AA/CarPlay, 360 camera.",
+   "source": "https://www.hondacarindia.com/web-data/brochures/pdfs/ZR-V%20Brochure_25July26.pdf ; price: https://www.rushlane.com/honda-zr-v-india-launch-price-rs-47-99-lakh-first-2-batches-all-booked-12551537.html"
+  },
+  "sources": [
+   "https://www.hondacarindia.com/web-data/brochures/pdfs/ZR-V%20Brochure_25July26.pdf",
+   "https://www.rushlane.com/honda-zr-v-india-launch-price-rs-47-99-lakh-first-2-batches-all-booked-12551537.html",
+   "https://www.euroncap.com/en/results/honda/zr-v/50189"
+  ]
+ },
+ "volkswagen-virtus": {
+  "safety": {
+   "agency": "GNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 29.71,
+   "childScore": 42,
+   "year": 2023,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "source": "https://www.globalncap.org/news/vw-skoda-shine-again-with-five-star-performance-but-maruti-suzuki-continues-to-disappoint-with-one-and-two-star-ratings"
+  },
+  "dims": {
+   "length": 4561,
+   "width": 1752,
+   "height": 1507,
+   "wheelbase": 2651,
+   "groundClearance": 179,
+   "boot": 521,
+   "fuelTank": 45
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 115,
+    "torqueNm": 178
+   },
+   {
+    "fuel": "petrol",
+    "powerPs": 150,
+    "torqueNm": 250
+   }
+  ],
+  "valueVariant": {
+   "name": "Highline",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1346000,
+   "reason": "Comfortline lacks rear camera; Highline adds reversing camera and 10in touchscreen with wireless AA/CarPlay; 6 airbags std.",
+   "source": "https://gaadify.com/volkswagen-virtus-variants-explained-comfortline-highline-topline-gt-plus ; price: https://caronphone.com/news/volkswagen-india-revises-prices-for-taigun-and-virtus-at-the-start-of-2026/"
+  },
+  "sources": [
+   "https://www.globalncap.org/news/vw-skoda-shine-again-with-five-star-performance-but-maruti-suzuki-continues-to-disappoint-with-one-and-two-star-ratings",
+   "https://www.autocarindia.com/auto-features-amp/every-indian-car-suv-tested-by-global-ncap-under-new-protocols-431384",
+   "https://www.volkswagen.co.in/idhub/content/dam/onehub_pkw/importers/in/models/virtus/virtus-brochure.pdf",
+   "https://caronphone.com/news/volkswagen-india-revises-prices-for-taigun-and-virtus-at-the-start-of-2026/",
+   "https://www.volkswagen.co.in/en/models/virtus.html"
+  ]
+ },
+ "volkswagen-taigun": {
+  "safety": {
+   "agency": "GNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 29.64,
+   "childScore": 42,
+   "year": 2022,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "source": "https://www.globalncap.org/news/vw-taigun-and-skoda-kushaq-first-to-achieve-5-stars-in-global-ncaps-updated-crash-tests",
+   "preFacelift": true
+  },
+  "dims": {
+   "length": 4221,
+   "width": 1760,
+   "height": 1612,
+   "wheelbase": 2651,
+   "boot": 385,
+   "fuelTank": 50
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 115,
+    "torqueNm": 178
+   },
+   {
+    "fuel": "petrol",
+    "powerPs": 150,
+    "torqueNm": 250
+   }
+  ],
+  "valueVariant": {
+   "name": "Highline",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1270000,
+   "reason": "Comfortline lacks a reversing camera; Highline adds camera and 10.1in VW Play touchscreen with wireless AA/CarPlay; 6 airbags std.",
+   "source": "https://www.volkswagen.co.in/idhub/content/dam/onehub_pkw/importers/in/models/new-taigun/the-new-taigun-brochure.pdf ; price: https://www.cardekho.com/india-car-news/2026-volkswagen-taigun-facelift-launched-in-india-at-rs-11-lakh-full-price-list-variants-information-design-features-and-more-35888.htm"
+  },
+  "sources": [
+   "https://www.globalncap.org/news/vw-taigun-and-skoda-kushaq-first-to-achieve-5-stars-in-global-ncaps-updated-crash-tests",
+   "https://www.autocarindia.com/auto-features-amp/every-indian-car-suv-tested-by-global-ncap-under-new-protocols-431384",
+   "https://www.volkswagen.co.in/idhub/content/dam/onehub_pkw/importers/in/models/new-taigun/the-new-taigun-brochure.pdf",
+   "https://www.cardekho.com/india-car-news/2026-volkswagen-taigun-facelift-launched-in-india-at-rs-11-lakh-full-price-list-variants-information-design-features-and-more-35888.htm",
+   "https://www.volkswagen.co.in/en/models/taigun.html"
+  ]
+ },
+ "volkswagen-tayron": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 9,
+   "airbagsMax": 9,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://www.bncap.in/ (homepage list) + carhp.in/car-news/every-car-tested-by-bharat-ncap (updated 15 Sep 2026, 32 cars, no Jeep/VW/Mercedes)"
+  },
+  "dims": {
+   "length": 4792,
+   "width": 1853,
+   "height": 1666,
+   "wheelbase": 2789,
+   "boot": 885,
+   "fuelTank": 61
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 204,
+    "torqueNm": 320
+   }
+  ],
+  "valueVariant": {
+   "name": "Life (5-seater)",
+   "fuel": "petrol",
+   "transmission": "DCT",
+   "price": 4199000,
+   "reason": "Base variant already has 9 airbags, 12.9-inch touchscreen with wired/wireless Android Auto & Apple CarPlay, rear-view camera with dynamic guidelines",
+   "source": "https://www.volkswagen.co.in/idhub/content/dam/onehub_pkw/importers/in/models/tayron/tayron-brochure.pdf ; price https://www.volkswagen.co.in/en/models/tayron.html"
+  },
+  "sources": [
+   "https://www.volkswagen.co.in/idhub/content/dam/onehub_pkw/importers/in/models/tayron/tayron-brochure.pdf",
+   "https://www.volkswagen.co.in/idhub/content/dam/onehub_pkw/importers/in/models/tayron-r-line/tayron-r-Line-brochure.pdf",
+   "https://www.volkswagen.co.in/en/models/tayron.html",
+   "https://www.bncap.in/ (homepage list) + carhp.in/car-news/every-car-tested-by-bharat-ncap (updated 15 Sep 2026, 32 cars, no Jeep/VW/Mercedes)"
+  ]
+ },
+ "volkswagen-tiguan-r-line": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 9,
+   "airbagsMax": 9,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://www.bncap.in/ (homepage list) + carhp.in/car-news/every-car-tested-by-bharat-ncap (updated 15 Sep 2026, 32 cars, no Jeep/VW/Mercedes)"
+  },
+  "dims": {
+   "length": 4539,
+   "width": 1859,
+   "height": 1656,
+   "wheelbase": 2680,
+   "groundClearance": 176,
+   "boot": 652,
+   "fuelTank": 60
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 204,
+    "torqueNm": 320
+   }
+  ],
+  "valueVariant": {
+   "name": "R-Line",
+   "fuel": "petrol",
+   "transmission": "DCT",
+   "price": 4711000,
+   "reason": "Single variant; 9 airbags, touchscreen with AA/CarPlay, 360 camera",
+   "source": "https://www.carwale.com/volkswagen-cars/tiguan-r-line/ (colours page, Rs 47.11 lakh)"
+  },
+  "sources": [
+   "https://www.cardekho.com/volkswagen/tiguan-r-line/specs",
+   "https://www.volkswagen.co.in/ (model list)",
+   "https://www.bncap.in/ (homepage list) + carhp.in/car-news/every-car-tested-by-bharat-ncap (updated 15 Sep 2026, 32 cars, no Jeep/VW/Mercedes)"
+  ]
+ },
+ "volkswagen-golf-gti": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 7,
+   "airbagsMax": 7,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://www.bncap.in/ (homepage list) + carhp.in/car-news/every-car-tested-by-bharat-ncap (updated 15 Sep 2026, 32 cars, no Jeep/VW/Mercedes)"
+  },
+  "dims": {
+   "length": 4289,
+   "width": 1789,
+   "height": 1471,
+   "wheelbase": 2627,
+   "groundClearance": 136,
+   "boot": 380,
+   "fuelTank": 45
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 265,
+    "torqueNm": 370
+   }
+  ],
+  "valueVariant": {
+   "name": "GTI",
+   "fuel": "petrol",
+   "transmission": "DCT",
+   "price": 5090900,
+   "reason": "Single variant; 7 airbags, 12.9-inch touchscreen with wired/wireless AA/CarPlay, rear-view camera",
+   "source": "https://www.volkswagen.co.in/idhub/content/dam/onehub_pkw/importers/in/models/golf-gti/golf-gti-brochure.pdf ; https://www.volkswagen.co.in/en/models/golf-gti.html"
+  },
+  "sources": [
+   "https://www.volkswagen.co.in/idhub/content/dam/onehub_pkw/importers/in/models/golf-gti/golf-gti-brochure.pdf",
+   "https://www.volkswagen.co.in/en/models/golf-gti.html",
+   "https://www.bncap.in/ (homepage list) + carhp.in/car-news/every-car-tested-by-bharat-ncap (updated 15 Sep 2026, 32 cars, no Jeep/VW/Mercedes)"
+  ]
+ },
+ "jeep-compass": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": null,
+   "older": false,
+   "source": "https://www.bncap.in/ (homepage list) + carhp.in/car-news/every-car-tested-by-bharat-ncap (updated 15 Sep 2026, 32 cars, no Jeep/VW/Mercedes)"
+  },
+  "dims": {
+   "length": 4405,
+   "width": 1818,
+   "height": 1640,
+   "wheelbase": 2636,
+   "groundClearance": 178,
+   "boot": 438,
+   "fuelTank": 60
+  },
+  "powertrains": [
+   {
+    "fuel": "diesel",
+    "powerPs": 170,
+    "torqueNm": 350
+   }
+  ],
+  "valueVariant": {
+   "name": "Sport 2WD MT",
+   "fuel": "diesel",
+   "transmission": "MT",
+   "price": 1799000,
+   "reason": "Base variant has 6 airbags, 8.4-inch touchscreen with wireless Android Auto/Apple CarPlay, reverse camera",
+   "source": "https://www.carwale.com/jeep-cars/compass/sport/ ; https://www.jeep-india.com/compass.html (Starting at 17.99 lakh, Sport has 6 airbags)"
+  },
+  "sources": [
+   "https://www.jeep-india.com/compass.html",
+   "https://www.carwale.com/jeep-cars/compass/",
+   "https://www.carwale.com/jeep-cars/compass/sport/",
+   "https://www.cardekho.com/jeep/compass/specs",
+   "https://www.cardekho.com/jeep/compass/variants.htm",
+   "https://www.autocarindia.com/cars/jeep/compass/specifications",
+   "https://www.bncap.in/ (homepage list) + carhp.in/car-news/every-car-tested-by-bharat-ncap (updated 15 Sep 2026, 32 cars, no Jeep/VW/Mercedes)"
+  ]
+ },
+ "jeep-meridian": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://www.bncap.in/ (homepage list) + carhp.in/car-news/every-car-tested-by-bharat-ncap (updated 15 Sep 2026, 32 cars, no Jeep/VW/Mercedes)"
+  },
+  "dims": {
+   "length": 4769,
+   "width": 1859,
+   "height": 1698,
+   "wheelbase": 2782,
+   "groundClearance": 214,
+   "boot": 170,
+   "fuelTank": 60
+  },
+  "powertrains": [
+   {
+    "fuel": "diesel",
+    "powerPs": 170,
+    "torqueNm": 350
+   }
+  ],
+  "valueVariant": {
+   "name": "Longitude 4x2 MT (5-seater)",
+   "fuel": "diesel",
+   "transmission": "MT",
+   "price": 2333000,
+   "reason": "Base variant has 6 airbags, 10.1-inch touchscreen with wireless AA/CarPlay, reverse camera",
+   "source": "https://www.carwale.com/jeep-cars/meridian/longitude/ ; https://www.jeep-india.com/meridian.html (Starting at 23.33 lakh)"
+  },
+  "sources": [
+   "https://www.jeep-india.com/meridian.html",
+   "https://kvr.jeep-india.com/Home/Model?id=9",
+   "https://www.carwale.com/jeep-cars/meridian/longitude/",
+   "https://www.carwale.com/jeep-cars/meridian/overland/",
+   "https://www.cardekho.com/jeep/meridian/specs",
+   "https://www.autocarindia.com/cars/jeep/meridian/specifications",
+   "https://www.bncap.in/ (homepage list) + carhp.in/car-news/every-car-tested-by-bharat-ncap (updated 15 Sep 2026, 32 cars, no Jeep/VW/Mercedes)"
+  ]
+ },
+ "jeep-grand-cherokee": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 8,
+   "airbagsMax": 8,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://www.bncap.in/ (homepage list) + carhp.in/car-news/every-car-tested-by-bharat-ncap (updated 15 Sep 2026, 32 cars, no Jeep/VW/Mercedes)"
+  },
+  "dims": {
+   "length": 4914,
+   "width": 1979,
+   "height": 1792,
+   "wheelbase": 2964,
+   "groundClearance": 215,
+   "fuelTank": 87
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 272,
+    "torqueNm": 400
+   }
+  ],
+  "valueVariant": {
+   "name": "Limited (O) 4x4",
+   "fuel": "petrol",
+   "transmission": "AT",
+   "price": 6300000,
+   "reason": "Base variant; 8 airbags, 10.1-inch touchscreen with AA/CarPlay, rear + 360 camera",
+   "source": "https://www.jeep-india.com/ (Starting at 63.00 lakh) ; https://www.cardekho.com/jeep/grand-cherokee/specs"
+  },
+  "sources": [
+   "https://www.jeep-india.com/",
+   "https://www.autocarindia.com/cars/jeep/grand-cherokee/specifications",
+   "https://www.cardekho.com/jeep/grand-cherokee/specs",
+   "https://www.carwale.com/jeep-cars/grand-cherokee/",
+   "https://www.bncap.in/ (homepage list) + carhp.in/car-news/every-car-tested-by-bharat-ncap (updated 15 Sep 2026, 32 cars, no Jeep/VW/Mercedes)"
+  ]
+ },
+ "jeep-wrangler": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L1",
+   "older": false,
+   "source": "https://www.bncap.in/ (homepage list) + carhp.in/car-news/every-car-tested-by-bharat-ncap (updated 15 Sep 2026, 32 cars, no Jeep/VW/Mercedes)"
+  },
+  "dims": {
+   "length": 4867,
+   "width": 1931,
+   "height": 1864,
+   "wheelbase": 3007
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": null,
+    "torqueNm": 400
+   }
+  ],
+  "valueVariant": {
+   "name": "Unlimited",
+   "fuel": "petrol",
+   "transmission": "AT",
+   "price": 6770000,
+   "reason": "Base variant; 6 airbags; touchscreen with AA/CarPlay and rear camera expected (not verified from maker)",
+   "source": "https://www.jeep-india.com/wrangler.html (Starting at 67.70 lakh) ; https://www.carwale.com/jeep-cars/wrangler/"
+  },
+  "sources": [
+   "https://www.jeep-india.com/wrangler.html",
+   "https://www.carwale.com/jeep-cars/wrangler/",
+   "https://www.autocarindia.com/cars/jeep/wrangler/specifications",
+   "https://www.cardekho.com/jeep/wrangler/specs",
+   "https://www.bncap.in/ (homepage list) + carhp.in/car-news/every-car-tested-by-bharat-ncap (updated 15 Sep 2026, 32 cars, no Jeep/VW/Mercedes)"
+  ]
+ },
+ "mercedes-benz-gla": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 7,
+   "airbagsMax": 7,
+   "esc": true,
+   "adas": null,
+   "older": false,
+   "source": "https://www.bncap.in/ (homepage list) + carhp.in/car-news/every-car-tested-by-bharat-ncap (updated 15 Sep 2026, 32 cars, no Jeep/VW/Mercedes)"
+  },
+  "dims": {
+   "length": 4412,
+   "width": 1834,
+   "height": 1611,
+   "wheelbase": 2729,
+   "boot": 425
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 163,
+    "torqueNm": 270
+   },
+   {
+    "fuel": "diesel",
+    "powerPs": 190,
+    "torqueNm": 400
+   }
+  ],
+  "valueVariant": {
+   "name": "GLA 200",
+   "fuel": "petrol",
+   "transmission": "DCT",
+   "price": 5180000,
+   "reason": "Base variant; 7 airbags, touchscreen with AA/CarPlay, rear camera",
+   "source": "https://www.carwale.com/mercedes-benz-cars/gla/ (51.80 lakh) ; https://www.cardekho.com/mercedes-benz/gla/specs"
+  },
+  "sources": [
+   "https://www.carwale.com/mercedes-benz-cars/gla/",
+   "https://www.cardekho.com/mercedes-benz/gla/specs",
+   "https://www.autocarindia.com/cars/mercedes-benz/gla/specifications",
+   "https://www.bncap.in/ (homepage list) + carhp.in/car-news/every-car-tested-by-bharat-ncap (updated 15 Sep 2026, 32 cars, no Jeep/VW/Mercedes)"
+  ]
+ },
+ "mercedes-benz-c-class": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 7,
+   "airbagsMax": 7,
+   "esc": true,
+   "adas": null,
+   "older": false,
+   "source": "https://www.bncap.in/ (homepage list) + carhp.in/car-news/every-car-tested-by-bharat-ncap (updated 15 Sep 2026, 32 cars, no Jeep/VW/Mercedes)"
+  },
+  "dims": {
+   "width": 1820,
+   "wheelbase": 2865,
+   "boot": 455,
+   "fuelTank": 66
+  },
+  "powertrains": [
+   {
+    "fuel": "mild-hybrid",
+    "powerPs": 204,
+    "torqueNm": 300
+   },
+   {
+    "fuel": "diesel",
+    "powerPs": 200,
+    "torqueNm": 440
+   },
+   {
+    "fuel": "mild-hybrid",
+    "powerPs": 258,
+    "torqueNm": 400
+   }
+  ],
+  "valueVariant": {
+   "name": "C 200",
+   "fuel": "mild-hybrid (petrol)",
+   "transmission": "AT",
+   "price": 6120000,
+   "reason": "Base petrol; 7 airbags, touchscreen with AA/CarPlay, rear camera",
+   "source": "https://www.carwale.com/mercedes-benz-cars/c-class/ (61.20 lakh; CarDekho shows 59.90 lakh - conflict)"
+  },
+  "sources": [
+   "https://www.carwale.com/mercedes-benz-cars/c-class/",
+   "https://www.cardekho.com/mercedes-benz/c-class/specs",
+   "https://www.autocarindia.com/cars/mercedes-benz/c-class/specifications",
+   "https://www.bncap.in/ (homepage list) + carhp.in/car-news/every-car-tested-by-bharat-ncap (updated 15 Sep 2026, 32 cars, no Jeep/VW/Mercedes)"
+  ]
+ },
+ "mercedes-benz-glc": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 7,
+   "airbagsMax": 7,
+   "esc": true,
+   "adas": null,
+   "older": false,
+   "source": "https://www.bncap.in/ (homepage list) + carhp.in/car-news/every-car-tested-by-bharat-ncap (updated 15 Sep 2026, 32 cars, no Jeep/VW/Mercedes)"
+  },
+  "dims": {
+   "length": 4716,
+   "width": 1890,
+   "height": 1640,
+   "wheelbase": 2888,
+   "groundClearance": 201,
+   "boot": 620
+  },
+  "powertrains": [
+   {
+    "fuel": "mild-hybrid",
+    "powerPs": 258,
+    "torqueNm": 400
+   },
+   {
+    "fuel": "diesel",
+    "powerPs": 197,
+    "torqueNm": 440
+   }
+  ],
+  "valueVariant": {
+   "name": "GLC 300 4MATIC",
+   "fuel": "mild-hybrid (petrol)",
+   "transmission": "AT",
+   "price": 7700000,
+   "reason": "Both variants 77.00 lakh; petrol picked; 7 airbags, 11.9-inch touchscreen with AA/CarPlay, rear + 360 camera",
+   "source": "https://www.carwale.com/mercedes-benz-cars/glc/ ; https://www.cardekho.com/mercedes-benz/glc/specs"
+  },
+  "sources": [
+   "https://www.carwale.com/mercedes-benz-cars/glc/",
+   "https://www.cardekho.com/mercedes-benz/glc/specs",
+   "https://www.autocarindia.com/cars/mercedes-benz/glc/specifications",
+   "https://www.bncap.in/ (homepage list) + carhp.in/car-news/every-car-tested-by-bharat-ncap (updated 15 Sep 2026, 32 cars, no Jeep/VW/Mercedes)"
+  ]
+ },
+ "vinfast-vf6": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 27.13,
+   "childScore": 44.41,
+   "year": 2026,
+   "airbagsStd": 7,
+   "airbagsMax": 7,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.rushlane.com/vinfast-vf6-and-vf7-bharat-ncap-crash-results-out-get-5-star-ratings-12538500.html"
+  },
+  "dims": {
+   "length": 4241,
+   "width": 1834,
+   "height": 1615,
+   "wheelbase": 2730,
+   "boot": 423
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 177,
+    "torqueNm": 250
+   },
+   {
+    "fuel": "ev",
+    "powerPs": 204,
+    "torqueNm": 310
+   }
+  ],
+  "valueVariant": {
+   "name": "Earth",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 1819000,
+   "reason": "Base Earth has 7 airbags, 12.9-inch touchscreen with wireless AA/CarPlay and 360 camera",
+   "source": "https://www.91wheels.com/expert-review/vinfast-vf-6-variants-explained-heres-what-you-get-with-each-variant ; price https://www.carwale.com/vinfast-cars/vf6/"
+  },
+  "sources": [
+   "https://www.rushlane.com/vinfast-vf6-and-vf7-bharat-ncap-crash-results-out-get-5-star-ratings-12538500.html",
+   "https://bizhub.vietnamnews.vn/vinfast-vf6-and-vf7-achieve-5-star-safety-certification-from-indias-bharat-ncap-post396023.html",
+   "https://www.carwale.com/vinfast-cars/vf6/",
+   "https://www.autocarindia.com/auto-features/which-variant-of-vinfast-vf6-should-you-consider-buying-437087",
+   "https://www.91wheels.com/expert-review/vinfast-vf-6-variants-explained-heres-what-you-get-with-each-variant"
+  ]
+ },
+ "vinfast-vf7": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 28.54,
+   "childScore": 45.25,
+   "year": 2026,
+   "airbagsStd": 7,
+   "airbagsMax": 7,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.rushlane.com/vinfast-vf6-and-vf7-bharat-ncap-crash-results-out-get-5-star-ratings-12538500.html"
+  },
+  "dims": {
+   "length": 4550,
+   "width": 1893,
+   "height": 1596,
+   "wheelbase": 2840
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 177,
+    "torqueNm": 250
+   },
+   {
+    "fuel": "ev",
+    "powerPs": 204,
+    "torqueNm": 310
+   },
+   {
+    "fuel": "ev",
+    "powerPs": 354,
+    "torqueNm": 500
+   }
+  ],
+  "valueVariant": {
+   "name": "Earth",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 2299000,
+   "reason": "Base Earth has 7 airbags, 12.9-inch touchscreen with wireless AA/CarPlay and 360 camera",
+   "source": "https://caronphone.com/news/vinfast-vf7-variant-wise-features-explained/ ; price https://www.carwale.com/vinfast-cars/vf7/"
+  },
+  "sources": [
+   "https://www.rushlane.com/vinfast-vf6-and-vf7-bharat-ncap-crash-results-out-get-5-star-ratings-12538500.html",
+   "https://www.carwale.com/vinfast-cars/vf7/",
+   "https://caronphone.com/news/vinfast-vf7-variant-wise-features-explained/",
+   "https://www.autocarindia.com/cars/vinfast/vf7/range"
+  ]
+ },
+ "vinfast-limo-green": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": null,
+   "airbagsMax": null,
+   "esc": true,
+   "adas": "none",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 4740,
+   "width": 1872,
+   "height": 1734,
+   "wheelbase": 2840,
+   "groundClearance": 180,
+   "boot": 126
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 204,
+    "torqueNm": 280
+   }
+  ],
+  "sources": [
+   "https://www.rushlane.com/vinfast-vf-mpv-7-launch-price-rs-24-49-lakh-517-km-range-7-seater-12544201.html",
+   "https://www.carwale.com/vinfast-cars/vf-mpv-7/",
+   "https://www.autocarpro.in/analysis/vinfast-indias-best-selling-model-in-q1-fy2027-is-seven-seater-limo-green-mpv-133763"
+  ]
+ },
+ "hyundai-grand-i10-nios": {
+  "safety": {
+   "agency": "GNCAP",
+   "adult": 2,
+   "child": 2,
+   "adultScore": 7.05,
+   "childScore": 15,
+   "year": 2020,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": false,
+   "adas": "none",
+   "source": "https://globalncap.org/news/s-presso-gck5a",
+   "oldProtocol": true
+  },
+  "dims": {
+   "length": 3815,
+   "width": 1680,
+   "height": 1520,
+   "wheelbase": 2450,
+   "boot": 260,
+   "fuelTank": 37
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 83,
+    "torqueNm": 113.8
+   },
+   {
+    "fuel": "cng",
+    "powerPs": 69,
+    "torqueNm": 95.2
+   }
+  ],
+  "valueVariant": {
+   "name": "Sportz",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 692900,
+   "reason": "Cheapest trim with rear camera and 8-inch touchscreen with Android Auto/CarPlay (Corporate has a 6.75-inch screen without AA/CP or camera); 6 airbags standard; also gets ESC.",
+   "source": "https://www.hyundai.com/content/dam/hyundai/in/en/data/brochure/grand-i10-nios.pdf"
+  },
+  "sources": [
+   "https://www.hyundai.com/content/dam/hyundai/in/en/data/brochure/grand-i10-nios.pdf",
+   "https://www.hyundai.com/in/en/find-a-car/grand-i10-nios/price",
+   "https://globalncap.org/news/s-presso-gck5a",
+   "https://www.rushlane.com/hyundai-grand-i10-nios-safety-crash-test-12383060.html",
+   "https://www.cardekho.com/hyundai/grand-i10-nios/specs",
+   "https://www.cardekho.com/hyundai/grand-i10-nios/mileage",
+   "https://www.carwale.com/hyundai-cars/grand-i10-nios/"
+  ]
+ },
+ "hyundai-exter": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 3830,
+   "width": 1723,
+   "height": 1643,
+   "wheelbase": 2450,
+   "boot": 391,
+   "fuelTank": 37
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 83,
+    "torqueNm": 113.8
+   },
+   {
+    "fuel": "cng",
+    "powerPs": 69,
+    "torqueNm": 95.2
+   }
+  ],
+  "valueVariant": {
+   "name": "HX 3",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 633600,
+   "reason": "Base HX 2 lacks touchscreen and rear camera; HX 3 adds 8-inch touchscreen with wireless AA/CP and rear camera; 6 airbags standard.",
+   "source": "https://www.hyundai.com/content/dam/hyundai/in/en/data/brochure/exter.pdf"
+  },
+  "sources": [
+   "https://www.hyundai.com/content/dam/hyundai/in/en/data/brochure/exter.pdf",
+   "https://www.hyundai.com/in/en/find-a-car/exter/highlights",
+   "https://www.cardekho.com/hyundai/exter/specs"
+  ]
+ },
+ "hyundai-i20": {
+  "safety": {
+   "agency": "GNCAP",
+   "adult": 3,
+   "child": 3,
+   "adultScore": 8.84,
+   "childScore": 36.89,
+   "year": 2022,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "source": "https://www.globalncap.org/news/four-stars-for-toyota-urban-cruiser-and-three-for-hyundai-creta-and-i20",
+   "oldProtocol": true
+  },
+  "dims": {
+   "length": 3995,
+   "width": 1775,
+   "height": 1505,
+   "wheelbase": 2580,
+   "boot": 311,
+   "fuelTank": 37
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 83,
+    "torqueNm": 114.7
+   }
+  ],
+  "valueVariant": {
+   "name": "Sportz",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 785200,
+   "reason": "First trim with rear camera and 8-inch touchscreen with wireless AA/CP; 6 airbags + ESC standard on all trims.",
+   "source": "https://www.hyundai.com/content/dam/hyundai/in/en/data/brochure/i20.pdf"
+  },
+  "sources": [
+   "https://www.hyundai.com/content/dam/hyundai/in/en/data/brochure/i20.pdf",
+   "https://www.hyundai.com/in/en/find-a-car/i20/highlights",
+   "https://www.globalncap.org/news/four-stars-for-toyota-urban-cruiser-and-three-for-hyundai-creta-and-i20",
+   "https://rushlane.com/global-ncap-crash-test-april-2022-hyundai-creta-i20-toyota-urban-cruiser-12432481.html",
+   "https://www.zigwheels.com/newcars/Hyundai/i20/specifications",
+   "https://www.carwale.com/hyundai-cars/i20/"
+  ]
+ },
+ "hyundai-aura": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": false,
+   "adas": "none",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 3995,
+   "width": 1680,
+   "height": 1520,
+   "wheelbase": 2450,
+   "fuelTank": 37
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 83,
+    "torqueNm": 113.8
+   },
+   {
+    "fuel": "cng",
+    "powerPs": 69,
+    "torqueNm": 95.2
+   }
+  ],
+  "valueVariant": {
+   "name": "SX",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 777200,
+   "reason": "First trim with rear camera, 8-inch touchscreen with AA/CP (wired) and ESC; 6 airbags standard.",
+   "source": "https://www.hyundai.com/content/dam/hyundai/in/en/data/brochure/aura.pdf"
+  },
+  "sources": [
+   "https://www.hyundai.com/content/dam/hyundai/in/en/data/brochure/aura.pdf",
+   "https://www.hyundai.com/in/en/find-a-car/aura/price",
+   "https://www.carwale.com/hyundai-cars/aura/"
+  ]
+ },
+ "hyundai-venue": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 31.15,
+   "childScore": 44.46,
+   "year": 2026,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.bncap.in/vehicle/hyundai-venue/"
+  },
+  "dims": {
+   "length": 3995,
+   "width": 1800,
+   "height": 1665,
+   "wheelbase": 2520,
+   "boot": 375,
+   "fuelTank": 45
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 83,
+    "torqueNm": 114.7
+   },
+   {
+    "fuel": "petrol",
+    "powerPs": 120,
+    "torqueNm": 172
+   },
+   {
+    "fuel": "diesel",
+    "powerPs": 116,
+    "torqueNm": 250
+   }
+  ],
+  "valueVariant": {
+   "name": "HX 4",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 899900,
+   "reason": "HX 2 has the 10.25-inch touchscreen with wireless AA/CP but no rear camera; HX 4 (1.2 MT only) adds the rear camera; 6 airbags standard.",
+   "source": "https://www.hyundai.com/content/dam/hyundai/in/en/data/brochure/venue.pdf"
+  },
+  "sources": [
+   "https://www.bncap.in/vehicle/hyundai-venue/",
+   "https://www.hyundai.com/in/en/hyundai-story/media-center/press-release/venue-venue-n-line-achieve-5star-safety-rating-at-bharatncap",
+   "https://www.hyundai.com/content/dam/hyundai/in/en/data/brochure/venue.pdf",
+   "https://www.cardekho.com/hyundai/venue/price-in-new-delhi",
+   "https://www.rushlane.com/hyundai-venue-scores-5-star-safety-rating-bharat-ncap-crash-test-12542893.html"
+  ]
+ },
+ "hyundai-i20-n-line": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 3995,
+   "width": 1775,
+   "height": 1505,
+   "wheelbase": 2580,
+   "fuelTank": 37
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 120,
+    "torqueNm": 172
+   }
+  ],
+  "valueVariant": {
+   "name": "N6",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 932200,
+   "reason": "Base N6 already has rear camera, 8-inch touchscreen with wireless AA/CP, 6 airbags and ESC.",
+   "source": "https://www.hyundai.com/content/dam/hyundai/in/en/data/brochure/i20-n-line.pdf"
+  },
+  "sources": [
+   "https://www.hyundai.com/content/dam/hyundai/in/en/data/brochure/i20-n-line.pdf",
+   "https://www.hyundai.com/in/en/find-a-car/i20-n-line/highlights",
+   "https://www.carwale.com/hyundai-cars/i20-n-line/"
+  ]
+ },
+ "hyundai-bayon": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 4245,
+   "width": 1810,
+   "height": 1605,
+   "wheelbase": 2600,
+   "boot": 505,
+   "fuelTank": 43
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 115,
+    "torqueNm": 143.8
+   }
+  ],
+  "valueVariant": {
+   "name": "HX 3",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1089900,
+   "reason": "HX 2 lacks rear camera and AA/CP; HX 3 adds rear camera and wireless AA/CP touchscreen; 6 airbags standard.",
+   "source": "https://www.hyundai.com/content/dam/hyundai/in/en/data/brochure/bayon.pdf"
+  },
+  "sources": [
+   "https://www.hyundai.com/content/dam/hyundai/in/en/data/brochure/bayon.pdf",
+   "https://www.hyundai.com/in/en/find-a-car/bayon/price",
+   "https://www.cardekho.com/hyundai/bayon/price-in-new-delhi",
+   "https://www.onmanorama.com/news/kerala/2026/10/26/hyundai-bayon-launched-in-india.amp.html"
+  ]
+ },
+ "hyundai-venue-n-line": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 31.15,
+   "childScore": 44.46,
+   "year": 2026,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.bncap.in/vehicle/hyundai-venue/"
+  },
+  "dims": {
+   "length": 3995,
+   "width": 1800,
+   "height": 1665,
+   "wheelbase": 2520,
+   "boot": 375,
+   "fuelTank": 45
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 120,
+    "torqueNm": 172
+   }
+  ],
+  "valueVariant": {
+   "name": "N6",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1066100,
+   "reason": "Base N6 already has rear camera, wireless AA/CP touchscreen, 6 airbags and ESC.",
+   "source": "https://www.hyundai.com/content/dam/hyundai/in/en/data/brochure/venue-n-line.pdf"
+  },
+  "sources": [
+   "https://www.bncap.in/vehicle/hyundai-venue/",
+   "https://www.hyundai.com/in/en/hyundai-story/media-center/press-release/venue-venue-n-line-achieve-5star-safety-rating-at-bharatncap",
+   "https://www.hyundai.com/content/dam/hyundai/in/en/data/brochure/venue-n-line.pdf",
+   "https://www.hyundai.com/in/en/find-a-car/venue-n-line/price"
+  ]
+ },
+ "hyundai-creta": {
+  "safety": {
+   "agency": "GNCAP",
+   "adult": 3,
+   "child": 3,
+   "adultScore": 8,
+   "childScore": 28.29,
+   "year": 2022,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.globalncap.org/news/four-stars-for-toyota-urban-cruiser-and-three-for-hyundai-creta-and-i20",
+   "preFacelift": true,
+   "oldProtocol": true
+  },
+  "dims": {
+   "length": 4330,
+   "width": 1790,
+   "height": 1635,
+   "wheelbase": 2610,
+   "fuelTank": 50
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 115,
+    "torqueNm": 143.8
+   },
+   {
+    "fuel": "petrol",
+    "powerPs": 160,
+    "torqueNm": 253
+   },
+   {
+    "fuel": "diesel",
+    "powerPs": 116,
+    "torqueNm": 250
+   }
+  ],
+  "valueVariant": {
+   "name": "EX(O)",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1314200,
+   "reason": "EX has 8-inch touchscreen with wireless AA/CP but no rear camera; EX(O) adds rear camera (and panoramic sunroof); 6 airbags standard.",
+   "source": "https://www.hyundai.com/in/en/find-a-car/creta/price"
+  },
+  "sources": [
+   "https://www.hyundai.com/content/dam/hyundai/in/en/data/brochure/creta.pdf",
+   "https://www.hyundai.com/in/en/find-a-car/creta/price",
+   "https://www.globalncap.org/news/four-stars-for-toyota-urban-cruiser-and-three-for-hyundai-creta-and-i20",
+   "https://rushlane.com/global-ncap-crash-test-april-2022-hyundai-creta-i20-toyota-urban-cruiser-12432481.html"
+  ]
+ },
+ "hyundai-verna": {
+  "safety": {
+   "agency": "GNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 28.18,
+   "childScore": 42,
+   "year": 2023,
+   "airbagsStd": 6,
+   "airbagsMax": 7,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.globalncap.org/news/hyundai-verna-joins-indias-constellation-of-five-star-cars"
+  },
+  "dims": {
+   "length": 4565,
+   "width": 1765,
+   "height": 1475,
+   "wheelbase": 2670,
+   "fuelTank": 45
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 115,
+    "torqueNm": 143.8
+   },
+   {
+    "fuel": "petrol",
+    "powerPs": 160,
+    "torqueNm": 253
+   }
+  ],
+  "valueVariant": {
+   "name": "HX 6",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1325200,
+   "reason": "HX 4 has the 8-inch touchscreen with wireless AA/CP but no rear camera; HX 6 adds the rear camera; 6 airbags standard (7 only on HX 10).",
+   "source": "https://www.hyundai.com/content/dam/hyundai/in/en/data/brochure/verna.pdf"
+  },
+  "sources": [
+   "https://www.globalncap.org/news/hyundai-verna-joins-indias-constellation-of-five-star-cars",
+   "https://autocarpro.in/news/verna-first-hyundai-with-5-star-rating-from-gncap-117074",
+   "https://www.hyundai.com/content/dam/hyundai/in/en/data/brochure/verna.pdf",
+   "https://www.hyundai.com/in/en/find-a-car/verna/highlights",
+   "https://www.carwale.com/hyundai-cars/verna/"
+  ]
+ },
+ "hyundai-alcazar": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 4560,
+   "width": 1800,
+   "height": 1710,
+   "wheelbase": 2760,
+   "fuelTank": 50
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 160,
+    "torqueNm": 253
+   },
+   {
+    "fuel": "diesel",
+    "powerPs": 116,
+    "torqueNm": 250
+   }
+  ],
+  "valueVariant": {
+   "name": "Prestige",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1681300,
+   "reason": "Executive has a rear camera but no touchscreen or AA/CP (basic TFT display); Prestige adds the 10.25-inch touchscreen with AA/CP (wireless via adapter); 6 airbags standard.",
+   "source": "https://www.hyundai.com/content/dam/hyundai/in/en/data/brochure/alcazar.pdf"
+  },
+  "sources": [
+   "https://www.hyundai.com/content/dam/hyundai/in/en/data/brochure/alcazar.pdf",
+   "https://www.carwale.com/hyundai-cars/alcazar/",
+   "https://www.carwale.com/hyundai-cars/alcazar/executive-petrol-15l-turbo-6-speed-manual-7-str/"
+  ]
+ },
+ "hyundai-creta-electric": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 4340,
+   "width": 1790,
+   "height": 1655,
+   "wheelbase": 2610
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 135,
+    "torqueNm": null
+   },
+   {
+    "fuel": "ev",
+    "powerPs": 171,
+    "torqueNm": null
+   }
+  ],
+  "valueVariant": {
+   "name": "Executive (42 kWh)",
+   "fuel": "ev",
+   "transmission": "single-speed",
+   "price": 1802800,
+   "reason": "Base trim already has rear camera, 10.25-inch touchscreen with wireless AA/CP and 6 airbags.",
+   "source": "https://www.hyundai.com/in/en/find-a-car/creta-electric/price"
+  },
+  "sources": [
+   "https://www.hyundai.com/content/dam/hyundai/in/en/data/brochure/creta-ev.pdf",
+   "https://www.hyundai.com/in/en/find-a-car/creta-electric/highlights",
+   "https://www.hyundai.com/in/en/find-a-car/creta-electric/price"
+  ]
+ },
+ "hyundai-creta-n-line": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 4330,
+   "width": 1790,
+   "height": 1635,
+   "wheelbase": 2610,
+   "fuelTank": 50
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 160,
+    "torqueNm": 253
+   }
+  ],
+  "valueVariant": {
+   "name": "N10",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1903300,
+   "reason": "Single trim; already has rear camera, touchscreen with wireless AA/CP (via adapter) and 6 airbags.",
+   "source": "https://www.hyundai.com/in/en/find-a-car/creta-n-line/price"
+  },
+  "sources": [
+   "https://www.hyundai.com/content/dam/hyundai/in/en/data/brochure/creta-n-line.pdf",
+   "https://www.hyundai.com/in/en/find-a-car/creta-n-line/price",
+   "https://www.carwale.com/hyundai-cars/creta-n-line/"
+  ]
+ },
+ "hyundai-ioniq-5": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 4655,
+   "width": 1890,
+   "height": 1625,
+   "wheelbase": 3000
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 229,
+    "torqueNm": null
+   }
+  ],
+  "valueVariant": {
+   "name": "Long Range RWD",
+   "fuel": "ev",
+   "transmission": "single-speed",
+   "price": 5570600,
+   "reason": "Single variant; wireless AA/CP touchscreen, surround-view camera, 6 airbags, L2 ADAS.",
+   "source": "https://www.hyundai.com/in/en/find-a-car/ioniq-5/price"
+  },
+  "sources": [
+   "https://www.hyundai.com/content/dam/hyundai/in/en/data/brochure/ioniq-5.pdf",
+   "https://www.hyundai.com/in/en/find-a-car/ioniq-5/highlights",
+   "https://www.hyundai.com/in/en/find-a-car/ioniq-5/price"
+  ]
+ },
+ "mahindra-xuv-3xo": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 29.36,
+   "childScore": 43,
+   "year": 2024,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.bncap.in/vehicle/mahindra-xuv-3xo/"
+  },
+  "dims": {
+   "length": 3990,
+   "width": 1821,
+   "height": 1647,
+   "wheelbase": 2600,
+   "groundClearance": 201,
+   "boot": 364,
+   "fuelTank": 42
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 111,
+    "torqueNm": 200
+   },
+   {
+    "fuel": "petrol",
+    "powerPs": 131,
+    "torqueNm": 230
+   },
+   {
+    "fuel": "cng",
+    "powerPs": 111,
+    "torqueNm": 200
+   },
+   {
+    "fuel": "diesel",
+    "powerPs": 117,
+    "torqueNm": 300
+   }
+  ],
+  "valueVariant": {
+   "name": "REVX EDGE",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 939000,
+   "reason": "Cheapest variant with 6 airbags (standard), 26.03 cm touchscreen with wireless Android Auto/wired CarPlay and rear-view camera (launched Sept 2026).",
+   "source": "https://auto.mahindra.com/on/demandware.static/-/Sites-amc-Library/default/dwb727fefa/X3XO/Press-Note-Mahindra-Expands-XUV-3XO-REVX-Line-up.pdf"
+  },
+  "sources": [
+   "https://www.bncap.in/vehicle/mahindra-xuv-3xo/",
+   "https://auto.mahindra.com/on/demandware.static/-/Sites-amc-Library/default/dwda9d7e10/X3XO/XUV-3XO-Brochure.pdf",
+   "https://auto.mahindra.com/on/demandware.static/-/Sites-amc-Library/default/dw93620b37/press-release/Press-Release-Mahindra-launches-XUV-3XO-ZNG.pdf",
+   "https://auto.mahindra.com/on/demandware.static/-/Sites-amc-Library/default/dwb727fefa/X3XO/Press-Note-Mahindra-Expands-XUV-3XO-REVX-Line-up.pdf",
+   "https://www.carwale.com/mahindra-cars/xuv-3xo/"
+  ]
+ },
+ "mahindra-bolero": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 2,
+   "airbagsMax": 2,
+   "esc": false,
+   "adas": "none",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 3995,
+   "width": 1745,
+   "height": 1880,
+   "wheelbase": 2680,
+   "fuelTank": 60
+  },
+  "powertrains": [
+   {
+    "fuel": "diesel",
+    "powerPs": 76,
+    "torqueNm": 210
+   }
+  ],
+  "sources": [
+   "https://auto.mahindra.com/on/demandware.static/-/Sites-amc-Library/default/dwd7498646/Bolero/BoleroBrochure_220926.pdf"
+  ]
+ },
+ "mahindra-bolero-neo": {
+  "safety": {
+   "agency": "GNCAP",
+   "adult": 1,
+   "child": 1,
+   "adultScore": 20.26,
+   "childScore": 12.71,
+   "year": 2024,
+   "airbagsStd": 2,
+   "airbagsMax": 2,
+   "esc": false,
+   "adas": "none",
+   "source": "https://www.globalncap.org/s/Mahindra-Bolero-Neo-fact-sheet-2024.pdf"
+  },
+  "dims": {
+   "length": 3995,
+   "width": 1795,
+   "height": 1817,
+   "wheelbase": 2680,
+   "fuelTank": 50
+  },
+  "powertrains": [
+   {
+    "fuel": "diesel",
+    "powerPs": 100,
+    "torqueNm": 260
+   }
+  ],
+  "valueVariant": {
+   "name": "N10 (R)",
+   "fuel": "diesel",
+   "transmission": "MT",
+   "price": 1000000,
+   "reason": "Lowest variant with 22.8 cm touchscreen and rear-view camera (both from N10 per brochure) and the max 2 airbags; Android Auto/CarPlay (wired) reported by Autocar/CarDekho but not stated in brochure.",
+   "source": "https://auto.mahindra.com/on/demandware.static/-/Sites-amc-Library/default/dw702a971a/NEO/BoleroNeo-Brochure-19-Dec.pdf"
+  },
+  "sources": [
+   "https://www.globalncap.org/s/Mahindra-Bolero-Neo-fact-sheet-2024.pdf",
+   "https://www.globalncap.org/news/mixed-results-in-global-ncaps-latest-crash-test-ratings",
+   "https://auto.mahindra.com/on/demandware.static/-/Sites-amc-Library/default/dw702a971a/NEO/BoleroNeo-Brochure-19-Dec.pdf",
+   "https://www.carwale.com/mahindra-cars/bolero-neo/"
+  ]
+ },
+ "mahindra-thar": {
+  "safety": {
+   "agency": "GNCAP",
+   "adult": 4,
+   "child": 4,
+   "adultScore": 12.52,
+   "childScore": 41.11,
+   "year": 2020,
+   "airbagsStd": 2,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "source": "https://www.globalncap.org/s/SaferCarsForIndia-Thar-factsheet-fw3m.pdf",
+   "oldProtocol": true
+  },
+  "dims": {
+   "length": 3995,
+   "width": 1870,
+   "height": 1855,
+   "wheelbase": 2450,
+   "groundClearance": 232,
+   "fuelTank": 55
+  },
+  "powertrains": [
+   {
+    "fuel": "diesel",
+    "powerPs": 119,
+    "torqueNm": 300
+   },
+   {
+    "fuel": "petrol",
+    "powerPs": 162,
+    "torqueNm": 330
+   },
+   {
+    "fuel": "diesel",
+    "powerPs": 152,
+    "torqueNm": 330
+   }
+  ],
+  "valueVariant": {
+   "name": "ZXT 1.5D RWD",
+   "fuel": "diesel",
+   "transmission": "MT",
+   "price": 1399000,
+   "reason": "Only ZXT gets the 4 extra side/curtain airbags (6 total) and rear-view camera; LXT/ZXT have touchscreen with wireless AA/wired CarPlay. Diesel chosen as Thar is diesel-led; cheapest ZXT petrol is RWD AT Rs 16.09L.",
+   "source": "https://www.carwale.com/mahindra-cars/thar/zxt/"
+  },
+  "sources": [
+   "https://www.globalncap.org/s/SaferCarsForIndia-Thar-factsheet-fw3m.pdf",
+   "https://autocarpro.in/news-national/new-mahindra-thar-gets-fourstar-rating-in-global-ncap-crash-test-77825",
+   "https://auto.mahindra.com/on/demandware.static/-/Sites-amc-Library/default/dw6aedc9ad/brochure/THE-THAR-OG-Brochure.pdf",
+   "https://www.carwale.com/mahindra-cars/thar/zxt/"
+  ]
+ },
+ "mahindra-thar-roxx": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 31.09,
+   "childScore": 45,
+   "year": 2024,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.bncap.in/vehicle/mahindra-thar-roxx/"
+  },
+  "dims": {
+   "length": 4428,
+   "width": 1870,
+   "height": 1923,
+   "wheelbase": 2850,
+   "fuelTank": 57
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 177,
+    "torqueNm": 380
+   },
+   {
+    "fuel": "diesel",
+    "powerPs": 175,
+    "torqueNm": 400
+   }
+  ],
+  "valueVariant": {
+   "name": "MX3 2WD Diesel",
+   "fuel": "diesel",
+   "transmission": "MT",
+   "price": 1639000,
+   "reason": "6 airbags std; MX3 is the first trim with rear camera and HD touchscreen with wireless AA (MX1 lacks camera). Diesel MT chosen; MX3 petrol is AT-only at Rs 15.39L.",
+   "source": "https://www.carwale.com/mahindra-cars/thar-roxx/mx3/"
+  },
+  "sources": [
+   "https://www.bncap.in/vehicle/mahindra-thar-roxx/",
+   "https://auto.mahindra.com/on/demandware.static/-/Sites-amc-Library/default/dw0bb6a77e/thar-roxx/THAR-ROXX-Brochure-3rd.pdf",
+   "https://www.carwale.com/mahindra-cars/thar-roxx/",
+   "https://www.carwale.com/mahindra-cars/thar-roxx/mx3/"
+  ]
+ },
+ "mahindra-scorpio-classic": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 2,
+   "airbagsMax": 2,
+   "esc": true,
+   "adas": "none",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 4456,
+   "width": 1820,
+   "height": 1995,
+   "wheelbase": 2680,
+   "fuelTank": 60
+  },
+  "powertrains": [
+   {
+    "fuel": "diesel",
+    "powerPs": 132,
+    "torqueNm": 300
+   }
+  ],
+  "sources": [
+   "https://auto.mahindra.com/on/demandware.static/-/Sites-amc-Library/default/dwe52246f8/SCRC/Scorpio-Classic-Brochure_SV.pdf",
+   "https://www.carwale.com/mahindra-cars/scorpio/"
+  ]
+ },
+ "mahindra-scorpio-n": {
+  "safety": {
+   "agency": "GNCAP",
+   "adult": 5,
+   "child": 3,
+   "adultScore": 29.25,
+   "childScore": 28.93,
+   "year": 2022,
+   "airbagsStd": 2,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.globalncap.org/s/MahindraScorpio-N-2022-fact-sheet.pdf"
+  },
+  "dims": {
+   "length": 4662,
+   "width": 1917,
+   "height": 1857,
+   "wheelbase": 2750,
+   "fuelTank": 57
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 203,
+    "torqueNm": 380
+   },
+   {
+    "fuel": "diesel",
+    "powerPs": 175,
+    "torqueNm": 400
+   }
+  ],
+  "valueVariant": {
+   "name": "Z8 S 2WD Diesel 7-seater",
+   "fuel": "diesel",
+   "transmission": "MT",
+   "price": 1889000,
+   "reason": "Z8S is the first trim with 6 airbags; it also has 31.24 cm touchscreen with wireless AA/CarPlay and rear+front camera. Diesel chosen; petrol Z8S MT is Rs 17.79L.",
+   "source": "https://www.carwale.com/mahindra-cars/scorpio-n/z8-s/"
+  },
+  "sources": [
+   "https://www.globalncap.org/s/MahindraScorpio-N-2022-fact-sheet.pdf",
+   "https://www.globalncap.org/news/mahindra-scores-a-welcome-five-star-safety-rating-while-maruti-suzuki-disappoints-with-three-popular-models-scoring-only-one-star-each",
+   "https://auto.mahindra.com/on/demandware.static/-/Sites-amc-Library/default/dw6e995936/brochures/SCN/SCN_brochure.pdf",
+   "https://www.carwale.com/mahindra-cars/scorpio-n/z8-s/"
+  ]
+ },
+ "mahindra-xuv-3xo-ev": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 3990,
+   "width": 1821,
+   "height": 1653,
+   "wheelbase": 2600,
+   "groundClearance": 190,
+   "boot": 364
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 150,
+    "torqueNm": 310
+   }
+  ],
+  "valueVariant": {
+   "name": "AX5 39.4 kWh (no charger)",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 1389000,
+   "reason": "Base AX5 already has 6 airbags, twin 26.03 cm screens with wireless AA/CarPlay and rear-view camera.",
+   "source": "https://www.carwale.com/mahindra-cars/xuv-3xo-ev/"
+  },
+  "sources": [
+   "https://auto.mahindra.com/on/demandware.static/-/Sites-amc-Library/default/dw485a2dcf/X3XO/29-06-MM-3XO-EV-BROCHURE_R3.pdf",
+   "https://www.carwale.com/mahindra-cars/xuv-3xo-ev/",
+   "https://www.bncap.in/vehicle/mahindra-xuv-3xo/"
+  ]
+ },
+ "mahindra-xuv-7xo": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 30.76,
+   "childScore": 44.97,
+   "year": 2026,
+   "airbagsStd": 6,
+   "airbagsMax": 7,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.bncap.in/vehicle/mahindra-xuv-7xo/"
+  },
+  "dims": {
+   "length": 4695,
+   "width": 1890,
+   "height": 1755,
+   "wheelbase": 2750,
+   "boot": 240,
+   "fuelTank": 60
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 203,
+    "torqueNm": 380
+   },
+   {
+    "fuel": "diesel",
+    "powerPs": 186,
+    "torqueNm": 450
+   }
+  ],
+  "valueVariant": {
+   "name": "AX3 2WD Diesel 7-seater",
+   "fuel": "diesel",
+   "transmission": "MT",
+   "price": 1687000,
+   "reason": "6 airbags std; AX adds 12.3-inch screen with wireless AA/CarPlay, AX3 adds the reverse camera. Diesel chosen; AX3 petrol MT is Rs 16.37L.",
+   "source": "https://www.carwale.com/mahindra-cars/xuv-7xo/"
+  },
+  "sources": [
+   "https://www.bncap.in/vehicle/mahindra-xuv-7xo/",
+   "https://auto.mahindra.com/suv/xuv-7xo.html",
+   "https://www.cardekho.com/india-car-news/new-mahindra-xuv-7xo-which-variant-gets-what-feature-explained-35509.htm",
+   "https://www.cardekho.com/mahindra/xuv-7xo/specs",
+   "https://www.carwale.com/mahindra-cars/xuv-7xo/"
+  ]
+ },
+ "mahindra-xuv400": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 30.38,
+   "childScore": 43,
+   "year": 2024,
+   "airbagsStd": 2,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "source": "https://www.bncap.in/vehicle/mahindra-xuv-400/"
+  },
+  "dims": {
+   "length": 4200,
+   "width": 1821,
+   "height": 1634,
+   "wheelbase": 2600
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 150,
+    "torqueNm": 310
+   },
+   {
+    "fuel": "ev",
+    "powerPs": 150,
+    "torqueNm": 310
+   }
+  ],
+  "valueVariant": {
+   "name": "EL Pro 34.5 kWh",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 1674000,
+   "reason": "EL Pro is the only trim with 6 airbags, 26.04 cm touchscreen with wireless AA/CarPlay and rear-view camera; 34.5 kWh is the cheapest EL Pro.",
+   "source": "https://auto.mahindra.com/suv/xuv400/X400.html"
+  },
+  "sources": [
+   "https://www.bncap.in/vehicle/mahindra-xuv-400/",
+   "https://auto.mahindra.com/suv/xuv400/X400.html",
+   "https://www.carwale.com/mahindra-cars/xuv400/",
+   "https://www.cardekho.com/mahindra/xuv400-ev/specs"
+  ]
+ },
+ "mahindra-be-6": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 31.97,
+   "childScore": 45,
+   "year": 2025,
+   "airbagsStd": 6,
+   "airbagsMax": 7,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.bncap.in/vehicle/mahindra-be-6/"
+  },
+  "dims": {
+   "length": 4371,
+   "width": 1907,
+   "height": 1627,
+   "wheelbase": 2775,
+   "groundClearance": 207,
+   "boot": 455
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 231,
+    "torqueNm": 380
+   },
+   {
+    "fuel": "ev",
+    "powerPs": 245,
+    "torqueNm": 380
+   },
+   {
+    "fuel": "ev",
+    "powerPs": 286,
+    "torqueNm": 380
+   }
+  ],
+  "valueVariant": {
+   "name": "ONE 59 kWh",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 1945000,
+   "reason": "Base ONE already has 6 airbags, wireless AA/CarPlay touchscreen and rear-view camera with sensors.",
+   "source": "https://www.mahindraelectricsuv.com/"
+  },
+  "sources": [
+   "https://www.bncap.in/vehicle/mahindra-be-6/",
+   "https://www.mahindraelectricsuv.com/on/demandware.static/-/Library-Sites-eSUVSharedLibrary/default/dw4c638e88/MBE6/BE6_SPORTEQ_BROCHURE.pdf",
+   "https://www.mahindraelectricsuv.com/"
+  ]
+ },
+ "mahindra-xev-9s": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 7,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 4737,
+   "width": 1900,
+   "height": 1747,
+   "wheelbase": 2762,
+   "groundClearance": 205,
+   "boot": 527
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 231,
+    "torqueNm": 380
+   },
+   {
+    "fuel": "ev",
+    "powerPs": 245,
+    "torqueNm": 380
+   },
+   {
+    "fuel": "ev",
+    "powerPs": 286,
+    "torqueNm": 380
+   }
+  ],
+  "valueVariant": {
+   "name": "Pack ONE Above 59 kWh 7-seater",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 2065000,
+   "reason": "Base trim already has 6 airbags, wireless AA/CarPlay and reverse camera (plus openable panoramic sunroof).",
+   "source": "https://www.mahindraelectricsuv.com/on/demandware.static/-/Library-Sites-eSUVSharedLibrary/default/dw597b9db1/XEV-9s/PDFs/XEV9S_BROCHURE.pdf"
+  },
+  "sources": [
+   "https://www.mahindraelectricsuv.com/on/demandware.static/-/Library-Sites-eSUVSharedLibrary/default/dw597b9db1/XEV-9s/PDFs/XEV9S_BROCHURE.pdf",
+   "https://www.mahindraelectricsuv.com/"
+  ]
+ },
+ "mahindra-xev-9e": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 32,
+   "childScore": 45,
+   "year": 2025,
+   "airbagsStd": 6,
+   "airbagsMax": 7,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.bncap.in/vehicle/mahindra-xev-9e/"
+  },
+  "dims": {
+   "length": 4789,
+   "width": 1907,
+   "height": 1694,
+   "wheelbase": 2775,
+   "groundClearance": 207,
+   "boot": 663
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 231,
+    "torqueNm": 380
+   },
+   {
+    "fuel": "ev",
+    "powerPs": 286,
+    "torqueNm": 380
+   }
+  ],
+  "valueVariant": {
+   "name": "Pack ONE 59 kWh",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 2190000,
+   "reason": "Base Pack ONE has 6 airbags, wireless AA/CarPlay and reverse camera.",
+   "source": "https://www.mahindraelectricsuv.com/on/demandware.static/-/Library-Sites-eSUVSharedLibrary/default/dweb0d1969/MXV9/XEV9e_BROCHURE_R1_20260428.pdf"
+  },
+  "sources": [
+   "https://www.bncap.in/vehicle/mahindra-xev-9e/",
+   "https://www.mahindraelectricsuv.com/on/demandware.static/-/Library-Sites-eSUVSharedLibrary/default/dweb0d1969/MXV9/XEV9e_BROCHURE_R1_20260428.pdf",
+   "https://www.mahindraelectricsuv.com/"
+  ]
+ },
+ "kia-sonet": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L1",
+   "older": false,
+   "source": "https://www.kia.com/in/our-vehicles/sonet.html"
+  },
+  "dims": {
+   "length": 3995,
+   "width": 1790,
+   "height": 1642,
+   "wheelbase": 2500,
+   "groundClearance": 205,
+   "boot": 385,
+   "fuelTank": 45
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 83,
+    "torqueNm": 115
+   },
+   {
+    "fuel": "petrol",
+    "powerPs": 120,
+    "torqueNm": 172
+   },
+   {
+    "fuel": "diesel",
+    "powerPs": 116,
+    "torqueNm": 250
+   }
+  ],
+  "valueVariant": {
+   "name": "HTK(O) 1.2",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 889000,
+   "reason": "Cheapest trim with 8in touchscreen + wireless Android Auto/Apple CarPlay + rear view camera; 6 airbags standard on all trims.",
+   "source": "https://www.cardekho.com/kia/sonet/variants.htm"
+  },
+  "sources": [
+   "https://www.kia.com/in/our-vehicles/sonet.html",
+   "https://www.kia.com/in/our-vehicles/sonet/specs.html",
+   "https://www.kia.com/content/dam/kia2/in/en/our-vehicles/showroom/sonet/brochure/Sonet_Wild_Reborn_Brochure_2026_Desktop.pdf",
+   "https://www.cardekho.com/kia/sonet/variants.htm",
+   "https://www.cardekho.com/kia/sonet/specs",
+   "https://www.91wheels.com/cars/kia/sonet/mileage",
+   "https://www.globalncap.org/news/haval-jolion-and-kia-sonet-fall-short-on-safety"
+  ]
+ },
+ "kia-syros": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 30.21,
+   "childScore": 44.42,
+   "year": 2025,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "source": "https://www.bncap.in/vehicle/kia-syros/"
+  },
+  "dims": {
+   "length": 3995,
+   "width": 1805,
+   "height": 1680,
+   "wheelbase": 2550,
+   "boot": 390,
+   "fuelTank": 45
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 120,
+    "torqueNm": 172
+   },
+   {
+    "fuel": "diesel",
+    "powerPs": 116,
+    "torqueNm": 250
+   }
+  ],
+  "valueVariant": {
+   "name": "HTK(EX) Turbo",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 982000,
+   "reason": "First trim with rear view camera; 10.25in touchscreen with wireless AA/CarPlay and 6 airbags are standard from HTE.",
+   "source": "https://www.cardekho.com/kia/syros/variants.htm"
+  },
+  "sources": [
+   "https://www.kia.com/in/our-vehicles/syros.html",
+   "https://www.kia.com/in/our-vehicles/syros/specs.html",
+   "https://www.bncap.in/vehicle/kia-syros/",
+   "https://www.kia.com/content/dam/kia2/in/en/our-vehicles/syros/FACT-SHEET-SYROS-1.pdf",
+   "https://www.kia.com/content/dam/kia2/in/en/our-vehicles/syros/Kia_Syros_5_Star_Brochure_Desktop.pdf",
+   "https://www.cardekho.com/kia/syros/variants.htm"
+  ]
+ },
+ "kia-seltos": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 31.7,
+   "childScore": 45,
+   "year": 2026,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.bncap.in/vehicle/kia-seltos/"
+  },
+  "dims": {
+   "length": 4460,
+   "width": 1830,
+   "height": 1635,
+   "wheelbase": 2690,
+   "groundClearance": 190,
+   "boot": 447,
+   "fuelTank": 47
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 115,
+    "torqueNm": 144
+   },
+   {
+    "fuel": "petrol",
+    "powerPs": 160,
+    "torqueNm": 253
+   },
+   {
+    "fuel": "diesel",
+    "powerPs": 116,
+    "torqueNm": 250
+   }
+  ],
+  "valueVariant": {
+   "name": "HTE 1.5",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1125000,
+   "reason": "Base trim already has 6 airbags, 10.25in touchscreen with wireless AA/CarPlay and rear view camera.",
+   "source": "https://www.cardekho.com/kia/seltos/variants.htm"
+  },
+  "sources": [
+   "https://www.kia.com/in/our-vehicles/seltos.html",
+   "https://www.kia.com/in/our-vehicles/seltos/specs.html",
+   "https://www.bncap.in/vehicle/kia-seltos/",
+   "https://www.kia.com/content/dam/kia2/in/en/our-vehicles/new-seltos/All-New-Seltos-BNCAP-Fact-Sheet.pdf",
+   "https://www.cardekho.com/kia/seltos/variants.htm",
+   "https://www.rushlane.com/new-kia-seltos-arai-mileage-figures-revealed-up-to-19-4-km-l-12544794.html",
+   "https://www.autocarindia.com/cars/kia/seltos/faqs"
+  ]
+ },
+ "kia-carens-clavis": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://www.globalncap.org/news/mixed-results-in-global-ncaps-latest-crash-test-ratings"
+  },
+  "dims": {
+   "length": 4550,
+   "width": 1800,
+   "height": 1708,
+   "wheelbase": 2780,
+   "boot": 216,
+   "fuelTank": 45
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 115,
+    "torqueNm": 144
+   },
+   {
+    "fuel": "petrol",
+    "powerPs": 160,
+    "torqueNm": 253
+   },
+   {
+    "fuel": "diesel",
+    "powerPs": 116,
+    "torqueNm": 250
+   }
+  ],
+  "valueVariant": {
+   "name": "HTE(O) 1.5",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1235000,
+   "reason": "Cheapest trim with 8in touchscreen + Android Auto/Apple CarPlay; CarDekho lists rear parking camera here (Kia's own trim list does not mention a rear camera below 360-camera trims - verify); 6 airbags standard.",
+   "source": "https://www.cardekho.com/kia/carens-clavis/variants.htm"
+  },
+  "sources": [
+   "https://www.kia.com/in/our-vehicles/carens-clavis.html",
+   "https://www.kia.com/in/our-vehicles/carens-clavis/specs.html",
+   "https://www.kia.com/content/dam/kia2/in/en/our-vehicles/kia-clavis/broc/Kia_Carens_Clavis_2026_Desktop.pdf",
+   "https://www.cardekho.com/kia/carens-clavis/variants.htm",
+   "https://www.globalncap.org/news/mixed-results-in-global-ncaps-latest-crash-test-ratings",
+   "https://www.globalncap.org/news/kia-carens-rated-3-stars-and-mahindra-achieves-safer-choice-award-for-xuv-700",
+   "https://gaadify.com/kia-carens-retains-3-star-safety-rating-in-global-ncap-tests"
+  ]
+ },
+ "kia-syros-ev": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://www.bncap.in/vehicle/kia-syros/"
+  },
+  "dims": {
+   "length": 3995,
+   "width": 1805,
+   "height": 1670,
+   "wheelbase": 2550,
+   "boot": 390
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 135,
+    "torqueNm": null
+   },
+   {
+    "fuel": "ev",
+    "powerPs": 171,
+    "torqueNm": null
+   }
+  ],
+  "valueVariant": {
+   "name": "HTK+ 42 kWh",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 1500000,
+   "reason": "First trim with rear view camera; 30in trinity panel touchscreen and 6 airbags standard.",
+   "source": "https://www.cardekho.com/kia/syros-ev/variants.htm"
+  },
+  "sources": [
+   "https://www.kia.com/in/our-vehicles/syros-ev.html",
+   "https://www.kia.com/in/our-vehicles/syros-ev/specs.html",
+   "https://www.kia.com/content/dam/kia2/in/en/images/our-vehicles/syros_ev/brochure/Kia_Syros_EV_Brochure_Desktop2026.pdf",
+   "https://www.cardekho.com/kia/syros-ev/variants.htm"
+  ]
+ },
+ "kia-carens-clavis-ev": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://www.kia.com/in/our-vehicles/carens-clavis-ev.html"
+  },
+  "dims": {
+   "length": 4550,
+   "width": 1800,
+   "height": 1730,
+   "wheelbase": 2780,
+   "boot": 216
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 135,
+    "torqueNm": null
+   },
+   {
+    "fuel": "ev",
+    "powerPs": 171,
+    "torqueNm": null
+   }
+  ],
+  "valueVariant": {
+   "name": "HTX 42 kWh",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 2054000,
+   "reason": "Lowest trim where Kia lists a camera (360 camera); 6 airbags and 26.62in dual display standard. Lower trims' rear camera not confirmed.",
+   "source": "https://www.cardekho.com/kia/carens-clavis-ev/variants.htm"
+  },
+  "sources": [
+   "https://www.kia.com/in/our-vehicles/carens-clavis-ev.html",
+   "https://www.kia.com/in/our-vehicles/carens-clavis-ev/specs.html",
+   "https://www.kia.com/content/dam/kia2/in/en/our-vehicles/kia-carens-clavis-ev/showroom/Kia_CarensClavisEV_Brochure_Desktop.pdf",
+   "https://www.cardekho.com/kia/carens-clavis-ev/variants.htm"
+  ]
+ },
+ "kia-sorento": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 7,
+   "airbagsMax": 10,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://www.kia.com/in/our-vehicles/sorento.html"
+  },
+  "dims": {
+   "length": 4815,
+   "width": 1900,
+   "height": 1785,
+   "wheelbase": 2820
+  },
+  "valueVariant": {
+   "name": "HTE 7-seater Diesel",
+   "fuel": "diesel",
+   "transmission": "DCT",
+   "price": 2799000,
+   "reason": "Base trim has 7 airbags, 12.3in touchscreen with Apple CarPlay/Android Auto and rear view camera (introductory price).",
+   "source": "https://www.autocarindia.com/car-news/kia-sorento-launched-at-rs-2799-lakh-440657"
+  },
+  "sources": [
+   "https://www.kia.com/in/our-vehicles/sorento.html",
+   "https://www.kia.com/in/our-vehicles/sorento/specs.html",
+   "https://www.kia.com/content/dam/kia2/in/en/images/our-vehicles/sorento/brochure/Kia_India_Sorento_Brochure_Desktop.pdf",
+   "https://www.autocarindia.com/car-news/kia-sorento-launched-at-rs-2799-lakh-440657"
+  ]
+ },
+ "kia-carnival": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 8,
+   "airbagsMax": 8,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://www.kia.com/in/our-vehicles/carnival.html"
+  },
+  "dims": {
+   "length": 5155,
+   "width": 1995,
+   "height": 1775,
+   "wheelbase": 3090,
+   "boot": 627,
+   "fuelTank": 72
+  },
+  "powertrains": [
+   {
+    "fuel": "diesel",
+    "powerPs": 193,
+    "torqueNm": 441
+   }
+  ],
+  "valueVariant": {
+   "name": "Limousine Plus",
+   "fuel": "diesel",
+   "transmission": "AT",
+   "price": 5965000,
+   "reason": "Only variant; fully loaded (8 airbags, touchscreen with AA/CarPlay, 360 camera).",
+   "source": "https://www.cardekho.com/kia/carnival"
+  },
+  "sources": [
+   "https://www.kia.com/in/our-vehicles/carnival.html",
+   "https://www.kia.com/in/our-vehicles/carnival/specs.html",
+   "https://www.kia.com/content/dam/kia2/in/en/our-vehicles/carnival/Kia_Carnival_Brochure_Desktop.pdf",
+   "https://www.cardekho.com/kia/carnival"
+  ]
+ },
+ "kia-ev6": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 8,
+   "airbagsMax": 8,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://press.kia.com/ie/en/home/media-resouces/press-releases/2022/Kia-EV6-awarded-five-star-Euro-NCAP-safety-rating.html"
+  },
+  "dims": {
+   "length": 4695,
+   "width": 1890,
+   "height": 1570,
+   "wheelbase": 2900,
+   "boot": 490
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 325,
+    "torqueNm": 605
+   }
+  ],
+  "valueVariant": {
+   "name": "GT-Line AWD",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 6597000,
+   "reason": "Only variant sold; fully loaded.",
+   "source": "https://www.zigwheels.com/kia-cars/ev6/on-road-price-indi/"
+  },
+  "sources": [
+   "https://www.kia.com/in/our-vehicles/ev6.html",
+   "https://www.kia.com/in/our-vehicles/ev6/specs.html",
+   "https://www.kia.com/content/dam/kia2/in/en/images/buy/download-brochure/ev6/EV6_Desktop_2025.pdf",
+   "https://press.kia.com/ie/en/home/media-resouces/press-releases/2022/Kia-EV6-awarded-five-star-Euro-NCAP-safety-rating.html"
+  ]
+ },
+ "kia-ev9": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 10,
+   "airbagsMax": 10,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": "https://www.kia.com/uk/about/news/ncap-safety-ratings-what-you-need-to-know/"
+  },
+  "dims": {
+   "length": 5015,
+   "width": 1980,
+   "height": 1780,
+   "wheelbase": 3100,
+   "boot": 333
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 384,
+    "torqueNm": 700
+   }
+  ],
+  "valueVariant": {
+   "name": "GT-Line AWD",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 13000000,
+   "reason": "Only variant sold; fully loaded.",
+   "source": "https://www.evfy.in/ecars/kia/kia-ev9/kia-ev9-gt-line"
+  },
+  "sources": [
+   "https://www.kia.com/in/our-vehicles/ev9.html",
+   "https://www.kia.com/in/our-vehicles/ev9/specs.html",
+   "https://www.kia.com/content/dam/kia2/in/en/our-vehicles/showroom/ev9/Kia_EV9_Brochure_Desktop.pdf",
+   "https://www.kia.com/uk/about/news/ncap-safety-ratings-what-you-need-to-know/"
+  ]
+ },
+ "bmw-2-series-gran-coupe": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L1",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 4546,
+   "width": 1800,
+   "height": 1435,
+   "wheelbase": 2670,
+   "groundClearance": 165,
+   "boot": 430
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 156,
+    "torqueNm": 230
+   }
+  ],
+  "valueVariant": {
+   "name": "218 M Sport",
+   "fuel": "petrol",
+   "transmission": "DCT",
+   "price": 4580000,
+   "reason": "Base trim already has 6 airbags, wireless AA/CarPlay and a 360/rear camera",
+   "source": "https://www.autocarindia.com/cars/bmw/2-series-gran-coupe"
+  },
+  "sources": [
+   "https://www.autocarindia.com/cars/bmw/2-series-gran-coupe",
+   "https://www.cardekho.com/bmw/2-series/specs"
+  ]
+ },
+ "bmw-x1": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L1",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 4500,
+   "width": 1845,
+   "height": 1642,
+   "wheelbase": 2692,
+   "groundClearance": 183,
+   "boot": 476
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 136,
+    "torqueNm": 230
+   },
+   {
+    "fuel": "diesel",
+    "powerPs": 150,
+    "torqueNm": 360
+   }
+  ],
+  "valueVariant": {
+   "name": "sDrive18i xLine",
+   "fuel": "petrol",
+   "transmission": "DCT",
+   "price": 5090000,
+   "reason": "Cheaper of the two standard-X1 trims; 6 airbags, AA/CarPlay touchscreen and reversing camera are standard",
+   "source": "https://www.autocarindia.com/cars/bmw/x1"
+  },
+  "sources": [
+   "https://www.autocarindia.com/cars/bmw/x1",
+   "https://www.autocarindia.com/car-news/bmw-x1-lwb-launched-at-rs-4990-lakh-440554",
+   "https://www.cardekho.com/bmw/x1/specs",
+   "https://www.cardekho.com/bmw/x1-lwb/specs"
+  ]
+ },
+ "bmw-ix1": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 8,
+   "airbagsMax": 8,
+   "esc": true,
+   "adas": "L2",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 4616,
+   "width": 1845,
+   "height": 1641,
+   "wheelbase": 2800,
+   "boot": 490
+  },
+  "powertrains": [
+   {
+    "fuel": "ev",
+    "powerPs": 204,
+    "torqueNm": 250
+   }
+  ],
+  "valueVariant": {
+   "name": "eDrive20L M Sport",
+   "fuel": "ev",
+   "transmission": "AT",
+   "price": 5470000,
+   "reason": "Only variant: 8 airbags, wireless AA/CarPlay, rear + 360 camera",
+   "source": "https://www.autocarindia.com/cars/bmw/ix1-lwb/edrive20l"
+  },
+  "sources": [
+   "https://www.autocarindia.com/cars/bmw/ix1-lwb/edrive20l",
+   "https://www.cardekho.com/bmw/ix1/specs",
+   "https://www.autocarindia.com/car-news/bmw-x1-lwb-launched-at-rs-4990-lakh-440554"
+  ]
+ },
+ "bmw-3-series-lwb": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L1",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 4819,
+   "width": 1827,
+   "height": 1463,
+   "wheelbase": 2961,
+   "boot": 480
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 258,
+    "torqueNm": 400
+   },
+   {
+    "fuel": "diesel",
+    "powerPs": 190,
+    "torqueNm": 400
+   }
+  ],
+  "valueVariant": {
+   "name": "330Li M Sport",
+   "fuel": "petrol",
+   "transmission": "AT",
+   "price": 6270000,
+   "reason": "Cheaper variant; 6 airbags, wireless AA/CarPlay and camera standard",
+   "source": "https://www.autocarindia.com/cars/bmw/3-series-lwb"
+  },
+  "sources": [
+   "https://www.autocarindia.com/cars/bmw/3-series-lwb",
+   "https://www.cardekho.com/bmw/3-series-gran-limousine/specs",
+   "https://www.rushlane.com/bmw-3-series-lwb-launch-price-rs-62-6-l-258-bhp-400-nm-12518980.html"
+  ]
+ },
+ "nissan-magnite": {
+  "safety": {
+   "agency": "GNCAP",
+   "adult": 5,
+   "child": 3,
+   "adultScore": 32.31,
+   "childScore": 33.64,
+   "year": 2025,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "source": "https://www.globalncap.org/news/nissan-magnite-improves-from-2-to-5-stars-with-six-airbags-and-esc-as-standard"
+  },
+  "dims": {
+   "length": 3994,
+   "width": 1758,
+   "height": 1572,
+   "wheelbase": 2500,
+   "groundClearance": 205,
+   "boot": 336,
+   "fuelTank": 40
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 72,
+    "torqueNm": 96
+   },
+   {
+    "fuel": "petrol",
+    "powerPs": 100,
+    "torqueNm": 160
+   }
+  ],
+  "valueVariant": {
+   "name": "Visia+",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 626000,
+   "reason": "Second trim adds 9-inch touchscreen with wireless AA/CarPlay and rear camera; 6 airbags standard",
+   "source": "https://www.nissan.in/vehicles/new/magnite.html"
+  },
+  "sources": [
+   "https://www.nissan.in/vehicles/new/magnite.html",
+   "https://www.globalncap.org/news/nissan-magnite-improves-from-2-to-5-stars-with-six-airbags-and-esc-as-standard",
+   "https://www.rushlane.com/nissan-magnite-global-ncap-crash-ratings-out-scores-5-stars-12526668.html",
+   "https://www.autocarindia.com/auto-features/nissan-magnite-facelift-price-variants-features-safety-full-list-433097",
+   "https://www.cardekho.com/nissan/magnite/specs"
+  ]
+ },
+ "nissan-gravite": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "none",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 3987,
+   "width": 1734,
+   "height": 1643,
+   "wheelbase": 2636,
+   "groundClearance": 182,
+   "fuelTank": 40
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 72,
+    "torqueNm": 96
+   }
+  ],
+  "valueVariant": {
+   "name": "N-Connecta",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 738400,
+   "reason": "Cheapest trim with the 8-inch wireless AA/CarPlay screen and rear camera (Acenta has the screen but no camera); 6 airbags standard",
+   "source": "https://www.nissan.in/vehicles/new/gravite.html"
+  },
+  "sources": [
+   "https://www.nissan.in/vehicles/new/gravite.html",
+   "https://www.cardekho.com/india-car-news/take-a-look-at-the-variantwise-features-of-the-nissan-gravite-35670.htm",
+   "https://www.cardekho.com/nissan/gravite/specs",
+   "https://en.wikipedia.org/wiki/Renault_Triber"
+  ]
+ },
+ "nissan-tekton": {
+  "safety": {
+   "agency": "BNCAP",
+   "adult": 5,
+   "child": 5,
+   "adultScore": 30.49,
+   "childScore": 45,
+   "year": 2026,
+   "airbagsStd": 6,
+   "airbagsMax": 6,
+   "esc": true,
+   "adas": "L2",
+   "source": "https://www.bncap.in/vehicle/nissan-tekton/"
+  },
+  "dims": {
+   "length": 4349,
+   "width": 1815,
+   "height": 1674,
+   "wheelbase": 2657,
+   "groundClearance": 212,
+   "boot": 518,
+   "fuelTank": 50
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 100,
+    "torqueNm": 160
+   },
+   {
+    "fuel": "petrol",
+    "powerPs": 163,
+    "torqueNm": 280
+   }
+  ],
+  "valueVariant": {
+   "name": "Visia+ T160",
+   "fuel": "petrol",
+   "transmission": "MT",
+   "price": 1114000,
+   "reason": "Second trim adds 9-inch wireless AA/CarPlay screen and rear camera with dynamic guidelines; 6 airbags standard",
+   "source": "https://www.autocarindia.com/auto-features/which-variant-of-the-nissan-tekton-should-you-buy-440773"
+  },
+  "sources": [
+   "https://www.bncap.in/vehicle/nissan-tekton/",
+   "https://www.autocarindia.com/car-news/nissan-tekton-scores-5-stars-in-bharat-ncap-crash-tests-440170",
+   "https://www.autocarindia.com/auto-features/which-variant-of-the-nissan-tekton-should-you-buy-440773",
+   "https://www.carwale.com/news/nissan-tekton-arai-certified-mileage-revealed/",
+   "https://www.cardekho.com/nissan/tekton/specs"
+  ]
+ },
+ "nissan-x-trail": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 7,
+   "airbagsMax": 7,
+   "esc": true,
+   "adas": "none",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 4680,
+   "width": 1840,
+   "height": 1725,
+   "wheelbase": 2705,
+   "groundClearance": 210,
+   "boot": 177,
+   "fuelTank": 55
+  },
+  "powertrains": [
+   {
+    "fuel": "mild-hybrid",
+    "powerPs": 163,
+    "torqueNm": 300
+   }
+  ],
+  "valueVariant": {
+   "name": "STD",
+   "fuel": "mild-hybrid",
+   "transmission": "CVT",
+   "price": 4820000,
+   "reason": "Single variant; 7 airbags, AA/CarPlay touchscreen, rear + 360 camera",
+   "source": "https://www.cardekho.com/nissan/x-trail/specs"
+  },
+  "sources": [
+   "https://www.cardekho.com/nissan/x-trail/specs",
+   "https://www.nissan.in/vehicles/new/x-trail.html"
+  ]
+ },
+ "audi-a4": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": 8,
+   "airbagsMax": 8,
+   "esc": true,
+   "adas": "none",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 4762,
+   "width": 1847,
+   "height": 1433,
+   "wheelbase": 2820,
+   "boot": 460,
+   "fuelTank": 54
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 204,
+    "torqueNm": 320
+   }
+  ],
+  "valueVariant": {
+   "name": "Premium",
+   "fuel": "petrol",
+   "transmission": "DCT",
+   "price": 4688000,
+   "reason": "Base trim; 8 airbags and wireless AA/CarPlay standard (rear camera listed model-wide by CarDekho, not confirmed per trim)",
+   "source": "https://www.autocarindia.com/cars/audi/a4"
+  },
+  "sources": [
+   "https://www.autocarindia.com/cars/audi/a4",
+   "https://www.cardekho.com/audi/a4/specs"
+  ]
+ },
+ "audi-q3": {
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "adultScore": null,
+   "childScore": null,
+   "year": null,
+   "airbagsStd": null,
+   "airbagsMax": 9,
+   "esc": true,
+   "adas": "L1",
+   "older": false,
+   "source": null
+  },
+  "dims": {
+   "length": 4531,
+   "width": 1859,
+   "height": 1601,
+   "wheelbase": 2681,
+   "boot": 488
+  },
+  "powertrains": [
+   {
+    "fuel": "petrol",
+    "powerPs": 204,
+    "torqueNm": 320
+   }
+  ],
+  "valueVariant": {
+   "name": "Nova",
+   "fuel": "petrol",
+   "transmission": "DCT",
+   "price": 5199000,
+   "reason": "Base trim has wireless AA/CarPlay, reversing camera, panoramic roof; airbag count (6 vs 9) unconfirmed",
+   "source": "https://www.autocarindia.com/cars/audi/q3"
+  },
+  "sources": [
+   "https://www.autocarindia.com/cars/audi/q3",
+   "https://www.cardekho.com/audi/q3/specs"
+  ]
+ }
+}

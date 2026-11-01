@@ -119,6 +119,7 @@ export class Studio {
     this.camera.fov = fov
     this.camera.updateProjectionMatrix()
     this.controls.autoRotate = false
+    this.userMoved = true // a fixed photo camera: don't refit it on resize
     this.controls.maxDistance = 200
     this.controls.target.set(0, 0.8, 0)
     this.camera.position.copy(v.multiplyScalar(d)).add(new THREE.Vector3(0, 0.8, 0))

@@ -240,7 +240,8 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     return y
   }
 
-  const paint = new THREE.MeshPhysicalMaterial({ color: opt.paint ?? spec.paint, metalness: 0.55, roughness: 0.3, clearcoat: 1, clearcoatRoughness: 0.05 })
+  // double-sided: body-coloured decals (pillars, fins) are wound either way on the glasshouse
+  const paint = new THREE.MeshPhysicalMaterial({ color: opt.paint ?? spec.paint, metalness: 0.55, roughness: 0.3, clearcoat: 1, clearcoatRoughness: 0.05, side: THREE.DoubleSide })
   // the roof has its own paint so dual-tone colours (contrasting roof) can be shown
   const roofPaint = paint.clone()
   if (spec.roof.black) roofPaint.color.set('#0d0e10')

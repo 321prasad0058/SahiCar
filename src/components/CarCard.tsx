@@ -9,10 +9,12 @@ import { Icon } from './Icon'
 import { toast } from './Toast'
 
 export function SafetyStars({ car }: { car: Car }) {
-  if (car.safety.adult == null) return <span className="chip">Not crash-tested</span>
+  const s = car.safety
+  if (s.adult == null || !s.agency) return <span className="chip" title="No Bharat NCAP or Global NCAP test of this model yet">Not crash-tested in India</span>
+  const caveat = s.oldProtocol ? 'old test protocol' : s.preFacelift ? 'pre-facelift test' : ''
   return (
-    <span className={`chip ${car.safety.adult >= 5 ? 'green' : car.safety.adult >= 4 ? 'cyan' : 'amber'}`} title={`${car.safety.agency} ${car.safety.year ?? ''}`}>
-      {car.safety.adult}★ {car.safety.agency === 'BNCAP' ? 'Bharat NCAP' : car.safety.agency}
+    <span className={`chip ${caveat ? 'amber' : s.adult >= 5 ? 'green' : s.adult >= 4 ? 'cyan' : 'amber'}`} title={`${s.agency === 'BNCAP' ? 'Bharat NCAP' : 'Global NCAP'} ${s.year ?? ''}${caveat ? ` · ${caveat}` : ''}`}>
+      {s.adult}★ {s.agency === 'BNCAP' ? 'Bharat NCAP' : 'Global NCAP'}{s.year ? ` ${s.year}` : ''}{caveat ? ` · ${caveat}` : ''}
     </span>
   )
 }

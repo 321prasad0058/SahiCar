@@ -53,7 +53,14 @@ export interface Car {
     airbagsMax: number | null
     esc: boolean | null
     adas: 'none' | 'L1' | 'L2'
+    /** the rating comes from the model before its latest facelift */
+    preFacelift?: boolean
+    /** Global NCAP's pre-2022 protocol, not comparable with today's scores */
+    oldProtocol?: boolean
+    source?: string
   }
+  /** the cheapest variant with 6 airbags, a touchscreen with Android Auto/CarPlay and a rear camera */
+  valueVariant?: { name: string; fuel: string | null; transmission: string | null; price: number; reason: string; source: string | null }
   powertrains: Powertrain[]
   variants: Variant[]
   features: string[]
