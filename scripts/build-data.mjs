@@ -126,7 +126,11 @@ for (const f of files) {
 // free images resolved by scripts/fetch-images.mjs
 const imgPath = join(research, 'images.json')
 const images = existsSync(imgPath) ? read(imgPath) : {}
-for (const c of seen.values()) c.image = images[c.id] ?? null
+// `false` marks a photo we know is the wrong generation: show the body outline, and skip the live Wikipedia lookup
+for (const c of seen.values()) {
+  c.image = images[c.id] || null
+  if (images[c.id] === false) c.wiki = null
+}
 
 // official manufacturer images, self-hosted by scripts/official-images.mjs (preferred when present)
 const offPath = join(research, 'official-images.json')
@@ -154,7 +158,8 @@ const upcoming = copy('upcoming.json', []).map((u) => ({
   fuels: (u.fuels ?? []).map(fuelOf),
   rivals: (u.rivals ?? []).map(slug),
   price: u.price?.min ? { min: u.price.min, max: u.price.max ?? u.price.min } : null,
-  image: images[`upcoming:${slug(u.id ?? `${u.brand}-${u.model}`)}`] ?? null,
+  image: images[`upcoming:${slug(u.id ?? `${u.brand}-${u.model}`)}`] || null,
+  ...(images[`upcoming:${slug(u.id ?? `${u.brand}-${u.model}`)}`] === false ? { wiki: null } : {}),
 }))
 writeFileSync(join(out, 'upcoming.json'), JSON.stringify(upcoming))
 writeFileSync(join(out, 'timing.json'), JSON.stringify(copy('timing-events.json', [])))

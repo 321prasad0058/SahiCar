@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react'
 import type { Body, Official } from '../data/types'
 
-type Img = { src: string; page: string } | null
+// artist and licence are set for photos picked from Wikimedia Commons (CC BY / BY-SA need both credited)
+type Img = { src: string; page: string; artist?: string; license?: string } | null
 const KEY = 'sc-img-v1'
 let memo: Record<string, Img> = {}
 try { memo = JSON.parse(localStorage.getItem(KEY) ?? '{}') } catch { /* storage blocked */ }
@@ -104,7 +105,7 @@ function WikiImage({ image, wiki, body, alt, eager }: { image?: Img; wiki?: stri
           onClick={(e) => { e.preventDefault(); e.stopPropagation(); open(img.page, '_blank', 'noopener') }}
           onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); open(img.page, '_blank', 'noopener') } }}
         >
-          Photo: Wikimedia
+          {img.artist ? `Photo: ${img.artist} · ${img.license ?? 'Wikimedia'}` : 'Photo: Wikimedia'}
         </span>
       )}
     </div>
