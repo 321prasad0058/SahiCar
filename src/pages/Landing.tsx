@@ -344,16 +344,6 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* what it costs each month */}
-      <section className="emi-home">
-        <div className="wrap">
-          <div className="eyebrow" data-reveal>Car loan EMI</div>
-          <h2 className="section-title" data-split>What will it cost you each month?</h2>
-          <p className="section-sub muted" data-reveal>Your EMI at the best published rate, and every lender’s offer for your loan one tap away.</p>
-          <EmiTeaser />
-        </div>
-      </section>
-
       {/* why us */}
       <section className="versus">
         <div className="wrap">
@@ -381,6 +371,13 @@ export default function Landing() {
       </section>
 
       {/* buy or wait */}
+      {/* a hook into the EMI calculator, after the USPs */}
+      <section className="emi-home">
+        <div className="wrap">
+          <EmiTeaser />
+        </div>
+      </section>
+
       <section className="soon">
         <div className="wrap">
           <div className="eyebrow" data-reveal>Buy now or wait?</div>

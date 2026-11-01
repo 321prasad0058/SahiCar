@@ -596,78 +596,74 @@
   gap: 18px;
 }
 
-/* home: EMI estimator */
+/* home: a slim bar into the EMI calculator */
 .emi-home {
-  padding: 12vh 0;
+  padding: 0 0 7vh;
   background: var(--bg);
 }
-.emi-teaser {
-  margin-top: 34px;
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  overflow: hidden;
-}
-.et-in {
-  padding: 28px;
-  display: grid;
-  gap: 18px;
-  align-content: start;
-}
-.et-row {
+.emi-hook {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
+  gap: 18px;
+  padding: 20px 24px;
+  background: linear-gradient(100deg, var(--accent-soft), var(--surface) 65%);
+  border-color: color-mix(in srgb, var(--accent) 25%, var(--line));
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s var(--ease);
 }
-.et-label {
-  font-weight: 600;
-  font-size: 14px;
+.emi-hook:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
 }
-.et-row b {
-  font-size: 20px;
-  font-variant-numeric: tabular-nums;
+.eh-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: var(--accent);
+  color: #fff;
 }
-.et-in input[type='range'] {
-  width: 100%;
+.eh-text {
+  display: grid;
+  gap: 3px;
   min-width: 0;
 }
-.et-out {
-  padding: 28px;
-  display: grid;
-  gap: 8px;
-  align-content: center;
-  justify-items: start;
-  background: linear-gradient(160deg, var(--accent-soft), var(--surface) 80%);
-  border-left: 1px solid var(--line);
+.eh-text > b {
+  font-size: 18px;
+  letter-spacing: -0.01em;
 }
-.et-big {
-  font-size: clamp(40px, 5vw, 56px);
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 1.05;
+.eh-num {
+  color: var(--accent);
   font-variant-numeric: tabular-nums;
 }
-.et-big span {
-  font-size: 0.32em;
-  font-weight: 500;
-  letter-spacing: 0;
-  color: var(--muted);
-  margin-left: 6px;
-}
-.et-out .btn {
-  margin: 10px 0 2px;
+.eh-btn {
+  margin-left: auto;
+  flex: none;
 }
 @media (max-width: 760px) {
-  .emi-teaser {
-    grid-template-columns: minmax(0, 1fr);
+  .emi-hook {
+    flex-wrap: wrap;
+    gap: 12px 14px;
+    padding: 16px;
   }
-  .et-in,
-  .et-out {
-    padding: 20px;
+  .eh-icon {
+    width: 40px;
+    height: 40px;
   }
-  .et-out {
-    border-left: 0;
-    border-top: 1px solid var(--line);
+  .eh-text {
+    flex: 1;
   }
+  .eh-text > b {
+    font-size: 16px;
+  }
+  .eh-btn {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+/* tuck the bar into the no-bias section's bottom space instead of adding a full section */
+.versus + .emi-home {
+  margin-top: -6vh;
 }
