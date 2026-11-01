@@ -3,6 +3,7 @@
 //   node scripts/official-images.mjs collect [id …]   visit each car's official page in headless Chrome and list candidate images
 //   node scripts/official-images.mjs pick [id …]      download candidates, score them, and write the best to public/cars/
 //   node scripts/official-images.mjs sheet            contact sheets of the picks (scratch/sheets) for a human check
+//   node scripts/official-images.mjs manual           add official photos saved by hand in research/official-manual/<car-id>.jpg|png|webp
 //
 // The scorer prefers studio renders: the transparent-background cut-outs carmakers use in their colour pickers,
 // then plain studio backdrops, then everything else. research/official-overrides.json pins a candidate URL
@@ -237,7 +238,28 @@ async function sheet() {
   console.log(`sheets in ${dir}`)
 }
 
+// ── manual: official photos downloaded in a browser (for makers whose sites refuse automated visits)
+
+async function manual() {
+  const { readdirSync } = await import('node:fs')
+  const dir = R('research/official-manual')
+  mkdirSync(dir, { recursive: true })
+  const result = readJson('research/official-images.json', {})
+  for (const f of readdirSync(dir).filter((f) => /\.(jpe?g|png|webp|avif)$/i.test(f))) {
+    const id = f.replace(/\.[^.]+$/, '')
+    const car = cars.find((c) => c.id === id)
+    if (!car) { console.log(`${f}: no car with id "${id}"`); continue }
+    const buf = readFileSync(join(dir, f))
+    const a = await analyse(buf)
+    if (!a) { console.log(`${f}: too small (at least 480 × 240)`); continue }
+    result[id] = { ...(await save(id, buf, a, { page: pages[id] ?? car.oemUrl, url: `manual:${f}` })), brand: car.brand }
+    console.log(`${id}: ${a.transparent ? 'cut-out' : 'photo'} ${a.W}×${a.H} · ${result[id].kb} KB`)
+  }
+  writeFileSync(R('research/official-images.json'), JSON.stringify(result, null, 1))
+}
+
 if (cmd === 'collect') await collect()
+else if (cmd === 'manual') await manual()
 else if (cmd === 'pick') await pick()
 else if (cmd === 'sheet') await sheet()
-else console.log('usage: node scripts/official-images.mjs collect|pick|sheet [id …]')
+else console.log('usage: node scripts/official-images.mjs collect|pick|sheet|manual [id …]')

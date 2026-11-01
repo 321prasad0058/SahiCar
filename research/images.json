@@ -7,34 +7,19 @@
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Audi_Q3_F3_DSC_7494.jpg/960px-Audi_Q3_F3_DSC_7494.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Audi_Q3"
  },
- "bmw-2-series-gran-coupe": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/BMW_F44_1X7A6109.jpg/960px-BMW_F44_1X7A6109.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/BMW_2_Series_Gran_Coup%C3%A9"
- },
+ "bmw-2-series-gran-coupe": false,
  "bmw-x1": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/BMW_U11_1X7A6826.jpg/960px-BMW_U11_1X7A6826.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/BMW_X1"
  },
- "bmw-ix1": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/BMW_U11_1X7A6826.jpg/960px-BMW_U11_1X7A6826.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/BMW_X1"
- },
- "bmw-3-series-lwb": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/2019_BMW_318d_SE_Automatic_2.0_Front.jpg/960px-2019_BMW_318d_SE_Automatic_2.0_Front.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/BMW_3_Series_(G20)"
- },
+ "bmw-ix1": false,
+ "bmw-3-series-lwb": false,
  "byd-atto-3": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/BYD_Atto_3_1X7A6491.jpg/960px-BYD_Atto_3_1X7A6491.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/BYD_Atto_3"
  },
- "byd-emax-7": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/41/2023_BYD_e6_SNF7478L_front.jpg/960px-2023_BYD_e6_SNF7478L_front.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/BYD_e6"
- },
- "byd-seal": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/2022_BYD_Seal.jpg/960px-2022_BYD_Seal.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/BYD_Seal"
- },
+ "byd-emax-7": false,
+ "byd-seal": false,
  "byd-sealion-7": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/2025_BYD_Sealion_7_Performance_front.jpg/960px-2025_BYD_Sealion_7_Performance_front.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/BYD_Sealion_7"
@@ -75,10 +60,7 @@
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/Honda_City_1.5_i-VTEC_V_%28VIII%2C_Facelift%29_%E2%80%93_f_22032025.jpg/960px-Honda_City_1.5_i-VTEC_V_%28VIII%2C_Facelift%29_%E2%80%93_f_22032025.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Honda_City"
  },
- "honda-zr-v": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/Honda_ZR-V_e-HEV_Advance_%E2%80%93_f_14072024.jpg/960px-Honda_ZR-V_e-HEV_Advance_%E2%80%93_f_14072024.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Honda_ZR-V"
- },
+ "honda-zr-v": false,
  "hyundai-grand-i10-nios": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Hyundai_i10_1.0_Intro_%28III%29_%E2%80%93_f_03012021.jpg/960px-Hyundai_i10_1.0_Intro_%28III%29_%E2%80%93_f_03012021.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Hyundai_i10"
@@ -199,26 +181,12 @@
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Mahindra_Bolero_ZLX.jpg/960px-Mahindra_Bolero_ZLX.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Mahindra_Bolero"
  },
- "mahindra-bolero-neo": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Mahindra_Bolero_ZLX.jpg/960px-Mahindra_Bolero_ZLX.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Mahindra_Bolero"
- },
- "mahindra-thar": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/Mahindra_Thar_SUV_in_%22Red_Rage%22_color_at_Ashiana_Brahmanda%2C_East_Singbhum_India_%28Ank_Kumar%2C_Infosys_limited%29_02_%28cropped%29.jpg/960px-Mahindra_Thar_SUV_in_%22Red_Rage%22_color_at_Ashiana_Brahmanda%2C_East_Singbhum_India_%28Ank_Kumar%2C_Infosys_limited%29_02_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Mahindra_Thar"
- },
+ "mahindra-bolero-neo": false,
  "mahindra-thar-roxx": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bd/Mahindra_Thar_ROXX_on_rocks_%28cropped%29.jpg/960px-Mahindra_Thar_ROXX_on_rocks_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Mahindra_Thar_ROXX"
  },
- "mahindra-scorpio-classic": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/Mahindra_Scorpio_GLX_2.6_m-Hawk_2011_%2836756517492%29.jpg/960px-Mahindra_Scorpio_GLX_2.6_m-Hawk_2011_%2836756517492%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Mahindra_Scorpio"
- },
- "mahindra-scorpio-n": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/2024_Mahindra_Scorpio_Z8L_front.jpg/960px-2024_Mahindra_Scorpio_Z8L_front.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Mahindra_Scorpio-N"
- },
+ "mahindra-scorpio-classic": false,
  "mahindra-xuv-3xo-ev": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/2025_Mahindra_XUV_3XO_AX7L_front.jpg/960px-2025_Mahindra_XUV_3XO_AX7L_front.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Mahindra_XUV_3XO"
@@ -299,30 +267,12 @@
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/35/Nissan_X-Trail_%28T33%29_1X7A7179.jpg/960px-Nissan_X-Trail_%28T33%29_1X7A7179.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Nissan_X-Trail"
  },
- "tata-punch": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/2021_Tata_Punch_Creative_%28India%29_front_view_01.png/960px-2021_Tata_Punch_Creative_%28India%29_front_view_01.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Tata_Punch"
- },
- "tata-nexon": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Tata_Nexon_Blue_Dual_Tone.jpg/960px-Tata_Nexon_Blue_Dual_Tone.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Tata_Nexon"
- },
- "tata-punch-ev": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/2021_Tata_Punch_Creative_%28India%29_front_view_01.png/960px-2021_Tata_Punch_Creative_%28India%29_front_view_01.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Tata_Punch"
- },
- "tata-nexon-ev": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Tata_Nexon_Blue_Dual_Tone.jpg/960px-Tata_Nexon_Blue_Dual_Tone.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Tata_Nexon"
- },
- "tata-harrier": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c3/Tata_Buzzard_Sport%2C_GIMS_2019%2C_Le_Grand-Saconnex_%28GIMS0651%29.jpg/960px-Tata_Buzzard_Sport%2C_GIMS_2019%2C_Le_Grand-Saconnex_%28GIMS0651%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Tata_Harrier"
- },
- "tata-harrier-ev": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c3/Tata_Buzzard_Sport%2C_GIMS_2019%2C_Le_Grand-Saconnex_%28GIMS0651%29.jpg/960px-Tata_Buzzard_Sport%2C_GIMS_2019%2C_Le_Grand-Saconnex_%28GIMS0651%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Tata_Harrier"
- },
+ "tata-punch": false,
+ "tata-nexon": false,
+ "tata-punch-ev": false,
+ "tata-nexon-ev": false,
+ "tata-harrier": false,
+ "tata-harrier-ev": false,
  "tesla-model-y": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/Tesla_Model_Y_Premium_%28Facelift%29_%E2%80%93_f_05052026.jpg/960px-Tesla_Model_Y_Premium_%28Facelift%29_%E2%80%93_f_05052026.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Tesla_Model_Y"
@@ -355,25 +305,15 @@
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/2020_Volkswagen_Golf_Style_1.5_Front.jpg/960px-2020_Volkswagen_Golf_Style_1.5_Front.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Volkswagen_Golf"
  },
- "upcoming:hyundai-bayon": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/2021_Hyundai_Bayon_Premium_T-GDi_MHEV_1.0_%281%29.jpg/960px-2021_Hyundai_Bayon_Premium_T-GDi_MHEV_1.0_%281%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Hyundai_Bayon"
- },
+ "upcoming:hyundai-bayon": false,
  "upcoming:renault-duster-hybrid": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/Dacia_Duster_TCe_130_Extreme_%28III%29_%E2%80%93_f_13102024.jpg/960px-Dacia_Duster_TCe_130_Extreme_%28III%29_%E2%80%93_f_13102024.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Dacia_Duster"
  },
- "upcoming:toyota-glanza": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/2017_Suzuki_Baleno_SZ3_Dualjet_1.2_Front.jpg/960px-2017_Suzuki_Baleno_SZ3_Dualjet_1.2_Front.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Suzuki_Baleno_(2015)"
- },
+ "upcoming:toyota-glanza": false,
  "upcoming:honda-elevate": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/2026_Honda_WR-V_Prestige_%28Colombia%29_front_view.jpg/960px-2026_Honda_WR-V_Prestige_%28Colombia%29_front_view.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Honda_Elevate"
- },
- "upcoming:skoda-slavia": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/2021_%C5%A0koda_Slavia_1.5_TSI_Style_%28India%29_front_view.png/960px-2021_%C5%A0koda_Slavia_1.5_TSI_Style_%28India%29_front_view.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/%C5%A0koda_Slavia"
  },
  "upcoming:audi-q3": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Audi_Q3_F3_DSC_7494.jpg/960px-Audi_Q3_F3_DSC_7494.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
@@ -387,14 +327,7 @@
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/Mahindra_Thar_SUV_in_%22Red_Rage%22_color_at_Ashiana_Brahmanda%2C_East_Singbhum_India_%28Ank_Kumar%2C_Infosys_limited%29_02_%28cropped%29.jpg/960px-Mahindra_Thar_SUV_in_%22Red_Rage%22_color_at_Ashiana_Brahmanda%2C_East_Singbhum_India_%28Ank_Kumar%2C_Infosys_limited%29_02_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Mahindra_Thar"
  },
- "upcoming:maruti-baleno": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/2017_Suzuki_Baleno_SZ3_Dualjet_1.2_Front.jpg/960px-2017_Suzuki_Baleno_SZ3_Dualjet_1.2_Front.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Suzuki_Baleno_(2015)"
- },
- "upcoming:maruti-brezza": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/2022_Maruti_Suzuki_Brezza_ZXi%2B_%28India%29_front_view_03.png/960px-2022_Maruti_Suzuki_Brezza_ZXi%2B_%28India%29_front_view_03.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Suzuki_Brezza"
- },
+ "upcoming:maruti-baleno": false,
  "upcoming:kia-syros-ev": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/2025_Kia_Syros_1.5_HTX%2B_%28O%29_%28India%29_front_view_01.jpg/960px-2025_Kia_Syros_1.5_HTX%2B_%28O%29_%28India%29_front_view_01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Kia_Syros"
@@ -423,18 +356,7 @@
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/21/2024_Hyundai_Creta_1.5_MPi_SX%28O%29_%28India%29_front_view.png/960px-2024_Hyundai_Creta_1.5_MPi_SX%28O%29_%28India%29_front_view.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Hyundai_Creta"
  },
- "upcoming:tata-nexon-next-gen": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Tata_Nexon_Blue_Dual_Tone.jpg/960px-Tata_Nexon_Blue_Dual_Tone.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Tata_Nexon"
- },
- "upcoming:kia-seltos-hybrid": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/Kia_Seltos_SP2_PE_Snow_White_Pearl_%2817%29_%28cropped%29.jpg/960px-Kia_Seltos_SP2_PE_Snow_White_Pearl_%2817%29_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Kia_Seltos"
- },
- "upcoming:kia-sonet-next-gen": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/2021_Kia_Sonet_1.5_Premiere_%28Indonesia%29_front_view_03.jpg/960px-2021_Kia_Sonet_1.5_Premiere_%28Indonesia%29_front_view_03.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Kia_Sonet"
- },
+ "upcoming:tata-nexon-next-gen": false,
  "upcoming:tesla-model-3": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/Tesla_Model_3_%282023%29_Autofr%C3%BChling_Ulm_IMG_9282.jpg/960px-Tesla_Model_3_%282023%29_Autofr%C3%BChling_Ulm_IMG_9282.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Tesla_Model_3"
@@ -547,10 +469,7 @@
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/2022_Tata_Tiago_XZA%2B_front_20230512.jpg/960px-2022_Tata_Tiago_XZA%2B_front_20230512.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Tata_Tiago"
  },
- "tata-altroz": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Tata_Altroz_front_20230617.jpg/960px-Tata_Altroz_front_20230617.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Tata_Altroz"
- },
+ "tata-altroz": false,
  "tata-tiago-ev": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/2022_Tata_Tiago_XZA%2B_front_20230512.jpg/960px-2022_Tata_Tiago_XZA%2B_front_20230512.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Tata_Tiago"
@@ -559,22 +478,13 @@
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/2025_Tata_Curvv_Creative%2B_S_Petrol_%28India%29_front_view.png/960px-2025_Tata_Curvv_Creative%2B_S_Petrol_%28India%29_front_view.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Tata_Curvv"
  },
- "tata-sierra": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Tata_Sierra_Turbo_GJ10DA0696_%28cropped%29.jpg/960px-Tata_Sierra_Turbo_GJ10DA0696_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Tata_Sierra"
- },
- "tata-safari": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3d/Tata_Safari_II_front_-_PSM_2009.jpg/960px-Tata_Safari_II_front_-_PSM_2009.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Tata_Safari"
- },
+ "tata-sierra": false,
+ "tata-safari": false,
  "tata-curvv-ev": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/2025_Tata_Curvv_Creative%2B_S_Petrol_%28India%29_front_view.png/960px-2025_Tata_Curvv_Creative%2B_S_Petrol_%28India%29_front_view.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Tata_Curvv"
  },
- "tata-sierra-ev": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Tata_Sierra_Turbo_GJ10DA0696_%28cropped%29.jpg/960px-Tata_Sierra_Turbo_GJ10DA0696_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Tata_Sierra"
- },
+ "tata-sierra-ev": false,
  "toyota-glanza": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/2017_Suzuki_Baleno_SZ3_Dualjet_1.2_Front.jpg/960px-2017_Suzuki_Baleno_SZ3_Dualjet_1.2_Front.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Suzuki_Baleno_(2015)"
@@ -632,10 +542,6 @@
   "page": "https://en.wikipedia.org/wiki/Volkswagen_Taigun"
  },
  "upcoming:mahindra-scorpio-n": null,
- "upcoming:volkswagen-virtus-facelift": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9e/2022_Volkswagen_Virtus_1.5_GT_%28India%29_front_view_02.png/960px-2022_Volkswagen_Virtus_1.5_GT_%28India%29_front_view_02.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Volkswagen_Virtus"
- },
  "upcoming:vinfast-vf3": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/2025_VinFast_VF_3%2C_front_left.jpg/960px-2025_VinFast_VF_3%2C_front_left.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/VinFast_VF_3"
@@ -644,21 +550,9 @@
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/VinFast_VF5.jpg/960px-VinFast_VF5.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/VinFast_VF_5"
  },
- "upcoming:maruti-grand-vitara-facelift": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/2022_Suzuki_Grand_Vitara_GX_Smart_Hybrid_%28Indonesia%29_front_view.jpg/960px-2022_Suzuki_Grand_Vitara_GX_Smart_Hybrid_%28Indonesia%29_front_view.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Suzuki_Grand_Vitara_(2022)"
- },
  "upcoming:hyundai-he1i": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/Hyundai_Inster_Prime_%E2%80%93_f_14022026.jpg/960px-Hyundai_Inster_Prime_%E2%80%93_f_14022026.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Hyundai_Inster"
- },
- "upcoming:toyota-fortuner-next-gen": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/2015_Toyota_Fortuner_%28New_Zealand%29.jpg/960px-2015_Toyota_Fortuner_%28New_Zealand%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Toyota_Fortuner"
- },
- "upcoming:tata-tiago-facelift": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/2022_Tata_Tiago_XZA%2B_front_20230512.jpg/960px-2022_Tata_Tiago_XZA%2B_front_20230512.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Tata_Tiago"
  },
  "upcoming:honda-0-alpha": null,
  "upcoming:renault-bigster": {
@@ -668,5 +562,46 @@
  "upcoming:volkswagen-tera": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/Volkswagen_Tera_170_TSi_Comfort_2026_Front.jpg/960px-Volkswagen_Tera_170_TSi_Comfort_2026_Front.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Volkswagen_Tera"
+ },
+ "tata-aeris": false,
+ "mahindra-thar": {
+  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/Mahindra_Thar_SUV_in_%22Red_Rage%22_color_at_Ashiana_Brahmanda%2C_East_Singbhum_India_%28Ank_Kumar%2C_Infosys_limited%29_02_%28cropped%29.jpg/960px-Mahindra_Thar_SUV_in_%22Red_Rage%22_color_at_Ashiana_Brahmanda%2C_East_Singbhum_India_%28Ank_Kumar%2C_Infosys_limited%29_02_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+  "page": "https://en.wikipedia.org/wiki/Mahindra_Thar"
+ },
+ "mahindra-scorpio-n": {
+  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/2024_Mahindra_Scorpio_Z8L_front.jpg/960px-2024_Mahindra_Scorpio_Z8L_front.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+  "page": "https://en.wikipedia.org/wiki/Mahindra_Scorpio-N"
+ },
+ "upcoming:skoda-slavia": {
+  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/2021_%C5%A0koda_Slavia_1.5_TSI_Style_%28India%29_front_view.png/960px-2021_%C5%A0koda_Slavia_1.5_TSI_Style_%28India%29_front_view.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+  "page": "https://en.wikipedia.org/wiki/%C5%A0koda_Slavia"
+ },
+ "upcoming:maruti-brezza": {
+  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/2022_Maruti_Suzuki_Brezza_ZXi%2B_%28India%29_front_view_03.png/960px-2022_Maruti_Suzuki_Brezza_ZXi%2B_%28India%29_front_view_03.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+  "page": "https://en.wikipedia.org/wiki/Suzuki_Brezza"
+ },
+ "upcoming:kia-seltos-hybrid": {
+  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/Kia_Seltos_SP2_PE_Snow_White_Pearl_%2817%29_%28cropped%29.jpg/960px-Kia_Seltos_SP2_PE_Snow_White_Pearl_%2817%29_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+  "page": "https://en.wikipedia.org/wiki/Kia_Seltos"
+ },
+ "upcoming:kia-sonet-next-gen": {
+  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/2021_Kia_Sonet_1.5_Premiere_%28Indonesia%29_front_view_03.jpg/960px-2021_Kia_Sonet_1.5_Premiere_%28Indonesia%29_front_view_03.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+  "page": "https://en.wikipedia.org/wiki/Kia_Sonet"
+ },
+ "upcoming:volkswagen-virtus-facelift": {
+  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9e/2022_Volkswagen_Virtus_1.5_GT_%28India%29_front_view_02.png/960px-2022_Volkswagen_Virtus_1.5_GT_%28India%29_front_view_02.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+  "page": "https://en.wikipedia.org/wiki/Volkswagen_Virtus"
+ },
+ "upcoming:maruti-grand-vitara-facelift": {
+  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/2022_Suzuki_Grand_Vitara_GX_Smart_Hybrid_%28Indonesia%29_front_view.jpg/960px-2022_Suzuki_Grand_Vitara_GX_Smart_Hybrid_%28Indonesia%29_front_view.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+  "page": "https://en.wikipedia.org/wiki/Suzuki_Grand_Vitara_(2022)"
+ },
+ "upcoming:toyota-fortuner-next-gen": {
+  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/2015_Toyota_Fortuner_%28New_Zealand%29.jpg/960px-2015_Toyota_Fortuner_%28New_Zealand%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+  "page": "https://en.wikipedia.org/wiki/Toyota_Fortuner"
+ },
+ "upcoming:tata-tiago-facelift": {
+  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/2022_Tata_Tiago_XZA%2B_front_20230512.jpg/960px-2022_Tata_Tiago_XZA%2B_front_20230512.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+  "page": "https://en.wikipedia.org/wiki/Tata_Tiago"
  }
 }
