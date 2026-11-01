@@ -1,0 +1,5649 @@
+{
+ "maruti-s-presso": {
+  "colours": [
+   {
+    "name": "Pearl Starry Blue",
+    "hex": "#114887"
+   },
+   {
+    "name": "Solid White",
+    "hex": "#f2f2ef",
+    "hexEstimated": true
+   },
+   {
+    "name": "Solid Sizzle Orange",
+    "hex": "#a83c0f"
+   },
+   {
+    "name": "Solid Fire Red",
+    "hex": "#8e0d0f"
+   },
+   {
+    "name": "Metallic Granite Grey",
+    "hex": "#222526"
+   },
+   {
+    "name": "Metallic Silky Silver",
+    "hex": "#737373"
+   },
+   {
+    "name": "Bluish Black",
+    "hex": "#141414"
+   }
+  ],
+  "source": "https://www.marutisuzuki.com/s-presso",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "maruti-alto-k10": {
+  "colours": [
+   {
+    "name": "Metallic Sizzling Red",
+    "hex": "#a10000"
+   },
+   {
+    "name": "Metallic Silky Silver",
+    "hex": "#737373"
+   },
+   {
+    "name": "Metallic Granite Grey",
+    "hex": "#222526"
+   },
+   {
+    "name": "Premium Earth Gold",
+    "hex": "#976c2d"
+   },
+   {
+    "name": "Metallic Speedy Blue",
+    "hex": "#1f47c2"
+   },
+   {
+    "name": "Solid White",
+    "hex": "#f2f2ef",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pearl Bluish Black",
+    "hex": "#141414"
+   }
+  ],
+  "source": "https://www.marutisuzuki.com/alto-k10",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "maruti-celerio": {
+  "colours": [
+   {
+    "name": "Metallic Speedy Blue",
+    "hex": "#1f47c2"
+   },
+   {
+    "name": "Metallic Glistening Grey",
+    "hex": "#4a4a4a"
+   },
+   {
+    "name": "Pearl Arctic White",
+    "hex": "#f3f3f3"
+   },
+   {
+    "name": "Metallic Silky Silver",
+    "hex": "#737373"
+   },
+   {
+    "name": "Solid Fire Red",
+    "hex": "#8e0d0f"
+   },
+   {
+    "name": "Pearl Caffeine Brown",
+    "hex": "#28201d"
+   },
+   {
+    "name": "Pearl Bluish Black",
+    "hex": "#141414"
+   }
+  ],
+  "source": "https://www.marutisuzuki.com/celerio",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "maruti-wagon-r": {
+  "colours": [
+   {
+    "name": "Solid White",
+    "hex": "#f2f2ef",
+    "hexEstimated": true
+   },
+   {
+    "name": "Metallic Silky Silver",
+    "hex": "#737373"
+   },
+   {
+    "name": "Metallic Magma Grey",
+    "hex": "#2b2c31"
+   },
+   {
+    "name": "Pearl Metallic Gallant Red",
+    "hex": "#d2232b"
+   },
+   {
+    "name": "Pearl Metallic Nutmeg Brown",
+    "hex": "#54473c"
+   },
+   {
+    "name": "Pearl Metallic Poolside Blue",
+    "hex": "#1188c5"
+   },
+   {
+    "name": "Pearl Metallic Gallant Red with Pearl Bluish Black Roof",
+    "hex": "#d2232b",
+    "roof": "#030303"
+   },
+   {
+    "name": "Metallic Magma Grey with Pearl Bluish Black Roof",
+    "hex": "#464848",
+    "roof": "#07072c"
+   },
+   {
+    "name": "Pearl Bluish Black",
+    "hex": "#141414"
+   }
+  ],
+  "source": "https://www.marutisuzuki.com/wagonr",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "maruti-eeco": {
+  "colours": [
+   {
+    "name": "Bluish Black",
+    "hex": "#141414"
+   },
+   {
+    "name": "Metallic Glistening Grey",
+    "hex": "#4a4a4a"
+   },
+   {
+    "name": "Solid White",
+    "hex": "#f2f2ef",
+    "hexEstimated": true
+   },
+   {
+    "name": "Metallic Brisk Blue",
+    "hex": "#0d6dc3"
+   },
+   {
+    "name": "Metallic Silky Silver",
+    "hex": "#737373"
+   }
+  ],
+  "source": "https://www.marutisuzuki.com/eeco",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "maruti-swift": {
+  "colours": [
+   {
+    "name": "Sizzling Red",
+    "hex": "#a10000"
+   },
+   {
+    "name": "Luster Blue",
+    "hex": "#1f47c2"
+   },
+   {
+    "name": "Novel Orange",
+    "hex": "#b33316"
+   },
+   {
+    "name": "Magma Grey",
+    "hex": "#2b2c31"
+   },
+   {
+    "name": "Splendid Silver",
+    "hex": "#737373"
+   },
+   {
+    "name": "Pearl Arctic White",
+    "hex": "#f3f3f3"
+   },
+   {
+    "name": "Sizzling Red with Bluish Black Roof",
+    "hex": "#a10000",
+    "roof": "#050505"
+   },
+   {
+    "name": "Luster Blue with Bluish Black Roof",
+    "hex": "#1f47c2",
+    "roof": "#050505"
+   },
+   {
+    "name": "Pearl Arctic White with Bluish Black Roof",
+    "hex": "#f3f3f3",
+    "roof": "#050505"
+   }
+  ],
+  "source": "https://www.marutisuzuki.com/swift",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "maruti-baleno": {
+  "colours": [
+   {
+    "name": "Nexa Blue",
+    "hex": "#001e5b"
+   },
+   {
+    "name": "Grandeur Grey",
+    "hex": "#303030"
+   },
+   {
+    "name": "Arctic White",
+    "hex": "#f9f9f9"
+   },
+   {
+    "name": "Splendid Silver",
+    "hex": "#464d50"
+   },
+   {
+    "name": "Opulent Red",
+    "hex": "#870001"
+   },
+   {
+    "name": "Enigmatic Teal Green",
+    "hex": "#069494"
+   },
+   {
+    "name": "Bluish Black",
+    "hex": "#181c28"
+   }
+  ],
+  "source": "https://www.nexaexperience.com/baleno",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "maruti-dzire": {
+  "colours": [
+   {
+    "name": "Gallant Red",
+    "hex": "#d2232b"
+   },
+   {
+    "name": "Alluring Blue",
+    "hex": "#415159"
+   },
+   {
+    "name": "Nutmeg Brown",
+    "hex": "#54473c"
+   },
+   {
+    "name": "Bluish Black",
+    "hex": "#141414"
+   },
+   {
+    "name": "Pearl Arctic White",
+    "hex": "#f3f3f3"
+   },
+   {
+    "name": "Magma Grey",
+    "hex": "#2b2c31"
+   },
+   {
+    "name": "Splendid Silver",
+    "hex": "#737373"
+   }
+  ],
+  "source": "https://www.marutisuzuki.com/dzire",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "maruti-fronx": {
+  "colours": [
+   {
+    "name": "NEXA Blue (Celestial)",
+    "hex": "#163472"
+   },
+   {
+    "name": "Arctic White",
+    "hex": "#f9f9f9"
+   },
+   {
+    "name": "Splendid Silver",
+    "hex": "#b6babd"
+   },
+   {
+    "name": "Grandeur Grey",
+    "hex": "#464848"
+   },
+   {
+    "name": "Earthen Brown",
+    "hex": "#95897b"
+   },
+   {
+    "name": "Opulent Red",
+    "hex": "#ac0f0f"
+   },
+   {
+    "name": "Bluish Black",
+    "hex": "#171717"
+   },
+   {
+    "name": "Earthen Brown with Bluish Black Roof",
+    "hex": "#95897b",
+    "roof": "#171717"
+   },
+   {
+    "name": "Splendid Silver with Bluish Black Roof",
+    "hex": "#b6babd",
+    "roof": "#171717"
+   },
+   {
+    "name": "Opulent Red with Black Roof",
+    "hex": "#ac0f0f",
+    "roof": "#171717"
+   }
+  ],
+  "source": "https://www.nexaexperience.com/fronx",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "maruti-brezza": {
+  "colours": [
+   {
+    "name": "Sizzling Red with Bluish Black Roof",
+    "hex": "#990000",
+    "roof": "#323232"
+   },
+   {
+    "name": "Pearl Arctic White with Bluish Black Roof",
+    "hex": "#f1f1ee",
+    "roof": "#323232",
+    "hexEstimated": true
+   },
+   {
+    "name": "Lustrous Beige with Bluish Black Roof",
+    "hex": "#9f957a",
+    "roof": "#323232"
+   },
+   {
+    "name": "Pearl Arctic White",
+    "hex": "#f3f3f3"
+   },
+   {
+    "name": "Splendid Silver",
+    "hex": "#a5afb1"
+   },
+   {
+    "name": "Magma Gray",
+    "hex": "#555347"
+   },
+   {
+    "name": "Vivacious Orange",
+    "hex": "#732708"
+   },
+   {
+    "name": "Lustrous Beige",
+    "hex": "#9f957a"
+   },
+   {
+    "name": "Pearl Bluish Black",
+    "hex": "#0c0d11"
+   }
+  ],
+  "source": "https://www.marutisuzuki.com/brezza",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "maruti-ertiga": {
+  "colours": [
+   {
+    "name": "Auburn Red",
+    "hex": "#732112"
+   },
+   {
+    "name": "Pearl Metallic Dignity Brown",
+    "hex": "#1f1412"
+   },
+   {
+    "name": "Magma Grey",
+    "hex": "#2b2c31"
+   },
+   {
+    "name": "Prime Oxford Blue",
+    "hex": "#40519c"
+   },
+   {
+    "name": "Arctic White",
+    "hex": "#f3f3f3"
+   },
+   {
+    "name": "Splendid Silver",
+    "hex": "#737373"
+   },
+   {
+    "name": "Bluish Black",
+    "hex": "#141414"
+   }
+  ],
+  "source": "https://www.marutisuzuki.com/ertiga",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "maruti-victoris": {
+  "colours": [
+   {
+    "name": "Eternal Blue with Bluish Black Roof",
+    "hex": "#24475b",
+    "roof": "#141414"
+   },
+   {
+    "name": "Splendid Silver with Bluish Black Roof",
+    "hex": "#ededf2",
+    "roof": "#050505"
+   },
+   {
+    "name": "Splendid Silver",
+    "hex": "#737373"
+   },
+   {
+    "name": "Sizzling Red with Bluish Black Roof",
+    "hex": "#a10000",
+    "roof": "#050505"
+   },
+   {
+    "name": "Sizzling Red",
+    "hex": "#a10000"
+   },
+   {
+    "name": "Mystic Green",
+    "hex": "#233b47"
+   },
+   {
+    "name": "Bluish Black",
+    "hex": "#141414"
+   },
+   {
+    "name": "Pearl Arctic White",
+    "hex": "#f3f3f3"
+   },
+   {
+    "name": "Magma Grey",
+    "hex": "#2b2c31"
+   },
+   {
+    "name": "Eternal Blue",
+    "hex": "#24475b"
+   }
+  ],
+  "source": "https://www.marutisuzuki.com/victoris",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "maruti-grand-vitara": {
+  "colours": [
+   {
+    "name": "NEXA Blue",
+    "hex": "#163472"
+   },
+   {
+    "name": "Arctic White",
+    "hex": "#f9f9f9"
+   },
+   {
+    "name": "Splendid Silver",
+    "hex": "#b6babd"
+   },
+   {
+    "name": "Grandeur Grey",
+    "hex": "#464848"
+   },
+   {
+    "name": "Chestnut Brown",
+    "hex": "#35312e"
+   },
+   {
+    "name": "Opulent Red",
+    "hex": "#ac0f0f"
+   },
+   {
+    "name": "Midnight Black",
+    "hex": "#171717"
+   },
+   {
+    "name": "Arctic White with Black Roof",
+    "hex": "#f9f9f9",
+    "roof": "#171717"
+   },
+   {
+    "name": "Splendid Silver with Black Roof",
+    "hex": "#b6babd",
+    "roof": "#171717"
+   },
+   {
+    "name": "Opulent Red with Black Roof",
+    "hex": "#ac0f0f",
+    "roof": "#171717"
+   }
+  ],
+  "source": "https://www.nexaexperience.com/grand-vitara",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "maruti-xl6": {
+  "colours": [
+   {
+    "name": "NEXA Blue (Celestial)",
+    "hex": "#163472"
+   },
+   {
+    "name": "Opulent Red",
+    "hex": "#ac0f0f"
+   },
+   {
+    "name": "Brave Khaki",
+    "hex": "#57490a"
+   },
+   {
+    "name": "Grandeur Grey",
+    "hex": "#464848"
+   },
+   {
+    "name": "Splendid Silver",
+    "hex": "#b6babd"
+   },
+   {
+    "name": "Arctic White",
+    "hex": "#f9f9f9"
+   },
+   {
+    "name": "Bluish Black",
+    "hex": "#040720"
+   },
+   {
+    "name": "Opulent Red with Midnight Black Roof",
+    "hex": "#ac0f0f",
+    "roof": "#171717"
+   },
+   {
+    "name": "Brave Khaki with Midnight Black Roof",
+    "hex": "#57490a",
+    "roof": "#171717"
+   },
+   {
+    "name": "Splendid Silver with Midnight Black Roof",
+    "hex": "#b6babd",
+    "roof": "#171717"
+   }
+  ],
+  "source": "https://www.nexaexperience.com/xl6",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "maruti-jimny": {
+  "colours": [
+   {
+    "name": "Kinetic Yellow with Bluish Black Roof",
+    "hex": "#e1ed4d",
+    "roof": "#040720"
+   },
+   {
+    "name": "Sizzling Red with Bluish Black Roof",
+    "hex": "#b21511",
+    "roof": "#040720"
+   },
+   {
+    "name": "Sizzling Red",
+    "hex": "#b21511"
+   },
+   {
+    "name": "Granite Gray",
+    "hex": "#494a4e"
+   },
+   {
+    "name": "NEXA Blue",
+    "hex": "#163472"
+   },
+   {
+    "name": "Bluish Black",
+    "hex": "#040720"
+   },
+   {
+    "name": "Pearl Arctic White",
+    "hex": "#f9f9f9"
+   }
+  ],
+  "source": "https://www.nexaexperience.com/jimny",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "maruti-e-vitara": {
+  "colours": [
+   {
+    "name": "Land Breeze Green with Bluish Black Roof",
+    "hex": "#4b4b3f",
+    "roof": "#181c28"
+   },
+   {
+    "name": "Opulent Red with Bluish Black Roof",
+    "hex": "#ac0f0f",
+    "roof": "#171717"
+   },
+   {
+    "name": "Arctic White with Bluish Black Roof",
+    "hex": "#f9f9f9",
+    "roof": "#171717"
+   },
+   {
+    "name": "Splendid Silver with Bluish Black Roof",
+    "hex": "#b6babd",
+    "roof": "#171717"
+   },
+   {
+    "name": "Opulent Red",
+    "hex": "#ac0f0f"
+   },
+   {
+    "name": "Celestial Blue",
+    "hex": "#1e2b71"
+   },
+   {
+    "name": "Arctic White",
+    "hex": "#f9f9f9"
+   },
+   {
+    "name": "Splendid Silver",
+    "hex": "#b6babd"
+   },
+   {
+    "name": "Grandeur Grey",
+    "hex": "#464848"
+   },
+   {
+    "name": "Bluish Black",
+    "hex": "#181c28"
+   }
+  ],
+  "source": "https://www.nexaexperience.com/e-vitara",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "maruti-invicto": {
+  "colours": [
+   {
+    "name": "Magnificent Black",
+    "hex": "#000000"
+   },
+   {
+    "name": "NEXA Blue (Celestial)",
+    "hex": "#163472"
+   },
+   {
+    "name": "Stellar Bronze",
+    "hex": "#beb2a6"
+   },
+   {
+    "name": "Majestic Silver",
+    "hex": "#cdd3e0"
+   },
+   {
+    "name": "Mystic White",
+    "hex": "#e5e4e2"
+   }
+  ],
+  "source": "https://www.nexaexperience.com/invicto",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "mg-comet-ev": {
+  "colours": [
+   {
+    "name": "Apple Green with Starry Black Roof",
+    "hex": "#b9e170",
+    "roof": "#1e1f1f"
+   },
+   {
+    "name": "Aurora Silver",
+    "hex": "#d1d1db"
+   },
+   {
+    "name": "Candy White",
+    "hex": "#eae9e7"
+   },
+   {
+    "name": "Starry Black",
+    "hex": "#242020"
+   },
+   {
+    "name": "Candy White with Starry Black Roof",
+    "hex": "#eae9e8",
+    "roof": "#1e1f1f"
+   }
+  ],
+  "source": "https://www.mgmotor.co.in/vehicles/comet-ev-electric-car-in-india",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "mg-astor": {
+  "colours": [
+   {
+    "name": "Aurora Silver",
+    "hex": "#d1d1db"
+   },
+   {
+    "name": "Glaze Red",
+    "hex": "#e32735"
+   },
+   {
+    "name": "Candy White",
+    "hex": "#eae9e7"
+   },
+   {
+    "name": "Starry Black",
+    "hex": "#242020"
+   },
+   {
+    "name": "Havana Grey",
+    "hex": "#6b6f73"
+   },
+   {
+    "name": "Candy White with Black Dual Tone",
+    "hex": "#eae9e8",
+    "roof": "#2c3334"
+   }
+  ],
+  "source": "https://www.mgmotor.co.in/vehicles/mgastor",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "mg-hector": {
+  "colours": [
+   {
+    "name": "Celadon Blue",
+    "hex": "#042343"
+   },
+   {
+    "name": "Pearl White",
+    "hex": "#eae9e8"
+   },
+   {
+    "name": "Aurora Silver",
+    "hex": "#d1d1db"
+   },
+   {
+    "name": "Glaze Red",
+    "hex": "#e32735"
+   },
+   {
+    "name": "Starry Black",
+    "hex": "#242020"
+   }
+  ],
+  "source": "https://www.mgmotor.co.in/vehicles/mghector",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "mg-windsor-ev": {
+  "colours": [
+   {
+    "name": "Pearl White",
+    "hex": "#eae9e8"
+   },
+   {
+    "name": "Starry Black",
+    "hex": "#242020"
+   },
+   {
+    "name": "Turquoise Green",
+    "hex": "#2f444d"
+   },
+   {
+    "name": "Glaze Red",
+    "hex": "#e32735"
+   },
+   {
+    "name": "Celadon Blue",
+    "hex": "#042343"
+   },
+   {
+    "name": "Aurora Silver",
+    "hex": "#d1d1db"
+   },
+   {
+    "name": "Clay Beige",
+    "hex": "#9c968f"
+   }
+  ],
+  "source": "https://www.mgmotor.co.in/vehicles/windsor-ev-electric-car-in-india",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "mg-hector-plus": {
+  "colours": [
+   {
+    "name": "Aurora Silver",
+    "hex": "#b3b3bc",
+    "hexEstimated": true
+   },
+   {
+    "name": "Glaze Red",
+    "hex": "#bb202c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Starry Black",
+    "hex": "#1e1b1b",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/mg-cars/hector-plus/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "mg-zs-ev": {
+  "colours": [
+   {
+    "name": "Glaze Red",
+    "hex": "#e32735"
+   },
+   {
+    "name": "Aurora Silver",
+    "hex": "#d1d1db"
+   },
+   {
+    "name": "Starry Black",
+    "hex": "#242020"
+   },
+   {
+    "name": "Candy White",
+    "hex": "#eae9e7"
+   }
+  ],
+  "source": "https://www.mgmotor.co.in/vehicles/mgzsev-electric-car-in-india",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "mg-hector-tomahawk-ev": {
+  "colours": [
+   {
+    "name": "Celadon Blue",
+    "hex": "#2e3d52",
+    "hexEstimated": true
+   },
+   {
+    "name": "Aurora Silver",
+    "hex": "#a3a9b1",
+    "hexEstimated": true
+   },
+   {
+    "name": "Starry Black",
+    "hex": "#222222",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pearl White",
+    "hex": "#e5e6e7",
+    "hexEstimated": true
+   },
+   {
+    "name": "Khaki Green",
+    "hex": "#7f927f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Khaki Green with Starry Black Roof",
+    "hex": "#7f927f",
+    "roof": "#212121",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/mg-cars/hector-tomahawk-ev/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "mg-hector-tomahawk-phev": {
+  "colours": [
+   {
+    "name": "Pearl White",
+    "hex": "#e5e6e7",
+    "hexEstimated": true
+   },
+   {
+    "name": "Starry Black",
+    "hex": "#222222",
+    "hexEstimated": true
+   },
+   {
+    "name": "Aurora Silver",
+    "hex": "#a3a9b1",
+    "hexEstimated": true
+   },
+   {
+    "name": "Celadon Blue",
+    "hex": "#2e3d52",
+    "hexEstimated": true
+   },
+   {
+    "name": "Shadow Gold",
+    "hex": "#bbb6ad",
+    "hexEstimated": true
+   },
+   {
+    "name": "Turquoise Green",
+    "hex": "#274651",
+    "hexEstimated": true
+   },
+   {
+    "name": "Turquoise Green with Pearl White Roof",
+    "hex": "#274651",
+    "roof": "#e5e6e7",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.cardekho.com/mg/hector-tomahawk-phev/colors",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "mg-majestor": {
+  "colours": [
+   {
+    "name": "Metal Black",
+    "hex": "#141510",
+    "hexEstimated": true
+   },
+   {
+    "name": "Metal Ash",
+    "hex": "#4b545b",
+    "hexEstimated": true
+   },
+   {
+    "name": "Concrete Grey",
+    "hex": "#827a72",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pearl White",
+    "hex": "#e7e7e7",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/mg-cars/majestor/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "mg-m9": {
+  "colours": [
+   {
+    "name": "Metal Black",
+    "hex": "#1d1d1d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pearl Lustre White with Black Roof",
+    "hex": "#e5e6e3",
+    "roof": "#050505",
+    "hexEstimated": true
+   },
+   {
+    "name": "Concrete Grey with Black Roof",
+    "hex": "#8a8a8d",
+    "roof": "#050505",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/mg-cars/m9/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "mg-cyberster": {
+  "colours": [
+   {
+    "name": "Flare Red",
+    "hex": "#ba0116",
+    "hexEstimated": true
+   },
+   {
+    "name": "Nuclear Yellow",
+    "hex": "#eeac37",
+    "hexEstimated": true
+   },
+   {
+    "name": "Andes Grey",
+    "hex": "#8c949b",
+    "hexEstimated": true
+   },
+   {
+    "name": "Modern Beige",
+    "hex": "#c4c0b6",
+    "hexEstimated": true
+   },
+   {
+    "name": "Irises Cyan",
+    "hex": "#0a6872",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/mg-cars/cyberster/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "citroen-c3": {
+  "colours": [
+   {
+    "name": "Polar White",
+    "hex": "#f0f0f0",
+    "hexEstimated": true
+   },
+   {
+    "name": "Steel Grey",
+    "hex": "#7c8181",
+    "hexEstimated": true
+   },
+   {
+    "name": "Cosmo Blue",
+    "hex": "#1b2c4d",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.autocarindia.com/cars/citroen/c3/colours",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "citroen-basalt": {
+  "colours": [
+   {
+    "name": "Polar White",
+    "hex": "#ebeef3",
+    "hexEstimated": true
+   },
+   {
+    "name": "Steel Grey",
+    "hex": "#7c8181",
+    "hexEstimated": true
+   },
+   {
+    "name": "Garnet Red",
+    "hex": "#872830",
+    "hexEstimated": true
+   },
+   {
+    "name": "Perla Nera Black",
+    "hex": "#171718",
+    "hexEstimated": true
+   },
+   {
+    "name": "Cosmo Blue",
+    "hex": "#1b2c4d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Polar White with Perla Nera Black Roof",
+    "hex": "#ebeef3",
+    "roof": "#171718",
+    "hexEstimated": true
+   },
+   {
+    "name": "Garnet Red with Perla Nera Black Roof",
+    "hex": "#872830",
+    "roof": "#171718",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/citroen-cars/basalt/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "citroen-aircross": {
+  "colours": [
+   {
+    "name": "Polar White",
+    "hex": "#ebeef3",
+    "hexEstimated": true
+   },
+   {
+    "name": "Steel Grey",
+    "hex": "#7c8181",
+    "hexEstimated": true
+   },
+   {
+    "name": "Perla Nera Black",
+    "hex": "#171718",
+    "hexEstimated": true
+   },
+   {
+    "name": "Garnet Red",
+    "hex": "#872830",
+    "hexEstimated": true
+   },
+   {
+    "name": "Deep Forest Green",
+    "hex": "#1b231d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Cosmo Blue",
+    "hex": "#19254b",
+    "hexEstimated": true
+   },
+   {
+    "name": "Cosmo Blue with Polar White Roof",
+    "hex": "#19254b",
+    "roof": "#ebeef3",
+    "hexEstimated": true
+   },
+   {
+    "name": "Polar White with Perla Nera Black Roof",
+    "hex": "#ebeef3",
+    "roof": "#171718",
+    "hexEstimated": true
+   },
+   {
+    "name": "Garnet Red with Perla Nera Black Roof",
+    "hex": "#872830",
+    "roof": "#171718",
+    "hexEstimated": true
+   },
+   {
+    "name": "Deep Forest Green with Perla Nera Black Roof",
+    "hex": "#1b231d",
+    "roof": "#171718",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.autocarindia.com/cars/citroen/aircross/colours",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "citroen-ec3": {
+  "colours": [
+   {
+    "name": "Polar White",
+    "hex": "#ebeef3",
+    "hexEstimated": true
+   },
+   {
+    "name": "Galaxy Blue",
+    "hex": "#00378f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Perla Nera Black",
+    "hex": "#171718",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/citroen-cars/ec3/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "citroen-c5-aircross": {
+  "colours": [
+   {
+    "name": "Pearl White",
+    "hex": "#f4f4f2",
+    "hexEstimated": true
+   },
+   {
+    "name": "Cumulus Grey",
+    "hex": "#7b746f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Eclipse Blue",
+    "hex": "#19254b",
+    "hexEstimated": true
+   },
+   {
+    "name": "Perla Nera Black",
+    "hex": "#1e1c1a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pearl White with Black Roof",
+    "hex": "#f4f4f2",
+    "roof": "#1e1c1a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Cumulus Grey with Black Roof",
+    "hex": "#7b746f",
+    "roof": "#1e1c1a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Eclipse Blue with Black Roof",
+    "hex": "#19254b",
+    "roof": "#1e1c1a",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/citroen-cars/c5-aircross/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "skoda-kylaq": {
+  "colours": [
+   {
+    "name": "Candy White",
+    "hex": "#fdfdfc",
+    "hexEstimated": true
+   },
+   {
+    "name": "Brilliant Silver",
+    "hex": "#b6b6ba",
+    "hexEstimated": true
+   },
+   {
+    "name": "Carbon Steel",
+    "hex": "#5a5e63",
+    "hexEstimated": true
+   },
+   {
+    "name": "Deep Black",
+    "hex": "#0a0809",
+    "hexEstimated": true
+   },
+   {
+    "name": "Lava Blue",
+    "hex": "#135d7d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Cherry Red",
+    "hex": "#a52c3d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Steel Grey",
+    "hex": "#7c8181",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.autocarindia.com/cars/skoda/kylaq/colours",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "skoda-slavia": {
+  "colours": [
+   {
+    "name": "Candy White",
+    "hex": "#f4f4f2",
+    "hexEstimated": true
+   },
+   {
+    "name": "Brilliant Silver",
+    "hex": "#b8bbc0",
+    "hexEstimated": true
+   },
+   {
+    "name": "Arctic Silver",
+    "hex": "#c9d0d2",
+    "hexEstimated": true
+   },
+   {
+    "name": "Carbon Steel",
+    "hex": "#5b5e63",
+    "hexEstimated": true
+   },
+   {
+    "name": "Steel Grey",
+    "hex": "#7c8181",
+    "hexEstimated": true
+   },
+   {
+    "name": "Deep Black",
+    "hex": "#0a0809",
+    "hexEstimated": true
+   },
+   {
+    "name": "Lava Blue",
+    "hex": "#135d7d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Cherry Red",
+    "hex": "#901923",
+    "hexEstimated": true
+   },
+   {
+    "name": "Cappuccino Beige",
+    "hex": "#9f9a96",
+    "hexEstimated": true
+   },
+   {
+    "name": "Shimla Green",
+    "hex": "#5f6a5c",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/skoda-cars/slavia/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "skoda-kushaq": {
+  "colours": [
+   {
+    "name": "Candy White",
+    "hex": "#f4f4f2",
+    "hexEstimated": true
+   },
+   {
+    "name": "Brilliant Silver",
+    "hex": "#b8bbc0",
+    "hexEstimated": true
+   },
+   {
+    "name": "Carbon Steel",
+    "hex": "#5b5e63",
+    "hexEstimated": true
+   },
+   {
+    "name": "Steel Grey",
+    "hex": "#7c8181",
+    "hexEstimated": true
+   },
+   {
+    "name": "Deep Black",
+    "hex": "#0a0809",
+    "hexEstimated": true
+   },
+   {
+    "name": "Lava Blue",
+    "hex": "#135d7d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Cherry Red",
+    "hex": "#901923",
+    "hexEstimated": true
+   },
+   {
+    "name": "Shimla Green",
+    "hex": "#5f6a5c",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/skoda-cars/kushaq/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "skoda-kodiaq": {
+  "colours": [
+   {
+    "name": "Moon White",
+    "hex": "#f0f0ee",
+    "hexEstimated": true
+   },
+   {
+    "name": "Magic Black",
+    "hex": "#1e2020",
+    "hexEstimated": true
+   },
+   {
+    "name": "Bronx Gold",
+    "hex": "#7e754a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Race Blue",
+    "hex": "#2a5fa8",
+    "hexEstimated": true
+   },
+   {
+    "name": "Graphite Grey",
+    "hex": "#4a4c50",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/skoda-cars/kodiaq/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "skoda-octavia-rs": {
+  "colours": [
+   {
+    "name": "Mamba Green",
+    "hex": "#bed700",
+    "hexEstimated": true
+   },
+   {
+    "name": "Magic Black",
+    "hex": "#1e2020",
+    "hexEstimated": true
+   },
+   {
+    "name": "Velvet Red",
+    "hex": "#9e1028",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/skoda-cars/octavia-rs/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "byd-atto-3": {
+  "colours": [
+   {
+    "name": "Ski White",
+    "hex": "#e6e8ec",
+    "hexEstimated": true
+   },
+   {
+    "name": "Cosmos Black",
+    "hex": "#212327",
+    "hexEstimated": true
+   },
+   {
+    "name": "Harbour Grey",
+    "hex": "#6f7377",
+    "hexEstimated": true
+   },
+   {
+    "name": "Surf Blue",
+    "hex": "#00516f",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.autocarindia.com/cars/byd/atto-3/colours",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "byd-emax-7": {
+  "colours": [
+   {
+    "name": "Crystal White",
+    "hex": "#f6f7f7",
+    "hexEstimated": true
+   },
+   {
+    "name": "Quartz Blue",
+    "hex": "#1c2b47",
+    "hexEstimated": true
+   },
+   {
+    "name": "Cosmos Black",
+    "hex": "#212327",
+    "hexEstimated": true
+   },
+   {
+    "name": "Harbour Grey",
+    "hex": "#6f7377",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/byd-cars/emax-7/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "byd-seal": {
+  "colours": [
+   {
+    "name": "Aurora White",
+    "hex": "#e5ecf6",
+    "hexEstimated": true
+   },
+   {
+    "name": "Cosmos Black",
+    "hex": "#151719",
+    "hexEstimated": true
+   },
+   {
+    "name": "Atlantis Gray",
+    "hex": "#4a5a72",
+    "hexEstimated": true
+   },
+   {
+    "name": "Shark Gray",
+    "hex": "#818b96",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.autocarindia.com/cars/byd/seal/colours",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "byd-sealion-7": {
+  "colours": [
+   {
+    "name": "Aurora White",
+    "hex": "#e0e3e7",
+    "hexEstimated": true
+   },
+   {
+    "name": "Cosmos Black",
+    "hex": "#1f2736",
+    "hexEstimated": true
+   },
+   {
+    "name": "Atlantis Gray",
+    "hex": "#4a5a72",
+    "hexEstimated": true
+   },
+   {
+    "name": "Shark Gray",
+    "hex": "#909cac",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.autocarindia.com/cars/byd/sealion-7/colours",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "renault-kwid": {
+  "colours": [
+   {
+    "name": "Ice Cool White",
+    "hex": "#f2f3f5",
+    "hexEstimated": true
+   },
+   {
+    "name": "Fiery Red",
+    "hex": "#b0151f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Moonlight Silver",
+    "hex": "#818084",
+    "hexEstimated": true
+   },
+   {
+    "name": "Outback Bronze",
+    "hex": "#5a5541",
+    "hexEstimated": true
+   },
+   {
+    "name": "Zanskar Blue",
+    "hex": "#005289",
+    "hexEstimated": true
+   },
+   {
+    "name": "Fiery Red with Mystery Black Roof",
+    "hex": "#b0151f",
+    "roof": "#1c1c1e",
+    "hexEstimated": true
+   },
+   {
+    "name": "Ice Cool White with Mystery Black Roof",
+    "hex": "#f2f3f5",
+    "roof": "#1c1c1e",
+    "hexEstimated": true
+   },
+   {
+    "name": "Moonlight Silver with Mystery Black Roof",
+    "hex": "#818084",
+    "roof": "#1c1c1e",
+    "hexEstimated": true
+   },
+   {
+    "name": "Zanskar Blue with Mystery Black Roof",
+    "hex": "#005289",
+    "roof": "#1c1c1e",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/renault-cars/kwid/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "renault-triber": {
+  "colours": [
+   {
+    "name": "Ice Cool White",
+    "hex": "#f2f3f5",
+    "hexEstimated": true
+   },
+   {
+    "name": "Moonlight Silver",
+    "hex": "#797f84",
+    "hexEstimated": true
+   },
+   {
+    "name": "Zanskar Blue",
+    "hex": "#005289",
+    "hexEstimated": true
+   },
+   {
+    "name": "Shadow Grey",
+    "hex": "#5d5d5d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Amber Terracotta",
+    "hex": "#a5502f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Stealth Black",
+    "hex": "#151718",
+    "hexEstimated": true
+   },
+   {
+    "name": "Ice Cool White with Mystery Black Roof",
+    "hex": "#f2f3f5",
+    "roof": "#1c1c1e",
+    "hexEstimated": true
+   },
+   {
+    "name": "Shadow Grey with Mystery Black Roof",
+    "hex": "#5d5d5d",
+    "roof": "#1c1c1e",
+    "hexEstimated": true
+   },
+   {
+    "name": "Amber Terracotta with Mystery Black Roof",
+    "hex": "#a5502f",
+    "roof": "#1c1c1e",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/renault-cars/triber/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "renault-kiger": {
+  "colours": [
+   {
+    "name": "Ice Cool White",
+    "hex": "#f2f3f5",
+    "hexEstimated": true
+   },
+   {
+    "name": "Moonlight Silver",
+    "hex": "#797f84",
+    "hexEstimated": true
+   },
+   {
+    "name": "Stealth Black",
+    "hex": "#151718",
+    "hexEstimated": true
+   },
+   {
+    "name": "Oasis Yellow",
+    "hex": "#bea94e",
+    "hexEstimated": true
+   },
+   {
+    "name": "Caspian Blue",
+    "hex": "#195194",
+    "hexEstimated": true
+   },
+   {
+    "name": "Shadow Grey",
+    "hex": "#5d5d5d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Oasis Yellow with Mystery Black Roof",
+    "hex": "#bea94e",
+    "roof": "#1c1c1e",
+    "hexEstimated": true
+   },
+   {
+    "name": "Shadow Grey with Mystery Black Roof",
+    "hex": "#5d5d5d",
+    "roof": "#1c1c1e",
+    "hexEstimated": true
+   },
+   {
+    "name": "Ice Cool White with Mystery Black Roof",
+    "hex": "#f2f3f5",
+    "roof": "#1c1c1e",
+    "hexEstimated": true
+   },
+   {
+    "name": "Radiant Red with Mystery Black Roof",
+    "hex": "#6a0e2b",
+    "roof": "#1c1c1e",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/renault-cars/kiger/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "renault-duster": {
+  "colours": [
+   {
+    "name": "Pearl White",
+    "hex": "#e5e6e7",
+    "hexEstimated": true
+   },
+   {
+    "name": "Moonlight Silver",
+    "hex": "#797f84",
+    "hexEstimated": true
+   },
+   {
+    "name": "Stealth Black",
+    "hex": "#151718",
+    "hexEstimated": true
+   },
+   {
+    "name": "Mountain Jade Green",
+    "hex": "#4a5739",
+    "hexEstimated": true
+   },
+   {
+    "name": "Sunset Red",
+    "hex": "#6a0e2b",
+    "hexEstimated": true
+   },
+   {
+    "name": "River Blue",
+    "hex": "#0e5b96",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pearl White with Stealth Black Roof",
+    "hex": "#e5e6e7",
+    "roof": "#151718",
+    "hexEstimated": true
+   },
+   {
+    "name": "Mountain Jade Green with Stealth Black Roof",
+    "hex": "#4a5739",
+    "roof": "#151718",
+    "hexEstimated": true
+   },
+   {
+    "name": "Sunset Red with Stealth Black Roof",
+    "hex": "#6a0e2b",
+    "roof": "#151718",
+    "hexEstimated": true
+   },
+   {
+    "name": "River Blue with Stealth Black Roof",
+    "hex": "#0e5b96",
+    "roof": "#151718",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/renault-cars/duster/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "tesla-model-y": {
+  "colours": [
+   {
+    "name": "Pearl White Multi-Coat",
+    "hex": "#f2f2f0",
+    "hexEstimated": true
+   },
+   {
+    "name": "Diamond Black",
+    "hex": "#16151a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Stealth Grey",
+    "hex": "#35343d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Quicksilver",
+    "hex": "#8e8c94",
+    "hexEstimated": true
+   },
+   {
+    "name": "Glacier Blue",
+    "hex": "#758aa9",
+    "hexEstimated": true
+   },
+   {
+    "name": "Ultra Red",
+    "hex": "#b60014",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.autocarindia.com/cars/tesla/model-y/colours",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "tata-tiago": {
+  "colours": [
+   {
+    "name": "Pristine White",
+    "hex": "#f3f3f3",
+    "hexEstimated": true
+   },
+   {
+    "name": "Daytona Grey",
+    "hex": "#373739",
+    "hexEstimated": true
+   },
+   {
+    "name": "Sobo Surge",
+    "hex": "#978483",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pangong Pulse",
+    "hex": "#90abc0",
+    "hexEstimated": true
+   },
+   {
+    "name": "Varanasi Vibrance",
+    "hex": "#cf4b44",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pure Grey",
+    "hex": "#a1a2a5",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pristine White with Black Roof",
+    "hex": "#f3f3f3",
+    "roof": "#30343d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Daytona Grey with Black Roof",
+    "hex": "#373739",
+    "roof": "#30343d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Sobo Surge with Black Roof",
+    "hex": "#978483",
+    "roof": "#30343d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pangong Pulse with Black Roof",
+    "hex": "#90abc0",
+    "roof": "#30343d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Varanasi Vibrance with Black Roof",
+    "hex": "#cf4b44",
+    "roof": "#30343d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pure Grey with Black Roof",
+    "hex": "#a1a2a5",
+    "roof": "#30343d",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/tata-cars/tiago/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "tata-aeris": {
+  "colours": [
+   {
+    "name": "Dandeli Drizzle",
+    "hex": "#8a84af",
+    "hexEstimated": true
+   },
+   {
+    "name": "Daytona Grey",
+    "hex": "#34363a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Dune Glow",
+    "hex": "#a39c99",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pure Grey",
+    "hex": "#bdbec2",
+    "hexEstimated": true
+   },
+   {
+    "name": "Nitro Crimson",
+    "hex": "#cc3c40",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pristine White",
+    "hex": "#f7f7f7",
+    "hexEstimated": true
+   },
+   {
+    "name": "Dandeli Drizzle with Black Roof",
+    "hex": "#8a84af",
+    "roof": "#292c30",
+    "hexEstimated": true
+   },
+   {
+    "name": "Daytona Grey with Black Roof",
+    "hex": "#34363a",
+    "roof": "#292c30",
+    "hexEstimated": true
+   },
+   {
+    "name": "Dune Glow with Black Roof",
+    "hex": "#a39c99",
+    "roof": "#292c30",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pure Grey with Black Roof",
+    "hex": "#bdbec2",
+    "roof": "#292c30",
+    "hexEstimated": true
+   },
+   {
+    "name": "Nitro Crimson with Black Roof",
+    "hex": "#cc3c40",
+    "roof": "#292c30",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pristine White with Black Roof",
+    "hex": "#f7f7f7",
+    "roof": "#292c30",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/tata-cars/aeris/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "tata-punch": {
+  "colours": [
+   {
+    "name": "Pristine White",
+    "hex": "#c2c2c4",
+    "hexEstimated": true
+   },
+   {
+    "name": "Bengal Rouge",
+    "hex": "#c11019",
+    "hexEstimated": true
+   },
+   {
+    "name": "Daytona Grey",
+    "hex": "#403f45",
+    "hexEstimated": true
+   },
+   {
+    "name": "Coorg Clouds",
+    "hex": "#bababa",
+    "hexEstimated": true
+   },
+   {
+    "name": "Cyantafic",
+    "hex": "#25a4db",
+    "hexEstimated": true
+   },
+   {
+    "name": "Caramel",
+    "hex": "#ba7d3d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pristine White with Black Roof",
+    "hex": "#c2c2c4",
+    "roof": "#30343d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Daytona Grey with Black Roof",
+    "hex": "#403f45",
+    "roof": "#30343d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Coorg Clouds with Black Roof",
+    "hex": "#bababa",
+    "roof": "#30343d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Caramel with Black Roof",
+    "hex": "#ba7d3d",
+    "roof": "#30343d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Bengal Rouge with White Roof",
+    "hex": "#c11019",
+    "roof": "#ffffff",
+    "hexEstimated": true
+   },
+   {
+    "name": "Cyantafic with White Roof",
+    "hex": "#25a4db",
+    "roof": "#ffffff",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/tata-cars/punch/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "tata-altroz": {
+  "colours": [
+   {
+    "name": "Dune Glow",
+    "hex": "#bfae9c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Ember Glow",
+    "hex": "#d83519",
+    "hexEstimated": true
+   },
+   {
+    "name": "Royal Blue",
+    "hex": "#0b1e50",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pure Grey",
+    "hex": "#7f7f7f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pristine White",
+    "hex": "#ffffff",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/tata-cars/altroz/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "tata-tiago-ev": {
+  "colours": [
+   {
+    "name": "Daytona Grey",
+    "hex": "#48525d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pristine White",
+    "hex": "#f3f3f3",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pangong Pulse",
+    "hex": "#b9cfe4",
+    "hexEstimated": true
+   },
+   {
+    "name": "Sobo Surge",
+    "hex": "#94807f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Dehradun Dew",
+    "hex": "#adb79c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pure Grey",
+    "hex": "#d9d9d9",
+    "hexEstimated": true
+   },
+   {
+    "name": "Daytona Grey with Black Roof",
+    "hex": "#48525d",
+    "roof": "#30343d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pristine White with Black Roof",
+    "hex": "#f3f3f3",
+    "roof": "#30343d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pangong Pulse with Black Roof",
+    "hex": "#b9cfe4",
+    "roof": "#30343d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Sobo Surge with Black Roof",
+    "hex": "#94807f",
+    "roof": "#30343d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Dehradun Dew with Black Roof",
+    "hex": "#adb79c",
+    "roof": "#30343d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pure Grey with Black Roof",
+    "hex": "#d9d9d9",
+    "roof": "#30343d",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/tata-cars/tiago-ev/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "tata-nexon": {
+  "colours": [
+   {
+    "name": "Pure Grey",
+    "hex": "#acadb2",
+    "hexEstimated": true
+   },
+   {
+    "name": "Daytona Grey",
+    "hex": "#40454b",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pristine White",
+    "hex": "#ebebeb",
+    "hexEstimated": true
+   },
+   {
+    "name": "Grassland Beige",
+    "hex": "#7d7c5f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Royal Blue",
+    "hex": "#1e4079",
+    "hexEstimated": true
+   },
+   {
+    "name": "Ocean Blue",
+    "hex": "#75a4ae",
+    "hexEstimated": true
+   },
+   {
+    "name": "Coorg Clouds",
+    "hex": "#c5c9ce",
+    "hexEstimated": true
+   },
+   {
+    "name": "Munnar Mist",
+    "hex": "#8c9273",
+    "hexEstimated": true
+   },
+   {
+    "name": "Daytona Grey with Black Roof",
+    "hex": "#40454b",
+    "roof": "#1a1e24",
+    "hexEstimated": true
+   },
+   {
+    "name": "Grassland Beige with Black Roof",
+    "hex": "#7d7c5f",
+    "roof": "#1a1e24",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pure Grey with Black Roof",
+    "hex": "#acadb2",
+    "roof": "#1a1e24",
+    "hexEstimated": true
+   },
+   {
+    "name": "Royal Blue with Black Roof",
+    "hex": "#1e4079",
+    "roof": "#1a1e24",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pristine White with Black Roof",
+    "hex": "#ebebeb",
+    "roof": "#1a1e24",
+    "hexEstimated": true
+   },
+   {
+    "name": "Ocean Blue with White Roof",
+    "hex": "#75a4ae",
+    "roof": "#dfdfdf",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/tata-cars/nexon/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "tata-punch-ev": {
+  "colours": [
+   {
+    "name": "Supernova Copper",
+    "hex": "#893b37",
+    "hexEstimated": true
+   },
+   {
+    "name": "Bengal Rouge",
+    "hex": "#c11019",
+    "hexEstimated": true
+   },
+   {
+    "name": "Caramel",
+    "hex": "#ba7d3d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pristine White",
+    "hex": "#e1e2e2",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pure Grey",
+    "hex": "#b1b2b4",
+    "hexEstimated": true
+   },
+   {
+    "name": "Fearless Yellow with Black Roof",
+    "hex": "#dfe150",
+    "roof": "#4c4c4c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pure Grey with Black Roof",
+    "hex": "#aaadb1",
+    "roof": "#4c4c4c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Bengal Rouge with Black Roof",
+    "hex": "#c11019",
+    "roof": "#4c4c4c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Caramel with Black Roof",
+    "hex": "#ba7d3d",
+    "roof": "#4c4c4c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Supernova Copper with Black Roof",
+    "hex": "#893b37",
+    "roof": "#4c4c4c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pristine White with Black Roof",
+    "hex": "#e1e2e2",
+    "roof": "#4c4c4c",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/tata-cars/punch-ev/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "tata-curvv": {
+  "colours": [
+   {
+    "name": "Pristine White",
+    "hex": "#feffff",
+    "hexEstimated": true
+   },
+   {
+    "name": "Opera Blue",
+    "hex": "#313a72",
+    "hexEstimated": true
+   },
+   {
+    "name": "Carbon Black",
+    "hex": "#26272a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pristine White with Black Roof",
+    "hex": "#feffff",
+    "roof": "#232b32",
+    "hexEstimated": true
+   },
+   {
+    "name": "Opera Blue with Black Roof",
+    "hex": "#313a72",
+    "roof": "#232b32",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pure Grey with Black Roof",
+    "hex": "#666666",
+    "roof": "#232b32",
+    "hexEstimated": true
+   },
+   {
+    "name": "Nitro Crimson with Black Roof",
+    "hex": "#be6069",
+    "roof": "#232b32",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/tata-cars/curvv/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "tata-sierra": {
+  "colours": [
+   {
+    "name": "Coorg Clouds",
+    "hex": "#c6ccc4",
+    "hexEstimated": true
+   },
+   {
+    "name": "Bengal Rouge",
+    "hex": "#b1332b",
+    "hexEstimated": true
+   },
+   {
+    "name": "Munnar Mist",
+    "hex": "#717456",
+    "hexEstimated": true
+   },
+   {
+    "name": "Andaman Adventure",
+    "hex": "#dda400",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pure Grey",
+    "hex": "#858e87",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pristine White",
+    "hex": "#e4e4da",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/tata-cars/sierra/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "tata-nexon-ev": {
+  "colours": [
+   {
+    "name": "Pristine White",
+    "hex": "#d8d8da",
+    "hexEstimated": true
+   },
+   {
+    "name": "Daytona Grey with White Roof",
+    "hex": "#383e3e",
+    "roof": "#e2e2e1",
+    "hexEstimated": true
+   },
+   {
+    "name": "Ocean Blue with White Roof",
+    "hex": "#3699a3",
+    "roof": "#e2e2e1",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pristine White with Black Roof",
+    "hex": "#d8d8da",
+    "roof": "#272727",
+    "hexEstimated": true
+   },
+   {
+    "name": "Ocean Blue with Black Roof",
+    "hex": "#3699a3",
+    "roof": "#272727",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pure Grey with Black Roof",
+    "hex": "#a9a9a9",
+    "roof": "#272727",
+    "hexEstimated": true
+   },
+   {
+    "name": "Daytona Grey with Black Roof",
+    "hex": "#4f4f4f",
+    "roof": "#272727",
+    "hexEstimated": true
+   },
+   {
+    "name": "Empowered Oxide with Black Roof",
+    "hex": "#bbc0b7",
+    "roof": "#272727",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/tata-cars/nexon-ev/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "tata-harrier": {
+  "colours": [
+   {
+    "name": "Seaweed Green",
+    "hex": "#555a43",
+    "hexEstimated": true
+   },
+   {
+    "name": "Daytona Grey",
+    "hex": "#5a5c60",
+    "hexEstimated": true
+   },
+   {
+    "name": "Fearless Red",
+    "hex": "#a0262c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pure Grey",
+    "hex": "#9a9b9e",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pristine White",
+    "hex": "#f2f2f2",
+    "hexEstimated": true
+   },
+   {
+    "name": "Carbon Black",
+    "hex": "#1e1e20",
+    "hexEstimated": true
+   },
+   {
+    "name": "Stealth Black",
+    "hex": "#30343d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Nitro Crimson with Black Roof",
+    "hex": "#5c121e",
+    "roof": "#2b2b2b",
+    "hexEstimated": true
+   },
+   {
+    "name": "Sunlit Yellow with Black Roof",
+    "hex": "#b6ad22",
+    "roof": "#2b2b2b",
+    "hexEstimated": true
+   },
+   {
+    "name": "Daytona Grey with Black Roof",
+    "hex": "#5a5c60",
+    "roof": "#2b2b2b",
+    "hexEstimated": true
+   },
+   {
+    "name": "Fearless Red with Black Roof",
+    "hex": "#a0262c",
+    "roof": "#2b2b2b",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pristine White with Black Roof",
+    "hex": "#f2f2f2",
+    "roof": "#2b2b2b",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pure Grey with Black Roof",
+    "hex": "#9a9b9e",
+    "roof": "#2b2b2b",
+    "hexEstimated": true
+   },
+   {
+    "name": "Seaweed Green with Black Roof",
+    "hex": "#555a43",
+    "roof": "#2b2b2b",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/tata-cars/harrier/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "tata-safari": {
+  "colours": [
+   {
+    "name": "Cosmic Gold",
+    "hex": "#b7ada1",
+    "hexEstimated": true
+   },
+   {
+    "name": "Supernova Copper",
+    "hex": "#985041",
+    "hexEstimated": true
+   },
+   {
+    "name": "Stealth Black",
+    "hex": "#343539",
+    "hexEstimated": true
+   },
+   {
+    "name": "Frost White",
+    "hex": "#fdfcfa",
+    "hexEstimated": true
+   },
+   {
+    "name": "Royal Blue",
+    "hex": "#334f81",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pure Grey",
+    "hex": "#9a9b9e",
+    "hexEstimated": true
+   },
+   {
+    "name": "Daytona Grey",
+    "hex": "#5a5c60",
+    "hexEstimated": true
+   },
+   {
+    "name": "Carbon Black",
+    "hex": "#1e1e20",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pure Grey with Black Roof",
+    "hex": "#9a9b9e",
+    "roof": "#2b2b2b",
+    "hexEstimated": true
+   },
+   {
+    "name": "Frost White with Black Roof",
+    "hex": "#fdfcfa",
+    "roof": "#2b2b2b",
+    "hexEstimated": true
+   },
+   {
+    "name": "Royal Blue with Black Roof",
+    "hex": "#334f81",
+    "roof": "#2b2b2b",
+    "hexEstimated": true
+   },
+   {
+    "name": "Cosmic Gold with Black Roof",
+    "hex": "#b7ada1",
+    "roof": "#2b2b2b",
+    "hexEstimated": true
+   },
+   {
+    "name": "Daytona Grey with Black Roof",
+    "hex": "#5a5c60",
+    "roof": "#2b2b2b",
+    "hexEstimated": true
+   },
+   {
+    "name": "Supernova Copper with Black Roof",
+    "hex": "#985041",
+    "roof": "#2b2b2b",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/tata-cars/safari/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "tata-curvv-ev": {
+  "colours": [
+   {
+    "name": "Virtual Sunrise",
+    "hex": "#96a3c3",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pure Grey",
+    "hex": "#6f6f6f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pristine White",
+    "hex": "#feffff",
+    "hexEstimated": true
+   },
+   {
+    "name": "Nitro Crimson",
+    "hex": "#78101b",
+    "hexEstimated": true
+   },
+   {
+    "name": "Empowered Oxide",
+    "hex": "#a4a59e",
+    "hexEstimated": true
+   },
+   {
+    "name": "Carbon Black",
+    "hex": "#28282a",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/tata-cars/curvv-ev/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "tata-sierra-ev": {
+  "colours": [
+   {
+    "name": "Pristine White",
+    "hex": "#dce7f2",
+    "hexEstimated": true
+   },
+   {
+    "name": "Rishikesh Rapids",
+    "hex": "#8c9793",
+    "hexEstimated": true
+   },
+   {
+    "name": "Coorg Clouds",
+    "hex": "#c6ccc4",
+    "hexEstimated": true
+   },
+   {
+    "name": "Andaman Adventure",
+    "hex": "#f7b722",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pure Grey",
+    "hex": "#858e87",
+    "hexEstimated": true
+   },
+   {
+    "name": "Bengal Rouge",
+    "hex": "#b1332b",
+    "hexEstimated": true
+   },
+   {
+    "name": "Nainital Nocturne",
+    "hex": "#13124a",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/tata-cars/sierra-ev/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "tata-harrier-ev": {
+  "colours": [
+   {
+    "name": "Pure Grey with Black Roof",
+    "hex": "#6f6f6f",
+    "roof": "#292c30",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pristine White with Black Roof",
+    "hex": "#feffff",
+    "roof": "#292c30",
+    "hexEstimated": true
+   },
+   {
+    "name": "Nainital Nocturne with Black Roof",
+    "hex": "#426ba3",
+    "roof": "#292c30",
+    "hexEstimated": true
+   },
+   {
+    "name": "Empowered Oxide with Black Roof",
+    "hex": "#a4a59e",
+    "roof": "#292c30",
+    "hexEstimated": true
+   },
+   {
+    "name": "Stealth Black",
+    "hex": "#30343d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Seaweed Green with Black Roof",
+    "hex": "#555a43",
+    "roof": "#292c30",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/tata-cars/harrier-ev/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "toyota-glanza": {
+  "colours": [
+   {
+    "name": "Sportin Red",
+    "hex": "#b22222"
+   },
+   {
+    "name": "Café White",
+    "hex": "#ffffff"
+   },
+   {
+    "name": "Bluish Black",
+    "hex": "#000000"
+   },
+   {
+    "name": "Digital Teal Green",
+    "hex": "#008080"
+   },
+   {
+    "name": "Gaming Grey",
+    "hex": "#808080"
+   },
+   {
+    "name": "Insta Blue",
+    "hex": "#191970"
+   },
+   {
+    "name": "Enticing Silver",
+    "hex": "#c0c0c0"
+   }
+  ],
+  "source": "https://www.toyotabharat.com/showroom/glanza/",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "toyota-urban-cruiser-taisor": {
+  "colours": [
+   {
+    "name": "Lucent Orange",
+    "hex": "#d16233"
+   },
+   {
+    "name": "Café White",
+    "hex": "#e0e0e0"
+   },
+   {
+    "name": "Enticing Silver",
+    "hex": "#bcbcbc"
+   },
+   {
+    "name": "Gaming Grey",
+    "hex": "#888787"
+   },
+   {
+    "name": "Sportin Red",
+    "hex": "#bc2b37"
+   },
+   {
+    "name": "Bluish Black",
+    "hex": "#162f50"
+   },
+   {
+    "name": "Sportin Red X Midnight Black",
+    "hex": "#bc2b37",
+    "roof": "#262626"
+   },
+   {
+    "name": "Enticing Silver X Midnight Black",
+    "hex": "#bcbcbc",
+    "roof": "#222222"
+   },
+   {
+    "name": "Café White X Midnight Black",
+    "hex": "#e0e0e0",
+    "roof": "#222222"
+   }
+  ],
+  "source": "https://www.toyotabharat.com/showroom/urbancruiser-taisor/",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "toyota-rumion": {
+  "colours": [
+   {
+    "name": "Spunky Blue",
+    "hex": "#1464a3"
+   },
+   {
+    "name": "Rustic Brown",
+    "hex": "#6d2829"
+   },
+   {
+    "name": "Iconic Grey",
+    "hex": "#2d2d30"
+   },
+   {
+    "name": "Cafe White",
+    "hex": "#cbc9c6"
+   },
+   {
+    "name": "Enticing Silver",
+    "hex": "#646569"
+   }
+  ],
+  "source": "https://www.toyotabharat.com/showroom/rumion/",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "toyota-urban-cruiser-hyryder": {
+  "colours": [
+   {
+    "name": "Cafe White",
+    "hex": "#cbc9c6"
+   },
+   {
+    "name": "Enticing Silver",
+    "hex": "#646569"
+   },
+   {
+    "name": "Gaming Grey",
+    "hex": "#2d2d30"
+   },
+   {
+    "name": "Sportin Red",
+    "hex": "#6d2829"
+   },
+   {
+    "name": "Midnight Black",
+    "hex": "#272727"
+   },
+   {
+    "name": "Cave Black",
+    "hex": "#2a251f"
+   },
+   {
+    "name": "Cafe White X Midnight Black",
+    "hex": "#cbc9c6",
+    "roof": "#272727"
+   },
+   {
+    "name": "Sportin Red X Midnight Black",
+    "hex": "#6d2829",
+    "roof": "#272727"
+   },
+   {
+    "name": "Enticing Silver X Midnight Black",
+    "hex": "#646569",
+    "roof": "#272727"
+   }
+  ],
+  "source": "https://www.toyotabharat.com/showroom/urbancruiser-hyryder/",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "toyota-innova-hycross": {
+  "colours": [
+   {
+    "name": "Blackish Ageha Glass Flake",
+    "hex": "#231f20"
+   },
+   {
+    "name": "Super White",
+    "hex": "#e8eaea"
+   },
+   {
+    "name": "Platinum White Pearl",
+    "hex": "#e5e4e2"
+   },
+   {
+    "name": "Attitude Black Mica",
+    "hex": "#181919"
+   },
+   {
+    "name": "Avant Garde Bronze Metallic",
+    "hex": "#beb2a6"
+   }
+  ],
+  "source": "https://www.toyotabharat.com/showroom/innova/",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "toyota-innova-crysta": {
+  "colours": [
+   {
+    "name": "Avant-Garde Bronze Metallic",
+    "hex": "#afaa9e"
+   },
+   {
+    "name": "Platinum White Pearl",
+    "hex": "#f0f1f3"
+   },
+   {
+    "name": "Super White",
+    "hex": "#ffffff"
+   },
+   {
+    "name": "Attitude Black Mica",
+    "hex": "#08081c"
+   }
+  ],
+  "source": "https://www.toyotabharat.com/showroom/innova-crysta/",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "toyota-urban-cruiser-ebella": {
+  "colours": [
+   {
+    "name": "Cafe White",
+    "hex": "#c9c9c9"
+   },
+   {
+    "name": "Bluish Black",
+    "hex": "#2f2424"
+   },
+   {
+    "name": "Gaming Grey",
+    "hex": "#c5c5c5"
+   },
+   {
+    "name": "Enticing Silver",
+    "hex": "#929497"
+   },
+   {
+    "name": "Sportin Red",
+    "hex": "#b33248"
+   },
+   {
+    "name": "Cafe White Dual Tone",
+    "hex": "#c9c9c9",
+    "roof": "#1c1c1c"
+   },
+   {
+    "name": "Sportin Red Dual Tone",
+    "hex": "#b33248",
+    "roof": "#1c1c1c"
+   },
+   {
+    "name": "Land Breeze Green Dual Tone",
+    "hex": "#646656",
+    "roof": "#1c1c1c"
+   },
+   {
+    "name": "Enticing Silver Dual Tone",
+    "hex": "#929497",
+    "roof": "#1c1c1c"
+   }
+  ],
+  "source": "https://www.toyotabharat.com/showroom/urbancruiser-ebella/",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "toyota-hilux": {
+  "colours": [
+   {
+    "name": "Sulphur Metallic",
+    "hex": "#ddb614"
+   },
+   {
+    "name": "Emotional Red",
+    "hex": "#952025"
+   },
+   {
+    "name": "Platinum Pearl White Metallic",
+    "hex": "#ddddda"
+   },
+   {
+    "name": "Ash",
+    "hex": "#97989a"
+   },
+   {
+    "name": "Super White",
+    "hex": "#ffffff"
+   },
+   {
+    "name": "Attitude Black",
+    "hex": "#000000"
+   }
+  ],
+  "source": "https://www.toyotabharat.com/showroom/hilux/",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "toyota-fortuner": {
+  "colours": [
+   {
+    "name": "Platinum White Pearl",
+    "hex": "#e0e0da",
+    "hexEstimated": true
+   },
+   {
+    "name": "Sparkling Black Crystal Shine",
+    "hex": "#202022",
+    "hexEstimated": true
+   },
+   {
+    "name": "Avant Garde Bronze",
+    "hex": "#bfb3a7",
+    "hexEstimated": true
+   },
+   {
+    "name": "Attitude Black",
+    "hex": "#0d0d0d",
+    "hexEstimated": true
+   },
+   {
+    "name": "Super White",
+    "hex": "#ffffff",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/toyota-cars/fortuner/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "toyota-fortuner-legender": {
+  "colours": [
+   {
+    "name": "Platinum White Pearl with Black Roof",
+    "hex": "#e0e0da",
+    "roof": "#181919",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/toyota-cars/fortuner-legender/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "toyota-camry": {
+  "colours": [
+   {
+    "name": "Attitude Black",
+    "hex": "#141513"
+   },
+   {
+    "name": "Cement Grey",
+    "hex": "#7d8289"
+   },
+   {
+    "name": "Dark Blue",
+    "hex": "#202e35"
+   },
+   {
+    "name": "Emotional Red",
+    "hex": "#70272d"
+   },
+   {
+    "name": "Platinum White",
+    "hex": "#f2f2f2"
+   },
+   {
+    "name": "Precious Metal",
+    "hex": "#6a6b72"
+   }
+  ],
+  "source": "https://www.toyotabharat.com/showroom/camry/",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "toyota-vellfire": {
+  "colours": [
+   {
+    "name": "Platinum White Pearl",
+    "hex": "#f0f0ec",
+    "hexEstimated": true
+   },
+   {
+    "name": "Black",
+    "hex": "#111111",
+    "hexEstimated": true
+   },
+   {
+    "name": "Precious Metal",
+    "hex": "#91939d"
+   }
+  ],
+  "source": "https://www.toyotabharat.com/showroom/vellfire/",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "toyota-land-cruiser-300": {
+  "colours": [
+   {
+    "name": "Attitude Black",
+    "hex": "#1c1d1e"
+   },
+   {
+    "name": "Precious White Pearl",
+    "hex": "#e5e5e5"
+   }
+  ],
+  "source": "https://www.toyotabharat.com/showroom/lc300/",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "honda-amaze-2nd-gen": {
+  "colours": [
+   {
+    "name": "Meteoroid Grey Metallic",
+    "hex": "#535c61"
+   },
+   {
+    "name": "Radiant Red Metallic",
+    "hex": "#ed121b"
+   },
+   {
+    "name": "Platinum White Pearl",
+    "hex": "#ffffff"
+   },
+   {
+    "name": "Lunar Silver Metallic",
+    "hex": "#afafae"
+   },
+   {
+    "name": "Golden Brown Metallic",
+    "hex": "#977b70"
+   }
+  ],
+  "source": "https://www.hondacarindia.com/honda-amaze-2g",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "honda-amaze": {
+  "colours": [
+   {
+    "name": "Meteoroid Grey Metallic",
+    "hex": "#535c61"
+   },
+   {
+    "name": "Radiant Red Metallic",
+    "hex": "#ed121b"
+   },
+   {
+    "name": "Platinum White Pearl",
+    "hex": "#ffffff"
+   },
+   {
+    "name": "Lunar Silver Metallic",
+    "hex": "#afafae"
+   },
+   {
+    "name": "Golden Brown Metallic",
+    "hex": "#977b70"
+   },
+   {
+    "name": "Obsidian Blue Pearl",
+    "hex": "#424f83"
+   },
+   {
+    "name": "Crystal Black Pearl",
+    "hex": "#000000"
+   }
+  ],
+  "source": "https://www.hondacarindia.com/honda-amaze",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "honda-elevate": {
+  "colours": [
+   {
+    "name": "Crystal Black Pearl",
+    "hex": "#000000"
+   },
+   {
+    "name": "Lunar Silver Metallic",
+    "hex": "#afafae"
+   },
+   {
+    "name": "Meteoroid Gray Metallic",
+    "hex": "#535c61"
+   },
+   {
+    "name": "Nordic Forest Pearl",
+    "hex": "#3a645f"
+   },
+   {
+    "name": "Obsidian Blue Pearl",
+    "hex": "#424f83"
+   },
+   {
+    "name": "Platinum White Pearl",
+    "hex": "#ffffff"
+   },
+   {
+    "name": "Radiant Red Metallic",
+    "hex": "#ed121b"
+   },
+   {
+    "name": "Nordic Forest Pearl with Crystal Black Pearl Roof",
+    "hex": "#3a645f",
+    "roof": "#000000"
+   },
+   {
+    "name": "Platinum White Pearl with Crystal Black Pearl Roof",
+    "hex": "#ffffff",
+    "roof": "#000000"
+   },
+   {
+    "name": "Radiant Red Metallic with Crystal Black Pearl Roof",
+    "hex": "#ed121b",
+    "roof": "#000000"
+   }
+  ],
+  "source": "https://www.hondacarindia.com/honda-elevate",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "honda-city": {
+  "colours": [
+   {
+    "name": "Radiant Red Metallic",
+    "hex": "#ed121b"
+   },
+   {
+    "name": "Lunar Silver Metallic",
+    "hex": "#afafae"
+   },
+   {
+    "name": "Platinum White Pearl",
+    "hex": "#ffffff"
+   },
+   {
+    "name": "Crystal Black Pearl",
+    "hex": "#000000"
+   },
+   {
+    "name": "Obsidian Blue Pearl",
+    "hex": "#424f83"
+   },
+   {
+    "name": "Meteoroid Gray Metallic",
+    "hex": "#535c61"
+   }
+  ],
+  "source": "https://www.hondacarindia.com/honda-city",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "honda-zr-v": {
+  "colours": [
+   {
+    "name": "Crystal Black Pearl",
+    "hex": "#000000"
+   },
+   {
+    "name": "Meteoroid Grey Metallic",
+    "hex": "#535c61"
+   },
+   {
+    "name": "Platinum White Pearl",
+    "hex": "#ffffff"
+   },
+   {
+    "name": "Twilight Mist Black Pearl",
+    "hex": "#0b0a08"
+   }
+  ],
+  "source": "https://www.hondacarindia.com/honda-zr-v",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "volkswagen-virtus": {
+  "colours": [
+   {
+    "name": "Lava Blue",
+    "hex": "#1f3a6e",
+    "hexEstimated": true
+   },
+   {
+    "name": "Deep Black Pearl",
+    "hex": "#141416",
+    "hexEstimated": true
+   },
+   {
+    "name": "Carbon Steel Grey",
+    "hex": "#4a4d52",
+    "hexEstimated": true
+   },
+   {
+    "name": "Candy White",
+    "hex": "#f4f4f2",
+    "hexEstimated": true
+   },
+   {
+    "name": "Rising Blue Metallic",
+    "hex": "#2f6db5",
+    "hexEstimated": true
+   },
+   {
+    "name": "Reflex Silver",
+    "hex": "#b9bcbf",
+    "hexEstimated": true
+   },
+   {
+    "name": "Wild Cherry Red",
+    "hex": "#8e1b2a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Carbon Steel Grey Matte",
+    "hex": "#55585c",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.volkswagen.co.in/en/models/virtus-chrome.html",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "volkswagen-taigun": {
+  "colours": [
+   {
+    "name": "Lava Blue Metallic",
+    "hex": "#1f3a6e",
+    "hexEstimated": true
+   },
+   {
+    "name": "Carbon Steel Grey Metallic",
+    "hex": "#4a4d52",
+    "hexEstimated": true
+   },
+   {
+    "name": "Deep Black Pearl Effect",
+    "hex": "#141416",
+    "hexEstimated": true
+   },
+   {
+    "name": "Wild Cherry Red Metallic",
+    "hex": "#8e1b2a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Reflex Silver Metallic",
+    "hex": "#b9bcbf",
+    "hexEstimated": true
+   },
+   {
+    "name": "Candy White",
+    "hex": "#f4f4f2",
+    "hexEstimated": true
+   },
+   {
+    "name": "Steel Grey",
+    "hex": "#6b6e72",
+    "hexEstimated": true
+   },
+   {
+    "name": "Avocado Pearl Effect",
+    "hex": "#5f6b45",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.volkswagen.co.in/en/models/taigun.html",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "volkswagen-tayron": {
+  "colours": [
+   {
+    "name": "Ultra Violet Metallic",
+    "hex": "#4b3a6b",
+    "hexEstimated": true
+   },
+   {
+    "name": "Grenadilla Black Metallic",
+    "hex": "#1a1a1c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Oryx White Mother of Pearl Effect",
+    "hex": "#eeece6",
+    "hexEstimated": true
+   },
+   {
+    "name": "Dolphin Grey Metallic",
+    "hex": "#6e7276",
+    "hexEstimated": true
+   },
+   {
+    "name": "Oyster Silver Metallic",
+    "hex": "#a9abad",
+    "hexEstimated": true
+   },
+   {
+    "name": "Cipressino Green Metallic",
+    "hex": "#585f56",
+    "hexEstimated": true
+   },
+   {
+    "name": "Nightshade Blue Metallic",
+    "hex": "#24384f",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.volkswagen.co.in/en/models/tayron.html",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "volkswagen-tiguan-r-line": {
+  "colours": [
+   {
+    "name": "Cipressino Green Metallic",
+    "hex": "#585f56",
+    "hexEstimated": true
+   },
+   {
+    "name": "Nightshade Blue Metallic",
+    "hex": "#24384f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Grenadilla Black Metallic",
+    "hex": "#1a1a1c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Oryx White Mother of Pearl Effect",
+    "hex": "#e8e7ea",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/volkswagen-cars/tiguan-r-line/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "volkswagen-golf-gti": {
+  "colours": [
+   {
+    "name": "Grenadilla Black Metallic",
+    "hex": "#1a1a1c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Oryx White Premium Mother-of-Pearl with Black Roof",
+    "hex": "#eeece6",
+    "roof": "#111111",
+    "hexEstimated": true
+   },
+   {
+    "name": "Moonstone Grey with Black Roof",
+    "hex": "#7c8085",
+    "roof": "#111111",
+    "hexEstimated": true
+   },
+   {
+    "name": "Kings Red Premium Metallic with Black Roof",
+    "hex": "#a3121f",
+    "roof": "#111111",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.volkswagen.co.in/en/models/golf-gti.html",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "jeep-compass": {
+  "colours": [
+   {
+    "name": "Pearl White",
+    "hex": "#e8e8e6",
+    "hexEstimated": true
+   },
+   {
+    "name": "Bright White",
+    "hex": "#f6f6f6",
+    "hexEstimated": true
+   },
+   {
+    "name": "Brilliant Black",
+    "hex": "#1c1d1f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Magnesio Grey",
+    "hex": "#58595a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Techno Metallic Green",
+    "hex": "#3d5352",
+    "hexEstimated": true
+   },
+   {
+    "name": "Exotica Red",
+    "hex": "#9a1621",
+    "hexEstimated": true
+   },
+   {
+    "name": "Galaxy Blue",
+    "hex": "#455978",
+    "hexEstimated": true
+   },
+   {
+    "name": "Silvery Moon",
+    "hex": "#c3bfbd",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.jeep-india.com/new-compass.html",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "jeep-meridian": {
+  "colours": [
+   {
+    "name": "Velvet Red",
+    "hex": "#752834",
+    "hexEstimated": true
+   },
+   {
+    "name": "Techno Metallic Green",
+    "hex": "#2a3e3b",
+    "hexEstimated": true
+   },
+   {
+    "name": "Magnesio Grey",
+    "hex": "#514f50",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pearl White",
+    "hex": "#e5e5e5",
+    "hexEstimated": true
+   },
+   {
+    "name": "Brilliant Black",
+    "hex": "#111111",
+    "hexEstimated": true
+   },
+   {
+    "name": "Galaxy Blue",
+    "hex": "#1a2240",
+    "hexEstimated": true
+   },
+   {
+    "name": "Silvery Moon",
+    "hex": "#a4a3a8",
+    "hexEstimated": true
+   },
+   {
+    "name": "Minimal Grey",
+    "hex": "#8f9294",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.jeep-india.com/new-jeep-meridian.html",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "jeep-grand-cherokee": {
+  "colours": [
+   {
+    "name": "Bright White",
+    "hex": "#f7f7f7",
+    "hexEstimated": true
+   },
+   {
+    "name": "Diamond Black Crystal",
+    "hex": "#161813",
+    "hexEstimated": true
+   },
+   {
+    "name": "Rocky Mountain",
+    "hex": "#444a4a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Velvet Red",
+    "hex": "#611829",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.jeep-india.com/new-grand-cherokee.html",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "jeep-wrangler": {
+  "colours": [
+   {
+    "name": "Firecracker Red",
+    "hex": "#b3202a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Black",
+    "hex": "#161616",
+    "hexEstimated": true
+   },
+   {
+    "name": "Bright White",
+    "hex": "#f6f6f6",
+    "hexEstimated": true
+   },
+   {
+    "name": "Anvil Clear Coat",
+    "hex": "#8a949a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Billet",
+    "hex": "#a3a3a3",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.jeep-india.com/wrangler-jl.html",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "mercedes-benz-gla": {
+  "colours": [
+   {
+    "name": "Polar White",
+    "hex": "#e1e1e1",
+    "hexEstimated": true
+   },
+   {
+    "name": "Mountain Grey",
+    "hex": "#5e6268",
+    "hexEstimated": true
+   },
+   {
+    "name": "Cosmos Black",
+    "hex": "#1b2029",
+    "hexEstimated": true
+   },
+   {
+    "name": "Iridium Silver",
+    "hex": "#c5c4c7",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/mercedes-benz-cars/gla/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "mercedes-benz-c-class": {
+  "colours": [
+   {
+    "name": "Obsidian Black",
+    "hex": "#1a1a1c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Selenite Grey",
+    "hex": "#65686a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Sodalite Blue",
+    "hex": "#3b415c",
+    "hexEstimated": true
+   },
+   {
+    "name": "High-Tech Silver",
+    "hex": "#c9cacd",
+    "hexEstimated": true
+   },
+   {
+    "name": "MANUFAKTUR Opalite White Bright",
+    "hex": "#e9eaea",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/mercedes-benz-cars/c-class/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "mercedes-benz-glc": {
+  "colours": [
+   {
+    "name": "Graphite Grey",
+    "hex": "#3b3c41",
+    "hexEstimated": true
+   },
+   {
+    "name": "Polar White",
+    "hex": "#dfdde2",
+    "hexEstimated": true
+   },
+   {
+    "name": "Obsidian Black",
+    "hex": "#1e1f23",
+    "hexEstimated": true
+   },
+   {
+    "name": "High-Tech Silver",
+    "hex": "#c9cacd",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/mercedes-benz-cars/glc/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "vinfast-vf6": {
+  "colours": [
+   {
+    "name": "Jet Black",
+    "hex": "#070707",
+    "hexEstimated": true
+   },
+   {
+    "name": "Desat Silver",
+    "hex": "#bec4c4",
+    "hexEstimated": true
+   },
+   {
+    "name": "Infinity Blanc",
+    "hex": "#f1f1f1",
+    "hexEstimated": true
+   },
+   {
+    "name": "Zenith Grey",
+    "hex": "#7f7e81",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/vinfast-cars/vf6/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "vinfast-vf7": {
+  "colours": [
+   {
+    "name": "Jet Black",
+    "hex": "#070707",
+    "hexEstimated": true
+   },
+   {
+    "name": "Desat Silver",
+    "hex": "#bec4c4",
+    "hexEstimated": true
+   },
+   {
+    "name": "Infinity Blanc",
+    "hex": "#f1f1f1",
+    "hexEstimated": true
+   },
+   {
+    "name": "Zenith Grey",
+    "hex": "#7f7e81",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/vinfast-cars/vf7/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "vinfast-limo-green": {
+  "colours": [
+   {
+    "name": "Infinity Blanc",
+    "hex": "#f2f2f2",
+    "hexEstimated": true
+   },
+   {
+    "name": "Jet Black",
+    "hex": "#070707",
+    "hexEstimated": true
+   },
+   {
+    "name": "Solar Ruby",
+    "hex": "#c8282e",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/vinfast-cars/limo-green/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "hyundai-grand-i10-nios": {
+  "colours": [
+   {
+    "name": "Fiery Red",
+    "hex": "#b0191e",
+    "hexEstimated": true
+   },
+   {
+    "name": "Typhoon Silver",
+    "hex": "#b8bcbf",
+    "hexEstimated": true
+   },
+   {
+    "name": "Titan Grey Matte",
+    "hex": "#63666a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Atlas White",
+    "hex": "#f2f3f1",
+    "hexEstimated": true
+   },
+   {
+    "name": "Titan Grey",
+    "hex": "#6b6e70",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.cardekho.com/hyundai/grand-i10-nios/colors",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "hyundai-exter": {
+  "colours": [
+   {
+    "name": "Golden Bronze",
+    "hex": "#8a6a45",
+    "hexEstimated": true
+   },
+   {
+    "name": "Ecotronic Gray",
+    "hex": "#5f6366",
+    "hexEstimated": true
+   },
+   {
+    "name": "Starry Night",
+    "hex": "#1f2a44",
+    "hexEstimated": true
+   },
+   {
+    "name": "Titanium Black",
+    "hex": "#0d0d0f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Ecotronic Gray Matte",
+    "hex": "#5a5e61",
+    "hexEstimated": true
+   },
+   {
+    "name": "Ranger Khaki",
+    "hex": "#7a7458",
+    "hexEstimated": true
+   },
+   {
+    "name": "Atlas White",
+    "hex": "#f2f3f1",
+    "hexEstimated": true
+   },
+   {
+    "name": "Ranger Khaki with Black Roof",
+    "hex": "#7a7458",
+    "roof": "#0d0d0f",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.hyundai.com/in/en/find-a-car/exter/highlights",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "hyundai-i20": {
+  "colours": [
+   {
+    "name": "Fiery Red",
+    "hex": "#b0191e",
+    "hexEstimated": true
+   },
+   {
+    "name": "Titan Grey Matte",
+    "hex": "#63666a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Starry Night",
+    "hex": "#1f2a44",
+    "hexEstimated": true
+   },
+   {
+    "name": "Atlas White",
+    "hex": "#f2f3f1",
+    "hexEstimated": true
+   },
+   {
+    "name": "Titan Grey",
+    "hex": "#6b6e70",
+    "hexEstimated": true
+   },
+   {
+    "name": "Titanium Black",
+    "hex": "#0d0d0f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Atlas White with Black Roof",
+    "hex": "#f2f3f1",
+    "roof": "#0d0d0f",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.cardekho.com/hyundai/i20/colors",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "hyundai-aura": {
+  "colours": [
+   {
+    "name": "Typhoon Silver",
+    "hex": "#b8bcbf",
+    "hexEstimated": true
+   },
+   {
+    "name": "Starry Night",
+    "hex": "#1f2a44",
+    "hexEstimated": true
+   },
+   {
+    "name": "Atlas White",
+    "hex": "#f2f3f1",
+    "hexEstimated": true
+   },
+   {
+    "name": "Titan Grey",
+    "hex": "#6b6e70",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.cardekho.com/hyundai/aura/colors",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "hyundai-venue": {
+  "colours": [
+   {
+    "name": "Titanium Black Knight",
+    "hex": "#0d0d0f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Mystic Sapphire",
+    "hex": "#1e3557",
+    "hexEstimated": true
+   },
+   {
+    "name": "Hazel Blue",
+    "hex": "#3f7f93",
+    "hexEstimated": true
+   },
+   {
+    "name": "Mystic Sapphire Matte",
+    "hex": "#263a55",
+    "hexEstimated": true
+   },
+   {
+    "name": "Hazel Blue Matte",
+    "hex": "#4a7d8c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Dragon Red",
+    "hex": "#a3151c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Titan Grey",
+    "hex": "#6b6e70",
+    "hexEstimated": true
+   },
+   {
+    "name": "Atlas White",
+    "hex": "#f2f3f1",
+    "hexEstimated": true
+   },
+   {
+    "name": "Titanium Black",
+    "hex": "#0d0d0f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Hazel Blue with Black Roof",
+    "hex": "#3f7f93",
+    "roof": "#0d0d0f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Atlas White with Black Roof",
+    "hex": "#f2f3f1",
+    "roof": "#0d0d0f",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.hyundai.com/in/en/find-a-car/venue/highlights",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "hyundai-i20-n-line": {
+  "colours": [
+   {
+    "name": "Starry Night",
+    "hex": "#1f2a44",
+    "hexEstimated": true
+   },
+   {
+    "name": "Atlas White",
+    "hex": "#f2f3f1",
+    "hexEstimated": true
+   },
+   {
+    "name": "Titan Grey",
+    "hex": "#6b6e70",
+    "hexEstimated": true
+   },
+   {
+    "name": "Titanium Black",
+    "hex": "#0d0d0f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Thunder Blue with Black Roof",
+    "hex": "#3a6fa0",
+    "roof": "#0d0d0f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Atlas White with Black Roof",
+    "hex": "#f2f3f1",
+    "roof": "#0d0d0f",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.cardekho.com/hyundai/i20-n-line/colors",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "hyundai-bayon": {
+  "colours": [
+   {
+    "name": "Fiery Red",
+    "hex": "#b0191e",
+    "hexEstimated": true
+   },
+   {
+    "name": "Atlas White",
+    "hex": "#f2f3f1",
+    "hexEstimated": true
+   },
+   {
+    "name": "Ecotronic Grey",
+    "hex": "#5f6366"
+   },
+   {
+    "name": "Golden Bronze",
+    "hex": "#8a6a45",
+    "hexEstimated": true
+   },
+   {
+    "name": "Titanium Black",
+    "hex": "#0d0d0f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Classy Blue",
+    "hex": "#2c4a73",
+    "hexEstimated": true
+   },
+   {
+    "name": "Titanium Black Matte",
+    "hex": "#1c1c1e",
+    "hexEstimated": true
+   },
+   {
+    "name": "Classy Blue Matte",
+    "hex": "#34496a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Fiery Red with Titanium Black Roof",
+    "hex": "#b0191e",
+    "roof": "#0d0d0f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Atlas White with Titanium Black Roof",
+    "hex": "#f2f3f1",
+    "roof": "#0d0d0f",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.hyundai.com/in/en/find-a-car/bayon/highlights",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "hyundai-venue-n-line": {
+  "colours": [
+   {
+    "name": "Hazel Blue",
+    "hex": "#3f7f93",
+    "hexEstimated": true
+   },
+   {
+    "name": "Dragon Red",
+    "hex": "#a3151c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Titan Grey",
+    "hex": "#6b6e70",
+    "hexEstimated": true
+   },
+   {
+    "name": "Atlas White",
+    "hex": "#f2f3f1",
+    "hexEstimated": true
+   },
+   {
+    "name": "Titanium Black",
+    "hex": "#0d0d0f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Hazel Blue with Titanium Black Roof",
+    "hex": "#3f7f93",
+    "roof": "#0d0d0f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Dragon Red with Titanium Black Roof",
+    "hex": "#a3151c",
+    "roof": "#0d0d0f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Atlas White with Titanium Black Roof",
+    "hex": "#f2f3f1",
+    "roof": "#0d0d0f",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.hyundai.com/in/en/find-a-car/venue-n-line/highlights",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "hyundai-creta": {
+  "colours": [
+   {
+    "name": "Titanium Black",
+    "hex": "#0d0d0f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Atlas White",
+    "hex": "#f2f3f1",
+    "hexEstimated": true
+   },
+   {
+    "name": "Robust Emerald Pearl",
+    "hex": "#1f3b33",
+    "hexEstimated": true
+   },
+   {
+    "name": "Titanium Black Matte",
+    "hex": "#1c1c1e",
+    "hexEstimated": true
+   },
+   {
+    "name": "Starry Night",
+    "hex": "#1f2a44",
+    "hexEstimated": true
+   },
+   {
+    "name": "Ecotronic Grey",
+    "hex": "#5f6366",
+    "hexEstimated": true
+   },
+   {
+    "name": "Ecotronic Grey Matte",
+    "hex": "#5a5e61",
+    "hexEstimated": true
+   },
+   {
+    "name": "King Limited Edition Titanium Black Matte",
+    "hex": "#1c1c1e",
+    "hexEstimated": true
+   },
+   {
+    "name": "Atlas White with Titanium Black Roof",
+    "hex": "#f2f3f1",
+    "roof": "#0d0d0f",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.cardekho.com/hyundai/creta/colors",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "hyundai-verna": {
+  "colours": [
+   {
+    "name": "Titanium Black",
+    "hex": "#0d0d0f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Atlas White",
+    "hex": "#f2f3f1",
+    "hexEstimated": true
+   },
+   {
+    "name": "Titan Grey",
+    "hex": "#6b6e70",
+    "hexEstimated": true
+   },
+   {
+    "name": "Starry Night",
+    "hex": "#1f2a44",
+    "hexEstimated": true
+   },
+   {
+    "name": "Titan Grey Matte",
+    "hex": "#63666a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Classy Blue",
+    "hex": "#2c4a73",
+    "hexEstimated": true
+   },
+   {
+    "name": "Atlas White with Black Roof",
+    "hex": "#f2f3f1",
+    "roof": "#0d0d0f",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.hyundai.com/in/en/find-a-car/verna/highlights",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "hyundai-alcazar": {
+  "colours": [
+   {
+    "name": "Robust Emerald Pearl",
+    "hex": "#1f3b33",
+    "hexEstimated": true
+   },
+   {
+    "name": "Titanium Black Matte Knight",
+    "hex": "#1c1c1e",
+    "hexEstimated": true
+   },
+   {
+    "name": "Starry Night",
+    "hex": "#1f2a44",
+    "hexEstimated": true
+   },
+   {
+    "name": "Atlas White",
+    "hex": "#f2f3f1",
+    "hexEstimated": true
+   },
+   {
+    "name": "Golden Bronze",
+    "hex": "#8a6a45",
+    "hexEstimated": true
+   },
+   {
+    "name": "Titanium Black",
+    "hex": "#0d0d0f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Atlas White with Titanium Black Roof",
+    "hex": "#f2f3f1",
+    "roof": "#0d0d0f",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.cardekho.com/hyundai/alcazar/colors",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "hyundai-creta-electric": {
+  "colours": [
+   {
+    "name": "Fiery Red",
+    "hex": "#b0191e",
+    "hexEstimated": true
+   },
+   {
+    "name": "Titanium Black Matte Knight",
+    "hex": "#1c1c1e",
+    "hexEstimated": true
+   },
+   {
+    "name": "Starry Night",
+    "hex": "#1f2a44",
+    "hexEstimated": true
+   },
+   {
+    "name": "Atlas White",
+    "hex": "#f2f3f1",
+    "hexEstimated": true
+   },
+   {
+    "name": "Golden Bronze",
+    "hex": "#8a6a45",
+    "hexEstimated": true
+   },
+   {
+    "name": "Titanium Black",
+    "hex": "#0d0d0f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Atlas White with Titanium Black Roof",
+    "hex": "#f2f3f1",
+    "roof": "#0d0d0f",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.cardekho.com/hyundai/creta-electric/colors",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "hyundai-creta-n-line": {
+  "colours": [
+   {
+    "name": "Titanium Black Matte",
+    "hex": "#1c1c1e",
+    "hexEstimated": true
+   },
+   {
+    "name": "Atlas White",
+    "hex": "#f2f3f1",
+    "hexEstimated": true
+   },
+   {
+    "name": "Titanium Black",
+    "hex": "#0d0d0f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Thunder Blue with Black Roof",
+    "hex": "#3a6fa0",
+    "roof": "#0d0d0f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Atlas White with Black Roof",
+    "hex": "#f2f3f1",
+    "roof": "#0d0d0f",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.cardekho.com/hyundai/creta-n-line/colors",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "hyundai-ioniq-5": {
+  "colours": [
+   {
+    "name": "Titan Grey",
+    "hex": "#6b6e70",
+    "hexEstimated": true
+   },
+   {
+    "name": "Gravity Gold Matte",
+    "hex": "#8c7a5b",
+    "hexEstimated": true
+   },
+   {
+    "name": "Midnight Black Pearl",
+    "hex": "#0e0f12",
+    "hexEstimated": true
+   },
+   {
+    "name": "Optic White",
+    "hex": "#f4f4f2",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.hyundai.com/in/en/find-a-car/ioniq-5/highlights",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "mahindra-xuv-3xo": {
+  "colours": [
+   {
+    "name": "Galaxy Grey",
+    "hex": "#575a63"
+   },
+   {
+    "name": "Everest White",
+    "hex": "#cfcdcd"
+   },
+   {
+    "name": "Stealth Black",
+    "hex": "#060505"
+   },
+   {
+    "name": "Dune Beige",
+    "hex": "#907b61"
+   },
+   {
+    "name": "Deep Forest",
+    "hex": "#282d22"
+   },
+   {
+    "name": "Nebula Blue",
+    "hex": "#07132a"
+   },
+   {
+    "name": "Tango Red",
+    "hex": "#970211"
+   },
+   {
+    "name": "Jeans Blue",
+    "hex": "#071f35"
+   },
+   {
+    "name": "Citrine Yellow",
+    "hex": "#baa21b"
+   },
+   {
+    "name": "Galaxy Grey Black",
+    "hex": "#575a63",
+    "roof": "#060505"
+   },
+   {
+    "name": "Stealth Black Grey",
+    "hex": "#060505",
+    "roof": "#6e6f6c"
+   },
+   {
+    "name": "Tango Red Black",
+    "hex": "#970211",
+    "roof": "#060505"
+   },
+   {
+    "name": "Nebula Blue Grey",
+    "hex": "#07132a",
+    "roof": "#6e6f6c"
+   },
+   {
+    "name": "Everest White Black",
+    "hex": "#cfcdcd",
+    "roof": "#060505"
+   },
+   {
+    "name": "Jeans Blue Black",
+    "hex": "#071f35",
+    "roof": "#060505"
+   },
+   {
+    "name": "Deep Forest Grey",
+    "hex": "#282d22",
+    "roof": "#6e6f6c"
+   },
+   {
+    "name": "Dune Beige Black",
+    "hex": "#907b61",
+    "roof": "#060505"
+   },
+   {
+    "name": "Citrine Yellow Black",
+    "hex": "#baa21b",
+    "roof": "#060505"
+   }
+  ],
+  "source": "https://auto.mahindra.com/suv/xuv3xo",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "mahindra-bolero": {
+  "colours": [
+   {
+    "name": "Stealth Black",
+    "hex": "#060505"
+   },
+   {
+    "name": "Diamond White",
+    "hex": "#e3dfd0"
+   },
+   {
+    "name": "DSat Silver",
+    "hex": "#4e4e51"
+   },
+   {
+    "name": "Rockey Beige",
+    "hex": "#b8a98a",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://auto.mahindra.com/suv/bolero",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "mahindra-bolero-neo": {
+  "colours": [
+   {
+    "name": "Stealth Black",
+    "hex": "#060505",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pearl White",
+    "hex": "#f2f1ec",
+    "hexEstimated": true
+   },
+   {
+    "name": "Diamond White",
+    "hex": "#e3dfd0",
+    "hexEstimated": true
+   },
+   {
+    "name": "Rockey Beige",
+    "hex": "#b8a98a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Jeans Blue",
+    "hex": "#071f35",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pearl White with Black Roof",
+    "hex": "#f2f1ec",
+    "roof": "#060505",
+    "hexEstimated": true
+   },
+   {
+    "name": "Jeans Blue with Black Roof",
+    "hex": "#071f35",
+    "roof": "#060505",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.cardekho.com/mahindra/bolero-neo/colors",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "mahindra-thar": {
+  "colours": [
+   {
+    "name": "Artemis Silver",
+    "hex": "#30363f"
+   },
+   {
+    "name": "Jeans Blue",
+    "hex": "#071f35"
+   },
+   {
+    "name": "Tango Red",
+    "hex": "#970211"
+   },
+   {
+    "name": "Galaxy Grey",
+    "hex": "#575a63"
+   },
+   {
+    "name": "Battleship Grey",
+    "hex": "#768390"
+   },
+   {
+    "name": "Everest White",
+    "hex": "#cfcdcd"
+   },
+   {
+    "name": "Stealth Black",
+    "hex": "#060505"
+   },
+   {
+    "name": "Deep Forest",
+    "hex": "#282d22"
+   }
+  ],
+  "source": "https://auto.mahindra.com/suv/thar",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "mahindra-thar-roxx": {
+  "colours": [
+   {
+    "name": "Stealth Black",
+    "hex": "#060505"
+   },
+   {
+    "name": "Tango Red",
+    "hex": "#c20d0e"
+   },
+   {
+    "name": "Everest White",
+    "hex": "#cfcdcd"
+   },
+   {
+    "name": "Deep Forest",
+    "hex": "#282d22"
+   },
+   {
+    "name": "Burnt Sienna",
+    "hex": "#45241a"
+   },
+   {
+    "name": "Nebula Blue",
+    "hex": "#07132a"
+   },
+   {
+    "name": "Battleship Grey",
+    "hex": "#768390"
+   },
+   {
+    "name": "Citrine Yellow",
+    "hex": "#baa21b"
+   }
+  ],
+  "source": "https://auto.mahindra.com/suv/thar-roxx",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "mahindra-scorpio-classic": {
+  "colours": [
+   {
+    "name": "Everest White",
+    "hex": "#cfcdcd",
+    "hexEstimated": true
+   },
+   {
+    "name": "Galaxy Grey",
+    "hex": "#575a63",
+    "hexEstimated": true
+   },
+   {
+    "name": "Diamond White",
+    "hex": "#e3dfd0",
+    "hexEstimated": true
+   },
+   {
+    "name": "Stealth Black",
+    "hex": "#060505",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.cardekho.com/mahindra/scorpio/colors",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "mahindra-scorpio-n": {
+  "colours": [
+   {
+    "name": "Deep Forest",
+    "hex": "#282d22"
+   },
+   {
+    "name": "Everest White",
+    "hex": "#f2f2f0",
+    "hexEstimated": true
+   },
+   {
+    "name": "Stealth Black",
+    "hex": "#060505"
+   },
+   {
+    "name": "Oceanic",
+    "hex": "#062943"
+   },
+   {
+    "name": "Galaxy Grey",
+    "hex": "#575a63"
+   }
+  ],
+  "source": "https://auto.mahindra.com/suv/scorpio-n",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "mahindra-xuv-3xo-ev": {
+  "colours": [
+   {
+    "name": "Everest White",
+    "hex": "#cfcdcd",
+    "hexEstimated": true
+   },
+   {
+    "name": "Galaxy Grey",
+    "hex": "#575a63",
+    "hexEstimated": true
+   },
+   {
+    "name": "Stealth Black",
+    "hex": "#060505",
+    "hexEstimated": true
+   },
+   {
+    "name": "Nebula Blue",
+    "hex": "#07132a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Deep Forest",
+    "hex": "#282d22",
+    "hexEstimated": true
+   },
+   {
+    "name": "Tango Red",
+    "hex": "#970211",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.cardekho.com/mahindra/xuv-3xo-ev/colors",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "mahindra-xuv-7xo": {
+  "colours": [
+   {
+    "name": "Everest White",
+    "hex": "#cfcdcd",
+    "hexEstimated": true
+   },
+   {
+    "name": "Stealth Black",
+    "hex": "#060505",
+    "hexEstimated": true
+   },
+   {
+    "name": "Galaxy Grey",
+    "hex": "#575a63",
+    "hexEstimated": true
+   },
+   {
+    "name": "Desert Myst",
+    "hex": "#c0beb7",
+    "hexEstimated": true
+   },
+   {
+    "name": "Ruby Velvet",
+    "hex": "#2d0406",
+    "hexEstimated": true
+   },
+   {
+    "name": "Nebula Blue",
+    "hex": "#07132a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Midnight Black",
+    "hex": "#101218",
+    "hexEstimated": true
+   },
+   {
+    "name": "Galaxy Grey with Stealth Black",
+    "hex": "#575a63",
+    "roof": "#060505",
+    "hexEstimated": true
+   },
+   {
+    "name": "Desert Myst with Stealth Black",
+    "hex": "#c0beb7",
+    "roof": "#060505",
+    "hexEstimated": true
+   },
+   {
+    "name": "Everest White with Stealth Black",
+    "hex": "#cfcdcd",
+    "roof": "#060505",
+    "hexEstimated": true
+   },
+   {
+    "name": "Midnight Black with Stealth Black",
+    "hex": "#101218",
+    "roof": "#060505",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/mahindra-cars/xuv-7xo/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "mahindra-xuv400": {
+  "colours": [],
+  "source": "https://www.cardekho.com/mahindra/xuv400-ev/colors",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "mahindra-be-6": {
+  "colours": [
+   {
+    "name": "Everest White",
+    "hex": "#cfcdcd",
+    "hexEstimated": true
+   },
+   {
+    "name": "Stealth Black",
+    "hex": "#060505",
+    "hexEstimated": true
+   },
+   {
+    "name": "Desert Myst",
+    "hex": "#c0beb7",
+    "hexEstimated": true
+   },
+   {
+    "name": "Deep Forest",
+    "hex": "#282d22",
+    "hexEstimated": true
+   },
+   {
+    "name": "Tango Red",
+    "hex": "#970211",
+    "hexEstimated": true
+   },
+   {
+    "name": "Firestorm Orange",
+    "hex": "#c4501e",
+    "hexEstimated": true
+   },
+   {
+    "name": "Ruby Velvet",
+    "hex": "#2d0406",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.mahindraelectricsuv.com/esuv/MBE6.html",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "mahindra-xev-9s": {
+  "colours": [
+   {
+    "name": "Stealth Black",
+    "hex": "#060505",
+    "hexEstimated": true
+   },
+   {
+    "name": "Desert Myst",
+    "hex": "#c0beb7",
+    "hexEstimated": true
+   },
+   {
+    "name": "Everest White",
+    "hex": "#cfcdcd",
+    "hexEstimated": true
+   },
+   {
+    "name": "Midnight Black",
+    "hex": "#101218",
+    "hexEstimated": true
+   },
+   {
+    "name": "Ruby Velvet",
+    "hex": "#2d0406",
+    "hexEstimated": true
+   },
+   {
+    "name": "Nebula Blue",
+    "hex": "#07132a",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.mahindraelectricsuv.com/esuv/xev-9s/XEV9.html",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "mahindra-xev-9e": {
+  "colours": [
+   {
+    "name": "Tango Red",
+    "hex": "#970211"
+   },
+   {
+    "name": "Deep Forest",
+    "hex": "#282d22"
+   },
+   {
+    "name": "Nebula Blue",
+    "hex": "#07132a"
+   },
+   {
+    "name": "Ruby Velvet",
+    "hex": "#2d0406"
+   },
+   {
+    "name": "Desert Myst",
+    "hex": "#c0beb7"
+   },
+   {
+    "name": "Everest White",
+    "hex": "#cfcdcd"
+   },
+   {
+    "name": "Stealth Black",
+    "hex": "#060505"
+   },
+   {
+    "name": "Satin White",
+    "hex": "#cfcdcd"
+   }
+  ],
+  "source": "https://www.mahindraelectricsuv.com/esuv/xev-9e/MXV9.html",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "kia-sonet": {
+  "colours": [
+   {
+    "name": "Gravity Grey",
+    "hex": "#55595c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Aurora Black Pearl",
+    "hex": "#0c0d10",
+    "hexEstimated": true
+   },
+   {
+    "name": "Glacier White Pearl",
+    "hex": "#f3f3f0",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pewter Olive",
+    "hex": "#6b6a55",
+    "hexEstimated": true
+   },
+   {
+    "name": "Imperial Blue",
+    "hex": "#1f2f5c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Magma Red",
+    "hex": "#8e1b1f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Matte Graphite",
+    "hex": "#4a4c4f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Glacier White Pearl + Aurora Black Pearl",
+    "hex": "#f3f3f0",
+    "roof": "#0c0d10",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.kia.com/in/our-vehicles/sonet.html",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "kia-syros": {
+  "colours": [
+   {
+    "name": "Frost Blue",
+    "hex": "#8fb3c9",
+    "hexEstimated": true
+   },
+   {
+    "name": "Ivory Silver Gloss",
+    "hex": "#c9c6bd",
+    "hexEstimated": true
+   },
+   {
+    "name": "Gravity Gray",
+    "hex": "#55595c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Imperial Blue",
+    "hex": "#1f2f5c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Magma Red",
+    "hex": "#8e1b1f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pewter Olive",
+    "hex": "#6b6a55",
+    "hexEstimated": true
+   },
+   {
+    "name": "Glacier White Pearl",
+    "hex": "#f3f3f0",
+    "hexEstimated": true
+   },
+   {
+    "name": "Aurora Black Pearl",
+    "hex": "#0c0d10",
+    "hexEstimated": true
+   },
+   {
+    "name": "Ivory Silver Matte",
+    "hex": "#c2bfb6",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.kia.com/in/our-vehicles/syros.html",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "kia-seltos": {
+  "colours": [
+   {
+    "name": "Frost Blue",
+    "hex": "#8fb3c9",
+    "hexEstimated": true
+   },
+   {
+    "name": "Ivory Silver Gloss",
+    "hex": "#c9c6bd",
+    "hexEstimated": true
+   },
+   {
+    "name": "Imperial Blue",
+    "hex": "#1f2f5c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Morning Haze",
+    "hex": "#a8a39a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Aurora Black Pearl",
+    "hex": "#0c0d10",
+    "hexEstimated": true
+   },
+   {
+    "name": "Gravity Gray",
+    "hex": "#55595c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Magma Red",
+    "hex": "#8e1b1f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pewter Olive",
+    "hex": "#6b6a55",
+    "hexEstimated": true
+   },
+   {
+    "name": "Glacier White Pearl",
+    "hex": "#f3f3f0",
+    "hexEstimated": true
+   },
+   {
+    "name": "Matte Graphite",
+    "hex": "#4a4c4f",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.kia.com/in/our-vehicles/seltos.html",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "kia-carens-clavis": {
+  "colours": [
+   {
+    "name": "Ivory Silver Gloss",
+    "hex": "#c9c6bd",
+    "hexEstimated": true
+   },
+   {
+    "name": "Imperial Blue",
+    "hex": "#1f2f5c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pewter Olive",
+    "hex": "#6b6a55",
+    "hexEstimated": true
+   },
+   {
+    "name": "Aurora Black Pearl",
+    "hex": "#0c0d10",
+    "hexEstimated": true
+   },
+   {
+    "name": "Gravity Gray",
+    "hex": "#55595c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Glacier White Pearl",
+    "hex": "#f3f3f0",
+    "hexEstimated": true
+   },
+   {
+    "name": "Dark Gun Metal",
+    "hex": "#3e4144",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.kia.com/in/our-vehicles/carens-clavis.html",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "kia-syros-ev": {
+  "colours": [
+   {
+    "name": "Ivory Silver Matte",
+    "hex": "#c2bfb6",
+    "hexEstimated": true
+   },
+   {
+    "name": "Gravity Grey",
+    "hex": "#55595c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Glacier White Pearl",
+    "hex": "#f3f3f0",
+    "hexEstimated": true
+   },
+   {
+    "name": "Ivory Silver Gloss",
+    "hex": "#c9c6bd",
+    "hexEstimated": true
+   },
+   {
+    "name": "Aurora Black Pearl",
+    "hex": "#0c0d10",
+    "hexEstimated": true
+   },
+   {
+    "name": "Frost Blue",
+    "hex": "#8fb3c9",
+    "hexEstimated": true
+   },
+   {
+    "name": "Magma Red",
+    "hex": "#8e1b1f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pewter Olive",
+    "hex": "#6b6a55",
+    "hexEstimated": true
+   },
+   {
+    "name": "Matte Graphite",
+    "hex": "#4a4c4f",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.kia.com/in/our-vehicles/syros-ev.html",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "kia-carens-clavis-ev": {
+  "colours": [
+   {
+    "name": "Ivory Silver Matte",
+    "hex": "#c2bfb6",
+    "hexEstimated": true
+   },
+   {
+    "name": "Imperial Blue",
+    "hex": "#1f2f5c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pewter Olive",
+    "hex": "#6b6a55",
+    "hexEstimated": true
+   },
+   {
+    "name": "Glacier White Pearl",
+    "hex": "#f3f3f0",
+    "hexEstimated": true
+   },
+   {
+    "name": "Gravity Grey",
+    "hex": "#55595c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Aurora Black Pearl",
+    "hex": "#0c0d10",
+    "hexEstimated": true
+   },
+   {
+    "name": "Dark Gun Metal",
+    "hex": "#3e4144",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.kia.com/in/our-vehicles/carens-clavis-ev.html",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "kia-sorento": {
+  "colours": [
+   {
+    "name": "Imperial Blue",
+    "hex": "#1f2f5c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Dark Gun Metal (Matte)",
+    "hex": "#3a3c3f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Gravity Gray",
+    "hex": "#55595c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pewter Olive",
+    "hex": "#6b6a55",
+    "hexEstimated": true
+   },
+   {
+    "name": "Aurora Black Pearl",
+    "hex": "#0c0d10",
+    "hexEstimated": true
+   },
+   {
+    "name": "Ivory Silver Gloss",
+    "hex": "#c9c6bd",
+    "hexEstimated": true
+   },
+   {
+    "name": "Magma Red",
+    "hex": "#8e1b1f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Glacier White Pearl",
+    "hex": "#f3f3f0",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.kia.com/in/our-vehicles/sorento.html",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "kia-carnival": {
+  "colours": [
+   {
+    "name": "Glacier White Pearl",
+    "hex": "#f3f3f0",
+    "hexEstimated": true
+   },
+   {
+    "name": "Fusion Black",
+    "hex": "#121214",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.kia.com/in/our-vehicles/carnival.html",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "kia-ev6": {
+  "colours": [
+   {
+    "name": "Snow White Pearl",
+    "hex": "#f2f2ef",
+    "hexEstimated": true
+   },
+   {
+    "name": "Wolf Grey",
+    "hex": "#6d7174",
+    "hexEstimated": true
+   },
+   {
+    "name": "Aurora Black Pearl",
+    "hex": "#0c0d10",
+    "hexEstimated": true
+   },
+   {
+    "name": "Runway Red",
+    "hex": "#9e1a24",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.kia.com/in/our-vehicles/ev6.html",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "kia-ev9": {
+  "colours": [
+   {
+    "name": "Ocean Blue",
+    "hex": "#1f4f7a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Aurora Black Pearl",
+    "hex": "#0c0d10",
+    "hexEstimated": true
+   },
+   {
+    "name": "Snow White Pearl",
+    "hex": "#f2f2ef",
+    "hexEstimated": true
+   },
+   {
+    "name": "Panthera Metal",
+    "hex": "#4f5357",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pebble Gray",
+    "hex": "#9a9894",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.kia.com/in/our-vehicles/ev9.html",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "bmw-2-series-gran-coupe": {
+  "colours": [
+   {
+    "name": "Brooklyn Grey Metallic",
+    "hex": "#7d8287",
+    "hexEstimated": true
+   },
+   {
+    "name": "Alpine White",
+    "hex": "#f2f2f0",
+    "hexEstimated": true
+   },
+   {
+    "name": "Portimao Blue Metallic",
+    "hex": "#1f4e9c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Black Sapphire Metallic",
+    "hex": "#0f1114",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/bmw-cars/2-series-gran-coupe/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "bmw-x1": {
+  "colours": [
+   {
+    "name": "Alpine White",
+    "hex": "#f2f2f0",
+    "hexEstimated": true
+   },
+   {
+    "name": "Black Sapphire Metallic",
+    "hex": "#0f1114",
+    "hexEstimated": true
+   },
+   {
+    "name": "M Portimao Blue Metallic",
+    "hex": "#1f4e9c",
+    "hexEstimated": true
+   },
+   {
+    "name": "Storm Bay Metallic",
+    "hex": "#4f585f",
+    "hexEstimated": true
+   },
+   {
+    "name": "Space Silver Metallic",
+    "hex": "#a3a6a8",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/bmw-cars/x1/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "bmw-ix1": {
+  "colours": [
+   {
+    "name": "Carbon Black Metallic",
+    "hex": "#1a2230",
+    "hexEstimated": true
+   },
+   {
+    "name": "Mineral White Metallic",
+    "hex": "#e8e8e3",
+    "hexEstimated": true
+   },
+   {
+    "name": "Night Dusk Blue",
+    "hex": "#25304a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Skyscraper Grey Metallic",
+    "hex": "#8f949a",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.autocarindia.com/cars/bmw/ix1-lwb/colours",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "bmw-3-series-lwb": {
+  "colours": [
+   {
+    "name": "Mineral White Metallic",
+    "hex": "#e8e8e3",
+    "hexEstimated": true
+   },
+   {
+    "name": "Skyscraper Grey Metallic",
+    "hex": "#8f949a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Carbon Black Metallic",
+    "hex": "#1a2230",
+    "hexEstimated": true
+   },
+   {
+    "name": "Portimao Blue Metallic",
+    "hex": "#1f4e9c",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.autocarindia.com/cars/bmw/3-series-lwb/colours",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "nissan-magnite": {
+  "colours": [
+   {
+    "name": "Sunrise Copper Orange",
+    "hex": "#c0602a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Flare Garnet Red",
+    "hex": "#8f1d22",
+    "hexEstimated": true
+   },
+   {
+    "name": "Olive Bronze",
+    "hex": "#6e6448",
+    "hexEstimated": true
+   },
+   {
+    "name": "Metallic Grey",
+    "hex": "#6b6e71",
+    "hexEstimated": true
+   },
+   {
+    "name": "Onyx Black",
+    "hex": "#111113",
+    "hexEstimated": true
+   },
+   {
+    "name": "Blade Silver",
+    "hex": "#b5b8bb",
+    "hexEstimated": true
+   },
+   {
+    "name": "Storm White",
+    "hex": "#e9e9e6",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pearl White",
+    "hex": "#f2f1ec",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.nissan.in/vehicles/new/nissan-magnite.html",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "nissan-gravite": {
+  "colours": [
+   {
+    "name": "Forest Green",
+    "hex": "#2f4a3a",
+    "hexEstimated": true
+   },
+   {
+    "name": "Onyx Black",
+    "hex": "#111113",
+    "hexEstimated": true
+   },
+   {
+    "name": "Blade Silver",
+    "hex": "#b5b8bb",
+    "hexEstimated": true
+   },
+   {
+    "name": "Storm White",
+    "hex": "#e9e9e6",
+    "hexEstimated": true
+   },
+   {
+    "name": "Metallic Grey",
+    "hex": "#6b6e71",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.nissan.in/vehicles/new/nissan-gravite.html",
+  "sourceType": "maker",
+  "checked": "2026-11-01"
+ },
+ "nissan-tekton": {
+  "colours": [
+   {
+    "name": "Moonbow Gray",
+    "hex": "#8a8f94",
+    "hexEstimated": true
+   },
+   {
+    "name": "Onyx Black",
+    "hex": "#111113",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pearl White",
+    "hex": "#f2f1ec",
+    "hexEstimated": true
+   },
+   {
+    "name": "Blade Silver",
+    "hex": "#b5b8bb",
+    "hexEstimated": true
+   },
+   {
+    "name": "Flare Garnet Red",
+    "hex": "#8f1d22",
+    "hexEstimated": true
+   },
+   {
+    "name": "Indigo Blue",
+    "hex": "#2a3866",
+    "hexEstimated": true
+   },
+   {
+    "name": "Pearl White with Onyx Black",
+    "hex": "#f2f1ec",
+    "roof": "#111113",
+    "hexEstimated": true
+   },
+   {
+    "name": "Flare Garnet Red with Onyx Black",
+    "hex": "#8f1d22",
+    "roof": "#111113",
+    "hexEstimated": true
+   },
+   {
+    "name": "Indigo Blue with Onyx Black",
+    "hex": "#2a3866",
+    "roof": "#111113",
+    "hexEstimated": true
+   },
+   {
+    "name": "Blade Silver with Onyx Black",
+    "hex": "#b5b8bb",
+    "roof": "#111113",
+    "hexEstimated": true
+   },
+   {
+    "name": "Moonbow Gray with Onyx Black",
+    "hex": "#8a8f94",
+    "roof": "#111113",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/nissan-cars/tekton/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "nissan-x-trail": {
+  "colours": [
+   {
+    "name": "Pearl White",
+    "hex": "#f2f1ec",
+    "hexEstimated": true
+   },
+   {
+    "name": "Diamond Black",
+    "hex": "#101114",
+    "hexEstimated": true
+   },
+   {
+    "name": "Champagne Silver",
+    "hex": "#c7bfae",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/nissan-cars/x-trail/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "audi-a4": {
+  "colours": [
+   {
+    "name": "Glacier White Metallic",
+    "hex": "#f1f1ee",
+    "hexEstimated": true
+   },
+   {
+    "name": "Mythos Black Metallic",
+    "hex": "#0e0e10",
+    "hexEstimated": true
+   },
+   {
+    "name": "Navarra Blue Metallic",
+    "hex": "#1d3a6b",
+    "hexEstimated": true
+   },
+   {
+    "name": "Progressive Red Metallic",
+    "hex": "#8e1520",
+    "hexEstimated": true
+   },
+   {
+    "name": "Manhattan Gray Metallic",
+    "hex": "#5c6064",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/audi-cars/a4/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ },
+ "audi-q3": {
+  "colours": [
+   {
+    "name": "Navarra Blue Metallic",
+    "hex": "#1d3a6b",
+    "hexEstimated": true
+   },
+   {
+    "name": "Glacier White Metallic",
+    "hex": "#f1f1ee",
+    "hexEstimated": true
+   },
+   {
+    "name": "Mythos Black Metallic",
+    "hex": "#0e0e10",
+    "hexEstimated": true
+   },
+   {
+    "name": "Sage Green",
+    "hex": "#7d8a74",
+    "hexEstimated": true
+   },
+   {
+    "name": "Tambora Grey",
+    "hex": "#8a8c88",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.carwale.com/audi-cars/q3/colours/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-01"
+ }
+}
