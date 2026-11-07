@@ -1,5 +1,7 @@
 import { Suspense, lazy, useCallback, useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react'
 import { Link } from 'react-router-dom'
+import { AppPromo } from '../components/AppPromo'
+import { openGetApp, platform, standalone } from '../lib/install'
 import { EmiTeaser } from '../components/EmiTeaser'
 import { Icon } from '../components/Icon'
 import summary from '../data/summary.json'
@@ -238,7 +240,16 @@ export default function Landing() {
 
         <div className="wrap hero-wrap">
           <div className="hero-text">
-            <div className="eyebrow hero-in">India’s free, unbiased car advisor</div>
+            <div className="hero-top hero-in">
+              <div className="eyebrow">India’s free, unbiased car advisor</div>
+              {/* phones only: the app sits beside the eyebrow, in space the hero already has */}
+              {!standalone && (
+                <button className="hero-app" onClick={() => openGetApp('hero', platform === 'desktop' ? null : platform)}>
+                  <span className="hero-app-go" aria-hidden><Icon name="download" size={13} stroke={2.4} /></span>
+                  Get the app
+                </button>
+              )}
+            </div>
             <h1 className="hero-title">
               <span data-hero>The right car.</span>
               <span data-hero className="grad">Honestly.</span>
@@ -407,6 +418,9 @@ export default function Landing() {
           <Link to="/upcoming" className="link-arrow" data-reveal>All upcoming cars <Icon name="arrow" size={14} /></Link>
         </div>
       </section>
+
+      {/* the app: install free, without the stores */}
+      <AppPromo />
 
       {/* final call */}
       <section className="final">

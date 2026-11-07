@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { openFeedback } from '../lib/feedback'
+import { openGetApp, standalone } from '../lib/install'
 import { Logo } from './Logo'
 
 export function Footer() {
@@ -17,6 +18,7 @@ export function Footer() {
             <Link to="/explore">All cars</Link>
             <Link to="/compare">Compare</Link>
             <Link to="/upcoming">Upcoming</Link>
+            {!standalone && <button className="footer-link" onClick={() => openGetApp('footer')}>Get the app</button>}
           </div>
           <div>
             <h4>Trust</h4>

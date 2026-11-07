@@ -4,6 +4,7 @@ import { Footer } from './components/Footer'
 import { Nav } from './components/Nav'
 import { Toasts } from './components/Toast'
 import { useFeedback } from './lib/feedback'
+import { maybeNudge, useInstall } from './lib/install'
 import { setGateNavigator } from './lib/gate'
 import { useStore } from './state/store'
 import Landing from './pages/Landing'
@@ -22,6 +23,8 @@ const About = lazy(() => import('./pages/About'))
 const Emi = lazy(() => import('./pages/Emi'))
 const HowWeScore = lazy(() => import('./pages/HowWeScore'))
 const FeedbackSheet = lazy(() => import('./components/Feedback'))
+const GetApp = lazy(() => import('./components/GetApp'))
+const AppCoach = lazy(() => import('./components/AppCoach'))
 const DevCars = import.meta.env.DEV ? lazy(() => import('./pages/DevCars')) : null
 
 const TITLES: Record<string, string> = {
@@ -50,6 +53,15 @@ export default function App() {
   const bare = pathname === '/sahifit' || dev
   const comparing = useStore((st) => st.compare.length > 0)
   const feedback = useFeedback((f) => f.open)
+  const getApp = useInstall((i) => i.open)
+  const coaching = useInstall((i) => i.coach || i.nudge !== null)
+  // on an iPhone, offer the app once, a little after the person has got something worth coming back to
+  useEffect(() => {
+    const reason = pathname === '/results' ? 'results' : pathname === '/emi' ? 'emi' : null
+    if (!reason) return
+    const t = setTimeout(() => maybeNudge(reason), 8000)
+    return () => clearTimeout(t)
+  }, [pathname])
 
   return (
     <>
@@ -84,6 +96,16 @@ export default function App() {
       {feedback && (
         <Suspense fallback={null}>
           <FeedbackSheet />
+        </Suspense>
+      )}
+      {getApp && (
+        <Suspense fallback={null}>
+          <GetApp />
+        </Suspense>
+      )}
+      {coaching && (
+        <Suspense fallback={null}>
+          <AppCoach />
         </Suspense>
       )}
       <Toasts />

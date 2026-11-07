@@ -18,7 +18,8 @@
     "official:collect": "node scripts/official-images.mjs collect",
     "official:pick": "node scripts/official-images.mjs pick",
     "official:sheet": "node scripts/official-images.mjs sheet",
-    "privacy:cleanup": "node scripts/privacy-cleanup.mjs"
+    "privacy:cleanup": "node scripts/privacy-cleanup.mjs",
+    "app:qr": "node scripts/app-qr.mjs"
   },
   "dependencies": {
     "firebase": "^12.19.0",
@@ -37,6 +38,7 @@
     "@vitejs/plugin-react": "^6.1.2",
     "firebase-tools": "^14.27.0",
     "puppeteer-core": "^25.16.0",
+    "qrcode": "^1.5.4",
     "sharp": "^0.35.5",
     "typescript": "~6.0.2",
     "vite": "^8.3.5"

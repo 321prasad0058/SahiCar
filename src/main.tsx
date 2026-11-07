@@ -1,5 +1,7 @@
 // first: read and tidy the share and campaign tags before the router sees the address
 import './lib/entry'
+// catch the browser's one-time install offer before anything else runs
+import './lib/install'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
@@ -10,6 +12,7 @@ import './styles/wizard.css'
 import './styles/pages.css'
 import './styles/emi.css'
 import './styles/growth.css'
+import './styles/app-install.css'
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>

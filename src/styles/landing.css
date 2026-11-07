@@ -379,7 +379,7 @@
 /* short phones: drop the lines the card can live without */
 @media (max-width: 960px) and (max-height: 760px) {
   .sc-foot .mono,
-  .eyebrow.hero-in {
+  .hero-top .eyebrow {
     display: none;
   }
   .sc-line {

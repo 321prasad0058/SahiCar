@@ -1,0 +1,1084 @@
+/* ── the app: home band, nav button and the "Get the app" sheet */
+
+/* nav button: a quiet pill with the brand tint */
+.nav-app {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid transparent;
+  transition: border-color 0.2s, background 0.2s;
+}
+.nav-app:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent-soft) 70%, #fff);
+}
+@media (max-width: 960px) {
+  .nav-app {
+    display: none;
+  }
+}
+
+/* hero pill: phones only, on the eyebrow's line so the car keeps all its room */
+.hero-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+}
+.hero-top .eyebrow {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hero-app {
+  display: none;
+}
+@media (max-width: 960px) {
+  .hero-app {
+    position: relative;
+    overflow: hidden;
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    height: 32px;
+    padding: 0 12px 0 4px;
+    margin-left: auto;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    background: var(--ink);
+    box-shadow: 0 8px 18px -10px rgba(21, 23, 27, 0.7);
+  }
+  .hero-app::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.25) 50%, transparent 65%);
+    transform: translateX(-120%);
+    animation: badge-sweep 3.6s var(--ease) 1.6s infinite;
+    pointer-events: none;
+  }
+  .hero-app:active {
+    transform: scale(0.96);
+  }
+  .hero-app-go {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .hero-app-go svg {
+    animation: hero-app-nudge 2.4s var(--ease) 2s infinite;
+  }
+}
+@keyframes hero-app-nudge {
+  0%,
+  70%,
+  100% {
+    transform: translateY(0);
+  }
+  80% {
+    transform: translateY(2px);
+  }
+  90% {
+    transform: translateY(-1px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-app::after,
+  .hero-app-go svg {
+    animation: none;
+  }
+}
+
+/* ── home band */
+.app-home {
+  padding: 12vh 0;
+  background: var(--bg);
+  overflow: hidden;
+}
+.app-band {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: clamp(28px, 5vw, 72px);
+  padding: clamp(28px, 5vw, 64px);
+  border-radius: 28px;
+  background:
+    radial-gradient(120% 90% at 100% 0%, var(--accent-soft) 0%, transparent 55%),
+    radial-gradient(80% 70% at 0% 100%, #efe9dc 0%, transparent 60%),
+    var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-lg);
+  isolation: isolate;
+}
+/* the road from the logo, running faintly behind the band */
+.app-band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: repeating-linear-gradient(115deg, transparent 0 46px, color-mix(in srgb, var(--accent) 5%, transparent) 46px 48px);
+  mask: linear-gradient(90deg, transparent 30%, #000 75%);
+}
+.app-copy .section-title {
+  font-size: clamp(32px, 4.4vw, 58px);
+}
+.app-perks {
+  list-style: none;
+  margin: 26px 0 30px;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+.app-perks li {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.app-perks li > span:last-child {
+  display: grid;
+}
+.app-perk-i {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+.app-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 22px;
+}
+.app-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+/* the badges look like the store badges people know, in our ink */
+.app-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  height: 60px;
+  padding: 0 22px 0 16px;
+  border-radius: 14px;
+  background: var(--ink);
+  color: #fff;
+  text-align: left;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08) inset, 0 12px 26px -14px rgba(21, 23, 27, 0.55);
+  transition: transform 0.2s var(--ease), box-shadow 0.2s, background 0.2s;
+  overflow: hidden;
+}
+.app-badge > span {
+  display: grid;
+  line-height: 1.15;
+}
+.app-badge small {
+  font-size: 11.5px;
+  opacity: 0.72;
+  letter-spacing: 0.01em;
+}
+.app-badge b {
+  font-size: 19px;
+  letter-spacing: -0.01em;
+}
+.app-badge:hover {
+  transform: translateY(-2px);
+  background: #000;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08) inset, 0 18px 34px -16px rgba(21, 23, 27, 0.6);
+}
+/* a light sweep across the badge: once on arrival, again on hover */
+.app-badge::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.22) 50%, transparent 65%);
+  transform: translateX(-120%);
+  animation: badge-sweep 3.6s var(--ease) 1.2s infinite;
+}
+.app-badge:hover::after {
+  animation-duration: 1.2s;
+}
+@keyframes badge-sweep {
+  0%,
+  55% {
+    transform: translateX(-120%);
+  }
+  80%,
+  100% {
+    transform: translateX(120%);
+  }
+}
+/* your own phone's badge gets the brand green */
+.app-badge.mine {
+  background: var(--accent);
+}
+.app-badge.mine:hover {
+  background: #095a43;
+}
+.app-qr-mini {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 14px 8px 8px;
+  border-radius: 14px;
+  border: 1px dashed var(--line-2);
+  background: var(--surface);
+  text-align: left;
+  transition: border-color 0.2s;
+}
+.app-qr-mini:hover {
+  border-color: var(--accent);
+}
+.app-qr-mini img {
+  width: 56px;
+  height: 56px;
+  padding: 4px;
+  background: #fff;
+  border-radius: 8px;
+}
+.app-qr-mini > span {
+  display: grid;
+}
+
+/* the phone */
+.app-visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 520px;
+}
+.app-glow {
+  position: absolute;
+  width: 78%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 22%, transparent) 0%, transparent 65%);
+  filter: blur(10px);
+}
+.app-phone {
+  position: relative;
+  width: min(270px, 70vw);
+  aspect-ratio: 390 / 844;
+  padding: 11px;
+  border-radius: 46px;
+  background: linear-gradient(145deg, #2b2e34, #0d0e11 60%);
+  box-shadow:
+    0 0 0 1.5px #3a3d44 inset,
+    0 50px 80px -40px rgba(21, 23, 27, 0.55),
+    0 20px 30px -20px rgba(21, 23, 27, 0.35);
+  transform: rotate(-4deg);
+  animation: phone-float 7s ease-in-out infinite;
+}
+.app-screen {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  border-radius: 36px;
+  overflow: hidden;
+  background: var(--bg);
+}
+/* a status bar, so the notch sits over it and not over the app */
+.app-status {
+  flex: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 34px;
+  padding: 0 24px 0 28px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.app-status i {
+  display: block;
+  width: 22px;
+  height: 10px;
+  border-radius: 3px;
+  border: 1.5px solid var(--ink);
+  background: linear-gradient(90deg, var(--ink) 70%, transparent 0) content-box;
+  padding: 1px;
+}
+.app-screen img {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+.app-notch {
+  position: absolute;
+  top: 19px;
+  left: 50%;
+  width: 82px;
+  height: 24px;
+  border-radius: 14px;
+  background: #0d0e11;
+  transform: translateX(-50%);
+}
+@keyframes phone-float {
+  0%,
+  100% {
+    transform: rotate(-4deg) translateY(0);
+  }
+  50% {
+    transform: rotate(-3deg) translateY(-12px);
+  }
+}
+.app-float {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-md);
+  font-size: 13px;
+  white-space: nowrap;
+}
+.app-float > span:not(.app-tick) {
+  display: grid;
+  line-height: 1.25;
+}
+.app-float-a {
+  top: 16%;
+  left: -4%;
+  animation: float-a 7s ease-in-out infinite;
+}
+.app-float-b {
+  bottom: 14%;
+  right: -2%;
+  color: var(--accent);
+  font-weight: 600;
+  animation: float-a 7s ease-in-out -3.5s infinite;
+}
+.app-tick {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+}
+@keyframes float-a {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@media (max-width: 900px) {
+  .app-band {
+    grid-template-columns: 1fr;
+    padding: 28px 20px 0;
+    border-radius: 22px;
+  }
+  .app-visual {
+    min-height: 0;
+    height: 380px;
+    overflow: hidden;
+    margin: 0 -20px;
+    border-radius: 0 0 22px 22px;
+  }
+  /* on a phone, the phone peeks up from the bottom of the band */
+  .app-phone {
+    width: 230px;
+    align-self: start;
+    margin-top: 20px;
+    transform: none;
+    animation: none;
+  }
+  .app-float-a {
+    top: 40px;
+    left: 8px;
+  }
+  .app-float-b {
+    bottom: auto;
+    top: 150px;
+    right: 8px;
+  }
+  .app-badges {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .app-badge {
+    justify-content: center;
+    padding: 0 12px;
+  }
+}
+@media (max-width: 360px) {
+  .app-badge {
+    gap: 8px;
+  }
+  .app-badge b {
+    font-size: 17px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .app-phone,
+  .app-float,
+  .app-badge::after {
+    animation: none;
+  }
+}
+
+/* ── the sheet */
+.ga-veil {
+  z-index: 90;
+}
+.ga-sheet {
+  position: relative;
+  width: min(460px, 100%);
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+  padding: 26px 22px 22px;
+  display: grid;
+  gap: 18px;
+  box-shadow: var(--shadow-lg);
+  animation: ga-in 0.35s var(--ease);
+}
+@keyframes ga-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+}
+.ga-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+}
+.ga-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-right: 40px;
+}
+.ga-icon {
+  flex: none;
+  filter: drop-shadow(0 8px 14px rgba(11, 107, 79, 0.3));
+}
+.ga-head h2 {
+  margin: 0 0 4px;
+  font-size: 21px;
+  letter-spacing: -0.02em;
+}
+.ga-head p {
+  margin: 0;
+}
+.ga-pick {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.ga-opt {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 12px;
+  border-radius: 14px;
+  border: 1.5px solid var(--line);
+  background: var(--surface-2);
+  text-align: left;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.ga-opt:hover {
+  border-color: var(--line-2);
+}
+.ga-opt.on {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 12%, transparent);
+}
+.ga-opt-glyph {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--ink);
+  color: #fff;
+  flex: none;
+}
+.ga-opt.on .ga-opt-glyph {
+  background: var(--accent);
+}
+.ga-opt-text {
+  display: grid;
+  line-height: 1.25;
+}
+.ga-opt-text b {
+  font-size: 16px;
+}
+.ga-opt-text .small {
+  color: var(--muted);
+}
+.ga-this {
+  position: absolute;
+  top: -9px;
+  right: 10px;
+  font-size: 11px;
+  padding: 1px 8px;
+}
+.ga-body {
+  animation: ga-in 0.3s var(--ease);
+}
+.ga-steps {
+  position: relative;
+  display: grid;
+  gap: 8px;
+}
+.ga-lead {
+  margin: 0 0 4px;
+  font-weight: 600;
+}
+.ga-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  animation: ga-in 0.4s var(--ease) both;
+}
+.ga-step-n {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+}
+.ga-step-text {
+  flex: 1;
+  font-size: 14.5px;
+}
+.ga-step-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+.ga-wide {
+  width: 100%;
+}
+.ga-install {
+  height: 56px;
+  font-size: 17px;
+  background: var(--accent);
+}
+.ga-install:hover {
+  background: #095a43;
+}
+.ga-fine {
+  margin: 0;
+  text-align: center;
+}
+.ga-done {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 0;
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--green-soft);
+  color: var(--green);
+  font-weight: 600;
+}
+.ga-other {
+  margin: 0;
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+}
+.ga-scan {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+}
+.ga-scan p {
+  margin: 4px 0 0;
+}
+.ga-qr {
+  position: relative;
+  flex: none;
+  padding: 10px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid var(--line);
+}
+.ga-qr img {
+  display: block;
+  width: 148px;
+  height: 148px;
+}
+/* the logo sits in the middle of the code; error correction reads straight through it */
+.ga-qr-mark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  padding: 3px;
+  border-radius: 10px;
+  background: #fff;
+  line-height: 0;
+}
+.ga-desk {
+  justify-self: center;
+}
+@media (max-width: 480px) {
+  .ga-veil {
+    place-items: end stretch;
+    padding: 0;
+  }
+  .ga-sheet {
+    width: 100%;
+    max-height: 92dvh;
+    border-radius: 22px 22px 0 0;
+    padding-bottom: calc(22px + env(safe-area-inset-bottom));
+    animation-name: ga-up;
+  }
+  .ga-scan {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+@keyframes ga-up {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+/* short phones hide the eyebrow: float the pill beside the headline's first line instead of giving it a row */
+@media (max-width: 960px) and (max-height: 760px) {
+  .hero-text {
+    position: relative;
+  }
+  .hero-top {
+    position: absolute;
+    top: 12px;
+    right: 0;
+    z-index: 2;
+  }
+}
+
+/* ── iPhone guide: the step that's playing lights up */
+.ga-step {
+  transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+}
+.ga-step.on {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 12%, transparent);
+}
+.ga-step.on .ga-step-n {
+  background: var(--accent);
+}
+.ga-show {
+  margin-top: 4px;
+  height: 50px;
+  background: var(--accent);
+}
+.ga-show svg {
+  rotate: 90deg;
+}
+
+/* the little film: a drawn phone screen, one scene at a time */
+.iof {
+  position: relative;
+  height: 172px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #eceae4;
+  border: 1px solid var(--line);
+}
+.iof-screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  animation: iof-in 0.35s var(--ease);
+}
+@keyframes iof-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+.iof-page {
+  flex: 1;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  padding: 16px 18px;
+  background: #fff;
+}
+.iof-page i {
+  display: block;
+  height: 9px;
+  border-radius: 5px;
+  background: #e8e6e0;
+}
+.iof-page i.short {
+  width: 55%;
+}
+.iof-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: rgba(246, 245, 241, 0.96);
+  border-top: 1px solid #dcdad3;
+}
+.iof-bar-top {
+  order: -1;
+  border-top: 0;
+  border-bottom: 1px solid #dcdad3;
+}
+.iof-url {
+  flex: 1;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  font-size: 12px;
+  color: #3c3c43;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+.iof-tools {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 4px 10px 8px;
+  background: rgba(246, 245, 241, 0.96);
+}
+.iof-tools i {
+  width: 16px;
+  height: 3px;
+  border-radius: 2px;
+  background: #b9b7b0;
+}
+.iof-btn {
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: #0a84ff;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+.iof-dots {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  color: #1c1c1e;
+}
+/* what to tap: a green ring that pulses like a finger landing */
+.iof-hit {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.iof-tap::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
+  animation: iof-tap 1.1s ease-out infinite;
+}
+@keyframes iof-tap {
+  from {
+    transform: scale(0.6);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+.iof-pop,
+.iof-sheet {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  gap: 2px;
+  padding: 6px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.3);
+  animation: iof-up 0.35s var(--ease);
+}
+.iof-pop {
+  right: 10px;
+  bottom: 52px;
+  width: 52%;
+  padding: 4px;
+}
+.iof-sheet {
+  left: 10px;
+  right: 10px;
+  bottom: 6px;
+}
+.iof-top .iof-sheet {
+  top: 6px;
+  bottom: auto;
+}
+@keyframes iof-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+}
+.iof-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 9px;
+  font-size: 12.5px;
+  color: #1c1c1e;
+}
+.iof-row.iof-hit {
+  font-weight: 700;
+  background: var(--accent-soft);
+  outline-offset: 0;
+}
+.iof-add {
+  flex: 1;
+  background: #f2f2f7;
+}
+.iof-add-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  font-size: 12.5px;
+  color: #0a84ff;
+}
+.iof-add-bar b {
+  color: #1c1c1e;
+}
+.iof-add-bar .iof-hit {
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-weight: 700;
+}
+.iof-add-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 4px 14px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #fff;
+}
+.iof-add-row span {
+  display: grid;
+  font-size: 13px;
+}
+.iof-add-row small {
+  color: #8e8e93;
+}
+.iof-home {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 40px);
+  justify-content: center;
+  align-content: center;
+  gap: 14px 22px;
+  background: linear-gradient(160deg, #0b6b4f, #12324a);
+}
+.iof-app {
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.22);
+}
+.iof-mine {
+  position: relative;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  animation: iof-pop 0.6s cubic-bezier(0.3, 1.6, 0.5, 1) 0.15s both;
+}
+.iof-mine small {
+  position: absolute;
+  top: 44px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
+}
+@keyframes iof-pop {
+  from {
+    transform: scale(0);
+  }
+}
+
+/* ── the arrow left on the real button after "Show me where to tap" */
+.coach {
+  position: fixed;
+  z-index: 96;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: min(330px, calc(100vw - 24px));
+  padding: 10px 12px 10px 16px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  color: #fff;
+  background: var(--ink);
+  box-shadow: var(--shadow-lg);
+  animation: coach-in 0.4s var(--ease);
+}
+@keyframes coach-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+.coach-arrow {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: coach-bob 1.1s ease-in-out infinite;
+}
+.coach-menu {
+  right: 12px;
+  bottom: calc(14px + env(safe-area-inset-bottom));
+}
+.coach-menu .coach-arrow svg {
+  rotate: 60deg;
+}
+.coach-bar {
+  left: 50%;
+  bottom: calc(14px + env(safe-area-inset-bottom));
+  translate: -50% 0;
+}
+.coach-bar .coach-arrow svg {
+  rotate: 90deg;
+}
+.coach-top {
+  right: 12px;
+  top: calc(12px + env(safe-area-inset-top));
+}
+.coach-top .coach-arrow svg {
+  rotate: -60deg;
+}
+@keyframes coach-bob {
+  50% {
+    translate: 0 5px;
+  }
+}
+.coach-top .coach-arrow {
+  animation-name: coach-bob-up;
+}
+@keyframes coach-bob-up {
+  50% {
+    translate: 0 -5px;
+  }
+}
+
+/* ── the one-time card on an iPhone */
+.nudge {
+  position: fixed;
+  z-index: 90;
+  left: 12px;
+  right: 12px;
+  bottom: calc(12px + env(safe-area-inset-bottom));
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 14px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+  animation: coach-in 0.45s var(--ease);
+}
+.nudge-copy {
+  flex: 1;
+  display: grid;
+  gap: 2px;
+  padding-right: 20px;
+}
+.nudge-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+.nudge-x {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .iof-screen,
+  .iof-pop,
+  .iof-sheet,
+  .iof-mine,
+  .iof-tap::after,
+  .coach,
+  .coach-arrow,
+  .nudge {
+    animation: none;
+  }
+}

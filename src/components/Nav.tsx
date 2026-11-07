@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useAuth } from '../state/auth'
 import { useStore } from '../state/store'
+import { openGetApp, useInstall } from '../lib/install'
 import { Icon } from './Icon'
 import { Logo } from './Logo'
 
@@ -11,6 +12,7 @@ export function Nav() {
   const enabled = useAuth((s) => s.enabled)
   const garage = useStore((s) => s.garage.length)
   const done = useStore((s) => s.done)
+  const installed = useInstall((s) => s.installed)
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 
@@ -35,6 +37,11 @@ export function Nav() {
           <NavLink to="/about">How it works</NavLink>
         </nav>
         <div className="nav-end">
+          {!installed && (
+            <button className="nav-app hide-sm" onClick={() => openGetApp('nav')}>
+              <Icon name="phone" size={16} /> Get the app
+            </button>
+          )}
           <Link to="/garage" className="icon-btn" aria-label={`Garage, ${garage} saved`}>
             <Icon name="heart" />
             {garage > 0 && <span className="dot-count">{garage}</span>}
