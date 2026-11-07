@@ -63,7 +63,7 @@
     "id": "volvo-ex90", "brand": "Volvo", "model": "EX90", "body": "suv",
     "expected": "2026-10", "price": { "min": 12600000, "max": null },
     "fuels": ["ev"], "status": "launched-recently",
-    "rivals": ["bmw-ix", "mercedes-benz-eqs-suv", "audi-q8-e-tron"],
+    "rivals": ["kia-ev9", "bmw-ix", "mercedes-benz-eqs-suv", "audi-q8-e-tron"],
     "waitAdvice": "This is Volvo's flagship 7-seat EV, launched in Oct 2026. The ES90 sedan uses the same hardware if you'd prefer a sedan.",
     "notes": "Launched 12 Oct 2026. Expected 106 kWh, dual-motor AWD; WLTP 625 km. The ES90 sedan was scheduled for the same date (CarWale lists only the EX90; some listings say ES90 Jan 2027).",
     "wiki": "Volvo EX90",
@@ -123,7 +123,7 @@
     "id": "kia-syros-ev", "brand": "Kia", "model": "Syros EV", "body": "compact-suv",
     "expected": "2026-07", "price": { "min": 1349000, "max": 1999000 },
     "fuels": ["ev"], "status": "launched-recently",
-    "rivals": ["tata-nexon-ev", "mahindra-xuv-3xo-ev", "mg-windsor", "tata-punch-ev"],
+    "rivals": ["tata-nexon-ev", "mahindra-xuv-3xo-ev", "mg-windsor-ev", "tata-punch-ev"],
     "waitAdvice": "If you're buying a Nexon EV, also look at the Syros EV: up to 526 km claimed range, and a ₹7.99L battery-rental option.",
     "notes": "Launched 23 Jul 2026. 42 kWh and 51.4 kWh packs, claimed range up to 526 km. Battery-as-a-Service from ₹7.99L plus ₹3.3/km.",
     "wiki": "Kia Syros",
@@ -132,69 +132,89 @@
 
   {
     "id": "mercedes-benz-glc-electric", "brand": "Mercedes-Benz", "model": "GLC Electric", "body": "suv",
-    "expected": "2026-11", "price": { "min": 8000000, "max": 8500000 },
-    "fuels": ["ev"], "status": "confirmed",
-    "rivals": ["bmw-ix3", "audi-q6-e-tron", "volvo-ex90", "mercedes-benz-eqe-suv"],
-    "waitAdvice": "If you're about to buy a petrol GLC or an EQE SUV, the new GLC Electric launches around 4 Nov. Compare before you commit.",
-    "notes": "Listed launch 4 Nov 2026 at ₹80–85L (estimate).",
+    "expected": "2026-11", "price": { "min": 7850000, "max": 7850000 },
+    "fuels": ["ev"], "status": "launched-recently",
+    "rivals": ["mercedes-benz-glc", "bmw-ix1", "kia-ev9"],
+    "waitAdvice": "It's on sale now at ₹78.5L, only ₹1.5L more than the petrol GLC. Mercedes says it is sold out until March 2027, so book early or expect a wait. BMW's iX3 is its first direct rival, due in 2027.",
+    "notes": "Launched 4 Nov 2026 at an introductory ₹78.50L (ex-showroom), below the ₹80–90L estimates. One trim, GLC 400 4MATIC, assembled in Pune: 94 kWh, 490 hp / 800 Nm, 711 km claimed WLTP, up to 330 kW DC charging. Over 1,000 bookings.",
     "wiki": null,
-    "sources": ["https://www.zigwheels.com/upcoming-cars", "https://autoindiadaily.in/car-news/upcoming-cars-in-november-2026/"]
+    "sources": ["https://www.autocarindia.com/car-news/mercedes-glc-electric-launched-at-rs-785-lakh-441238", "https://www.businesstoday.in/auto/story/mercedes-benz-electric-glc-launched-at-rs78-50-lakh-deliveries-to-begin-in-november-565777-2026-11-05"]
   },
   {
     "id": "denza-d9", "brand": "Denza (BYD)", "model": "D9", "body": "mpv",
-    "expected": "2026-11", "price": { "min": 10000000, "max": 11000000 },
+    "expected": "2026-11", "price": { "min": 8000000, "max": 9000000 },
     "fuels": ["ev"], "status": "confirmed",
-    "rivals": ["toyota-vellfire", "kia-carnival", "mercedes-benz-v-class"],
-    "waitAdvice": "If you're about to buy a Vellfire or a top-end Carnival, BYD's Denza brand launches its D9 electric luxury MPV around 13 Nov. See its price first.",
-    "notes": "This is the India debut of BYD's premium Denza brand, dated 13 Nov 2026. Expected price ₹1–1.1 crore (estimate).",
+    "rivals": ["toyota-vellfire", "kia-carnival", "mg-m9"],
+    "waitAdvice": "If you're about to buy a Vellfire or an MG M9, wait for Denza's 13 Nov debut. The D9 electric luxury MPV is expected around ₹80–90L, but prices and the sale date may come later than the unveil.",
+    "notes": "BYD's premium Denza brand debuts in India on 13 Nov 2026 (confirmed by BYD). Reports say the Z9 GT shooting brake and the D9 MPV come first, both as imports; Autocar India's November list names only the Z9 GT for that date. D9 price is an estimate (Autocar Pro: about ₹90L; others ₹80–90L). Global D9 EV: 103 kWh, about 520 km WLTP.",
     "wiki": "Denza D9",
-    "sources": ["https://www.drivespark.com/upcoming-cars/", "https://autoindiadaily.in/car-news/upcoming-cars-in-november-2026/"]
+    "sources": ["https://www.autocarpro.in/news/byds-luxury-brand-denza-to-debut-in-india-on-november-13-135455", "https://www.v3cars.com/news/upcoming-cars-in-november-2026-new-car-launches-in-india"]
+  },
+  {
+    "id": "denza-z9-gt", "brand": "Denza (BYD)", "model": "Z9 GT", "body": "coupe",
+    "expected": "2026-11", "price": { "min": 12000000, "max": 15000000 },
+    "fuels": ["ev"], "status": "confirmed",
+    "rivals": ["mercedes-benz-glc-electric", "kia-ev9", "bmw-ix1"],
+    "waitAdvice": "This is a niche, very fast electric shooting brake with no direct rival in India. Wait for the 13 Nov unveil only if a ₹1.2 crore-plus EV is on your list.",
+    "notes": "Denza's India debut model on 13 Nov 2026. Global spec: 122.5 kWh, three motors, 1,156 hp, about 600 km WLTP, 0–100 km/h in 2.7 s. Autocar India estimates ₹1.2–1.5 crore. Listed as 'coupe' because the schema has no shooting-brake body. India-spec figures not announced.",
+    "wiki": "Denza Z9",
+    "sources": ["https://www.autocarindia.com/car-news/upcoming-car-launches-in-november-2026-441173", "https://www.autocarpro.in/news/byds-luxury-brand-denza-to-debut-in-india-on-november-13-135455"]
+  },
+  {
+    "id": "mini-cooper-se", "brand": "MINI", "model": "Cooper SE (2nd gen)", "body": "hatchback",
+    "expected": "2026-11", "price": null,
+    "fuels": ["ev"], "status": "confirmed",
+    "rivals": ["bmw-ix1", "byd-atto-3", "mg-cyberster"],
+    "waitAdvice": "If you want a small premium EV, the new-generation Cooper SE launches on 27 Nov alongside a Paul Smith Edition. Wait for the price; the old model sold for about ₹53–55L.",
+    "notes": "Launch reported for 27 Nov 2026. Global spec: 54.2 kWh, 218 hp / 330 Nm front motor, 402 km WLTP, 95 kW DC charging. No India price announced yet.",
+    "wiki": "Mini Hatch",
+    "sources": ["https://www.autocarindia.com/car-news/upcoming-car-launches-in-november-2026-441173", "https://www.timesdrive.in/news/new-mini-cooper-se-india-launch-on-november-27-expected-price-range-battery-features-and-more-article-156449342"]
   },
   {
     "id": "tata-safari-ev", "brand": "Tata", "model": "Safari EV", "body": "suv",
     "expected": "2026-Q4", "price": { "min": null, "max": null },
     "fuels": ["ev"], "status": "confirmed",
     "rivals": ["mahindra-xev-9s", "tata-harrier-ev", "byd-emax-7", "kia-carens-clavis-ev"],
-    "waitAdvice": "If you want a 7-seat EV and are looking at the XEV 9S or Harrier EV, the Safari EV is expected around Diwali to end-2026. Wait a few weeks to compare.",
-    "notes": "Part of Tata's FY2027 plan. Expected to carry over the Harrier EV's 65/75 kWh packs and RWD/AWD layouts. Tata has not fixed a date; reports range from Diwali 2026 to early 2027. Aggregator price guess is about ₹32L.",
+    "waitAdvice": "If you want a 7-seat EV and are looking at the XEV 9S or Harrier EV, the Safari EV was expected by Diwali but has not launched. Newer reports say early 2027, so don't hold off a purchase for long.",
+    "notes": "Part of Tata's FY2027 plan. Expected to carry over the Harrier EV's 65/75 kWh packs and RWD/AWD layouts. It missed the Diwali 2026 window; as of 7 Nov 2026 Tata had given no date, and newer reports point to early 2027. Aggregator price guess is about ₹32L.",
     "wiki": null,
-    "sources": ["https://www.autocarindia.com/car-news/tata-to-launch-2-new-models-4-facelifts-in-fy2027-439754", "https://www.carlelo.com/news/tata-safari-ev-7-seater-launching-by-diwali-2026"]
+    "sources": ["https://www.autocarindia.com/car-news/tata-to-launch-2-new-models-4-facelifts-in-fy2027-439754", "https://www.carlelo.com/news/tata-safari-ev-7-seater-launching-by-diwali-2026", "https://www.carlelo.com/news/next-gen-tata-nexon-and-safari-ev-launch-expected-in-early-2027"]
   },
   {
     "id": "toyota-innova-hycross", "brand": "Toyota", "model": "Innova Hycross facelift", "body": "mpv",
-    "expected": "2027-Q1", "price": { "min": null, "max": null },
-    "fuels": ["petrol", "strong-hybrid"], "status": "testing",
+    "expected": "2026-11", "price": { "min": 2000000, "max": 3500000 },
+    "fuels": ["petrol", "strong-hybrid"], "status": "confirmed",
     "rivals": ["kia-carens-clavis", "mahindra-xuv-7xo", "maruti-invicto", "tata-safari"],
-    "waitAdvice": "If you're about to book an Innova Hycross (long waiting periods anyway), the Hilux-styled facelift with a bigger screen is due in late 2026 to early 2027. Wait unless your allocation is immediate.",
-    "notes": "Spied testing since July 2026 with a Hilux-style nose and a ~12-inch screen; flex-fuel hybrid possible. One report says 26 Nov 2026; CarWale says Mar 2027 (tentative). The Toyota-based Maruti Invicto will likely follow.",
+    "waitAdvice": "If you're about to book an Innova Hycross, wait about three weeks: the facelift is reported for 25 Nov 2026 with a new nose and a 12.3-inch screen. Don't take pre-facelift stock without a big discount.",
+    "notes": "Autocar India (3 Nov 2026) reports a 25 Nov launch; other outlets say 26 Nov. Toyota had not officially announced the date. Already launched in Indonesia. Expected: new grille, headlamps and bumpers, 12.3-inch touchscreen, 12.3-inch digital cluster on hybrids, and possibly a flex-fuel (E30+) strong hybrid. Price range is Autocar India's estimate. The Maruti Invicto will likely follow.",
     "wiki": "Toyota Innova",
-    "sources": ["https://www.autocarindia.com/car-news/toyota-innova-hycross-facelift-rendered-based-on-design-patent-440595", "https://carhp.in/car-news/toyota-innova-hycross-facelift-to-launch-on-november-26-flex-fuel-hybrid-expected", "https://www.carwale.com/toyota-cars/innova-hycross-facelift/"]
+    "sources": ["https://www.autocarindia.com/car-news/toyota-innova-hycross-facelift-to-launch-on-november-25-441225", "https://carhp.in/car-news/toyota-innova-hycross-facelift-to-launch-on-november-26-flex-fuel-hybrid-expected", "https://www.autocarindia.com/car-news/updated-toyota-innova-hycross-launched-in-indonesia-441193"]
   },
   {
     "id": "volkswagen-virtus-facelift", "brand": "Volkswagen", "model": "Virtus facelift", "body": "sedan",
-    "expected": "2026-Q4", "price": { "min": 1100000, "max": 2000000 },
-    "fuels": ["petrol"], "status": "testing",
+    "expected": "2026-12", "price": { "min": 1100000, "max": 2000000 },
+    "fuels": ["petrol"], "status": "confirmed",
     "rivals": ["skoda-slavia", "hyundai-verna", "honda-city"],
-    "waitAdvice": "If you're about to buy a Virtus, wait. The facelift is due around Nov–Dec 2026 and should get the new 8-speed automatic already given to the Slavia and Taigun facelifts.",
-    "notes": "Spied testing since April 2026. Listings say Nov–Dec 2026; earlier dates slipped. Expected to mirror the Slavia facelift: new lighting, 360-degree camera, 8-speed AT on the 1.0 TSI.",
+    "waitAdvice": "If you're about to buy a Virtus, wait. The facelift is due in December 2026 and gets the 8-speed automatic already given to the Slavia and Taigun facelifts.",
+    "notes": "Volkswagen has revealed the facelift; reports say it is unveiled in late Nov and launched in early Dec 2026, no exact date yet. Keeps the 1.0 and 1.5 TSI; the 1.0 TSI automatic moves from 6 to 8 speeds. Expected to mirror the Slavia facelift: new lighting, 360-degree camera. Price range is an estimate.",
     "wiki": "Volkswagen Virtus",
-    "sources": ["https://www.v3cars.com/upcoming-cars", "https://www.rushlane.com/vw-virtus-facelift-spied-for-the-first-time-interior-exterior-updates-leaked-12543591.html?nonamp=1"]
+    "sources": ["https://www.v3cars.com/news/upcoming-cars-in-november-2026-new-car-launches-in-india", "https://www.cartoq.com/car-news/volkswagen-virtus-facelift-december-2026-launch/", "https://www.rushlane.com/vw-virtus-facelift-spied-for-the-first-time-interior-exterior-updates-leaked-12543591.html?nonamp=1"]
   },
   {
     "id": "jsw-combat", "brand": "JSW Motors", "model": "Combat (Jetour T2-based PHEV)", "body": "suv",
     "expected": "2026-12", "price": { "min": 4000000, "max": 5000000 },
     "fuels": ["strong-hybrid"], "status": "confirmed",
     "rivals": ["toyota-fortuner", "mg-gloster", "mg-majestor", "jeep-meridian"],
-    "waitAdvice": "If you're about to buy a Fortuner or Gloster, JSW's boxy plug-in-hybrid Combat launches around 3–4 Dec. It's a new brand with an unproven service network, so weigh that.",
-    "notes": "JSW Motors' first car, a 5-seat plug-in hybrid based on the Chery Jetour T2. Debut 3–4 Dec 2026; Autocar India expects ₹40–50L. Listed as 'strong-hybrid' because the schema has no PHEV fuel type.",
+    "waitAdvice": "If you're about to buy a Fortuner or Gloster, JSW's boxy plug-in-hybrid Combat is unveiled on 4 Dec. Sales and deliveries may come later, and it's a new brand with an unproven service network, so weigh that.",
+    "notes": "JSW Motors' first car, a 5-seat plug-in hybrid based on the Chery Jetour T2. Unveil on 4 Dec 2026 (an unveil, not confirmed as the on-sale date). 1.5L turbo-petrol plus two motors, 18.4 kWh battery, 360 hp / 610 Nm, about 90 km NEDC electric range (Jetour T2 figure). Autocar India expects ₹40–50L. Listed as 'strong-hybrid' because the schema has no PHEV fuel type.",
     "wiki": null,
-    "sources": ["https://www.autocarindia.com/car-news/jsw-combat-to-debut-on-december-3-440985"]
+    "sources": ["https://www.autocarindia.com/auto-features/all-you-need-to-know-about-the-upcoming-jsw-combat-441267", "https://www.autocarindia.com/car-news/jsw-combat-to-debut-on-december-3-440985"]
   },
   {
     "id": "jsw-icar-v23", "brand": "JSW Motors", "model": "iCar V23 (Chery)", "body": "suv",
     "expected": "2027-H1", "price": { "min": 2000000, "max": 2500000 },
     "fuels": ["ev"], "status": "testing",
-    "rivals": ["mahindra-be-6", "tata-curvv-ev", "mg-windsor", "hyundai-creta-ev"],
+    "rivals": ["mahindra-be-6", "tata-curvv-ev", "mg-windsor-ev", "hyundai-creta-electric"],
     "waitAdvice": "This is a boxy, retro-styled EV from a new brand. Only worth waiting for if you like its looks; established rivals are on sale now.",
     "notes": "Spied testing in India. Global range 401/510 km by battery. Listings say 15 Nov 2026, but reports point to late 2026 to 2027 after JSW's Maharashtra plant starts.",
     "wiki": null,
@@ -206,7 +226,7 @@
     "fuels": ["ev"], "status": "confirmed",
     "rivals": ["mg-comet-ev", "tata-tiago-ev", "tata-punch-ev"],
     "waitAdvice": "If you want a tiny city EV like the Comet or Tiago EV, VinFast's VF3 micro-SUV is expected around Nov 2026 at about ₹7.5–10L. Wait to see its price.",
-    "notes": "VinFast has confirmed the VF3 for India in 2026, but not the date or price. Listings say late Nov 2026. Two-door micro SUV.",
+    "notes": "VinFast has confirmed the VF3 for India in 2026, but as of 7 Nov 2026 had given no date or price. CarWale's tentative listing says Nov 2026; earlier dates have already slipped. Two-door micro SUV; 18.64 kWh, about 210 km (NEDC) in global spec.",
     "wiki": "VinFast VF 3",
     "sources": ["https://www.carwale.com/vinfast-cars/vf3/", "https://vahanbazaar.in/news/vinfast-vf3-sub-10-lakh-ev-india-2026"]
   },
@@ -214,7 +234,7 @@
     "id": "vinfast-vf5", "brand": "VinFast", "model": "VF5", "body": "compact-suv",
     "expected": "2026-Q4", "price": { "min": 1000000, "max": 1200000 },
     "fuels": ["ev"], "status": "rumoured",
-    "rivals": ["tata-punch-ev", "tata-nexon-ev", "kia-syros-ev", "citroen-e-c3x"],
+    "rivals": ["tata-punch-ev", "tata-nexon-ev", "kia-syros-ev", "citroen-ec3"],
     "waitAdvice": "This is a possible low-cost alternative to the Punch EV and Nexon EV around Nov–Dec 2026, but the date is unconfirmed and VinFast's service network is thin.",
     "notes": "Listings give 17 Nov or Dec 2026 at about ₹10–12L. No OEM date.",
     "wiki": "VinFast VF 5",
@@ -224,7 +244,7 @@
     "id": "byd-atto-2", "brand": "BYD", "model": "Atto 2", "body": "suv",
     "expected": "2026-Q4", "price": { "min": 1700000, "max": 2500000 },
     "fuels": ["ev"], "status": "rumoured",
-    "rivals": ["hyundai-creta-ev", "tata-curvv-ev", "maruti-e-vitara", "mahindra-be-6"],
+    "rivals": ["hyundai-creta-electric", "tata-curvv-ev", "maruti-e-vitara", "mahindra-be-6"],
     "waitAdvice": "If you're about to buy a Creta Electric or e Vitara, BYD's smaller Atto 2 may arrive in Dec 2026, but the date isn't confirmed.",
     "notes": "Listings say about 15 Dec 2026, with estimates from ₹16.99L or ₹18–25L. BYD also teased its first PHEV (Seal U DM-i) in June 2026.",
     "wiki": "BYD Atto 2",
@@ -234,9 +254,9 @@
     "id": "citroen-basalt-ev", "brand": "Citroen", "model": "Basalt EV", "body": "suv",
     "expected": "2026-12", "price": { "min": 1400000, "max": 1700000 },
     "fuels": ["ev"], "status": "testing",
-    "rivals": ["tata-curvv-ev", "mg-windsor", "tata-nexon-ev"],
+    "rivals": ["tata-curvv-ev", "mg-windsor-ev", "tata-nexon-ev"],
     "waitAdvice": "This is a coupe-SUV EV that could undercut the Curvv EV, but Citroen's dates have slipped before. Don't hold off a purchase for it.",
-    "notes": "Spied testing. Listings say mid-Dec 2026 at ₹14–17L (earlier expected Nov 2025).",
+    "notes": "Spied testing. Listings say mid-Dec 2026 at ₹14–17L (earlier expected Nov 2025). As of 7 Nov 2026 there was no Citroen announcement; the latest Basalt news is the petrol X Comfort Edition (Jul 2026).",
     "wiki": null,
     "sources": ["https://www.carwale.com/citroen-cars/basalt-ev/"]
   },
@@ -246,9 +266,9 @@
     "fuels": ["petrol", "cng"], "status": "testing",
     "rivals": ["tata-nexon", "hyundai-venue", "kia-sonet", "toyota-urban-cruiser-taisor", "maruti-brezza"],
     "waitAdvice": "If you're about to buy a Fronx, the facelift is listed for Nov 2026 and is due by Mar 2027 at the latest. Wait, or demand a big discount on current stock.",
-    "notes": "V3Cars lists Nov 2026; IndiaTV/Carlelo say by Mar 2027. Expected ADAS and styling updates. The strong hybrid follows separately (see maruti-fronx-hybrid).",
+    "notes": "Maruti had not announced a date as of 30 Oct 2026 (91wheels). Listings say Nov 2026; IndiaTV/Carlelo say by Mar 2027. Expected ADAS and styling updates. The strong hybrid follows separately (see maruti-fronx-hybrid).",
     "wiki": "Suzuki Fronx",
-    "sources": ["https://www.v3cars.com/upcoming-cars", "https://www.indiatvnews.com/auto/maruti-suzuki-brezza-fronx-and-grand-vitara-facelifts-to-launch-by-march-2027-what-to-expect-2026-06-12-1044623"]
+    "sources": ["https://www.v3cars.com/upcoming-cars", "https://www.91wheels.com/news/maruti-fronx-facelift-coming-soon-3-cylinder-engine-updated-features-and-more", "https://www.indiatvnews.com/auto/maruti-suzuki-brezza-fronx-and-grand-vitara-facelifts-to-launch-by-march-2027-what-to-expect-2026-06-12-1044623"]
   },
   {
     "id": "maruti-fronx-hybrid", "brand": "Maruti Suzuki", "model": "Fronx Strong Hybrid", "body": "compact-suv",
@@ -284,7 +304,7 @@
     "id": "maruti-ymc-ev", "brand": "Maruti Suzuki", "model": "YMC electric MPV", "body": "mpv",
     "expected": "2027-H1", "price": { "min": 1400000, "max": 1800000 },
     "fuels": ["ev"], "status": "testing",
-    "rivals": ["kia-carens-clavis-ev", "mg-windsor", "byd-emax-7"],
+    "rivals": ["kia-carens-clavis-ev", "mg-windsor-ev", "byd-emax-7"],
     "waitAdvice": "If you want a 7-seat EV under ₹20L, Maruti's e Vitara-based electric MPV is expected in H1 2027. Wait if Maruti's network matters to you.",
     "notes": "Shares e Vitara's platform and batteries; spied testing. No official date; estimates run from Q1 to mid-2027. CarTrade estimates ₹14–18L. A Toyota version is expected.",
     "wiki": null,
@@ -294,7 +314,7 @@
     "id": "hyundai-he1i", "brand": "Hyundai", "model": "Compact EV (HE1i, Inster-based)", "body": "compact-suv",
     "expected": "2027-Q1", "price": { "min": 979000, "max": 1299000 },
     "fuels": ["ev"], "status": "confirmed",
-    "rivals": ["tata-punch-ev", "tata-nexon-ev", "mg-windsor", "citroen-e-c3x", "kia-syros-ev"],
+    "rivals": ["tata-punch-ev", "tata-nexon-ev", "mg-windsor-ev", "citroen-ec3", "kia-syros-ev"],
     "waitAdvice": "If you're about to buy a Punch EV or another sub-₹13L EV, Hyundai's Inster-based compact EV is confirmed before Mar 2027. Wait a few months to compare.",
     "notes": "Hyundai India CEO confirmed launch within FY2026-27 (by Mar 2027); reportedly fast-tracked. Built at Sriperumbudur. Early cars use Svolt cells, later Exide. India-spec range not announced. Price is an Autocar estimate.",
     "wiki": "Hyundai Inster",
@@ -431,14 +451,14 @@
     "sources": ["https://www.carlelo.com/news/kia-to-launch-two-new-suvs-in-2027-next-sonet-and-seltos-hybrid", "https://autocarpro.in/feature/exclusive-kia-india-plans-six-new-models-including-a-c-segment-suv-by-2027-124406"]
   },
   {
-    "id": "honda-0-alpha", "brand": "Honda", "model": "0 Alpha", "body": "suv",
+    "id": "honda-0-alpha", "brand": "Honda", "model": "Alpha (0 Alpha) EV", "body": "suv",
     "expected": "2027-Q1", "price": { "min": 1700000, "max": 2200000 },
     "fuels": ["ev"], "status": "confirmed",
-    "rivals": ["hyundai-creta-ev", "maruti-e-vitara", "tata-curvv-ev", "mahindra-be-6", "mg-windsor"],
-    "waitAdvice": "If you're a Honda loyalist eyeing a mid-size EV, the locally built 0 Alpha is confirmed for 2027 (likely Q1). Wait if you can.",
-    "notes": "Honda confirmed 2027 sales with India as a key market; first locally built 0 Series model; spied testing. Battery and range not announced. Price is an aggregator estimate (CarTrade).",
+    "rivals": ["hyundai-creta-electric", "maruti-e-vitara", "tata-curvv-ev", "mahindra-be-6", "mg-windsor-ev"],
+    "waitAdvice": "If you're a Honda loyalist eyeing a mid-size EV, the production model is revealed on 2 Dec 2026, with sales expected in 2027. Wait for its battery, range and price before you commit to a rival.",
+    "notes": "Honda Cars India confirmed the name 'Alpha' and a 2 Dec 2026 world premiere in India. It is built in India for domestic sales and export. The reveal is not a price announcement; bookings, battery and range are not yet announced. Price is an aggregator estimate.",
     "wiki": "Honda 0 Series",
-    "sources": ["https://www.businesstoday.in/auto/story/honda-0-alpha-ev-coming-in-2027-new-details-about-range-size-and-features-560858-2026-10-11", "https://www.electrive.com/2026/03/17/honda-starts-testing-0-alphas-production-version-in-india/"]
+    "sources": ["https://www.autocarindia.com/car-news/honda-0-alpha-india-debut-on-december-2-441046", "https://www.electrive.com/2026/11/04/honda-announces-alpha-ev-in-india-effectively-scrapping-0-series/", "https://www.businesstoday.in/auto/story/honda-0-alpha-ev-coming-in-2027-new-details-about-range-size-and-features-560858-2026-10-11"]
   },
   {
     "id": "nissan-7-seater-suv", "brand": "Nissan", "model": "Tekton-based 7-seater SUV", "body": "suv",
@@ -494,7 +514,7 @@
     "id": "mg-astor-next-gen", "brand": "MG", "model": "Astor / ZS EV (next gen)", "body": "suv",
     "expected": "2027-H2", "price": { "min": null, "max": null },
     "fuels": ["petrol", "ev"], "status": "rumoured",
-    "rivals": ["hyundai-creta", "kia-seltos", "hyundai-creta-ev", "tata-curvv-ev"],
+    "rivals": ["hyundai-creta", "kia-seltos", "hyundai-creta-electric", "tata-curvv-ev"],
     "waitAdvice": "If you're looking at an MG Astor or ZS EV, both are due for replacement on SAIC's SIGMA platform in 2027, so buy only with a big discount.",
     "notes": "Team-BHP reports next-gen Astor and ZS EV in 2027 on the SIGMA platform.",
     "wiki": null,

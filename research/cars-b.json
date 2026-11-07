@@ -2830,10 +2830,10 @@
     "fuel": "petrol"
    },
    {
-    "engine": "1.2L turbo-petrol + twin-cylinder CNG",
+    "engine": "1.2L mStallion turbo-petrol 3-cyl (MPFi) + twin-cylinder CNG",
     "cc": 1197,
-    "powerPs": null,
-    "torqueNm": null,
+    "powerPs": 111,
+    "torqueNm": 200,
     "transmissions": [
      "MT6"
     ],
@@ -2883,13 +2883,25 @@
     "price": 1504000
    },
    {
-    "name": "ZNG (base CNG)",
+    "name": "MX Edge CNG",
     "fuel": "cng",
     "transmission": "MT",
     "price": 999000
    },
    {
-    "name": "REVX A CNG",
+    "name": "RevX Edge (O) CNG",
+    "fuel": "cng",
+    "transmission": "MT",
+    "price": 1079000
+   },
+   {
+    "name": "AX5 CNG",
+    "fuel": "cng",
+    "transmission": "MT",
+    "price": 1119000
+   },
+   {
+    "name": "RevX A CNG",
     "fuel": "cng",
     "transmission": "MT",
     "price": 1227000
@@ -2946,7 +2958,8 @@
   "oemUrl": "https://auto.mahindra.com/suv/xuv3xo",
   "sources": [
    "https://www.cardekho.com/mahindra/xuv-3xo",
-   "https://www.bharatncap.gov.in/"
+   "https://www.bharatncap.gov.in/",
+   "https://www.autocarindia.com/car-news-amp/mahindra-xuv-3xo-cng-launched-at-rs-999-lakh-441040"
   ],
   "verifiedOn": "2026-10"
  },
@@ -10376,6 +10389,104 @@
   "verifiedOn": "2026-10"
  },
  {
+  "id": "mercedes-benz-glc-electric",
+  "brand": "Mercedes-Benz",
+  "model": "GLC Electric (GLC 400 4MATIC)",
+  "body": "suv",
+  "segment": "luxury",
+  "launched": "2026-11",
+  "lastUpdate": null,
+  "price": {
+   "min": 7850000,
+   "max": 7850000
+  },
+  "seats": [
+   5
+  ],
+  "dims": {
+   "length": 4856,
+   "width": 1913,
+   "height": 1652,
+   "wheelbase": 2972,
+   "groundClearance": null,
+   "boot": 570,
+   "kerbWeight": null,
+   "fuelTank": null,
+   "turningRadius": null
+  },
+  "safety": {
+   "agency": "none",
+   "adult": null,
+   "child": null,
+   "year": null,
+   "airbagsStd": 9,
+   "airbagsMax": 9,
+   "esc": true,
+   "adas": "L2"
+  },
+  "powertrains": [
+   {
+    "engine": "Dual motor AWD, 94 kWh, 2-speed rear gearbox",
+    "cc": null,
+    "powerPs": 490,
+    "torqueNm": 800,
+    "transmissions": [
+     "2-speed"
+    ],
+    "efficiency": 711,
+    "batteryKwh": 94,
+    "priceFrom": 7850000,
+    "fuel": "ev"
+   }
+  ],
+  "variants": [
+   {
+    "name": "GLC 400 4MATIC",
+    "fuel": "ev",
+    "transmission": "AT",
+    "price": 7850000
+   }
+  ],
+  "features": [
+   "9-airbags",
+   "adas",
+   "panoramic-sunroof",
+   "360-camera",
+   "awd",
+   "burmester-audio",
+   "massage-seats",
+   "powered-tailgate",
+   "wireless-charger",
+   "park-assist"
+  ],
+  "highlights": [
+   "Assembled in Pune; one fully loaded GLC 400 4MATIC trim at Rs 78.50 lakh (introductory)",
+   "490 hp / 800 Nm dual-motor AWD, 0-100 km/h in a claimed 4.3 s",
+   "94 kWh battery, 711 km claimed WLTP range; up to 330 kW DC charging",
+   "570 L boot plus a 128 L frunk; 2,972 mm wheelbase",
+   "Level 2 ADAS, nine airbags, 39.1-inch Hyperscreen and Burmester audio"
+  ],
+  "weaknesses": [
+   "Introductory price: Mercedes has not said how long it lasts",
+   "Mercedes says it is sold out until March 2027",
+   "Front seats heated and massaging but not ventilated",
+   "No air suspension; not crash-tested in India",
+   "Range is the WLTP claim; no ARAI/MIDC figure published"
+  ],
+  "serviceCost": 4,
+  "resale": 2,
+  "network": 2,
+  "wiki": "Mercedes-Benz GLC Electric",
+  "oemUrl": "https://www.mercedes-benz.co.in/",
+  "sources": [
+   "https://www.autocarindia.com/car-news/mercedes-glc-electric-launched-at-rs-785-lakh-441238",
+   "https://www.timesdrive.in/news/mercedes-benz-glc-ev-launched-in-india-at-rs-7850-lakh-gets-94kwh-battery-490bhp-power-article-156463978",
+   "https://www.cardekho.com/mercedes-benz/glc-electric/specs",
+   "https://www.businesstoday.in/auto/story/mercedes-benz-electric-glc-launched-at-rs78-50-lakh-deliveries-to-begin-in-november-565777-2026-11-05"
+  ],
+  "verifiedOn": "2026-11"
+ },
+ {
   "id": "bmw-2-series-gran-coupe",
   "brand": "BMW",
   "model": "2 Series Gran Coupe",
@@ -10847,7 +10958,7 @@
   "model": "Q3",
   "body": "suv",
   "segment": "luxury",
-  "launched": "2026-01",
+  "launched": "2026-10",
   "lastUpdate": null,
   "price": {
    "min": 5199000,
@@ -10857,12 +10968,12 @@
    5
   ],
   "dims": {
-   "length": null,
-   "width": null,
+   "length": 4531,
+   "width": 1859,
    "height": null,
-   "wheelbase": null,
+   "wheelbase": 2681,
    "groundClearance": null,
-   "boot": null,
+   "boot": 488,
    "kerbWeight": null,
    "fuelTank": null,
    "turningRadius": null
@@ -10872,17 +10983,17 @@
    "adult": null,
    "child": null,
    "year": null,
-   "airbagsStd": null,
-   "airbagsMax": null,
+   "airbagsStd": 7,
+   "airbagsMax": 9,
    "esc": true,
    "adas": null
   },
   "powertrains": [
    {
-    "engine": "2.0L TFSI turbo-petrol quattro",
+    "engine": "2.0L TFSI turbo-petrol 4-cyl, quattro AWD",
     "cc": 1984,
-    "powerPs": null,
-    "torqueNm": null,
+    "powerPs": 204,
+    "torqueNm": 320,
     "transmissions": [
      "DCT7"
     ],
@@ -10894,37 +11005,39 @@
   ],
   "variants": [
    {
-    "name": "Q3 (base)",
+    "name": "Nova",
     "fuel": "petrol",
     "transmission": "DCT",
     "price": 5199000
    },
    {
-    "name": "Q3 (top)",
+    "name": "Zenith",
     "fuel": "petrol",
     "transmission": "DCT",
     "price": 5599000
-   },
-   {
-    "name": "Q3 Sportback",
-    "fuel": "petrol",
-    "transmission": "DCT",
-    "price": 5425000
    }
   ],
   "features": [
    "panoramic-sunroof",
    "wireless-carplay",
-   "cruise",
-   "awd"
+   "awd",
+   "tri-zone-climate",
+   "powered-seats",
+   "hud",
+   "matrix-led",
+   "sonos-audio"
   ],
   "highlights": [
-   "New generation for 2026",
-   "quattro AWD"
+   "All-new third generation, launched 16 Oct 2026 and assembled in India",
+   "204 PS / 320 Nm 2.0 TFSI with 7-speed DCT and quattro AWD as standard",
+   "Panoramic sunroof, tri-zone climate and powered front seats on both trims",
+   "Top Zenith adds Digital Matrix LED lamps, head-up display, 12-speaker Sonos audio and 9 airbags"
   ],
   "weaknesses": [
-   "Specs/variants for new gen not fully verified",
-   "Pricey options"
+   "Rs 8.32 lakh dearer than the outgoing Q3",
+   "Only one petrol engine; no diesel or hybrid",
+   "Not crash-tested by Bharat NCAP",
+   "Audi service network thin outside big cities"
   ],
   "serviceCost": 5,
   "resale": 2,
@@ -10932,8 +11045,10 @@
   "wiki": "Audi Q3",
   "oemUrl": "https://www.audi.in/",
   "sources": [
-   "https://www.cardekho.com/audi-cars"
+   "https://www.autocarpro.in/news/audi-launches-new-q3-in-india-at-rs-5199-lakh-135297",
+   "https://www.autocarindia.com/cars/audi/q3",
+   "https://www.cartoq.com/car-news/audi-q3-third-gen-india-launch/"
   ],
-  "verifiedOn": "2026-10"
+  "verifiedOn": "2026-11"
  }
 ]
