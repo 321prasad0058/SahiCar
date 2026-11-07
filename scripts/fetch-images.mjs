@@ -65,6 +65,8 @@ async function summary(title) {
 
 let found = 0
 for (const job of jobs) {
+  // false marks a photo checked by hand and rejected (usually the wrong generation): never replace it, even with --force
+  if (cache[job.key] === false) continue
   if (!force && cache[job.key]) continue
   try {
     cache[job.key] = await resolve(job.title, job.q)
