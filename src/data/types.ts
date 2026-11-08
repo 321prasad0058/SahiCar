@@ -71,7 +71,7 @@ export interface Car {
   network: number
   wiki: string | null
   oemUrl: string | null
-  image?: { src: string; page: string } | null
+  image?: { src: string; page: string; artist?: string; license?: string; ai?: boolean } | null
   /** the manufacturer's own image, self-hosted; preferred over the Wikimedia photo */
   official?: Official | null
   /** paint colours offered in India, with the maker's own names (research/colours.json) */

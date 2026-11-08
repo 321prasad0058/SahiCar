@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react'
 import type { Body, Official } from '../data/types'
 
 // artist and licence are set for photos picked from Wikimedia Commons (CC BY / BY-SA need both credited)
-type Img = { src: string; page: string; artist?: string; license?: string } | null
+// ai marks a self-hosted studio render (scripts/ai-renders.mjs): shown without a photo credit
+type Img = { src: string; page: string; artist?: string; license?: string; ai?: boolean } | null
 const KEY = 'sc-img-v1'
 let memo: Record<string, Img> = {}
 try { memo = JSON.parse(localStorage.getItem(KEY) ?? '{}') } catch { /* storage blocked */ }
@@ -98,7 +99,7 @@ function WikiImage({ image, wiki, body, alt, eager }: { image?: Img; wiki?: stri
           onError={() => setImg(img.src.includes('/960px-') ? { ...img, src: img.src.replace('/960px-', '/640px-') } : null)}
         />
       )}
-      {img && loaded && img.page && (
+      {img && loaded && !img.ai && img.page && (
         // a span, not a link: cards are already links, and links can't nest
         <span
           className="credit"

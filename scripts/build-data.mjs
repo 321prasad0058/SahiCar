@@ -201,7 +201,8 @@ const upcoming = copy('upcoming.json', []).map((u) => ({
   fuels: (u.fuels ?? []).map(fuelOf),
   rivals: (u.rivals ?? []).map(slug),
   price: u.price?.min ? { min: u.price.min, max: u.price.max ?? u.price.min } : null,
-  image: images[`upcoming:${slug(u.id ?? `${u.brand}-${u.model}`)}`] || null,
+  // a launch that has since gone on sale shows the same picture as its car page
+  image: images[`upcoming:${slug(u.id ?? `${u.brand}-${u.model}`)}`] || cars.find((c) => c.id === slug(u.id ?? `${u.brand}-${u.model}`))?.image || null,
   ...(images[`upcoming:${slug(u.id ?? `${u.brand}-${u.model}`)}`] === false ? { wiki: null } : {}),
 }))
 writeFileSync(join(out, 'upcoming.json'), JSON.stringify(upcoming))

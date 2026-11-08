@@ -19,7 +19,8 @@
     "official:pick": "node scripts/official-images.mjs pick",
     "official:sheet": "node scripts/official-images.mjs sheet",
     "privacy:cleanup": "node scripts/privacy-cleanup.mjs",
-    "app:qr": "node scripts/app-qr.mjs"
+    "app:qr": "node scripts/app-qr.mjs",
+    "ai-renders": "node scripts/ai-renders.mjs"
   },
   "dependencies": {
     "firebase": "^12.19.0",
