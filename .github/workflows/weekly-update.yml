@@ -69,6 +69,23 @@ jobs:
         if: steps.pr.outputs.pull-request-url != '' && env.HAS_MAIL == 'true'
         run: sed -i "s#{{PR_URL}}#${{ steps.pr.outputs.pull-request-url }}#g" weekly-email.html
 
+      # pasted secrets often carry spaces or a line break, which Gmail rejects: strip them, and print a safe check
+      # (lengths only, never the values)
+      - name: Check the mail login
+        if: env.HAS_MAIL == 'true'
+        env:
+          RAW_USER: ${{ secrets.MAIL_USERNAME }}
+          RAW_PASS: ${{ secrets.MAIL_PASSWORD }}
+          RAW_TO: ${{ secrets.MAIL_TO }}
+        run: |
+          u="$(printf '%s' "$RAW_USER" | tr -d '[:space:]')"
+          p="$(printf '%s' "$RAW_PASS" | tr -d '[:space:]')"
+          t="$(printf '%s' "$RAW_TO" | tr -d '[:space:]')"
+          echo "::add-mask::$p"
+          { echo "MAIL_USER=$u"; echo "MAIL_PASS=$p"; echo "MAIL_DEST=$t"; } >> "$GITHUB_ENV"
+          case "$u" in *@*) at=yes;; *) at=NO;; esac
+          echo "Sender has @: $at · sender domain: ${u#*@} · password length: ${#p} (a Gmail App Password is 16) · recipient has @: $(case "$t" in *@*) echo yes;; *) echo NO;; esac)"
+
       - name: Email the report
         if: steps.pr.outputs.pull-request-url != '' && env.HAS_MAIL == 'true'
         uses: dawidd6/action-send-mail@v3
@@ -76,10 +93,10 @@ jobs:
           server_address: smtp.gmail.com
           server_port: 465
           secure: true
-          username: ${{ secrets.MAIL_USERNAME }}
-          password: ${{ secrets.MAIL_PASSWORD }}
-          to: ${{ secrets.MAIL_TO }}
-          from: SahiCar weekly update <${{ secrets.MAIL_USERNAME }}>
+          username: ${{ env.MAIL_USER }}
+          password: ${{ env.MAIL_PASS }}
+          to: ${{ env.MAIL_DEST }}
+          from: SahiCar weekly update <${{ env.MAIL_USER }}>
           subject: 'SahiCar weekly update: ready for your approval'
           html_body: file://weekly-email.html
           body: |
