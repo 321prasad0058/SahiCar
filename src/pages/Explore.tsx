@@ -1,10 +1,12 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { CarCard } from '../components/CarCard'
 import { Icon } from '../components/Icon'
 import { brands, cars, onroad } from '../data'
 import { BODY_LABEL, FUEL_LABEL, type Body, type Fuel } from '../data/types'
 import { sahiScore } from '../engine/sahiscore'
+import { lakh } from '../lib/format'
+import { carMatch, norm, suggest, type Suggestion } from '../lib/carSearch'
 import { useStore } from '../state/store'
 
 const BUDGETS = [
@@ -22,6 +24,25 @@ export default function Explore() {
   const done = useStore((s) => s.done)
   const [params] = useSearchParams()
   const [q, setQ] = useState('')
+  // the list of names under the box: open while typing, closed once one is picked
+  const [open, setOpen] = useState(false)
+  const [hi, setHi] = useState(-1)
+  const input = useRef<HTMLInputElement>(null)
+  const hints = useMemo(() => suggest(cars, q), [q])
+  const pick = (s: Suggestion) => {
+    setQ(s.kind === 'car' ? `${s.car.brand} ${s.car.model}` : s.kind === 'brand' ? s.brand : q)
+    if (s.kind === 'brand') setBrand('')
+    setOpen(false)
+    setHi(-1)
+    input.current?.blur()
+  }
+  const onKey = (e: React.KeyboardEvent) => {
+    if (!open || !hints.length) return
+    if (e.key === 'ArrowDown') { e.preventDefault(); setHi((h) => (h + 1) % hints.length) }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); setHi((h) => (h <= 0 ? hints.length - 1 : h - 1)) }
+    else if (e.key === 'Enter' && hi >= 0) { e.preventDefault(); pick(hints[hi]) }
+    else if (e.key === 'Escape') setOpen(false)
+  }
   // the landing page links straight to a body style or fuel
   const [body, setBody] = useState<Body | ''>(() => {
     const b = params.get('body')
@@ -43,10 +64,9 @@ export default function Explore() {
   }, [answers, done])
 
   const list = useMemo(() => {
-    const words = q.toLowerCase().split(/\s+/).filter(Boolean)
     const out = cars.filter(
       (c) =>
-        words.every((w) => `${c.brand} ${c.model} ${c.body}`.toLowerCase().includes(w)) &&
+        carMatch(c, q) > 0 &&
         (!body || c.body === body || (body === 'suv' && c.body === 'compact-suv')) &&
         (!fuel || c.powertrains.some((p) => p.fuel === fuel)) &&
         (!budget || c.price.min <= budget) &&
@@ -73,10 +93,54 @@ export default function Explore() {
         <p className="muted">{cars.length} models from {brands.length} brands. Prices are ex-showroom; open a car for on-road, variants and 5-year cost.</p>
 
         <div className="filters card">
-          <label className="search">
+          <div className="search">
             <Icon name="search" />
-            <input className="input" placeholder="Search Creta, Nexon, EV…" value={q} onChange={(e) => setQ(e.target.value)} aria-label="Search cars" />
-          </label>
+            <input
+              ref={input}
+              className="input"
+              placeholder="Search Creta, Nexon, EV…"
+              value={q}
+              onChange={(e) => { setQ(e.target.value); setOpen(true); setHi(-1) }}
+              onFocus={() => setOpen(true)}
+              onBlur={() => setOpen(false)}
+              onKeyDown={onKey}
+              aria-label="Search cars"
+              role="combobox"
+              aria-expanded={open && hints.length > 0}
+              aria-controls="search-hints"
+              aria-autocomplete="list"
+              autoComplete="off"
+            />
+            {q && <button className="search-clear" aria-label="Clear search" onMouseDown={(e) => e.preventDefault()} onClick={() => { setQ(''); input.current?.focus() }}><Icon name="close" size={16} /></button>}
+            {open && hints.length > 0 && (
+              <ul className="search-hints" id="search-hints" role="listbox">
+                {hints.map((s, i) => (
+                  <li
+                    key={s.kind === 'car' ? s.car.id : `b-${s.brand}`}
+                    role="option"
+                    aria-selected={i === hi}
+                    className={i === hi ? 'on' : ''}
+                    // mousedown, not click: the input's blur would close the list before a click lands
+                    onMouseDown={(e) => { e.preventDefault(); pick(s) }}
+                    onMouseEnter={() => setHi(i)}
+                  >
+                    <Icon name="search" size={15} />
+                    {s.kind === 'car' ? (
+                      <>
+                        <span className="hint-name"><span className="dim">{s.car.brand}</span> <Mark text={s.car.model} q={q} /></span>
+                        <span className="hint-meta">{BODY_LABEL[s.car.body]} · from {lakh(s.car.price.min)}</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="hint-name"><Mark text={s.brand} q={q} /> <span className="dim">· all cars</span></span>
+                        <span className="hint-meta">{s.count} models</span>
+                      </>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
           <div className="filter-row">
             <select className="select" value={body} onChange={(e) => setBody(e.target.value as Body | '')} aria-label="Body style">
               <option value="">All body styles</option>
@@ -104,7 +168,7 @@ export default function Explore() {
           <div className="filter-row">
             <button className={`pick ${seven ? 'on' : ''}`} onClick={() => setSeven(!seven)}>7 seats</button>
             <button className={`pick ${five ? 'on' : ''}`} onClick={() => setFive(!five)}>5★ crash rating</button>
-            <span className="dim small push">{list.length} cars</span>
+            <span className="dim small push">{list.length} {list.length === 1 ? 'car' : 'cars'}</span>
           </div>
         </div>
 
@@ -114,5 +178,21 @@ export default function Explore() {
         {!list.length && <p className="muted empty">No cars match those filters.</p>}
       </div>
     </div>
+  )
+}
+
+/** The typed letters in bold where they appear in a name ("Vict" in "Victoris"). */
+function Mark({ text, q }: { text: string; q: string }) {
+  // the longest typed word that appears in the name; if none does (a typo), the whole name stands out
+  const lower = text.toLowerCase()
+  const w = norm(q).split(' ').filter((x) => x && lower.includes(x)).sort((a, b) => b.length - a.length)[0]
+  const at = w ? lower.indexOf(w) : -1
+  if (at < 0) return <b>{text}</b>
+  return (
+    <>
+      {text.slice(0, at)}
+      <b>{text.slice(at, at + w.length)}</b>
+      {text.slice(at + w.length)}
+    </>
   )
 }
