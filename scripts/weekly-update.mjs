@@ -11,16 +11,19 @@
 // Nothing reaches the live site until a person reads that pull request and merges it.
 //
 // Flags: --dry-run  ask Gemini and print the summary, but write nothing
+//        --sample   use built-in sample answers instead of Gemini (implies --dry-run): a test of the report and email
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { report } from './weekly-report.mjs'
+import { sampleAnswer } from './weekly-sample.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const R = (p) => join(root, p)
-const DRY = process.argv.includes('--dry-run')
+const SAMPLE = process.argv.includes('--sample')
+const DRY = SAMPLE || process.argv.includes('--dry-run')
 const KEY = process.env.GEMINI_API_KEY?.trim() // a pasted secret often carries a newline or a space
-if (!KEY) {
+if (!KEY && !SAMPLE) {
   console.error('weekly-update: GEMINI_API_KEY is not set')
   process.exit(1)
 }
@@ -79,6 +82,7 @@ function writeUpcoming(removeIds, add) {
 // ── Gemini with Google Search; answers must be JSON inside a ```json block
 
 async function ask(prompt) {
+  if (SAMPLE) return realUrls(sampleAnswer(prompt))
   let lastErr
   for (const model of MODELS) {
     for (let attempt = 0; attempt < 3; attempt++) {
@@ -318,7 +322,7 @@ if (changed) {
 
 // ── report: the pull request description (what GitHub's email shows) and a designed HTML email
 
-const { markdown, html } = report({ date: today, summary, checked: slice.map((c) => `${c.brand} ${c.model}`), changed })
+const { markdown, html } = report({ date: today, summary, checked: slice.map((c) => `${c.brand} ${c.model}`), changed, sample: SAMPLE })
 writeFileSync(R('weekly-summary.md'), markdown)
 writeFileSync(R('weekly-email.html'), html)
 console.log(markdown)

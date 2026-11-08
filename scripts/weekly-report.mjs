@@ -38,7 +38,7 @@ function specs(e) {
   ].map(([k, v]) => [k, v ?? '— (not confirmed)'])
 }
 
-export function report({ date, summary: s, checked, changed }) {
+export function report({ date, summary: s, checked, changed, sample = false }) {
   // every car that needs a studio render, and why
   const renders = [
     ...s.newCars.filter((n) => n.photo.kind === 'none').map((n) => ({ name: n.name, why: 'new car page, no free photo found' })),
@@ -61,7 +61,8 @@ export function report({ date, summary: s, checked, changed }) {
   const photoMd = (p, alt) => (p.kind === 'none' ? '🎨 **No free photo found — please make a render**' : `<img src="${p.src}" alt="${esc(alt)}" width="300"><br><sub>${p.kind === 'render' ? 'SahiCar studio render' : `Photo from [Wikipedia](${p.page}) · **check it shows the current model**`}</sub>`)
   const srcMd = (list) => list.map((u) => `[${host(u)}](${u})`).join(' · ')
 
-  md.push(`# 🚗 SahiCar weekly update — ${nice(date)}`, '')
+  md.push(`# ${sample ? '🧪 TEST — ' : ''}🚗 SahiCar weekly update — ${nice(date)}`, '')
+  if (sample) md.push('> **This is a test email with sample updates.** Nothing was researched or changed. Close this when you\'ve seen it.', '')
   md.push('> Researched by Gemini with Google Search. **Nothing is live until you merge.** Merge = deploy · Close = discard.', '')
   md.push('## 📊 At a glance', '', '| | | |', '|---|---|---:|')
   for (const [i, k, v] of counts) md.push(`| ${i} | ${k} | **${v}** |`)
@@ -140,7 +141,7 @@ export function report({ date, summary: s, checked, changed }) {
   const h = []
   h.push(`<div style="background:#f5f3ee;padding:24px 12px;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:14px;line-height:1.5">`)
   h.push(`<div style="max-width:640px;margin:0 auto">`)
-  h.push(`<div style="background:#0b6b4f;color:#fff;border-radius:16px;padding:22px 22px 18px"><div style="font-size:13px;opacity:.85">SahiCar weekly update</div><div style="font-size:24px;font-weight:700;margin:2px 0 6px">${nice(date)}</div><div style="font-size:13px;opacity:.9">Researched by Gemini with Google Search. Nothing is live until you merge.</div>`)
+  h.push(`<div style="background:#0b6b4f;color:#fff;border-radius:16px;padding:22px 22px 18px"><div style="font-size:13px;opacity:.85">${sample ? '🧪 TEST · sample updates · ' : ''}SahiCar weekly update</div><div style="font-size:24px;font-weight:700;margin:2px 0 6px">${nice(date)}</div><div style="font-size:13px;opacity:.9">Researched by Gemini with Google Search. Nothing is live until you merge.</div>`)
   h.push(`<a href="{{PR_URL}}" style="display:inline-block;margin-top:14px;background:#fff;color:#0b6b4f;text-decoration:none;font-weight:700;border-radius:10px;padding:10px 16px">Review &amp; approve on GitHub →</a></div>`)
 
   h.push(h2('📊 At a glance'))

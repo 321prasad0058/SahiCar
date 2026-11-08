@@ -1,0 +1,60 @@
+# Sends a test of the weekly email: the report built from sample updates (no research, no data changes), opened
+# as an issue assigned to you so GitHub emails it, plus the designed HTML email if the Gmail secrets are set.
+# Run it from Actions → "Send a test weekly email" → Run workflow.
+name: Send a test weekly email
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  test-email:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      HAS_MAIL: ${{ secrets.MAIL_USERNAME != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Build the report from sample updates
+        run: node scripts/weekly-update.mjs --sample
+
+      # opened by GitHub Actions and assigned to you, so GitHub sends you its email (it never emails you about
+      # things you did yourself)
+      - name: Open it as an issue assigned to you
+        id: issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          url=$(gh issue create --repo "${{ github.repository }}" \
+            --title "🧪 Test: SahiCar weekly update email" \
+            --body-file weekly-summary.md \
+            --assignee 321prasad0058)
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "Opened $url"
+
+      - name: Put the link into the designed email
+        if: env.HAS_MAIL == 'true'
+        run: sed -i "s#{{PR_URL}}#${{ steps.issue.outputs.url }}#g" weekly-email.html
+
+      - name: Send the designed email
+        if: env.HAS_MAIL == 'true'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          to: ${{ secrets.MAIL_TO }}
+          from: SahiCar weekly update <${{ secrets.MAIL_USERNAME }}>
+          subject: '🧪 Test: SahiCar weekly update email'
+          html_body: file://weekly-email.html
+          body: 'Test of the SahiCar weekly update email: ${{ steps.issue.outputs.url }}'
