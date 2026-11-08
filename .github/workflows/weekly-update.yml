@@ -50,7 +50,7 @@ jobs:
         id: pr
         uses: peter-evans/create-pull-request@v7
         with:
-          branch: weekly-update/inventory
+          branch: auto/weekly-inventory # not under weekly-update/: a branch already has that name
           delete-branch: true
           title: 'Weekly inventory update'
           body-path: weekly-summary.md
