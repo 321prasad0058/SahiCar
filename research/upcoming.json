@@ -398,5 +398,26 @@
     "notes": "Listings say Mar 2027 at ₹3–3.7 crore (estimate). The Range Rover Sport Electric is listed for a similar time.",
     "wiki": null,
     "sources": ["https://www.zigwheels.com/upcoming-cars", "https://www.autocarindia.com/upcoming-cars"]
+  },
+  {
+    "id": "jsw-jaecoo-j5-ev",
+    "brand": "JSW Jaecoo",
+    "model": "J5 EV",
+    "body": "suv",
+    "expected": "2026-11",
+    "price": {
+      "min": 2000000,
+      "max": null
+    },
+    "fuels": [
+      "electric"
+    ],
+    "status": "rumoured",
+    "rivals": [],
+    "waitAdvice": "This new electric SUV from JSW Jaecoo is expected to launch mid-November, so stay tuned for official details.",
+    "notes": "Expected to launch on November 15, 2026, as one of the first models from the JSW Jaecoo brand in India.",
+    "sources": [
+      "https://www.zigwheels.com/newcars"
+    ]
   }
 ]
