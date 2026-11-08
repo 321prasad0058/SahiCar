@@ -79,7 +79,8 @@ jobs:
           RAW_TO: ${{ secrets.MAIL_TO }}
         run: |
           u="$(printf '%s' "$RAW_USER" | tr -d '[:space:]')"
-          p="$(printf '%s' "$RAW_PASS" | tr -d '[:space:]')"
+          # a Gmail App Password is 16 letters; copying it can bring invisible separators (non-breaking spaces)
+          p="$(printf '%s' "$RAW_PASS" | LC_ALL=C tr -cd 'A-Za-z')"
           t="$(printf '%s' "$RAW_TO" | tr -d '[:space:]')"
           echo "::add-mask::$p"
           { echo "MAIL_USER=$u"; echo "MAIL_PASS=$p"; echo "MAIL_DEST=$t"; } >> "$GITHUB_ENV"
