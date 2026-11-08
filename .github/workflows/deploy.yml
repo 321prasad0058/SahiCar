@@ -1,0 +1,50 @@
+# Builds and deploys the site to Firebase Hosting whenever main changes, which is when a weekly update (or any other
+# pull request) is merged. Also runnable by hand from the Actions tab.
+name: Deploy to Firebase
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      HAS_SA: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SAHICAR_IN != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # data build, sitemap, type check and Vite build: a broken build never reaches the live site
+      - run: npm run build
+
+      - name: Deploy to sahicar-in.web.app
+        if: env.HAS_SA == 'true'
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SAHICAR_IN }}
+          channelId: live
+          projectId: sahicar-in
+
+      - name: Explain a skipped deploy
+        if: env.HAS_SA != 'true'
+        run: |
+          echo "::warning::Deploy skipped - add the FIREBASE_SERVICE_ACCOUNT_SAHICAR_IN secret (see docs/weekly-update.md)."

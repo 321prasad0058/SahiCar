@@ -20,7 +20,8 @@
     "official:sheet": "node scripts/official-images.mjs sheet",
     "privacy:cleanup": "node scripts/privacy-cleanup.mjs",
     "app:qr": "node scripts/app-qr.mjs",
-    "ai-renders": "node scripts/ai-renders.mjs"
+    "ai-renders": "node scripts/ai-renders.mjs",
+    "weekly": "node scripts/weekly-update.mjs"
   },
   "dependencies": {
     "firebase": "^12.19.0",

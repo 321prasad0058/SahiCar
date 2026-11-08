@@ -1,0 +1,87 @@
+# Every Monday morning: research the week's launches, new announcements and price changes with Gemini, rebuild and
+# check the data, and open a pull request for a person to read. Nothing goes live until that pull request is merged
+# (merging runs deploy.yml). GitHub emails the assignee when the pull request opens; if the MAIL_* secrets are set,
+# a second email with the full summary is sent as well.
+name: Weekly inventory update
+
+on:
+  schedule:
+    - cron: '30 3 * * 1' # Mondays 03:30 UTC = 09:00 IST
+  workflow_dispatch: # "Run workflow" button, for an update on demand
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: weekly-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      HAS_MAIL: ${{ secrets.MAIL_USERNAME != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Research this week's changes (Gemini + Google Search)
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: node scripts/weekly-update.mjs
+
+      # the same checks run before every deploy: bad data stops here, before anyone is asked to merge it
+      - name: Rebuild the site data and check it
+        run: |
+          npm run data
+          npm run test:engine
+          npx tsc -b
+          node scripts/build-sitemap.mjs
+
+      - name: Open the pull request
+        id: pr
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: weekly-update/inventory
+          delete-branch: true
+          title: 'Weekly inventory update'
+          body-path: weekly-summary.md
+          commit-message: 'weekly: inventory update'
+          author: Prasad Alai <110602321+321prasad0058@users.noreply.github.com>
+          committer: Prasad Alai <110602321+321prasad0058@users.noreply.github.com>
+          add-paths: |
+            research/*.json
+            src/data/*.json
+            public/sitemap.xml
+          assignees: 321prasad0058
+          labels: weekly-update
+
+      # optional: a direct email with the summary and the link, on top of GitHub's own notification
+      - name: Email the summary
+        if: steps.pr.outputs.pull-request-url != '' && env.HAS_MAIL == 'true'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          to: ${{ secrets.MAIL_TO }}
+          from: SahiCar weekly update <${{ secrets.MAIL_USERNAME }}>
+          subject: 'SahiCar: this week''s inventory update needs your approval'
+          convert_markdown: true
+          body: |
+            This week's update is ready for you to check:
+            ${{ steps.pr.outputs.pull-request-url }}
+
+            Open it, check the sources, and press "Merge pull request" to put it live.
+            Close it instead to throw the changes away.
+          attachments: weekly-summary.md
