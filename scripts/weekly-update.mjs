@@ -18,7 +18,7 @@ import { fileURLToPath } from 'node:url'
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const R = (p) => join(root, p)
 const DRY = process.argv.includes('--dry-run')
-const KEY = process.env.GEMINI_API_KEY
+const KEY = process.env.GEMINI_API_KEY?.trim() // a pasted secret often carries a newline or a space
 if (!KEY) {
   console.error('weekly-update: GEMINI_API_KEY is not set')
   process.exit(1)
