@@ -64,8 +64,12 @@ jobs:
           assignees: 321prasad0058
           labels: weekly-update
 
-      # optional: a direct email with the summary and the link, on top of GitHub's own notification
-      - name: Email the summary
+      # optional: the designed HTML email (same report as the pull request), on top of GitHub's own notification
+      - name: Put the pull request link into the email
+        if: steps.pr.outputs.pull-request-url != '' && env.HAS_MAIL == 'true'
+        run: sed -i "s#{{PR_URL}}#${{ steps.pr.outputs.pull-request-url }}#g" weekly-email.html
+
+      - name: Email the report
         if: steps.pr.outputs.pull-request-url != '' && env.HAS_MAIL == 'true'
         uses: dawidd6/action-send-mail@v3
         with:
@@ -76,12 +80,8 @@ jobs:
           password: ${{ secrets.MAIL_PASSWORD }}
           to: ${{ secrets.MAIL_TO }}
           from: SahiCar weekly update <${{ secrets.MAIL_USERNAME }}>
-          subject: 'SahiCar: this week''s inventory update needs your approval'
-          convert_markdown: true
+          subject: 'SahiCar weekly update: ready for your approval'
+          html_body: file://weekly-email.html
           body: |
-            This week's update is ready for you to check:
+            This week's SahiCar update is ready for you to check and approve:
             ${{ steps.pr.outputs.pull-request-url }}
-
-            Open it, check the sources, and press "Merge pull request" to put it live.
-            Close it instead to throw the changes away.
-          attachments: weekly-summary.md

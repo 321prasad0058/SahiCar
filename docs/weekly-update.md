@@ -6,6 +6,10 @@ Every **Monday at 9:00 IST**, GitHub runs `scripts/weekly-update.mjs` on its own
    week's 15 car prices are still right. Only answers with a source link are used. Price swings over 25% are
    flagged, not applied.
 2. The data is rebuilt and checked (`npm run data`, the scoring test, the type check). Bad data stops the run.
+   - **Photos:** every new car page or upcoming car gets a free photo from Wikipedia / Wikimedia Commons when
+     one exists (only a real photo, from an article about that vehicle). If none exists, the report says
+     **"No free photo found — please make a render"**. A car that just launched as a facelift is flagged too,
+     because its existing photo may show the old design.
 3. A **pull request** titled "Weekly inventory update" opens, listing every change with its source. You're
    assigned to it, so **GitHub emails you**. Optionally a second email with the summary goes out (see below).
 4. You read it. **Merge** puts it live (the deploy workflow builds and deploys to Firebase). **Close** throws
@@ -53,6 +57,13 @@ If you'd also like the whole summary in the email itself, add three more secrets
 | `MAIL_TO` | where to send it |
 
 Without these, the step is skipped and GitHub's own email still arrives.
+
+## The report (pull request and email)
+Reads top to bottom: **At a glance** (counts) → **Your to-do before merging** (a checklist) → **Launched this
+week** (a card per car: photo or render request, price, key specs, sources) → **Newly announced** →
+**Price changes** (was / now / % change) → **Renders needed** → **Needs you** → the cars whose prices were
+checked. GitHub's email carries this report; with the Gmail secrets set you also get it as a designed email
+with a "Review & approve on GitHub" button.
 
 ## Checking a weekly pull request
 - Open each **source** link and check that the page says what the summary says.

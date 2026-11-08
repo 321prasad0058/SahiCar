@@ -18,3 +18,4 @@ research/*.log
 
 # written by scripts/weekly-update.mjs for the pull request description
 weekly-summary.md
+weekly-email.html

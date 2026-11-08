@@ -14,6 +14,7 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { report } from './weekly-report.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const R = (p) => join(root, p)
@@ -175,7 +176,7 @@ Answer: \`\`\`json
     const existing = allCars().find((c) => carId(c) === a.id)
     if (existing) {
       existing.lastUpdate = (a.date ?? today).slice(0, 7)
-      summary.launched.push({ name: `${u.brand} ${u.model}`, date: a.date, price: [a.priceMin, a.priceMax], source: a.source, note: 'already in the car list; removed from upcoming' })
+      summary.launched.push({ id: a.id, name: `${u.brand} ${u.model}`, date: a.date, price: [a.priceMin || existing.price.min, a.priceMax || existing.price.max], source: a.source })
       continue
     }
     // a brand-new car: Gemini drafts the entry in our schema; unknowns stay null
@@ -196,7 +197,7 @@ Answer: \`\`\`json { ...the entry... } \`\`\``).catch((e) => (summary.review.pus
     entry.verifiedOn = month
     entry.wiki = entry.wiki ?? u.wiki ?? null
     carsB.data.push(entry)
-    summary.newCars.push({ name: `${u.brand} ${u.model}`, date: a.date, price: [entry.price.min, entry.price.max], sources: entry.sources.filter(isUrl) })
+    summary.newCars.push({ id: a.id, name: `${u.brand} ${u.model}`, date: a.date, price: [entry.price.min, entry.price.max], sources: entry.sources.filter(isUrl), wiki: entry.wiki, entry })
   }
 }
 
@@ -206,7 +207,7 @@ const known = [...upcoming.map(upId), ...allCars().map(carId)].join(', ')
 const news = await ask(`${RULES}
 Which NEW cars were officially announced, confirmed or revealed for an Indian launch in the last 7 days? Leave out anything whose id is already in this list: ${known}
 Answer: \`\`\`json
-[{"id": "brand-model", "brand": "", "model": "", "body": "suv", "expected": "YYYY-MM", "price": {"min": 0, "max": null}, "fuels": ["petrol"], "status": "confirmed|testing|rumoured", "rivals": ["<ids from the list above>"], "waitAdvice": "one sentence for a buyer", "notes": "what was announced, with dates", "sources": ["<url>"]}]
+[{"id": "brand-model", "brand": "", "model": "", "body": "suv", "expected": "YYYY-MM", "price": {"min": 0, "max": null}, "fuels": ["petrol"], "status": "confirmed|testing|rumoured", "rivals": ["<ids from the list above>"], "waitAdvice": "one sentence for a buyer", "notes": "what was announced, with dates", "wiki": "<exact English Wikipedia article title for this model, or null>", "sources": ["<url>"]}]
 \`\`\``).catch((e) => (summary.review.push(`New-launch check failed: ${e.message}`), []))
 const knownIds = new Set(known.split(', '))
 const brandKey = (b) => slug(b).split('-')[0] // "JSW Motors" and "JSW" are the same maker
@@ -219,9 +220,9 @@ for (const n of Array.isArray(news) ? news : []) {
   if (!n.brand || !n.model || !n.sources?.some(isUrl)) continue
   const id = slug(n.id || `${n.brand}-${n.model}`)
   if (knownIds.has(id) || add.some((x) => x.id === id) || isTracked(n)) continue
-  const entry = { id, brand: n.brand, model: n.model, body: n.body ?? 'suv', expected: n.expected ?? null, price: n.price?.min ? n.price : null, fuels: n.fuels ?? [], status: ['confirmed', 'testing', 'rumoured'].includes(n.status) ? n.status : 'rumoured', rivals: (n.rivals ?? []).filter((r) => knownIds.has(r)), waitAdvice: n.waitAdvice ?? '', notes: n.notes ?? '', sources: n.sources.filter(isUrl) }
+  const entry = { id, brand: n.brand, model: n.model, body: n.body ?? 'suv', expected: n.expected ?? null, price: n.price?.min ? n.price : null, fuels: n.fuels ?? [], status: ['confirmed', 'testing', 'rumoured'].includes(n.status) ? n.status : 'rumoured', rivals: (n.rivals ?? []).filter((r) => knownIds.has(r)), waitAdvice: n.waitAdvice ?? '', notes: n.notes ?? '', wiki: n.wiki || null, sources: n.sources.filter(isUrl) }
   add.push(entry)
-  summary.announced.push({ name: `${n.brand} ${n.model}`, expected: entry.expected, status: entry.status, sources: entry.sources })
+  summary.announced.push({ id, name: `${n.brand} ${n.model}`, expected: entry.expected, status: entry.status, price: entry.price, notes: entry.notes, advice: entry.waitAdvice, wiki: entry.wiki, sources: entry.sources })
 }
 
 // 3. prices: this week's slice of the car list
@@ -247,46 +248,78 @@ for (const p of Array.isArray(priced) ? priced : []) {
     summary.review.push(`${c.brand} ${c.model}: Gemini says ${lakh(p.min)}–${lakh(p.max)}, we have ${lakh(c.price.min)}–${lakh(c.price.max)}. Not applied; check ${p.source}`)
     continue
   }
-  summary.prices.push({ name: `${c.brand} ${c.model}`, from: [c.price.min, c.price.max], to: [p.min, p.max], source: p.source })
+  summary.prices.push({ id: carId(c), name: `${c.brand} ${c.model}`, from: [c.price.min, c.price.max], to: [p.min, p.max], source: p.source })
   c.price = { min: p.min, max: p.max }
   c.verifiedOn = month
   c.sources = [...new Set([...(c.sources ?? []), p.source])]
 }
 
-// ── write and summarise
+// ── photos: a free one from Wikipedia / Wikimedia Commons where it exists, otherwise a render request
+
+const imgPath = 'research/images.json'
+const images = JSON.parse(readFileSync(R(imgPath), 'utf8'))
+const UA = { 'User-Agent': 'SahiCar/0.1 (free car advisor; weekly update; images credited to Wikimedia Commons)' }
+async function wikiPhoto(title) {
+  if (!title) return null
+  const r = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title.replace(/ /g, '_'))}?redirect=true`, { headers: UA, signal: AbortSignal.timeout(20000) }).catch(() => null)
+  if (!r?.ok) return null
+  const j = await r.json()
+  const t = j.thumbnail?.source ?? j.originalimage?.source
+  // only a photograph (not a logo or diagram) from an article about a vehicle
+  if (!t || !/\.jpe?g/i.test(t) || j.type === 'disambiguation') return null
+  if (!/\b(car|cars|vehicle|automobile|suv|crossover|sedan|saloon|hatchback|mpv|minivan|pickup|coupé|coupe|electric|motor)\b/i.test(`${j.description ?? ''} ${j.extract ?? ''}`)) return null
+  return { src: t.replace(/\/(\d+)px-/, '/960px-'), page: j.content_urls?.desktop?.page ?? '' }
+}
+/** The model's own Wikipedia article first; failing that, the closest article whose title still names the model. */
+async function findPhoto(brand, model, wiki) {
+  const direct = (await wikiPhoto(wiki)) ?? (await wikiPhoto(`${brand} ${model}`))
+  if (direct) return direct
+  const word = slug(model).split('-').find((w) => w.length >= 2 && !GENERIC.has(w))
+  if (!word) return null
+  const q = `${brand.replace(/ Suzuki| Motors| \(.*\)/g, '')} ${model}`
+  const r = await fetch(`https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(q)}&srlimit=3&format=json`, { headers: UA, signal: AbortSignal.timeout(20000) }).catch(() => null)
+  const make = slug(brand).split('-')[0]
+  for (const hit of r?.ok ? ((await r.json()).query?.search ?? []) : []) {
+    const t = slug(hit.title)
+    if (!t.includes(word) || !t.includes(make)) continue // the title must name both the maker and the model
+    const p = await wikiPhoto(hit.title)
+    if (p) return p
+  }
+  return null
+}
+/** What a car's picture is today: our studio render, a Wikimedia photo, or nothing. */
+const photoOf = (key) => (images[key]?.ai ? { kind: 'render', ...images[key] } : images[key] ? { kind: 'wiki', ...images[key] } : { kind: 'none' })
+
+for (const n of summary.newCars) {
+  if (!images[n.id]) {
+    const p = await findPhoto(n.entry.brand, n.entry.model, n.wiki)
+    if (p) images[n.id] = p
+  }
+  n.photo = photoOf(n.id)
+}
+for (const a of summary.announced) {
+  const u = add.find((x) => x.id === a.id)
+  const p = await findPhoto(u.brand, u.model, a.wiki)
+  if (p) images[`upcoming:${a.id}`] = p
+  a.photo = photoOf(`upcoming:${a.id}`)
+}
+for (const l of summary.launched) l.photo = photoOf(l.id) // already a car: a Wikimedia photo may show the old design
+for (const p of summary.prices) p.photo = photoOf(p.id)
+
+// ── write
 
 const changed = summary.launched.length + summary.newCars.length + summary.announced.length + summary.prices.length
 if (changed) {
   save(carsA)
   save(carsB)
   if (removeIds.size || add.length) writeUpcoming(removeIds, add)
+  if (!DRY) writeFileSync(R(imgPath), JSON.stringify(images, null, 1))
 }
 
-const md = [`## Weekly inventory update · ${today}`, '', 'Researched by Gemini with Google Search. **Check each source before merging** — merging deploys the site.', '']
-const src = (u) => `[source](${u})`
-if (summary.launched.length || summary.newCars.length) {
-  md.push('### Launched (moved out of Upcoming)')
-  for (const l of summary.launched) md.push(`- **${l.name}** — ${l.date ?? ''} ${l.price[0] ? `from ${lakh(l.price[0])}` : ''} · ${l.note} · ${src(l.source)}`)
-  for (const n of summary.newCars) md.push(`- **${n.name}** — NEW car page, from ${lakh(n.price[0])} · ${n.sources.map(src).join(' ')} · ⚠️ check every spec; it needs a photo (render pack)`)
-  md.push('')
-}
-if (summary.announced.length) {
-  md.push('### Newly announced (added to Upcoming)')
-  for (const a of summary.announced) md.push(`- **${a.name}** — expected ${a.expected ?? '?'}, ${a.status} · ${a.sources.map(src).join(' ')}`)
-  md.push('')
-}
-if (summary.prices.length) {
-  md.push('### Price changes')
-  for (const p of summary.prices) md.push(`- **${p.name}**: ${lakh(p.from[0])}–${lakh(p.from[1])} → **${lakh(p.to[0])}–${lakh(p.to[1])}** · ${src(p.source)} (variant prices not updated: check them)`)
-  md.push('')
-}
-if (summary.review.length) {
-  md.push('### Needs a person')
-  for (const r of summary.review) md.push(`- ${r}`)
-  md.push('')
-}
-if (!changed) md.push('No changes this week.')
-md.push('', `Prices checked this week: ${slice.map((c) => c.model).join(', ')}.`)
-writeFileSync(R('weekly-summary.md'), md.join('\n') + '\n')
-console.log(md.join('\n'))
+// ── report: the pull request description (what GitHub's email shows) and a designed HTML email
+
+const { markdown, html } = report({ date: today, summary, checked: slice.map((c) => `${c.brand} ${c.model}`), changed })
+writeFileSync(R('weekly-summary.md'), markdown)
+writeFileSync(R('weekly-email.html'), html)
+console.log(markdown)
 console.log(`\nweekly-update: ${changed} change(s)${DRY ? ' (dry run, nothing written)' : ''}`)
