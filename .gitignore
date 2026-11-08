@@ -12,3 +12,6 @@ dist
 research/official-candidates.json
 research/sheets/
 research/*.log
+
+# API keys
+.key

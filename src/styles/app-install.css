@@ -1,4 +1,4 @@
-/* ── the app: home band, nav button and the "Get the app" sheet */
+/* ── the app: nav button, hero pill, menu section and the "Get the app" sheet */
 
 /* nav button: a quiet pill with the brand tint */
 .nav-app {
@@ -104,7 +104,7 @@
   }
 }
 
-/* ── home band */
+/* ── the app page (/app): the band */
 .app-home {
   padding: 12vh 0;
   background: var(--bg);
@@ -452,6 +452,24 @@
   .app-badge::after {
     animation: none;
   }
+}
+
+/* on its own page the band starts under the nav */
+.app-page {
+  padding: 96px 0 8vh;
+}
+@media (max-width: 960px) {
+  .app-page {
+    padding-top: 76px;
+  }
+}
+
+/* ── "Get the app" in the phone menu: a link like the others, in the brand colour, opening /app */
+.nav-sheet a.menu-app {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent);
 }
 
 /* ── the sheet */

@@ -9,10 +9,10 @@ const PERKS = [
   { i: 'shield', t: 'Nothing to sign up for', d: 'No store account, no phone number' },
 ]
 
-export function AppPromo() {
-  if (standalone) return null
+export function AppPromo({ page = false }: { page?: boolean }) {
+  if (standalone && !page) return null
   return (
-    <section className="app-home">
+    <section className={`app-home ${page ? 'app-page' : ''}`}>
       <div className="wrap">
         <div className="app-band">
           <div className="app-copy">

@@ -1,6 +1,5 @@
 import { Suspense, lazy, useCallback, useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react'
 import { Link } from 'react-router-dom'
-import { AppPromo } from '../components/AppPromo'
 import { openGetApp, platform, standalone } from '../lib/install'
 import { EmiTeaser } from '../components/EmiTeaser'
 import { Icon } from '../components/Icon'
@@ -418,9 +417,6 @@ export default function Landing() {
           <Link to="/upcoming" className="link-arrow" data-reveal>All upcoming cars <Icon name="arrow" size={14} /></Link>
         </div>
       </section>
-
-      {/* the app: install free, without the stores */}
-      <AppPromo />
 
       {/* final call */}
       <section className="final">

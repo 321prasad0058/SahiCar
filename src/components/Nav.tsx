@@ -70,6 +70,11 @@ export function Nav() {
         <NavLink to="/garage">My garage</NavLink>
         <NavLink to="/about">How it works</NavLink>
         {enabled && !user && <NavLink to="/login">Sign in</NavLink>}
+        {!installed && (
+          <NavLink to="/app" className="menu-app">
+            <Icon name="phone" size={18} /> Get the app <span className="chip cyan">Free</span>
+          </NavLink>
+        )}
       </div>
     </header>
   )

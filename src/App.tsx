@@ -21,6 +21,7 @@ const Garage = lazy(() => import('./pages/Garage'))
 const Login = lazy(() => import('./pages/Login'))
 const About = lazy(() => import('./pages/About'))
 const Emi = lazy(() => import('./pages/Emi'))
+const AppPage = lazy(() => import('./pages/AppPage'))
 const HowWeScore = lazy(() => import('./pages/HowWeScore'))
 const FeedbackSheet = lazy(() => import('./components/Feedback'))
 const GetApp = lazy(() => import('./components/GetApp'))
@@ -38,6 +39,7 @@ const TITLES: Record<string, string> = {
   '/login': 'Sign in · SahiCar',
   '/about': 'How SahiCar works',
   '/emi': 'Car loan EMI calculator · SahiCar',
+  '/app': 'Get the SahiCar app · free, no app store',
   '/how-we-score': 'How we score · SahiCar',
 }
 
@@ -81,6 +83,7 @@ export default function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/about" element={<About />} />
             <Route path="/emi" element={<Emi />} />
+            <Route path="/app" element={<AppPage />} />
             <Route path="/how-we-score" element={<HowWeScore />} />
             {DevCars && <Route path="/dev/cars" element={<DevCars />} />}
             <Route path="*" element={<NotFound />} />

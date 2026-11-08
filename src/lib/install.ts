@@ -1,6 +1,7 @@
 // Installing SahiCar as an app, free and without the stores. Android (Chrome, Edge, Samsung Internet) installs it in one
 // tap from the browser's own prompt; an iPhone adds it from Safari's Share menu. Both open full screen with an icon.
 import { create } from 'zustand'
+import { toast } from '../components/Toast'
 import { track } from './track'
 
 export type Platform = 'android' | 'ios' | 'desktop'
@@ -50,6 +51,13 @@ export const standalone =
 export const useInstall = create<InstallState>(() => ({ open: false, from: '', pick: null, prompt: null, installed: standalone, coach: false, nudge: null }))
 
 export const openGetApp = (from: string, pick: Platform | null = null) => {
+  // Android with the browser's install prompt ready: a tap installs straight away, no sheet, no steps.
+  // (Not for a scanned QR link: the browser only shows its dialog in answer to a tap.)
+  if (platform === 'android' && pick !== 'ios' && from !== 'link' && !inAppBrowser && useInstall.getState().prompt) {
+    track('app_direct', { from })
+    void installNow().then((ok) => ok && toast('SahiCar is on your home screen'))
+    return
+  }
   useInstall.setState({ open: true, from, pick })
   track('app_sheet_open', { from, platform, pick: pick ?? 'none' })
 }

@@ -15,6 +15,7 @@ const pages = [
   ['/upcoming', '0.7'],
   ['/compare', '0.5'],
   ['/about', '0.5'],
+  ['/app', '0.5'],
   ...cars.map((c) => [`/car/${c.id}`, '0.8']),
 ]
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
