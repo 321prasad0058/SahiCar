@@ -11050,5 +11050,96 @@
    "https://www.cartoq.com/car-news/audi-q3-third-gen-india-launch/"
   ],
   "verifiedOn": "2026-11"
+ },
+ {
+  "id": "volvo-ex90",
+  "brand": "Volvo",
+  "model": "EX90",
+  "body": "suv",
+  "segment": "luxury",
+  "launched": "2026-10",
+  "lastUpdate": null,
+  "price": {
+   "min": 12600000,
+   "max": 12600000
+  },
+  "seats": [
+   6
+  ],
+  "dims": {
+   "length": 5037,
+   "width": 1964,
+   "height": 1747,
+   "wheelbase": 2985,
+   "groundClearance": null,
+   "boot": null,
+   "kerbWeight": null,
+   "fuelTank": null,
+   "turningRadius": null
+  },
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "year": null,
+   "airbagsStd": null,
+   "airbagsMax": null,
+   "esc": true,
+   "adas": "L2"
+  },
+  "powertrains": [
+   {
+    "engine": "Dual-motor AWD, 106 kWh",
+    "cc": null,
+    "powerPs": 455,
+    "torqueNm": null,
+    "transmissions": [
+     "single-speed"
+    ],
+    "efficiency": 625,
+    "batteryKwh": 106,
+    "priceFrom": 12600000,
+    "fuel": "ev"
+   }
+  ],
+  "variants": [
+   {
+    "name": "Ultra AWD",
+    "fuel": "ev",
+    "transmission": "AT",
+    "price": 12600000
+   }
+  ],
+  "features": [
+   "sunroof",
+   "360-camera",
+   "ventilated-seats",
+   "wireless-carplay",
+   "cruise",
+   "adas",
+   "hud",
+   "captain-seats"
+  ],
+  "highlights": [
+   "Volvo flagship 6-seat electric SUV",
+   "625 km claimed range (WLTP), AWD",
+   "Introductory price for bookings before 31 Dec 2026"
+  ],
+  "weaknesses": [
+   "Rs 1.26 crore introductory price",
+   "Single fully-loaded variant",
+   "Deliveries from January 2027"
+  ],
+  "serviceCost": 4,
+  "resale": 2,
+  "network": 1,
+  "wiki": "Volvo EX90",
+  "oemUrl": "https://www.volvocars.com/in/cars/ex90-electric/",
+  "sources": [
+   "https://www.evoindia.com/news/car-news/evoindiacomvolvo-ex90-launch-news-587802",
+   "https://www.zigwheels.com/news-features/general-news/volvo-launches-ex90-flagship-suv-at-rs-1.26-cr-swedish-ev-luxury-with-625-km-range/58349/",
+   "https://www.autocarindia.com/cars/volvo/ex90"
+  ],
+  "verifiedOn": "2026-11"
  }
 ]

@@ -385,44 +385,6 @@
   "artist": "Dinkun Chen",
   "license": "CC BY-SA 4.0"
  },
- "upcoming:hyundai-bayon": false,
- "upcoming:renault-duster-hybrid": {
-  "src": "/cars/ai/renault-duster.webp",
-  "page": "",
-  "ai": true
- },
- "upcoming:toyota-glanza": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/Toyota_Glanza.jpg/960px-Toyota_Glanza.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-  "page": "https://commons.wikimedia.org/wiki/File:Toyota_Glanza.jpg",
-  "artist": "YouTuber MK",
-  "license": "CC BY 3.0"
- },
- "upcoming:honda-elevate": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/2026_Honda_WR-V_Prestige_%28Colombia%29_front_view.jpg/960px-2026_Honda_WR-V_Prestige_%28Colombia%29_front_view.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Honda_Elevate"
- },
- "upcoming:audi-q3": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Audi_Q3_F3_DSC_7494.jpg/960px-Audi_Q3_F3_DSC_7494.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Audi_Q3"
- },
- "upcoming:volvo-ex90": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Volvo_EX90_autoMOBIL_T%C3%BCbingen_2025_DSC_2740.jpg/960px-Volvo_EX90_autoMOBIL_T%C3%BCbingen_2025_DSC_2740.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Volvo_EX90"
- },
- "upcoming:mahindra-thar": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/Mahindra_Thar_SUV_in_%22Red_Rage%22_color_at_Ashiana_Brahmanda%2C_East_Singbhum_India_%28Ank_Kumar%2C_Infosys_limited%29_02_%28cropped%29.jpg/960px-Mahindra_Thar_SUV_in_%22Red_Rage%22_color_at_Ashiana_Brahmanda%2C_East_Singbhum_India_%28Ank_Kumar%2C_Infosys_limited%29_02_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Mahindra_Thar"
- },
- "upcoming:maruti-baleno": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/SuzukiBalenoMauritius.jpg/960px-SuzukiBalenoMauritius.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-  "page": "https://commons.wikimedia.org/wiki/File:SuzukiBalenoMauritius.jpg",
-  "artist": "Wojtekszczesny",
-  "license": "CC0"
- },
- "upcoming:kia-syros-ev": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/2025_Kia_Syros_1.5_HTX%2B_%28O%29_%28India%29_front_view_01.jpg/960px-2025_Kia_Syros_1.5_HTX%2B_%28O%29_%28India%29_front_view_01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Kia_Syros"
- },
  "upcoming:denza-d9": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/Denza_D9_DM-i_IAA_2025_DSC_2042.jpg/960px-Denza_D9_DM-i_IAA_2025_DSC_2042.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Denza_D9"
@@ -681,7 +643,6 @@
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Volkswagen_Taigun_front_20230528.jpg/960px-Volkswagen_Taigun_front_20230528.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Volkswagen_Taigun"
  },
- "upcoming:mahindra-scorpio-n": null,
  "upcoming:vinfast-vf3": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/2025_VinFast_VF_3%2C_front_left.jpg/960px-2025_VinFast_VF_3%2C_front_left.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/VinFast_VF_3"
@@ -715,14 +676,6 @@
  "mahindra-scorpio-n": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/2024_Mahindra_Scorpio_Z8L_front.jpg/960px-2024_Mahindra_Scorpio_Z8L_front.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Mahindra_Scorpio-N"
- },
- "upcoming:skoda-slavia": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/2021_%C5%A0koda_Slavia_1.5_TSI_Style_%28India%29_front_view.png/960px-2021_%C5%A0koda_Slavia_1.5_TSI_Style_%28India%29_front_view.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/%C5%A0koda_Slavia"
- },
- "upcoming:maruti-brezza": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/2022_Maruti_Suzuki_Brezza_ZXi%2B_%28India%29_front_view_03.png/960px-2022_Maruti_Suzuki_Brezza_ZXi%2B_%28India%29_front_view_03.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Suzuki_Brezza"
  },
  "upcoming:kia-seltos-hybrid": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/Kia_Seltos_front_Pozna%C5%84_Motor_Show_2026.jpg/960px-Kia_Seltos_front_Pozna%C5%84_Motor_Show_2026.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
@@ -766,5 +719,9 @@
  "upcoming:mini-cooper-se": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c4/Mini_Hatch_%28J01%29_Ditzingen_Mobil_IMG_9772_%28cropped%29.jpg/960px-Mini_Hatch_%28J01%29_Ditzingen_Mobil_IMG_9772_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Mini_Hatch"
+ },
+ "volvo-ex90": {
+  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Volvo_EX90_autoMOBIL_T%C3%BCbingen_2025_DSC_2740.jpg/960px-Volvo_EX90_autoMOBIL_T%C3%BCbingen_2025_DSC_2740.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+  "page": "https://en.wikipedia.org/wiki/Volvo_EX90"
  }
 }

@@ -35,7 +35,7 @@ export default function Upcoming() {
         <h1>Every car <span className="grad">coming to India</span>.</h1>
         <p className="muted">{upcoming.length} launches, new generations and facelifts we’re tracking — each matched against today’s cars, so your SahiScore results can warn you when a better one is weeks away.</p>
         <div className="tabs">
-          {[['all', 'All'], ['confirmed', 'Confirmed'], ['testing', 'Testing'], ['ev', 'Electric'], ['launched-recently', 'Just launched']].map(([k, l]) => (
+          {[['all', 'All'], ['confirmed', 'Confirmed'], ['testing', 'Testing'], ['ev', 'Electric']].map(([k, l]) => (
             <button key={k} className={`chip ${filter === k ? 'cyan' : ''}`} onClick={() => setFilter(k)}>{l}</button>
           ))}
         </div>
