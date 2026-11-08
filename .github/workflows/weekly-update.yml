@@ -85,7 +85,9 @@ jobs:
           echo "::add-mask::$p"
           { echo "MAIL_USER=$u"; echo "MAIL_PASS=$p"; echo "MAIL_DEST=$t"; } >> "$GITHUB_ENV"
           case "$u" in *@*) at=yes;; *) at=NO;; esac
-          echo "Sender has @: $at · sender domain: ${u#*@} · password length: ${#p} (a Gmail App Password is 16) · recipient has @: $(case "$t" in *@*) echo yes;; *) echo NO;; esac)"
+          same=no; [ "$(printf '%s' "$u" | tr 'A-Z' 'a-z')" = "$(printf '%s' "$t" | tr 'A-Z' 'a-z')" ] && same=YES
+          echo "Sender has @: $at · sender domain: ${u#*@} · password length: ${#p} (a Gmail App Password is 16)"
+          echo "Recipient domain: ${t#*@} · recipient is the same address as the sender: $same"
 
       - name: Email the report
         if: steps.pr.outputs.pull-request-url != '' && env.HAS_MAIL == 'true'

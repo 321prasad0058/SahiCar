@@ -29,6 +29,7 @@ jobs:
       # opened by GitHub Actions and assigned to you, so GitHub sends you its email (it never emails you about
       # things you did yourself)
       - name: Open it as an issue assigned to you
+        if: env.HAS_MAIL != 'true'
         id: issue
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -42,7 +43,7 @@ jobs:
 
       - name: Put the link into the designed email
         if: env.HAS_MAIL == 'true'
-        run: sed -i "s#{{PR_URL}}#${{ steps.issue.outputs.url }}#g" weekly-email.html
+        run: sed -i "s#{{PR_URL}}#https://github.com/${{ github.repository }}/pulls#g" weekly-email.html
 
       # pasted secrets often carry spaces or a line break, which Gmail rejects: strip them, and print a safe check
       # (lengths only, never the values)
@@ -60,7 +61,9 @@ jobs:
           echo "::add-mask::$p"
           { echo "MAIL_USER=$u"; echo "MAIL_PASS=$p"; echo "MAIL_DEST=$t"; } >> "$GITHUB_ENV"
           case "$u" in *@*) at=yes;; *) at=NO;; esac
-          echo "Sender has @: $at · sender domain: ${u#*@} · password length: ${#p} (a Gmail App Password is 16) · recipient has @: $(case "$t" in *@*) echo yes;; *) echo NO;; esac)"
+          same=no; [ "$(printf '%s' "$u" | tr 'A-Z' 'a-z')" = "$(printf '%s' "$t" | tr 'A-Z' 'a-z')" ] && same=YES
+          echo "Sender has @: $at · sender domain: ${u#*@} · password length: ${#p} (a Gmail App Password is 16)"
+          echo "Recipient domain: ${t#*@} · recipient is the same address as the sender: $same"
 
       - name: Send the designed email
         if: env.HAS_MAIL == 'true'
@@ -75,4 +78,4 @@ jobs:
           from: SahiCar weekly update <${{ env.MAIL_USER }}>
           subject: 'Test: SahiCar weekly update email'
           html_body: file://weekly-email.html
-          body: 'Test of the SahiCar weekly update email: ${{ steps.issue.outputs.url }}'
+          body: 'Test of the SahiCar weekly update email. Open it in an email app that shows HTML to see the design.'
