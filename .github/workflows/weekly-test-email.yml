@@ -34,7 +34,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           url=$(gh issue create --repo "${{ github.repository }}" \
-            --title "🧪 Test: SahiCar weekly update email" \
+            --title "Test: SahiCar weekly update email" \
             --body-file weekly-summary.md \
             --assignee 321prasad0058)
           echo "url=$url" >> "$GITHUB_OUTPUT"
@@ -55,6 +55,6 @@ jobs:
           password: ${{ secrets.MAIL_PASSWORD }}
           to: ${{ secrets.MAIL_TO }}
           from: SahiCar weekly update <${{ secrets.MAIL_USERNAME }}>
-          subject: '🧪 Test: SahiCar weekly update email'
+          subject: 'Test: SahiCar weekly update email'
           html_body: file://weekly-email.html
           body: 'Test of the SahiCar weekly update email: ${{ steps.issue.outputs.url }}'
