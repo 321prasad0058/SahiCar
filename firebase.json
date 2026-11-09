@@ -3,6 +3,13 @@
     "public": "dist",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "cleanUrls": true,
+    "redirects": [
+      {
+        "source": "/li",
+        "destination": "/?utm_source=linkedin&utm_medium=social&utm_campaign=company_page&utm_content=website",
+        "type": 302
+      }
+    ],
     "rewrites": [{ "source": "**", "destination": "/index.html" }],
     "headers": [
       { "source": "/", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] },
