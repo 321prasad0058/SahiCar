@@ -1,15 +1,13 @@
-// How we score: the pledge first, then the weights SahiScore would use for this visitor, in plain words, and the
-// public code behind them. Trust is the product; this page is the proof.
+// How we score: the pledge first, then the weights SahiScore would use for this visitor, in plain words.
+// Trust is the product; this page is the proof.
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Icon } from '../components/Icon'
-import { cars } from '../data'
 import { DIM_HOW } from '../engine/method'
 import { DIM_LABEL, weightsFor, type Dim } from '../engine/sahiscore'
 import { track } from '../lib/track'
 import { useStore } from '../state/store'
 
-const CODE = 'https://github.com/321prasad0058/SahiCar/blob/main/src/engine/sahiscore.ts'
 
 const PLEDGE = [
   ['No carmaker or dealer pays us', 'Not for placement, not for a badge, not for a “sponsored” slot. There are none.'],
@@ -79,15 +77,6 @@ export default function HowWeScore() {
               <li><Icon name="check" size={16} /> <span><b>Three real choices</b>, not three clones: the best version of each model, and a different body or fuel in third place if it’s close.</span></li>
             </ul>
           </div>
-        </section>
-
-        <section className="hws-code card pad">
-          <Icon name="cube" size={22} />
-          <div>
-            <b>Read every line yourself</b>
-            <p className="muted small">The SahiScore engine that ranks all {cars.length} models is public on GitHub. If a number looks wrong, it’s our bug — tell us.</p>
-          </div>
-          <a href={CODE} target="_blank" rel="noopener" className="btn btn-ghost btn-sm">See the code <Icon name="external" size={14} /></a>
         </section>
 
         <div className="about-cta">
