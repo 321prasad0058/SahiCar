@@ -330,6 +330,11 @@ export class HeroWorld {
     const r = Math.max(rW, rH) * c.zoom * (this.camera.aspect < 1 ? 1.16 : 1)
     this.camera.position.set(Math.sin(theta) * Math.cos(elev) * r, c.look + Math.sin(elev) * r, Math.cos(theta) * Math.cos(elev) * r)
     this.camera.lookAt(0, c.look, 0)
+    // the haze that melts the floor into the wall starts just behind the car, however far back the camera
+    // stands (phones step back to fit the car), so it never washes out the car itself
+    const fog = this.scene.fog as THREE.Fog
+    fog.near = r + 4
+    fog.far = r + 36
 
     this.renderer.render(this.scene, this.camera)
     if (!this.firstFrame) {

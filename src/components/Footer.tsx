@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import { openFeedback } from '../lib/feedback'
 import { openGetApp, standalone } from '../lib/install'
 import { Logo } from './Logo'
-import { YouTubeLink } from './YouTube'
 
 export function Footer() {
   return (
@@ -11,7 +10,6 @@ export function Footer() {
         <div>
           <Logo size={30} />
           <p className="muted small">India’s free, unbiased car advisor. No dealer leads, no sponsored rankings, no selling your number.</p>
-          <YouTubeLink where="footer" label="Showroom ye nahi batata. Hum batayenge." sub="Watch SahiCar on YouTube" />
         </div>
         <div className="footer-cols">
           <div>

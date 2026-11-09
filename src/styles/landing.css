@@ -287,7 +287,8 @@
     height: 100%;
   }
   .hero-vignette {
-    background: linear-gradient(180deg, rgba(245, 243, 238, 0.96) 0%, rgba(245, 243, 238, 0.7) 34%, rgba(245, 243, 238, 0) 50%);
+    /* behind the headline only: fully clear before the car starts, so the car keeps its true colours */
+    background: linear-gradient(180deg, rgba(245, 243, 238, 0.96) 0%, rgba(245, 243, 238, 0.88) 30%, rgba(245, 243, 238, 0) 42%);
   }
   .hero-stats,
   .hero-sub .more,
