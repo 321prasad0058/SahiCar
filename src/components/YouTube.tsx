@@ -30,7 +30,7 @@ export function YouTubeHook() {
   return (
     <a className="yt-hook" href={CHANNEL} target="_blank" rel="noopener noreferrer" onClick={() => track('youtube_open', { where: 'hero' })}>
       <Play size={14} />
-      <span><b>Same price. ₹3 lakh ka farak.</b> <span className="yt-hook-go">Watch<span className="yt-long"> on YouTube</span></span></span>
+      <span><b>Car buying ka sach, 60 second mein.</b> <span className="yt-hook-go">Watch<span className="yt-long"> on YouTube</span></span></span>
     </a>
   )
 }

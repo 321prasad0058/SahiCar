@@ -540,8 +540,14 @@
 .yt-hook {
   white-space: nowrap;
 }
-@media (max-width: 380px) {
+@media (max-width: 440px) {
   .yt-long {
     display: none;
+  }
+}
+@media (max-width: 345px) {
+  .yt-hook {
+    font-size: 13.5px;
+    gap: 8px;
   }
 }
