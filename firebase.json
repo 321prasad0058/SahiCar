@@ -8,6 +8,11 @@
         "source": "/li",
         "destination": "/?utm_source=linkedin&utm_medium=social&utm_campaign=company_page&utm_content=website",
         "type": 302
+      },
+      {
+        "source": "/ig",
+        "destination": "/?utm_source=instagram&utm_medium=social&utm_campaign=profile&utm_content=bio_link",
+        "type": 302
       }
     ],
     "rewrites": [{ "source": "**", "destination": "/index.html" }],
