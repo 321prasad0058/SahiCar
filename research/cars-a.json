@@ -437,7 +437,7 @@
     "lastUpdate": "2025-04",
     "price": {
       "min": 498900,
-      "max": 697400
+      "max": 724000
     },
     "seats": [
       5
@@ -599,9 +599,10 @@
       "https://www.cardekho.com/maruti/wagon-r/specs",
       "https://www.marutisuzuki.com/wagonr/specifications",
       "https://www.autocarindia.com/car-news-amp/maruti-suzuki-wagon-r-scores-1-star-in-2023-global-ncap-crash-test-427769",
-      "https://www.cardekho.com/india-car-news/maruti-wagon-r-flex-fuel-launched-at-rs-724-lakh-rs-86000-more-expensive-than-regular-variant-36156.htm"
+      "https://www.cardekho.com/india-car-news/maruti-wagon-r-flex-fuel-launched-at-rs-724-lakh-rs-86000-more-expensive-than-regular-variant-36156.htm",
+      "https://www.zigwheels.com/maruti-suzuki-cars/wagon-r/on-road-price-indi/"
     ],
-    "verifiedOn": "2026-10"
+    "verifiedOn": "2026-11"
   },
   {
     "id": "maruti-swift",
