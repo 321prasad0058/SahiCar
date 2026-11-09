@@ -40,6 +40,12 @@ const host = (u) => {
 }
 const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 const pct = (from, to) => (from ? ((to - from) / from) * 100 : 0)
+/** A price range's change: whichever end moved more (a new top variant can leave the starting price untouched). */
+const rangePct = (from, to) => {
+  const lo = pct(from[0], to[0])
+  const hi = pct(from[1], to[1])
+  return Math.abs(hi) > Math.abs(lo) ? hi : lo
+}
 const signed = (d) => `${d > 0 ? '+' : d < 0 ? '−' : ''}${Math.abs(d).toFixed(1)}%`
 const BODY = { hatchback: 'Hatchback', sedan: 'Sedan', suv: 'SUV', 'compact-suv': 'Compact SUV', mpv: 'MPV', coupe: 'Coupe', pickup: 'Pickup' }
 const STATUS = { confirmed: 'Confirmed', testing: 'Testing', rumoured: 'Rumoured' }
@@ -132,7 +138,7 @@ export function report({ date, summary: s, checked, changed, sample = false }) {
 
   if (s.prices.length) {
     md.push('---', '', '### Price changes', '_Ex-showroom range, lowest to highest variant._', '', '| Car | Was | Now | Change | Source |', '|---|---|---|---:|---|')
-    for (const p of s.prices) md.push(`| ${p.name} | ${range(p.from)} | **${range(p.to)}** | ${signed(pct(p.from[0], p.to[0]))} | [${host(p.source)}](${p.source}) |`)
+    for (const p of s.prices) md.push(`| ${p.name} | ${range(p.from)} | **${range(p.to)}** | ${signed(rangePct(p.from, p.to))} | [${host(p.source)}](${p.source}) |`)
     md.push('')
   }
 
@@ -214,7 +220,7 @@ export function report({ date, summary: s, checked, changed, sample = false }) {
       card(
         `<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;font-size:14px"><tr><td style="padding:0 0 8px;font-size:12px;color:${T.dim}">Car</td><td style="padding:0 0 8px;font-size:12px;color:${T.dim}">Now</td><td style="padding:0 0 8px;font-size:12px;color:${T.dim};text-align:right">Change</td></tr>${s.prices
           .map((p) => {
-            const d = pct(p.from[0], p.to[0])
+            const d = rangePct(p.from, p.to)
             return `<tr><td style="padding:11px 8px 11px 0;border-top:1px solid ${T.line};vertical-align:top"><b>${esc(p.name)}</b><div style="font-size:12px;color:${T.dim}">Was ${range(p.from)} · <a href="${esc(p.source)}" style="color:${T.dim}">${esc(host(p.source))}</a></div></td><td style="padding:11px 8px 11px 0;border-top:1px solid ${T.line};vertical-align:top;white-space:nowrap"><b>${range(p.to)}</b></td><td style="padding:11px 0;border-top:1px solid ${T.line};vertical-align:top;text-align:right;font-weight:600;white-space:nowrap;color:${d > 0 ? T.up : T.accent}">${signed(d)}</td></tr>`
           })
           .join('')}</table>`,
