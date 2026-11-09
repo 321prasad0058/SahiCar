@@ -13,6 +13,21 @@
         "source": "/ig",
         "destination": "/?utm_source=instagram&utm_medium=social&utm_campaign=profile&utm_content=bio_link",
         "type": 302
+      },
+      {
+        "source": "/igs",
+        "destination": "/?utm_source=instagram&utm_medium=social&utm_campaign=story&utm_content=story_link",
+        "type": 302
+      },
+      {
+        "source": "/yt",
+        "destination": "/?utm_source=youtube&utm_medium=social&utm_campaign=channel&utm_content=channel_link",
+        "type": 302
+      },
+      {
+        "source": "/ytv",
+        "destination": "/?utm_source=youtube&utm_medium=social&utm_campaign=video&utm_content=description_link",
+        "type": 302
       }
     ],
     "rewrites": [{ "source": "**", "destination": "/index.html" }],
