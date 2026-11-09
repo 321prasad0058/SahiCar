@@ -1,12 +1,15 @@
 # Every Monday morning: research the week's launches, new announcements and price changes with Gemini, rebuild and
 # check the data, and open a pull request for a person to read. Nothing goes live until that pull request is merged
 # (merging runs deploy.yml). GitHub emails the assignee when the pull request opens; if the MAIL_* secrets are set,
-# a second email with the full summary is sent as well.
+# the designed report email is sent as well, and in a week with no changes a short "no changes" email, so a quiet
+# week never looks like a missed run.
 name: Weekly inventory update
 
 on:
   schedule:
-    - cron: '30 3 * * 1' # Mondays 03:30 UTC = 09:00 IST
+    # Mondays 03:13 UTC = 08:43 IST. GitHub delays scheduled jobs most at round times (:00, :30); an odd minute
+    # usually runs on time, so the email arrives before 9 AM.
+    - cron: '13 3 * * 1'
   workflow_dispatch: # "Run workflow" button, for an update on demand
 
 permissions:
@@ -34,9 +37,13 @@ jobs:
       - run: npm ci
 
       - name: Research this week's changes (Gemini + Google Search)
+        id: research
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: node scripts/weekly-update.mjs
+        run: |
+          set -o pipefail
+          node scripts/weekly-update.mjs | tee research.log
+          echo "changes=$(grep -o 'weekly-update: [0-9]*' research.log | grep -o '[0-9]*$')" >> "$GITHUB_OUTPUT"
 
       # the same checks run before every deploy: bad data stops here, before anyone is asked to merge it
       - name: Rebuild the site data and check it
@@ -105,3 +112,20 @@ jobs:
           body: |
             This week's SahiCar update is ready for you to check and approve:
             ${{ steps.pr.outputs.pull-request-url }}
+
+      # a quiet week: no pull request, so say so, rather than leave silence that looks like a missed run
+      - name: Email that there were no changes
+        if: steps.research.outputs.changes == '0' && env.HAS_MAIL == 'true'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ env.MAIL_USER }}
+          password: ${{ env.MAIL_PASS }}
+          to: ${{ env.MAIL_DEST }}
+          from: SahiCar weekly update <${{ env.MAIL_USER }}>
+          subject: 'SahiCar weekly update: no changes this week'
+          html_body: file://weekly-email.html
+          body: |
+            This week's SahiCar check found no launches, announcements or price changes. Nothing needs your approval.

@@ -86,7 +86,7 @@ export function report({ date, summary: s, checked, changed, sample = false }) {
     ? 'A test of the weekly email, with sample updates. Nothing was researched or changed.'
     : total
       ? `${total} ${total === 1 ? 'change is' : 'changes are'} ready for your approval.`
-      : 'No changes this week.'
+      : 'Everything checked, nothing changed. Launches, announcements and this week\'s prices are all up to date, so there is nothing to approve.'
 
   // ── markdown (GitHub's email)
 
@@ -236,7 +236,7 @@ export function report({ date, summary: s, checked, changed, sample = false }) {
   h.push(card(`<div style="font-size:14px;color:${T.muted}">${checked.map(esc).join(', ')}</div>`))
 
   if (total || sample) h.push(`<div style="text-align:center;margin:30px 0 10px">${button('Review on GitHub')}</div>`)
-  h.push(`<div style="text-align:center;font-size:12px;color:${T.dim};margin-top:14px;line-height:1.6">Merge to publish, close to discard.<br>Updates are found with Gemini and Google Search; every change links to its source.<br>SahiCar · India's free, unbiased car advisor</div>`)
+  h.push(`<div style="text-align:center;font-size:12px;color:${T.dim};margin-top:14px;line-height:1.6">${total || sample ? 'Merge to publish, close to discard.<br>' : ''}Updates are found with Gemini and Google Search; every change links to its source.<br>SahiCar · India's free, unbiased car advisor</div>`)
   h.push('</div></div>')
 
   return { markdown: md.join('\n') + '\n', html: h.join('\n') }
