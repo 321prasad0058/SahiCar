@@ -328,7 +328,8 @@
   .stage {
     flex: 1;
     min-height: 0;
-    gap: 6px;
+    /* breathing room between the car's wheels and the card; the car frames itself to what's left */
+    gap: 20px;
   }
   .car-zone {
     flex: 1;

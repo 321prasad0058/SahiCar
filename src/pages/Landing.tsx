@@ -119,11 +119,13 @@ export default function Landing() {
     const cr = c.getBoundingClientRect()
     const zr = z.getBoundingClientRect()
     if (!cr.width || !cr.height) return
+    // phones: frame the car in the upper 88% of its zone, so there's always floor between the wheels and the card
+    const lift = cr.width < 960 ? 0.88 : 1
     world.current.setFocus(
       (zr.left + zr.width / 2 - cr.left) / cr.width,
-      (zr.top + zr.height / 2 - cr.top) / cr.height,
+      (zr.top + (zr.height * lift) / 2 - cr.top) / cr.height,
       zr.width / cr.width,
-      zr.height / cr.height,
+      (zr.height * lift) / cr.height,
     )
   }, [])
 
