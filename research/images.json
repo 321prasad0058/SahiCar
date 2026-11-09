@@ -169,8 +169,9 @@
   "page": "https://en.wikipedia.org/wiki/Kia_Sonet"
  },
  "kia-syros": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/2025_Kia_Syros_1.5_HTX%2B_%28O%29_%28India%29_front_view_01.jpg/960px-2025_Kia_Syros_1.5_HTX%2B_%28O%29_%28India%29_front_view_01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Kia_Syros"
+  "src": "/cars/ai/kia-syros.webp",
+  "page": "",
+  "ai": true
  },
  "kia-seltos": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/Kia_Seltos_front_Pozna%C5%84_Motor_Show_2026.jpg/960px-Kia_Seltos_front_Pozna%C5%84_Motor_Show_2026.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
@@ -265,16 +266,19 @@
   "page": "https://en.wikipedia.org/wiki/Suzuki_Eeco"
  },
  "maruti-swift": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3d/Suzuki_Swift_%282024%29_hybrid_DSC_6076.jpg/960px-Suzuki_Swift_%282024%29_hybrid_DSC_6076.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Suzuki_Swift"
+  "src": "/cars/ai/maruti-swift.webp",
+  "page": "",
+  "ai": true
  },
  "maruti-dzire": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/Suzuki_Dzire_II_1.2_GLX_Hybrid_Arctic_White_Pearl.jpg/960px-Suzuki_Dzire_II_1.2_GLX_Hybrid_Arctic_White_Pearl.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Suzuki_Dzire"
+  "src": "/cars/ai/maruti-dzire.webp",
+  "page": "",
+  "ai": true
  },
  "maruti-fronx": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/80/2024_Suzuki_Fronx.jpg/960px-2024_Suzuki_Fronx.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Suzuki_Fronx"
+  "src": "/cars/ai/maruti-fronx.webp",
+  "page": "",
+  "ai": true
  },
  "maruti-ertiga": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Suzuki_Ertiga_NC_FL_1.5_GLX_Hybrid_Snow_White_Pearl.jpg/960px-Suzuki_Ertiga_NC_FL_1.5_GLX_Hybrid_Snow_White_Pearl.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
