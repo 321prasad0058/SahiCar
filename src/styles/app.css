@@ -506,3 +506,42 @@
 .final-yt .yt-link {
   margin-top: 0;
 }
+.hero-yt {
+  margin-top: 16px;
+}
+.yt-hook {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink-2);
+  font-size: 14.5px;
+  text-decoration: none;
+}
+.yt-hook b {
+  font-weight: 600;
+  color: var(--ink);
+}
+.yt-hook-go {
+  color: var(--muted);
+  border-bottom: 1px solid var(--line-2);
+  transition: color 0.2s, border-color 0.2s;
+}
+.yt-hook:hover .yt-hook-go {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.yt-hook svg {
+  flex: none;
+  transition: transform 0.25s var(--ease);
+}
+.yt-hook:hover svg {
+  transform: scale(1.1);
+}
+.yt-hook {
+  white-space: nowrap;
+}
+@media (max-width: 380px) {
+  .yt-long {
+    display: none;
+  }
+}

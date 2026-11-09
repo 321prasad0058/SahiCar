@@ -1,7 +1,9 @@
 // SahiCar's YouTube channel. The link asks the visitor to subscribe on arrival (?sub_confirmation=1).
 import { track } from '../lib/track'
 
-export const YOUTUBE = 'https://www.youtube.com/@SahiCar?sub_confirmation=1'
+export const CHANNEL = 'https://www.youtube.com/@SahiCar'
+/** the same, asking the visitor to subscribe on arrival */
+export const YOUTUBE = `${CHANNEL}?sub_confirmation=1`
 
 /** YouTube's play mark (a link to our own channel, as YouTube's brand guidelines allow). */
 const Play = ({ size = 18 }: { size?: number }) => (
@@ -11,14 +13,24 @@ const Play = ({ size = 18 }: { size?: number }) => (
   </svg>
 )
 
-export function YouTubeLink({ where, label = 'SahiCar on YouTube', sub }: { where: string; label?: string; sub?: string }) {
+export function YouTubeLink({ where, label = 'SahiCar on YouTube', sub, href = YOUTUBE }: { where: string; label?: string; sub?: string; href?: string }) {
   return (
-    <a className="yt-link" href={YOUTUBE} target="_blank" rel="noopener noreferrer" onClick={() => track('youtube_open', { where })}>
+    <a className="yt-link" href={href} target="_blank" rel="noopener noreferrer" onClick={() => track('youtube_open', { where })}>
       <Play />
       <span className="yt-text">
         <b>{label}</b>
         {sub && <span className="yt-sub">{sub}</span>}
       </span>
+    </a>
+  )
+}
+
+/** One slim line under the hero buttons: the trailer's hook. Opens the channel, where the trailer plays for new visitors. */
+export function YouTubeHook() {
+  return (
+    <a className="yt-hook" href={CHANNEL} target="_blank" rel="noopener noreferrer" onClick={() => track('youtube_open', { where: 'hero' })}>
+      <Play size={14} />
+      <span><b>Same price. ₹3 lakh ka farak.</b> <span className="yt-hook-go">Watch<span className="yt-long"> on YouTube</span></span></span>
     </a>
   )
 }

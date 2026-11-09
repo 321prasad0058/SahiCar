@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { openGetApp, platform, standalone } from '../lib/install'
 import { EmiTeaser } from '../components/EmiTeaser'
 import { Icon } from '../components/Icon'
-import { YouTubeLink } from '../components/YouTube'
+import { YouTubeHook, YouTubeLink } from '../components/YouTube'
 import summary from '../data/summary.json'
 import { expectedLabel, monthsUntil } from '../engine/timing'
 import { lakh } from '../lib/format'
@@ -272,6 +272,9 @@ export default function Landing() {
                 <Link to="/explore" className="btn btn-ghost">Explore {summary.cars} cars</Link>
               )}
             </div>
+            <div className="hero-yt hero-in">
+              <YouTubeHook />
+            </div>
             <div className="hero-stats hero-in">
               <div><b data-count={summary.cars}>{summary.cars}</b><span>models scored</span></div>
               <div><b data-count={summary.variants}>{summary.variants}</b><span>variants costed</span></div>
@@ -428,7 +431,7 @@ export default function Landing() {
             Start SahiFit <Icon name="arrow" />
           </Link>
           <div className="final-yt" data-reveal>
-            <YouTubeLink where="home" label="Car buying, honestly explained" sub="Watch on YouTube · Dil vs Dimaag & more" />
+            <YouTubeLink where="home" label="Showroom ye nahi batata. Hum batayenge." sub="Watch SahiCar on YouTube" />
           </div>
         </div>
       </section>
