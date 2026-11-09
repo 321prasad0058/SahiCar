@@ -457,3 +457,52 @@
   padding: 6% 7% 10%;
   filter: drop-shadow(0 18px 14px rgba(21, 23, 27, 0.22));
 }
+
+/* YouTube: a slim pill in the footer and under the home page's last call */
+.yt-link {
+  display: inline-flex;
+  justify-self: start;
+  width: fit-content;
+  max-width: 100%;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+  padding: 9px 16px 9px 12px;
+  border-radius: 999px;
+  background: var(--card-solid, #fff);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform 0.2s var(--ease), border-color 0.2s, box-shadow 0.2s;
+}
+.yt-link:hover {
+  transform: translateY(-1px);
+  border-color: var(--line-2);
+  box-shadow: var(--shadow-sm);
+}
+.yt-link svg {
+  flex: none;
+  transition: transform 0.25s var(--ease);
+}
+.yt-link:hover svg {
+  transform: scale(1.08);
+}
+.yt-text {
+  display: grid;
+  line-height: 1.25;
+  text-align: left;
+}
+.yt-text b {
+  font-size: 14px;
+  font-weight: 600;
+}
+.yt-sub {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.final-yt {
+  margin-top: 6px;
+}
+.final-yt .yt-link {
+  margin-top: 0;
+}

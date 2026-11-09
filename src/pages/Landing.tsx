@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { openGetApp, platform, standalone } from '../lib/install'
 import { EmiTeaser } from '../components/EmiTeaser'
 import { Icon } from '../components/Icon'
+import { YouTubeLink } from '../components/YouTube'
 import summary from '../data/summary.json'
 import { expectedLabel, monthsUntil } from '../engine/timing'
 import { lakh } from '../lib/format'
@@ -426,6 +427,9 @@ export default function Landing() {
           <Link to="/sahifit" className="btn btn-primary btn-xl" data-reveal>
             Start SahiFit <Icon name="arrow" />
           </Link>
+          <div className="final-yt" data-reveal>
+            <YouTubeLink where="home" label="Car buying, honestly explained" sub="Watch on YouTube · Dil vs Dimaag & more" />
+          </div>
         </div>
       </section>
     </div>
