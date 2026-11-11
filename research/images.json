@@ -240,8 +240,9 @@
   "page": "https://en.wikipedia.org/wiki/Mahindra_XUV_3XO"
  },
  "mahindra-xuv-7xo": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/2021_Mahindra_XUV700_2.2_AX7_%28India%29_front_view.png/960px-2021_Mahindra_XUV700_2.2_AX7_%28India%29_front_view.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Mahindra_XUV700"
+  "src": "/cars/ai/mahindra-xuv-7xo.webp",
+  "page": "",
+  "ai": true
  },
  "mahindra-xuv400": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/22/2023_Mahindra_XUV_400_EL_EV_%2C_Ashiana_Brahmananda%2C_Jamshedpur%2C_Jharkhand%2C_India_%28_Ank_Kumar%2C_Infosys_Limited_%29_03.jpg/960px-2023_Mahindra_XUV_400_EL_EV_%2C_Ashiana_Brahmananda%2C_Jamshedpur%2C_Jharkhand%2C_India_%28_Ank_Kumar%2C_Infosys_Limited_%29_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
