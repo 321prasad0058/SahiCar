@@ -1,0 +1,10 @@
+{
+  "_note": "Extra studio photos per car, shown as a carousel on the car page after its main photo. Renders made in Gemini from press/review references (scripts: see research/ai-renders/gallery). Files live in public/cars/gallery/<car-id>/.",
+  "hyundai-bayon": [
+    { "src": "/cars/gallery/hyundai-bayon/2-top.webp", "caption": "From above: black roof with panoramic sunroof" },
+    { "src": "/cars/gallery/hyundai-bayon/3-dashboard.webp", "caption": "Dashboard: dual 12.3-inch curved screens" },
+    { "src": "/cars/gallery/hyundai-bayon/4-ai-assistant.webp", "caption": "AI voice assistant (Perplexity + SoundHound): chat in English" },
+    { "src": "/cars/gallery/hyundai-bayon/5-seats.webp", "caption": "Front seats, ventilated on upper trims" },
+    { "src": "/cars/gallery/hyundai-bayon/6-boot.webp", "caption": "505-litre boot" }
+  ]
+}

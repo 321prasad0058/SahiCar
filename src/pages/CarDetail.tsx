@@ -2,6 +2,8 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { CarCard, SafetyStars } from '../components/CarCard'
 import { CarImage } from '../components/CarImage'
+import { Gallery, type Shot } from '../components/Gallery'
+import galleryData from '../data/gallery.json'
 import { Icon } from '../components/Icon'
 import { ScoreRing } from '../components/ScoreRing'
 import { toast } from '../components/Toast'
@@ -201,7 +203,17 @@ export default function CarDetail() {
                 <a className="chip" href={car.oemUrl} target="_blank" rel="noreferrer">Official site & colours <Icon name="external" size={12} /></a>
               )}
             </div>
-            {view === 'photo' ? <CarImage official={car.official} image={car.image} wiki={car.wiki} body={car.body} alt={`${car.brand} ${car.model}`} eager /> : <Studio3D car={car} />}
+            {view === 'photo' ? (
+              (galleryData as unknown as Record<string, Shot[]>)[car.id]?.length ? (
+                <Gallery
+                  shots={(galleryData as unknown as Record<string, Shot[]>)[car.id]}
+                  alt={`${car.brand} ${car.model}`}
+                  first={<CarImage official={car.official} image={car.image} wiki={car.wiki} body={car.body} alt={`${car.brand} ${car.model}`} eager />}
+                />
+              ) : (
+                <CarImage official={car.official} image={car.image} wiki={car.wiki} body={car.body} alt={`${car.brand} ${car.model}`} eager />
+              )
+            ) : <Studio3D car={car} />}
           </div>
 
           <div className="detail-head">
