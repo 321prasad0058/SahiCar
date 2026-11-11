@@ -259,8 +259,9 @@
   "page": "https://en.wikipedia.org/wiki/Mahindra_XEV_9e"
  },
  "maruti-s-presso": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Suzuki_S-Presso_%E2%80%93_Dubai_%28cropped%29.jpg/960px-Suzuki_S-Presso_%E2%80%93_Dubai_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Suzuki_S-Presso"
+  "src": "/cars/ai/maruti-s-presso.webp",
+  "page": "",
+  "ai": true
  },
  "maruti-eeco": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7f/White_Maruti_Eeco_01.jpg/960px-White_Maruti_Eeco_01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
@@ -426,10 +427,9 @@
   "ai": true
  },
  "maruti-alto-k10": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Maruti_Suzuki_Alto_K10_-_front.jpg/960px-Maruti_Suzuki_Alto_K10_-_front.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-  "page": "https://commons.wikimedia.org/wiki/File:Maruti_Suzuki_Alto_K10_-_front.jpg",
-  "artist": "Vis M",
-  "license": "CC BY-SA 4.0"
+  "src": "/cars/ai/maruti-alto-k10.webp",
+  "page": "",
+  "ai": true
  },
  "maruti-celerio": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/2021_Maruti_Suzuki_Celerio_ZXi_%28India%29_front_view_02.png/960px-2021_Maruti_Suzuki_Celerio_ZXi_%28India%29_front_view_02.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
