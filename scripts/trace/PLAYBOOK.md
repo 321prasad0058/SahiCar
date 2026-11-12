@@ -72,6 +72,10 @@ Add the id to `READY` in src/webgl/cars/specs.ts **and** to `SHOWCASE_IDS` in sr
 - Dark paint (deep green, black) defeats the `paintTop`/`paintLow` finder: read the belt, window line, pillars and
   cladding off the side photo with `gridify.cjs` (metres = (groundY − y) ÷ pxPerM; take groundY from the roof top
   + measuredHeight × pxPerM, the tyre bottoms sit in grass).
-- A pillar can take `mat` (e.g. `'silver'` for the Creta's C-pillar garnish) instead of black/body.
+- A pillar can take `mat` and a curved `rearEdge`; silver panels on the glasshouse still came out mottled on the
+  Creta, so it was dropped — test before relying on it.
+- Big silver panels (skid plates) look like white paper in 'silver': use `'satin'`, round their outlines (Chaikin a
+  few times) and keep their bottoms above where the end face exists — set `sill` at u = 0 / 1 low enough.
+- Very dark paints still render light under the studio lights: the Creta's deep teal needed #0c2a2e.
 - Decal skins are pushed out along normals averaged per grid vertex, so skid plates and lamp bars no longer stripe;
   if stripes come back, look for decals running past the end face's half-width.

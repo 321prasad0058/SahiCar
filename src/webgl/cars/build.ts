@@ -6,7 +6,7 @@ import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeom
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
 import { curve, loft, ring, ringZ, stationsU, type Pts, type Tag } from './loft'
 
-export type Mat = 'gloss' | 'trim' | 'chrome' | 'silver' | 'drl' | 'head' | 'tail' | 'amber' | 'mesh' | 'hex' | 'slats' | 'body' | 'glass'
+export type Mat = 'gloss' | 'trim' | 'chrome' | 'silver' | 'satin' | 'drl' | 'head' | 'tail' | 'amber' | 'mesh' | 'hex' | 'slats' | 'body' | 'glass'
 /** An outline traced from a photo. Front/rear: [z, y] in metres (z across the car, + = right); side: [u, y]. */
 export interface Decal {
   mat: Mat
@@ -20,7 +20,7 @@ export interface Decal {
   depth?: number
 }
 /** default relief per material (metres) */
-const RELIEF: Partial<Record<Mat, number>> = { head: 0.014, drl: 0.01, tail: 0.012, amber: 0.01, gloss: 0.006, silver: 0.01, chrome: 0.006, mesh: 0.004, hex: 0.004, slats: 0.004 }
+const RELIEF: Partial<Record<Mat, number>> = { head: 0.014, drl: 0.01, tail: 0.012, amber: 0.01, gloss: 0.006, silver: 0.01, satin: 0.01, chrome: 0.006, mesh: 0.004, hex: 0.004, slats: 0.004 }
 export type WheelStyle = 'turbine' | 'twin' | 'aero' | 'multi' | 'blade' | 'split'
 
 export interface CarSpec {
@@ -52,7 +52,7 @@ export interface CarSpec {
   /** glass that wraps up into the roof edge */
   alpine?: [number, number]
   /** raked pillars: u range at the beltline and at the roof */
-  pillars: { bottom: [number, number]; top: [number, number]; black: boolean; /** overrides black/body, e.g. a silver C-pillar panel */ mat?: Mat }[]
+  pillars: { bottom: [number, number]; top: [number, number]; black: boolean; /** overrides black/body, e.g. a silver C-pillar panel */ mat?: Mat; /** extra points on the rear edge, roof → belt, as [u, f] with f = 1 at the roof, 0 at the belt */ rearEdge?: [number, number][] }[]
   /** black plastic over the lower body: its traced top line, and how far the arch flares reach */
   cladding?: { top: Pts; flare: number }
   /** door shut lines: u at the sill and at the beltline */
@@ -168,6 +168,8 @@ function makeShared() {
     gloss: new THREE.MeshPhysicalMaterial({ color: '#050607', metalness: 0.5, roughness: 0.12, clearcoat: 1, side: THREE.DoubleSide }),
     chrome: new THREE.MeshStandardMaterial({ color: '#e4eaef', metalness: 1, roughness: 0.14, side: THREE.DoubleSide }),
     silver: new THREE.MeshStandardMaterial({ color: '#b3bbc2', metalness: 0.85, roughness: 0.3, side: THREE.DoubleSide }),
+    // satin light silver for big painted-silver panels (skid plates, pillar garnish): duller than 'silver'
+    satin: new THREE.MeshStandardMaterial({ color: '#7f858a', metalness: 0.5, roughness: 0.5, envMapIntensity: 0.5, side: THREE.DoubleSide }),
     tyre: new THREE.MeshStandardMaterial({ color: '#111214', roughness: 0.88 }),
     rimDark: new THREE.MeshStandardMaterial({ color: '#3a4147', metalness: 0.75, roughness: 0.32 }),
     rimFace: new THREE.MeshStandardMaterial({ color: '#d7dee4', metalness: 1, roughness: 0.2 }),
@@ -324,7 +326,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
       // a front/rear outline may wrap round a corner, but never run back along the flank over a wheel
       if (Math.abs(rings[i].x - rings[end > 0 ? n - 1 : 0].x) > 0.3) return null
       const zi = ringZ(rings[i].ring, y)
-      if (zi >= az) {
+      if (zi >= az && zi > 0) {
         if (k === 0) return new THREE.Vector3(rings[i].x, y, z)
         const j = end > 0 ? i + 1 : i - 1
         const zj = ringZ(rings[j].ring, y)
@@ -427,12 +429,24 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     return mat
   }
   const glows: { sprite: THREE.Sprite; k: number }[] = []
-  const glow = (p: THREE.Vector3, color: string, scale: number, k: number) => {
+  let lightsLevel = 0
+  const glowDir = new THREE.Vector3(), glowPos = new THREE.Vector3(), glowCam = new THREE.Vector3()
+  const glow = (p: THREE.Vector3, color: string, scale: number, k: number, facing?: THREE.Vector3) => {
     const m = new THREE.SpriteMaterial({ map: S.glow, color, blending: THREE.AdditiveBlending, depthWrite: false, transparent: true })
     disposables.push(m)
     const sp = new THREE.Sprite(m)
     sp.position.copy(p)
     sp.scale.setScalar(scale)
+    // a glow is a billboard: fade it out as its lamp turns away, or it shows as fuzz past the body's edge
+    if (facing) {
+      const f = facing.clone()
+      sp.onBeforeRender = (_r, _s, camera) => {
+        glowDir.copy(f).transformDirection(group.matrixWorld)
+        sp.getWorldPosition(glowPos)
+        glowCam.copy(camera.position).sub(glowPos).normalize()
+        m.opacity = lightsLevel * k * THREE.MathUtils.clamp((glowDir.dot(glowCam) - 0.05) / 0.35, 0, 1)
+      }
+    }
     group.add(sp)
     glows.push({ sprite: sp, k })
   }
@@ -446,6 +460,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     trim: S.trim,
     chrome: S.chrome,
     silver: S.silver,
+    satin: S.satin,
     body: paint,
     glass: S.glass,
     drl: lightMat('#e2f6ff', 2.3),
@@ -459,7 +474,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
 
   /** Rasterise a traced outline on a fine grid, snap edge vertices onto the outline, project onto the body. */
   const decal = (d: Decal, where: 'front' | 'rear' | 'left' | 'right' | 'ghLeft' | 'ghRight') => {
-    if (opt.generic && d.mat !== 'trim' && d.mat !== 'silver') return
+    if (opt.generic && d.mat !== 'trim' && d.mat !== 'silver' && d.mat !== 'satin') return
     const poly = d.poly
     const endOn = where === 'front' || where === 'rear'
     const step = hi ? 0.011 : 0.02
@@ -490,7 +505,10 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     const uScale = endOn ? 1 : L
     for (let i = 0; i < na; i++)
       for (let j = 0; j < nb; j++) {
-        if (!inside([a0 + (i + 0.5) * da, b0 + (j + 0.5) * db], poly)) continue
+        // edge cells count when their centre or any corner is inside: their outside corners snap onto the outline,
+        // so the skin follows slanted and rounded edges instead of stepping along the grid
+        const inC = (ii: number, jj: number) => inside([a0 + ii * da, b0 + jj * db], poly)
+        if (!inside([a0 + (i + 0.5) * da, b0 + (j + 0.5) * db], poly) && !inC(i, j) && !inC(i + 1, j) && !inC(i + 1, j + 1) && !inC(i, j + 1)) continue
         const q = [vert(i, j), vert(i + 1, j), vert(i + 1, j + 1), vert(i, j + 1)]
         if (q.some((v) => !v)) continue
         const [p00, p10, p11, p01] = q as THREE.Vector3[]
@@ -572,12 +590,12 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
         wg.setAttribute('position', new THREE.Float32BufferAttribute(wall, 3))
         wg.computeVertexNormals()
         // lamp lenses keep their own glow on the walls; everything else gets a gloss-black edge
-        add(d.mat === 'head' || d.mat === 'drl' || d.mat === 'tail' || d.mat === 'amber' ? mats[d.mat] : d.mat === 'silver' || d.mat === 'chrome' ? mats[d.mat] : S.gloss, wg)
+        add(d.mat === 'head' || d.mat === 'drl' || d.mat === 'tail' || d.mat === 'amber' ? mats[d.mat] : d.mat === 'silver' || d.mat === 'satin' || d.mat === 'chrome' ? mats[d.mat] : S.gloss, wg)
       }
     }
     // shiny parts on the nose or tail (skid plates, chrome, gloss housings) reflect as one smooth panel:
     // the projection grid's small row-to-row tilts would otherwise show up as stripes in the reflection
-    if (endOn && (d.mat === 'silver' || d.mat === 'chrome' || d.mat === 'gloss')) {
+    if (endOn && (d.mat === 'silver' || d.mat === 'satin' || d.mat === 'chrome' || d.mat === 'gloss')) {
       const N = g.attributes.normal as THREE.BufferAttribute
       for (let k = 0; k < N.count; k++) {
         n.set(N.getX(k), N.getY(k), N.getZ(k)).lerp(outward, 0.75).normalize()
@@ -601,7 +619,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
         const a = a0 + ((a1 - a0) * k) / count
         if (!inside([a, midB], poly)) continue
         const p = project(a, midB)
-        if (p) glow(p.add(outward.clone().multiplyScalar(0.03)), color, d.mat === 'head' ? 0.22 : 0.16, d.mat === 'tail' ? 0.55 : 0.42)
+        if (p) glow(p.add(outward.clone().multiplyScalar(0.03)), color, d.mat === 'head' ? 0.22 : 0.16, d.mat === 'tail' ? 0.55 : 0.42, outward)
       }
     }
   }
@@ -628,8 +646,9 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
       [p.bottom[1], yb(p.bottom[1])],
       [p.top[1], yt(p.top[1])],
       [p.top[0], yt(p.top[0])],
+      ...(p.rearEdge ?? []).map(([u, f]) => [u, yb(u) + (yt(u) - yb(u)) * f] as [number, number]),
     ]
-    for (const w of ['ghLeft', 'ghRight'] as const) decal({ mat: p.mat ?? (p.black ? 'gloss' : 'body'), poly, depth: p.mat ? 0 : undefined }, w)
+    for (const w of ['ghLeft', 'ghRight'] as const) decal({ mat: p.mat ?? (p.black ? 'gloss' : 'body'), poly, depth: p.mat ? 0 : undefined, layer: p.mat ? 3 : undefined }, w)
   }
 
   // number plates (India: white, green for EVs)
@@ -639,11 +658,16 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     const y = end > 0 ? spec.plates.front : spec.plates.rear
     const p = endPoint(end, 0, y)
     if (!p) continue
+    // stand the plate clear of the face across its whole height and width, not just at its centre
+    for (const [dz, dy] of [[0, -0.055], [0, 0.055], [-0.25, 0], [0.25, 0], [-0.25, -0.055], [0.25, -0.055], [-0.25, 0.055], [0.25, 0.055]]) {
+      const q = endPoint(end, dz, y + dy)
+      if (q && (q.x - p.x) * end > 0) p.x = q.x
+    }
     const g = new THREE.PlaneGeometry(0.5, 0.11)
     g.rotateY(end > 0 ? Math.PI / 2 : -Math.PI / 2)
     disposables.push(g)
     const m = new THREE.Mesh(g, plateMat)
-    m.position.set(p.x + end * 0.016, y, 0)
+    m.position.set(p.x + end * 0.048, y, 0)
     group.add(m)
   }
 
@@ -815,6 +839,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     roof: roofPaint,
     spec,
     setLights(v) {
+      lightsLevel = v
       for (const l of lightMats) l.mat.color.copy(l.base).multiplyScalar(0.06 + v * l.k)
       for (const g of glows) (g.sprite.material as THREE.SpriteMaterial).opacity = v * g.k
     },
