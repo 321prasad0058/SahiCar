@@ -78,3 +78,8 @@ Add the id to `READY` in src/webgl/cars/specs.ts **and** to `SHOWCASE_IDS` in sr
 - If cars.json lists the dual-tone paints separately ("… with Black Roof"), set `roof.black: false`: those paints
   bring their own roof colour. Black pillars alone still give the floating-roof look.
 - Deep blues read purple under the studio lights: keep the photo's green-to-blue ratio when darkening the paint.
+- A good side IoU can still read as a van: check the f34/r34 sheet for plan rounding (hard `width` taper to ~0.68 at
+  both ends, noseSweep ~0.3), tumble (~0.62 for a small hatch), haunch (~0.06) and bulge (~0.04). None move the score.
+- Side decals must stay below `top(u) − 0.01`: above it they project onto the glasshouse, and outside the glasshouse's
+  u range that lands on the centre line (stray marks in the middle of the tail).
+- Thin lines (shut lines) need ≥ 12 mm height or the decal grid breaks them into dashes.
