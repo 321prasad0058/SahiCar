@@ -62,7 +62,7 @@ self.addEventListener('fetch', (e) => {
   )
 })
 
-// ── alerts (web push, sent by scripts/push-send.mjs): { title, body, url, tag }
+// ── alerts (web push, sent by scripts/push-send.mjs): { title, body, url, tag, image }
 self.addEventListener('push', (e) => {
   let m = {}
   try { m = e.data ? e.data.json() : {} } catch { m = { body: e.data ? e.data.text() : '' } }
@@ -72,6 +72,7 @@ self.addEventListener('push', (e) => {
       icon: '/icon-192.png',
       badge: '/icon-192.png',
       tag: m.tag || undefined,
+      image: m.image || undefined, // the car's photo, shown large on Android and computers
       data: { url: m.url || '/' },
     }),
   )

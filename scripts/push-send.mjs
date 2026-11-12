@@ -42,6 +42,9 @@ if (!simulate && !sa && !process.env.GOOGLE_APPLICATION_CREDENTIALS && !emulator
 const fs = simulate ? null : (initializeApp(sa ? { credential: cert(JSON.parse(sa)) } : { projectId: process.env.GCLOUD_PROJECT || 'sahicar-in' }), getFirestore())
 
 // ── what to say
+// Android and computers show a large picture under the alert (iPhone shows text only): the car's studio photo
+const SITE = 'https://sahicar-in.web.app'
+const photo = (c) => (c?.image?.src?.startsWith('/') ? SITE + c.image.src : undefined)
 const lakh = (n) => `₹${(n / 1e5).toFixed(n >= 1e7 ? 0 : 2).replace(/\.?0+$/, '')} L`
 const read = (rev, path) => {
   try { return JSON.parse(execFileSync('git', ['show', `${rev}:${path}`], { encoding: 'utf8', maxBuffer: 64e6 })) } catch { return [] }
@@ -66,6 +69,7 @@ function messageFor(sub, ch) {
       title: `${p.car.brand} ${p.car.model}: price ${down ? 'down' : 'up'}`,
       body: `Now from ${lakh(p.to)} (was ${lakh(p.from)})${mine.length > 1 ? ` · ${mine.length - 1} more of your saved cars changed too` : ''}`,
       url: `/car/${p.car.id}?utm_source=push&utm_medium=alert&utm_campaign=price`,
+      image: photo(p.car),
       tag: 'price',
     }
   }
@@ -75,6 +79,7 @@ function messageFor(sub, ch) {
       title: ch.launches.length === 1 ? `Just launched: ${names}` : `${ch.launches.length} new cars this week`,
       body: ch.launches.length === 1 ? 'Prices, variants and our honest take are up on SahiCar.' : `${names}${ch.launches.length > 2 ? ' and more' : ''}: prices and our take are up.`,
       url: ch.launches.length === 1 ? `/car/${ch.launches[0].id}?utm_source=push&utm_medium=alert&utm_campaign=launch` : '/explore?utm_source=push&utm_medium=alert&utm_campaign=launch',
+      image: photo(ch.launches[0]),
       tag: 'launch',
     }
   }
