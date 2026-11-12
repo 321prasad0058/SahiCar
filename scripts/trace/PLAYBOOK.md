@@ -427,3 +427,12 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   part and a small `silver` reversing block reads like the photo. Lamps striped across the whole tailgate while `top(0)` sat 40 cm
   under them on a raked hatch tail; starting `top(0)` 3 cm over the lamp tops cleaned them for −0.1 % IoU.
 - Five bright triangular spokes on black pockets (Nios): `blade` was closest (swirl/turbine read all silver, petal a disc).
+- Celerio / Alto K10 (round hatches, body-coloured D-pillars beside a raked tailgate glass): the Wagon R layout (body climbs the
+  tail to the roof, cliff at the D-pillar's front edge, tail-only `shoulder.inset`) reads right from behind, but the glass top
+  sat 0.36–0.43 m in from the tail, past the 0.3 m end zone. `endReach: [tail, nose]` (new, opt-in) widens it per end.
+- The Celerio gallery had no side view; another portal's long-lens road photo (1.571 m, axles 1.6 % apart) cut out cleanly.
+  The Alto's gallery studio render read 2 % tall with the axles 3.6 % apart (photo tyre matched the official size, so the
+  length scale was right): heights × 0.979 via `altoK`, side details mapped with the axles via `altoU`; IoU 0.954.
+- Satin/silver side decals on a nose corner speckled (fine black/white noise) at any depth; a dark `trim` housing with a
+  `gloss` inner read clean. A side decal starting at u = 1 smeared across the nose face: start it at 0.998.
+- Centre-line blobs over a grille on a raked nose went away once the nose `top` at 0.98–1 stood above the lamps (again).
