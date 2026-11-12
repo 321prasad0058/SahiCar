@@ -201,6 +201,22 @@ function makeShared() {
   }
 }
 
+const plateCache = new Map<string, THREE.CanvasTexture>()
+/** A blank number plate (no registration number or lettering): white, or green for electric cars. */
+function plateTexture(_text: string, ev: boolean) {
+  const key = `blank|${ev}`
+  if (plateCache.has(key)) return plateCache.get(key)!
+  const t = canvasTex(512, 120, (x) => {
+    x.fillStyle = ev ? '#0f7a3a' : '#f4f4f0' // India: green plates for electric cars
+    x.fillRect(0, 0, 512, 120)
+    x.strokeStyle = ev ? '#e9f5ee' : '#2a2a2a'
+    x.lineWidth = 5
+    x.strokeRect(5, 5, 502, 110)
+  })
+  t.anisotropy = 4
+  plateCache.set(key, t)
+  return t
+}
 
 // ── polygon helpers
 
@@ -725,8 +741,25 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     for (const w of ['ghLeft', 'ghRight'] as const) decal({ mat: p.mat ?? (p.black ? 'gloss' : 'body'), poly, depth: p.mat ? 0 : undefined, layer: p.mat ? 3 : undefined }, w)
   }
 
-  // no number plates: the models are shown without registration plates (the traced plate recesses stay).
-  // spec.plates / spec.plate are kept for reference only.
+  // number plates (India: white, green for EVs)
+  const plateMat = new THREE.MeshStandardMaterial({ map: plateTexture(spec.plate, !!spec.ev), roughness: 0.5 })
+  disposables.push(plateMat)
+  for (const end of [1, -1] as const) {
+    const y = end > 0 ? spec.plates.front : spec.plates.rear
+    const p = endPoint(end, 0, y)
+    if (!p) continue
+    // stand the plate clear of the face across its whole height and width, not just at its centre
+    for (const [dz, dy] of [[0, -0.055], [0, 0.055], [-0.25, 0], [0.25, 0], [-0.25, -0.055], [0.25, -0.055], [-0.25, 0.055], [0.25, 0.055]]) {
+      const q = endPoint(end, dz, y + dy)
+      if (q && (q.x - p.x) * end > 0) p.x = q.x
+    }
+    const g = new THREE.PlaneGeometry(0.5, 0.11)
+    g.rotateY(end > 0 ? Math.PI / 2 : -Math.PI / 2)
+    disposables.push(g)
+    const m = new THREE.Mesh(g, plateMat)
+    m.position.set(p.x + end * 0.048, y, 0)
+    group.add(m)
+  }
 
   // ── side details
   const tube = (pts: THREE.Vector3[], r: number, mat: THREE.Material) => {
