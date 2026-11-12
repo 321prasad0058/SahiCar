@@ -344,3 +344,12 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   to 0.15) hid most of the edge-on glass slivers there (the top 7.5 cm of the glass stays uncovered and shows a faint line).
 - A front decal band whose lower part sat between the grille top and the light bar didn't show (body colour gap); running the band
   down behind the grille (layer 1 over it, bricks on 2) closed the gap. Fine black ribs on a raised satin skid plate read as holes: left out.
+- Windsor EV (black gallery car, close camera: 1.718 m measured, axles 1.3 % apart): heights × 0.976 left a uniform red band over
+  the roof and round the tyres in the overlay, IoU 0.948; kept at the official height rather than chasing the photo's perspective.
+  On black paint `paintTop` is noise: a per-column luminance scan of the levelled cut-out (chrome belt line = the bright run
+  under the glass) read the belt to ±1 cm.
+- A stepped bonnet lip (`top` dropping 7 cm in 1 cm over the light bar) rippled the whole wing in the side view; one smooth curve
+  from the cowl through the light bar to the nose (the bar then sits on the sloping face, `rakedEnds`) read clean for −0.1 % IoU.
+  A belt that dips and climbs again into the windscreen base also ripples the wing: keep it nearly level into the cowl.
+- The mirror sits at `greenhouse.u1 − 0.04`; with a long screen running into the bonnet that put it on top of the cowl, so
+  `mirrorU` (new, opt-in) places it on the door. Mostly-silver alloys with narrow dark slots: `wheel.style: 'petal'` (new).

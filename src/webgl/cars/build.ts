@@ -23,7 +23,7 @@ export interface Decal {
 }
 /** default relief per material (metres) */
 const RELIEF: Partial<Record<Mat, number>> = { head: 0.014, drl: 0.01, tail: 0.012, amber: 0.01, gloss: 0.006, silver: 0.01, satin: 0.008, reflector: 0.004, chrome: 0.006, mesh: 0.004, hex: 0.004, slats: 0.004 }
-export type WheelStyle = 'turbine' | 'twin' | 'aero' | 'multi' | 'blade' | 'split' | 'swirl'
+export type WheelStyle = 'turbine' | 'twin' | 'aero' | 'multi' | 'blade' | 'split' | 'swirl' | 'petal'
 
 export interface CarSpec {
   id: string
@@ -79,6 +79,8 @@ export interface CarSpec {
   spoiler?: boolean | { len?: number; thick?: number; tilt?: number }
   sunroof?: [number, number]
   mirrors: 'black' | 'body'
+  /** u of the door mirrors (default 0.04 behind the glasshouse's front end), for a long screen running into the bonnet */
+  mirrorU?: number
   /** fender haunches: the body swells this fraction wider over each wheel and is pinched in between
    *  (width stays the official width at the haunch peak) */
   haunch?: number
@@ -771,7 +773,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
   }
   {
     // door mirrors on a stalk at the base of the A-pillar
-    const u = gh.u1 - 0.04
+    const u = spec.mirrorU ?? gh.u1 - 0.04
     const x = xOf(u)
     const y = top(u) + 0.1
     const zBody = zAt(x, top(u) - 0.03)
@@ -1022,6 +1024,9 @@ function rimBlurTexture(spec: CarSpec) {
       case 'aero':
         bar(a, 0.36, len)
         break
+      case 'petal':
+        for (const d of [-0.33, -0.11, 0.11, 0.33]) bar(a + d, 0.3, len)
+        break
       case 'blade':
         bar(a, 0.14, len * 0.98, 0.02)
         bar(a, 0.14, len * 0.98, 0.2)
@@ -1135,6 +1140,10 @@ function rimGeometry(spec: CarSpec, hi: boolean) {
         break
       case 'aero':
         blade(a, R * 0.36, len, face - 0.006, 0.25)
+        break
+      case 'petal':
+        // a near-solid silver face: wide petals of overlapping swept blades, leaving narrow slots between them
+        for (const d of [-0.33, -0.11, 0.11, 0.33]) blade(a + d, R * 0.3, len, face - 0.006, 0.2)
         break
       case 'swirl':
         // a wide machined-silver blade and a slim one in the rim's own tone, both curling the same way, with
