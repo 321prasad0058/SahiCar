@@ -81,7 +81,7 @@ export const PUNCH: CarSpec = {
   L: 3.876, W: 1.742, H: 1.615,
   axles: [0.1596, 0.7904],
   tyreR: 0.32, tyreW: 0.195, rim: 0.635, wheel: { style: 'twin', spokes: 5 },
-  archGap: 0.055, archSquare: 0.35,
+  archGap: 0.055, archSquare: 0.6,
   sill: [[0, 0.47], [0.02, 0.31], [0.05, 0.265], [0.1, 0.24], [0.26, 0.215], [0.5, 0.222], [0.7, 0.222], [0.86, 0.205], [0.92, 0.226], [0.96, 0.254], [0.985, 0.3], [1, 0.52]],
   // tailgate below the glass, the belt rising gently towards the rear with the body-coloured kick at the C-pillar,
   // then the cowl and the bonnet falling to the nose
@@ -90,6 +90,10 @@ export const PUNCH: CarSpec = {
   width: [[0, 0.8], [0.008, 0.88], [0.025, 0.94], [0.06, 0.975], [0.12, 0.995], [0.5, 1], [0.88, 0.993], [0.93, 0.975], [0.965, 0.93], [0.985, 0.86], [1, 0.76]],
   crown: 0.02,
   bulge: 0.012,
+  // the character line from the headlamp, rising over the doors to the tail lamp
+  shoulder: { y: [[0, 1.0], [0.5, 0.955], [0.9, 0.9], [1, 0.86]], inset: 0.03 },
+  haunch: 0.03,
+  bonnetRidge: 0.012,
   noseSweep: 0.2,
   tailSweep: 0.12,
   greenhouse: {
@@ -109,17 +113,17 @@ export const PUNCH: CarSpec = {
   doors: [[0.205, 0.205], [0.432, 0.432], [0.7, 0.69]],
   front: [
     // gloss-black band under the bonnet edge; the LED light bar runs from the centre badge out to each corner
-    { mat: 'gloss', poly: [[-0.87, 0.875], [0.87, 0.875], [0.85, 0.945], [-0.85, 0.945]] },
-    { mat: 'drl', mirror: true, poly: [[0.12, 0.918], [0.85, 0.918], [0.84, 0.934], [0.12, 0.934]], layer: 1 },
+    { mat: 'gloss', poly: [[-0.8, 0.875], [0.8, 0.875], [0.78, 0.945], [-0.78, 0.945]] },
+    { mat: 'drl', mirror: true, poly: [[0.12, 0.918], [0.77, 0.918], [0.76, 0.934], [0.12, 0.934]], layer: 1 },
     // square LED headlamps in black pods at the top corners of the bumper, small fog lamps below
-    { mat: 'gloss', mirror: true, poly: [[0.6, 0.6], [0.88, 0.6], [0.88, 0.815], [0.64, 0.815]] },
-    { mat: 'head', mirror: true, poly: [[0.67, 0.71], [0.83, 0.71], [0.83, 0.785], [0.69, 0.785]], layer: 1 },
-    { mat: 'head', mirror: true, poly: [[0.7, 0.63], [0.8, 0.63], [0.8, 0.665], [0.7, 0.665]], layer: 1 },
+    { mat: 'gloss', mirror: true, poly: [[0.56, 0.6], [0.78, 0.6], [0.78, 0.815], [0.6, 0.815]] },
+    { mat: 'head', mirror: true, poly: [[0.62, 0.71], [0.75, 0.71], [0.75, 0.785], [0.64, 0.785]], layer: 1 },
+    { mat: 'head', mirror: true, poly: [[0.64, 0.63], [0.73, 0.63], [0.73, 0.665], [0.64, 0.665]], layer: 1 },
     // the black lower bumper with horizontal grille slats
-    { mat: 'trim', poly: [[-0.88, 0.22], [0.88, 0.22], [0.88, 0.6], [0.6, 0.62], [-0.6, 0.62], [-0.88, 0.6]] },
+    { mat: 'trim', poly: [[-0.8, 0.22], [0.8, 0.22], [0.8, 0.6], [0.56, 0.62], [-0.56, 0.62], [-0.8, 0.6]] },
     { mat: 'slats', poly: [[-0.5, 0.36], [0.5, 0.36], [0.5, 0.55], [-0.5, 0.55]], layer: 1 },
     // the bold silver skid plate: a U under the grille, wrapping up both corners
-    { mat: 'silver', layer: 1, poly: [[-0.6, 0.225], [0.6, 0.225], [0.74, 0.28], [0.79, 0.48], [0.71, 0.5], [0.65, 0.34], [-0.65, 0.34], [-0.71, 0.5], [-0.79, 0.48], [-0.74, 0.28]] },
+    { mat: 'silver', layer: 1, poly: [[-0.56, 0.225], [0.56, 0.225], [0.68, 0.28], [0.73, 0.47], [0.66, 0.49], [0.6, 0.34], [-0.6, 0.34], [-0.66, 0.49], [-0.73, 0.47], [-0.68, 0.28]] },
   ],
   rear: [
     // wedge-shaped black lamp clusters at the corners, joined by the light bar across the tailgate under the glass

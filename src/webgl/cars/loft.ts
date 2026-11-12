@@ -49,7 +49,7 @@ export function ring(
   rb: number,
   rt: number,
   seg: number,
-  opt: { tumble?: number; bulge?: number; crown?: number; shoulder?: number; inset?: number } = {},
+  opt: { tumble?: number; bulge?: number; crown?: number; shoulder?: number; inset?: number; ridge?: number } = {},
 ): Ring {
   const h = Math.max(0.002, yt - yb)
   rb = Math.min(rb, hw * 0.95, h * 0.45)
@@ -80,6 +80,8 @@ export function ring(
     if (bulge && (t === 'side' || t === 'barc')) zz += hw * bulge * Math.sin(Math.PI * f)
     let yy = y
     if (crown && t === 'top') yy += crown * Math.cos((Math.PI / 2) * (z / hw))
+    // twin bonnet ridges: raised creases running along the top, about two-thirds of the way out
+    if (opt.ridge && (t === 'top' || t === 'tarc')) yy += opt.ridge * Math.exp(-(((Math.abs(z) / hw - 0.64) / 0.11) ** 2))
     return [zz, yy, t]
   }
   const right = half.map(shape)

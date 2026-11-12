@@ -65,6 +65,11 @@ export interface CarSpec {
   spoiler?: boolean
   sunroof?: [number, number]
   mirrors: 'black' | 'body'
+  /** fender haunches: the body swells this fraction wider over each wheel and is pinched in between
+   *  (width stays the official width at the haunch peak) */
+  haunch?: number
+  /** height (m) of the twin raised creases along the bonnet */
+  bonnetRidge?: number
   /** dark gunmetal alloys (machined edges) instead of bright silver */
   rimTone?: 'dark'
   windowChrome?: boolean
@@ -248,11 +253,20 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     return y
   }
 
+  // fender haunches: full width over the wheels, pinched in along the doors and at the ends
+  const haunch = spec.haunch ?? 0
+  const haunchK = (x: number) => {
+    if (!haunch) return 1
+    let b = 0
+    for (const ax of axles) b = Math.max(b, Math.exp(-(((x - ax) / (archR * 1.35)) ** 2)))
+    return 1 - haunch + haunch * b
+  }
+
   // double-sided: body-coloured decals (pillars, fins) are wound either way on the glasshouse
   const paint = new THREE.MeshPhysicalMaterial({ color: opt.paint ?? spec.paint, metalness: 0.55, roughness: 0.3, clearcoat: 1, clearcoatRoughness: 0.05, side: THREE.DoubleSide })
   // the roof has its own paint so dual-tone colours (contrasting roof) can be shown
   const roofPaint = paint.clone()
-  if (spec.roof.black) roofPaint.color.set('#0d0e10')
+  if (spec.roof.black) { roofPaint.color.set('#0d0e10'); roofPaint.metalness = 0.25; roofPaint.roughness = 0.42; roofPaint.clearcoatRoughness = 0.3 }
   const disposables: { dispose(): void }[] = [paint, roofPaint]
   const parts = new Map<THREE.Material, THREE.BufferGeometry[]>()
   const add = (mat: THREE.Material, g: THREE.BufferGeometry, m?: THREE.Matrix4) => {
@@ -269,12 +283,13 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     const x = xOf(u)
     const yb = Math.max(sill(u), archLine(x))
     const yt = top(u)
-    const hw = (width(u) * W) / 2
+    const hw = ((width(u) * W) / 2) * haunchK(x)
     return {
       x,
       ring: ring(hw, yb, yt, 0.07, 0.17, seg, {
         bulge: spec.bulge ?? 0.025,
         crown: u > spec.greenhouse.u1 ? spec.crown ?? 0.025 : 0,
+        ridge: u > spec.greenhouse.u1 + 0.02 && u < 0.985 ? spec.bonnetRidge : undefined,
         shoulder: shoulderY ? shoulderY(u) : undefined,
         inset: spec.shoulder?.inset,
       }),
@@ -331,7 +346,9 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
       for (const ax of axles) {
         const d = Math.abs(x - ax)
         const R = archR + flare
-        if (d < R) y = Math.max(y, archY + Math.sqrt(R * R - d * d))
+        // the flare follows the arch's own squareness (a superellipse), not a plain circle
+        const pe = 2 + spec.archSquare * 2.2
+        if (d < R) y = Math.max(y, archY + R * Math.pow(1 - Math.pow(d / R, pe), 1 / pe))
       }
       return y
     }
@@ -347,7 +364,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
         for (const ax of axles) if (Math.abs(x - ax) < archR + flare) out = 0.026
         return {
           x: xx,
-          ring: ring((width(u) * W) / 2 + out, yb, Math.max(yb + 0.01, yt), 0.07, 0.17, seg, {
+          ring: ring(((width(u) * W) / 2) * haunchK(x) + out, yb, Math.max(yb + 0.01, yt), 0.07, 0.17, seg, {
             bulge: spec.bulge ?? 0.025,
             shoulder: shoulderY ? shoulderY(u) : undefined,
             inset: spec.shoulder?.inset,
@@ -614,7 +631,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     const y = top(u) + 0.1
     const zBody = zAt(x, top(u) - 0.03)
     for (const side of [-1, 1]) {
-      add(spec.mirrors === 'black' ? S.gloss : paint, new RoundedBoxGeometry(0.11, 0.1, 0.19, 2, 0.035), new THREE.Matrix4().makeTranslation(x - 0.01, y, side * (zBody + 0.105)))
+      add(spec.mirrors === 'black' ? S.gloss : paint, new RoundedBoxGeometry(0.11, 0.095, 0.17, 2, 0.035), new THREE.Matrix4().makeTranslation(x - 0.01, y, side * (zBody + 0.085)))
       add(S.trim, new RoundedBoxGeometry(0.08, 0.04, 0.16, 2, 0.015), new THREE.Matrix4().makeTranslation(x + 0.01, y - 0.05, side * (zBody + 0.04)))
     }
   }
