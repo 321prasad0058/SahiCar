@@ -202,3 +202,12 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   bar's outer ends on the corner rounding (topRadius 0.12) smear into white hooks: stop them ~0.71 m out.
 - A uniform 1.5–2.5 cm blue band over bonnet and roof in the overlay (close gallery camera): lowering both by that much took
   the Nexon from IoU 0.957 to 0.969.
+- Gallery side photos taken close (Wagon R flex-fuel show car: 1.766 m measured vs 1.675, axles 6 % apart) are useless; the
+  listing site's own image gallery on another portal had a long-lens side view (1.677 m) that cut out cleanly.
+- Tall-boy tails (Wagon R): the body forms the D-pillar. Let `top` climb the raked tailgate to the roof, run along the roof to
+  the D-pillar's front edge, then drop in a steep cliff to the belt; start the glasshouse at that edge. A body-coloured pillar
+  decal there crumpled. Make the body's top a hair higher than the glass roof at the joint, or the two z-fight in a seam.
+- Tumblehome at the tail only: `shoulder.inset` with the shoulder line placed above the belt elsewhere (y > top turns the inset
+  off), and `greenhouse.followBody` (u) so the glass's foot sits on the leaning body edge instead of sticking out as a ledge.
+  The inset is reached at each ring's own top, so on a raked tail keep lamps inside what the rings within 0.3 m reach.
+- A raked black (or body) A-pillar decal saw-toothed on a steep windscreen; leaving the A-pillar as plain glass reads right.
