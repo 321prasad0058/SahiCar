@@ -265,3 +265,11 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - The 'hex' grille material reads as a white honeycomb from any distance: a dark grille wants `gloss` + `mesh` inside the chrome ring.
 - Headlamps that sweep back along the wing: start the `side` decal at u ≈ 0.996 and push the front decal to ~1.5 cm inside the
   end face, or a gap at the corner splits the lamp in two.
+- XUV 7XO: `both(smooth(half))` smooths the half outline as a closed shape, cutting its centre-line edge into a V notch
+  (grille, intake); smooth the mirrored outline instead: `smooth(both(half), 1)`.
+- A pale ellipse on a gloss end decal that moves with the camera is the studio softbox reflected in the clearcoat, not a hole:
+  `dropSlivers`, `rakedEnds` and raising `top` don't change it.
+- On a big blunt SUV nose a `side` headlamp wrap read as a second lamp on the wing (the corner roll between them stays body
+  colour); dropped. At the tail a wider end face (`width` 0.93 at u = 0) let the lamp columns reach 0.82 m without fraying,
+  so the side lamp wrap nearly meets them.
+- Close gallery camera again: a uniform 1.5 cm blue band over roof and bonnet; lowering both by it took IoU 0.955 → 0.962.
