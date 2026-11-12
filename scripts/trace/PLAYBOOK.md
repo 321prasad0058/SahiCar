@@ -324,3 +324,10 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - Wrap-around tail lamp: `width` 0.92 at u = 0 lets the end-face lamp reach 0.80 m on a 1.775 m car, and the `side` wedge starting
   at u = 0.005 meets it with no gap. Headlamp: the side wedge can start at u = 0.999 to meet a front lamp kept 3.5 cm inside the face.
 - A `gloss` headlamp housing on a raked nose reads body-grey (it mirrors the softbox); `trim` keeps it dark.
+- Alcazar (gallery side photo, tyres in grass patched): 1.78 m measured over the rails, axles 2.9 % apart. Heights × 0.965 also
+  brought the photo's tyre to the official 215/55 R18, a handy check for the scale factor. A 1.5 cm roof bump back up to the
+  official height still left a thin red band in the overlay (IoU 0.951 / upper 0.934); kept the official height.
+- Tailgate glass reading as a grey "pickup bed" from behind: the glasshouse's first stations rose too gently (traced off the
+  D-pillar corner, not the glass). Starting the glasshouse lower and closer to the tail (u0 0.03) and steepening the first
+  6 % made the glass read upright, for −0.1 % IoU. A skid plate made with `smooth()` of a rectangle sagged at its top
+  corners; `rrect()` keeps the straight top edge.
