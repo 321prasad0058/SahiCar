@@ -80,7 +80,7 @@ export const PUNCH: CarSpec = {
   name: 'Tata Punch',
   L: 3.876, W: 1.742, H: 1.615,
   axles: [0.1596, 0.7904],
-  tyreR: 0.32, tyreW: 0.195, rim: 0.635, wheel: { style: 'twin', spokes: 5 },
+  tyreR: 0.32, tyreW: 0.195, rim: 0.635, wheel: { style: 'split', spokes: 5 },
   archGap: 0.055, archSquare: 0.6,
   sill: [[0, 0.47], [0.02, 0.31], [0.05, 0.265], [0.1, 0.24], [0.26, 0.215], [0.5, 0.222], [0.7, 0.222], [0.86, 0.205], [0.92, 0.226], [0.96, 0.254], [0.985, 0.3], [1, 0.52]],
   // tailgate below the glass, the belt rising gently towards the rear with the body-coloured kick at the C-pillar,

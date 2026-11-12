@@ -21,7 +21,7 @@ export interface Decal {
 }
 /** default relief per material (metres) */
 const RELIEF: Partial<Record<Mat, number>> = { head: 0.014, drl: 0.01, tail: 0.012, amber: 0.01, gloss: 0.006, silver: 0.01, chrome: 0.006, mesh: 0.004, hex: 0.004, slats: 0.004 }
-export type WheelStyle = 'turbine' | 'twin' | 'aero' | 'multi' | 'blade'
+export type WheelStyle = 'turbine' | 'twin' | 'aero' | 'multi' | 'blade' | 'split'
 
 export interface CarSpec {
   id: string
@@ -556,6 +556,16 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
         add(d.mat === 'head' || d.mat === 'drl' || d.mat === 'tail' || d.mat === 'amber' ? mats[d.mat] : d.mat === 'silver' || d.mat === 'chrome' ? mats[d.mat] : S.gloss, wg)
       }
     }
+    // shiny parts on the nose or tail (skid plates, chrome, gloss housings) reflect as one smooth panel:
+    // the projection grid's small row-to-row tilts would otherwise show up as stripes in the reflection
+    if (endOn && (d.mat === 'silver' || d.mat === 'chrome' || d.mat === 'gloss')) {
+      g.computeVertexNormals()
+      const N = g.attributes.normal as THREE.BufferAttribute
+      for (let k = 0; k < N.count; k++) {
+        n.set(N.getX(k), N.getY(k), N.getZ(k)).lerp(outward, 0.75).normalize()
+        N.setXYZ(k, n.x, n.y, n.z)
+      }
+    }
     add(mats[d.mat], g)
     // solid slats across a slatted grille: raised gloss-black bars clipped to the grille's outline
     if (d.mat === 'slats' && !d.depth) {
@@ -662,8 +672,8 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     const r0 = Math.min(...flat) + 0.01, r1 = Math.max(...flat) - 0.01
     const us = Array.from({ length: 18 }, (_, i) => r0 + ((r1 - r0) * i) / 17)
     for (const side of [-1, 1] as const) {
-      tube(us.map((u) => new THREE.Vector3(xOf(u), roofY(u) + 0.04, side * (roofHW(u) - 0.09))), 0.014, railMat)
-      for (const u of [us[0], us[us.length - 1]]) add(S.trim, new THREE.BoxGeometry(0.1, 0.045, 0.04), new THREE.Matrix4().makeTranslation(xOf(u), roofY(u) + 0.02, side * (roofHW(u) - 0.09)))
+      tube(us.map((u) => new THREE.Vector3(xOf(u), roofY(u) + 0.028, side * (roofHW(u) - 0.09))), 0.013, railMat)
+      for (const u of [us[0], us[us.length - 1]]) add(railMat, new THREE.BoxGeometry(0.09, 0.032, 0.036), new THREE.Matrix4().makeTranslation(xOf(u), roofY(u) + 0.014, side * (roofHW(u) - 0.09)))
     }
   }
   if (spec.spoiler) {
@@ -671,7 +681,10 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     let su = gh.u0
     let best = -1
     for (let u = gh.u0; u < spec.roof.u0 + 0.05; u += 0.002) if (ghTop(u) > best - 0.0005) { best = Math.max(best, ghTop(u)); su = u; if (ghTop(u) >= ghTop(spec.roof.u0) - 0.05) break }
-    add(roofPaint, new RoundedBoxGeometry(0.12, 0.025, roofHW(su) * 1.9, 2, 0.01), new THREE.Matrix4().makeTranslation(xOf(su) - 0.02, roofY(su) + 0.008, 0))
+    // a lip that kicks out and slightly down over the tailgate glass, with small fins at its ends
+    const lip = new RoundedBoxGeometry(0.2, 0.03, roofHW(su) * 1.92, 2, 0.012)
+    add(roofPaint, lip, new THREE.Matrix4().makeRotationZ(0.1).premultiply(new THREE.Matrix4().makeTranslation(xOf(su) - 0.07, roofY(su) - 0.004, 0)))
+    for (const side of [-1, 1]) add(roofPaint, new RoundedBoxGeometry(0.16, 0.05, 0.03, 2, 0.01), new THREE.Matrix4().makeTranslation(xOf(su) - 0.06, roofY(su) - 0.03, side * (roofHW(su) * 0.96 - 0.015)))
   }
   if (spec.sunroof) {
     const [a, b] = spec.sunroof
@@ -696,7 +709,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     for (const side of [-1, 1]) {
       const w = new THREE.Group()
       w.add(new THREE.Mesh(tyreG, S.tyre))
-      for (const r of rimG) w.add(new THREE.Mesh(r.g, r.mat === 'face' ? (spec.rimTone === 'dark' ? S.rimGun : S.rimFace) : r.mat === 'dark' ? S.rimDark : S.brake))
+      for (const r of rimG) w.add(new THREE.Mesh(r.g, r.mat === 'face' ? (spec.rimTone === 'dark' ? S.rimGun : S.rimFace) : r.mat === 'edge' ? S.rimFace : r.mat === 'dark' ? S.rimDark : S.brake))
       const bd = new THREE.Mesh(blurG, blurMat)
       bd.visible = false
       w.add(bd)
@@ -847,6 +860,10 @@ function rimBlurTexture(spec: CarSpec) {
       case 'turbine':
         bar(a, 0.32, len)
         break
+      case 'split':
+        bar(a - 0.05, 0.1, len)
+        bar(a + 0.05, 0.1, len)
+        break
       case 'aero':
         bar(a, 0.36, len)
         break
@@ -900,7 +917,7 @@ function rimBlurTexture(spec: CarSpec) {
 function rimGeometry(spec: CarSpec, hi: boolean) {
   const R = spec.tyreR * spec.rim
   const face = spec.tyreW / 2 - 0.012
-  const out: { g: THREE.BufferGeometry; mat: 'face' | 'dark' | 'brake' }[] = []
+  const out: { g: THREE.BufferGeometry; mat: 'face' | 'dark' | 'brake' | 'edge' }[] = []
   const cyl = (r: number, d: number, z: number, n: number) => {
     const g = new THREE.CylinderGeometry(r, r, d, n)
     g.rotateX(Math.PI / 2)
@@ -914,8 +931,9 @@ function rimGeometry(spec: CarSpec, hi: boolean) {
   out.push({ g: lip, mat: 'face' })
   out.push({ g: cyl(R * 0.18, 0.04, face - 0.004, 20), mat: 'face' })
   const spokes: THREE.BufferGeometry[] = []
+  const edges: THREE.BufferGeometry[] = []
   const n = spec.wheel.spokes
-  const blade = (angle: number, w: number, len: number, z: number, sweep = 0, off = 0) => {
+  const blade = (angle: number, w: number, len: number, z: number, sweep = 0, off = 0, into = spokes) => {
     const b = new THREE.BoxGeometry(w, len, 0.022, 1, 6, 1)
     b.translate(off, R * 0.18 + len / 2, z)
     if (sweep) {
@@ -928,7 +946,7 @@ function rimGeometry(spec: CarSpec, hi: boolean) {
       }
     }
     b.rotateZ(angle)
-    spokes.push(b)
+    into.push(b)
   }
   const len = R * 0.78
   for (let i = 0; i < n; i++) {
@@ -953,6 +971,13 @@ function rimGeometry(spec: CarSpec, hi: boolean) {
         spokes.push(t)
         break
       }
+      case 'split':
+        // a pair of arms forking towards the rim, each with a machined silver outer edge
+        blade(a - 0.05, R * 0.1, len, face - 0.008, -0.22)
+        blade(a + 0.05, R * 0.1, len, face - 0.008, 0.22)
+        blade(a - 0.1, R * 0.022, len, face - 0.002, -0.22, 0, edges)
+        blade(a + 0.1, R * 0.022, len, face - 0.002, 0.22, 0, edges)
+        break
       case 'aero':
         blade(a, R * 0.36, len, face - 0.006, 0.25)
         break
@@ -963,5 +988,10 @@ function rimGeometry(spec: CarSpec, hi: boolean) {
   const merged = mergeGeometries(spokes.map((s) => s.toNonIndexed()), false)
   spokes.forEach((s) => s.dispose())
   if (merged) out.push({ g: merged, mat: 'face' })
+  if (edges.length) {
+    const me = mergeGeometries(edges.map((s) => s.toNonIndexed()), false)
+    edges.forEach((s) => s.dispose())
+    if (me) out.push({ g: me, mat: 'edge' })
+  }
   return out
 }
