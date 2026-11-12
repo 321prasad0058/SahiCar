@@ -406,3 +406,13 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - Light-bar end that turns down the rear corner into a smoked wedge on the flank: rear decal to ~1.4 cm inside the face (`width`
   0.92 at u = 0) and the side wedge starting at u 0.003 read as one lamp; its red guide is a `sideBand` along the wedge's top edge.
 - Twisted gunmetal spokes with machined silver wedges: `swirl` + `rimTone: 'dark'` (split + dark went almost all grey).
+- Sierra / Sierra.ev (one body, two cars): the gallery cut-out of the petrol car lost its black sill into the shadow on sand (sill read
+  0.37 m, IoU 0.917); filling the cut-out's alpha down to the sill line read off the photo (`patch-sill`: find the cut-out's offset in
+  the photo, copy the photo's pixels back in between the wheels) gave 0.954. Trace the shared body from the cleaner photo, then score
+  each car against its own; a per-car height factor (`sierraK`, every y in the spec incl. decals) took up the uniform 1–3 cm roof and
+  bonnet band (EV 0.988, petrol 0.978 for its 3.5 cm lower official height).
+- Rails run over every listed `greenhouse.top` point within 6 cm of the peak: keep the windscreen header points below that, or the
+  rails reach onto the header and the overlay shows a 5 cm bump.
+- `alpine` glass on the roof edge reads as a white band from behind (it reflects the sky); on a black roof leave it out.
+- Spoiler "ears" on the quarter glass: a `side` 'body' decal above `top(u)` lands on the glasshouse; keep its top ~3 cm under the roof
+  line or it smears across the top of the tail glass. Black `side` wraps at a blunt nose corner read as a separate strip: dropped.
