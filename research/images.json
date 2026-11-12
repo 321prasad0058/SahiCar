@@ -440,8 +440,9 @@
   "page": "https://en.wikipedia.org/wiki/Suzuki_Celerio"
  },
  "maruti-wagon-r": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/35/1996_Suzuki_Wagon_R_RX_in_Radiant_Red_Mica%2C_front_left.jpg/960px-1996_Suzuki_Wagon_R_RX_in_Radiant_Red_Mica%2C_front_left.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Suzuki_Wagon_R"
+  "src": "/cars/ai/maruti-wagon-r.webp",
+  "page": "",
+  "ai": true
  },
  "maruti-baleno": {
   "src": "/cars/ai/maruti-baleno.webp",
