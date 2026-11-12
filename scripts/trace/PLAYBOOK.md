@@ -460,3 +460,16 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - `spare.z` (new, opt-in) puts the spare wheel off-centre (Bolero +0.19 m, the right side seen from behind, like rear decal z).
 - `wellInset` walls showed as a solid black slab under a high rear bumper (Bolero bumper bottom 0.6 m); on black paint there's nothing to
   hide, so it was dropped. Black pillars on dark glass read better with `mat: 'trim'` (plain black came out grey).
+- EV twins (Nexon.ev, Punch.ev): start from the sibling with `...SIBLING` and override, but trace the side again: the Nexon.ev
+  photo put the axles 3.3 % apart with a different overhang split than the ICE trace (front 0.90 m vs 0.79 m), so its top,
+  glasshouse, doors and side decals go through a photo-u → official-u map (`nexonEvU`) like the Syros.
+- Grey unpainted plastic (Punch.ev cladding and bumpers): `cladding.color` (new, opt-in) and the `clad` decal material (new)
+  in the same grey, for ribbed grille panels and bumper faces.
+- A swept nose/tail (`noseSweep`/`tailSweep`) bends the cladding's flat end cap as one fan, so the finely tessellated body
+  pokes through it in two patches either side of the centre; a `clad` (or `trim`) decal over the bumper face covers it.
+  Cutting the sweep instead made the upper corners the car's ends and cost ~1 % IoU (the model scales down to the photo).
+- Rear decals stand ~3 cm proud: on a tail whose bumper barely leads, an upright tail face up to the light bar became the
+  rearmost point and shrank the whole overlay; a raked `top` at u 0–0.015 with `rakedEnds` puts the bar back on the slope.
+- A gloss tail bar that "turns body colour" from behind is the red glow sprites over it, not a hole: check with a `satin` swap.
+- Tyres hidden in grass that the cut-out crops off: pad the canvas, paint dark discs at the hubs, and clear grass by colour
+  only where it can't be pale paint (Empowered Oxide is grey-green: a plain g > b test ate the doors).

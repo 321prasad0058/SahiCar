@@ -6,7 +6,7 @@ import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeom
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
 import { curve, loft, ring, ringZ, stationsU, type Pts, type Ring, type Tag } from './loft'
 
-export type Mat = 'gloss' | 'trim' | 'chrome' | 'silver' | 'satin' | 'reflector' | 'drl' | 'head' | 'tail' | 'amber' | 'mesh' | 'hex' | 'slats' | 'body' | 'glass'
+export type Mat = 'gloss' | 'trim' | 'clad' | 'chrome' | 'silver' | 'satin' | 'reflector' | 'drl' | 'head' | 'tail' | 'amber' | 'mesh' | 'hex' | 'slats' | 'body' | 'glass'
 /** An outline traced from a photo. Front/rear: [z, y] in metres (z across the car, + = right); side: [u, y]. */
 export interface Decal {
   mat: Mat
@@ -65,7 +65,8 @@ export interface CarSpec {
   cladding?: { top: Pts; flare: number; cut?: boolean; /** where the traced top reaches the body's own top (black bumpers),
    *  cover the whole section instead of stopping 4 cm short, so the bumper's top surface is black too */ cover?: boolean
     /** how far the arch flares stand out from the body (m, default 0.026), and the u range they are kept inside (so a
-     *  flare reaching past an upright nose doesn't lid the face) */ flareOut?: number; flareU?: [number, number] }
+     *  flare reaching past an upright nose doesn't lid the face) */ flareOut?: number; flareU?: [number, number]
+    /** unpainted grey plastic instead of black (hex), e.g. the Punch.ev's grey cladding and bumpers */ color?: string }
   /** a spare wheel on the tailgate: its outer face at the tail (u = 0), its hub at height y (m), optionally off-centre
    *  by z (m, + = right, as in the rear decals) */
   spare?: { y: number; z?: number }
@@ -418,6 +419,12 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
   const sidePoint = (u: number, y: number, side: 1 | -1) =>
     new THREE.Vector3(xOf(u), y, side * (ghZRef && y > top(u) - 0.01 ? ghZRef(xOf(u), y) : zAt(xOf(u), y)))
 
+  // grey unpainted plastic when the spec asks for it (cladding.color), else black trim; decals use it as 'clad'
+  let cladMat: THREE.Material = S.trim
+  if (spec.cladding?.color) {
+    cladMat = new THREE.MeshStandardMaterial({ color: spec.cladding.color, metalness: 0.1, roughness: 0.75, side: THREE.DoubleSide })
+    disposables.push(cladMat)
+  }
   // ── cladding: a thin black skin with its own traced top edge and flared arches
   if (spec.cladding && cladTop) {
     const flare = spec.cladding.flare
@@ -460,7 +467,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
       1,
     )
     disposables.push(clad.geometry)
-    group.add(new THREE.Mesh(clad.geometry, S.trim))
+    group.add(new THREE.Mesh(clad.geometry, cladMat))
   }
 
   // ── glasshouse with raked pillars
@@ -548,6 +555,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
   const mats: Record<Mat, THREE.Material> = {
     gloss: S.gloss,
     trim: S.trim,
+    clad: cladMat,
     chrome: S.chrome,
     silver: S.silver,
     satin: S.satin,
