@@ -166,8 +166,9 @@
   "license": "CC BY-SA 4.0"
  },
  "kia-sonet": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/2021_Kia_Sonet_1.5_Premiere_%28Indonesia%29_front_view_03.jpg/960px-2021_Kia_Sonet_1.5_Premiere_%28Indonesia%29_front_view_03.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Kia_Sonet"
+  "src": "/cars/ai/kia-sonet.webp",
+  "page": "",
+  "ai": true
  },
  "kia-syros": {
   "src": "/cars/ai/kia-syros.webp",
@@ -227,8 +228,9 @@
   "ai": true
  },
  "mahindra-thar-roxx": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bd/Mahindra_Thar_ROXX_on_rocks_%28cropped%29.jpg/960px-Mahindra_Thar_ROXX_on_rocks_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Mahindra_Thar_ROXX"
+  "src": "/cars/ai/mahindra-thar-roxx.webp",
+  "page": "",
+  "ai": true
  },
  "mahindra-scorpio-classic": {
   "src": "/cars/ai/mahindra-scorpio-classic.webp",
@@ -283,8 +285,9 @@
   "ai": true
  },
  "maruti-ertiga": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Suzuki_Ertiga_NC_FL_1.5_GLX_Hybrid_Snow_White_Pearl.jpg/960px-Suzuki_Ertiga_NC_FL_1.5_GLX_Hybrid_Snow_White_Pearl.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Suzuki_Ertiga"
+  "src": "/cars/ai/maruti-ertiga.webp",
+  "page": "",
+  "ai": true
  },
  "maruti-victoris": {
   "src": "/cars/ai/maruti-victoris.webp",
@@ -440,14 +443,14 @@
   "page": "https://en.wikipedia.org/wiki/Suzuki_Wagon_R"
  },
  "maruti-baleno": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/SuzukiBalenoMauritius.jpg/960px-SuzukiBalenoMauritius.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-  "page": "https://commons.wikimedia.org/wiki/File:SuzukiBalenoMauritius.jpg",
-  "artist": "Wojtekszczesny",
-  "license": "CC0"
+  "src": "/cars/ai/maruti-baleno.webp",
+  "page": "",
+  "ai": true
  },
  "maruti-brezza": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/2022_Maruti_Suzuki_Brezza_ZXi%2B_%28India%29_front_view_03.png/960px-2022_Maruti_Suzuki_Brezza_ZXi%2B_%28India%29_front_view_03.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Suzuki_Brezza"
+  "src": "/cars/ai/maruti-brezza.webp",
+  "page": "",
+  "ai": true
  },
  "maruti-grand-vitara": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/2022_Suzuki_Grand_Vitara_GX_Smart_Hybrid_%28Indonesia%29_front_view.jpg/960px-2022_Suzuki_Grand_Vitara_GX_Smart_Hybrid_%28Indonesia%29_front_view.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
@@ -682,8 +685,9 @@
   "page": "https://en.wikipedia.org/wiki/Mahindra_Thar"
  },
  "mahindra-scorpio-n": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/2024_Mahindra_Scorpio_Z8L_front.jpg/960px-2024_Mahindra_Scorpio_Z8L_front.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Mahindra_Scorpio-N"
+  "src": "/cars/ai/mahindra-scorpio-n.webp",
+  "page": "",
+  "ai": true
  },
  "upcoming:kia-seltos-hybrid": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/Kia_Seltos_front_Pozna%C5%84_Motor_Show_2026.jpg/960px-Kia_Seltos_front_Pozna%C5%84_Motor_Show_2026.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
