@@ -1,0 +1,49 @@
+# Send one alert by hand to everyone who turned alerts on (or check the setup without sending: mode "check").
+# Actions tab → "Send alert" → Run workflow. Automatic alerts after data updates are sent by deploy.yml.
+name: Send alert
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'check = count subscribers and send nothing; send = send to everyone'
+        type: choice
+        options: [check, send]
+        default: check
+      title:
+        description: 'Alert title (send mode)'
+        default: 'SahiCar'
+      body:
+        description: 'Alert text (send mode)'
+        default: ''
+      url:
+        description: 'Page to open when tapped, e.g. /upcoming'
+        default: '/'
+
+permissions:
+  contents: read
+
+jobs:
+  alert:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Send
+        env:
+          VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
+          FIREBASE_ADMIN_SA: ${{ secrets.FIREBASE_ADMIN_SA }}
+          TITLE: ${{ inputs.title }}
+          BODY: ${{ inputs.body }}
+          URL: ${{ inputs.url }}
+        run: |
+          if [ "${{ inputs.mode }}" = "send" ]; then
+            node scripts/push-send.mjs --test "$TITLE" "$BODY" "$URL"
+          else
+            node scripts/push-send.mjs --test "$TITLE" "$BODY" "$URL" --dry
+          fi
