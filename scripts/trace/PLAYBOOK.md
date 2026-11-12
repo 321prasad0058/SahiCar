@@ -331,3 +331,8 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   a `gloss` housing disappeared into the black strip joining the lamps. Upright butterfly-grille ribs: `trim` (depth 0.014) on
   `gloss` gives dark-grey ribs; `chrome` ribs went paper-white.
 - The studio adds roughly 55 of grey to every channel: Lava Blue (studio photo ~31,61,86) needed #00395c (no red at all).
+- Fortuner (white, road side photo 1.788 m over low rails, axles 1.7 % apart): chrome decals on light paint (grille fangs, the
+  strip joining the tail lamps) vanish, as chrome mirrors the white studio: use `satin` for chrome on the body, chrome only over black.
+- A deep wheel gap (archGap 0.13) showed the body's own paint wall at the arch edges speckling through the cladding inside the
+  wells; `wellInset: 0.05` (new, opt-in) puts black end walls just inside each arch. They hang a little below the sill (reads as mud flaps).
+- A grille "hat" centred on z = 0 read as a badge; keep raised pattern elements off the centre line.
