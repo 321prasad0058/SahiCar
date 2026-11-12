@@ -246,3 +246,4 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   above the lamp tops (Tiago 0.867 vs lamps 0.832) and keep `topRadius` ≤ 0.09, or the lamps' outer ends hook back.
 - Front/rear end decals running past the end face's half-width wrap back along the flank and show as spikes in the side view
   (Tiago tail lamps at z 0.705 on a 0.707 face): keep them ~3 cm inside it.
+- No number plates on any model (the user's rule): the builder draws none, so never notch bumper or skid-plate decals around a plate.
