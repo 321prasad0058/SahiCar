@@ -259,8 +259,9 @@
   "page": "https://en.wikipedia.org/wiki/Mahindra_BE_6"
  },
  "mahindra-xev-9e": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/Mahindra_XEV_9E.jpg/960px-Mahindra_XEV_9E.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Mahindra_XEV_9e"
+  "src": "/cars/ai/mahindra-xev-9e.webp",
+  "page": "",
+  "ai": true
  },
  "maruti-s-presso": {
   "src": "/cars/ai/maruti-s-presso.webp",
