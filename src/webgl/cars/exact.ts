@@ -3578,4 +3578,151 @@ export const ALTROZ_X: CarSpec = {
   plate: 'MH 12 AZ 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, KYLAQ, FORTUNER, SAFARI, WINDSOR_EV, CITY_X, SYROS, ALCAZAR, ALTROZ_X]
+const SIERRA_L = 4.34
+/** photo u → model u: the gallery camera spreads the axles 2.9 %, so lower-body lines (doors, handles, cladding, B-pillar)
+ *  are mapped piecewise-linearly onto the official wheelbase; the silhouette stays in photo u */
+const sierraU = (u: number): number => {
+  const pa = 0.1787, pb = 0.8257, ma = 0.1878, mb = 0.8168
+  const v = u <= pa ? (u * ma) / pa : u <= pb ? ma + ((u - pa) * (mb - ma)) / (pb - pa) : mb + ((u - pb) * (1 - mb)) / (1 - pb)
+  return +v.toFixed(5)
+}
+const sierraP = (pts: P2[]): P2[] => pts.map(([u, y]) => [sierraU(u), y] as P2)
+/** a side outline from a rounded rectangle given in u (0…1) and metres */
+const sierraRectU = (u0: number, y0: number, u1: number, y1: number, r: number): P2[] =>
+  rrectS(u0 * SIERRA_L, y0, u1 * SIERRA_L, y1, r).map(([x, y]) => [+(x / SIERRA_L).toFixed(5), y] as P2)
+
+/** all heights × k: each gallery photo's overlay sat ~2 cm low over roof and bonnet (the ICE car is also 3.5 cm lower) */
+const sierraK = (s: CarSpec, k: number): CarSpec => {
+  const ys = (pts: P2[]): P2[] => pts.map(([a, y]) => [a, +(y * k).toFixed(4)] as P2)
+  const ds = (list: Decal[] | undefined) => list?.map((d) => ({ ...d, poly: ys(d.poly) }))
+  return {
+    ...s, sill: ys(s.sill), top: ys(s.top), greenhouse: { ...s.greenhouse, top: ys(s.greenhouse.top) },
+    cladding: s.cladding && { ...s.cladding, top: ys(s.cladding.top) },
+    front: ds(s.front)!, rear: ds(s.rear)!, side: ds(s.side),
+    plates: { front: +(s.plates.front * k).toFixed(3), rear: +(s.plates.rear * k).toFixed(3) },
+  }
+}
+// the tail (shared by both): the connected light bar, the black bumper with red reflectors, the satin skid plate
+const SIERRA_REAR: Decal[] = [
+  { step: 0.005, mat: 'gloss', layer: 2, depth: 0.012, poly: smooth(both([[0, 1.152], [0.77, 1.152], [0.8, 1.162], [0.805, 1.2], [0.8, 1.228], [0.77, 1.236], [0, 1.236]]), 1) },
+  { step: 0.005, mat: 'tail', layer: 3, depth: 0.016, poly: both([[0, 1.206], [0.77, 1.206], [0.792, 1.21], [0.792, 1.222], [0.77, 1.224], [0, 1.224]]) },
+  { step: 0.005, mat: 'tail', layer: 3, mirror: true, depth: 0.016, poly: rrect(0.56, 1.172, 0.785, 1.192, 0.005) },
+  { step: 0.005, mat: 'trim', poly: smooth(both([[0, 0.3], [0.72, 0.3], [0.77, 0.33], [0.785, 0.42], [0.785, 0.62], [0.765, 0.715], [0.7, 0.752], [0.55, 0.775], [0, 0.785]]), 1) },
+  { step: 0.004, mat: 'reflector', layer: 1, mirror: true, poly: rrect(0.36, 0.655, 0.64, 0.675, 0.005) },
+  { step: 0.005, mat: 'satin', layer: 1, depth: 0.01, poly: smooth(both([[0, 0.375], [0.69, 0.375], [0.735, 0.395], [0.745, 0.45], [0.705, 0.548], [0.63, 0.57], [0.47, 0.565], [0.415, 0.52], [0, 0.52]]), 1) },
+]
+// the flank (shared): the body-coloured "ear" of the roof spoiler on the quarter glass, the handles, the fuel/charge lid,
+// the satin strip along the cladding, the light bar's wrap at the tail corner
+const SIERRA_SIDE: Decal[] = [
+  { step: 0.004, mat: 'body', depth: 0.004, poly: smooth([[0.026, 1.625], [0.06, 1.638], [0.1, 1.648], [0.134, 1.655], [0.1, 1.592], [0.07, 1.532], [0.046, 1.475], [0.038, 1.52], [0.03, 1.59]], 1) },
+  { step: 0.005, mat: 'gloss', depth: 0.002, poly: sierraRectU(sierraU(0.5), 1.032, sierraU(0.548), 1.076, 0.016) },
+  { step: 0.005, mat: 'body', layer: 1, depth: 0.008, poly: sierraRectU(sierraU(0.503), 1.037, sierraU(0.545), 1.071, 0.012) },
+  { step: 0.005, mat: 'gloss', depth: 0.002, poly: sierraRectU(sierraU(0.249), 1.063, sierraU(0.297), 1.103, 0.016) },
+  { step: 0.005, mat: 'body', layer: 1, depth: 0.008, poly: sierraRectU(sierraU(0.252), 1.068, sierraU(0.294), 1.098, 0.012) },
+  { step: 0.004, mat: 'satin', layer: 1, depth: 0.004, poly: sideBand(sierraP([[0.355, 0.463], [0.45, 0.452], [0.55, 0.44], [0.65, 0.43], [0.7, 0.425]]), 0.014, SIERRA_L) },
+  { step: 0.003, mat: 'gloss', depth: 0.002, poly: [[0.002, 1.152], [0.03, 1.158], [0.036, 1.19], [0.03, 1.232], [0.002, 1.236]] },
+  { step: 0.003, mat: 'tail', layer: 1, depth: 0.004, poly: [[0.002, 1.204], [0.03, 1.206], [0.032, 1.222], [0.002, 1.224]] },
+]
+const SIERRA_BODY = {
+  L: SIERRA_L, W: 1.841,
+  axles: [0.1878, 0.8168] as [number, number],
+  tyreR: 0.365, tyreW: 0.225, rim: 0.661,
+  archGap: 0.11, archSquare: 0.35, wellInset: 0.06,
+  sill: [[0, 0.33], [0.02, 0.33], [0.04, 0.32], [0.08, 0.3], [0.12, 0.28], [0.18, 0.26], [0.3, 0.245], [0.45, 0.235], [0.6, 0.225], [0.72, 0.232], [0.85, 0.24], [0.92, 0.25], [0.95, 0.25], [0.97, 0.24], [0.985, 0.235], [1, 0.235]] as P2[],
+  // the tail face up to the glass, the belt falling gently to the cowl, the long flat bonnet curving down to the light bar
+  top: [[0, 1.285], [0.012, 1.287], [0.03, 1.283], [0.1, 1.27], [0.2, 1.255], [0.29, 1.243], [0.38, 1.235], [0.45, 1.225], [0.5, 1.218], [0.6, 1.208], [0.7, 1.203], [0.755, 1.198], [0.77, 1.186], [0.8, 1.176], [0.85, 1.161], [0.88, 1.146], [0.9, 1.132], [0.92, 1.112], [0.94, 1.089], [0.96, 1.066], [0.97, 1.055], [0.98, 1.047], [0.99, 1.041], [1, 1.037]] as P2[],
+  width: [[0, 0.92], [0.008, 0.945], [0.02, 0.968], [0.05, 0.988], [0.1, 0.998], [0.5, 1], [0.88, 0.997], [0.93, 0.988], [0.965, 0.972], [0.99, 0.952], [1, 0.935]] as P2[],
+  crown: 0.012,
+  bulge: 0.02,
+  haunch: 0.03,
+  topRadius: 0.08,
+  noseSweep: 0.1,
+  tailSweep: 0.08,
+  greenhouse: {
+    u0: 0.012, u1: 0.755, tumble: 0.86,
+    // the upright tailgate glass, the long flat roof (rails left out), the raked windscreen
+    top: [[0.012, 1.287], [0.018, 1.33], [0.022, 1.4], [0.026, 1.52], [0.029, 1.615], [0.032, 1.645], [0.04, 1.658], [0.06, 1.667], [0.1, 1.683], [0.15, 1.694], [0.2, 1.7], [0.3, 1.703], [0.4, 1.7], [0.47, 1.696], [0.5, 1.69], [0.52, 1.676], [0.54, 1.66], [0.56, 1.64], [0.58, 1.625], [0.6, 1.585], [0.62, 1.545], [0.64, 1.496], [0.66, 1.443], [0.68, 1.394], [0.7, 1.345], [0.72, 1.291], [0.74, 1.235], [0.755, 1.198]] as P2[],
+  },
+  roof: { u0: 0.03018, u1: 0.52951, black: true },
+  pillars: [
+    // the wide body-coloured fin behind the front door glass, the black B-pillar strip ahead of it
+    { bottom: [sierraU(0.377), sierraU(0.455)] as [number, number], top: [sierraU(0.404), sierraU(0.455)] as [number, number], black: false, step: 0.005 },
+    { bottom: [sierraU(0.455), sierraU(0.465)] as [number, number], top: [sierraU(0.455), sierraU(0.465)] as [number, number], black: true },
+  ],
+  doors: [[sierraU(0.721), sierraU(0.709)], [sierraU(0.472), sierraU(0.464)], [sierraU(0.212), sierraU(0.218)]] as [number, number][],
+  rear: SIERRA_REAR,
+  plates: { front: 0.6, rear: 0.59 },
+  rails: 'black' as const,
+  mirrors: 'black' as const,
+  dropSlivers: true,
+}
+
+/** Tata Sierra (Nov 2025 relaunch, petrol/diesel). 4340 × 1841 × 1715, wheelbase 2730, 225/55 R19 (top trim).
+ *  Shares its body with the Sierra.ev: the side profile traced from the EV's gallery side photo (cleaner, on tarmac) and
+ *  checked against this car's own (sand hides its sill). The near-upright tailgate glass, the long flat roof with the
+ *  alpine quarter glass and the spoiler's body-coloured "ears", the wide body-coloured fin behind the front doors; the
+ *  gloss-black grille band under the full-width light bar with the headlamps at its ends, the body-coloured band with the
+ *  corner lamp pods, the black lower bumper with its satin skid plate, from the straight front and close-up photos. */
+export const SIERRA_X: CarSpec = sierraK({
+  ...SIERRA_BODY,
+  id: 'tata-sierra',
+  name: 'Tata Sierra',
+  H: 1.715,
+  wheel: { style: 'blade', spokes: 4 },
+  cladding: { top: sierraP([[0, 0.68], [0.02, 0.64], [0.05, 0.62], [0.08, 0.6], [0.28, 0.52], [0.3, 0.5], [0.33, 0.56], [0.36, 0.59], [0.5, 0.595], [0.6, 0.585], [0.65, 0.57], [0.7, 0.52], [0.72, 0.49], [0.75, 0.48], [0.93, 0.47], [0.955, 0.47], [0.975, 0.46], [1, 0.45]]), flare: 0.045, cut: true },
+  front: [
+    // the gloss-black grille band under the light bar, the headlamps along its foot
+    { step: 0.005, mat: 'gloss', depth: 0.006, poly: smooth(both([[0, 0.778], [0.79, 0.778], [0.815, 0.79], [0.822, 0.83], [0.822, 0.975], [0.81, 0.988], [0, 0.99]]), 1) },
+    { step: 0.005, mat: 'trim', layer: 1, depth: 0.006, poly: both([[0, 0.985], [0.8, 0.985], [0.82, 0.99], [0.825, 1.0], [0.815, 1.016], [0, 1.018]]) },
+    { step: 0.005, mat: 'drl', layer: 2, poly: both([[0, 0.996], [0.79, 0.996], [0.812, 1.0], [0.79, 1.008], [0, 1.008]]) },
+    { step: 0.005, mat: 'head', layer: 1, mirror: true, poly: rrect(0.63, 0.795, 0.805, 0.83, 0.008) },
+    // the corner lamp pods in the body-coloured band
+    { step: 0.004, mat: 'gloss', mirror: true, depth: 0.006, poly: rrect(0.765, 0.55, 0.812, 0.685, 0.008) },
+    { step: 0.004, mat: 'drl', layer: 1, mirror: true, poly: rrect(0.776, 0.6, 0.8, 0.672, 0.004) },
+    // the black lower bumper (its top flat across the middle, falling to the corners), a satin line on the slope
+    { step: 0.005, mat: 'trim', poly: smooth(both([[0, 0.265], [0.7, 0.265], [0.78, 0.3], [0.815, 0.36], [0.822, 0.45], [0.76, 0.49], [0.66, 0.57], [0.56, 0.645], [0.5, 0.655], [0, 0.655]]), 1) },
+    { step: 0.004, mat: 'satin', layer: 1, mirror: true, depth: 0.004, poly: band([[0.79, 0.47], [0.72, 0.51], [0.65, 0.565]], 0.014) },
+    // the lower grille between the skid plate's fangs, the skid plate
+    { step: 0.005, mat: 'mesh', layer: 1, depth: 0.012, poly: both([[0, 0.368], [0.445, 0.368], [0.495, 0.515], [0, 0.515]]) },
+    { step: 0.005, mat: 'satin', layer: 2, depth: 0.01, poly: smooth(both([[0, 0.3], [0.64, 0.3], [0.69, 0.315], [0.7, 0.36], [0.64, 0.368], [0.55, 0.5], [0.5, 0.5], [0.45, 0.368], [0, 0.368]]), 1) },
+  ],
+  side: SIERRA_SIDE,
+  paint: '#d69c00', // Andaman Adventure (the gallery car's yellow), darkened for the studio lights
+  plate: 'MH 12 SR 2026',
+}, 0.978)
+
+/** Tata Sierra.ev (2026). 4340 × 1841 × 1750, wheelbase 2730, 225/55 R19 (top trim). The Sierra's body traced from its own
+ *  gallery side photo; the closed front: the light bar over a body-coloured panel, the headlamps in its lower corners,
+ *  the black band and lower bumper with the corner lamps, the lower grille and satin skid plate, from the straight front
+ *  photo and close-ups. */
+export const SIERRA_EV_X: CarSpec = sierraK({
+  ...SIERRA_BODY,
+  id: 'tata-sierra-ev',
+  name: 'Tata Sierra.ev',
+  H: 1.75,
+  wheel: { style: 'blade', spokes: 5 },
+  cladding: { top: sierraP([[0, 0.68], [0.02, 0.64], [0.05, 0.62], [0.08, 0.6], [0.28, 0.52], [0.3, 0.5], [0.33, 0.56], [0.36, 0.59], [0.5, 0.595], [0.6, 0.585], [0.65, 0.57], [0.7, 0.52], [0.72, 0.49], [0.75, 0.48], [0.93, 0.47], [0.955, 0.48], [0.975, 0.62], [1, 0.655]]), flare: 0.045, cut: true },
+  front: [
+    // the full-width light bar on the bonnet's leading edge
+    { step: 0.005, mat: 'trim', layer: 1, depth: 0.006, poly: both([[0, 0.985], [0.8, 0.985], [0.82, 0.99], [0.825, 1.0], [0.815, 1.016], [0, 1.018]]) },
+    { step: 0.005, mat: 'drl', layer: 2, poly: both([[0, 0.996], [0.79, 0.996], [0.812, 1.0], [0.79, 1.008], [0, 1.008]]) },
+    // the headlamps in the panel's lower corners
+    { step: 0.004, mat: 'gloss', mirror: true, depth: 0.006, poly: smooth([[0.63, 0.8], [0.66, 0.772], [0.815, 0.772], [0.822, 0.8], [0.818, 0.862], [0.645, 0.862]], 1) },
+    { step: 0.004, mat: 'head', layer: 1, mirror: true, poly: rrect(0.67, 0.79, 0.805, 0.83, 0.008) },
+    // the black band across the face (gloss along its top) and the black lower bumper
+    { step: 0.005, mat: 'trim', poly: smooth(both([[0, 0.265], [0.7, 0.265], [0.78, 0.3], [0.815, 0.36], [0.822, 0.5], [0.822, 0.762], [0.62, 0.745], [0, 0.716]]), 1) },
+    { step: 0.005, mat: 'gloss', layer: 1, poly: both([[0, 0.668], [0.82, 0.675], [0.82, 0.757], [0.62, 0.741], [0, 0.712]]) },
+    // the corner lamps
+    { step: 0.004, mat: 'gloss', layer: 1, mirror: true, depth: 0.006, poly: rrect(0.755, 0.5, 0.805, 0.64, 0.008) },
+    { step: 0.004, mat: 'drl', layer: 2, mirror: true, poly: rrect(0.772, 0.52, 0.79, 0.62, 0.004) },
+    // the lower grille between the skid plate's fangs, the skid plate
+    { step: 0.005, mat: 'mesh', layer: 1, depth: 0.012, poly: both([[0, 0.368], [0.445, 0.368], [0.495, 0.515], [0, 0.515]]) },
+    { step: 0.005, mat: 'satin', layer: 2, depth: 0.01, poly: smooth(both([[0, 0.3], [0.64, 0.3], [0.69, 0.315], [0.7, 0.36], [0.64, 0.368], [0.55, 0.5], [0.5, 0.5], [0.45, 0.368], [0, 0.368]]), 1) },
+  ],
+  side: SIERRA_SIDE,
+  paint: '#6f9893', // Rishikesh Rapids (the gallery car's mint teal), darkened for the studio lights
+  ev: true,
+  plate: 'MH 12 EV 2026',
+}, 0.988)
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, KYLAQ, FORTUNER, SAFARI, WINDSOR_EV, CITY_X, SYROS, ALCAZAR, ALTROZ_X, SIERRA_X, SIERRA_EV_X]
