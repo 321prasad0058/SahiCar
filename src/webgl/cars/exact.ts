@@ -151,4 +151,88 @@ export const PUNCH: CarSpec = {
   plate: 'MH 12 PN 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH]
+/** Hyundai Creta (2024 facelift). 4330 × 1790 × 1635, wheelbase 2610, 215/60 R17.
+ *  Side profile from a levelled side photo (height 1.609 vs 1.635 official, wheelbase 2.613); the belt, window line and
+ *  pillars were read off the photo on a pixel grid (the dark green paint fools the paint-run belt finder).
+ *  Lamps, grille and skid plates from front and rear three-quarter photos. */
+export const CRETA: CarSpec = {
+  id: 'hyundai-creta',
+  name: 'Hyundai Creta',
+  L: 4.33, W: 1.79, H: 1.635,
+  axles: [0.1999, 0.8027],
+  tyreR: 0.345, tyreW: 0.215, rim: 0.626, wheel: { style: 'split', spokes: 5 }, rimTone: 'dark',
+  archGap: 0.06, archSquare: 0.4,
+  sill: [[0, 0.37], [0.01, 0.35], [0.02, 0.335], [0.04, 0.305], [0.07, 0.262], [0.1, 0.242], [0.28, 0.2], [0.4, 0.19], [0.6, 0.2], [0.7, 0.19], [0.9, 0.16], [0.95, 0.15], [0.97, 0.18], [0.99, 0.2], [1, 0.24]],
+  // upright tailgate, the belt kicking up under the rear quarter glass, then the long flat bonnet
+  top: [[0, 0.6], [0.006, 0.86], [0.012, 1.0], [0.02, 1.1], [0.035, 1.16], [0.07, 1.175], [0.12, 1.2], [0.2, 1.215], [0.3, 1.175], [0.413, 1.14], [0.5, 1.122], [0.6, 1.112], [0.7, 1.105], [0.715, 1.1], [0.75, 1.07], [0.8, 1.053], [0.85, 1.028], [0.9, 0.998], [0.95, 0.95], [0.97, 0.9], [0.98, 0.81], [0.99, 0.7], [1, 0.52]],
+  width: [[0, 0.82], [0.008, 0.9], [0.025, 0.955], [0.06, 0.98], [0.12, 0.995], [0.5, 1], [0.88, 0.995], [0.93, 0.98], [0.965, 0.95], [0.985, 0.88], [1, 0.8]],
+  crown: 0.02,
+  bulge: 0.01,
+  // the sharp crease along both doors
+  shoulder: { y: [[0, 0.95], [0.3, 0.9], [0.7, 0.87], [1, 0.9]], inset: 0.03 },
+  haunch: 0.025,
+  bonnetRidge: 0.01,
+  noseSweep: 0.18,
+  tailSweep: 0.1,
+  greenhouse: {
+    u0: 0.04, u1: 0.715, tumble: 0.75,
+    top: [[0.04, 1.165], [0.05, 1.185], [0.06, 1.21], [0.07, 1.245], [0.08, 1.3], [0.09, 1.44], [0.1, 1.465], [0.13, 1.487], [0.17, 1.505], [0.25, 1.527], [0.35, 1.548], [0.45, 1.552], [0.5, 1.537], [0.52, 1.53], [0.54, 1.51], [0.56, 1.49], [0.58, 1.46], [0.6, 1.42], [0.62, 1.36], [0.66, 1.243], [0.69, 1.16], [0.715, 1.1]],
+  },
+  roof: { u0: 0.12, u1: 0.53, black: false },
+  pillars: [
+    { bottom: [0.258, 0.268], top: [0.258, 0.268], black: true },
+    { bottom: [0.413, 0.437], top: [0.413, 0.437], black: true },
+    { bottom: [0.7, 0.715], top: [0.535, 0.55], black: true },
+  ],
+  cladding: { top: [[0, 0.67], [0.03, 0.67], [0.08, 0.72], [0.13, 0.785], [0.2, 0.79], [0.27, 0.75], [0.3, 0.4], [0.4, 0.38], [0.6, 0.38], [0.69, 0.4], [0.72, 0.78], [0.8, 0.83], [0.88, 0.79], [0.92, 0.6], [0.95, 0.5], [1, 0.48]], flare: 0.13 },
+  doors: [[0.695, 0.699], [0.444, 0.444], [0.27, 0.19]],
+  front: [
+    // gloss band under the bonnet edge with the full-width light bar; thicker corner DRLs with a vertical drop (the "H")
+    { mat: 'gloss', poly: [[-0.688, 0.86], [0.688, 0.86], [0.679, 0.92], [-0.679, 0.92]] },
+    { mat: 'drl', poly: [[-0.671, 0.896], [0.671, 0.896], [0.671, 0.907], [-0.671, 0.907]], layer: 1 },
+    { mat: 'drl', mirror: true, poly: [[0.43, 0.886], [0.671, 0.886], [0.671, 0.912], [0.43, 0.912]], layer: 1 },
+    { mat: 'drl', mirror: true, poly: [[0.649, 0.82], [0.675, 0.82], [0.675, 0.912], [0.649, 0.912]], layer: 1 },
+    // the big dark parametric grille
+    { mat: 'gloss', poly: [[-0.482, 0.58], [0.482, 0.58], [0.516, 0.86], [-0.516, 0.86]] },
+    { mat: 'mesh', poly: [[-0.447, 0.61], [0.447, 0.61], [0.473, 0.84], [-0.473, 0.84]], layer: 1 },
+    // quad-LED headlamps in black housings low at the corners
+    { mat: 'gloss', mirror: true, poly: [[0.516, 0.56], [0.688, 0.56], [0.688, 0.76], [0.533, 0.76]] },
+    { mat: 'head', mirror: true, poly: [[0.542, 0.59], [0.662, 0.59], [0.662, 0.73], [0.559, 0.73]], layer: 1 },
+    // black lower bumper and lower grille, framed by the silver skid plate and its corner fangs
+    { mat: 'trim', poly: [[-0.649, 0.2], [0.649, 0.2], [0.649, 0.56], [0.475, 0.56], [0.443, 0.58], [-0.443, 0.58], [-0.475, 0.56], [-0.649, 0.56]] },
+    { mat: 'mesh', poly: [[-0.499, 0.26], [0.499, 0.26], [0.516, 0.44], [-0.516, 0.44]], layer: 1 },
+    { mat: 'satin', layer: 1, poly: [[-0.523, 0.24], [-0.507, 0.24], [-0.495, 0.253], [-0.483, 0.279], [-0.472, 0.319], [-0.463, 0.371], [-0.399, 0.411], [-0.283, 0.437], [-0.112, 0.45], [0.112, 0.45], [0.283, 0.437], [0.399, 0.411], [0.463, 0.371], [0.472, 0.319], [0.483, 0.279], [0.495, 0.253], [0.507, 0.24], [0.523, 0.24], [0.534, 0.254], [0.544, 0.283], [0.55, 0.326], [0.554, 0.384], [0.555, 0.429], [0.553, 0.463], [0.548, 0.485], [0.541, 0.495], [0.469, 0.502], [0.333, 0.508], [0.132, 0.51], [-0.132, 0.51], [-0.333, 0.508], [-0.469, 0.502], [-0.541, 0.495], [-0.548, 0.485], [-0.553, 0.463], [-0.555, 0.429], [-0.554, 0.384], [-0.55, 0.326], [-0.544, 0.283], [-0.534, 0.254]] },
+    { mat: 'satin', layer: 1, poly: [[-0.228, 0.21], [0.228, 0.21], [0.459, 0.219], [0.467, 0.236], [0.236, 0.245], [-0.236, 0.245], [-0.467, 0.236], [-0.459, 0.219]] },
+  ],
+  rear: [
+    // gloss band across the tailgate: the connected light bar and the lamp clusters at the corners
+    { mat: 'gloss', poly: [[-0.705, 0.95], [0.705, 0.95], [0.705, 1.07], [-0.705, 1.07]] },
+    { mat: 'tail', poly: [[-0.688, 1.045], [0.688, 1.045], [0.688, 1.056], [-0.688, 1.056]], layer: 1 },
+    { mat: 'tail', mirror: true, poly: [[0.499, 0.975], [0.688, 0.975], [0.688, 1.04], [0.499, 1.04]], layer: 1 },
+    // dark recess round the number plate
+    { mat: 'gloss', poly: [[-0.43, 0.76], [0.43, 0.76], [0.482, 0.93], [-0.482, 0.93]] },
+    // black lower bumper, silver skid plate with a dark insert, vertical reflectors at the corners
+    { mat: 'trim', poly: [[-0.722, 0.36], [0.722, 0.36], [0.722, 0.66], [-0.722, 0.66]] },
+    { mat: 'satin', layer: 1, poly: [[-0.133, 0.36], [0.133, 0.36], [0.337, 0.364], [0.479, 0.371], [0.559, 0.383], [0.576, 0.398], [0.587, 0.419], [0.591, 0.446], [0.589, 0.48], [0.581, 0.52], [0.503, 0.55], [0.357, 0.57], [0.142, 0.58], [-0.142, 0.58], [-0.357, 0.57], [-0.503, 0.55], [-0.581, 0.52], [-0.589, 0.48], [-0.591, 0.446], [-0.587, 0.419], [-0.576, 0.398], [-0.559, 0.383], [-0.479, 0.371], [-0.337, 0.364]] },
+    { mat: 'gloss', layer: 2, depth: 0.014, poly: [[-0.387, 0.49], [0.387, 0.49], [0.387, 0.55], [-0.387, 0.55]] },
+    { mat: 'tail', mirror: true, poly: [[0.619, 0.5], [0.671, 0.5], [0.671, 0.62], [0.619, 0.62]], layer: 1 },
+  ],
+  side: [
+    // the silver strip on the black sill, and the chrome door handles
+    // the tail lamps wrap round the corners
+    { mat: 'gloss', poly: [[0.004, 0.945], [0.075, 0.95], [0.08, 1.07], [0.004, 1.07]] },
+    { mat: 'tail', layer: 1, poly: [[0.008, 0.975], [0.065, 0.98], [0.07, 1.045], [0.008, 1.045]] },
+    { mat: 'silver', poly: [[0.3, 0.285], [0.68, 0.285], [0.685, 0.305], [0.3, 0.31]] },
+    { mat: 'chrome', poly: [[0.473, 0.955], [0.513, 0.955], [0.513, 0.985], [0.473, 0.985]] },
+    { mat: 'chrome', poly: [[0.21, 1.0], [0.27, 1.0], [0.27, 1.03], [0.21, 1.03]] },
+  ],
+  plates: { front: 0.47, rear: 0.83 },
+  rails: 'silver',
+  spoiler: true,
+  sunroof: [0.3, 0.45],
+  mirrors: 'body',
+  paint: '#0c2a2e', // Robust Emerald (the deep green of the reference photos, darkened for the studio lights)
+  plate: 'MH 12 CR 2024',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA]
