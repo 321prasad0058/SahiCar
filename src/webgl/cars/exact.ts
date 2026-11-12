@@ -413,4 +413,101 @@ export const SWIFT: CarSpec = {
   plate: 'MH 12 SW 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT]
+/** Maruti Suzuki Fronx (2023). 3995 × 1765 × 1550 (over the roof rails), wheelbase 2520, 195/60 R16.
+ *  Side profile from a levelled side photo of a dark blue car (1.573 m with rails and antenna); the photo's axles sit
+ *  6 % too far apart (a close camera), so the axles are at the official wheelbase with the overhangs split as in the
+ *  photo (0.414 : 0.586) and the arches, doors and handles were moved with them. */
+export const FRONX: CarSpec = {
+  id: 'maruti-fronx',
+  name: 'Maruti Suzuki Fronx',
+  rakedEnds: true,
+  L: 3.995, W: 1.765, H: 1.55,
+  axles: [0.1527, 0.7835],
+  tyreR: 0.32, tyreW: 0.195, rim: 0.635, wheel: { style: 'swirl', spokes: 5 },
+  archGap: 0.08, archSquare: 0.55,
+  sill: [[0, 0.38], [0.008, 0.34], [0.02, 0.32], [0.04, 0.31], [0.08, 0.305], [0.15, 0.3], [0.22, 0.29], [0.3, 0.285], [0.5, 0.285], [0.65, 0.28], [0.72, 0.27], [0.8, 0.26], [0.9, 0.25], [0.95, 0.245], [0.98, 0.245], [0.995, 0.235], [1, 0.23]],
+  // the short tail up to the light bar, the belt falling from the quarter glass to the mirror, then the bonnet
+  top: [[0, 1.08], [0.008, 1.1], [0.02, 1.122], [0.03, 1.14], [0.06, 1.18], [0.09, 1.22], [0.115, 1.25], [0.13, 1.26], [0.145, 1.245], [0.16, 1.215], [0.175, 1.185], [0.19, 1.165], [0.21, 1.15], [0.24, 1.134], [0.39, 1.115], [0.54, 1.1], [0.66, 1.096], [0.7, 1.105], [0.72, 1.11], [0.75, 1.085], [0.8, 1.065], [0.85, 1.045], [0.9, 1.015], [0.94, 0.985], [0.97, 0.958], [0.985, 0.94], [0.995, 0.925], [1, 0.91]],
+  // round in plan: both ends taper hard into the corners
+  width: [[0, 0.7], [0.006, 0.8], [0.015, 0.88], [0.035, 0.94], [0.07, 0.975], [0.13, 0.995], [0.17, 1], [0.45, 0.99], [0.75, 1], [0.8, 0.995], [0.86, 0.985], [0.92, 0.955], [0.955, 0.91], [0.978, 0.84], [0.992, 0.77], [1, 0.72]],
+  crown: 0.012,
+  bulge: 0.035,
+  // the crease from the DRL along the front wing, rising over the doors onto the rear haunch
+  shoulder: { y: [[0, 1.02], [0.15, 1.02], [0.3, 0.99], [0.6, 0.95], [0.8, 0.93], [1, 0.92]], inset: 0.035 },
+  // the Fronx's muscular arches: the body swells over the wheels and pinches in along the doors
+  haunch: 0.06,
+  bonnetRidge: 0.01,
+  topRadius: 0.1,
+  noseSweep: 0.3,
+  tailSweep: 0.22,
+  greenhouse: {
+    u0: 0.03, u1: 0.715, tumble: 0.68,
+    // the steep tailgate glass under the big roof spoiler, the coupe roof, then the long raked screen
+    top: [[0.03, 1.14], [0.05, 1.2], [0.07, 1.255], [0.09, 1.3], [0.11, 1.33], [0.12, 1.37], [0.125, 1.4], [0.135, 1.425], [0.15, 1.442], [0.16, 1.452], [0.18, 1.468], [0.2, 1.48], [0.25, 1.502], [0.3, 1.512], [0.35, 1.524], [0.4, 1.53], [0.45, 1.527], [0.5, 1.515], [0.53, 1.5], [0.55, 1.48], [0.57, 1.45], [0.6, 1.39], [0.62, 1.35], [0.65, 1.29], [0.68, 1.225], [0.7, 1.18], [0.715, 1.15]],
+  },
+  // body-coloured roof: the dual-tone paints bring their own black roof (cars.json colours)
+  roof: { u0: 0.135, u1: 0.54, black: false },
+  pillars: [
+    // black B-pillar, body-coloured A-pillar; the D-pillar is the body itself, rising round the quarter glass (a
+    // thin raked black C-pillar decal saw-toothed on this glasshouse, and black on the dark glass it isn't missed)
+    { bottom: [0.379, 0.43], top: [0.379, 0.43], black: true },
+    { bottom: [0.69, 0.715], top: [0.54, 0.56], black: false },
+  ],
+  // squared black arch flares, joined by a band along the lower doors, black lower bumpers
+  cladding: { top: [[0, 0.56], [0.02, 0.58], [0.04, 0.74], [0.08, 0.82], [0.133, 0.853], [0.181, 0.85], [0.221, 0.79], [0.243, 0.64], [0.256, 0.46], [0.27, 0.45], [0.5, 0.45], [0.66, 0.45], [0.672, 0.5], [0.688, 0.63], [0.705, 0.79], [0.745, 0.85], [0.803, 0.86], [0.87, 0.81], [0.903, 0.69], [0.92, 0.5], [0.94, 0.46], [1, 0.46]], flare: 0.1, cut: true },
+  doors: [[0.177, 0.172], [0.41, 0.41], [0.674, 0.662]],
+  front: [
+    // the gloss-black slot grille under the bonnet edge, the chrome bar across the top of the main grille
+    { step: 0.005, mat: 'gloss', poly: [[-0.42, 0.855], [0.42, 0.855], [0.46, 0.868], [0.45, 0.895], [-0.45, 0.895], [-0.46, 0.868]] },
+    { step: 0.005, mat: 'mesh', layer: 1, poly: [[-0.4, 0.862], [0.4, 0.862], [0.43, 0.872], [0.42, 0.888], [-0.42, 0.888], [-0.43, 0.872]] },
+    { step: 0.005, mat: 'chrome', layer: 2, poly: [[-0.47, 0.834], [0.47, 0.834], [0.5, 0.842], [0.535, 0.862], [0.53, 0.876], [0.495, 0.857], [0.465, 0.851], [-0.465, 0.851], [-0.495, 0.857], [-0.53, 0.876], [-0.535, 0.862], [-0.5, 0.842]] },
+    // the NEXA three-block LED DRLs: a slim lamp under the bonnet edge, rising towards the corner
+    { step: 0.005, mat: 'gloss', mirror: true, poly: [[0.52, 0.862], [0.6, 0.872], [0.655, 0.884], [0.665, 0.898], [0.66, 0.918], [0.6, 0.91], [0.53, 0.898], [0.515, 0.88]] },
+    { step: 0.005, mat: 'drl', mirror: true, layer: 1, poly: [[0.535, 0.874], [0.572, 0.879], [0.572, 0.899], [0.535, 0.894]] },
+    { step: 0.005, mat: 'drl', mirror: true, layer: 1, poly: [[0.582, 0.88], [0.617, 0.885], [0.617, 0.904], [0.582, 0.9]] },
+    { step: 0.005, mat: 'drl', mirror: true, layer: 1, poly: [[0.627, 0.887], [0.65, 0.891], [0.65, 0.909], [0.627, 0.906]] },
+    // the big gloss-black grille with its chunky 3D pattern
+    { step: 0.005, mat: 'gloss', poly: [[-0.45, 0.834], [0.45, 0.834], [0.48, 0.81], [0.49, 0.77], [0.47, 0.72], [0.42, 0.64], [0.37, 0.57], [0.33, 0.55], [-0.33, 0.55], [-0.37, 0.57], [-0.42, 0.64], [-0.47, 0.72], [-0.49, 0.77], [-0.48, 0.81]] },
+    { step: 0.005, mat: 'mesh', layer: 1, poly: [[-0.43, 0.824], [0.43, 0.824], [0.465, 0.8], [0.47, 0.77], [0.452, 0.725], [0.405, 0.648], [0.36, 0.578], [-0.36, 0.578], [-0.405, 0.648], [-0.452, 0.725], [-0.47, 0.77], [-0.465, 0.8]] },
+    // the headlamps: three projectors in a black pod low in each bumper corner
+    { step: 0.005, mat: 'gloss', mirror: true, poly: [[0.49, 0.65], [0.5, 0.625], [0.53, 0.607], [0.6, 0.6], [0.64, 0.605], [0.66, 0.625], [0.665, 0.72], [0.655, 0.75], [0.63, 0.765], [0.57, 0.765], [0.53, 0.745], [0.5, 0.69]] },
+    { step: 0.004, mat: 'head', mirror: true, layer: 1, poly: [[0.589, 0.7132], [0.6012, 0.701], [0.6188, 0.701], [0.631, 0.7132], [0.631, 0.7308], [0.6188, 0.743], [0.6012, 0.743], [0.589, 0.7308]] },
+    { step: 0.004, mat: 'head', mirror: true, layer: 1, poly: [[0.532, 0.6632], [0.5442, 0.651], [0.5618, 0.651], [0.574, 0.6632], [0.574, 0.6808], [0.5618, 0.693], [0.5442, 0.693], [0.532, 0.6808]] },
+    { step: 0.004, mat: 'head', mirror: true, layer: 1, poly: [[0.601, 0.6482], [0.6132, 0.636], [0.6308, 0.636], [0.643, 0.6482], [0.643, 0.6658], [0.6308, 0.678], [0.6132, 0.678], [0.601, 0.6658]] },
+    // black lower bumper with a wide slatted intake and the silver skid lip along the bottom
+    { step: 0.005, mat: 'trim', poly: [[-0.6, 0.26], [0.6, 0.26], [0.65, 0.28], [0.68, 0.32], [0.68, 0.46], [0.48, 0.47], [-0.48, 0.47], [-0.68, 0.46], [-0.68, 0.32], [-0.65, 0.28]] },
+    { step: 0.005, mat: 'slats', layer: 1, poly: [[-0.42, 0.36], [0.42, 0.36], [0.46, 0.45], [-0.46, 0.45]] },
+    { step: 0.005, mat: 'satin', layer: 1, poly: [[-0.5, 0.278], [0.5, 0.278], [0.54, 0.281], [0.565, 0.29], [0.575, 0.303], [0.565, 0.316], [0.53, 0.325], [-0.53, 0.325], [-0.565, 0.316], [-0.575, 0.303], [-0.565, 0.29], [-0.54, 0.281]] },
+  ],
+  rear: [
+    // the gloss-black band across the tailgate: the "7"-block lamps at the corners, the red light bar between
+    { step: 0.005, mat: 'gloss', poly: [[-0.66, 0.985], [0.66, 0.985], [0.685, 0.995], [0.69, 1.06], [0.67, 1.08], [-0.67, 1.08], [-0.69, 1.06], [-0.685, 0.995]] },
+    { step: 0.005, mat: 'tail', layer: 1, poly: [[-0.42, 1.048], [0.42, 1.048], [0.42, 1.062], [-0.42, 1.062]] },
+    { step: 0.004, mat: 'tail', mirror: true, layer: 1, poly: [[0.44, 1.052], [0.44, 1.072], [0.51, 1.072], [0.51, 1.056], [0.47, 1], [0.444, 1], [0.482, 1.052]] },
+    { step: 0.004, mat: 'tail', mirror: true, layer: 1, poly: [[0.52, 1.052], [0.52, 1.072], [0.59, 1.072], [0.59, 1.056], [0.55, 1], [0.524, 1], [0.562, 1.052]] },
+    { step: 0.004, mat: 'tail', mirror: true, layer: 1, poly: [[0.6, 1.052], [0.6, 1.072], [0.67, 1.072], [0.67, 1.056], [0.63, 1], [0.604, 1], [0.642, 1.052]] },
+    { step: 0.005, mat: 'head', mirror: true, layer: 1, poly: [[0.47, 0.99], [0.66, 0.99], [0.66, 1.003], [0.47, 1.003]] },
+    // black lower bumper: the satin skid plate with its dark insert, a red line along its top, upright reflectors
+    { step: 0.005, mat: 'trim', poly: [[-0.68, 0.33], [0.68, 0.33], [0.72, 0.38], [0.72, 0.6], [0.62, 0.62], [-0.62, 0.62], [-0.72, 0.6], [-0.72, 0.38]] },
+    { step: 0.005, mat: 'satin', layer: 1, poly: [[-0.5, 0.36], [0.5, 0.36], [0.535, 0.372], [0.56, 0.392], [0.572, 0.43], [0.575, 0.525], [0.565, 0.545], [0.545, 0.55], [0.525, 0.53], [0.505, 0.495], [0.48, 0.48], [-0.48, 0.48], [-0.505, 0.495], [-0.525, 0.53], [-0.545, 0.55], [-0.565, 0.545], [-0.575, 0.525], [-0.572, 0.43], [-0.56, 0.392], [-0.535, 0.372]] },
+    { step: 0.005, mat: 'trim', layer: 2, depth: 0.012, poly: [[-0.44, 0.385], [0.44, 0.385], [0.48, 0.4], [0.5, 0.43], [0.47, 0.455], [-0.47, 0.455], [-0.5, 0.43], [-0.48, 0.4]] },
+    { step: 0.005, mat: 'reflector', layer: 2, poly: [[-0.48, 0.48], [0.48, 0.48], [0.53, 0.5], [0.56, 0.55], [0.545, 0.55], [0.52, 0.512], [0.48, 0.494], [-0.48, 0.494], [-0.52, 0.512], [-0.545, 0.55], [-0.56, 0.55], [-0.53, 0.5]] },
+    { step: 0.005, mat: 'reflector', mirror: true, layer: 1, poly: [[0.665, 0.5], [0.69, 0.5], [0.69, 0.62], [0.665, 0.62]] },
+  ],
+  side: [
+    // door handles, the rear one higher on the rising crease
+    { step: 0.005, mat: 'gloss', poly: [[0.2, 0.985], [0.25, 0.985], [0.25, 1.015], [0.2, 1.015]] },
+    { step: 0.005, mat: 'gloss', poly: [[0.425, 0.93], [0.475, 0.93], [0.475, 0.96], [0.425, 0.96]] },
+    // the silver strip along the bottom of the door cladding
+    { step: 0.005, mat: 'satin', poly: [[0.3, 0.29], [0.64, 0.29], [0.65, 0.293], [0.656, 0.3], [0.655, 0.31], [0.648, 0.317], [0.64, 0.319], [0.3, 0.319], [0.292, 0.316], [0.288, 0.305], [0.292, 0.294]] },
+  ],
+  plates: { front: 0.5, rear: 0.86 },
+  rails: 'silver',
+  spoiler: { len: 0.1, thick: 0.03, tilt: 0.12 },
+  mirrors: 'body',
+  rimTone: 'dark',
+  paint: '#07204f', // NEXA Blue (Celestial)
+  plate: 'MH 12 FX 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX]

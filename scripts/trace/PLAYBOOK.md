@@ -104,3 +104,10 @@ Add the id to `READY` in src/webgl/cars/specs.ts **and** to `SHOWCASE_IDS` in sr
 - Side decals must stay below `top(u) − 0.01`: above it they project onto the glasshouse, and outside the glasshouse's
   u range that lands on the centre line (stray marks in the middle of the tail).
 - Thin lines (shut lines) need ≥ 12 mm height or the decal grid breaks them into dashes.
+- A close gallery camera can spread the photo's axles by 6 % (Fronx), not 3 %: put the axles at the official wheelbase
+  (overhangs in the photo's ratio) and map the arch cladding, door lines and handles with them; keep the silhouette.
+- A body-coloured D-pillar decal on a steep tailgate glasshouse crumples: raise the belt (`top`) instead so the body
+  itself rises round the quarter glass, keeping it just under the glass slope. Thin raked pillar decals saw-tooth
+  where the belt falls steeply under them; on dark glass a thin black C-pillar can simply be left out.
+- Navy paint reads lavender-grey under the studio lights: Fronx NEXA Blue needed #07204f (saturated, blue-heavy).
+- Tail lamps above `top(0)`: keep `top` at the tail up to the lamp band (even at a small IoU cost) or they scatter.
