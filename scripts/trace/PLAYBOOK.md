@@ -246,3 +246,13 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   above the lamp tops (Tiago 0.867 vs lamps 0.832) and keep `topRadius` ≤ 0.09, or the lamps' outer ends hook back.
 - Front/rear end decals running past the end face's half-width wrap back along the flank and show as spikes in the side view
   (Tiago tail lamps at z 0.705 on a 0.707 face): keep them ~3 cm inside it.
+- Exter (2026 facelift): the listing gallery had no side view; another portal's gallery had a studio side render (served as
+  WebP, convert before cutout; Python urllib hung on that CDN, plain curl with only a browser User-Agent worked). It read
+  1.69 m over the rails with the axles 4.5 % apart: heights × 0.972, axles at the official wheelbase, and cladding, doors
+  and handles mapped piecewise-linearly with the axles (silhouette kept in photo u). IoU 0.961 / upper 0.960.
+- Tail lamps and the black strip between them broke into horizontal stripes while the tail `top` at u = 0 was the profile's
+  rounded corner (0.8 m); starting `top` at the lamp tops (1.1) made them clean for −0.001 IoU.
+- Paired machined spokes with a dark groove and black pockets: `blade` with no `rimTone` ('twin' was too thin; 'split' +
+  'dark' went all gunmetal).
+- A body-coloured D-pillar over a dark tailgate-glass wrap: `pillars` with `black: false`, a near-zero belt range, the top
+  range starting exactly on `roof.u0`, and a curved `rearEdge`; a top starting past `roof.u0` left a torn patch at the roof.
