@@ -1,7 +1,7 @@
 // SahiCar service worker: instant repeat visits and a working app offline.
 // - hashed build files (/assets/*), 3D loading posters (/3d/*, hashed names) and car images are cache-first: their URLs change when their content does;
 // - pages are network-first with a cached fallback, so a deploy shows up at once but offline still works.
-const VERSION = 'sahicar-v4'
+const VERSION = 'sahicar-v5'
 const ASSETS = `${VERSION}-assets`
 const PAGES = `${VERSION}-pages`
 const IMAGES = `${VERSION}-images`
@@ -59,5 +59,33 @@ self.addEventListener('fetch', (e) => {
           return res
         }),
     ),
+  )
+})
+
+// ── alerts (web push, sent by scripts/push-send.mjs): { title, body, url, tag }
+self.addEventListener('push', (e) => {
+  let m = {}
+  try { m = e.data ? e.data.json() : {} } catch { m = { body: e.data ? e.data.text() : '' } }
+  e.waitUntil(
+    self.registration.showNotification(m.title || 'SahiCar', {
+      body: m.body || '',
+      icon: '/icon-192.png',
+      badge: '/icon-192.png',
+      tag: m.tag || undefined,
+      data: { url: m.url || '/' },
+    }),
+  )
+})
+
+// tapping an alert opens its page, reusing an open SahiCar window when there is one
+self.addEventListener('notificationclick', (e) => {
+  e.notification.close()
+  const url = new URL(e.notification.data?.url || '/', location.origin).href
+  e.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((list) => {
+      const w = list.find((c) => new URL(c.url).origin === location.origin)
+      if (w) return w.navigate(url).then((c) => (c || w).focus())
+      return self.clients.openWindow(url)
+    }),
   )
 })

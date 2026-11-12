@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CarImage } from '../components/CarImage'
+import { PushOptIn } from '../components/PushOptIn'
 import { carById, timingEvents, upcoming } from '../data'
 import { BODY_LABEL, FUEL_LABEL } from '../data/types'
 import { expectedLabel, monthsUntil } from '../engine/timing'
@@ -34,6 +35,7 @@ export default function Upcoming() {
         <div className="eyebrow">Buy now or wait?</div>
         <h1>Every car <span className="grad">coming to India</span>.</h1>
         <p className="muted">{upcoming.length} launches, new generations and facelifts we’re tracking — each matched against today’s cars, so your SahiScore results can warn you when a better one is weeks away.</p>
+        <PushOptIn from="upcoming" title="Get launch alerts" text="A notification when a car on this page launches or gets its price, and when cars you saved change price." />
         <div className="tabs">
           {[['all', 'All'], ['confirmed', 'Confirmed'], ['testing', 'Testing'], ['ev', 'Electric']].map(([k, l]) => (
             <button key={k} className={`chip ${filter === k ? 'cyan' : ''}`} onClick={() => setFilter(k)}>{l}</button>

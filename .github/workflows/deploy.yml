@@ -24,6 +24,8 @@ jobs:
       HAS_SA: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SAHICAR_IN != '' }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # the alerts step compares the car data with the previous deploy
 
       - uses: actions/setup-node@v4
         with:
@@ -43,6 +45,20 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SAHICAR_IN }}
           channelId: live
           projectId: sahicar-in
+
+      # alerts: once the new data is live, tell subscribers about price changes on their saved cars and new launches
+      # (skips itself when the car data didn't change, or when the push secrets aren't set)
+      - name: Send alerts about what changed
+        if: env.HAS_SA == 'true' && github.event_name == 'push' && github.event.before != '0000000000000000000000000000000000000000'
+        env:
+          VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
+          FIREBASE_ADMIN_SA: ${{ secrets.FIREBASE_ADMIN_SA }}
+        run: |
+          if git diff --quiet ${{ github.event.before }} HEAD -- src/data/cars.json; then
+            echo "car data unchanged: no alerts"
+          else
+            node scripts/push-send.mjs --changes ${{ github.event.before }}
+          fi
 
       - name: Explain a skipped deploy
         if: env.HAS_SA != 'true'

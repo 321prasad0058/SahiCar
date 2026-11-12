@@ -834,6 +834,34 @@ button.v-row:hover {
   align-content: start;
 }
 
+/* ── push alerts opt-in */
+.push-optin {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.push-ico {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent, #0b6b4f) 12%, transparent);
+  color: var(--accent, #0b6b4f);
+  flex: none;
+}
+.push-copy {
+  flex: 1 1 240px;
+  display: grid;
+  gap: 2px;
+}
+.push-copy p {
+  margin: 0;
+}
+
 /* ── garage & auth */
 .sync {
   display: flex;

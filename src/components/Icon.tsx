@@ -1,6 +1,7 @@
 // A small inline icon set (stroke icons, 24px grid).
 const PATHS: Record<string, string> = {
   check: 'M5 12.5l4.2 4.2L19 7',
+  bell: 'M6 16V11a6 6 0 0112 0v5l1.5 2h-15L6 16zM10 20.5a2 2 0 004 0',
   alert: 'M12 8v5M12 16.5v.5M10.3 3.9L2.6 17.5A2 2 0 004.3 20.5h15.4a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z',
   heart: 'M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z',
   compare: 'M8 4v16M16 4v16M4 8h4M16 16h4',

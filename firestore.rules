@@ -38,6 +38,22 @@ service cloud.firestore {
         && request.resource.data.at == request.time;
     }
 
+    // push alerts: a browser can add, update or remove its own subscription (the id is a SHA-256 of its push
+    // address, so it can't be guessed); nobody can read them from the app. The sender reads them with admin access.
+    match /push/{id} {
+      allow create, update: if id.size() == 64
+        && request.resource.data.keys().hasOnly(['sub', 'cars', 'topics', 'platform', 'at'])
+        && request.resource.data.sub is map && request.resource.data.sub.keys().hasOnly(['endpoint', 'keys'])
+        && request.resource.data.sub.endpoint is string && request.resource.data.sub.endpoint.size() <= 800
+        && request.resource.data.sub.endpoint.matches('https://.*')
+        && request.resource.data.sub['keys'] is map && request.resource.data.sub['keys'].keys().hasOnly(['p256dh', 'auth'])
+        && request.resource.data.cars is list && request.resource.data.cars.size() <= 50
+        && request.resource.data.topics is list && request.resource.data.topics.size() <= 5
+        && request.resource.data.platform in ['ios', 'android', 'desktop']
+        && request.resource.data.at == request.time;
+      allow delete: if id.size() == 64;
+    }
+
     // nothing else is readable or writable
     match /{document=**} {
       allow read, write: if false;

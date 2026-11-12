@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CarCard } from '../components/CarCard'
+import { PushOptIn } from '../components/PushOptIn'
 import { toast } from '../components/Toast'
 import { carById } from '../data'
 import { fb, useAuth } from '../state/auth'
@@ -43,6 +44,7 @@ export default function Garage() {
             <DeleteAccount />
           </div>
         )}
+        <PushOptIn from="garage" title="Price alerts for your shortlist" text="Get a notification when a car you saved changes price, gets an update, or a better rival launches." />
         {list.length ? (
           <div className="card-grid">{list.map((c) => <CarCard key={c.id} car={c} />)}</div>
         ) : (
