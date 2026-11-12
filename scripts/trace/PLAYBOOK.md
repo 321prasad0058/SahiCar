@@ -159,3 +159,14 @@ Add the id to `READY` in src/webgl/cars/specs.ts **and** to `SHOWCASE_IDS` in sr
   (no 6 % taper in the last 3 cm) and use `topRadius` ~0.1; a `silver` projector disc also reads as a hole (use a small `head`).
 - `rimTone: 'dark'` turns `split`/`turbine` almost all gunmetal; for a mostly-machined alloy, plain `swirl` (no rimTone)
   gives silver spokes over dark pockets.
+- Big off-roader flares (Thar Roxx): use the cladding's own flare with `cladding.flareOut` (lateral reach, e.g. 0.075) — raised
+  side decals with a large `depth` tore along the arch edge. `cladding.flareU` keeps the flare off an upright nose: the
+  cladding is a full tube, so a flare station in front of the grille face lids the lower grille in black.
+- Black bumpers whose top surface must be black: `cladding.cover: true` (and a traced cladding top above the bumper's `top`).
+- The wheel-well box reaches `archR` ahead of the axle: on a short-nosed upright face keep axle + archR behind the face, or a
+  black slab shows through below the grille (Thar: archGap 0.04, the flare covers the rest of the opening).
+- A spare wheel on the tailgate: `spare: { y }` (its outer face at u = 0; the official length includes it). Model the bumper
+  under it as a short low `top` and lift `top` to the belt at the tailgate face.
+- Body-coloured door frames on a black hard top: pillars with `black: false` plus a 'body' side decal along the window tops
+  (kept below ghTop − 0.075, where the black roof band starts). Thin black pillars on the hard top's corners tore at their
+  tops; the dark quarter glass alone reads right.
