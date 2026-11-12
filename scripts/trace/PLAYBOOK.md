@@ -79,3 +79,14 @@ Add the id to `READY` in src/webgl/cars/specs.ts **and** to `SHOWCASE_IDS` in sr
 - Very dark paints still render light under the studio lights: the Creta's deep teal needed #0c2a2e.
 - Decal skins are pushed out along normals averaged per grid vertex, so skid plates and lamp bars no longer stripe;
   if stripes come back, look for decals running past the end face's half-width.
+- Dark paint (Brezza): `paintTop`/`paintLow` are noise. Read belt, cladding top, shut lines and pillars off a
+  `gridify` of the cut-out (nose left: u = (x_tail − x) / length_px, y_m = (ground_px − y) / pxPerM).
+- When the official height includes roof rails, the greenhouse top is the silhouette minus ~0.05 under the rails.
+- Black cladding along the lower doors: set `cladding.cut: true`, or the section's rounded top tucks the band
+  under the paint and only a sliver shows.
+- A plate over trim or a skid plate: notch those decals round the plate (≈ ±0.25 × 0.11 m) or it gets buried.
+- Lamps striping in streaks = they sit above the end face: the nose/tail `top` at u = 1 / 0 must reach the top of
+  the lamps (decals above it hop between rings). A boxy car also wants `topRadius` ~0.08 so the face stays flat.
+- Same for low skid plates: the `sill` at the ends must sit ~7 cm below them (the bottom corner is rounded).
+- Overlapping decals need distinct `layer`s; fine parts on curved ends get `step: 0.005`. Skid plates: `satin`,
+  bumper reflectors: `reflector` (no lamp glow). Spoiler shape: `spoiler: { len, thick, tilt }`.
