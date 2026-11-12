@@ -246,3 +246,11 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   above the lamp tops (Tiago 0.867 vs lamps 0.832) and keep `topRadius` ≤ 0.09, or the lamps' outer ends hook back.
 - Front/rear end decals running past the end face's half-width wrap back along the flank and show as spikes in the side view
   (Tiago tail lamps at z 0.705 on a 0.707 face): keep them ~3 cm inside it.
+- XUV 7XO: `both(smooth(half))` smooths the half outline as a closed shape, cutting its centre-line edge into a V notch
+  (grille, intake); smooth the mirrored outline instead: `smooth(both(half), 1)`.
+- A pale ellipse on a gloss end decal that moves with the camera is the studio softbox reflected in the clearcoat, not a hole:
+  `dropSlivers`, `rakedEnds` and raising `top` don't change it.
+- On a big blunt SUV nose a `side` headlamp wrap read as a second lamp on the wing (the corner roll between them stays body
+  colour); dropped. At the tail a wider end face (`width` 0.93 at u = 0) let the lamp columns reach 0.82 m without fraying,
+  so the side lamp wrap nearly meets them.
+- Close gallery camera again: a uniform 1.5 cm blue band over roof and bonnet; lowering both by it took IoU 0.955 → 0.962.
