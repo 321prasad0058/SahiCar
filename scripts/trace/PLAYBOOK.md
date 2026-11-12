@@ -104,3 +104,14 @@ Add the id to `READY` in src/webgl/cars/specs.ts **and** to `SHOWCASE_IDS` in sr
 - Side decals must stay below `top(u) − 0.01`: above it they project onto the glasshouse, and outside the glasshouse's
   u range that lands on the centre line (stray marks in the middle of the tail).
 - Thin lines (shut lines) need ≥ 12 mm height or the decal grid breaks them into dashes.
+- Sedans (Dzire): `greenhouse.u0` sits where the rear glass meets the boot lid; `top` below it is the flat boot deck, with a
+  short ducktail at the tail. The official height includes the shark-fin: the roof traced ~1.45 m against 1.525.
+- Glass/roof boundaries (`roof.u0`, `roof.u1`) should sit exactly on a glasshouse station, or the boundary row zigzags
+  (each quad's two triangles fall on opposite sides). Stations: u0 + (u1 − u0)·(0.5 − 0.5·cos(πi/140)).
+- A flat fin sticking out at the base of the rear glass / A-pillar = the glasshouse's bottom ring is wider than the body's
+  rounded top edge. Lower `topRadius` (Dzire: 0.08) so the body edge reaches it.
+- Speckled lamps (gloss showing through a lens) on a raked nose don't go away with layers or depth; pull the lamp's outer
+  end in (≤ ~0.73 m on a 1.73 m car) and put the wrap-around part on the flank as a `side` decal instead.
+- Chrome grille slats: one thin chrome decal per slat (14 mm, `depth` ~0.012) over a gloss grille, instead of `slats`.
+- `exact.ts` has `band(path, w)` (thin lines along a path, e.g. a boot-lid shut line) and `both(half)` (mirror a half outline).
+- A gallery photo with tyres in grass: patch the hidden tyre bottom in the cut-out before extract-side, or it mis-levels.

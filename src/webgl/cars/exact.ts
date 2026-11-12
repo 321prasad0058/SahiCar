@@ -1,7 +1,7 @@
 // Exact models traced from studio side, front and rear views of the current model, scaled to the official
 // length and wheelbase (overhangs split in the photo's proportion). Heights in metres; u runs 0 (tail) … 1 (nose);
 // front/rear decal x is across the width (−1 … 1). Each car is checked side by side against its photos.
-import type { CarSpec } from './build'
+import type { CarSpec, Decal } from './build'
 
 /** Tata Nexon (2023 facelift). 3995 × 1804 × 1620, wheelbase 2498, 215/60 R16. */
 export const NEXON: CarSpec = {
@@ -413,4 +413,118 @@ export const SWIFT: CarSpec = {
   plate: 'MH 12 SW 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT]
+/** A thin band along a path (shut lines, strips): each point offset by ±w/2 across the path. */
+function band(path: [number, number][], w: number): [number, number][] {
+  const off = path.map((_, i) => {
+    const a = path[Math.max(0, i - 1)], b = path[Math.min(path.length - 1, i + 1)]
+    const dx = b[0] - a[0], dy = b[1] - a[1], l = Math.hypot(dx, dy) || 1
+    return [(-dy / l) * (w / 2), (dx / l) * (w / 2)]
+  })
+  return [
+    ...path.map((p, i) => [p[0] + off[i][0], p[1] + off[i][1]] as [number, number]),
+    ...path.map((p, i) => [p[0] - off[i][0], p[1] - off[i][1]] as [number, number]).reverse(),
+  ]
+}
+/** a right-half outline (z ≥ 0, bottom → top) mirrored into a full outline across the centre line */
+function both(half: [number, number][]): [number, number][] {
+  return [...half, ...half.map(([z, y]) => [-z, y] as [number, number]).reverse()]
+}
+// the Dzire's grille: wide at the top, bulging at the sides, rounded into its lower corners
+const DZIRE_GRILLE: [number, number][] = [[0.4, 0.316], [0.455, 0.328], [0.495, 0.36], [0.52, 0.42], [0.525, 0.5], [0.515, 0.58], [0.5, 0.635], [0.48, 0.662], [0.46, 0.668]]
+const dzireSlat = (y: number, hw: number): Decal => ({
+  step: 0.005, mat: 'chrome', layer: 1, depth: 0.012,
+  poly: [[-hw, y], [hw, y], [hw + 0.005, y + 0.007], [hw, y + 0.014], [-hw, y + 0.014], [-hw - 0.005, y + 0.007]],
+})
+
+/** Maruti Suzuki Dzire (2024, 4th gen). 3995 × 1735 × 1525, wheelbase 2450, 185/65 R15.
+ *  Side profile from a levelled gallery side photo (roof 1.45 m: the official height includes the shark-fin antenna);
+ *  overhangs from the Swift's nose plus the longer boot. Belt, pillars and handles read off the photo on a pixel grid,
+ *  lamps and grille from a straight front and a rear three-quarter photo. */
+export const DZIRE: CarSpec = {
+  id: 'maruti-dzire',
+  name: 'Maruti Suzuki Dzire',
+  rakedEnds: true,
+  L: 3.995, W: 1.735, H: 1.525,
+  axles: [0.194, 0.8075],
+  tyreR: 0.31, tyreW: 0.185, rim: 0.614, wheel: { style: 'split', spokes: 5 },
+  archGap: 0.045, archSquare: 0.15,
+  sill: [[0, 0.34], [0.006, 0.29], [0.015, 0.28], [0.03, 0.275], [0.05, 0.265], [0.07, 0.24], [0.1, 0.201], [0.2, 0.176], [0.29, 0.166], [0.5, 0.166], [0.55, 0.158], [0.6, 0.142], [0.7, 0.133], [0.8, 0.129], [0.88, 0.122], [0.91, 0.121], [0.93, 0.136], [0.95, 0.15], [0.97, 0.158], [0.985, 0.166], [0.993, 0.18], [1, 0.25]],
+  // the boot: a short ducktail lip and the flat boot lid; then the belt (rising to the C-pillar) and the bonnet
+  top: [[0, 0.5], [0.003, 0.86], [0.007, 0.99], [0.012, 1.05], [0.02, 1.073], [0.035, 1.083], [0.06, 1.091], [0.08, 1.098], [0.1, 1.108], [0.15, 1.1], [0.2, 1.086], [0.3, 1.058], [0.4, 1.038], [0.5, 1.026], [0.6, 1.018], [0.7, 1.014], [0.735, 1.018], [0.76, 0.996], [0.8, 0.963], [0.85, 0.933], [0.9, 0.896], [0.93, 0.864], [0.95, 0.834], [0.965, 0.803], [0.975, 0.778], [0.983, 0.743], [0.99, 0.678], [0.996, 0.6], [1, 0.48]],
+  // round in plan: both ends taper hard into the corners
+  width: [[0, 0.7], [0.005, 0.79], [0.015, 0.875], [0.035, 0.935], [0.07, 0.972], [0.13, 0.995], [0.18, 1], [0.45, 0.99], [0.8, 0.995], [0.86, 0.99], [0.92, 0.965], [0.955, 0.92], [0.978, 0.85], [0.992, 0.77], [1, 0.68]],
+  crown: 0.02,
+  bulge: 0.04,
+  shoulder: { y: [[0, 0.98], [0.2, 0.965], [0.5, 0.935], [0.8, 0.9], [1, 0.84]], inset: 0.035 },
+  haunch: 0.06,
+  topRadius: 0.08,
+  noseSweep: 0.3,
+  tailSweep: 0.22,
+  greenhouse: {
+    u0: 0.1, u1: 0.735, tumble: 0.62,
+    // the rear glass rising off the boot lid, a long gently domed roof, then the windscreen
+    top: [[0.1, 1.108], [0.12, 1.163], [0.15, 1.224], [0.2, 1.311], [0.25, 1.384], [0.28, 1.406], [0.32, 1.424], [0.36, 1.434], [0.4, 1.438], [0.45, 1.435], [0.49, 1.424], [0.52, 1.406], [0.55, 1.382], [0.58, 1.344], [0.62, 1.271], [0.66, 1.196], [0.7, 1.111], [0.735, 1.028]],
+  },
+  roof: { u0: 0.267, u1: 0.5488, black: false },
+  pillars: [
+    // body-coloured C-pillar behind the rear quarter glass; black B-pillar and quarter-glass divider; body A-pillar
+    { bottom: [0.1, 0.192], top: [0.17, 0.235], black: false },
+    { bottom: [0.253, 0.26], top: [0.253, 0.26], black: true },
+    { bottom: [0.387, 0.418], top: [0.388, 0.42], black: true },
+    { bottom: [0.64, 0.735], top: [0.545, 0.565], black: false },
+  ],
+  doors: [[0.215, 0.168], [0.436, 0.418], [0.686, 0.698]],
+  windowChrome: true,
+  front: [
+    // gloss-black band under the bonnet edge carrying the badge, the chrome strip under it running lamp to lamp
+    { step: 0.005, mat: 'gloss', poly: [[-0.475, 0.688], [0.475, 0.688], [0.475, 0.76], [-0.475, 0.76]] },
+    { step: 0.005, mat: 'chrome', poly: [[-0.49, 0.672], [0.49, 0.672], [0.49, 0.688], [-0.49, 0.688]], layer: 1 },
+    // wide, slim LED headlamps, the light strip along their lower edge running into the chrome strip
+    { step: 0.005, depth: 0.002, mat: 'gloss', mirror: true, poly: [[0.48, 0.662], [0.48, 0.752], [0.6, 0.782], [0.68, 0.806], [0.715, 0.814], [0.73, 0.8], [0.733, 0.745], [0.72, 0.71], [0.67, 0.68]] },
+    { step: 0.005, depth: 0.004, mat: 'head', mirror: true, poly: [[0.5, 0.708], [0.5, 0.742], [0.6, 0.768], [0.68, 0.793], [0.712, 0.8], [0.72, 0.765], [0.68, 0.742], [0.6, 0.724]], layer: 1 },
+    { step: 0.005, depth: 0.004, mat: 'drl', mirror: true, poly: [[0.49, 0.684], [0.6, 0.692], [0.67, 0.702], [0.725, 0.72], [0.725, 0.736], [0.67, 0.718], [0.6, 0.708], [0.49, 0.7]], layer: 2 },
+    // the wide grille: gloss black behind five chrome slats
+    { step: 0.005, mat: 'gloss', poly: both(DZIRE_GRILLE) },
+    dzireSlat(0.36, 0.47), dzireSlat(0.42, 0.495), dzireSlat(0.48, 0.5), dzireSlat(0.541, 0.495), dzireSlat(0.6, 0.48),
+    // fog lamps in black pods
+    { step: 0.005, depth: 0.003, mat: 'gloss', mirror: true, poly: [[0.575, 0.33], [0.64, 0.352], [0.685, 0.385], [0.7, 0.43], [0.698, 0.488], [0.6, 0.485], [0.585, 0.46]] },
+    { step: 0.005, depth: 0.004, mat: 'silver', mirror: true, poly: [[0.65, 0.415], [0.672, 0.418], [0.684, 0.432], [0.682, 0.455], [0.662, 0.462], [0.645, 0.452], [0.642, 0.43]], layer: 1 },
+    // black lower lip
+    { step: 0.005, mat: 'trim', poly: [[-0.6, 0.2], [0.6, 0.2], [0.66, 0.24], [-0.66, 0.24]] },
+  ],
+  rear: [
+    // the gloss-black lip spoiler along the boot lid's trailing edge
+    { step: 0.005, mat: 'gloss', poly: [[-0.6, 1.035], [0.6, 1.035], [0.62, 1.05], [0.58, 1.068], [-0.58, 1.068], [-0.62, 1.05]] },
+    // the boot lid's shut line round the plate recess
+    { step: 0.005, mat: 'gloss', depth: 0.001, poly: band([[0.54, 0.83], [0.515, 0.74], [0.48, 0.66], [0.43, 0.622], [0.36, 0.612], [0, 0.61], [-0.36, 0.612], [-0.43, 0.622], [-0.48, 0.66], [-0.515, 0.74], [-0.54, 0.83]], 0.012) },
+    // gloss-black strip across the boot lid joining the lamps, a chrome strip along its top
+    { step: 0.005, mat: 'gloss', poly: [[-0.56, 0.925], [0.56, 0.925], [0.56, 0.96], [-0.56, 0.96]] },
+    { step: 0.005, mat: 'chrome', poly: [[-0.56, 0.96], [0.56, 0.96], [0.56, 0.975], [-0.56, 0.975]], layer: 1 },
+    // tail lamps: dark lenses with a Y of red light guides, a clear reversing lamp at the inner bottom
+    { step: 0.005, depth: 0.002, mat: 'gloss', mirror: true, poly: [[0.545, 0.815], [0.53, 0.955], [0.6, 0.972], [0.73, 0.998], [0.76, 0.998], [0.765, 0.9], [0.758, 0.815]], layer: 1 },
+    { step: 0.005, depth: 0.005, mat: 'tail', mirror: true, poly: [[0.55, 0.935], [0.64, 0.952], [0.73, 0.974], [0.755, 0.978], [0.755, 0.962], [0.73, 0.958], [0.64, 0.936], [0.55, 0.92]], layer: 2 },
+    { step: 0.005, depth: 0.005, mat: 'tail', mirror: true, poly: [[0.622, 0.942], [0.665, 0.951], [0.75, 0.852], [0.717, 0.84]], layer: 3 },
+    { step: 0.005, depth: 0.005, mat: 'tail', mirror: true, poly: [[0.685, 0.957], [0.72, 0.965], [0.756, 0.912], [0.755, 0.872]], layer: 3 },
+    { step: 0.005, mat: 'silver', mirror: true, poly: [[0.555, 0.83], [0.63, 0.83], [0.6, 0.895], [0.553, 0.895]], layer: 2, depth: 0.004 },
+    // black lower bumper
+    { step: 0.005, mat: 'trim', poly: [[-0.64, 0.26], [0.64, 0.26], [0.7, 0.33], [0.71, 0.39], [-0.71, 0.39], [-0.7, 0.33]] },
+  ],
+  side: [
+    // body-coloured door handles (the relief gives them a dark rim)
+    { step: 0.005, mat: 'body', depth: 0.01, poly: [[0.437, 0.9], [0.495, 0.9], [0.495, 0.928], [0.437, 0.928]] },
+    { step: 0.005, mat: 'body', depth: 0.01, poly: [[0.19, 0.926], [0.25, 0.926], [0.25, 0.954], [0.19, 0.954]] },
+    // the headlamp wrapping back along the front wing, its light strip along the lower edge
+    { step: 0.005, depth: 0.002, mat: 'gloss', poly: [[0.898, 0.828], [0.93, 0.826], [0.955, 0.808], [0.972, 0.77], [0.982, 0.725], [0.985, 0.69], [0.96, 0.684], [0.93, 0.694], [0.91, 0.76]] },
+    { step: 0.005, depth: 0.004, mat: 'drl', layer: 1, poly: [[0.912, 0.75], [0.935, 0.705], [0.96, 0.697], [0.984, 0.7], [0.984, 0.714], [0.96, 0.711], [0.94, 0.719], [0.918, 0.762]] },
+    // the tail lamp wrapping round onto the flank, its red guide along the top
+    { step: 0.005, mat: 'gloss', poly: [[0.052, 0.995], [0.045, 1.012], [0.014, 1.012], [0.012, 0.815], [0.048, 0.815]] },
+    { step: 0.005, depth: 0.005, mat: 'tail', layer: 1, poly: [[0.05, 0.99], [0.044, 1.003], [0.014, 1.003], [0.014, 0.989]] },
+  ],
+  plates: { front: 0.47, rear: 0.8 },
+  mirrors: 'body',
+  rimTone: 'dark',
+  paint: '#213650', // Alluring Blue
+  plate: 'MH 12 DZ 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, DZIRE]
