@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Merge one car's model branch into the current branch without splicing specs into each other.
 
-usage: python3 scripts/trace/merge-car.py <branch> <EXPORT_NAME> <car-id>
+usage: python3 scripts/trace/merge-car.py <branch> <EXPORT_NAME[,EXPORT2]> <car-id[,car-id2]>   (one build may carry two related cars)
 
 exact.ts, specs.ts (READY), CarDetail.tsx (SHOWCASE_IDS) and PLAYBOOK.md are rebuilt from the current version plus
 only what the branch ADDED since it forked (checked: the branch must not have changed anything else in them). Other
@@ -9,7 +9,9 @@ files are merged by git as usual. Leaves the merge staged but uncommitted, so it
 """
 import difflib, re, subprocess, sys
 
-branch, export, car = sys.argv[1:4]
+branch, exports, cars_arg = sys.argv[1:4]
+exports = [e for e in exports.split(',') if e]
+cars = [c for c in cars_arg.split(',') if c]
 sh = lambda *a: subprocess.run(a, check=True, capture_output=True, text=True).stdout
 base = sh('git', 'merge-base', 'HEAD', branch).strip()
 show = lambda rev, path: sh('git', 'show', f'{rev}:{path}')
@@ -32,14 +34,15 @@ EX = re.compile(r"export const EXACT: CarSpec\[\] = \[([^\]]*)\]\n")
 head = show('HEAD', 'src/webgl/cars/exact.ts')
 names = EX.search(head).group(1)
 section = added('src/webgl/cars/exact.ts', lambda s: EX.sub('', s))
-exact = EX.sub('', head).rstrip('\n') + '\n\n' + section + f'\n\nexport const EXACT: CarSpec[] = [{names}, {export}]\n'
+exact = EX.sub('', head).rstrip('\n') + '\n\n' + section + f'\n\nexport const EXACT: CarSpec[] = [{names}, {", ".join(exports)}]\n'
 open('src/webgl/cars/exact.ts', 'w').write(exact)
 
 def add_id(path, pattern):
     s = show('HEAD', path)
-    m = re.search(pattern, s)
-    if f"'{car}'" not in m.group(0):
-        s = s[: m.end() - 1] + f", '{car}'" + s[m.end() - 1 :]
+    for car in cars:
+        m = re.search(pattern, s)
+        if f"'{car}'" not in m.group(0):
+            s = s[: m.end() - 1] + f", '{car}'" + s[m.end() - 1 :]
     open(path, 'w').write(s)
 
 add_id('src/webgl/cars/specs.ts', r"const READY: string\[\] = \[[^\]]*\]")
@@ -50,4 +53,4 @@ open('scripts/trace/PLAYBOOK.md', 'w').write(pb)
 
 subprocess.run(['git', 'add', 'src/webgl/cars/exact.ts', 'src/webgl/cars/specs.ts', 'src/pages/CarDetail.tsx', 'scripts/trace/PLAYBOOK.md'], check=True)
 left = sh('git', 'diff', '--name-only', '--diff-filter=U').strip()
-print(f'{car}: {section.count(chr(10)) + 1} spec lines added' + (f'; still conflicted: {left}' if left else '; ready to type-check and commit'))
+print(f'{"+".join(cars)}: {section.count(chr(10)) + 1} spec lines added' + (f'; still conflicted: {left}' if left else '; ready to type-check and commit'))
