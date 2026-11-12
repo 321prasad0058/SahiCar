@@ -113,7 +113,7 @@ export class Studio {
 
   /** Dev: a photographer's long-lens shot from a named direction, for comparing against reference photos. */
   shoot(name: 'side' | 'front' | 'rear' | 'f34' | 'r34', fov = 14) {
-    const dir = { side: [0, 0.1, -1], front: [1, 0.12, 0], rear: [-1, 0.16, 0], f34: [0.78, 0.22, -0.62], r34: [-0.75, 0.25, -0.62] }[name]
+    const dir = { side: [0, 0, -1], front: [1, 0.12, 0], rear: [-1, 0.16, 0], f34: [0.78, 0.22, -0.62], r34: [-0.75, 0.25, -0.62] }[name]
     const v = new THREE.Vector3(dir[0], dir[1], dir[2]).normalize()
     const d = (name === 'front' || name === 'rear' ? 1.25 : 1.75) / Math.tan(THREE.MathUtils.degToRad(fov / 2))
     this.camera.fov = fov
@@ -124,6 +124,23 @@ export class Studio {
     this.controls.target.set(0, 0.8, 0)
     this.camera.position.copy(v.multiplyScalar(d)).add(new THREE.Vector3(0, 0.8, 0))
     this.camera.lookAt(this.controls.target)
+    this.dirty = true
+  }
+
+  /** Dev: a flat black silhouette of the car alone (glass included; glows, floor ring and ground shadow hidden),
+   *  for scoring a traced model against the outline of its reference photo (scripts/trace/compare-side.cjs). */
+  silhouette() {
+    const black = new THREE.MeshBasicMaterial({ color: 0x000000, side: THREE.DoubleSide })
+    this.scene.environment = null
+    this.scene.traverse((o) => {
+      if (o === this.scene || o === this.rig.group) return
+      if ((o as THREE.Sprite).isSprite || o.name === 'contact-shadow') { o.visible = false; return }
+      if ((o as THREE.Mesh).isMesh) {
+        if (!this.rig.group.getObjectById(o.id)) { o.visible = false; return } // the floor ring
+        ;(o as THREE.Mesh).material = black
+      }
+    })
+    this.renderer.toneMapping = THREE.NoToneMapping
     this.dirty = true
   }
 

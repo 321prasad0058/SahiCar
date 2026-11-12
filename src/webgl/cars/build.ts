@@ -630,6 +630,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     p.rotateX(-Math.PI / 2)
     disposables.push(m, p)
     shadowMesh = new THREE.Mesh(p, m)
+    shadowMesh.name = 'contact-shadow'
     shadowMesh.position.y = 0.004
     shadowMesh.renderOrder = -1
     group.add(shadowMesh)

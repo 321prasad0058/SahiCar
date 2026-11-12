@@ -70,4 +70,74 @@ export const NEXON: CarSpec = {
   plate: 'MH 12 NX 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON]
+
+/** Tata Punch (2026 facelift). 3876 × 1742 × 1615, wheelbase 2445, 195/60 R16.
+ *  Side profile measured with scripts/trace/extract-side.cjs from a levelled side photo (height came out 1.602 vs
+ *  1.615 official); axles set to the official wheelbase with the overhangs split as in the photo (0.432 : 0.568).
+ *  Lamps and lower grille from Tata's reveal images (front three-quarter, straight rear). */
+export const PUNCH: CarSpec = {
+  id: 'tata-punch',
+  name: 'Tata Punch',
+  L: 3.876, W: 1.742, H: 1.615,
+  axles: [0.1596, 0.7904],
+  tyreR: 0.32, tyreW: 0.195, rim: 0.635, wheel: { style: 'twin', spokes: 5 },
+  archGap: 0.055, archSquare: 0.35,
+  sill: [[0, 0.47], [0.02, 0.31], [0.05, 0.265], [0.1, 0.24], [0.26, 0.215], [0.5, 0.222], [0.7, 0.222], [0.86, 0.205], [0.92, 0.226], [0.96, 0.254], [0.985, 0.3], [1, 0.52]],
+  // tailgate below the glass, the belt rising gently towards the rear with the body-coloured kick at the C-pillar,
+  // then the cowl and the bonnet falling to the nose
+  top: [[0, 0.9], [0.01, 0.96], [0.025, 0.99], [0.06, 1.0], [0.1, 1.025], [0.14, 1.04], [0.165, 1.12], [0.2, 1.13], [0.3, 1.117], [0.4, 1.101], [0.5, 1.084], [0.6, 1.068], [0.69, 1.07], [0.715, 1.13], [0.74, 1.128], [0.8, 1.098], [0.84, 1.083], [0.88, 1.06], [0.92, 1.018], [0.96, 0.951], [0.98, 0.845], [0.993, 0.72], [1, 0.62]],
+  width: [[0, 0.86], [0.01, 0.92], [0.03, 0.96], [0.07, 0.985], [0.12, 0.997], [0.5, 1], [0.88, 0.995], [0.93, 0.98], [0.97, 0.94], [0.99, 0.89], [1, 0.84]],
+  crown: 0.02,
+  bulge: 0.012,
+  noseSweep: 0.15,
+  tailSweep: 0.09,
+  greenhouse: {
+    u0: 0.02, u1: 0.715, tumble: 0.76,
+    // the tailgate glass rises steeply to the roof spoiler; the roof stays flat over both rows, then the screen falls
+    top: [[0.02, 0.99], [0.03, 1.12], [0.06, 1.21], [0.085, 1.33], [0.1, 1.45], [0.13, 1.48], [0.16, 1.51], [0.2, 1.555], [0.3, 1.565], [0.4, 1.57], [0.48, 1.565], [0.52, 1.545], [0.56, 1.495], [0.6, 1.42], [0.64, 1.335], [0.68, 1.24], [0.715, 1.13]],
+  },
+  roof: { u0: 0.12, u1: 0.53, black: true },
+  pillars: [
+    // blacked-out pillars all round; the wide C-pillar carries the rear door handle
+    { bottom: [0.02, 0.06], top: [0.09, 0.125], black: true },
+    { bottom: [0.15, 0.205], top: [0.15, 0.19], black: true },
+    { bottom: [0.425, 0.44], top: [0.425, 0.44], black: true },
+    { bottom: [0.7, 0.715], top: [0.52, 0.535], black: true },
+  ],
+  cladding: { top: [[0, 0.6], [0.04, 0.6], [0.08, 0.75], [0.13, 0.775], [0.2, 0.745], [0.25, 0.55], [0.35, 0.58], [0.5, 0.55], [0.65, 0.49], [0.7, 0.63], [0.74, 0.78], [0.8, 0.795], [0.86, 0.76], [0.9, 0.6], [0.93, 0.55], [0.95, 0.74], [1, 0.74]], flare: 0.13 },
+  doors: [[0.205, 0.205], [0.432, 0.432], [0.7, 0.69]],
+  front: [
+    // the slim full-width LED light bar under the bonnet's edge
+    { mat: 'gloss', poly: [[-0.86, 0.9], [0.86, 0.9], [0.84, 0.95], [-0.84, 0.95]] },
+    { mat: 'drl', poly: [[-0.84, 0.918], [0.84, 0.918], [0.83, 0.932], [-0.83, 0.932]], layer: 1 },
+    // headlamps in black pods at the top corners of the bumper
+    { mat: 'gloss', mirror: true, poly: [[0.6, 0.7], [0.87, 0.7], [0.87, 0.82], [0.63, 0.82]] },
+    { mat: 'head', mirror: true, poly: [[0.66, 0.73], [0.84, 0.73], [0.84, 0.79], [0.68, 0.79]], layer: 1 },
+    // the big black lower grille with mesh, and the silver skid plate wrapping the corners
+    { mat: 'trim', poly: [[-0.86, 0.24], [0.86, 0.24], [0.86, 0.66], [0.55, 0.68], [-0.55, 0.68], [-0.86, 0.66]] },
+    { mat: 'mesh', poly: [[-0.55, 0.42], [0.55, 0.42], [0.52, 0.6], [-0.52, 0.6]], layer: 1 },
+    { mat: 'silver', layer: 1, poly: [[-0.7, 0.24], [0.7, 0.24], [0.82, 0.34], [0.6, 0.4], [-0.6, 0.4], [-0.82, 0.34]] },
+  ],
+  rear: [
+    // the connected LED light bar across the tailgate just under the glass, with the lamp clusters at the corners
+    { mat: 'gloss', poly: [[-0.9, 1.0], [0.9, 1.0], [0.9, 1.07], [-0.9, 1.07]] },
+    { mat: 'tail', poly: [[-0.86, 1.03], [0.86, 1.03], [0.86, 1.045], [-0.86, 1.045]], layer: 1 },
+    { mat: 'tail', mirror: true, poly: [[0.74, 0.99], [0.9, 0.99], [0.9, 1.08], [0.78, 1.08]], layer: 1 },
+    // black lower bumper with small reflectors
+    { mat: 'trim', poly: [[-0.9, 0.36], [0.9, 0.36], [0.9, 0.56], [-0.9, 0.56]] },
+    { mat: 'tail', mirror: true, poly: [[0.72, 0.5], [0.84, 0.5], [0.84, 0.52], [0.72, 0.52]], layer: 1 },
+  ],
+  side: [
+    // front door handle; the rear one hides in the C-pillar
+    { mat: 'gloss', poly: [[0.545, 0.95], [0.6, 0.95], [0.6, 0.98], [0.545, 0.98]] },
+  ],
+  plates: { front: 0.5, rear: 0.62 },
+  rails: 'black',
+  spoiler: true,
+  sunroof: [0.3, 0.42],
+  mirrors: 'black',
+  paint: '#c8873c', // the Caramel of the side photo, for checking against it
+  plate: 'MH 12 PN 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH]
