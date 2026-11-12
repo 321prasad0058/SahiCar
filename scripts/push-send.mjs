@@ -52,10 +52,16 @@ const read = (rev, path) => {
 function changes(rev) {
   const now = JSON.parse(readFileSync('src/data/cars.json', 'utf8'))
   const before = new Map(read(rev, 'src/data/cars.json').map((c) => [c.id, c]))
+  // a launch alert needs a real launch: the car is new to SahiCar AND it was on the Upcoming list before, or its
+  // launch month is within the last two months. A car added later just for coverage (an older model) sends nothing.
+  const wasUpcoming = new Set(read(rev, 'src/data/upcoming.json').map((u) => u.id))
+  const cutoff = new Date()
+  cutoff.setMonth(cutoff.getMonth() - 2)
+  const recent = (ym) => /^\d{4}-\d{2}/.test(ym || '') && new Date(`${ym.slice(0, 7)}-01`) >= new Date(cutoff.getFullYear(), cutoff.getMonth(), 1)
   const prices = [], launches = []
   for (const c of now) {
     const b = before.get(c.id)
-    if (!b) { launches.push(c); continue }
+    if (!b) { if (wasUpcoming.has(c.id) || recent(c.launched)) launches.push(c); continue }
     if (b.price?.min && c.price?.min && b.price.min !== c.price.min) prices.push({ car: c, from: b.price.min, to: c.price.min })
   }
   return { prices, launches }
