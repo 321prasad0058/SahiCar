@@ -283,3 +283,15 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   'dark' went all gunmetal).
 - A body-coloured D-pillar over a dark tailgate-glass wrap: `pillars` with `black: false`, a near-zero belt range, the top
   range starting exactly on `roof.u0`, and a curved `rearEdge`; a top starting past `roof.u0` left a torn patch at the roof.
+- i20 (rain-wet gallery side photo, tyres in short grass): extract-side read 1.498 m against 1.505 with the axles only 0.6 % apart, so
+  no scaling; a uniform 1.5 cm blue band on the bonnet still came off for +0.003 IoU.
+- `cladding` with `flare: 0` for a low black side skirt leaves a 1 cm skin sliver round each arch edge (speckled arches, even with
+  `flareU`): a `trim` side decal (bottom ~2 cm above the sill, `depth` 0.004) plus a chrome line reads clean.
+- A steep belt kick under a pointed quarter glass (13 cm over 30 cm) frays the glass/body seam at the tail, and a body-coloured
+  D-pillar decal there tore; a gentler kick (~9 cm) and no D-pillar decal read clean. `followBody` made that seam worse.
+- Tail lamps and the black band up at the tail's `top(0)` (rakedEnds): raising `top(0)` above them broke them up (they land on the
+  top roll); keeping `top(0)` at the lamp tops and making the first 3 % of the tail climb steeply put them back. Lamp housings
+  that still lost their upper half came back whole on `layer: 1` (guides 2, chrome strip 3).
+- Wrap-around tail lamp: `width` 0.92 at u = 0 lets the end-face lamp reach 0.80 m on a 1.775 m car, and the `side` wedge starting
+  at u = 0.005 meets it with no gap. Headlamp: the side wedge can start at u = 0.999 to meet a front lamp kept 3.5 cm inside the face.
+- A `gloss` headlamp housing on a raked nose reads body-grey (it mirrors the softbox); `trim` keeps it dark.
