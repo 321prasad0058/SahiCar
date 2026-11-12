@@ -1,7 +1,7 @@
 // SahiCar service worker: instant repeat visits and a working app offline.
 // - hashed build files (/assets/*) and car images are cache-first: their URLs change when their content does;
 // - pages are network-first with a cached fallback, so a deploy shows up at once but offline still works.
-const VERSION = 'sahicar-v3'
+const VERSION = 'sahicar-v4'
 const ASSETS = `${VERSION}-assets`
 const PAGES = `${VERSION}-pages`
 const IMAGES = `${VERSION}-images`
