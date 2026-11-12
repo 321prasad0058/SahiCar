@@ -76,7 +76,7 @@ export class Studio {
     const want = aspect >= 1.6 ? 10.1 : 8.2 * Math.sqrt(1.6 / aspect)
     if (Math.abs(offset.length() - want) > 0.05 && !this.userMoved) offset.setLength(want)
     this.camera.position.copy(target).add(offset)
-    this.controls.maxDistance = Math.max(14, want * 1.3)
+    if (!this.userMoved) this.controls.maxDistance = Math.max(14, want * 1.3)
     this.dirty = true
   }
 

@@ -15,8 +15,8 @@ export default function DevCars() {
   useEffect(() => {
     const s = new Studio(canvas.current!, SPEC_BY_ID[id] ?? EXACT.find((e) => e.id === id)!)
     if (shot) s.shoot(shot, Number(q.get('fov') ?? 14))
-    if (q.get('mask')) s.silhouette()
     else s.view(view as 'front' | 'side' | 'rear' | 'top')
+    if (q.get('mask')) s.silhouette()
     return () => s.dispose()
   }, [id, view, shot, q])
   return (

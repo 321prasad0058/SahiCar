@@ -60,6 +60,8 @@ export interface CarSpec {
   spoiler?: boolean
   sunroof?: [number, number]
   mirrors: 'black' | 'body'
+  /** dark gunmetal alloys (machined edges) instead of bright silver */
+  rimTone?: 'dark'
   windowChrome?: boolean
   paint: string
   ev?: boolean
@@ -159,6 +161,7 @@ function makeShared() {
     tyre: new THREE.MeshStandardMaterial({ color: '#111214', roughness: 0.88 }),
     rimDark: new THREE.MeshStandardMaterial({ color: '#3a4147', metalness: 0.75, roughness: 0.32 }),
     rimFace: new THREE.MeshStandardMaterial({ color: '#d7dee4', metalness: 1, roughness: 0.2 }),
+    rimGun: new THREE.MeshStandardMaterial({ color: '#4b5056', metalness: 0.85, roughness: 0.32 }),
     brake: new THREE.MeshStandardMaterial({ color: '#44484c', metalness: 0.8, roughness: 0.5 }),
     well: new THREE.MeshBasicMaterial({ color: '#020203' }),
   }
@@ -611,7 +614,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     for (const side of [-1, 1]) {
       const w = new THREE.Group()
       w.add(new THREE.Mesh(tyreG, S.tyre))
-      for (const r of rimG) w.add(new THREE.Mesh(r.g, r.mat === 'face' ? S.rimFace : r.mat === 'dark' ? S.rimDark : S.brake))
+      for (const r of rimG) w.add(new THREE.Mesh(r.g, r.mat === 'face' ? (spec.rimTone === 'dark' ? S.rimGun : S.rimFace) : r.mat === 'dark' ? S.rimDark : S.brake))
       const bd = new THREE.Mesh(blurG, blurMat)
       bd.visible = false
       w.add(bd)
