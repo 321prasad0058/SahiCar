@@ -436,3 +436,17 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - Satin/silver side decals on a nose corner speckled (fine black/white noise) at any depth; a dark `trim` housing with a
   `gloss` inner read clean. A side decal starting at u = 1 smeared across the nose face: start it at 0.998.
 - Centre-line blobs over a grille on a raked nose went away once the nose `top` at 0.98–1 stood above the lamps (again).
+- Twins (Glanza/Baleno, Taisor/Fronx): `{ ...SIBLING, ... }` keeps the shared body; override only what the twin's own photos
+  disagree on, copying arrays from the sibling (never edit the sibling). Both twins' gallery side views refitted the sibling:
+  Glanza IoU 0.937 → 0.960, Taisor 0.933 → 0.960.
+- Glanza (2026 facelift): every studio side render (three portals) read the axles 7 % apart with tyres 10 % big (one CGI camera);
+  squeezing the cut-out to the official height and keeping the Baleno's axles still fitted (IoU 0.960). Its raked face with a
+  jutting lip cost the decals: a raked nose `top` (0.42 at u = 1) frayed the chrome X-frame and lamps into hooks; a near-upright
+  face up to the bonnet bar (0.845 at u = 1) made them clean for no IoU change.
+- Black bumper corners on a twin that inherits a body-coloured face: cladding raised only over u 0.966–0.984 (back to 0.1 at the
+  face) blacks the corners; raised up to u = 1 it covered the whole lower face, hiding the red lip.
+- Honeycomb cells under the number plate show through it: skip cells inside the plate's outline.
+- Taisor: a long-lens road side photo (1.557 m over the rails, axles 1 % apart) put the Fronx's roof 3.5 cm and bonnet 7 cm
+  high (the Fronx trace came from a close camera); the axles moved 4 cm forward with the cladding/doors (`taisorS`). Heights
+  read off a straight front photo came out 3 cm low against the side photo's DRL height; lift them together (`taisorUp`).
+- A white vertical band down the nose and tail in the side view at `noseSweep` 0.3 / `tailSweep` 0.22 went away at 0.15 / 0.14.

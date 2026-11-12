@@ -4412,4 +4412,171 @@ export const ALTO_K10: CarSpec = {
   plate: 'MH 12 AK 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, KYLAQ, FORTUNER, SAFARI, WINDSOR_EV, CITY_X, SYROS, ALCAZAR, ALTROZ_X, VERNA, VICTORIS_X, SIERRA_X, SIERRA_EV_X, GRAND_I10_NIOS, AURA, CELERIO, ALTO_K10]
+/** the Glanza's lower honeycomb: rows of wide dark hexagon cells (every other row offset half a cell) inside half-width hw(y) */
+const glanzaHoney = (ys: number[], hw: (y: number) => number): Decal[] =>
+  ys.flatMap((y, row) => {
+    const out: Decal[] = []
+    for (let k = -8; k <= 8; k++) {
+      const zc = k * 0.094 + (row % 2) * 0.047
+      if (Math.abs(zc) + 0.045 > Math.min(hw(y), hw(y + 0.03)) - 0.006) continue
+      // none behind the number plate
+      if (Math.abs(zc) - 0.045 < 0.27 && y + 0.03 > 0.54) continue
+      out.push({ step: 0.004, mat: 'trim', layer: 2, depth: 0.008, poly: [[zc - 0.042, y + 0.015], [zc - 0.03, y], [zc + 0.03, y], [zc + 0.042, y + 0.015], [zc + 0.03, y + 0.03], [zc - 0.03, y + 0.03]] })
+    }
+    return out
+  })
+/** the honeycomb's half-width: out to the chrome bracket's inner edge, narrowing along its upper arm */
+const glanzaHoneyHW = (y: number) => (y < 0.53 ? 0.605 : 0.605 - ((y - 0.53) * 0.14) / 0.135)
+
+/** Toyota Glanza (2026 facelift of the Baleno twin). 3990 × 1745 × 1530, wheelbase 2520, 195/55 R16 (V).
+ *  The body is the Baleno's. Side profile from the gallery's studio side render (a close camera: tyres 10 % big, axles
+ *  7 % apart, 1.549 m tall), squeezed to the official height; axles at the official wheelbase as on the Baleno, the
+ *  silhouette kept in photo u. Toyota's own front (chrome bonnet bar, black face with an X-shaped chrome frame round
+ *  a honeycomb, slim lamps, red lip) from a straight front photo and close-ups; the black side skirts. */
+export const GLANZA: CarSpec = {
+  ...BALENO,
+  id: 'toyota-glanza',
+  name: 'Toyota Glanza',
+  dropSlivers: true,
+  sill: [[0, 0.42], [0.006, 0.34], [0.015, 0.285], [0.03, 0.267], [0.05, 0.247], [0.08, 0.235], [0.12, 0.232], [0.2, 0.235], [0.3, 0.24], [0.4, 0.245], [0.5, 0.25], [0.6, 0.245], [0.7, 0.23], [0.75, 0.22], [0.85, 0.215], [0.9, 0.225], [0.93, 0.24], [0.96, 0.25], [0.985, 0.25], [1, 0.25]],
+  // the Baleno's tail and belt; a higher bonnet falling to a raked face over the jutting lip
+  top: [[0, 0.8], [0.004, 0.95], [0.01, 1.05], [0.018, 1.09], [0.025, 1.095], [0.05, 1.13], [0.08, 1.19], [0.11, 1.225], [0.13, 1.235], [0.15, 1.2], [0.16, 1.155], [0.168, 1.115], [0.2, 1.1], [0.3, 1.073], [0.4, 1.05], [0.5, 1.022], [0.6, 0.993], [0.7, 0.985], [0.73, 1.0], [0.76, 1.052], [0.78, 1.042], [0.8, 1.035], [0.82, 1.026], [0.85, 1.008], [0.88, 0.988], [0.9, 0.97], [0.92, 0.945], [0.94, 0.925], [0.955, 0.912], [0.97, 0.9], [0.98, 0.89], [0.99, 0.876], [0.996, 0.862], [1, 0.845]],
+  width: [[0, 0.7], [0.005, 0.79], [0.015, 0.875], [0.035, 0.935], [0.07, 0.972], [0.13, 0.995], [0.17, 1], [0.45, 0.99], [0.8, 0.995], [0.86, 0.99], [0.92, 0.97], [0.955, 0.945], [0.972, 0.92], [0.986, 0.895], [0.996, 0.87], [1, 0.86]],
+  greenhouse: {
+    u0: 0.025, u1: 0.76, tumble: 0.62,
+    top: [[0.025, 1.095], [0.04, 1.15], [0.06, 1.202], [0.08, 1.258], [0.1, 1.3], [0.12, 1.355], [0.13, 1.385], [0.14, 1.41], [0.15, 1.425], [0.2, 1.455], [0.25, 1.475], [0.3, 1.49], [0.35, 1.5], [0.4, 1.505], [0.45, 1.5], [0.5, 1.486], [0.55, 1.458], [0.57, 1.436], [0.6, 1.385], [0.62, 1.343], [0.65, 1.28], [0.68, 1.214], [0.7, 1.17], [0.72, 1.12], [0.74, 1.085], [0.76, 1.05]],
+  },
+  // the black bumper corners round the fog lamps
+  cladding: { top: [[0, 0.1], [0.955, 0.1], [0.966, 0.6], [0.984, 0.62], [0.992, 0.1], [1, 0.1]], flare: 0, cut: true },
+  front: [
+    // the black face under the chrome bonnet bar, out to the lamps and down to the red lip
+    { step: 0.004, mat: 'trim', depth: 0.004, poly: smooth(both([[0, 0.385], [0.62, 0.385], [0.68, 0.39], [0.705, 0.42], [0.71, 0.6], [0.69, 0.645], [0.66, 0.67], [0.62, 0.7], [0.565, 0.725], [0.548, 0.76], [0.542, 0.866], [0, 0.871]]), 1) },
+    // the chrome bar along the bonnet's leading edge, lamp to lamp
+    { step: 0.004, mat: 'satin', layer: 1, depth: 0.008, poly: both([[0, 0.872], [0.45, 0.869], [0.54, 0.866], [0.6, 0.874], [0.66, 0.89], [0.69, 0.903], [0.67, 0.912], [0.6, 0.9], [0.54, 0.897], [0.45, 0.903], [0, 0.906]]) },
+    // the slatted upper grille
+    { step: 0.004, mat: 'gloss', layer: 1, poly: smooth(both([[0, 0.7], [0.3, 0.7], [0.345, 0.725], [0.365, 0.79], [0.355, 0.826], [0, 0.828]]), 1) },
+    { step: 0.004, mat: 'slats', layer: 2, depth: 0.006, poly: both([[0, 0.712], [0.29, 0.712], [0.33, 0.732], [0.348, 0.79], [0.34, 0.814], [0, 0.816]]) },
+    // the lower grille: a gloss-black field of wide honeycomb cells
+    { step: 0.004, mat: 'gloss', layer: 1, poly: both([[0, 0.395], [0.585, 0.395], [0.605, 0.415], [0.612, 0.53], [0.47, 0.665], [0, 0.665]]) },
+    ...glanzaHoney([0.405, 0.445, 0.485, 0.525, 0.565, 0.605], glanzaHoneyHW),
+    // the chrome brackets framing it: an arm from the upper grille down and out, a wider foot back in along the lip
+    { step: 0.004, mat: 'satin', mirror: true, layer: 3, depth: 0.01, poly: [[0.357, 0.799], [0.384, 0.808], [0.673, 0.538], [0.667, 0.42], [0.648, 0.358], [0.62, 0.338], [0.36, 0.338], [0.36, 0.374], [0.593, 0.385], [0.618, 0.41], [0.634, 0.53]] },
+    // slim swept headlamps: a dark housing, the projector, the DRL along the lower edge
+    { step: 0.004, mat: 'trim', mirror: true, layer: 1, depth: 0.004, poly: [[0.552, 0.738], [0.62, 0.756], [0.7, 0.785], [0.712, 0.8], [0.712, 0.9], [0.695, 0.918], [0.62, 0.902], [0.546, 0.884], [0.54, 0.862], [0.542, 0.752]] },
+    { step: 0.004, mat: 'head', mirror: true, layer: 2, depth: 0.006, poly: rrect(0.635, 0.832, 0.68, 0.876, 0.02) },
+    { step: 0.004, mat: 'drl', mirror: true, layer: 2, depth: 0.008, poly: band([[0.56, 0.75], [0.63, 0.768], [0.704, 0.796]], 0.014) },
+    // fog lamps in chrome bezels in the black bumper corners
+    { step: 0.004, mat: 'chrome', mirror: true, layer: 1, depth: 0.006, poly: rrect(0.684, 0.425, 0.75, 0.5, 0.012) },
+    { step: 0.004, mat: 'head', mirror: true, layer: 2, depth: 0.008, poly: rrect(0.695, 0.436, 0.74, 0.488, 0.008) },
+    // the black lip under the red one
+    { step: 0.004, mat: 'trim', poly: smooth(both([[0, 0.258], [0.62, 0.258], [0.72, 0.272], [0.745, 0.3], [0.73, 0.332], [0, 0.332]]), 1) },
+  ],
+  // the Baleno's tail, without its black lower lip (the Glanza's bumper is body colour to the bottom)
+  rear: BALENO.rear.filter((d) => !(d.mat === 'trim' && d.poly.some(([, y]) => y < 0.33))),
+  side: [
+    ...(BALENO.side ?? []),
+    // black skirts along the sills between the arches
+    { step: 0.004, mat: 'trim', depth: 0.004, poly: rrectS(0.262, 0.252, 0.696, 0.345, 0.008) },
+    // the headlamp sweeping back along the wing
+    { step: 0.004, mat: 'trim', depth: 0.004, poly: smooth([[0.997, 0.728], [0.984, 0.73], [0.95, 0.8], [0.925, 0.85], [0.912, 0.876], [0.92, 0.884], [0.95, 0.866], [0.975, 0.85], [0.997, 0.84]], 1) },
+    { step: 0.004, mat: 'drl', layer: 1, depth: 0.008, poly: sideBand([[0.996, 0.742], [0.97, 0.775], [0.945, 0.815], [0.925, 0.85]], 0.012, 3.99) },
+  ],
+  plates: { front: 0.6, rear: 0.6 },
+  paint: '#850f17', // Sportin Red, the gallery car's, darkened for the studio lights
+  plate: 'MH 12 GZ 2026',
+}
+
+/** the Taisor's side photo puts the axles 1.06 % of the length further forward than the Fronx trace: the arch cladding,
+ *  doors and handles move with them (the ends stay put) */
+const taisorS = (pts: P2[]): P2[] => pts.map(([u, y]) => [u <= 0.02 || u >= 0.985 ? u : +(u + 0.0106).toFixed(4), y] as P2)
+/** a circle outline (projector lenses) */
+const taisorCircle = (zc: number, yc: number, r: number, n = 28): P2[] =>
+  Array.from({ length: n }, (_, i) => { const a = (i / n) * Math.PI * 2; return [+(zc + r * Math.cos(a)).toFixed(4), +(yc + r * Math.sin(a)).toFixed(4)] as P2 })
+
+/** the Taisor's honeycomb: rows of small dark hexagon cells (every other row offset half a cell) inside the grille */
+const taisorHoneyHW = (y: number) => (y < 0.62 ? 0.4 + (y - 0.565) * 1.6 : y < 0.735 ? 0.49 - (y - 0.62) * 0.4 : 0.44)
+const taisorHoney = (ys: number[]): Decal[] =>
+  ys.flatMap((y, row) => {
+    const out: Decal[] = []
+    for (let k = -9; k <= 9; k++) {
+      const zc = k * 0.058 + (row % 2) * 0.029
+      if (Math.abs(zc) + 0.027 > Math.min(taisorHoneyHW(y), taisorHoneyHW(y + 0.024)) - 0.012) continue
+      out.push({ step: 0.004, mat: 'trim', layer: 1, depth: 0.008, poly: [[zc - 0.026, y + 0.012], [zc - 0.016, y], [zc + 0.016, y], [zc + 0.026, y + 0.012], [zc + 0.016, y + 0.024], [zc - 0.016, y + 0.024]] })
+    }
+    return out
+  })
+
+/** the front photo's heights sit 3 cm low against the side photo's DRL: lift the upper face parts by that */
+const taisorUp = (ds: Decal[]): Decal[] => ds.map((d) => ({ ...d, poly: d.poly.map(([z, y]) => [z, +(y + 0.03).toFixed(4)] as P2) }))
+/** Toyota Urban Cruiser Taisor (2024; the Fronx's twin). 3995 × 1765 × 1550 (over the roof rails), wheelbase 2520,
+ *  195/60 R16 (V). The body is the Fronx's, re-fitted to a long-lens road side photo of an orange car (1.557 m over the
+ *  rails, axles within 1 % of the wheelbase): axles 4 cm further forward, a lower roof and bonnet. Toyota's own front
+ *  (chrome bar joining slim DRLs over a honeycomb grille, triple projectors in black pods, slatted intake and silver
+ *  skid plate) from a straight front photo; the tail lamps' internals and the big rear skid plate from a straight rear. */
+export const TAISOR: CarSpec = {
+  ...FRONX,
+  id: 'toyota-urban-cruiser-taisor',
+  name: 'Toyota Urban Cruiser Taisor',
+  dropSlivers: true,
+  axles: [0.1633, 0.7941],
+  // paired machined spokes over black pockets
+  wheel: { style: 'blade', spokes: 5 },
+  // the swept corners read as bright bands down the nose and tail in the side view at the Fronx's sweep
+  noseSweep: 0.15,
+  tailSweep: 0.14,
+  rimTone: undefined,
+  sill: [[0, 0.38], [0.008, 0.34], [0.02, 0.32], [0.04, 0.31], [0.08, 0.305], [0.15, 0.3], [0.22, 0.28], [0.3, 0.265], [0.5, 0.262], [0.6, 0.25], [0.65, 0.24], [0.72, 0.23], [0.8, 0.225], [0.9, 0.215], [0.95, 0.21], [0.98, 0.2], [0.995, 0.178], [1, 0.17]],
+  // the Fronx's tail and belt; the bonnet lower, falling to a nose that just clears the DRLs
+  top: [[0, 1.08], [0.008, 1.1], [0.02, 1.122], [0.03, 1.14], [0.06, 1.18], [0.09, 1.22], [0.115, 1.25], [0.13, 1.26], [0.145, 1.245], [0.16, 1.215], [0.175, 1.185], [0.19, 1.165], [0.21, 1.15], [0.24, 1.134], [0.39, 1.115], [0.54, 1.1], [0.66, 1.096], [0.7, 1.1], [0.72, 1.098], [0.75, 1.06], [0.8, 1.025], [0.85, 0.997], [0.9, 0.963], [0.94, 0.937], [0.97, 0.914], [0.985, 0.902], [0.995, 0.894], [1, 0.888]],
+  greenhouse: {
+    ...FRONX.greenhouse,
+    top: [[0.03, 1.14], [0.05, 1.2], [0.07, 1.255], [0.09, 1.3], [0.11, 1.33], [0.12, 1.37], [0.125, 1.4], [0.135, 1.425], [0.15, 1.44], [0.16, 1.448], [0.18, 1.458], [0.2, 1.462], [0.25, 1.474], [0.3, 1.482], [0.35, 1.492], [0.4, 1.498], [0.45, 1.494], [0.5, 1.48], [0.53, 1.465], [0.55, 1.452], [0.57, 1.436], [0.6, 1.39], [0.62, 1.35], [0.65, 1.29], [0.68, 1.225], [0.7, 1.18], [0.715, 1.15]],
+  },
+  cladding: { ...FRONX.cladding!, top: taisorS(FRONX.cladding!.top) },
+  doors: FRONX.doors.map(([a, b]) => [+(a + 0.0106).toFixed(4), +(b + 0.0106).toFixed(4)] as [number, number]),
+  front: [
+    ...taisorUp([
+    // the chrome bar under the bonnet edge, joining the DRLs across the top of the grille
+    { step: 0.004, mat: 'satin', layer: 2, depth: 0.008, poly: both([[0, 0.764], [0.5, 0.764], [0.512, 0.772], [0.5, 0.788], [0, 0.788]]) },
+    // slim DRLs rising towards the corners: a dark lens with a light line along it
+    { step: 0.004, mat: 'trim', mirror: true, layer: 1, depth: 0.004, poly: smooth([[0.5, 0.762], [0.58, 0.774], [0.625, 0.786], [0.645, 0.8], [0.645, 0.82], [0.632, 0.826], [0.6, 0.816], [0.54, 0.804], [0.5, 0.8]], 1) },
+    { step: 0.004, mat: 'drl', mirror: true, layer: 2, depth: 0.008, poly: band([[0.515, 0.782], [0.58, 0.792], [0.615, 0.8], [0.632, 0.808]], 0.014) },
+    // the gloss-black honeycomb grille under the bar
+    { step: 0.004, mat: 'gloss', poly: smooth(both([[0, 0.565], [0.4, 0.565], [0.47, 0.585], [0.5, 0.62], [0.445, 0.735], [0.43, 0.768], [0, 0.768]]), 1) },
+    ...taisorHoney([0.578, 0.612, 0.646, 0.68, 0.714, 0.748]),
+    // triple projectors in a black pod low in each bumper corner
+    { step: 0.004, mat: 'gloss', mirror: true, layer: 1, poly: smooth([[0.52, 0.565], [0.535, 0.5], [0.57, 0.462], [0.63, 0.448], [0.68, 0.455], [0.7, 0.485], [0.705, 0.6], [0.69, 0.64], [0.65, 0.652], [0.59, 0.646], [0.545, 0.618]], 1) },
+    { step: 0.004, mat: 'head', mirror: true, layer: 2, poly: taisorCircle(0.635, 0.6, 0.018) },
+    { step: 0.004, mat: 'head', mirror: true, layer: 2, poly: taisorCircle(0.585, 0.54, 0.018) },
+    { step: 0.004, mat: 'head', mirror: true, layer: 2, poly: taisorCircle(0.645, 0.535, 0.018) },
+    ]),
+    // black lower bumper with the wide slatted intake, the silver skid plate along the bottom
+    { step: 0.004, mat: 'trim', poly: smooth(both([[0, 0.19], [0.62, 0.19], [0.68, 0.21], [0.7, 0.26], [0.7, 0.3], [0.6, 0.31], [0.56, 0.36], [0.52, 0.405], [0, 0.405]]), 1) },
+    { step: 0.004, mat: 'slats', layer: 1, depth: 0.006, poly: both([[0, 0.29], [0.4, 0.29], [0.47, 0.32], [0.42, 0.37], [0, 0.37]]) },
+    { step: 0.004, mat: 'satin', layer: 2, depth: 0.01, poly: smooth(both([[0, 0.192], [0.52, 0.192], [0.575, 0.2], [0.605, 0.218], [0.59, 0.236], [0.54, 0.248], [0, 0.25]]), 1) },
+  ],
+  rear: [
+    // the gloss-black band across the tailgate: the red light bar along its top, the lamps at the corners
+    FRONX.rear[0],
+    { step: 0.005, mat: 'tail', layer: 1, poly: [[-0.46, 1.058], [0.46, 1.058], [0.46, 1.068], [-0.46, 1.068]] },
+    // smoked lamps with red guides: a line along the top, a chevron at the inner end, the outer edge
+    { step: 0.004, mat: 'tail', mirror: true, layer: 1, poly: [[0.47, 1.06], [0.67, 1.06], [0.67, 1.072], [0.47, 1.072]] },
+    { step: 0.004, mat: 'tail', mirror: true, layer: 1, poly: [[0.47, 1.048], [0.5, 1.0], [0.522, 1.0], [0.494, 1.048]] },
+    { step: 0.004, mat: 'tail', mirror: true, layer: 1, poly: [[0.655, 1.0], [0.672, 1.0], [0.672, 1.055], [0.655, 1.055]] },
+    { step: 0.004, mat: 'silver', mirror: true, layer: 1, depth: 0.006, poly: [[0.54, 1.012], [0.64, 1.012], [0.64, 1.024], [0.54, 1.024]] },
+    // the black lower bumper filled by a big silver skid plate, upright reflectors at the corners
+    FRONX.rear[6],
+    { step: 0.005, mat: 'satin', layer: 1, poly: smooth(both([[0, 0.355], [0.52, 0.355], [0.56, 0.37], [0.585, 0.41], [0.59, 0.52], [0.57, 0.565], [0.5, 0.58], [0.16, 0.58], [0.12, 0.55], [0, 0.545]]), 1) },
+    { step: 0.005, mat: 'reflector', mirror: true, layer: 1, poly: rrect(0.665, 0.5, 0.69, 0.615, 0.008) },
+  ],
+  side: [
+    { step: 0.005, mat: 'gloss', poly: taisorS([[0.2, 0.985], [0.25, 0.985], [0.25, 1.015], [0.2, 1.015]]) },
+    { step: 0.005, mat: 'gloss', poly: taisorS([[0.425, 0.93], [0.475, 0.93], [0.475, 0.96], [0.425, 0.96]]) },
+    { step: 0.005, mat: 'satin', poly: taisorS([[0.3, 0.27], [0.64, 0.27], [0.65, 0.273], [0.656, 0.28], [0.655, 0.29], [0.648, 0.297], [0.64, 0.299], [0.3, 0.299], [0.292, 0.296], [0.288, 0.285], [0.292, 0.274]]) },
+  ],
+  plates: { front: 0.5, rear: 0.86 },
+  paint: '#9c2500', // Lucent Orange, the gallery car's, darkened for the studio lights
+  plate: 'MH 12 TS 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, KYLAQ, FORTUNER, SAFARI, WINDSOR_EV, CITY_X, SYROS, ALCAZAR, ALTROZ_X, VERNA, VICTORIS_X, SIERRA_X, SIERRA_EV_X, GRAND_I10_NIOS, AURA, CELERIO, ALTO_K10, GLANZA, TAISOR]
