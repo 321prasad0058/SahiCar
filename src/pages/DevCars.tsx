@@ -23,7 +23,7 @@ export default function DevCars() {
     <div style={{ position: 'fixed', inset: 0, background: q.get('mask') ? '#ffffff' : 'radial-gradient(#132433, #04070b)' }}>
       <canvas ref={canvas} style={{ width: '100%', height: '100%', display: 'block' }} />
       <div style={{ position: 'absolute', top: 12, left: 12, display: q.get('mask') ? 'none' : 'flex', gap: 8 }}>
-        {[...SHOWCASE, ...EXACT].map((s) => <a key={s.id} className="chip" href={`/dev/cars?car=${s.id}&view=${view}`}>{s.name}</a>)}
+        {[...SHOWCASE.filter((s) => !EXACT.some((e) => e.id === s.id)), ...EXACT].map((s) => <a key={s.id} className="chip" href={`/dev/cars?car=${s.id}&view=${view}`}>{s.name}</a>)}
       </div>
     </div>
   )
