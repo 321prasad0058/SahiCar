@@ -1910,4 +1910,111 @@ export const HARRIER: CarSpec = {
   plate: 'MH 12 HR 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER]
+const HYCROSS_L = 4.755
+/** a side outline from a rounded rectangle given in u (0…1) and metres */
+const hycrossU = (u0: number, y0: number, u1: number, y1: number, r: number): P2[] =>
+  rrectS(u0 * HYCROSS_L, y0, u1 * HYCROSS_L, y1, r).map(([x, y]) => [+(x / HYCROSS_L).toFixed(5), y] as P2)
+/** a circle outline (fog lamps, projectors) */
+const hycrossCircle = (zc: number, yc: number, r: number, n = 40): P2[] =>
+  Array.from({ length: n }, (_, i) => { const a = (i / n) * Math.PI * 2; return [+(zc + r * Math.cos(a)).toFixed(4), +(yc + r * Math.sin(a)).toFixed(4)] as P2 })
+
+/** Toyota Innova Hycross (2022). 4755 × 1845 × 1790, wheelbase 2850, 225/50 R18 (ZX (O)).
+ *  Side profile from a levelled gallery side photo (1.786 m measured over the roof antenna; the photo's axles 1.9 % too
+ *  far apart, so the axles sit at the official wheelbase with the overhangs split as in the photo). Belt, pillars, shut
+ *  lines and cladding read off a metric grid of the levelled cut-out; the hexagonal chrome-ringed grille, slim headlamps
+ *  and the C-framed corner pockets from the straight front photo; the wraparound tail lamps and the grey lower bumper
+ *  from the straight rear and three-quarter photos. */
+export const INNOVA_HYCROSS: CarSpec = {
+  id: 'toyota-innova-hycross',
+  name: 'Toyota Innova Hycross',
+  rakedEnds: true,
+  dropSlivers: true,
+  L: HYCROSS_L, W: 1.845, H: 1.79,
+  axles: [0.2094, 0.8088],
+  tyreR: 0.3411, tyreW: 0.225, rim: 0.67, wheel: { style: 'split', spokes: 5 },
+  archGap: 0.09, archSquare: 0.25,
+  sill: [[0, 0.36], [0.02, 0.37], [0.04, 0.36], [0.06, 0.345], [0.08, 0.33], [0.1, 0.315], [0.13, 0.3], [0.2, 0.28], [0.3, 0.272], [0.5, 0.268], [0.7, 0.258], [0.8, 0.25], [0.88, 0.24], [0.9, 0.222], [0.93, 0.21], [0.95, 0.22], [0.97, 0.26], [0.98, 0.28], [0.99, 0.295], [1, 0.31]],
+  // the upright tail up to the lamps, the D-pillar body rising to the quarter glass's upturned tip, the belt falling
+  // forwards to the cowl, then the long bonnet down to the upright grille face
+  top: [[0, 1.285], [0.005, 1.295], [0.012, 1.31], [0.02, 1.335], [0.03, 1.375], [0.04, 1.425], [0.05, 1.475], [0.06, 1.53], [0.066, 1.58], [0.072, 1.665], [0.078, 1.708], [0.09, 1.728], [0.1, 1.734], [0.12, 1.741], [0.15, 1.747], [0.178, 1.748], [0.186, 1.748], [0.19, 1.45], [0.194, 1.375], [0.2, 1.352], [0.21, 1.325], [0.25, 1.295], [0.3, 1.282], [0.4, 1.258], [0.5, 1.235], [0.6, 1.208], [0.65, 1.195], [0.7, 1.183], [0.74, 1.178], [0.76, 1.192], [0.78, 1.215], [0.8, 1.207], [0.85, 1.173], [0.9, 1.135], [0.93, 1.103], [0.95, 1.077], [0.96, 1.062], [0.97, 1.049], [0.98, 1.04], [0.99, 1.034], [1, 1.03]],
+  width: [[0, 0.9], [0.005, 0.93], [0.015, 0.955], [0.04, 0.978], [0.08, 0.993], [0.15, 1], [0.85, 1], [0.9, 0.992], [0.94, 0.978], [0.965, 0.96], [0.985, 0.94], [1, 0.92]],
+  crown: 0.015,
+  bulge: 0.03,
+  // the tail's tumblehome above the lamps only (the line sits above the belt elsewhere, so the inset is off there)
+  shoulder: { y: [[0, 1.3], [0.17, 1.35], [0.2, 1.5], [1, 1.5]], inset: 0.13 },
+  haunch: 0.04,
+  bonnetRidge: 0.01,
+  topRadius: 0.07,
+  noseSweep: 0.1,
+  tailSweep: 0.1,
+  greenhouse: {
+    u0: 0.18, u1: 0.78, tumble: 0.88, followBody: 0.2,
+    // the raked tailgate glass up under the roof spoiler, the long flat roof, the raked screen
+    top: [[0.18, 1.744], [0.2, 1.746], [0.3, 1.749], [0.4, 1.746], [0.44, 1.743], [0.47, 1.738], [0.5, 1.728], [0.53, 1.711], [0.56, 1.69], [0.58, 1.674], [0.6, 1.653], [0.62, 1.626], [0.65, 1.565], [0.68, 1.5], [0.7, 1.442], [0.72, 1.36], [0.74, 1.3], [0.76, 1.248], [0.78, 1.215]],
+  },
+  roof: { u0: 0.18, u1: 0.59169, black: false },
+  pillars: [
+    // the thin black C- and B-pillars
+    { bottom: [0.278, 0.296], top: [0.278, 0.296], black: true },
+    { bottom: [0.495, 0.515], top: [0.495, 0.515], black: true },
+  ],
+  // black arch flares joined by the black rocker, black lower bumpers
+  cladding: { top: [[0, 0.5], [0.04, 0.5], [0.07, 0.45], [0.1, 0.38], [0.13, 0.355], [0.3, 0.355], [0.7, 0.35], [0.9, 0.345], [0.94, 0.37], [0.97, 0.4], [1, 0.4]], flare: 0.07, cut: true },
+  doors: [[0.738, 0.745], [0.5, 0.5], [0.24, 0.247]],
+  front: [
+    // the big hexagonal grille: a chrome surround round a black honeycomb, wider at the bottom than at the top
+    { step: 0.005, mat: 'chrome', depth: 0.008, poly: both([[0, 0.728], [0.49, 0.73], [0.515, 0.742], [0.573, 0.832], [0.571, 0.848], [0.482, 1.006], [0.465, 1.013], [0, 1.013]]) },
+    { step: 0.005, mat: 'gloss', layer: 1, depth: 0.004, poly: both([[0, 0.744], [0.483, 0.746], [0.503, 0.756], [0.556, 0.836], [0.554, 0.848], [0.472, 0.995], [0, 0.997]]) },
+    { step: 0.005, mat: 'mesh', layer: 2, poly: both([[0, 0.754], [0.477, 0.756], [0.494, 0.765], [0.543, 0.838], [0.541, 0.849], [0.464, 0.985], [0, 0.987]]) },
+    // slim headlamps: a dark housing, the DRL along the bottom and up the outer end, two projector lenses
+    { step: 0.005, mat: 'gloss', mirror: true, depth: 0.006, poly: smooth([[0.47, 0.958], [0.62, 0.94], [0.77, 0.924], [0.802, 0.928], [0.815, 0.95], [0.815, 0.995], [0.805, 1.018], [0.77, 1.024], [0.62, 1.01], [0.47, 0.992]], 1) },
+    { step: 0.005, mat: 'drl', layer: 1, mirror: true, poly: band([[0.5, 0.962], [0.62, 0.95], [0.76, 0.936], [0.795, 0.938], [0.805, 0.955], [0.805, 1.0]], 0.012) },
+    { step: 0.005, mat: 'head', layer: 1, mirror: true, poly: rrect(0.665, 0.962, 0.735, 0.998, 0.012) },
+    { step: 0.005, mat: 'head', layer: 1, mirror: true, poly: rrect(0.57, 0.97, 0.635, 1.0, 0.012) },
+    // the C-framed corner pockets: black mesh, a horizontal LED bar, the chrome frame down the outer edge and along the bottom
+    { step: 0.005, mat: 'gloss', mirror: true, depth: 0.006, poly: smooth([[0.48, 0.655], [0.6, 0.605], [0.74, 0.545], [0.775, 0.55], [0.782, 0.6], [0.782, 0.79], [0.765, 0.8], [0.6, 0.77], [0.48, 0.728]], 1) },
+    { step: 0.005, mat: 'mesh', layer: 1, mirror: true, poly: smooth([[0.5, 0.665], [0.6, 0.623], [0.745, 0.565], [0.765, 0.575], [0.768, 0.6], [0.768, 0.775], [0.6, 0.755], [0.5, 0.72]], 1) },
+    { step: 0.005, mat: 'drl', layer: 2, mirror: true, poly: band([[0.49, 0.685], [0.775, 0.685]], 0.014) },
+    { step: 0.004, mat: 'chrome', layer: 2, mirror: true, depth: 0.01, poly: band([[0.78, 0.805], [0.795, 0.79], [0.797, 0.57], [0.785, 0.533], [0.755, 0.525], [0.6, 0.588], [0.475, 0.642]], 0.016) },
+    // the black lower grille with its fog lamps, the black chin
+    { step: 0.005, mat: 'trim', poly: smooth(both([[0, 0.39], [0.58, 0.39], [0.62, 0.41], [0.6, 0.49], [0, 0.49]]), 1) },
+    { step: 0.005, mat: 'slats', layer: 1, poly: both([[0, 0.405], [0.45, 0.405], [0.45, 0.475], [0, 0.475]]) },
+    { step: 0.005, mat: 'head', layer: 1, mirror: true, depth: 0.008, poly: hycrossCircle(0.525, 0.44, 0.02) },
+    { step: 0.005, mat: 'trim', poly: smooth(both([[0, 0.33], [0.74, 0.33], [0.78, 0.35], [0.79, 0.385], [0, 0.39]]), 1) },
+  ],
+  rear: [
+    // the tailgate glass on the raked tail, under the roof spoiler
+    { step: 0.004, mat: 'gloss', depth: 0.003, poly: smooth(both([[0, 1.296], [0.66, 1.296], [0.665, 1.33], [0.63, 1.48], [0.6, 1.58], [0.57, 1.61], [0, 1.61]]), 1) },
+    // the connected chrome strip under the tailgate glass
+    { step: 0.005, mat: 'chrome', depth: 0.006, poly: band([[-0.66, 1.278], [0.66, 1.278]], 0.012) },
+    // the wraparound tail lamps: a smoked housing, the red upper lens (taller on the body corner), a clear strip under it
+    { step: 0.005, mat: 'gloss', mirror: true, depth: 0.006, poly: smooth([[0.385, 1.232], [0.42, 1.2], [0.47, 1.128], [0.785, 1.126], [0.8, 1.14], [0.8, 1.255], [0.785, 1.27], [0.69, 1.27], [0.66, 1.252], [0.45, 1.25]], 1) },
+    { step: 0.005, mat: 'tail', layer: 1, mirror: true, poly: [[0.395, 1.232], [0.43, 1.204], [0.66, 1.2], [0.69, 1.203], [0.79, 1.203], [0.792, 1.258], [0.69, 1.262], [0.66, 1.244], [0.45, 1.243]] },
+    { step: 0.005, mat: 'silver', layer: 1, mirror: true, poly: [[0.475, 1.136], [0.785, 1.136], [0.785, 1.192], [0.45, 1.192], [0.44, 1.185]] },
+    // the tailgate's shut line down its sides and across above the bumper
+    { step: 0.005, mat: 'gloss', depth: 0.001, poly: band([[-0.69, 1.125], [-0.69, 0.63], [-0.67, 0.6], [-0.6, 0.592], [0, 0.59], [0.6, 0.592], [0.67, 0.6], [0.69, 0.63], [0.69, 1.125]], 0.012) },
+    // the grey lower bumper: red reflectors, mesh pockets in the corners, a satin edge along its top
+    { step: 0.005, mat: 'trim', poly: smooth(both([[0, 0.37], [0.72, 0.37], [0.78, 0.39], [0.8, 0.43], [0.8, 0.565], [0.78, 0.575], [0.7, 0.55], [0.5, 0.535], [0, 0.53]]), 1) },
+    { step: 0.005, mat: 'satin', layer: 1, depth: 0.004, poly: band([[-0.795, 0.56], [-0.7, 0.54], [-0.5, 0.527], [0, 0.523], [0.5, 0.527], [0.7, 0.54], [0.795, 0.56]], 0.016) },
+    { step: 0.005, mat: 'reflector', layer: 1, mirror: true, poly: rrect(0.55, 0.49, 0.755, 0.512, 0.006) },
+    { step: 0.005, mat: 'mesh', layer: 1, mirror: true, poly: smooth([[0.55, 0.405], [0.76, 0.405], [0.775, 0.475], [0.55, 0.478]], 1) },
+  ],
+  side: [
+    // chrome door handles
+    { step: 0.004, mat: 'chrome', depth: 0.01, poly: hycrossU(0.555, 1.094, 0.6, 1.118, 0.01) },
+    { step: 0.004, mat: 'chrome', depth: 0.01, poly: hycrossU(0.257, 1.168, 0.302, 1.192, 0.01) },
+    // the slim headlamp sweeping back along the front wing
+    { step: 0.003, mat: 'gloss', depth: 0.003, poly: smooth([[0.996, 0.932], [0.96, 0.925], [0.93, 0.935], [0.905, 0.975], [0.882, 1.04], [0.886, 1.052], [0.92, 1.04], [0.95, 1.025], [0.975, 1.012], [0.996, 1.004]], 1) },
+    { step: 0.003, mat: 'drl', layer: 1, depth: 0.004, poly: sideBand([[0.994, 0.94], [0.96, 0.932], [0.932, 0.942], [0.908, 0.98], [0.89, 1.035]], 0.01, HYCROSS_L) },
+    // the tail lamp wrapping onto the flank, tapering forwards
+    { step: 0.004, mat: 'gloss', depth: 0.004, poly: [[0.106, 1.231], [0.06, 1.258], [0.01, 1.27], [0.01, 1.19], [0.05, 1.205], [0.08, 1.217]] },
+    { step: 0.004, mat: 'tail', layer: 1, depth: 0.005, poly: [[0.098, 1.232], [0.06, 1.252], [0.016, 1.262], [0.016, 1.205], [0.05, 1.212], [0.08, 1.222]] },
+  ],
+  plates: { front: 0.55, rear: 1.0 },
+  mirrors: 'body',
+  windowChrome: true,
+  paint: '#03163f', // Blackish Ageha Glass Flake (deep navy in the gallery photos), darkened, blue kept up
+  plate: 'MH 12 HX 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS]
