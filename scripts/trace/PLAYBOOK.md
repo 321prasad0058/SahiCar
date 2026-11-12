@@ -59,3 +59,9 @@ reference photos.
   the door's middle (extract-side does this).
 - The side camera must be level (`shoot('side')` uses dir y = 0); looking down 6° adds ~16 cm of roof.
 - Studio lights wash paint out: pick the paint ~15% darker than the photo's mid-tone.
+- Lamps, grilles and trim get real relief by default (build.ts `RELIEF`: lens 14 mm, housings 6 mm, skid
+  plates 10 mm, grille lip 4 mm + solid slats for `slats`). Override per decal with `depth`.
+- Keep end decals (front/rear) inside the end face (|z| ≲ 0.8): parts that wrap onto the sides break up.
+- Round the plan-view corners with a hard `width` taper over the last 2–3 % at each end plus `noseSweep`
+  ~0.2 / `tailSweep` ~0.12 — without it a small SUV reads as a van.
+- The cladding shell now follows the body's own cross-section; a torn cladding edge means a builder bug.
