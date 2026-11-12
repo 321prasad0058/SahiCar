@@ -211,3 +211,15 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   off), and `greenhouse.followBody` (u) so the glass's foot sits on the leaning body edge instead of sticking out as a ledge.
   The inset is reached at each ring's own top, so on a raked tail keep lamps inside what the rings within 0.3 m reach.
 - A raked black (or body) A-pillar decal saw-toothed on a steep windscreen; leaving the A-pillar as plain glass reads right.
+- Ertiga: the gallery side photo's rod antenna sat in the cut-out and added 3 cm to the measured height; erase it (clear
+  thin runs above the roof per column) before extract-side. Heights were then scaled by 0.975 (photo 3 % tall from the close
+  camera) and the overlay still fitted (IoU 0.975).
+- A straight front photo taken from above lifts parts set back from the grille (headlamps 0.45 m back read 5 cm high): take
+  lamp heights from the side photo and only the across-the-car positions from the front.
+- A raked tail with lamps climbing the D-pillars (Ertiga): `rakedEnds` is a must (without it the lamps and glass decal turn
+  into horizontal slats); relief on those wedges saw-toothed their outer edges, `depth` 0.002 and `step` 0.003 made them clean.
+  `topRadius` 0.07 keeps the tail corners flat enough for the wedges.
+- Headlamps that sweep far back along the wing: a `side` decal works only on the flat flank below the fender's top roll
+  (keep it under the bonnet `top` − topRadius); the front decal stops ~2 cm inside the corner and the two nearly meet.
+- With an EXACT spec whose id is also in SHOWCASE, /dev/cars listed it twice (duplicate React key); the chip list now skips
+  SHOWCASE ids that EXACT overrides.
