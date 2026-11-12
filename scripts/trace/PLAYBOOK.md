@@ -324,3 +324,12 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - Wrap-around tail lamp: `width` 0.92 at u = 0 lets the end-face lamp reach 0.80 m on a 1.775 m car, and the `side` wedge starting
   at u = 0.005 meets it with no gap. Headlamp: the side wedge can start at u = 0.999 to meet a front lamp kept 3.5 cm inside the face.
 - A `gloss` headlamp housing on a raked nose reads body-grey (it mirrors the softbox); `trim` keeps it dark.
+- Altroz (2025 facelift): the gallery side photo's shark-fin antenna read 1.537 m; erasing it from the cut-out (clear alpha above
+  the roof line over the fin's columns) gave 1.509 against 1.523 with the fin, so heights × 0.99. An EXACT spec with a SHOWCASE id
+  overrides it in SPEC_BY_ID (EXACT entries come last); /car/<id> shows the new model with no other change.
+- A beige ledge between a piano-black tail panel and the tailgate glass = the body's flat top between the tail face and
+  `greenhouse.u0`: start the glasshouse at the tail face (u0 0.015, its top = `top(0)`) and keep the black panel up to `top(0)`.
+- Headlamp wrap along the wing (Altroz): the side decal running back to u 0.81 on the bonnet roll tore into shards; stopping it at
+  u 0.91, `topRadius` 0.08 and the nose `top` ~5 cm over the lamps read clean. A bonnet shut line on that roll looked like a crack.
+- A side tail-lamp wedge just under a climbing tail `top` frayed along its top edge: keep it ≥ 4 cm under `top(u)` there, `step`
+  0.003, `depth` 0.002. Black alloys with thin machined edges: `twin` + `rimTone: 'dark'` (split/turbine read silver/grey).

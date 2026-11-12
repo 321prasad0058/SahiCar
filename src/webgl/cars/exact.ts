@@ -2678,4 +2678,120 @@ export const I20: CarSpec = {
   plate: 'MH 12 IT 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20]
+const ALTROZ_L = 3.99
+/** a side outline from a rounded rectangle given in u (0…1) and metres */
+const altrozRectU = (u0: number, y0: number, u1: number, y1: number, r: number): P2[] =>
+  rrectS(u0 * ALTROZ_L, y0, u1 * ALTROZ_L, y1, r).map(([x, y]) => [+(x / ALTROZ_L).toFixed(5), y] as P2)
+/** the upper grille's staggered rows of short dark slots, kept inside half-width hw */
+const altrozSlots = (ys: number[], hw: number): Decal[] =>
+  ys.flatMap((y, i) => {
+    const out: Decal[] = []
+    const pitch = 0.07, w = 0.05, h = 0.012
+    for (let z = (i % 2 ? pitch / 2 : 0) - 1; z < 1; z += pitch) {
+      if (Math.abs(z) + w / 2 > hw) continue
+      out.push({ step: 0.004, mat: 'trim', layer: 2, depth: 0.009, poly: rrect(z - w / 2, y - h / 2, z + w / 2, y + h / 2, 0.003) })
+    }
+    return out
+  })
+
+/** Tata Altroz (May 2025 facelift). 3990 × 1755 × 1523 (with the shark-fin), wheelbase 2501, 185/60 R16 (top trim).
+ *  Side profile from a levelled gallery side photo (the shark-fin erased from the cut-out: roof 1.509 m, the close camera's
+ *  axles 2 % too far apart, so heights × 0.99 and the axles at the official wheelbase with the overhangs split as in the
+ *  photo). Belt, quarter glass, D-pillar, shut lines, fuel lid and handle read off a metric grid of the cut-out; the slim
+ *  headlamps with their LED DRLs and the wide grille between them, the black lower bumper with its silver corners, the
+ *  piano-black tail panel joining the tail lamps and the black rear bumper from the straight front and rear photos. */
+export const ALTROZ_X: CarSpec = {
+  id: 'tata-altroz',
+  name: 'Tata Altroz',
+  dropSlivers: true,
+  L: ALTROZ_L, W: 1.755, H: 1.523,
+  axles: [0.1594, 0.7862],
+  tyreR: 0.3142, tyreW: 0.185, rim: 0.647, wheel: { style: 'twin', spokes: 5 }, rimTone: 'dark',
+  archGap: 0.05, archSquare: 0.15,
+  sill: [[0, 0.36], [0.005, 0.33], [0.015, 0.315], [0.03, 0.305], [0.045, 0.293], [0.06, 0.282], [0.08, 0.27], [0.12, 0.25], [0.18, 0.225], [0.25, 0.205], [0.3, 0.204], [0.4, 0.198], [0.5, 0.193], [0.6, 0.184], [0.7, 0.175], [0.75, 0.176], [0.8, 0.181], [0.88, 0.188], [0.92, 0.185], [0.95, 0.198], [0.97, 0.21], [0.985, 0.222], [0.995, 0.232], [1, 0.24]],
+  // the tail up to the lamp band; the belt kicking up under the pointed quarter glass (the body forms the lower D-pillar),
+  // falling along the doors to the black mirror sail; the cowl, then the bonnet curving down, lifted at the face over
+  // the headlamps
+  top: [[0, 1.062], [0.008, 1.068], [0.015, 1.072], [0.03, 1.09], [0.045, 1.11], [0.06, 1.13], [0.08, 1.163], [0.1, 1.195], [0.12, 1.222], [0.135, 1.233], [0.148, 1.23], [0.158, 1.21], [0.17, 1.185], [0.19, 1.15], [0.215, 1.12], [0.25, 1.1], [0.3, 1.072], [0.35, 1.052], [0.4, 1.032], [0.45, 1.008], [0.5, 0.985], [0.55, 0.962], [0.6, 0.948], [0.65, 0.944], [0.69, 0.952], [0.71, 0.968], [0.725, 0.99], [0.74, 1.018], [0.75, 1.033], [0.762, 1.034], [0.775, 1.026], [0.79, 1.014], [0.81, 1.0], [0.83, 0.982], [0.85, 0.962], [0.87, 0.94], [0.89, 0.916], [0.91, 0.893], [0.93, 0.874], [0.945, 0.863], [0.96, 0.856], [0.975, 0.851], [0.988, 0.848], [1, 0.846]],
+  // round in plan: both ends taper into the corners
+  width: [[0, 0.92], [0.006, 0.94], [0.018, 0.958], [0.04, 0.975], [0.08, 0.99], [0.15, 1], [0.5, 0.995], [0.8, 0.995], [0.86, 0.985], [0.92, 0.965], [0.955, 0.945], [0.978, 0.925], [0.992, 0.91], [1, 0.9]],
+  crown: 0.015,
+  bulge: 0.04,
+  haunch: 0.03,
+  topRadius: 0.08,
+  noseSweep: 0.15,
+  tailSweep: 0.12,
+  greenhouse: {
+    u0: 0.015, u1: 0.75, tumble: 0.58,
+    // the raked tailgate glass up under the roof spoiler, the long roof (shark-fin left out), the raked windscreen
+    top: [[0.015, 1.074], [0.02, 1.08], [0.03, 1.108], [0.04, 1.153], [0.05, 1.186], [0.06, 1.219], [0.07, 1.251], [0.08, 1.278], [0.09, 1.311], [0.1, 1.34], [0.11, 1.38], [0.115, 1.405], [0.12, 1.43], [0.13, 1.444], [0.15, 1.451], [0.17, 1.457], [0.2, 1.463], [0.23, 1.47], [0.25, 1.478], [0.3, 1.487], [0.35, 1.493], [0.4, 1.494], [0.43, 1.493], [0.45, 1.484], [0.47, 1.475], [0.5, 1.464], [0.53, 1.451], [0.55, 1.428], [0.57, 1.4], [0.6, 1.347], [0.63, 1.289], [0.66, 1.236], [0.69, 1.171], [0.72, 1.098], [0.74, 1.06], [0.75, 1.036]],
+  },
+  roof: { u0: 0.12264, u1: 0.55665, black: false },
+  pillars: [
+    // the body-coloured D-pillar behind the quarter glass, only where the glasshouse still faces sideways; the black
+    // B-pillar (the A-pillar and the quarter glass's black frame read as glass)
+    { bottom: [0.13, 0.155], top: [0.152, 0.185], black: false },
+    { bottom: [0.393, 0.416], top: [0.397, 0.423], black: true },
+  ],
+  doors: [[0.677, 0.683], [0.42, 0.42]],
+  front: [
+    // the slim headlamps: a dark housing, the LED DRL along the top, the LED projector rows
+    { step: 0.004, mat: 'trim', mirror: true, depth: 0.004, poly: smooth([[0.455, 0.645], [0.56, 0.652], [0.66, 0.664], [0.72, 0.674], [0.745, 0.684], [0.748, 0.73], [0.745, 0.79], [0.73, 0.798], [0.64, 0.786], [0.55, 0.772], [0.455, 0.762]], 1) },
+    { step: 0.004, mat: 'drl', mirror: true, layer: 1, depth: 0.008, poly: band([[0.465, 0.748], [0.55, 0.758], [0.64, 0.771], [0.72, 0.782], [0.742, 0.784]], 0.014) },
+    { step: 0.004, mat: 'head', mirror: true, layer: 1, depth: 0.008, poly: rrect(0.5, 0.672, 0.6, 0.7, 0.006) },
+    { step: 0.004, mat: 'head', mirror: true, layer: 1, depth: 0.008, poly: rrect(0.625, 0.69, 0.7, 0.718, 0.006) },
+    // the wide upper grille between the headlamps: a gloss-black band over rows of staggered dark slots
+    { step: 0.004, mat: 'gloss', poly: both([[0, 0.638], [0.43, 0.638], [0.452, 0.645], [0.452, 0.762], [0, 0.762]]) },
+    ...altrozSlots([0.664, 0.69, 0.716], 0.42),
+    // the slim black slot in the body-coloured band under it
+    { step: 0.004, mat: 'gloss', poly: rrect(-0.38, 0.548, 0.38, 0.582, 0.01) },
+    // the black lower bumper running up into the fog-lamp pods at the corners
+    { step: 0.005, mat: 'trim', poly: smooth(both([[0, 0.27], [0.64, 0.27], [0.7, 0.28], [0.745, 0.31], [0.758, 0.4], [0.758, 0.58], [0.745, 0.612], [0.7, 0.62], [0.655, 0.6], [0.63, 0.515], [0, 0.515]]), 1) },
+    { step: 0.004, mat: 'silver', mirror: true, layer: 1, depth: 0.008, poly: rrect(0.672, 0.552, 0.722, 0.573, 0.005) },
+    // the lower grille: gloss panel with staggered dark slots
+    { step: 0.004, mat: 'gloss', layer: 1, poly: smooth(both([[0, 0.29], [0.56, 0.29], [0.6, 0.31], [0.6, 0.4], [0.57, 0.415], [0, 0.415]]), 1) },
+    ...altrozSlots([0.31, 0.338, 0.366, 0.394], 0.56).map((d): Decal => ({ ...d, layer: 3, depth: 0.012 })),
+    // the satin corner panels low on the bumper
+    { step: 0.004, mat: 'satin', mirror: true, layer: 2, depth: 0.01, poly: smooth([[0.6, 0.39], [0.755, 0.41], [0.758, 0.31], [0.73, 0.292], [0.64, 0.295]], 1) },
+  ],
+  rear: [
+    // the piano-black panel across the tailgate joining the tail lamps, a red line along its top
+    { step: 0.004, mat: 'gloss', poly: both(smooth([[0, 0.895], [0.55, 0.895], [0.6, 0.9], [0.62, 0.91], [0.62, 1.062], [0, 1.062]], 1)) },
+    { step: 0.004, mat: 'reflector', layer: 2, depth: 0.008, poly: both([[0, 1.038], [0.6, 1.038], [0.6, 1.05], [0, 1.05]]) },
+    // the tail lamps at the corners: smoked housings, red guides along the top and down the outer edge
+    { step: 0.004, mat: 'gloss', mirror: true, layer: 1, depth: 0.006, poly: smooth([[0.6, 0.9], [0.72, 0.905], [0.765, 0.92], [0.775, 0.96], [0.775, 1.045], [0.76, 1.062], [0.6, 1.062]], 1) },
+    { step: 0.004, mat: 'tail', mirror: true, layer: 2, depth: 0.01, poly: [[0.6, 1.05], [0.75, 1.05], [0.765, 1.037], [0.765, 0.94], [0.752, 0.94], [0.752, 1.032], [0.745, 1.038], [0.6, 1.038]] },
+    // the tailgate's lower panel shut line
+    { step: 0.004, mat: 'gloss', depth: 0.001, poly: band([[-0.6, 0.895], [-0.6, 0.75], [-0.585, 0.715], [-0.55, 0.703], [0, 0.7], [0.55, 0.703], [0.585, 0.715], [0.6, 0.75], [0.6, 0.895]], 0.012) },
+    // the black rear bumper, body-coloured below at its corners, red reflectors along its top corners
+    { step: 0.005, mat: 'trim', poly: smooth(both([[0, 0.37], [0.6, 0.37], [0.635, 0.39], [0.645, 0.47], [0.7, 0.48], [0.74, 0.5], [0.755, 0.56], [0.748, 0.64], [0.72, 0.66], [0, 0.66]]), 1) },
+    { step: 0.004, mat: 'reflector', mirror: true, layer: 1, poly: rrect(0.52, 0.628, 0.67, 0.645, 0.005) },
+    { step: 0.004, mat: 'silver', layer: 1, depth: 0.006, poly: rrect(-0.1, 0.38, 0.1, 0.41, 0.008) },
+  ],
+  side: [
+    // the door handle, body-coloured in a dark recess
+    { step: 0.004, mat: 'gloss', depth: 0.002, poly: altrozRectU(0.451, 0.828, 0.502, 0.872, 0.014) },
+    { step: 0.004, mat: 'body', layer: 1, depth: 0.008, poly: altrozRectU(0.454, 0.834, 0.499, 0.866, 0.01) },
+    // the rear door's curved rear edge
+    { step: 0.004, mat: 'gloss', depth: 0.001, poly: sideBand([[0.308, 0.277], [0.291, 0.294], [0.268, 0.365], [0.242, 0.525], [0.215, 0.72], [0.198, 0.847], [0.187, 0.99], [0.182, 1.097]], 0.012, ALTROZ_L) },
+    // the fuel lid
+    { step: 0.004, mat: 'gloss', depth: 0.001, poly: sideBand([...altrozRectU(0.091, 0.745, 0.142, 0.89, 0.03)].concat([altrozRectU(0.091, 0.745, 0.142, 0.89, 0.03)[0]]), 0.012, ALTROZ_L) },
+    // the tail lamp wrapping onto the flank to a point
+    { step: 0.003, mat: 'gloss', depth: 0.002, poly: smooth([[0.004, 0.905], [0.03, 0.915], [0.06, 0.94], [0.1, 0.985], [0.142, 1.02], [0.1, 1.034], [0.05, 1.042], [0.02, 1.042], [0.004, 1.04]], 1) },
+    { step: 0.004, mat: 'tail', layer: 1, depth: 0.006, poly: [[0.054, 0.955], [0.066, 0.965], [0.068, 1.025], [0.056, 1.028]] },
+    // the black rear bumper wrapping round the corner
+    { step: 0.004, mat: 'trim', depth: 0.004, poly: [[0.002, 0.38], [0.02, 0.38], [0.028, 0.45], [0.028, 0.62], [0.015, 0.655], [0.002, 0.66]] },
+    // the headlamp sweeping back along the wing, its DRL along the top
+    { step: 0.004, mat: 'trim', depth: 0.004, poly: smooth([[0.999, 0.672], [0.999, 0.795], [0.975, 0.806], [0.95, 0.818], [0.925, 0.83], [0.912, 0.826], [0.93, 0.79], [0.955, 0.73], [0.977, 0.688]], 1) },
+    { step: 0.004, mat: 'drl', layer: 1, depth: 0.008, poly: sideBand([[0.996, 0.786], [0.97, 0.798], [0.945, 0.81], [0.925, 0.82]], 0.012, ALTROZ_L) },
+    // the black bumper corner with the fog-lamp pod, the satin panel under it
+    { step: 0.003, mat: 'trim', depth: 0.002, poly: smooth([[0.999, 0.6], [0.975, 0.59], [0.95, 0.56], [0.935, 0.5], [0.932, 0.42], [0.999, 0.41]], 1) },
+    { step: 0.004, mat: 'satin', layer: 1, depth: 0.008, poly: smooth([[0.999, 0.41], [0.94, 0.4], [0.923, 0.35], [0.95, 0.29], [0.999, 0.285]], 1) },
+  ],
+  plates: { front: 0.48, rear: 0.55 },
+  mirrors: 'black',
+  paint: '#685c53', // Dune Glow, the gallery car's taupe, darkened for the studio lights
+  plate: 'MH 12 AZ 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, ALTROZ_X]
