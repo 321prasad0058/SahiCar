@@ -247,3 +247,10 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - Front/rear end decals running past the end face's half-width wrap back along the flank and show as spikes in the side view
   (Tiago tail lamps at z 0.705 on a 0.707 face): keep them ~3 cm inside it.
 - Number plates are blank (the user's rule): no registration number or lettering on them.
+- Harrier: a body-coloured D-pillar made by letting `top` climb beside the tailgate glass (1.27 → 1.38 m over 25 cm) dented
+  the tail corner and left glass shards, with or without `followBody`; a flat tail `top` and the glasshouse starting at the
+  tail face (u0 0.02) read clean. A rear 'glass' decal for an inset tailgate glass sliced into slats until `rakedEnds`.
+- A `shoulder` crease on a car whose belt and bonnet fall fast at the ends rippled both the front wing and the tail corner;
+  without it (and without `bonnetRidge`) both are smooth for no IoU change.
+- Parametric grilles (staggered short bars): generate rows of small `satin` rrects (~56 × 12 mm, pitch ~0.11 m, every other
+  row offset half a pitch); 'silver' read paper-white. `twin` + `rimTone: 'dark'` is the closest to all-black alloys.
