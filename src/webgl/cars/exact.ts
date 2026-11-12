@@ -772,7 +772,7 @@ export const SELTOS: CarSpec = {
   name: 'Kia Seltos',
   L: SELTOS_L, W: 1.83, H: 1.635,
   axles: [0.1924, 0.7955],
-  tyreR: 0.347, tyreW: 0.215, rim: 0.659, wheel: { style: 'swirl', spokes: 5 }, rimTone: 'dark',
+  tyreR: 0.347, tyreW: 0.215, rim: 0.659, wheel: { style: 'blade', spokes: 5 },
   archGap: 0.08, archSquare: 0.45,
   sill: [[0, 0.4], [0.007, 0.39], [0.02, 0.375], [0.035, 0.365], [0.06, 0.345], [0.08, 0.32], [0.1, 0.27], [0.3, 0.265], [0.6, 0.265], [0.7, 0.265], [0.88, 0.25], [0.92, 0.24], [0.95, 0.25], [0.975, 0.25], [0.99, 0.25], [1, 0.27]],
   // the upright tail up to the light bar, the belt sweeping up round the rear quarter glass (the body-coloured kick),
@@ -1072,4 +1072,105 @@ export const THAR_ROXX: CarSpec = {
   plate: 'MH 12 TR 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX]
+/** Hyundai Venue (2025, 2nd gen). 3995 × 1800 × 1665 (over the roof rails), wheelbase 2520, 215/60 R16.
+ *  Side profile from a levelled gallery side photo (1.675 m measured; the close camera spreads the axles by 3 %, so the
+ *  axles sit at the official wheelbase with the overhangs split as in the photo and the arch cladding, shut lines and
+ *  handles mapped onto them). Dark paint: belt, cladding and the silver door strip read off the cut-out's pixel columns.
+ *  Lamps, grille and skid plates from the straight front and rear photos and the close-ups. */
+const VENUE_L = 3.995
+const venueU = (x0: number, y0: number, x1: number, y1: number, r: number): P2[] =>
+  rrectS(x0 * VENUE_L, y0, x1 * VENUE_L, y1, r).map(([x, y]) => [+(x / VENUE_L).toFixed(5), y] as P2)
+export const VENUE: CarSpec = {
+  id: 'hyundai-venue',
+  name: 'Hyundai Venue',
+  rakedEnds: true,
+  dropSlivers: true,
+  L: VENUE_L, W: 1.8, H: 1.665,
+  axles: [0.1786, 0.8093],
+  tyreR: 0.332, tyreW: 0.215, rim: 0.612, wheel: { style: 'blade', spokes: 5 },
+  archGap: 0.065, archSquare: 0.5,
+  sill: [[0, 0.34], [0.01, 0.35], [0.02, 0.355], [0.04, 0.335], [0.06, 0.31], [0.08, 0.3], [0.12, 0.29], [0.27, 0.245], [0.5, 0.235], [0.72, 0.225], [0.88, 0.22], [0.93, 0.205], [0.96, 0.215], [0.98, 0.235], [0.99, 0.245], [1, 0.26]],
+  // the raked tailgate up to the light bar, the belt kicking up under the quarter glass, the long flat bonnet and the
+  // upright nose face with the light bar along the bonnet's leading edge
+  top: [[0, 0.66], [0.005, 0.84], [0.01, 0.97], [0.015, 1.06], [0.02, 1.12], [0.027, 1.17], [0.035, 1.21], [0.05, 1.235], [0.1, 1.245], [0.14, 1.235], [0.17, 1.205], [0.2, 1.18], [0.25, 1.165], [0.35, 1.155], [0.5, 1.14], [0.6, 1.13], [0.7, 1.11], [0.725, 1.1], [0.75, 1.085], [0.8, 1.072], [0.85, 1.055], [0.9, 1.032], [0.93, 1.008], [0.95, 0.982], [0.96, 0.973], [0.97, 0.968], [0.98, 0.967], [0.99, 0.966], [1, 0.965]],
+  width: [[0, 0.84], [0.008, 0.9], [0.025, 0.955], [0.06, 0.98], [0.12, 0.996], [0.5, 1], [0.88, 0.995], [0.93, 0.98], [0.965, 0.955], [0.985, 0.91], [1, 0.86]],
+  crown: 0.015,
+  bulge: 0.012,
+  // the crease through the door handles, rising towards the tail lamps
+  shoulder: { y: [[0, 1.04], [0.3, 1.0], [0.7, 0.955], [1, 0.93]], inset: 0.022 },
+  haunch: 0.03,
+  bonnetRidge: 0.01,
+  topRadius: 0.09,
+  noseSweep: 0.18,
+  tailSweep: 0.11,
+  greenhouse: {
+    u0: 0.035, u1: 0.725, tumble: 0.78,
+    // the raked tailgate glass under the long roof spoiler, a flat roof, a fairly upright screen
+    top: [[0.035, 1.215], [0.04, 1.245], [0.05, 1.305], [0.06, 1.365], [0.07, 1.425], [0.08, 1.478], [0.09, 1.522], [0.1, 1.552], [0.115, 1.575], [0.13, 1.588], [0.16, 1.6], [0.2, 1.607], [0.3, 1.612], [0.4, 1.613], [0.47, 1.61], [0.5, 1.602], [0.52, 1.592], [0.54, 1.575], [0.56, 1.548], [0.58, 1.51], [0.6, 1.462], [0.62, 1.41], [0.64, 1.358], [0.66, 1.303], [0.68, 1.248], [0.7, 1.19], [0.725, 1.12]],
+  },
+  roof: { u0: 0.1009, u1: 0.53, black: false },
+  pillars: [
+    { bottom: [0.232, 0.248], top: [0.245, 0.258], black: true },
+    { bottom: [0.418, 0.448], top: [0.412, 0.445], black: true },
+  ],
+  // squared black arch flares joined along the lower doors, black bumper ends
+  cladding: { top: [[0, 0.62], [0.02, 0.66], [0.05, 0.71], [0.085, 0.8], [0.109, 0.872], [0.16, 0.868], [0.208, 0.868], [0.237, 0.85], [0.26, 0.82], [0.267, 0.7], [0.276, 0.56], [0.3, 0.55], [0.67, 0.55], [0.684, 0.65], [0.694, 0.78], [0.742, 0.815], [0.791, 0.82], [0.835, 0.82], [0.888, 0.77], [0.923, 0.69], [0.95, 0.6], [0.97, 0.54], [1, 0.5]], flare: 0.13, cut: true },
+  doors: [[0.193, 0.193], [0.445, 0.448], [0.694, 0.705]],
+  front: [
+    // the full-width light bar along the bonnet's leading edge: a thin DRL between the two lamp heads
+    { step: 0.005, mat: 'gloss', poly: rrect(-0.715, 0.885, 0.715, 0.95, 0.014) },
+    { step: 0.005, mat: 'drl', layer: 1, depth: 0.004, poly: [[-0.505, 0.906], [0.505, 0.906], [0.505, 0.92], [-0.505, 0.92]] },
+    { step: 0.005, mat: 'drl', layer: 1, mirror: true, depth: 0.004, poly: [[0.515, 0.928], [0.703, 0.928], [0.703, 0.943], [0.515, 0.943]] },
+    { step: 0.005, mat: 'head', layer: 1, mirror: true, poly: [[0.53, 0.895], [0.698, 0.895], [0.698, 0.92], [0.53, 0.92]] },
+    // the dark grille: three rows of boxes in silver frames
+    { step: 0.005, mat: 'gloss', poly: [[-0.508, 0.62], [0.508, 0.62], [0.508, 0.812], [-0.508, 0.812]] },
+    { step: 0.005, mat: 'slats', layer: 1, poly: [[-0.495, 0.632], [0.495, 0.632], [0.495, 0.8], [-0.495, 0.8]] },
+    ...[0.632, 0.688, 0.744, 0.8].map((y): Decal => ({ step: 0.005, mat: 'silver', layer: 2, depth: 0.008, poly: [[-0.495, y - 0.007], [0.495, y - 0.007], [0.495, y + 0.007], [-0.495, y + 0.007]] })),
+    ...[-0.305, -0.102, 0.102, 0.305].map((z): Decal => ({ step: 0.005, mat: 'silver', layer: 2, depth: 0.008, poly: [[z - 0.007, 0.632], [z + 0.007, 0.632], [z + 0.007, 0.8], [z - 0.007, 0.8]] })),
+    // tall headlamps at the corners: an L-shaped light guide down the outer edge and along the foot, quad LEDs inside
+    { step: 0.005, mat: 'gloss', mirror: true, poly: smooth([[0.514, 0.6], [0.6, 0.567], [0.73, 0.567], [0.73, 0.836], [0.514, 0.836]], 1) },
+    { step: 0.005, mat: 'drl', mirror: true, layer: 1, poly: [[0.69, 0.828], [0.722, 0.828], [0.722, 0.578], [0.61, 0.578], [0.69, 0.612]] },
+    { step: 0.005, mat: 'head', mirror: true, layer: 1, poly: rrect(0.535, 0.745, 0.675, 0.81, 0.008) },
+    { step: 0.005, mat: 'head', mirror: true, layer: 1, poly: rrect(0.535, 0.665, 0.675, 0.728, 0.008) },
+    // black lower bumper; the silver skid plate rising under the grille, black pods, the lower grille
+    { step: 0.005, mat: 'trim', poly: [[-0.76, 0.26], [0.76, 0.26], [0.76, 0.6], [0.6, 0.567], [0.514, 0.6], [0.514, 0.62], [-0.514, 0.62], [-0.514, 0.6], [-0.6, 0.567], [-0.76, 0.6]] },
+    { step: 0.005, mat: 'satin', layer: 1, poly: smooth(both([[0, 0.3], [0.68, 0.3], [0.73, 0.33], [0.745, 0.38], [0.748, 0.515], [0.515, 0.616], [0, 0.616]]), 2) },
+    { step: 0.005, mat: 'gloss', layer: 2, depth: 0.012, mirror: true, poly: rrect(0.423, 0.345, 0.523, 0.565, 0.012) },
+    { step: 0.005, mat: 'gloss', layer: 2, depth: 0.012, poly: rrect(-0.39, 0.39, 0.39, 0.487, 0.008) },
+    { step: 0.005, mat: 'slats', layer: 3, depth: 0.016, poly: rrect(-0.37, 0.4, -0.03, 0.477, 0.006) },
+    { step: 0.005, mat: 'slats', layer: 3, depth: 0.016, poly: rrect(0.03, 0.4, 0.37, 0.477, 0.006) },
+  ],
+  rear: [
+    // the light bar across the tailgate: a red line over the full width, lamp blocks at both ends
+    { step: 0.005, mat: 'gloss', layer: 1, depth: 0.008, poly: rrect(-0.72, 1.039, 0.72, 1.122, 0.01) },
+    { step: 0.005, mat: 'tail', layer: 2, poly: [[-0.712, 1.098], [0.712, 1.098], [0.712, 1.113], [-0.712, 1.113]] },
+    { step: 0.005, mat: 'tail', layer: 2, mirror: true, poly: [[0.59, 1.048], [0.712, 1.048], [0.712, 1.09], [0.59, 1.09]] },
+    { step: 0.005, mat: 'tail', layer: 2, mirror: true, poly: [[0.505, 1.05], [0.575, 1.05], [0.575, 1.085], [0.505, 1.085]] },
+    { step: 0.005, mat: 'tail', layer: 2, mirror: true, poly: [[0.425, 1.05], [0.49, 1.05], [0.49, 1.085], [0.425, 1.085]] },
+    // black lower tailgate edge and bumper, the corner housings with the vertical L-shaped lamps
+    { step: 0.005, mat: 'trim', poly: [[-0.73, 0.385], [0.73, 0.385], [0.73, 0.76], [-0.73, 0.76]] },
+    { step: 0.005, mat: 'gloss', poly: [[-0.58, 0.758], [0.58, 0.758], [0.58, 0.848], [-0.58, 0.848]] },
+    { step: 0.005, mat: 'gloss', mirror: true, poly: rrect(0.455, 0.566, 0.728, 0.848, 0.01) },
+    { step: 0.005, mat: 'tail', layer: 1, mirror: true, poly: [[0.66, 0.836], [0.718, 0.836], [0.718, 0.627], [0.602, 0.627], [0.66, 0.69]] },
+    { step: 0.005, mat: 'gloss', layer: 1, poly: [[-0.325, 0.613], [0.325, 0.613], [0.325, 0.758], [-0.325, 0.758]] },
+    // the silver skid plate wrapping round the plate recess, with tall black pods holding the reversing lamps
+    { step: 0.005, mat: 'satin', layer: 1, poly: smooth(both([[0, 0.39], [0.67, 0.39], [0.708, 0.405], [0.72, 0.44], [0.72, 0.555], [0.36, 0.685], [0.325, 0.685], [0.325, 0.613], [0, 0.613]]), 2) },
+    { step: 0.005, mat: 'gloss', layer: 2, mirror: true, poly: rrect(0.371, 0.42, 0.464, 0.63, 0.01) },
+    { step: 0.005, mat: 'silver', layer: 3, mirror: true, poly: rrect(0.387, 0.44, 0.448, 0.505, 0.008) },
+  ],
+  side: [
+    // the silver strip on the black lower doors
+    { mat: 'satin', poly: smooth([[0.285, 0.41], [0.69, 0.392], [0.7, 0.4], [0.69, 0.45], [0.55, 0.488], [0.42, 0.503], [0.33, 0.508], [0.3, 0.49]], 2) },
+    // flush door handles
+    { step: 0.005, mat: 'chrome', poly: venueU(0.4825, 0.965, 0.526, 0.99, 0.01) },
+    { step: 0.005, mat: 'chrome', poly: venueU(0.2131, 0.975, 0.2568, 1.0, 0.01) },
+  ],
+  plates: { front: 0.545, rear: 0.694 },
+  rails: 'silver',
+  sunroof: [0.36, 0.48],
+  mirrors: 'body',
+  paint: '#0c1048', // Mystic Sapphire, darkened for the studio lights
+  plate: 'MH 12 VN 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE]

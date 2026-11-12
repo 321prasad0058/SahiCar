@@ -173,3 +173,11 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - Body-coloured door frames on a black hard top: pillars with `black: false` plus a 'body' side decal along the window tops
   (kept below ghTop − 0.075, where the black roof band starts). Thin black pillars on the hard top's corners tore at their
   tops; the dark quarter glass alone reads right.
+- Venue (raked tail, long roof spoiler): the `spoiler` box floated as a plank over the tailgate glass; dropping it and moving
+  `roof.u0` back onto a station (0.1009) so the roof paint covers the glass top read right at a ~0.1 % IoU cost.
+- A light bar along the bonnet's leading edge: lift the nose `top` at 0.96–1 just above the bar's top (Venue 0.965 vs 0.95)
+  and keep its ends ~1.5 cm inside the end face's half-width, or the bar's ends and the bonnet lip above it fray.
+- Small parts inside a raised `satin` skid plate (pods, a lower grille) vanish under its 8 mm relief: give them `depth`
+  ≥ 0.012 and their slats a deeper one still (0.016).
+- A thin black A-pillar or wide D-pillar on dark glass came out with grey scratches / sawtooth edges; left out, the dark
+  glass alone reads right. A side wrap of tail lamps above `top(u) − 0.01` near u = 0 tears into red spikes: leave it out.
