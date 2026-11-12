@@ -388,3 +388,14 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   u 0.91, `topRadius` 0.08 and the nose `top` ~5 cm over the lamps read clean. A bonnet shut line on that roll looked like a crack.
 - A side tail-lamp wedge just under a climbing tail `top` frayed along its top edge: keep it ≥ 4 cm under `top(u)` there, `step`
   0.003, `depth` 0.002. Black alloys with thin machined edges: `twin` + `rimTone: 'dark'` (split/turbine read silver/grey).
+- Grand i10 Nios / Aura (hatch + sedan pair): gallery side photos read 1.554 / 1.562 m with the axles 4–5 % apart; `niosK`/`auraK`
+  scale heights to the official 1.52 and `niosU`/`auraU` map doors, handles, fuel lid and lamp wraps onto the official wheelbase
+  (silhouette kept in photo u): IoU 0.962 / 0.968. The Aura spreads `...GRAND_I10_NIOS` and reuses its headlamp decals.
+- Stray "||" marks on the nose centre with no front decals at all = a `side` decal above `top(u) − 0.01` near u = 1 (a headlamp
+  wrap traced past the nose). Keep side lamp wraps at u ≤ 0.985 and under the nose `top`.
+- Lowering `noseSweep`/`tailSweep` (0.3/0.24 → 0.12) lengthened the side render (aspect 2.515 → 2.533) and cost 0.9 % IoU; the
+  white glare on the end faces in the side shot stayed, so it isn't the sweep. Kept the sweeps.
+- Red tail lamps on red paint: a `reflector` housing disappears into the paint; a `trim` housing with a `tail` lens over its upper
+  part and a small `silver` reversing block reads like the photo. Lamps striped across the whole tailgate while `top(0)` sat 40 cm
+  under them on a raked hatch tail; starting `top(0)` 3 cm over the lamp tops cleaned them for −0.1 % IoU.
+- Five bright triangular spokes on black pockets (Nios): `blade` was closest (swirl/turbine read all silver, petal a disc).
