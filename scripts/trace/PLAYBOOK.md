@@ -353,3 +353,13 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   A belt that dips and climbs again into the windscreen base also ripples the wing: keep it nearly level into the cowl.
 - The mirror sits at `greenhouse.u1 − 0.04`; with a long screen running into the bonnet that put it on top of the cowl, so
   `mirrorU` (new, opt-in) places it on the door. Mostly-silver alloys with narrow dark slots: `wheel.style: 'petal'` (new).
+- City (2026 New City, black gallery car on a dark background): cutout.swift still cut it cleanly; paint-based belt finding was
+  noise, so belt, glass, shut lines and handles came off a brightened `gridify` of the cut-out. The photo read 1.514 m with the
+  axles 3 % apart: heights × 0.983 through a small per-car helper (`cityK`), then a 2.5 cm bonnet band and a 2.5 cm front sill
+  band came off for IoU 0.958 → 0.963.
+- A full-width light bar on a raked sedan nose (Dzire-style `top` falling to 0.6 at u = 1, `rakedEnds`) grew a double vertical
+  mark above the bar at the centre line; raising the nose `top` at 0.95–1 to ~2 cm over the lamps removed it for no IoU cost.
+- Honeycomb grilles: rows of small hexagon `trim` cells (`cityHoney`) over a `gloss` panel read right; `gloss` cells on a `trim`
+  diffuser read as white dots, so the rear diffuser is a `mesh` panel instead.
+- Smoked tail lamps with red light guides: a `trim` housing plus thin `tail` guides; a `reflector` housing read as solid red.
+- Black spokes with thin machined edges: `split` + `rimTone: 'dark'` (`blade` was mostly silver; `blade` + dark was flat grey).
