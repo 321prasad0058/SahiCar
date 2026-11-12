@@ -450,3 +450,13 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   high (the Fronx trace came from a close camera); the axles moved 4 cm forward with the cladding/doors (`taisorS`). Heights
   read off a straight front photo came out 3 cm low against the side photo's DRL height; lift them together (`taisorUp`).
 - A white vertical band down the nose and tail in the side view at `noseSweep` 0.3 / `tailSweep` 0.22 went away at 0.15 / 0.14.
+- Bolero Neo / Bolero: the official 3995 mm is to the rear bumper, not over the tailgate spare. Scaling the side photo's bumper-to-bumper
+  span to 3.995 gave the official wheelbase and height (within 2 % / 0.7 %), so `L` is the length over the spare (Neo 4.169, Bolero 4.25)
+  read off the photo at that scale; the comment says so.
+- Body ahead of the spare (u 0 … tail face) must still exist: a narrow, low "tow step" block (width 0.26, under the spare) read right on
+  the Neo. A sliver with a sharp height jump to the bumper lofted into a black ramp / slab over the plate; keep transitions height-similar.
+- Rear decals only land on rings within 0.3 m of u = 0, and with a spare that includes the spare's depth: on the Bolero a tail face at
+  0.32 m from the end lost every rear decal. Keep the tailgate face ≤ ~0.29 m from the spare's outer face.
+- `spare.z` (new, opt-in) puts the spare wheel off-centre (Bolero +0.19 m, the right side seen from behind, like rear decal z).
+- `wellInset` walls showed as a solid black slab under a high rear bumper (Bolero bumper bottom 0.6 m); on black paint there's nothing to
+  hide, so it was dropped. Black pillars on dark glass read better with `mat: 'trim'` (plain black came out grey).

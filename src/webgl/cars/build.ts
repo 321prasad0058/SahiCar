@@ -66,8 +66,9 @@ export interface CarSpec {
    *  cover the whole section instead of stopping 4 cm short, so the bumper's top surface is black too */ cover?: boolean
     /** how far the arch flares stand out from the body (m, default 0.026), and the u range they are kept inside (so a
      *  flare reaching past an upright nose doesn't lid the face) */ flareOut?: number; flareU?: [number, number] }
-  /** a spare wheel on the tailgate: its outer face at the tail (u = 0), its hub at height y (m) */
-  spare?: { y: number }
+  /** a spare wheel on the tailgate: its outer face at the tail (u = 0), its hub at height y (m), optionally off-centre
+   *  by z (m, + = right, as in the rear decals) */
+  spare?: { y: number; z?: number }
   /** door shut lines: u at the sill and at the beltline */
   doors: [number, number][]
   front: Decal[]
@@ -871,7 +872,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     spareG.add(new THREE.Mesh(tyreG, S.tyre))
     for (const r of rimG) spareG.add(new THREE.Mesh(r.g, r.mat === 'face' ? (spec.rimTone === 'dark' ? S.rimGun : S.rimFace) : r.mat === 'edge' ? S.rimFace : r.mat === 'dark' ? S.rimDark : S.brake))
     spareG.rotation.y = -Math.PI / 2
-    spareG.position.set(xOf(0) + spec.tyreW / 2, spec.spare.y, 0)
+    spareG.position.set(xOf(0) + spec.tyreW / 2, spec.spare.y, spec.spare.z ?? 0)
     group.add(spareG)
   }
 

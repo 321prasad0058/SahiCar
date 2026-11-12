@@ -4579,4 +4579,230 @@ export const TAISOR: CarSpec = {
   plate: 'MH 12 TS 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, KYLAQ, FORTUNER, SAFARI, WINDSOR_EV, CITY_X, SYROS, ALCAZAR, ALTROZ_X, VERNA, VICTORIS_X, SIERRA_X, SIERRA_EV_X, GRAND_I10_NIOS, AURA, CELERIO, ALTO_K10, GLANZA, TAISOR]
+const NEO_L = 4.169
+/** photo u → model u: the gallery photo's axles land on the official wheelbase (overhangs in the photo's ratio) */
+const neoU = (u: number): number => {
+  const a0 = 0.1795, a1 = 0.8363, b0 = 0.1867, b1 = 0.8295
+  const v = u < a0 ? (u * b0) / a0 : u > a1 ? 1 - ((1 - u) * (1 - b1)) / (1 - a1) : b0 + ((u - a0) * (b1 - b0)) / (a1 - a0)
+  return +v.toFixed(5)
+}
+/** photo [u, y] → model: u mapped onto the official axles, heights × 0.985 (the close camera reads 1.844 m) */
+const neoP = (pts: P2[]): P2[] => pts.map(([u, y]) => [neoU(u), +(y * 0.985).toFixed(4)] as P2)
+const NEO_GH: [number, number] = [neoU(0.057), neoU(0.74)]
+/** a glasshouse station (roof and pillar edges sit on them) */
+const neoSt = (i: number) => +(NEO_GH[0] + (NEO_GH[1] - NEO_GH[0]) * (0.5 - 0.5 * Math.cos((Math.PI * i) / 140))).toFixed(5)
+const neoRectU = (u0: number, y0: number, u1: number, y1: number, r: number): P2[] =>
+  neoP(rrectS(u0 * NEO_L, y0, u1 * NEO_L, y1, r).map(([x, y]) => [x / NEO_L, y] as P2))
+const neoCircle = (zc: number, yc: number, r: number, n = 40): P2[] =>
+  Array.from({ length: n }, (_, i) => { const a = (i / n) * Math.PI * 2; return [+(zc + r * Math.cos(a)).toFixed(4), +(yc + r * Math.sin(a)).toFixed(4)] as P2 })
+/** the black moulding along the flanks (photo u range), falling gently towards the nose like the roof */
+const neoStrip = (u0: number, u1: number): P2[] => {
+  const yc = (u: number) => 0.955 + (0.93 - u) * 0.17
+  const pts: P2[] = []
+  for (let k = 0; k <= 6; k++) { const u = u0 + ((u1 - u0) * k) / 6; pts.push([u, +(yc(u) - 0.017).toFixed(4)]) }
+  for (let k = 6; k >= 0; k--) { const u = u0 + ((u1 - u0) * k) / 6; pts.push([u, +(yc(u) + 0.017).toFixed(4)]) }
+  return neoP(pts)
+}
+/** a row of chrome grille bars across ±hw at height y, split where the grille's dark dividers are */
+const neoSlats = (y: number, hw: number, h = 0.014): Decal[] =>
+  [[-hw, -0.31], [-0.29, -0.13], [-0.11, 0.11], [0.13, 0.29], [0.31, hw]].map(([a, b]): Decal => ({
+    step: 0.005, mat: 'chrome', layer: 2, depth: 0.012, poly: rrect(a, y - h / 2, b, y + h / 2, 0.004),
+  }))
+
+/** Mahindra Bolero Neo (2025 update). 3995 × 1795 × 1817, wheelbase 2680, 215/70 R16. The official length is to the
+ *  rear bumper; over the tailgate spare wheel it is 4.17 m (read off the side photo at the official scale). Side
+ *  profile from a levelled gallery side photo (1.844 m measured, axles 2 % apart: heights × 0.985, axles at the
+ *  official wheelbase, everything traced mapped with them). Lamps, grilles and bumpers from the straight front and
+ *  rear photos and the close-ups. Black pillars, black arch flares, black lower bumpers and side steps. */
+export const BOLERO_NEO: CarSpec = {
+  id: 'mahindra-bolero-neo',
+  name: 'Mahindra Bolero Neo',
+  rakedEnds: true,
+  dropSlivers: true,
+  L: NEO_L, W: 1.795, H: 1.817,
+  axles: [neoU(0.1795), neoU(0.8363)],
+  tyreR: 0.354, tyreW: 0.215, rim: 0.574, wheel: { style: 'split', spokes: 5 },
+  archGap: 0.1, archSquare: 0.45, wellInset: 0.05,
+  // the tow step under the spare, the rear bumper's lower lip, the running boards between the wheels, the front lip
+  sill: neoP([[0, 0.39], [0.035, 0.39], [0.042, 0.42], [0.05, 0.38], [0.085, 0.36], [0.1, 0.36], [0.27, 0.27], [0.3, 0.262], [0.5, 0.255], [0.7, 0.245], [0.73, 0.25], [0.93, 0.29], [0.96, 0.285], [0.98, 0.3], [0.99, 0.31], [1, 0.35]]),
+  // the step under the spare, the near-upright tail face (one plane) up to the belt, the belt stepping down under the
+  // rear door glass, the cowl, the long bonnet falling to the raked grille face
+  top: neoP([[0, 0.47], [0.035, 0.47], [0.04, 0.5], [0.0436, 0.7], [0.0472, 0.9], [0.0508, 1.1], [0.0544, 1.3], [0.0554, 1.355], [0.1, 1.358], [0.2, 1.355], [0.23, 1.345], [0.26, 1.322], [0.3, 1.316], [0.4, 1.31], [0.5, 1.302], [0.6, 1.295], [0.68, 1.285], [0.74, 1.25], [0.76, 1.215], [0.8, 1.196], [0.85, 1.163], [0.88, 1.143], [0.91, 1.118], [0.93, 1.1], [0.95, 1.1], [0.965, 1.1], [0.98, 1.098], [0.99, 1.095], [0.996, 1.09], [1, 1.08]]),
+  // boxy: flat flanks, the corners of both faces rounded; the narrow step under the spare
+  width: [[0, 0.26], [0.034, 0.26], [0.04, 0.86], [0.046, 0.92], [0.06, 0.95], [0.1, 0.965], [0.3, 0.975], [0.7, 0.975], [0.85, 0.972], [0.92, 0.968], [0.96, 0.958], [0.985, 0.94], [1, 0.91]],
+  crown: 0.01,
+  bulge: 0.006,
+  topRadius: 0.06,
+  noseSweep: 0.12,
+  haunch: 0.015,
+  tailSweep: 0.03,
+  greenhouse: {
+    u0: NEO_GH[0], u1: NEO_GH[1], tumble: 0.92,
+    // the black D-pillar raked back from the upright tail glass up to the spoiler, the long roof falling gently to
+    // the windscreen
+    top: neoP([[0.057, 1.355], [0.062, 1.45], [0.07, 1.58], [0.08, 1.7], [0.09, 1.77], [0.1, 1.815], [0.11, 1.835], [0.12, 1.84], [0.2, 1.844], [0.3, 1.838], [0.4, 1.827], [0.5, 1.805], [0.55, 1.792], [0.58, 1.778], [0.6, 1.757], [0.61, 1.737], [0.62, 1.71], [0.63, 1.669], [0.65, 1.6], [0.67, 1.533], [0.69, 1.454], [0.71, 1.381], [0.73, 1.305], [0.74, 1.25]]),
+  },
+  roof: { u0: neoSt(25), u1: neoSt(99), black: false },
+  pillars: [
+    // black C- and B-pillars (the dark glass alone carries the black D-pillar); the A-pillar stays glass
+    { bottom: [neoU(0.214), neoU(0.288)], top: [neoU(0.21), neoU(0.297)], black: true, mat: 'trim' },
+    { bottom: [neoU(0.43), neoU(0.473)], top: [neoU(0.41), neoU(0.455)], black: true, mat: 'trim' },
+  ],
+  // black lower bumpers, the black rocker and running boards, thin black arch flares
+  cladding: { top: neoP([[0, 0.5], [0.04, 0.5], [0.046, 0.47], [0.09, 0.48], [0.3, 0.48], [0.5, 0.47], [0.73, 0.45], [0.93, 0.43], [0.97, 0.42], [1, 0.42]]), flare: 0.045, flareOut: 0.02, flareU: [neoU(0.06), neoU(0.97)], cut: true },
+  doors: [[neoU(0.726), neoU(0.72)], [neoU(0.475), neoU(0.47)], [neoU(0.29), neoU(0.25)]],
+  front: [
+    // the upper grille: a black panel with five rows of split chrome bars (no badge)
+    { step: 0.005, mat: 'gloss', poly: rrect(-0.49, 0.835, 0.49, 1.035, 0.015) },
+    ...[0.865, 0.9, 0.935, 0.97, 1.005].flatMap((y) => neoSlats(y, 0.465)),
+    // headlamps: a clear lens over chrome reflectors, the bulb, an LED strip along the top edge
+    { step: 0.005, mat: 'gloss', mirror: true, poly: smooth([[0.5, 0.875], [0.74, 0.89], [0.775, 0.905], [0.795, 0.94], [0.8, 0.99], [0.795, 1.04], [0.77, 1.055], [0.5, 1.03]], 1) },
+    { step: 0.005, mat: 'chrome', mirror: true, layer: 1, depth: 0.008, poly: rrect(0.53, 0.9, 0.695, 0.995, 0.02) },
+    { step: 0.005, mat: 'chrome', mirror: true, layer: 1, depth: 0.008, poly: rrect(0.71, 0.91, 0.78, 1.015, 0.02) },
+    { step: 0.005, mat: 'head', mirror: true, layer: 2, depth: 0.01, poly: neoCircle(0.6, 0.95, 0.028) },
+    { step: 0.005, mat: 'drl', mirror: true, layer: 2, depth: 0.01, poly: [[0.53, 1.005], [0.765, 1.027], [0.765, 1.041], [0.53, 1.019]] },
+    // the lower grille: a black trapezoid with four chrome bars
+    { step: 0.005, mat: 'gloss', poly: [[-0.5, 0.7], [0.5, 0.7], [0.43, 0.52], [-0.43, 0.52]] },
+    ...[[0.555, 0.44], [0.595, 0.455], [0.635, 0.47], [0.675, 0.485]].flatMap(([y, hw]) => neoSlats(y, hw, 0.013)),
+    // fog lamps in black pods at the bumper corners
+    { step: 0.005, mat: 'gloss', mirror: true, depth: 0.008, poly: rrect(0.57, 0.555, 0.77, 0.665, 0.03) },
+    { step: 0.005, mat: 'chrome', mirror: true, layer: 1, depth: 0.01, poly: neoCircle(0.665, 0.61, 0.036) },
+    { step: 0.005, mat: 'head', mirror: true, layer: 2, depth: 0.012, poly: neoCircle(0.665, 0.61, 0.024) },
+    // the satin skid plate round the number plate
+    { step: 0.005, mat: 'satin', mirror: true, poly: [[0.265, 0.36], [0.44, 0.36], [0.52, 0.51], [0.265, 0.51]] },
+    { step: 0.005, mat: 'satin', poly: [[-0.27, 0.49], [0.27, 0.49], [0.27, 0.51], [-0.27, 0.51]] },
+  ],
+  rear: [
+    // tall tail lamps at the corners: red lens, the clear reversing band, the lit red guide at the top
+    { step: 0.005, mat: 'reflector', mirror: true, depth: 0.014, poly: rrect(0.655, 0.93, 0.83, 1.32, 0.015) },
+    { step: 0.005, mat: 'tail', mirror: true, layer: 1, depth: 0.016, poly: rrect(0.675, 1.2, 0.815, 1.3, 0.01) },
+    { step: 0.005, mat: 'silver', mirror: true, layer: 1, depth: 0.016, poly: rrect(0.675, 1.0, 0.815, 1.08, 0.006) },
+    // the side-hinged tailgate: its shut lines and handle
+    { step: 0.005, mat: 'gloss', mirror: true, depth: 0.001, poly: [[0.628, 0.7], [0.641, 0.7], [0.641, 1.33], [0.628, 1.33]] },
+    { step: 0.005, mat: 'gloss', depth: 0.001, poly: [[-0.641, 0.7], [0.641, 0.7], [0.641, 0.713], [-0.641, 0.713]] },
+    { step: 0.005, mat: 'gloss', depth: 0.016, poly: rrect(-0.6, 1.065, -0.4, 1.1, 0.012) },
+    // the black lower bumper with the plate recess and red reflectors
+    { step: 0.005, mat: 'trim', poly: rrect(-0.84, 0.38, 0.84, 0.615, 0.03) },
+    { step: 0.005, mat: 'reflector', mirror: true, layer: 1, poly: rrect(0.52, 0.53, 0.7, 0.57, 0.006) },
+  ],
+  side: [
+    // the black moulding along both doors and the rear quarter, the amber side repeater above it
+    ...[[0.945, 0.733], [0.718, 0.478], [0.467, 0.258], [0.245, 0.062]].map(([a, b]): Decal => ({ step: 0.005, mat: 'trim', depth: 0.006, poly: neoStrip(b, a) })),
+    { step: 0.005, mat: 'amber', layer: 1, poly: neoRectU(0.73, 1.025, 0.755, 1.05, 0.006) },
+    // black door handles
+    { step: 0.005, mat: 'gloss', layer: 1, depth: 0.012, poly: neoRectU(0.495, 1.035, 0.54, 1.065, 0.012) },
+    { step: 0.005, mat: 'gloss', layer: 1, depth: 0.012, poly: neoRectU(0.262, 1.075, 0.307, 1.105, 0.012) },
+  ],
+  plates: { front: 0.425, rear: 0.535 },
+  spare: { y: 1.085 },
+  rimTone: 'dark',
+  mirrors: 'body',
+  paint: '#033856', // Jeans Blue, darkened for the studio lights
+  plate: 'MH 12 BN 2026',
+}
+
+const BOLERO_L = 4.25
+const BOLERO_GH: [number, number] = [0.069, 0.7]
+/** a glasshouse station (roof and pillar edges sit on them) */
+const boleroSt = (i: number) => +(BOLERO_GH[0] + (BOLERO_GH[1] - BOLERO_GH[0]) * (0.5 - 0.5 * Math.cos((Math.PI * i) / 140))).toFixed(5)
+const boleroRectU = (u0: number, y0: number, u1: number, y1: number, r: number): P2[] =>
+  rrectS(u0 * BOLERO_L, y0, u1 * BOLERO_L, y1, r).map(([x, y]) => [+(x / BOLERO_L).toFixed(5), y] as P2)
+const boleroCircle = (zc: number, yc: number, r: number, n = 40): P2[] =>
+  Array.from({ length: n }, (_, i) => { const a = (i / n) * Math.PI * 2; return [+(zc + r * Math.cos(a)).toFixed(4), +(yc + r * Math.sin(a)).toFixed(4)] as P2 })
+/** the satin side strip (u range), rising gently towards the tail */
+const boleroStrip = (u0: number, u1: number): P2[] => {
+  const yc = (u: number) => 0.945 + (0.95 - u) * 0.09
+  const pts: P2[] = []
+  for (let k = 0; k <= 6; k++) { const u = u0 + ((u1 - u0) * k) / 6; pts.push([+u.toFixed(5), +(yc(u) - 0.021).toFixed(4)]) }
+  for (let k = 6; k >= 0; k--) { const u = u0 + ((u1 - u0) * k) / 6; pts.push([+u.toFixed(5), +(yc(u) + 0.021).toFixed(4)]) }
+  return smooth(pts, 1)
+}
+
+/** Mahindra Bolero (2025 update). 3995 × 1745 × 1880, wheelbase 2680, 215/75 R15. The official length is to the rear
+ *  bumper; over the tailgate spare wheel it is 4.25 m (read off the side photo at the official scale, which then gives
+ *  the official wheelbase and height within 0.7 %). Side profile from a levelled gallery side photo; lamps, grille and
+ *  bumpers from the straight front and rear photos and the close-ups. Upright slab sides, a satin strip along the
+ *  flanks, black flares and bumpers, the spare wheel off-centre on the side-hinged tailgate. */
+export const BOLERO: CarSpec = {
+  id: 'mahindra-bolero',
+  name: 'Mahindra Bolero',
+  rakedEnds: true,
+  dropSlivers: true,
+  L: BOLERO_L, W: 1.745, H: 1.88,
+  axles: [0.2445, 0.8751],
+  tyreR: 0.352, tyreW: 0.215, rim: 0.541, wheel: { style: 'split', spokes: 5 },
+  archGap: 0.11, archSquare: 0.35,
+  // a sliver hidden behind the spare, the rear bumper, the running boards between the wheels, the front bumper
+  sill: [[0, 0.985], [0.057, 0.985], [0.062, 0.6], [0.1, 0.6], [0.14, 0.58], [0.34, 0.28], [0.5, 0.28], [0.62, 0.31], [0.68, 0.3], [0.76, 0.35], [0.97, 0.33], [0.99, 0.34], [1, 0.36]],
+  // the sliver behind the spare, the bumper, the upright tailgate up to the belt, the belt falling a little to the cowl, the bonnet
+  // stepped below the belt, the upright grille face over the bumper
+  top: [[0, 1.0], [0.057, 1.0], [0.061, 0.74], [0.0675, 0.75], [0.0678, 0.9], [0.0682, 1.1], [0.0686, 1.3], [0.075, 1.305], [0.2, 1.305], [0.3, 1.295], [0.45, 1.285], [0.6, 1.275], [0.69, 1.27], [0.7, 1.26], [0.705, 1.21], [0.712, 1.18], [0.72, 1.16], [0.75, 1.148], [0.8, 1.126], [0.85, 1.093], [0.9, 1.06], [0.93, 1.04], [0.95, 1.024], [0.97, 1.0], [0.985, 0.985], [0.992, 0.975], [1, 0.71]],
+  // a slab-sided box: flat flanks, barely rounded corners; the narrow sliver behind the spare
+  width: [[0, 0.025], [0.057, 0.025], [0.062, 0.93], [0.07, 0.95], [0.09, 0.97], [0.15, 0.975], [0.85, 0.975], [0.95, 0.97], [0.98, 0.955], [0.993, 0.94], [1, 0.95]],
+  crown: 0.008,
+  bulge: 0.003,
+  topRadius: 0.05,
+  noseSweep: 0.04,
+  tailSweep: 0.02,
+  greenhouse: {
+    u0: BOLERO_GH[0], u1: BOLERO_GH[1], tumble: 0.95,
+    // the upright tail glass under the roof's drip rail, the long flat roof falling a little to the windscreen
+    top: [[0.069, 1.305], [0.073, 1.4], [0.079, 1.5], [0.087, 1.6], [0.095, 1.68], [0.103, 1.74], [0.11, 1.78], [0.117, 1.81], [0.124, 1.83], [0.14, 1.85], [0.16, 1.86], [0.2, 1.865], [0.25, 1.859], [0.3, 1.85], [0.35, 1.84], [0.4, 1.835], [0.45, 1.822], [0.5, 1.812], [0.55, 1.787], [0.6, 1.763], [0.62, 1.743], [0.63, 1.717], [0.64, 1.671], [0.65, 1.595], [0.66, 1.529], [0.67, 1.463], [0.68, 1.392], [0.69, 1.325], [0.7, 1.26]],
+  },
+  roof: { u0: boleroSt(23), u1: boleroSt(110), black: false },
+  pillars: [
+    // black B- and C-pillars and the rear door's sliding-glass divider
+    { bottom: [0.455, 0.49], top: [0.455, 0.49], black: true, mat: 'trim' },
+    { bottom: [0.338, 0.345], top: [0.338, 0.345], black: true, mat: 'trim' },
+    { bottom: [0.27, 0.3], top: [0.27, 0.3], black: true, mat: 'trim' },
+  ],
+  // black bumpers (their tops too), the black rocker and running boards, squared black arch flares
+  cladding: { top: [[0, 0.76], [0.085, 0.76], [0.1, 0.62], [0.14, 0.55], [0.35, 0.5], [0.7, 0.5], [0.77, 0.55], [0.975, 0.62], [0.985, 0.71], [1, 0.71]], flare: 0.06, flareOut: 0.03, flareU: [0.08, 0.98], cut: true, cover: true },
+  doors: [[0.668, 0.665], [0.472, 0.472], [0.29, 0.29]],
+  front: [
+    // the grille: five slots of black mesh between body-coloured bars, a chrome bar down four of them (no badge)
+    { step: 0.005, mat: 'gloss', poly: rrect(-0.415, 0.76, 0.415, 0.96, 0.015) },
+    ...[[-0.39, -0.27], [-0.25, -0.11], [-0.085, 0.085], [0.11, 0.25], [0.27, 0.39]].map(([a, b]): Decal => ({ step: 0.005, mat: 'mesh', layer: 1, depth: 0.004, poly: rrect(a, 0.775, b, 0.945, 0.012) })),
+    ...[-0.33, -0.18, 0.18, 0.33].map((z): Decal => ({ step: 0.005, mat: 'chrome', layer: 2, depth: 0.014, poly: rrect(z - 0.008, 0.795, z + 0.008, 0.925, 0.006) })),
+    // headlamps: a dark housing, the big round reflector outboard, the amber indicator inboard, a chrome line under it
+    { step: 0.005, mat: 'gloss', mirror: true, poly: rrect(0.425, 0.775, 0.785, 0.96, 0.03) },
+    { step: 0.005, mat: 'chrome', mirror: true, layer: 1, depth: 0.008, poly: boleroCircle(0.655, 0.868, 0.078) },
+    { step: 0.005, mat: 'head', mirror: true, layer: 2, depth: 0.012, poly: boleroCircle(0.655, 0.868, 0.026) },
+    { step: 0.005, mat: 'amber', mirror: true, layer: 1, poly: rrect(0.46, 0.89, 0.53, 0.935, 0.008) },
+    { step: 0.005, mat: 'chrome', mirror: true, layer: 1, depth: 0.008, poly: [[0.445, 0.81], [0.57, 0.81], [0.6, 0.83], [0.6, 0.844], [0.57, 0.824], [0.445, 0.824]] },
+    // black bumper: fog lamps in square pods, the lower mesh intake
+    { step: 0.005, mat: 'gloss', mirror: true, depth: 0.008, poly: rrect(0.57, 0.5, 0.79, 0.63, 0.02) },
+    { step: 0.005, mat: 'chrome', mirror: true, layer: 1, depth: 0.01, poly: boleroCircle(0.675, 0.565, 0.036) },
+    { step: 0.005, mat: 'head', mirror: true, layer: 2, depth: 0.012, poly: boleroCircle(0.675, 0.565, 0.024) },
+    { step: 0.005, mat: 'mesh', poly: [[-0.38, 0.45], [0.38, 0.45], [0.4, 0.53], [-0.4, 0.53]] },
+  ],
+  rear: [
+    // square tail lamps at the corners: red top and bottom, the clear centre with a red band across it
+    { step: 0.005, mat: 'reflector', mirror: true, depth: 0.014, poly: rrect(0.65, 0.78, 0.835, 1.08, 0.012) },
+    { step: 0.005, mat: 'silver', mirror: true, layer: 1, depth: 0.016, poly: rrect(0.67, 0.83, 0.815, 1.01, 0.008) },
+    { step: 0.005, mat: 'tail', mirror: true, layer: 2, depth: 0.018, poly: rrect(0.675, 0.895, 0.81, 0.95, 0.008) },
+    // the side-hinged tailgate's shut lines and handle
+    { step: 0.005, mat: 'gloss', mirror: true, depth: 0.001, poly: [[0.6, 0.76], [0.613, 0.76], [0.613, 1.3], [0.6, 1.3]] },
+    { step: 0.005, mat: 'gloss', depth: 0.001, poly: [[-0.613, 0.76], [0.613, 0.76], [0.613, 0.773], [-0.613, 0.773]] },
+    { step: 0.005, mat: 'satin', depth: 0.012, poly: rrect(-0.45, 1.15, -0.34, 1.21, 0.01) },
+    // the black bumper bar
+    { step: 0.005, mat: 'trim', poly: rrect(-0.86, 0.6, 0.86, 0.745, 0.02) },
+  ],
+  side: [
+    // the satin strip along the wing, both doors and the rear quarter, the amber repeater on it
+    ...[[0.95, 0.676], [0.665, 0.483], [0.457, 0.292], [0.264, 0.086]].map(([a, b]): Decal => ({ step: 0.005, mat: 'satin', depth: 0.008, poly: boleroStrip(b, a) })),
+    { step: 0.005, mat: 'amber', layer: 1, depth: 0.01, poly: boleroRectU(0.771, 0.92, 0.789, 0.945, 0.006) },
+    // satin door handles, the vent on the rear quarter
+    { step: 0.005, mat: 'satin', layer: 1, depth: 0.01, poly: boleroRectU(0.501, 1.1, 0.527, 1.135, 0.008) },
+    { step: 0.005, mat: 'satin', layer: 1, depth: 0.01, poly: boleroRectU(0.311, 1.145, 0.337, 1.18, 0.008) },
+    { step: 0.005, mat: 'satin', depth: 0.006, poly: boleroRectU(0.088, 1.13, 0.12, 1.195, 0.01) },
+    { step: 0.005, mat: 'gloss', layer: 1, depth: 0.008, poly: boleroRectU(0.092, 1.145, 0.116, 1.18, 0.006) },
+  ],
+  plates: { front: 0.6, rear: 0.67 },
+  spare: { y: 1.09, z: 0.19 },
+  mirrors: 'black',
+  paint: '#070809', // Stealth Black
+  plate: 'MH 12 BL 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, KYLAQ, FORTUNER, SAFARI, WINDSOR_EV, CITY_X, SYROS, ALCAZAR, ALTROZ_X, VERNA, VICTORIS_X, SIERRA_X, SIERRA_EV_X, GRAND_I10_NIOS, AURA, CELERIO, ALTO_K10, GLANZA, TAISOR, BOLERO_NEO, BOLERO]
