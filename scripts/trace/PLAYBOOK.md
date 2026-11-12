@@ -372,3 +372,10 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   behind it is cladding raised to the lamp tops at u 0.955–0.978.
 - A lower tail lamp that wraps the rear corner: rear decal to ~1 cm inside the face plus a side copy starting at u 0.002 reads as one unit; a side copy
   starting 5 cm forward read as a second lamp. Low skid frames/intakes at both ends need `sill` at u = 0 / 1 below them (0.25), or their bottoms fray.
+- Alcazar (gallery side photo, tyres in grass patched): 1.78 m measured over the rails, axles 2.9 % apart. Heights × 0.965 also
+  brought the photo's tyre to the official 215/55 R18, a handy check for the scale factor. A 1.5 cm roof bump back up to the
+  official height still left a thin red band in the overlay (IoU 0.951 / upper 0.934); kept the official height.
+- Tailgate glass reading as a grey "pickup bed" from behind: the glasshouse's first stations rose too gently (traced off the
+  D-pillar corner, not the glass). Starting the glasshouse lower and closer to the tail (u0 0.03) and steepening the first
+  6 % made the glass read upright, for −0.1 % IoU. A skid plate made with `smooth()` of a rectangle sagged at its top
+  corners; `rrect()` keeps the straight top edge.
