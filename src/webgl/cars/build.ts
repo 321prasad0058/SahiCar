@@ -90,6 +90,9 @@ export interface CarSpec {
   /** strongly raked nose/tail (hatchbacks): end parts above the outermost section are placed on the lofted strip
    *  between sections, so lamps on a sloping tail don't stripe. Upright SUV ends look cleaner without it */
   rakedEnds?: boolean
+  /** how far in (m) from the tail and the nose rear/front decals may land (default 0.3 each): a raked tailgate glass whose
+   *  top sits further in than that, drawn as a `rear` decal on a body that climbs to the roof */
+  endReach?: [number, number]
   /** drop zero-area decal triangles (snapped edge slivers): their noisy normals fray slanted lamp edges into spikes
    *  on a raked end */
   dropSlivers?: boolean
@@ -360,7 +363,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     const n = rings.length, out: number[] = []
     for (let k = 0; k < n; k++) {
       const i = end > 0 ? n - 1 - k : k
-      if (Math.abs(rings[i].x - rings[end > 0 ? n - 1 : 0].x) > 0.3) break
+      if (Math.abs(rings[i].x - rings[end > 0 ? n - 1 : 0].x) > (spec.endReach?.[end > 0 ? 1 : 0] ?? 0.3)) break
       out.push(i)
     }
     return out
