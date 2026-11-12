@@ -283,3 +283,13 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   'dark' went all gunmetal).
 - A body-coloured D-pillar over a dark tailgate-glass wrap: `pillars` with `black: false`, a near-zero belt range, the top
   range starting exactly on `roof.u0`, and a curved `rearEdge`; a top starting past `roof.u0` left a torn patch at the roof.
+- Curvv: the listing's studio side render read 1.72 m against 1.63 (aspect 2.50 vs L/H 2.64) and capped IoU at 0.93 once scaled
+  to the official height; a road photo from another portal's gallery (1.648 m, axles 2 % apart) cut out cleanly: IoU 0.965.
+- A body-coloured sail behind the rear door glass under a coupe's glass strip: a `pillars` entry, with `step: 0.004` (new,
+  opt-in) or its edges saw-tooth on the rolled glasshouse. The pillar stops 7.5 cm under the glass top (ghTop − 0.075), so
+  start its belt range where the glasshouse is taller than that (Curvv u 0.095); running it into the low ducktail tore it.
+  A rear edge at f ≈ 0.55–0.75 lets the tailgate glass wrap down the sides like the photo and frays less than f = 1.
+- Tail light bar: its gloss housing vanished in a band at |z| 0.5–0.6 while the red line stayed (body poking through the
+  thin housing); housing at `layer` 2 with `depth` 0.012 and the red line at `layer` 3 / `depth` 0.016 fixed it. A separate
+  red chevron over the housing's corner also tore it: draw the red line as one bent outline instead. With `crown` the
+  face's sides sit lower, so keep the tail `top` at u = 0 ~8 cm over the bar (Curvv 1.262 vs bar top 1.185).

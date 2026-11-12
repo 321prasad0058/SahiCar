@@ -2239,4 +2239,111 @@ export const EXTER: CarSpec = {
   plate: 'MH 12 EX 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER]
+const CURVV_L = 4.308
+/** a side outline from a rounded rectangle given in u (0…1) and metres */
+const curvvU = (u0: number, y0: number, u1: number, y1: number, r: number): P2[] =>
+  rrectS(u0 * CURVV_L, y0, u1 * CURVV_L, y1, r).map(([x, y]) => [+(x / CURVV_L).toFixed(5), y] as P2)
+/** the Curvv's grilles: staggered rows of short silver dashes at heights ys, kept inside half-width hw(y), off the plate */
+const curvvDashes = (ys: number[], hw: (y: number) => number, skip?: (z: number, y: number) => boolean): Decal[] =>
+  ys.flatMap((y, i) => {
+    const out: Decal[] = []
+    const pitch = 0.085, w = 0.046, h = 0.011
+    for (let z = (i % 2 ? pitch / 2 : 0) - 1.2; z < 1.2; z += pitch) {
+      if (Math.abs(z) + w / 2 > hw(y) || skip?.(z, y)) continue
+      out.push({ step: 0.004, mat: 'satin', layer: 2, depth: 0.008, poly: rrectS(z - w / 2, y - h / 2, z + w / 2, y + h / 2, 0.004) })
+    }
+    return out
+  })
+
+/** Tata Curvv (2024, petrol/diesel). 4308 × 1810 × 1630, wheelbase 2560, 215/55 R18 (top trim).
+ *  Side profile from a levelled road photo of a red Curvv (shark fin erased; 1.648 m measured, heights scaled by 0.989;
+ *  the axles 2 % too far apart, so they sit at the official wheelbase with the overhangs split as in the photo, arches,
+ *  doors and handles mapped with them, the silhouette kept in photo u). The listing's studio side render read 1.72 m
+ *  (5.5 % tall) and was not used for heights. The SUV-coupe: the long roof running into a raked tailgate glass with a
+ *  ducktail lip, the body-coloured sail behind the rear door glass; the light bar along the bonnet's edge over the
+ *  split headlamp pods, the dashed parametric grilles from the straight front; the connected tail light bar, tall black
+ *  rear bumper and corner lamps from a straight rear photo. */
+export const CURVV: CarSpec = {
+  id: 'tata-curvv',
+  name: 'Tata Curvv',
+  dropSlivers: true,
+  rakedEnds: true,
+  L: CURVV_L, W: 1.81, H: 1.63,
+  axles: [0.2208, 0.815],
+  tyreR: 0.347, tyreW: 0.215, rim: 0.659, wheel: { style: 'split', spokes: 5 }, rimTone: 'dark',
+  archGap: 0.12, archSquare: 0.3,
+  sill: [[0, 0.37], [0.01, 0.36], [0.02, 0.36], [0.05, 0.355], [0.07, 0.35], [0.1, 0.335], [0.12, 0.33], [0.32, 0.303], [0.5, 0.3], [0.6, 0.3], [0.68, 0.287], [0.72, 0.28], [0.93, 0.28], [0.95, 0.29], [0.97, 0.3], [0.99, 0.3], [1, 0.29]],
+  // the tail face up to the light bar and the ducktail lip, the belt under the sail and falling gently forward under
+  // the windows, the cowl, the bonnet falling to the light bar along its leading edge
+  top: [[0, 1.262], [0.006, 1.264], [0.012, 1.265], [0.02, 1.265], [0.06, 1.264], [0.12, 1.265], [0.187, 1.265], [0.2, 1.261], [0.25, 1.247], [0.3, 1.234], [0.35, 1.22], [0.4, 1.207], [0.45, 1.193], [0.5, 1.179], [0.55, 1.165], [0.6, 1.152], [0.65, 1.138], [0.7, 1.13], [0.725, 1.136], [0.735, 1.142], [0.745, 1.15], [0.76, 1.154], [0.78, 1.145], [0.8, 1.133], [0.82, 1.121], [0.84, 1.112], [0.86, 1.103], [0.88, 1.09], [0.9, 1.073], [0.92, 1.053], [0.94, 1.031], [0.95, 1.019], [0.96, 1.009], [0.97, 1.001], [0.98, 0.996], [0.99, 0.993], [1, 0.991]],
+  width: [[0, 0.9], [0.006, 0.93], [0.02, 0.955], [0.05, 0.978], [0.1, 0.993], [0.2, 1], [0.5, 1], [0.85, 0.997], [0.9, 0.986], [0.94, 0.966], [0.97, 0.935], [0.99, 0.9], [1, 0.88]],
+  crown: 0.012,
+  bulge: 0.03,
+  haunch: 0.045,
+  topRadius: 0.06,
+  noseSweep: 0.15,
+  tailSweep: 0.12,
+  greenhouse: {
+    u0: 0.02, u1: 0.745, tumble: 0.7,
+    // the ducktail lip, the long raked tailgate glass flowing into the coupe roof, the raked windscreen
+    top: [[0.02, 1.265], [0.03, 1.271], [0.04, 1.277], [0.05, 1.283], [0.06, 1.29], [0.07, 1.302], [0.08, 1.318], [0.09, 1.335], [0.1, 1.35], [0.12, 1.38], [0.14, 1.41], [0.16, 1.44], [0.18, 1.475], [0.2, 1.512], [0.22, 1.537], [0.24, 1.556], [0.26, 1.571], [0.28, 1.586], [0.3, 1.596], [0.33, 1.613], [0.36, 1.624], [0.4, 1.63], [0.45, 1.628], [0.48, 1.626], [0.5, 1.62], [0.52, 1.607], [0.54, 1.588], [0.56, 1.568], [0.58, 1.538], [0.6, 1.5], [0.62, 1.465], [0.64, 1.424], [0.66, 1.38], [0.68, 1.334], [0.7, 1.284], [0.72, 1.238], [0.735, 1.2], [0.745, 1.152]],
+  },
+  roof: { u0: 0.2036, u1: 0.5614, black: false },
+  pillars: [
+    // the body-coloured sail behind the rear door glass, under the dark strip of the tailgate glass
+    { bottom: [0.095, 0.187], top: [0.2036, 0.269], black: false, rearEdge: [[0.185, 0.75], [0.16, 0.62], [0.13, 0.55], [0.1, 0.4]], step: 0.004 },
+    // the black B-pillar (the A-pillar is left as plain glass)
+    { bottom: [0.453, 0.472], top: [0.455, 0.47], black: true },
+  ],
+  // black arch flares joined by a band along the doors, the black lower bumpers
+  cladding: { top: [[0, 0.55], [0.06, 0.55], [0.09, 0.53], [0.099, 0.514], [0.1105, 0.589], [0.1226, 0.745], [0.1453, 0.852], [0.1801, 0.914], [0.2384, 0.914], [0.2823, 0.852], [0.3043, 0.733], [0.3238, 0.491], [0.34, 0.49], [0.4, 0.505], [0.5, 0.51], [0.6, 0.505], [0.69, 0.49], [0.7114, 0.445], [0.7143, 0.564], [0.725, 0.708], [0.7476, 0.814], [0.7915, 0.883], [0.8486, 0.877], [0.9016, 0.78], [0.9244, 0.658], [0.9364, 0.445], [0.96, 0.46], [1, 0.46]], flare: 0.07, cut: true },
+  doors: [[0.2412, 0.2354], [0.4705, 0.4705], [0.7143, 0.7086]],
+  front: [
+    // the gloss-black band along the bonnet's leading edge, the light bar in it kicking up into the DRL chevrons
+    { step: 0.005, mat: 'gloss', poly: both([[0, 0.775], [0.36, 0.775], [0.45, 0.8], [0.58, 0.872], [0.66, 0.905], [0.712, 0.932], [0.722, 0.95], [0.712, 0.966], [0.6, 0.963], [0, 0.961]]) },
+    { step: 0.005, mat: 'drl', layer: 1, poly: both([[0, 0.943], [0.55, 0.944], [0.64, 0.948], [0.7, 0.952], [0.716, 0.955], [0.712, 0.962], [0.64, 0.959], [0.55, 0.956], [0, 0.955]]) },
+    { step: 0.005, mat: 'drl', layer: 2, mirror: true, poly: [[0.6, 0.936], [0.66, 0.938], [0.705, 0.944], [0.714, 0.953], [0.66, 0.951], [0.6, 0.949]] },
+    // the upper grille's silver dashes
+    ...curvvDashes([0.857, 0.834, 0.811, 0.788], (y) => 0.36 + (y - 0.775) * 2.2),
+    // the split headlamp pods at the bumper corners: projector, LED lamp, slatted pocket tapering down
+    { step: 0.005, mat: 'gloss', mirror: true, depth: 0.008, poly: smooth([[0.665, 0.835], [0.7, 0.845], [0.765, 0.845], [0.772, 0.82], [0.775, 0.45], [0.755, 0.44], [0.725, 0.52], [0.68, 0.64], [0.665, 0.68]], 1) },
+    { step: 0.005, mat: 'head', layer: 1, mirror: true, poly: rrectS(0.69, 0.75, 0.762, 0.825, 0.016) },
+    { step: 0.005, mat: 'head', layer: 1, mirror: true, poly: rrectS(0.695, 0.668, 0.762, 0.7, 0.008) },
+    { step: 0.005, mat: 'slats', layer: 1, mirror: true, poly: [[0.755, 0.47], [0.767, 0.47], [0.767, 0.645], [0.7, 0.645]] },
+    // the dark recess under the upper grille, a black crease running out to the pods
+    { step: 0.005, mat: 'gloss', poly: both([[0, 0.655], [0.42, 0.655], [0.5, 0.668], [0.55, 0.705], [0.5, 0.722], [0, 0.722]]) },
+    { step: 0.005, mat: 'gloss', mirror: true, poly: band([[0.5, 0.664], [0.6, 0.671], [0.67, 0.686]], 0.012) },
+    // the black lower bumper, the big lower grille with its dashes, the satin skid plate
+    { step: 0.005, mat: 'trim', poly: both([[0, 0.28], [0.68, 0.28], [0.755, 0.32], [0.77, 0.41], [0.6, 0.39], [0, 0.39]]) },
+    { step: 0.005, mat: 'gloss', layer: 1, poly: smooth(both([[0, 0.375], [0.66, 0.375], [0.74, 0.43], [0.7, 0.47], [0.6, 0.55], [0.55, 0.575], [0, 0.575]]), 1) },
+    ...curvvDashes([0.552, 0.529, 0.506, 0.483, 0.46, 0.437, 0.414, 0.391], (y) => Math.min(0.71, 0.56 + (0.575 - y) * 0.9), (z, y) => Math.abs(z) < 0.29 && y > 0.51),
+    { step: 0.005, mat: 'satin', layer: 2, poly: smooth(both([[0, 0.3], [0.52, 0.3], [0.58, 0.31], [0.6, 0.33], [0.56, 0.348], [0, 0.352]]), 2) },
+  ],
+  rear: [
+    // the connected light bar under the ducktail lip: a smoked band, its red line dipping into the corner units
+    { step: 0.005, mat: 'gloss', layer: 2, depth: 0.012, poly: both([[0, 1.138], [0.6, 1.138], [0.7, 1.128], [0.742, 1.105], [0.756, 1.11], [0.762, 1.14], [0.756, 1.18], [0.6, 1.185], [0, 1.185]]) },
+    { step: 0.005, mat: 'tail', layer: 3, depth: 0.016, poly: both([[0, 1.158], [0.6, 1.159], [0.66, 1.153], [0.72, 1.14], [0.75, 1.132], [0.752, 1.145], [0.72, 1.153], [0.66, 1.165], [0.6, 1.171], [0, 1.17]]) },
+    // the tailgate's lower shut line over a body-coloured band
+    { step: 0.005, mat: 'gloss', depth: 0.001, poly: band([[-0.72, 0.8], [0.72, 0.8]], 0.012) },
+    // the tall black bumper round the plate, rising round the vertical corner lamps, the satin skid plate
+    { step: 0.005, mat: 'trim', poly: both([[0, 0.36], [0.7, 0.36], [0.77, 0.4], [0.775, 0.89], [0.718, 0.895], [0.71, 0.74], [0.68, 0.685], [0.6, 0.665], [0, 0.66]]) },
+    { step: 0.005, mat: 'reflector', layer: 1, mirror: true, poly: rrectS(0.726, 0.69, 0.765, 0.875, 0.01) },
+    { step: 0.005, mat: 'satin', layer: 1, poly: smooth(both([[0, 0.385], [0.55, 0.385], [0.62, 0.395], [0.632, 0.425], [0.58, 0.442], [0, 0.445]]), 2) },
+  ],
+  side: [
+    // the tail lamp wedge on the flank: smoked housing and the red line along its top
+    { step: 0.004, mat: 'gloss', depth: 0.002, poly: [[0.012, 1.175], [0.03, 1.16], [0.0878, 1.093], [0.0636, 1.084], [0.03, 1.115], [0.012, 1.128]] },
+    { step: 0.004, mat: 'tail', layer: 1, depth: 0.004, poly: [[0.012, 1.166], [0.03, 1.152], [0.08, 1.097], [0.074, 1.093], [0.03, 1.14], [0.012, 1.154]] },
+    // the chrome strip along the bottom of the side glass
+    { step: 0.004, mat: 'chrome', depth: 0.003, poly: sideBand([[0.19, 1.244], [0.3, 1.215], [0.4, 1.188], [0.5, 1.16], [0.6, 1.133], [0.7, 1.111], [0.722, 1.115]], 0.012, CURVV_L) },
+    // flush door handles
+    { step: 0.005, mat: 'body', depth: 0.006, poly: curvvU(0.5038, 1.015, 0.5499, 1.058, 0.012) },
+    { step: 0.005, mat: 'body', depth: 0.006, poly: curvvU(0.2713, 1.08, 0.3184, 1.123, 0.012) },
+  ],
+  plates: { front: 0.582, rear: 0.56 },
+  mirrors: 'black',
+  paint: '#cfd0d2', // Pristine White, darkened for the studio lights
+  plate: 'MH 12 CV 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CURVV]

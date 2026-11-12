@@ -55,7 +55,7 @@ export interface CarSpec {
   /** glass that wraps up into the roof edge */
   alpine?: [number, number]
   /** raked pillars: u range at the beltline and at the roof */
-  pillars: { bottom: [number, number]; top: [number, number]; black: boolean; /** overrides black/body, e.g. a silver C-pillar panel */ mat?: Mat; /** extra points on the rear edge, roof → belt, as [u, f] with f = 1 at the roof, 0 at the belt */ rearEdge?: [number, number][] }[]
+  pillars: { bottom: [number, number]; top: [number, number]; black: boolean; /** overrides black/body, e.g. a silver C-pillar panel */ mat?: Mat; /** extra points on the rear edge, roof → belt, as [u, f] with f = 1 at the roof, 0 at the belt */ rearEdge?: [number, number][]; /** decal grid step (m) for a pillar on a strongly curved glasshouse */ step?: number }[]
   /** black plastic over the lower body: its traced top line, and how far the arch flares reach */
   /** `cut`: take the cladding's section from the full body height, cut off at its top, so a low band along the
    *  doors shows at its traced height (otherwise the section's rounded top corner tucks a low band under the paint) */
@@ -738,7 +738,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
       [p.top[0], yt(p.top[0])],
       ...(p.rearEdge ?? []).map(([u, f]) => [u, yb(u) + (yt(u) - yb(u)) * f] as [number, number]),
     ]
-    for (const w of ['ghLeft', 'ghRight'] as const) decal({ mat: p.mat ?? (p.black ? 'gloss' : 'body'), poly, depth: p.mat ? 0 : undefined, layer: p.mat ? 3 : undefined }, w)
+    for (const w of ['ghLeft', 'ghRight'] as const) decal({ mat: p.mat ?? (p.black ? 'gloss' : 'body'), poly, depth: p.mat ? 0 : undefined, layer: p.mat ? 3 : undefined, step: p.step }, w)
   }
 
   // number plates (India: white, green for EVs)
