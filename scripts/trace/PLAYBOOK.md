@@ -136,3 +136,11 @@ Add the id to `READY` in src/webgl/cars/specs.ts **and** to `SHOWCASE_IDS` in sr
 - Bright machined spokes on dark pockets: 'split' without `rimTone` ('dark' turns the spokes gunmetal).
 - Desaturated dark paints read slate grey under the studio lights; deep teal needed a saturated #002b3d.
 - No brand logos or lettering on any model (front or rear): every car so far is badge-free.
+- Bonnet `crown` raises the centre line above the traced `top`: lower the bonnet `top` by about the crown (Seltos: 1.5 cm)
+  or the side silhouette sits high over the whole bonnet.
+- Lamps that sit on the corner chamfer (Seltos DRL bars, boomerang tail lamps) go on the flank as `side` decals; the end
+  face only carries the parts inside its half-width. A vertical bar on both faces reads as two bars from the rear.
+- `rrect()` (rounded rectangle) and `smooth()` (Chaikin) in exact.ts give pods and skirts clean outlines; Chaikin on a plain
+  rectangle turns it into a blob. `sideBand()` is `band()` for side decals (u scaled by the length).
+- Measure belt/cladding heights per pixel column of the levelled cut-out (light paint vs dark runs) instead of by eye:
+  the eye read of the Seltos belt was 3 cm off.
