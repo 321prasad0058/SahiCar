@@ -91,8 +91,9 @@
   "page": "https://en.wikipedia.org/wiki/Hyundai_i10"
  },
  "hyundai-exter": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/35/2023_Hyundai_Exter_SX_%28O%29.png/960px-2023_Hyundai_Exter_SX_%28O%29.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Hyundai_Exter"
+  "src": "/cars/ai/hyundai-exter.webp",
+  "page": "",
+  "ai": true
  },
  "hyundai-i20": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Hyundai_i20_%28III%2C_Facelift%29_%E2%80%93_f_11102025.jpg/960px-Hyundai_i20_%28III%2C_Facelift%29_%E2%80%93_f_11102025.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
@@ -604,8 +605,9 @@
   "page": "https://en.wikipedia.org/wiki/Suzuki_Ertiga"
  },
  "toyota-innova-hycross": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/Toyota_Innova_Zenix_2.0_V_%28III%29_%E2%80%93_f_22032025.jpg/960px-Toyota_Innova_Zenix_2.0_V_%28III%29_%E2%80%93_f_22032025.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Toyota_Innova"
+  "src": "/cars/ai/toyota-innova-hycross.webp",
+  "page": "",
+  "ai": true
  },
  "toyota-innova-crysta": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/Toyota_Innova_Zenix_2.0_V_%28III%29_%E2%80%93_f_22032025.jpg/960px-Toyota_Innova_Zenix_2.0_V_%28III%29_%E2%80%93_f_22032025.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
