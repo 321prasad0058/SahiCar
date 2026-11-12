@@ -388,3 +388,10 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   u 0.91, `topRadius` 0.08 and the nose `top` ~5 cm over the lamps read clean. A bonnet shut line on that roll looked like a crack.
 - A side tail-lamp wedge just under a climbing tail `top` frayed along its top edge: keep it ≥ 4 cm under `top(u)` there, `step`
   0.003, `depth` 0.002. Black alloys with thin machined edges: `twin` + `rimTone: 'dark'` (split/turbine read silver/grey).
+- Victoris (gallery side photo, tyres in grass): the cut-out ended above the tyre bottoms, so extend its canvas ~40 px and paint a
+  dark disc per wheel (hub and radius off a grid of the wheel) before extract-side. It read 1.673 m with the axles 4.9 % apart:
+  heights × 0.989 and every traced u mapped onto the official wheelbase (`victorisP`). IoU 0.952 / upper 0.951.
+- A bright vertical strip down the tail in the side view is the tail-sweep Fresnel band (as at the nose): `tailSweep` 0.06.
+- Light-bar end that turns down the rear corner into a smoked wedge on the flank: rear decal to ~1.4 cm inside the face (`width`
+  0.92 at u = 0) and the side wedge starting at u 0.003 read as one lamp; its red guide is a `sideBand` along the wedge's top edge.
+- Twisted gunmetal spokes with machined silver wedges: `swirl` + `rimTone: 'dark'` (split + dark went almost all grey).
