@@ -1527,41 +1527,6 @@ export const XUV_3XO: CarSpec = {
   shoulder: { y: [[0, 0.85], [0.12, 1.02], [0.4, 0.99], [1, 0.93]], inset: 0.02 },
   haunch: 0.04,
   bonnetRidge: 0.01,
-const ERTIGA_L = 4.435
-/** a circle outline for the Ertiga's fog lamps and headlamp bowls */
-const ertigaCircle = (zc: number, yc: number, r: number, n = 40): P2[] =>
-  Array.from({ length: n }, (_, i) => { const a = (i / n) * Math.PI * 2; return [+(zc + r * Math.cos(a)).toFixed(4), +(yc + r * Math.sin(a)).toFixed(4)] as P2 })
-/** one chrome "wing" of the grille: a slim bar from zi out to zo whose outer end bends down */
-const ertigaWing = (zi: number, zo: number, y: number): Decal => ({
-  step: 0.004, mat: 'chrome', mirror: true, layer: 2, depth: 0.01,
-  poly: [[zi, y + 0.006], [zo - 0.03, y + 0.002], [zo - 0.006, y - 0.016], [zo + 0.004, y - 0.012], [zo - 0.016, y + 0.016], [zi, y + 0.02]],
-})
-
-/** Maruti Suzuki Ertiga (2022 facelift, 2025 update with the roof spoiler). 4435 × 1735 × 1690, wheelbase 2740,
- *  185/65 R15 (ZXi Plus). Side profile from a levelled gallery side photo (rod antenna removed; the close camera spreads
- *  the axles by 3.4 % and stands the roof 3 % tall, so heights are scaled to the official height and the axles sit at the
- *  official wheelbase with the overhangs split as in the photo; doors, handles and pillars are mapped onto them). The
- *  long MPV body: a near-upright tail with the boomerang lamps climbing the D-pillars, a body-coloured D-pillar panel under
- *  a black glass band (floating roof), the long rear quarter glass, the belt falling forwards, the crease from the tail
- *  lamps down the doors. Grille, headlamps and bumpers from a straight front photo; the tail from the rear
- *  three-quarters and close-ups. */
-export const ERTIGA_X: CarSpec = {
-  id: 'maruti-ertiga',
-  name: 'Maruti Suzuki Ertiga',
-  rakedEnds: true,
-  dropSlivers: true,
-  L: ERTIGA_L, W: 1.735, H: 1.69,
-  axles: [0.2009, 0.8187],
-  tyreR: 0.3108, tyreW: 0.185, rim: 0.613, wheel: { style: 'split', spokes: 5 },
-  archGap: 0.08, archSquare: 0.1,
-  sill: [[0, 0.4875], [0.004, 0.4193], [0.01, 0.39], [0.02, 0.3754], [0.04, 0.3559], [0.06, 0.3217], [0.08, 0.3023], [0.1, 0.273], [0.12, 0.2632], [0.2, 0.2555], [0.3, 0.2496], [0.4, 0.2437], [0.5, 0.2359], [0.6, 0.2311], [0.7, 0.2233], [0.74, 0.2096], [0.8, 0.2047], [0.88, 0.2047], [0.91, 0.2165], [0.93, 0.2262], [0.95, 0.2418], [0.97, 0.2681], [0.98, 0.2905], [0.99, 0.3217], [0.996, 0.3705], [1, 0.4387]],
-  top: [[0, 0.6825], [0.002, 0.8775], [0.005, 1.0237], [0.008, 1.1212], [0.011, 1.17], [0.015, 1.1944], [0.02, 1.2383], [0.03, 1.3065], [0.04, 1.3699], [0.05, 1.4284], [0.06, 1.4723], [0.07, 1.5015], [0.078, 1.5112], [0.085, 1.5034], [0.093, 1.4723], [0.1, 1.443], [0.11, 1.3991], [0.12, 1.3601], [0.13, 1.3211], [0.14, 1.2821], [0.15, 1.248], [0.16, 1.2236], [0.17, 1.209], [0.19, 1.1973], [0.22, 1.1895], [0.3, 1.17], [0.4, 1.1534], [0.5, 1.1339], [0.6, 1.1115], [0.7, 1.0891], [0.74, 1.0774], [0.76, 1.0852], [0.78, 1.0998], [0.8, 1.1134], [0.82, 1.1066], [0.85, 1.0725], [0.88, 1.0433], [0.9, 1.0208], [0.92, 0.9945], [0.94, 0.9682], [0.96, 0.9389], [0.975, 0.9116], [0.985, 0.897], [0.993, 0.8872], [1, 0.8775]],
-  width: [[0, 0.82], [0.005, 0.88], [0.015, 0.93], [0.035, 0.968], [0.07, 0.99], [0.12, 1], [0.85, 1], [0.9, 0.99], [0.94, 0.972], [0.965, 0.95], [0.98, 0.928], [0.992, 0.9], [1, 0.875]],
-  crown: 0.02,
-  bulge: 0.03,
-  shoulder: { y: [[0, 1.1017], [0.1, 1.0823], [0.25, 1.0335], [0.5, 0.975], [0.7, 0.8921], [0.8, 0.8531], [1, 0.8287]], inset: 0.035 },
-  haunch: 0.04,
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X]
   topRadius: 0.07,
   noseSweep: 0.12,
   tailSweep: 0.12,
@@ -1630,6 +1595,44 @@ export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIR
   plate: 'MH 12 XO 2026',
 }
 
+const ERTIGA_L = 4.435
+/** a circle outline for the Ertiga's fog lamps and headlamp bowls */
+const ertigaCircle = (zc: number, yc: number, r: number, n = 40): P2[] =>
+  Array.from({ length: n }, (_, i) => { const a = (i / n) * Math.PI * 2; return [+(zc + r * Math.cos(a)).toFixed(4), +(yc + r * Math.sin(a)).toFixed(4)] as P2 })
+/** one chrome "wing" of the grille: a slim bar from zi out to zo whose outer end bends down */
+const ertigaWing = (zi: number, zo: number, y: number): Decal => ({
+  step: 0.004, mat: 'chrome', mirror: true, layer: 2, depth: 0.01,
+  poly: [[zi, y + 0.006], [zo - 0.03, y + 0.002], [zo - 0.006, y - 0.016], [zo + 0.004, y - 0.012], [zo - 0.016, y + 0.016], [zi, y + 0.02]],
+})
+
+/** Maruti Suzuki Ertiga (2022 facelift, 2025 update with the roof spoiler). 4435 × 1735 × 1690, wheelbase 2740,
+ *  185/65 R15 (ZXi Plus). Side profile from a levelled gallery side photo (rod antenna removed; the close camera spreads
+ *  the axles by 3.4 % and stands the roof 3 % tall, so heights are scaled to the official height and the axles sit at the
+ *  official wheelbase with the overhangs split as in the photo; doors, handles and pillars are mapped onto them). The
+ *  long MPV body: a near-upright tail with the boomerang lamps climbing the D-pillars, a body-coloured D-pillar panel under
+ *  a black glass band (floating roof), the long rear quarter glass, the belt falling forwards, the crease from the tail
+ *  lamps down the doors. Grille, headlamps and bumpers from a straight front photo; the tail from the rear
+ *  three-quarters and close-ups. */
+export const ERTIGA_X: CarSpec = {
+  id: 'maruti-ertiga',
+  name: 'Maruti Suzuki Ertiga',
+  rakedEnds: true,
+  dropSlivers: true,
+  L: ERTIGA_L, W: 1.735, H: 1.69,
+  axles: [0.2009, 0.8187],
+  tyreR: 0.3108, tyreW: 0.185, rim: 0.613, wheel: { style: 'split', spokes: 5 },
+  archGap: 0.08, archSquare: 0.1,
+  sill: [[0, 0.4875], [0.004, 0.4193], [0.01, 0.39], [0.02, 0.3754], [0.04, 0.3559], [0.06, 0.3217], [0.08, 0.3023], [0.1, 0.273], [0.12, 0.2632], [0.2, 0.2555], [0.3, 0.2496], [0.4, 0.2437], [0.5, 0.2359], [0.6, 0.2311], [0.7, 0.2233], [0.74, 0.2096], [0.8, 0.2047], [0.88, 0.2047], [0.91, 0.2165], [0.93, 0.2262], [0.95, 0.2418], [0.97, 0.2681], [0.98, 0.2905], [0.99, 0.3217], [0.996, 0.3705], [1, 0.4387]],
+  top: [[0, 0.6825], [0.002, 0.8775], [0.005, 1.0237], [0.008, 1.1212], [0.011, 1.17], [0.015, 1.1944], [0.02, 1.2383], [0.03, 1.3065], [0.04, 1.3699], [0.05, 1.4284], [0.06, 1.4723], [0.07, 1.5015], [0.078, 1.5112], [0.085, 1.5034], [0.093, 1.4723], [0.1, 1.443], [0.11, 1.3991], [0.12, 1.3601], [0.13, 1.3211], [0.14, 1.2821], [0.15, 1.248], [0.16, 1.2236], [0.17, 1.209], [0.19, 1.1973], [0.22, 1.1895], [0.3, 1.17], [0.4, 1.1534], [0.5, 1.1339], [0.6, 1.1115], [0.7, 1.0891], [0.74, 1.0774], [0.76, 1.0852], [0.78, 1.0998], [0.8, 1.1134], [0.82, 1.1066], [0.85, 1.0725], [0.88, 1.0433], [0.9, 1.0208], [0.92, 0.9945], [0.94, 0.9682], [0.96, 0.9389], [0.975, 0.9116], [0.985, 0.897], [0.993, 0.8872], [1, 0.8775]],
+  width: [[0, 0.82], [0.005, 0.88], [0.015, 0.93], [0.035, 0.968], [0.07, 0.99], [0.12, 1], [0.85, 1], [0.9, 0.99], [0.94, 0.972], [0.965, 0.95], [0.98, 0.928], [0.992, 0.9], [1, 0.875]],
+  crown: 0.02,
+  bulge: 0.03,
+  shoulder: { y: [[0, 1.1017], [0.1, 1.0823], [0.25, 1.0335], [0.5, 0.975], [0.7, 0.8921], [0.8, 0.8531], [1, 0.8287]], inset: 0.035 },
+  haunch: 0.04,
+  topRadius: 0.07,
+  noseSweep: 0.12,
+  tailSweep: 0.12,
+  greenhouse: {
     u0: 0.057, u1: 0.8, tumble: 0.72, followBody: 0.1,
     top: [[0.057, 1.599], [0.06, 1.6263], [0.07, 1.6477], [0.08, 1.6594], [0.1, 1.6692], [0.13, 1.6789], [0.2, 1.6985], [0.3, 1.7111], [0.38, 1.7131], [0.45, 1.6985], [0.5, 1.6789], [0.55, 1.6536], [0.58, 1.6263], [0.6, 1.6019], [0.62, 1.5746], [0.64, 1.5405], [0.66, 1.4986], [0.68, 1.4508], [0.7, 1.4021], [0.72, 1.3504], [0.74, 1.3007], [0.76, 1.2499], [0.78, 1.1992], [0.8, 1.1388]],
   },
