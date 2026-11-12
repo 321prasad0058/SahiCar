@@ -90,3 +90,17 @@ Add the id to `READY` in src/webgl/cars/specs.ts **and** to `SHOWCASE_IDS` in sr
 - Same for low skid plates: the `sill` at the ends must sit ~7 cm below them (the bottom corner is rounded).
 - Overlapping decals need distinct `layer`s; fine parts on curved ends get `step: 0.005`. Skid plates: `satin`,
   bumper reflectors: `reflector` (no lamp glow). Spoiler shape: `spoiler: { len, thick, tilt }`.
+- A gallery side photo shot from closer than a studio's makes the near tyres look big: the overlay (aligned at the
+  lowest pixel) then shows a uniform band — model high on top, photo low under the sill. Lower sill, belt and roof
+  together by that band (Swift: ~2 cm) instead of growing the tyres.
+- Read side heights off the cut-out's alpha columns or extract-side, not by eye from a grid of the raw photo.
+- End decals land on the lofted strip between rings, so lamps on a raked tail no longer stair-step; plates are
+  tessellated and follow the nose/tail sweep (a flat plate sank behind the grille at the centre).
+- If cars.json lists the dual-tone paints separately ("… with Black Roof"), set `roof.black: false`: those paints
+  bring their own roof colour. Black pillars alone still give the floating-roof look.
+- Deep blues read purple under the studio lights: keep the photo's green-to-blue ratio when darkening the paint.
+- A good side IoU can still read as a van: check the f34/r34 sheet for plan rounding (hard `width` taper to ~0.68 at
+  both ends, noseSweep ~0.3), tumble (~0.62 for a small hatch), haunch (~0.06) and bulge (~0.04). None move the score.
+- Side decals must stay below `top(u) − 0.01`: above it they project onto the glasshouse, and outside the glasshouse's
+  u range that lands on the centre line (stray marks in the middle of the tail).
+- Thin lines (shut lines) need ≥ 12 mm height or the decal grid breaks them into dashes.

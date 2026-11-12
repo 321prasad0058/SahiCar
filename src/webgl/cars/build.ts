@@ -4,7 +4,7 @@
 import * as THREE from 'three'
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js'
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
-import { curve, loft, ring, ringZ, stationsU, type Pts, type Tag } from './loft'
+import { curve, loft, ring, ringZ, stationsU, type Pts, type Ring, type Tag } from './loft'
 
 export type Mat = 'gloss' | 'trim' | 'chrome' | 'silver' | 'satin' | 'reflector' | 'drl' | 'head' | 'tail' | 'amber' | 'mesh' | 'hex' | 'slats' | 'body' | 'glass'
 /** An outline traced from a photo. Front/rear: [z, y] in metres (z across the car, + = right); side: [u, y]. */
@@ -76,6 +76,9 @@ export interface CarSpec {
   /** radius (m) of the body's upper side edge (shoulder roll, bonnet and tail edges); default 0.17. A boxy car
    *  with lamps tucked under the bonnet edge wants less, so the nose and tail faces stay flat up to the lamps */
   topRadius?: number
+  /** strongly raked nose/tail (hatchbacks): end parts above the outermost section are placed on the lofted strip
+   *  between sections, so lamps on a sloping tail don't stripe. Upright SUV ends look cleaner without it */
+  rakedEnds?: boolean
   /** height (m) of the twin raised creases along the bonnet */
   bonnetRidge?: number
   /** dark gunmetal alloys (machined edges) instead of bright silver */
@@ -239,6 +242,23 @@ function nearestOnPoly(p: [number, number], poly: [number, number][]): [number, 
   return best
 }
 
+/** ringZ of the cross-section part-way (t: 0 = a … 1 = b) along the lofted strip between rings a and b */
+function ringZBlend(a: Ring, b: Ring, t: number, y: number) {
+  let best = 0
+  const p = a.pts, q = b.pts, n = p.length
+  for (let i = 0; i < n; i++) {
+    const k = (i + 1) % n
+    const z1 = p[i][0] + (q[i][0] - p[i][0]) * t, y1 = p[i][1] + (q[i][1] - p[i][1]) * t
+    const z2 = p[k][0] + (q[k][0] - p[k][0]) * t, y2 = p[k][1] + (q[k][1] - p[k][1]) * t
+    if (z1 < 0 && z2 < 0) continue
+    if ((y1 - y) * (y2 - y) <= 0 && y1 !== y2) {
+      const z = z1 + ((y - y1) / (y2 - y1)) * (z2 - z1)
+      if (z > best) best = z
+    }
+  }
+  return best
+}
+
 // ── the builder
 
 export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
@@ -337,11 +357,28 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
       // a front/rear outline may wrap round a corner, but never run back along the flank over a wheel
       if (Math.abs(rings[i].x - rings[end > 0 ? n - 1 : 0].x) > 0.3) return null
       const zi = ringZ(rings[i].ring, y)
-      if (zi >= az && zi > 0) {
+      // zi = 0 means the ring does not reach this height (matters on the centre line, where az = 0)
+      if (zi > 0 && zi >= az) {
         if (k === 0) return new THREE.Vector3(rings[i].x, y, z)
         const j = end > 0 ? i + 1 : i - 1
+        // find the crossing on the lofted strip between the two rings (their vertices blended), not by
+        // blending the two rings' z: on a raked end the outer ring may not reach this height at all, and a
+        // straight blend then puts each grid row on a different step
         const zj = ringZ(rings[j].ring, y)
-        const t = (zi - az) / (zi - zj || 1)
+        // the next ring reaches this height: blend the two rings' z. If it doesn't (a raked end, above the outer
+        // ring), find the crossing on the lofted strip between them instead (their vertices blended), or each
+        // grid row lands on a different step
+        let t = (zi - az) / (zi - zj || 1)
+        if (spec.rakedEnds && zj <= 0) {
+          let lo = 0, hiT = 1
+          for (let it = 0; it < 12; it++) {
+            const m = (lo + hiT) / 2
+            const zm = ringZBlend(rings[i].ring, rings[j].ring, m, y)
+            if (zm > 0 && zm >= az) lo = m
+            else hiT = m
+          }
+          t = (lo + hiT) / 2
+        }
         return new THREE.Vector3(rings[i].x + t * (rings[j].x - rings[i].x), y, z)
       }
     }
