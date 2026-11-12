@@ -211,3 +211,9 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   off), and `greenhouse.followBody` (u) so the glass's foot sits on the leaning body edge instead of sticking out as a ledge.
   The inset is reached at each ring's own top, so on a raked tail keep lamps inside what the rings within 0.3 m reach.
 - A raked black (or body) A-pillar decal saw-toothed on a steep windscreen; leaving the A-pillar as plain glass reads right.
+- XUV 3XO: erase a roof antenna from the cut-out before extract-side (it read 1.713 m with it, 1.631 without).
+- A rear-fender kick in `top` (body rising under a black C-pillar panel) shows from behind as body-coloured "ears" above the
+  tail light bar; keep the tail `top` nearly flat and let the dark glass carry the C-pillar.
+- Headlamp DRL corners on the face's rounded top corner frayed into white ticks: `topRadius` 0.07, nose `top` a little above
+  the lamps, and chamfer the lamp and DRL outer-top corner with a few extra points. Pushing the lamp past the end face's
+  half-width (0.805 of 0.83 m) frayed again; a short `side` black pocket (u ≥ 0.958, ending at 0.993) carries the wrap.
