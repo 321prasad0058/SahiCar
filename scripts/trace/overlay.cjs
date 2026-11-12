@@ -15,7 +15,7 @@ async function mask(buf, isBg) {
   const b = await puppeteer.launch({ executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', headless: 'new', args: ['--use-angle=metal', '--enable-gpu', '--ignore-gpu-blocklist'] })
   const p = await b.newPage()
   await p.setViewport({ width: 1600, height: 800 })
-  await p.goto(`http://localhost:5181/dev/cars?car=${car}&shot=side&fov=10`, { waitUntil: 'networkidle2' })
+  await p.goto(`http://localhost:${process.env.PORT || 5181}/dev/cars?car=${car}&shot=side&fov=10`, { waitUntil: 'networkidle2' })
   // plain background so the silhouette separates cleanly; hide the floor ring and chips
   await p.evaluate(() => { document.querySelector('div[style]').style.background = '#ffffff'; document.querySelectorAll('a.chip').forEach((a) => (a.style.display = 'none')) })
   await new Promise((r) => setTimeout(r, 1800))
