@@ -86,11 +86,12 @@ export const PUNCH: CarSpec = {
   // tailgate below the glass, the belt rising gently towards the rear with the body-coloured kick at the C-pillar,
   // then the cowl and the bonnet falling to the nose
   top: [[0, 1.0], [0.008, 1.05], [0.02, 1.07], [0.06, 1.062], [0.1, 1.05], [0.14, 1.05], [0.165, 1.12], [0.2, 1.13], [0.3, 1.117], [0.4, 1.101], [0.5, 1.084], [0.6, 1.068], [0.69, 1.07], [0.715, 1.13], [0.74, 1.128], [0.8, 1.098], [0.84, 1.083], [0.88, 1.06], [0.92, 1.018], [0.96, 0.951], [0.98, 0.845], [0.993, 0.72], [1, 0.62]],
-  width: [[0, 0.86], [0.01, 0.92], [0.03, 0.96], [0.07, 0.985], [0.12, 0.997], [0.5, 1], [0.88, 0.995], [0.93, 0.98], [0.97, 0.94], [0.99, 0.89], [1, 0.84]],
+  // rounded corners in plan: the nose and tail taper hard over their last few centimetres
+  width: [[0, 0.8], [0.008, 0.88], [0.025, 0.94], [0.06, 0.975], [0.12, 0.995], [0.5, 1], [0.88, 0.993], [0.93, 0.975], [0.965, 0.93], [0.985, 0.86], [1, 0.76]],
   crown: 0.02,
   bulge: 0.012,
-  noseSweep: 0.15,
-  tailSweep: 0.09,
+  noseSweep: 0.2,
+  tailSweep: 0.12,
   greenhouse: {
     u0: 0.02, u1: 0.715, tumble: 0.76,
     // the tailgate glass rises steeply to the roof spoiler; the roof stays flat over both rows, then the screen falls
@@ -118,7 +119,7 @@ export const PUNCH: CarSpec = {
     { mat: 'trim', poly: [[-0.88, 0.22], [0.88, 0.22], [0.88, 0.6], [0.6, 0.62], [-0.6, 0.62], [-0.88, 0.6]] },
     { mat: 'slats', poly: [[-0.5, 0.36], [0.5, 0.36], [0.5, 0.55], [-0.5, 0.55]], layer: 1 },
     // the bold silver skid plate: a U under the grille, wrapping up both corners
-    { mat: 'silver', layer: 1, poly: [[-0.62, 0.225], [0.62, 0.225], [0.8, 0.29], [0.86, 0.5], [0.76, 0.52], [0.68, 0.34], [-0.68, 0.34], [-0.76, 0.52], [-0.86, 0.5], [-0.8, 0.29]] },
+    { mat: 'silver', layer: 1, poly: [[-0.6, 0.225], [0.6, 0.225], [0.74, 0.28], [0.79, 0.48], [0.71, 0.5], [0.65, 0.34], [-0.65, 0.34], [-0.71, 0.5], [-0.79, 0.48], [-0.74, 0.28]] },
   ],
   rear: [
     // wedge-shaped black lamp clusters at the corners, joined by the light bar across the tailgate under the glass

@@ -15,7 +15,12 @@ export interface Decal {
   mirror?: boolean
   /** stacking: decals drawn on top of others sit a little further out */
   layer?: number
+  /** relief in metres: how far the part stands proud of the body, with walls round its edge (0 = flat skin).
+   *  Defaults by material give lamps a lens, housings a rim, grilles a lip and solid slats. */
+  depth?: number
 }
+/** default relief per material (metres) */
+const RELIEF: Partial<Record<Mat, number>> = { head: 0.014, drl: 0.01, tail: 0.012, amber: 0.01, gloss: 0.006, silver: 0.01, chrome: 0.006, mesh: 0.004, hex: 0.004, slats: 0.004 }
 export type WheelStyle = 'turbine' | 'twin' | 'aero' | 'multi' | 'blade'
 
 export interface CarSpec {
@@ -336,9 +341,18 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
         const yb = Math.max(sill(u), archLine(x)) - 0.004
         const yt = Math.min(cTop(x), top(u) - 0.04)
         const xx = i === 0 ? x - 0.008 : i === stations.length - 1 ? x + 0.008 : x
-        let out = 0.008
-        for (const ax of axles) if (Math.abs(x - ax) < archR + flare) out = 0.024
-        return { x: xx, ring: ring((width(u) * W) / 2 + out, yb, Math.max(yb + 0.01, yt), 0.075, 0.02, seg) }
+        // the cladding follows the body's own cross-section (same corner radii, bulge and shoulder), offset
+        // outward by its thickness, so the paint can never poke through it in patches
+        let out = 0.012
+        for (const ax of axles) if (Math.abs(x - ax) < archR + flare) out = 0.026
+        return {
+          x: xx,
+          ring: ring((width(u) * W) / 2 + out, yb, Math.max(yb + 0.01, yt), 0.07, 0.17, seg, {
+            bulge: spec.bulge ?? 0.025,
+            shoulder: shoulderY ? shoulderY(u) : undefined,
+            inset: spec.shoulder?.inset,
+          }),
+        }
       }),
       () => 0,
       1,
@@ -482,7 +496,58 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
       if (n.dot(outward) < 0 && !(endOn && Math.abs(n.z) > 0.6)) n.negate()
       P.setXYZ(k, P.getX(k) + n.x * out, P.getY(k) + n.y * out, P.getZ(k) + n.z * out)
     }
+    // ── relief: lift the face along the surface normal and wall its outline, so lamps have lenses,
+    // housings have rims and grilles have a lip that catches the light
+    const relief = d.depth ?? RELIEF[d.mat] ?? 0
+    if (relief > 0) {
+      const e = endOn ? 0.004 : 0.004 / L
+      const normalAt = (a: number, b: number) => {
+        const p = project(a, b), pa = project(a + e, b), pb = project(a, b + e)
+        if (!p || !pa || !pb) return null
+        const nn = pa.clone().sub(p).cross(pb.clone().sub(p)).normalize()
+        if (nn.dot(outward) < 0 && !(endOn && Math.abs(nn.z) > 0.6)) nn.negate()
+        return { p, n: nn }
+      }
+      for (let k = 0; k < P.count; k++) {
+        n.set(nrm.getX(k), nrm.getY(k), nrm.getZ(k))
+        if (endOn && Math.abs(n.z) > 0.2) n.z = Math.sign(P.getZ(k)) * Math.abs(n.z)
+        if (n.dot(outward) < 0 && !(endOn && Math.abs(n.z) > 0.6)) n.negate()
+        P.setXYZ(k, P.getX(k) + n.x * relief, P.getY(k) + n.y * relief, P.getZ(k) + n.z * relief)
+      }
+      const wall: number[] = []
+      const wstep = endOn ? 0.012 : 0.012 / L
+      for (let k = 0; k < poly.length; k++) {
+        const A = poly[k], B = poly[(k + 1) % poly.length]
+        const len = Math.hypot((B[0] - A[0]) * (endOn ? 1 : L), B[1] - A[1])
+        const m = Math.max(1, Math.ceil(len / 0.012))
+        let prev: { b: THREE.Vector3; t: THREE.Vector3 } | null = null
+        for (let t = 0; t <= m; t++) {
+          const a = A[0] + ((B[0] - A[0]) * t) / m, b = A[1] + ((B[1] - A[1]) * t) / m
+          const q = normalAt(a, b)
+          if (!q) { prev = null; continue }
+          const base = q.p.clone().addScaledVector(q.n, out), top = base.clone().addScaledVector(q.n, relief)
+          if (prev) for (const v of [prev.b, base, top, prev.b, top, prev.t]) wall.push(v.x, v.y, v.z)
+          prev = { b: base, t: top }
+        }
+      }
+      void wstep
+      if (wall.length) {
+        const wg = new THREE.BufferGeometry()
+        wg.setAttribute('position', new THREE.Float32BufferAttribute(wall, 3))
+        wg.computeVertexNormals()
+        // lamp lenses keep their own glow on the walls; everything else gets a gloss-black edge
+        add(d.mat === 'head' || d.mat === 'drl' || d.mat === 'tail' || d.mat === 'amber' ? mats[d.mat] : d.mat === 'silver' || d.mat === 'chrome' ? mats[d.mat] : S.gloss, wg)
+      }
+    }
     add(mats[d.mat], g)
+    // solid slats across a slatted grille: raised gloss-black bars clipped to the grille's outline
+    if (d.mat === 'slats' && !d.depth) {
+      for (let y = b0 + 0.025; y < b1 - 0.012; y += 0.042) {
+        let xa = Infinity, xb = -Infinity
+        for (let a = a0; a <= a1; a += (a1 - a0) / 80) if (inside([a, y + 0.007], poly)) { xa = Math.min(xa, a); xb = Math.max(xb, a) }
+        if (xb > xa) decal({ mat: 'gloss', poly: [[xa, y], [xb, y], [xb, y + 0.014], [xa, y + 0.014]], layer: (d.layer ?? 0) + 1, depth: 0.016 }, where)
+      }
+    }
     if (d.mat === 'drl' || d.mat === 'tail' || d.mat === 'head') {
       const color = d.mat === 'tail' ? '#ff3344' : '#cfefff'
       const midB = (b0 + b1) / 2
