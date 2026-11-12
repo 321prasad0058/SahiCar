@@ -246,3 +246,14 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   above the lamp tops (Tiago 0.867 vs lamps 0.832) and keep `topRadius` ≤ 0.09, or the lamps' outer ends hook back.
 - Front/rear end decals running past the end face's half-width wrap back along the flank and show as spikes in the side view
   (Tiago tail lamps at z 0.705 on a 0.707 face): keep them ~3 cm inside it.
+- Innova Hycross (raked tailgate glass, wide body-coloured D-pillar whose front edge leans forward): a body-coloured `pillars`
+  entry over a glasshouse that wraps round the tail tore at the spoiler corners. What worked: the Wagon R layout — the body
+  climbs the raked tail to the roof and runs flat to the quarter glass, a short cliff to the belt, the glasshouse starting at
+  that cliff, the tailgate glass as a `rear` gloss decal (with `rakedEnds`, 0.3 m deep was fine). To blend the body's roof
+  block into the glass roof: tail-only `shoulder.inset` (~0.13, line just above the lamps, above `top` elsewhere), a less
+  tumbled glasshouse (0.88) so the two widths match, the body's flat top run 3 mm higher and overlapping the glasshouse's first
+  station (a gap shows the glass end cap as a dark seam), and `followBody` past u0 so its foot doesn't poke out as flaps.
+- `sunroof` adds ~2 cm on top of the roof in the side silhouette (a step where it ends); leave it out when the photo's roof is flush.
+- The 'hex' grille material reads as a white honeycomb from any distance: a dark grille wants `gloss` + `mesh` inside the chrome ring.
+- Headlamps that sweep back along the wing: start the `side` decal at u ≈ 0.996 and push the front decal to ~1.5 cm inside the
+  end face, or a gap at the corner splits the lamp in two.
