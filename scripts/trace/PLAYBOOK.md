@@ -104,3 +104,16 @@ Add the id to `READY` in src/webgl/cars/specs.ts **and** to `SHOWCASE_IDS` in sr
 - Side decals must stay below `top(u) − 0.01`: above it they project onto the glasshouse, and outside the glasshouse's
   u range that lands on the centre line (stray marks in the middle of the tail).
 - Thin lines (shut lines) need ≥ 12 mm height or the decal grid breaks them into dashes.
+- Gallery "colour" side renders can be stretched (Scorpio-N: aspect 2.27 against the spec's 2.51). Check the cut-out's
+  aspect against L/H first; the maker's press side view (dark studio background) cut out cleanly and matched.
+- On a long car the near-orthographic compare render comes out ~2 % short, so traced heights read ~4 cm high in the
+  overlay: fit to the overlay (per-u top/bottom of photo vs model), not to the raw profile.
+- Tall lamps climbing the D-pillars of a raked tailgate: let the tail `top` climb to the lamp tops, keep that raked
+  run one straight line (collinear `top` points, so the face is one plane), and set `dropSlivers: true` — snapped
+  edge cells leave zero-area triangles whose noisy normals fray slanted lamp edges into spikes on a raked end.
+- On a raked end keep lamps inside |z| ≲ half-width − topRadius (≈ 0.82 m on the Scorpio-N) and don't wrap them with
+  side decals at that corner: both stripe.
+- Grille slats and lamps broke into hooks while the nose `top` fell below the grille top; a near-vertical nose face
+  up to the lamps fixed it (the bumper's forward bulge costs < 0.5 % IoU).
+- Bright machined spokes on dark pockets: 'split' without `rimTone` ('dark' turns the spokes gunmetal).
+- Desaturated dark paints read slate grey under the studio lights; deep teal needed a saturated #002b3d.

@@ -79,6 +79,9 @@ export interface CarSpec {
   /** strongly raked nose/tail (hatchbacks): end parts above the outermost section are placed on the lofted strip
    *  between sections, so lamps on a sloping tail don't stripe. Upright SUV ends look cleaner without it */
   rakedEnds?: boolean
+  /** drop zero-area decal triangles (snapped edge slivers): their noisy normals fray slanted lamp edges into spikes
+   *  on a raked end */
+  dropSlivers?: boolean
   /** height (m) of the twin raised creases along the bonnet */
   bonnetRidge?: number
   /** dark gunmetal alloys (machined edges) instead of bright silver */
@@ -562,8 +565,13 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
         const q = [vert(i, j), vert(i + 1, j), vert(i + 1, j + 1), vert(i, j + 1)]
         if (q.some((v) => !v)) continue
         const [p00, p10, p11, p01] = q as THREE.Vector3[]
-        for (const p of [p00, p10, p11, p00, p11, p01]) pos.push(p.x, p.y, p.z)
-        for (const [ii, jj] of [[i, j], [i + 1, j], [i + 1, j + 1], [i, j], [i + 1, j + 1], [i, j + 1]]) uv.push(((a0 + ii * da) * uScale) / 0.09, (b0 + jj * db) / 0.09)
+        const tris: [THREE.Vector3, number, number][][] = [[[p00, i, j], [p10, i + 1, j], [p11, i + 1, j + 1]], [[p00, i, j], [p11, i + 1, j + 1], [p01, i, j + 1]]]
+        for (const t of tris) {
+          // snapped edge cells can leave three points on the outline: a zero-area sliver whose normal is noise,
+          // which pushes its corner out sideways as a spike on a raked face
+          if (spec.dropSlivers && t[1][0].clone().sub(t[0][0]).cross(t[2][0].clone().sub(t[0][0])).lengthSq() < 1e-14) continue
+          for (const [p, ii, jj] of t) { pos.push(p.x, p.y, p.z); uv.push(((a0 + ii * da) * uScale) / 0.09, (b0 + jj * db) / 0.09) }
+        }
       }
     if (!pos.length) return
     const g = new THREE.BufferGeometry()
