@@ -175,15 +175,17 @@ export default function CarDetail() {
   // full-screen zoom: every photo in the media box, in order, opened at the one tapped
   const [zoom, setZoom] = useState<{ shots: ZoomShot[]; start: number } | null>(null)
   const openZoom = (e: React.MouseEvent<HTMLDivElement>) => {
-    const target = (e.target as HTMLElement).closest('img')
+    const target = (e.target as HTMLElement).closest('img, video')
     if (!target || (e.target as HTMLElement).closest('button, a, .credit')) return
-    const imgs = [...e.currentTarget.querySelectorAll<HTMLImageElement>('.car-img img')]
-    const shots = imgs.map((im) => {
-      const src = im.currentSrc || im.src
+    const media = [...e.currentTarget.querySelectorAll<HTMLImageElement | HTMLVideoElement>('.car-img img, .car-img video')]
+    const shots = media.map((m) => {
+      // a gallery clip zooms as a clip, its still showing until it starts
+      if (m instanceof HTMLVideoElement) return { src: m.poster, video: m.currentSrc || m.src, alt: m.getAttribute('aria-label') ?? '' }
+      const src = m.currentSrc || m.src
       // Wikimedia serves bigger renditions by width in the path
-      return { src, alt: im.alt, caption: im.closest('.gal-slide')?.querySelector('.gal-cap')?.textContent ?? undefined, hd: src.includes('/960px-') ? src.replace('/960px-', '/1600px-') : undefined }
+      return { src, alt: m.alt, caption: m.closest('.gal-slide')?.querySelector('.gal-cap')?.textContent ?? undefined, hd: src.includes('/960px-') ? src.replace('/960px-', '/1600px-') : undefined }
     })
-    setZoom({ shots, start: Math.max(0, imgs.indexOf(target as HTMLImageElement)) })
+    setZoom({ shots, start: Math.max(0, media.indexOf(target as HTMLImageElement | HTMLVideoElement)) })
   }
   const fuels = useMemo(() => (car ? [...new Set(car.powertrains.map((p) => p.fuel))] : []), [car])
   const [fuel, setFuel] = useState<Fuel | null>(null)

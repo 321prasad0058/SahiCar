@@ -54,7 +54,7 @@ export function Gallery({ first, shots, alt }: { first: ReactNode; shots: Shot[]
                 <img src={s.src} alt={`${alt}: ${s.caption}`} loading="lazy" decoding="async" />
               </div>
             )}
-            <div className="gal-cap">{s.caption}</div>
+            {!s.video && <div className="gal-cap">{s.caption}</div>}
           </div>
         ))}
       </div>

@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Icon } from './Icon'
 
-export type ZoomShot = { src: string; alt: string; caption?: string; hd?: string }
+export type ZoomShot = { src: string; alt: string; caption?: string; hd?: string; video?: string }
 
 const MAX = 5
 const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v))
@@ -14,7 +14,7 @@ export function ZoomViewer({ shots, start, onClose }: { shots: ZoomShot[]; start
   const [t, setT] = useState({ s: 1, x: 0, y: 0 })
   const [lowres, setLowres] = useState<Record<string, true>>({})
   const stage = useRef<HTMLDivElement>(null)
-  const img = useRef<HTMLImageElement>(null)
+  const img = useRef<HTMLImageElement & HTMLVideoElement>(null)
   const pts = useRef(new Map<number, { x: number; y: number }>())
   const gesture = useRef<{ d0: number; s0: number; cx: number; cy: number; x0: number; y0: number; moved: boolean; sx: number; sy: number; t0: number } | null>(null)
   const lastTap = useRef(0)
@@ -132,17 +132,35 @@ export function ZoomViewer({ shots, start, onClose }: { shots: ZoomShot[]; start
         onPointerUp={up}
         onPointerCancel={up}
       >
-        <img
-          ref={img}
-          key={shot.src}
-          src={shot.hd && !lowres[shot.src] ? shot.hd : shot.src}
-          // a sharper copy for zooming when one exists; the page's own size otherwise
-          onError={() => shot.hd && setLowres((m) => ({ ...m, [shot.src]: true }))}
-          alt={shot.alt}
-          draggable={false}
-          style={{ transform: `translate(${t.x}px, ${t.y}px) scale(${t.s})` }}
-          className={gesture.current ? 'live' : ''}
-        />
+        {shot.video ? (
+          // a clip keeps playing while you zoom and drag around it
+          <video
+            ref={img}
+            key={shot.video}
+            src={shot.video}
+            poster={shot.src}
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-label={shot.alt}
+            draggable={false}
+            style={{ transform: `translate(${t.x}px, ${t.y}px) scale(${t.s})` }}
+            className={gesture.current ? 'live' : ''}
+          />
+        ) : (
+          <img
+            ref={img}
+            key={shot.src}
+            src={shot.hd && !lowres[shot.src] ? shot.hd : shot.src}
+            // a sharper copy for zooming when one exists; the page's own size otherwise
+            onError={() => shot.hd && setLowres((m) => ({ ...m, [shot.src]: true }))}
+            alt={shot.alt}
+            draggable={false}
+            style={{ transform: `translate(${t.x}px, ${t.y}px) scale(${t.s})` }}
+            className={gesture.current ? 'live' : ''}
+          />
+        )}
       </div>
       <div className="zv-top">
         <span className="zv-count">{n > 1 ? `${i + 1} / ${n}` : ''}{shot.caption ? ` · ${shot.caption}` : ''}</span>
