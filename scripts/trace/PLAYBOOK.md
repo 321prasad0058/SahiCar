@@ -324,3 +324,12 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - Wrap-around tail lamp: `width` 0.92 at u = 0 lets the end-face lamp reach 0.80 m on a 1.775 m car, and the `side` wedge starting
   at u = 0.005 meets it with no gap. Headlamp: the side wedge can start at u = 0.999 to meet a front lamp kept 3.5 cm inside the face.
 - A `gloss` headlamp housing on a raked nose reads body-grey (it mirrors the softbox); `trim` keeps it dark.
+- Syros: no gallery side view on either listing site, but the maker's site has a 72-frame 360° viewer (`/content/dam/…/360vr/<car>/<code>/exterior/<paint>/NN-d.png`,
+  frame 1 = front, 19 = left side at 5° a frame). The PNGs carry alpha, including a soft black ground shadow: keep alpha ≥ 250 (or > 140 and not
+  pure black) for a clean cut-out. It read 1.724 m with the axles 3.5 % apart: squeeze the cut-out to the official height, then map every traced u
+  piecewise-linearly so the photo's axles land on the official wheelbase (a `syrosU` helper applied to top, sill, glasshouse, cladding, doors, decals).
+- A headlamp on the corner (Syros front view: lamps out to 0.87 m of 0.90): side decals on a 45° chamfer and a DRL kick past the face both frayed.
+  A blunt nose (`width` 0.96 at u = 1) with the whole lamp as a front decal kept ~3 cm inside the face's half-width read clean; the black corner
+  behind it is cladding raised to the lamp tops at u 0.955–0.978.
+- A lower tail lamp that wraps the rear corner: rear decal to ~1 cm inside the face plus a side copy starting at u 0.002 reads as one unit; a side copy
+  starting 5 cm forward read as a second lamp. Low skid frames/intakes at both ends need `sill` at u = 0 / 1 below them (0.25), or their bottoms fray.

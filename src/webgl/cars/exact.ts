@@ -2678,4 +2678,126 @@ export const I20: CarSpec = {
   plate: 'MH 12 IT 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20]
+const SYROS_L = 3.995
+// the side photo's axles (u 0.1623 / 0.8223) sit 3.5 % too far apart (close studio camera): everything traced off it is
+// mapped piecewise-linearly so its axles land on the official wheelbase, the overhangs split as in the photo
+const syrosU = (u: number): number => {
+  const pa = [0, 0.1623, 0.8223, 1], ma = [0, 0.1727, 0.811, 1]
+  for (let i = 0; i < 3; i++) if (u <= pa[i + 1] || i === 2) return +(ma[i] + ((u - pa[i]) * (ma[i + 1] - ma[i])) / (pa[i + 1] - pa[i])).toFixed(5)
+  return u
+}
+const syrosP = (pts: P2[]): P2[] => pts.map(([u, y]) => [syrosU(u), y] as P2)
+/** a side outline from a rounded rectangle given in photo u and metres */
+const syrosRectU = (u0: number, y0: number, u1: number, y1: number, r: number): P2[] =>
+  syrosP(rrectS(u0 * SYROS_L, y0, u1 * SYROS_L, y1, r).map(([x, y]) => [x / SYROS_L, y] as P2))
+const SYROS_GH: [number, number] = [syrosU(0.014), syrosU(0.762)]
+/** the glasshouse station nearest u (roof paint edges must sit on one) */
+const syrosStation = (u: number): number => {
+  const [a, b] = SYROS_GH
+  let best = a
+  for (let i = 0; i <= 140; i++) { const s = a + (b - a) * (0.5 - 0.5 * Math.cos((Math.PI * i) / 140)); if (Math.abs(s - u) < Math.abs(best - u)) best = s }
+  return +best.toFixed(5)
+}
+
+/** Kia Syros (2025, petrol/diesel). 3995 × 1805 × 1680 (with roof rails), wheelbase 2550, 215/55 R17 (HTX+).
+ *  Side profile from the maker's 360° studio frame at 90° (Frost Blue), squeezed 2.6 % to the official height and its
+ *  axles mapped onto the official wheelbase. The tall boxy body: a flat upright face with the stacked headlamps and tall
+ *  DRL bars on chamfered corners, square black arch cladding, the belt kicking up into a body-coloured quarter, dark
+ *  glass wrapping the tail with L-shaped lamps up the D-pillars, and the black bumpers with body-coloured L-frames.
+ *  Lamps, grilles and bumpers from the straight front and rear frames. */
+export const SYROS: CarSpec = {
+  id: 'kia-syros',
+  name: 'Kia Syros',
+  dropSlivers: true,
+  L: SYROS_L, W: 1.805, H: 1.68,
+  axles: [0.1727, 0.811],
+  tyreR: 0.334, tyreW: 0.215, rim: 0.646, wheel: { style: 'split', spokes: 5 }, rimTone: 'dark',
+  archGap: 0.06, archSquare: 0.4,
+  sill: syrosP([[0, 0.25], [0.004, 0.27], [0.012, 0.31], [0.02, 0.335], [0.03, 0.338], [0.06, 0.33], [0.1, 0.3], [0.15, 0.27], [0.3, 0.265], [0.7, 0.265], [0.85, 0.262], [0.92, 0.262], [0.95, 0.272], [0.975, 0.27], [0.99, 0.255], [0.997, 0.245], [1, 0.24]]),
+  // the flat tail up to the lamp line, the quarter kicking up behind the rear door, the long level belt, the bonnet
+  // falling gently to a flat upright face
+  top: syrosP([[0, 1.185], [0.014, 1.19], [0.04, 1.19], [0.05, 1.225], [0.06, 1.262], [0.07, 1.274], [0.13, 1.275], [0.15, 1.262], [0.17, 1.215], [0.19, 1.155], [0.21, 1.122], [0.25, 1.11], [0.45, 1.108], [0.7, 1.108], [0.73, 1.125], [0.762, 1.145], [0.78, 1.135], [0.8, 1.125], [0.85, 1.105], [0.9, 1.075], [0.93, 1.045], [0.95, 1.01], [0.96, 0.985], [0.97, 0.968], [0.98, 0.958], [0.99, 0.953], [1, 0.95]]),
+  // boxy: the flat face and tail run nearly the full width, with tight corners
+  width: [[0, 0.95], [0.006, 0.97], [0.015, 0.985], [0.03, 0.995], [0.06, 1], [0.88, 1], [0.93, 0.998], [0.96, 0.993], [0.975, 0.988], [0.99, 0.976], [1, 0.96]],
+  crown: 0.012,
+  bulge: 0.02,
+  haunch: 0.03,
+  topRadius: 0.08,
+  noseSweep: 0.1,
+  tailSweep: 0.1,
+  greenhouse: {
+    u0: SYROS_GH[0], u1: SYROS_GH[1], tumble: 0.8,
+    // dark glass wrapping round the tail under the roof's spoiler lip, the long flat roof, the upright windscreen
+    top: syrosP([[0.014, 1.19], [0.02, 1.215], [0.028, 1.3], [0.035, 1.42], [0.04, 1.52], [0.05, 1.556], [0.06, 1.572], [0.08, 1.59], [0.1, 1.602], [0.14, 1.612], [0.3, 1.62], [0.5, 1.62], [0.55, 1.615], [0.58, 1.602], [0.6, 1.585], [0.62, 1.56], [0.65, 1.49], [0.7, 1.345], [0.72, 1.28], [0.74, 1.218], [0.75, 1.188], [0.762, 1.145]]),
+  },
+  roof: { u0: syrosStation(syrosU(0.05)), u1: syrosStation(syrosU(0.6)), black: false },
+  pillars: [
+    // the body-coloured B-pillar, the black divider at the rear door glass
+    { bottom: [syrosU(0.4), syrosU(0.452)], top: [syrosU(0.4), syrosU(0.452)], black: false },
+    { bottom: [syrosU(0.248), syrosU(0.257)], top: [syrosU(0.248), syrosU(0.257)], black: true },
+  ],
+  // square black arch cladding (front reaching up round the headlamps), the black rocker along the doors,
+  // the black bumpers
+  cladding: {
+    top: syrosP([[0, 0.68], [0.008, 0.7], [0.016, 0.84], [0.06, 0.845], [0.1, 0.836], [0.2, 0.836], [0.23, 0.82], [0.25, 0.79], [0.262, 0.75], [0.27, 0.69], [0.275, 0.6], [0.28, 0.49], [0.69, 0.49], [0.698, 0.6], [0.706, 0.67], [0.72, 0.725], [0.74, 0.795], [0.76, 0.83], [0.78, 0.84], [0.86, 0.836], [0.92, 0.84], [0.94, 0.87], [0.955, 0.9], [0.978, 0.9], [0.988, 0.6], [1, 0.52]]),
+    flare: 0.1, cut: true,
+  },
+  doors: [[syrosU(0.712), syrosU(0.706)], [syrosU(0.434), syrosU(0.434)], [syrosU(0.168), syrosU(0.182)]],
+  front: [
+    // the slim black strip under the bonnet lip, its ends kinking up
+    { step: 0.004, mat: 'gloss', depth: 0.004, poly: both([[0, 0.925], [0.6, 0.925], [0.66, 0.935], [0.7, 0.945], [0.7, 0.948], [0.655, 0.944], [0.6, 0.94], [0, 0.94]]) },
+    // the black lower face: the upper grille slot, dropping to the corners under the headlamps
+    { step: 0.005, mat: 'trim', poly: smooth(both([[0, 0.26], [0.74, 0.26], [0.785, 0.29], [0.79, 0.5], [0.74, 0.535], [0.5, 0.71], [0.47, 0.73], [0, 0.73]]), 1) },
+    { step: 0.005, mat: 'gloss', layer: 1, depth: 0.004, poly: smooth(both([[0, 0.606], [0.45, 0.606], [0.473, 0.625], [0.473, 0.7], [0.455, 0.716], [0, 0.716]]), 1) },
+    ...[0.632, 0.66, 0.688].map((y): Decal => ({ step: 0.004, mat: 'trim', layer: 2, depth: 0.008, poly: rrect(-0.44, y - 0.006, 0.44, y + 0.006, 0.004) })),
+    // the lower grille with two rows of bars
+    { step: 0.005, mat: 'gloss', layer: 1, depth: 0.004, poly: smooth(both([[0, 0.33], [0.5, 0.33], [0.52, 0.35], [0.52, 0.47], [0.5, 0.484], [0, 0.484]]), 1) },
+    ...[0.372, 0.41, 0.448].map((y): Decal => ({ step: 0.004, mat: 'trim', layer: 2, depth: 0.008, poly: rrect(-0.49, y - 0.006, 0.49, y + 0.006, 0.004) })),
+    // body-coloured wedge frames round the corner intakes: the dark pocket, the LED strip at its foot
+    { step: 0.004, mat: 'body', layer: 1, mirror: true, depth: 0.01, poly: smooth([[0.533, 0.55], [0.62, 0.55], [0.775, 0.37], [0.775, 0.32], [0.755, 0.3], [0.55, 0.3], [0.533, 0.315]], 1) },
+    { step: 0.004, mat: 'gloss', layer: 2, mirror: true, depth: 0.012, poly: smooth([[0.597, 0.52], [0.615, 0.52], [0.752, 0.36], [0.752, 0.33], [0.597, 0.33]], 1) },
+    { step: 0.004, mat: 'drl', layer: 3, mirror: true, depth: 0.014, poly: rrect(0.62, 0.334, 0.742, 0.356, 0.006) },
+    // stacked headlamps: three cubes in a dark housing, the tall DRL bar down its outer edge
+    { step: 0.004, mat: 'trim', layer: 1, mirror: true, depth: 0.006, poly: smooth([[0.7, 0.905], [0.838, 0.905], [0.838, 0.5], [0.775, 0.5], [0.722, 0.56], [0.7, 0.66], [0.693, 0.8]], 1) },
+    ...[0.78, 0.686, 0.596].map((y): Decal => ({ step: 0.004, mat: 'head', layer: 2, mirror: true, depth: 0.01, poly: rrect(0.72, y - 0.027, 0.798, y + 0.027, 0.008) })),
+    { step: 0.004, mat: 'drl', layer: 3, mirror: true, depth: 0.012, poly: [[0.81, 0.535], [0.828, 0.535], [0.828, 0.89], [0.785, 0.89], [0.785, 0.874], [0.81, 0.874]] },
+  ],
+  rear: [
+    // the black strip at the foot of the tailgate glass with the lamps' red feet
+    { step: 0.004, mat: 'gloss', depth: 0.004, poly: both([[0, 1.14], [0.7, 1.14], [0.72, 1.16], [0.72, 1.185], [0, 1.185]]) },
+    { step: 0.004, mat: 'tail', layer: 1, mirror: true, poly: [[0.47, 1.152], [0.705, 1.152], [0.705, 1.168], [0.47, 1.168]] },
+    // the tailgate's shut line
+    { step: 0.005, mat: 'gloss', depth: 0.001, poly: band([[-0.69, 1.14], [-0.69, 0.78], [-0.67, 0.73], [-0.62, 0.7], [-0.55, 0.69], [0.55, 0.69], [0.62, 0.7], [0.67, 0.73], [0.69, 0.78], [0.69, 1.14]], 0.012) },
+    // the black bumper, the lamp pods at its corners
+    { step: 0.005, mat: 'trim', poly: smooth(both([[0, 0.3], [0.8, 0.3], [0.845, 0.34], [0.85, 0.86], [0.75, 0.86], [0.745, 0.7], [0.72, 0.675], [0, 0.675]]), 1) },
+    // the lower tail lamps: red bars over a dark lens, the reversing lamp
+    { step: 0.004, mat: 'gloss', layer: 1, mirror: true, depth: 0.006, poly: rrect(0.76, 0.55, 0.85, 0.84, 0.012) },
+    ...[0.668, 0.696, 0.724, 0.752, 0.78].map((y): Decal => ({ step: 0.004, mat: 'tail', layer: 2, mirror: true, depth: 0.01, poly: rrect(0.775, y - 0.007, 0.835, y + 0.007, 0.003) })),
+    { step: 0.004, mat: 'silver', layer: 2, mirror: true, depth: 0.01, poly: rrect(0.785, 0.565, 0.83, 0.625, 0.006) },
+    // body-coloured wedge frames with a dark pocket, the plate recess
+    { step: 0.004, mat: 'body', layer: 1, mirror: true, depth: 0.01, poly: smooth([[0.48, 0.585], [0.62, 0.585], [0.765, 0.41], [0.765, 0.37], [0.745, 0.355], [0.58, 0.32], [0.48, 0.32]], 1) },
+    { step: 0.004, mat: 'gloss', layer: 2, mirror: true, depth: 0.012, poly: smooth([[0.545, 0.55], [0.605, 0.55], [0.728, 0.4], [0.728, 0.375], [0.585, 0.348], [0.545, 0.348]], 1) },
+    { step: 0.005, mat: 'gloss', layer: 1, depth: 0.004, poly: smooth(both([[0, 0.47], [0.36, 0.47], [0.37, 0.64], [0, 0.64]]), 1) },
+  ],
+  side: [
+    // the L-lamp running up the D-pillar's edge
+    { step: 0.004, mat: 'tail', poly: syrosP([[0.034, 1.17], [0.042, 1.17], [0.063, 1.5], [0.056, 1.5]]) },
+    // the lower tail lamp on the bumper corner
+    { step: 0.004, mat: 'trim', depth: 0.004, poly: syrosP([[0.002, 0.58], [0.026, 0.58], [0.028, 0.86], [0.002, 0.86]]) },
+    ...[0.668, 0.696, 0.724, 0.752, 0.78].map((y): Decal => ({ step: 0.004, mat: 'tail', layer: 1, poly: syrosRectU(0.004, y - 0.007, 0.02, y + 0.007, 0.003) })),
+    // the body-coloured insert on the black side skirt
+    { step: 0.004, mat: 'body', depth: 0.006, poly: syrosP(smooth([[0.31, 0.395], [0.33, 0.42], [0.66, 0.42], [0.685, 0.4], [0.68, 0.335], [0.32, 0.335]], 1)) },
+    // flush door handles
+    ...[[0.459, 0.513], [0.202, 0.261]].flatMap(([a, b]): Decal[] => [
+      { step: 0.004, mat: 'gloss', depth: 0.002, poly: syrosRectU(a, 0.927, b, 0.957, 0.012) },
+      { step: 0.004, mat: 'body', layer: 1, depth: 0.004, poly: syrosRectU(a + 0.002, 0.933, b - 0.002, 0.951, 0.008) },
+    ]),
+  ],
+  plates: { front: 0.535, rear: 0.571 },
+  rails: 'black',
+  mirrors: 'black',
+  paint: '#42697e', // Frost Blue, darkened for the studio lights
+  plate: 'MH 12 SY 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, SYROS]
