@@ -2568,7 +2568,7 @@ const i20GrilleHW = (y: number) => (y < 0.6 ? 0.39 + ((y - 0.37) * 0.13) / 0.23 
 const i20Chevrons: Decal[] = [0.612, 0.552, 0.492, 0.432, 0.385].flatMap((y, row) => {
   const out: Decal[] = []
   for (let k = -6; k <= 6; k++) {
-    const zc = k * 0.095 + (row % 2) * 0.0475
+    const zc = k * 0.105 + (row % 2) * 0.0525
     if (Math.abs(zc) + 0.055 > Math.min(i20GrilleHW(y), i20GrilleHW(y + 0.034)) - 0.015) continue
     if (Math.abs(zc) < 0.31 && y > 0.38 && y < 0.55) continue
     out.push({ step: 0.004, mat: 'trim', layer: 1, depth: 0.012, poly: [[zc - 0.05, y], [zc - 0.034, y], [zc, y + 0.02], [zc + 0.034, y], [zc + 0.05, y], [zc, y + 0.034]] })
