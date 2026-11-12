@@ -324,3 +324,11 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - Wrap-around tail lamp: `width` 0.92 at u = 0 lets the end-face lamp reach 0.80 m on a 1.775 m car, and the `side` wedge starting
   at u = 0.005 meets it with no gap. Headlamp: the side wedge can start at u = 0.999 to meet a front lamp kept 3.5 cm inside the face.
 - A `gloss` headlamp housing on a raked nose reads body-grey (it mirrors the softbox); `trim` keeps it dark.
+- Safari (dark-edition gallery car, close camera: 1.89 m measured, axles 6 % apart): another portal's long-lens Cosmic Gold side photo
+  (served as WebP; convert before cutout) read 1.798 m over the rails with the axles 1.5 % apart once the roof antenna was erased.
+- Stepped roof over the third row (Hycross layout): the body climbs the raked tail to a flat D-pillar block, cliffs down along the
+  pillar's leaning front edge, and the glasshouse starts at the cliff. Starting the glass roof *below* the block's top and rising out
+  of it over ~3 cm of u (the step) stopped the roof paint tearing at the joint; a black `pillars` strip over the cliff (top range up
+  to 0.15) hid most of the edge-on glass slivers there (the top 7.5 cm of the glass stays uncovered and shows a faint line).
+- A front decal band whose lower part sat between the grille top and the light bar didn't show (body colour gap); running the band
+  down behind the grille (layer 1 over it, bricks on 2) closed the gap. Fine black ribs on a raised satin skid plate read as holes: left out.
