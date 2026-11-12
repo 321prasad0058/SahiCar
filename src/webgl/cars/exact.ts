@@ -1072,4 +1072,100 @@ export const THAR_ROXX: CarSpec = {
   plate: 'MH 12 TR 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX]
+const SONET_L = 3.995
+// the tiger-nose grille's hex cells, each with a dark-chrome bar across it, in four staggered rows
+const sonetCells: Decal[] = [[0.862, 0, 0.5], [0.82, 0.056, 0.52], [0.778, 0, 0.5], [0.738, 0.056, 0.42]].flatMap(([y, off, max]) => {
+  const zs: number[] = []
+  for (let z = off; z <= max + 1e-6; z += 0.112) { zs.push(z); if (z > 0) zs.push(-z) }
+  return zs.map((z): Decal => ({ step: 0.005, mat: 'satin', layer: 2, depth: 0.008, poly: rrect(z - 0.03, y - 0.006, z + 0.03, y + 0.006, 0.005) }))
+})
+
+/** Kia Sonet (2024 facelift, X-Line in Matte Graphite). 3995 × 1790 × 1642 (with roof rails), wheelbase 2500,
+ *  215/60 R16. Side profile from the gallery's levelled side photo (height 1.615 over the rails); axles at the
+ *  official wheelbase (overhangs as in the photo); lamps, grille and bumpers from the straight front and rear photos. */
+export const SONET: CarSpec = {
+  id: 'kia-sonet',
+  name: 'Kia Sonet',
+  dropSlivers: true,
+  L: SONET_L, W: 1.79, H: 1.642,
+  axles: [0.1876, 0.8134],
+  tyreR: 0.332, tyreW: 0.215, rim: 0.612, wheel: { style: 'swirl', spokes: 5 }, rimTone: 'dark',
+  archGap: 0.045, archSquare: 0.35,
+  sill: [[0, 0.42], [0.01, 0.36], [0.02, 0.335], [0.04, 0.315], [0.07, 0.295], [0.1, 0.29], [0.28, 0.24], [0.7, 0.24], [0.9, 0.22], [0.95, 0.22], [0.975, 0.24], [0.99, 0.28], [1, 0.33]],
+  // the tail up to the light bar, the belt rising gently to the C-pillar, the dip under the mirror sail, the
+  // bonnet rolling down to the raked face
+  top: [[0, 1.06], [0.006, 1.1], [0.012, 1.115], [0.02, 1.125], [0.04, 1.13], [0.1, 1.135], [0.2, 1.14], [0.234, 1.14], [0.3, 1.12], [0.45, 1.09], [0.6, 1.06], [0.66, 1.05], [0.7, 1.062], [0.71, 1.078], [0.72, 1.098], [0.73, 1.11], [0.76, 1.095], [0.8, 1.075], [0.85, 1.05], [0.9, 1.015], [0.93, 0.983], [0.95, 0.958], [0.97, 0.95], [0.98, 0.947], [0.99, 0.945], [1, 0.94]],
+  width: [[0, 0.86], [0.006, 0.9], [0.02, 0.945], [0.05, 0.98], [0.1, 0.996], [0.5, 1], [0.88, 0.996], [0.93, 0.98], [0.96, 0.96], [0.985, 0.93], [1, 0.9]],
+  crown: 0.015,
+  bulge: 0.02,
+  shoulder: { y: [[0, 0.8], [0.12, 0.97], [0.5, 0.97], [1, 0.95]], inset: 0.02 },
+  haunch: 0.04,
+  bonnetRidge: 0.01,
+  topRadius: 0.1,
+  noseSweep: 0.1,
+  tailSweep: 0.14,
+  greenhouse: {
+    u0: 0.02, u1: 0.73, tumble: 0.68,
+    top: [[0.02, 1.13], [0.03, 1.2], [0.04, 1.245], [0.05, 1.295], [0.06, 1.34], [0.07, 1.38], [0.08, 1.43], [0.09, 1.48], [0.1, 1.52], [0.12, 1.522], [0.16, 1.54], [0.2, 1.548], [0.3, 1.553], [0.42, 1.553], [0.48, 1.548], [0.5, 1.54], [0.52, 1.524], [0.55, 1.5], [0.6, 1.415], [0.65, 1.315], [0.7, 1.2], [0.73, 1.13]],
+  },
+  roof: { u0: 0.0878, u1: 0.52181, black: false },
+  pillars: [
+    // the big body-coloured D-pillar between the quarter glass and the black wrap-round tailgate glass
+    { bottom: [0.12, 0.234], top: [0.118, 0.155], black: false },
+    { bottom: [0.441, 0.459], top: [0.436, 0.452], black: true },
+    { bottom: [0.71, 0.73], top: [0.525, 0.54], black: true },
+  ],
+  // black arch flares, the black rocker under the doors, black lower bumpers
+  cladding: { top: [[0, 0.47], [0.04, 0.44], [0.08, 0.36], [0.12, 0.31], [0.3, 0.31], [0.7, 0.31], [0.88, 0.31], [0.93, 0.33], [0.97, 0.34], [1, 0.34]], flare: 0.14, cut: true },
+  doors: [[0.707, 0.713], [0.459, 0.449], [0.222, 0.198]],
+  front: [
+    // the tiger-nose grille: gloss black, a row of dark-chrome bars in each row of hex cells
+    { step: 0.005, mat: 'gloss', poly: smooth(both([[0, 0.66], [0.47, 0.665], [0.52, 0.7], [0.565, 0.8], [0.55, 0.88], [0.53, 0.905], [0, 0.905]]), 1) },
+    ...sonetCells,
+    // headlamps: dark lens wedge under the bonnet edge, an LED line along its top and down the outer edge, the turn pocket
+    { step: 0.005, mat: 'gloss', layer: 1, mirror: true, depth: 0.006, poly: smooth([[0.4, 0.885], [0.735, 0.942], [0.735, 0.69], [0.69, 0.69], [0.69, 0.82], [0.42, 0.85]], 1) },
+    { step: 0.005, mat: 'drl', layer: 3, mirror: true, poly: [[0.41, 0.872], [0.712, 0.924], [0.712, 0.7], [0.727, 0.7], [0.727, 0.937], [0.405, 0.887]] },
+    { step: 0.005, mat: 'satin', layer: 2, mirror: true, poly: smooth([[0.48, 0.852], [0.7, 0.83], [0.7, 0.912], [0.48, 0.876]], 1) },
+    ...[0.56, 0.615, 0.67].map((z): Decal => ({ step: 0.005, mat: 'head', layer: 3, mirror: true, poly: rrect(z - 0.02, 0.857, z + 0.02, 0.885, 0.008) })),
+    { step: 0.005, mat: 'gloss', layer: 1, mirror: true, depth: 0.004, poly: rrect(0.67, 0.6, 0.735, 0.68, 0.012) },
+    // lower grille, LED fog strips, the black lip
+    { step: 0.005, mat: 'gloss', poly: smooth(both([[0, 0.355], [0.45, 0.355], [0.46, 0.51], [0, 0.51]]), 1) },
+    { step: 0.005, mat: 'mesh', layer: 1, poly: smooth(both([[0, 0.37], [0.43, 0.37], [0.44, 0.495], [0, 0.495]]), 1) },
+    { step: 0.005, mat: 'drl', mirror: true, poly: rrect(0.55, 0.39, 0.72, 0.405, 0.006) },
+    { step: 0.005, mat: 'trim', poly: smooth(both([[0, 0.24], [0.68, 0.24], [0.76, 0.27], [0.76, 0.35], [0.47, 0.355], [0, 0.355]]), 1) },
+  ],
+  rear: [
+    // the full-width light bar and the tail lamps at its ends
+    { step: 0.005, mat: 'gloss', poly: both([[0, 1.035], [0.6, 1.035], [0.6, 1.1], [0, 1.1]]) },
+    { step: 0.005, mat: 'tail', layer: 1, poly: [[-0.6, 1.055], [0.6, 1.055], [0.6, 1.088], [-0.6, 1.088]] },
+    { step: 0.005, mat: 'gloss', layer: 1, mirror: true, depth: 0.006, poly: smooth([[0.6, 1.1], [0.738, 1.1], [0.738, 0.82], [0.61, 0.82], [0.6, 0.84]], 1) },
+    { step: 0.005, mat: 'tail', layer: 2, mirror: true, poly: [[0.61, 1.088], [0.73, 1.088], [0.73, 1.07], [0.626, 1.07], [0.626, 0.84], [0.61, 0.84]] },
+    ...[0.92, 0.95, 0.98, 1.01, 1.04].map((y): Decal => ({ step: 0.005, mat: 'tail', layer: 2, mirror: true, poly: [[0.64, y], [0.722, y + 0.012], [0.722, y + 0.026], [0.64, y + 0.014]] })),
+    { step: 0.005, mat: 'amber', layer: 2, mirror: true, poly: rrect(0.64, 0.845, 0.722, 0.9, 0.006) },
+    // the gloss-black tailgate garnish between the lamps
+    { step: 0.005, mat: 'gloss', depth: 0.004, poly: smooth(both([[0, 0.78], [0.55, 0.78], [0.6, 0.8], [0.61, 0.84], [0.61, 1.035], [0, 1.035]]), 2) },
+    // black bumper with the plate recess, reflectors and the gloss diffuser
+    { step: 0.005, mat: 'trim', poly: smooth(both([[0, 0.32], [0.7, 0.32], [0.76, 0.36], [0.765, 0.66], [0, 0.668]]), 1) },
+    { step: 0.005, mat: 'gloss', layer: 1, depth: 0.004, poly: smooth(both([[0, 0.5], [0.35, 0.5], [0.36, 0.65], [0, 0.65]]), 1) },
+    { step: 0.005, mat: 'reflector', layer: 1, mirror: true, poly: rrect(0.44, 0.447, 0.72, 0.48, 0.008) },
+    { step: 0.005, mat: 'trim', layer: 1, depth: 0.006, poly: smooth(both([[0, 0.32], [0.68, 0.32], [0.72, 0.36], [0.72, 0.43], [0, 0.43]]), 1) },
+    { step: 0.005, mat: 'satin', layer: 2, poly: rrect(-0.09, 0.35, 0.09, 0.372, 0.006) },
+  ],
+  side: [
+    // the tail lamp wrapping round the corner: a black wedge with the red bar along its top
+    { step: 0.004, mat: 'gloss', depth: 0.004, poly: smooth([[0.014, 1.098], [0.0995, 1.074], [0.074, 1.005], [0.05, 0.976], [0.036, 0.85], [0.03, 0.82], [0.014, 0.82]], 1) },
+    { step: 0.004, mat: 'tail', layer: 1, poly: [[0.016, 1.09], [0.092, 1.071], [0.086, 1.057], [0.016, 1.074]] },
+    // body-coloured door handles
+    { step: 0.005, mat: 'body', depth: 0.01, poly: smooth([[0.475, 0.9], [0.54, 0.9], [0.54, 0.945], [0.475, 0.945]], 1) },
+    { step: 0.005, mat: 'body', depth: 0.01, poly: smooth([[0.216, 0.925], [0.276, 0.925], [0.276, 0.97], [0.216, 0.97]], 1) },
+  ],
+  plates: { front: 0.56, rear: 0.575 },
+  rails: 'black',
+  sunroof: [0.22, 0.42],
+  mirrors: 'black',
+  windowChrome: true,
+  paint: '#2b3039', // Matte Graphite (the blue-grey of the gallery photos, darkened for the studio lights)
+  plate: 'MH 12 SN 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, SONET]
