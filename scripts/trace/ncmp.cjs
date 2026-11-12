@@ -11,7 +11,7 @@ const [car, out, ...pairs] = process.argv.slice(2) // pairs: shot=refpath
   const W = 640, H = 380, tiles = []
   for (let i = 0; i < pairs.length; i++) {
     const [shot, ref] = pairs[i].split('=')
-    await p.goto(`http://localhost:5181/dev/cars?car=${car}&shot=${shot}&fov=10`, { waitUntil: 'networkidle2' })
+    await p.goto(`http://localhost:${process.env.PORT || 5181}/dev/cars?car=${car}&shot=${shot}&fov=10`, { waitUntil: 'networkidle2' })
     await new Promise((r) => setTimeout(r, 1800))
     const png = await p.screenshot({ clip: { x: 0, y: 60, width: 1200, height: 640 } })
     let rend = sharp(png).resize(W, H, { fit: 'contain', background: '#e9e6df' })
