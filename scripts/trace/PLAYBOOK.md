@@ -388,3 +388,14 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   u 0.91, `topRadius` 0.08 and the nose `top` ~5 cm over the lamps read clean. A bonnet shut line on that roll looked like a crack.
 - A side tail-lamp wedge just under a climbing tail `top` frayed along its top edge: keep it ≥ 4 cm under `top(u)` there, `step`
   0.003, `depth` 0.002. Black alloys with thin machined edges: `twin` + `rimTone: 'dark'` (split/turbine read silver/grey).
+- Verna (black gallery car, long lens: 1.470 m, axles 0.2 % apart) still showed a uniform 2 cm band (model high over roof and
+  bonnet, photo low under the sill); a `VERNA_DY` shift on every traced height and decal (`vernaY`/`vernaD`) took IoU 0.945 → 0.965.
+  On black paint a gamma-brightened metric grid of the levelled cut-out (u lines every 0.01, y every 2 cm) read belt, shut lines,
+  handles and lamps cleanly.
+- A boot-lid wing on a short deck: no `spoiler` (that one sits over tailgate glass); lift the tail `top` to the wing's top at the
+  face and put the wing as a `rear` gloss decal on the raked strip, with the deck behind it ~2 cm lower than the wing.
+- Fastback C-pillar beside a raked rear glass: a body `pillars` entry frayed along the glass edge and specked the far side even
+  with `step: 0.004`; on a black car the glass alone reads right, so it was dropped.
+- A wide front (lamp clusters at the bumper corners): `width` 0.9 at u = 1 with `noseSweep` 0.12 put lamps, light bar and grille at
+  their photo widths; a side wrap of the corner lamp read as a dark blob on the wing and was dropped. A full-width light bar on a
+  crowned nose bends down at its ends from the front: draw it as a `band()` rising ~1 cm at the ends.
