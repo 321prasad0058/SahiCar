@@ -151,4 +151,79 @@ export const PUNCH: CarSpec = {
   plate: 'MH 12 PN 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH]
+/** Maruti Suzuki Swift (4th generation, 2024). 3860 × 1735 × 1520, wheelbase 2450, 185/65 R15.
+ *  Side profile measured from a levelled side photo (roof came out 1.47 m: the 1.52 m official height includes
+ *  the mast antenna); axles set to the official wheelbase with the overhangs split as in the photo (0.455 : 0.545). */
+export const SWIFT: CarSpec = {
+  id: 'maruti-swift',
+  name: 'Maruti Suzuki Swift',
+  L: 3.86, W: 1.735, H: 1.52,
+  axles: [0.1661, 0.8008],
+  tyreR: 0.31, tyreW: 0.185, rim: 0.614, wheel: { style: 'split', spokes: 5 },
+  archGap: 0.045, archSquare: 0.15,
+  sill: [[0, 0.42], [0.01, 0.31], [0.02, 0.285], [0.04, 0.262], [0.06, 0.25], [0.1, 0.23], [0.2, 0.2], [0.29, 0.185], [0.5, 0.183], [0.6, 0.16], [0.7, 0.152], [0.8, 0.15], [0.9, 0.151], [0.93, 0.167], [0.95, 0.177], [0.97, 0.193], [0.98, 0.204], [0.99, 0.221], [1, 0.35]],
+  // the rounded tail under the tailgate glass, a level belt, then the short clamshell bonnet falling to the nose
+  top: [[0, 0.485], [0.006, 0.645], [0.012, 0.745], [0.02, 0.855], [0.03, 0.92], [0.04, 0.97], [0.05, 1.003], [0.065, 1.035], [0.1, 1.045], [0.4, 1.047], [0.7, 1.047], [0.72, 1.043], [0.735, 1.022], [0.75, 0.999], [0.78, 0.976], [0.8, 0.964], [0.85, 0.928], [0.9, 0.879], [0.93, 0.85], [0.95, 0.821], [0.97, 0.786], [0.98, 0.758], [0.99, 0.724], [0.996, 0.67], [1, 0.53]],
+  width: [[0, 0.8], [0.008, 0.87], [0.025, 0.935], [0.06, 0.975], [0.12, 0.995], [0.5, 1], [0.88, 0.993], [0.93, 0.975], [0.965, 0.93], [0.985, 0.87], [1, 0.8]],
+  crown: 0.02,
+  bulge: 0.024,
+  // the crease from the headlamp along the doors, rising onto the rear haunch
+  shoulder: { y: [[0, 0.96], [0.15, 0.96], [0.5, 0.94], [0.9, 0.88], [1, 0.82]], inset: 0.025 },
+  haunch: 0.04,
+  noseSweep: 0.26,
+  tailSweep: 0.18,
+  greenhouse: {
+    u0: 0.065, u1: 0.715, tumble: 0.71,
+    // the raked tailgate glass up to the roof spoiler, a gently domed roof, then the windscreen
+    top: [[0.065, 1.035], [0.08, 1.095], [0.1, 1.195], [0.12, 1.24], [0.14, 1.32], [0.16, 1.35], [0.2, 1.395], [0.25, 1.415], [0.3, 1.427], [0.4, 1.437], [0.46, 1.441], [0.5, 1.433], [0.54, 1.42], [0.56, 1.393], [0.58, 1.369], [0.6, 1.341], [0.62, 1.296], [0.64, 1.251], [0.66, 1.2], [0.68, 1.155], [0.7, 1.103], [0.715, 1.055]],
+  },
+  // body-coloured roof: the dual-tone paints bring their own black roof (cars.json colours)
+  roof: { u0: 0.14, u1: 0.555, black: false },
+  pillars: [
+    // floating roof: every pillar is black, and the wide C-pillar wraps the rear quarter glass
+    { bottom: [0.065, 0.183], top: [0.135, 0.178], black: true },
+    { bottom: [0.218, 0.226], top: [0.222, 0.23], black: true },
+    { bottom: [0.386, 0.422], top: [0.381, 0.41], black: true },
+    { bottom: [0.7, 0.715], top: [0.565, 0.585], black: true },
+  ],
+  doors: [[0.16, 0.148], [0.405, 0.4], [0.69, 0.7]],
+  front: [
+    // wide swept-back headlamps under the bonnet edge, the LED light strip along their lower edge
+    { mat: 'gloss', mirror: true, poly: [[0.33, 0.66], [0.55, 0.665], [0.74, 0.69], [0.76, 0.8], [0.56, 0.8], [0.38, 0.73]] },
+    { mat: 'head', mirror: true, poly: [[0.48, 0.695], [0.72, 0.71], [0.73, 0.785], [0.56, 0.785]], layer: 1 },
+    { mat: 'drl', mirror: true, poly: [[0.35, 0.67], [0.55, 0.675], [0.74, 0.698], [0.74, 0.71], [0.55, 0.688], [0.37, 0.685]], layer: 1 },
+    // the oval gloss-black grille with its honeycomb, low in the bumper
+    { mat: 'gloss', poly: [[-0.44, 0.41], [-0.32, 0.36], [0.32, 0.36], [0.44, 0.41], [0.49, 0.55], [0.42, 0.665], [-0.42, 0.665], [-0.49, 0.55]] },
+    { mat: 'mesh', poly: [[-0.41, 0.42], [-0.3, 0.38], [0.3, 0.38], [0.41, 0.42], [0.46, 0.55], [0.4, 0.645], [-0.4, 0.645], [-0.46, 0.55]], layer: 1 },
+    // fog lamps in black pods at the corners
+    { mat: 'gloss', mirror: true, poly: [[0.5, 0.335], [0.66, 0.335], [0.68, 0.42], [0.52, 0.42]] },
+    { mat: 'head', mirror: true, poly: [[0.56, 0.36], [0.62, 0.36], [0.62, 0.395], [0.56, 0.395]], layer: 1 },
+    // black lower lip with a wide slot
+    { mat: 'trim', poly: [[-0.68, 0.22], [0.68, 0.22], [0.7, 0.31], [0.5, 0.33], [-0.5, 0.33], [-0.7, 0.31]] },
+    { mat: 'slats', poly: [[-0.45, 0.26], [0.45, 0.26], [0.45, 0.31], [-0.45, 0.31]], layer: 1, depth: 0.004 },
+  ],
+  rear: [
+    // dark-tinted tail lamps in the corners, a red light guide round their top, inner and lower edges
+    { mat: 'gloss', mirror: true, poly: [[0.46, 0.83], [0.71, 0.81], [0.72, 0.97], [0.6, 0.995], [0.48, 0.99]] },
+    { mat: 'tail', mirror: true, poly: [[0.49, 0.955], [0.7, 0.945], [0.7, 0.96], [0.49, 0.972]], layer: 1 },
+    { mat: 'tail', mirror: true, poly: [[0.49, 0.85], [0.515, 0.85], [0.515, 0.965], [0.49, 0.965]], layer: 1 },
+    { mat: 'tail', mirror: true, poly: [[0.49, 0.845], [0.7, 0.83], [0.7, 0.845], [0.49, 0.86]], layer: 1 },
+    // black lower diffuser and small reflectors in the bumper corners
+    { mat: 'trim', poly: [[-0.7, 0.28], [0.7, 0.28], [0.7, 0.36], [-0.7, 0.36]] },
+    { mat: 'tail', mirror: true, poly: [[0.56, 0.41], [0.7, 0.41], [0.7, 0.44], [0.56, 0.44]], layer: 1, depth: 0.004 },
+  ],
+  side: [
+    // door handles: the rear one is back on the door
+    { mat: 'gloss', poly: [[0.415, 0.935], [0.47, 0.935], [0.47, 0.96], [0.415, 0.96]] },
+    { mat: 'gloss', poly: [[0.178, 0.945], [0.232, 0.945], [0.232, 0.97], [0.178, 0.97]] },
+    // the tail lamp wrapping round onto the flank
+    { mat: 'gloss', poly: [[0.078, 0.975], [0.05, 0.97], [0.035, 0.935], [0.025, 0.87], [0.04, 0.88], [0.06, 0.92]] },
+  ],
+  plates: { front: 0.47, rear: 0.47 },
+  spoiler: true,
+  mirrors: 'black',
+  paint: '#0a45a2', // Luster Blue
+  plate: 'MH 12 SW 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, SWIFT]

@@ -69,3 +69,12 @@ Add the id to `READY` in src/webgl/cars/specs.ts **and** to `SHOWCASE_IDS` in sr
   doors), `archSquare` (also squares the cladding flares), `bonnetRidge` (~0.012 m twin creases).
 - After rounding the corners, the nose face is narrower than the car: keep front parts within the end face's
   half-width (≈ width(1) × W/2 … the taper value), or they stripe as they wrap.
+- A gallery side photo shot from closer than a studio's makes the near tyres look big: the overlay (aligned at the
+  lowest pixel) then shows a uniform band — model high on top, photo low under the sill. Lower sill, belt and roof
+  together by that band (Swift: ~2 cm) instead of growing the tyres.
+- Read side heights off the cut-out's alpha columns or extract-side, not by eye from a grid of the raw photo.
+- End decals land on the lofted strip between rings, so lamps on a raked tail no longer stair-step; plates are
+  tessellated and follow the nose/tail sweep (a flat plate sank behind the grille at the centre).
+- If cars.json lists the dual-tone paints separately ("… with Black Roof"), set `roof.black: false`: those paints
+  bring their own roof colour. Black pillars alone still give the floating-roof look.
+- Deep blues read purple under the studio lights: keep the photo's green-to-blue ratio when darkening the paint.
