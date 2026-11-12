@@ -283,3 +283,13 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   'dark' went all gunmetal).
 - A body-coloured D-pillar over a dark tailgate-glass wrap: `pillars` with `black: false`, a near-zero belt range, the top
   range starting exactly on `roof.u0`, and a curved `rearEdge`; a top starting past `roof.u0` left a torn patch at the roof.
+- Hyryder (Grand Vitara body, Toyota ends): the listing gallery had no true side; another portal's studio side renders cut out
+  cleanly but were squeezed sideways (1.745 m tall at the official length): stretch the cut-out × 1.061 to the official height
+  before extract-side and compare-side. The listing's 360° viewer (object2vr) serves its frames as `images/img_0_0_<n>.jpg`
+  next to the config XML named in its HTML; those frames were too close for profiles but fine for details.
+- That close studio camera put the sill and bonnet ~4 cm above the GV trace and the axles 7 % apart: raising sill and bonnet and
+  splitting the overhangs in the photo's ratio (doors, pillars, handles mapped with the axles) took IoU 0.928 → 0.953.
+- A dark upper grille right under a rounded bonnet lip read as a thin strip with a body band over it: the `topRadius` roll ate
+  its top. Raise the nose `top` ~5 cm above the grille (1.03 vs 0.955) with `topRadius` 0.08.
+- Tail lamps running lower than the GV's light bar (down to 1.04 m) striped on the raked strip under `top(0)` = 0.98: start the
+  tail `top` at the lamp tops (1.152), as on the Exter.
