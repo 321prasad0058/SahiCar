@@ -2678,4 +2678,117 @@ export const I20: CarSpec = {
   plate: 'MH 12 IT 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20]
+const KYLAQ_L = 3.995
+/** a side outline from a rounded rectangle given in u (0…1) and metres */
+const kylaqU = (u0: number, y0: number, u1: number, y1: number, r: number): P2[] =>
+  rrectS(u0 * KYLAQ_L, y0, u1 * KYLAQ_L, y1, r).map(([x, y]) => [+(x / KYLAQ_L).toFixed(5), y] as P2)
+/** a circle outline (projector lamps) */
+const kylaqCircle = (zc: number, yc: number, r: number, n = 36): P2[] =>
+  Array.from({ length: n }, (_, i) => { const a = (i / n) * Math.PI * 2; return [+(zc + r * Math.cos(a)).toFixed(4), +(yc + r * Math.sin(a)).toFixed(4)] as P2 })
+/** the butterfly grille's upright ribs: one dark-chrome rib per slot, each as tall as the grille at its z */
+const kylaqGrilleBot = (z: number) => (z < 0.42 ? 0.728 + (z / 0.42) * 0.012 : 0.74 + ((z - 0.42) / 0.12) * 0.06)
+const kylaqRibs: Decal[] = [0.029, 0.087, 0.145, 0.203, 0.261, 0.319, 0.377, 0.435, 0.493].map((z): Decal => ({
+  step: 0.004, mat: 'trim', layer: 2, depth: 0.014, mirror: true,
+  poly: rrect(z - 0.011, kylaqGrilleBot(z + 0.011) + 0.012, z + 0.011, 0.928 - z * 0.012, 0.004),
+}))
+
+/** Skoda Kylaq (2025). 3995 × 1783 × 1619 (with roof rails), wheelbase 2566, 205/55 R17 (Prestige).
+ *  Side profile from the gallery's levelled side photo (1.627 m measured over the rails, wheelbase within 0.3 %); axles at
+ *  the official wheelbase with the overhangs split as in the photo. Belt, cladding, shut lines and handles read off a
+ *  metric grid of the levelled cut-out; the split headlamps under slim DRLs, the butterfly grille and the bumpers from
+ *  the straight front photo and close-ups; the tail lamps joined by the black strip and the rear bumper from the rear
+ *  photos. */
+export const KYLAQ: CarSpec = {
+  id: 'skoda-kylaq',
+  name: 'Skoda Kylaq',
+  dropSlivers: true,
+  L: KYLAQ_L, W: 1.783, H: 1.619,
+  axles: [0.1625, 0.8048],
+  tyreR: 0.3287, tyreW: 0.205, rim: 0.657, wheel: { style: 'split', spokes: 5 },
+  archGap: 0.08, archSquare: 0.65,
+  sill: [[0, 0.37], [0.01, 0.335], [0.02, 0.315], [0.04, 0.293], [0.07, 0.27], [0.1, 0.255], [0.28, 0.24], [0.5, 0.236], [0.7, 0.232], [0.9, 0.225], [0.95, 0.222], [0.97, 0.232], [0.98, 0.245], [0.99, 0.255], [1, 0.27]],
+  // the upright tail up to the lamp tops, the belt falling gently from the D-pillar to the mirror, the bonnet rolling
+  // down to the upright grille face
+  top: [[0, 1.225], [0.006, 1.232], [0.012, 1.236], [0.02, 1.238], [0.05, 1.236], [0.1, 1.228], [0.15, 1.217], [0.2, 1.203], [0.25, 1.192], [0.3, 1.182], [0.4, 1.167], [0.45, 1.16], [0.5, 1.152], [0.6, 1.138], [0.68, 1.128], [0.72, 1.122], [0.75, 1.097], [0.8, 1.063], [0.85, 1.036], [0.9, 1.01], [0.92, 0.998], [0.94, 0.984], [0.96, 0.969], [0.97, 0.962], [0.98, 0.957], [0.99, 0.953], [1, 0.951]],
+  width: [[0, 0.92], [0.008, 0.95], [0.02, 0.97], [0.05, 0.985], [0.1, 0.996], [0.5, 1], [0.88, 0.996], [0.93, 0.98], [0.96, 0.96], [0.985, 0.935], [1, 0.91]],
+  crown: 0.012,
+  bulge: 0.02,
+  // the crease through the door handles, kept under the tail lamps at the tail
+  shoulder: { y: [[0, 0.9], [0.1, 0.98], [0.2, 1.02], [0.5, 0.99], [1, 0.93]], inset: 0.018 },
+  haunch: 0.04,
+  bonnetRidge: 0.01,
+  topRadius: 0.06,
+  noseSweep: 0.07,
+  tailSweep: 0.09,
+  greenhouse: {
+    u0: 0.02, u1: 0.72, tumble: 0.75,
+    // the raked tailgate glass under the roof spoiler, a near-flat roof under the rails, the screen
+    top: [[0.02, 1.15], [0.03, 1.214], [0.04, 1.258], [0.05, 1.29], [0.06, 1.327], [0.07, 1.362], [0.08, 1.398], [0.09, 1.442], [0.095, 1.475], [0.1, 1.505], [0.105, 1.522], [0.11, 1.53], [0.12, 1.538], [0.15, 1.55], [0.2, 1.562], [0.3, 1.572], [0.4, 1.57], [0.45, 1.564], [0.5, 1.552], [0.52, 1.54], [0.53, 1.53], [0.55, 1.512], [0.6, 1.43], [0.65, 1.306], [0.7, 1.18], [0.72, 1.124]],
+  },
+  roof: { u0: 0.09153, u1: 0.52186, black: false },
+  pillars: [
+    // the big body-coloured D-pillar from the tail to the leaning rear edge of the door glass
+    { bottom: [0.075, 0.205], top: [0.09153, 0.238], black: false, step: 0.004 },
+    { bottom: [0.267, 0.275], top: [0.267, 0.275], black: true },
+    { bottom: [0.432, 0.455], top: [0.434, 0.455], black: true },
+  ],
+  // squared black arch flares, the grey rocker under the doors, the black rear bumper
+  cladding: { top: [[0, 0.74], [0.04, 0.74], [0.055, 0.68], [0.07, 0.56], [0.09, 0.49], [0.12, 0.47], [0.3, 0.47], [0.5, 0.465], [0.7, 0.455], [0.9, 0.45], [0.95, 0.45], [1, 0.45]], flare: 0.07, cut: true },
+  doors: [[0.706, 0.698], [0.448, 0.445], [0.232, 0.207]],
+  front: [
+    // the butterfly grille: gloss black, a dark-chrome top frame and an upright rib in every slot
+    { step: 0.004, mat: 'gloss', poly: smooth(both([[0, 0.726], [0.4, 0.736], [0.43, 0.742], [0.53, 0.792], [0.552, 0.815], [0.556, 0.84], [0.556, 0.912], [0.55, 0.924], [0.53, 0.929], [0.3, 0.94], [0, 0.948]]), 1) },
+    { step: 0.004, mat: 'trim', layer: 1, depth: 0.01, poly: band([[-0.54, 0.921], [-0.3, 0.932], [0, 0.94], [0.3, 0.932], [0.54, 0.921]], 0.014) },
+    ...kylaqRibs,
+    // slim LED DRLs on top, in a black slit, running out from the grille's top corners
+    { step: 0.004, mat: 'gloss', layer: 1, mirror: true, depth: 0.004, poly: smooth([[0.565, 0.9], [0.728, 0.912], [0.742, 0.926], [0.73, 0.94], [0.57, 0.928]], 1) },
+    { step: 0.004, mat: 'drl', layer: 2, mirror: true, poly: band([[0.575, 0.914], [0.73, 0.926]], 0.014) },
+    // headlamps below: a black-framed pocket, the hex LED unit inboard and the projector outboard
+    { step: 0.004, mat: 'trim', mirror: true, depth: 0.004, poly: smooth([[0.55, 0.745], [0.58, 0.692], [0.775, 0.692], [0.785, 0.71], [0.785, 0.8], [0.765, 0.815], [0.6, 0.802]], 1) },
+    { step: 0.004, mat: 'gloss', layer: 1, mirror: true, poly: smooth([[0.57, 0.745], [0.592, 0.705], [0.765, 0.705], [0.772, 0.718], [0.772, 0.792], [0.76, 0.8], [0.61, 0.79]], 1) },
+    { step: 0.004, mat: 'silver', layer: 2, mirror: true, poly: [[0.6, 0.748], [0.618, 0.722], [0.675, 0.722], [0.685, 0.748], [0.675, 0.775], [0.618, 0.775]] },
+    { step: 0.004, mat: 'chrome', layer: 3, mirror: true, poly: [[0.61, 0.748], [0.624, 0.729], [0.668, 0.729], [0.676, 0.748], [0.668, 0.768], [0.624, 0.768]] },
+    { step: 0.004, mat: 'silver', layer: 2, mirror: true, depth: 0.006, poly: kylaqCircle(0.73, 0.752, 0.03) },
+    { step: 0.004, mat: 'head', layer: 3, mirror: true, poly: kylaqCircle(0.73, 0.752, 0.013) },
+    // the grey bumper rising between the blue corner pockets, the black slot under the grille
+    { step: 0.004, mat: 'trim', poly: smooth(both([[0, 0.27], [0.7, 0.27], [0.79, 0.31], [0.8, 0.42], [0.69, 0.435], [0.62, 0.64], [0.6, 0.668], [0, 0.668]]), 1) },
+    { step: 0.004, mat: 'gloss', layer: 1, poly: rrect(-0.43, 0.632, 0.43, 0.655, 0.008) },
+    // the trapezoid lower grille (dark hex mesh) and the satin skid lip under it
+    { step: 0.004, mat: 'gloss', layer: 1, poly: smooth(both([[0, 0.345], [0.57, 0.345], [0.62, 0.485], [0, 0.485]]), 1) },
+    { step: 0.004, mat: 'mesh', layer: 2, poly: smooth(both([[0, 0.355], [0.555, 0.355], [0.6, 0.474], [0, 0.474]]), 1) },
+    { step: 0.004, mat: 'satin', layer: 2, poly: smooth(both([[0, 0.3], [0.62, 0.3], [0.69, 0.318], [0.7, 0.34], [0.6, 0.345], [0, 0.345]]), 2) },
+  ],
+  rear: [
+    // the tail lamps: smoked housings, a red guide along the top and down the outer half, the clear reversing inner
+    { step: 0.004, mat: 'reflector', layer: 1, mirror: true, depth: 0.008, poly: smooth([[0.6, 1.0], [0.735, 1.0], [0.785, 1.04], [0.8, 1.12], [0.792, 1.168], [0.765, 1.196], [0.72, 1.206], [0.6, 1.208]], 1) },
+    { step: 0.004, mat: 'tail', layer: 2, mirror: true, poly: [[0.605, 1.183], [0.73, 1.183], [0.752, 1.174], [0.758, 1.186], [0.735, 1.196], [0.605, 1.197]] },
+    { step: 0.004, mat: 'tail', layer: 2, mirror: true, poly: [[0.69, 1.08], [0.705, 1.08], [0.71, 1.183], [0.695, 1.183]] },
+    { step: 0.004, mat: 'tail', layer: 2, mirror: true, poly: [[0.715, 1.12], [0.778, 1.12], [0.779, 1.134], [0.715, 1.134]] },
+    { step: 0.004, mat: 'silver', layer: 2, mirror: true, poly: rrect(0.612, 1.07, 0.682, 1.178, 0.006) },
+    { step: 0.004, mat: 'satin', layer: 3, mirror: true, poly: rrect(0.614, 1.118, 0.68, 1.128, 0.003) },
+    { step: 0.004, mat: 'gloss', layer: 2, mirror: true, poly: rrect(0.606, 1.04, 0.69, 1.065, 0.004) },
+    // the gloss-black strip joining them
+    { step: 0.004, mat: 'gloss', depth: 0.006, poly: smooth(both([[0, 1.09], [0.6, 1.09], [0.61, 1.1], [0.61, 1.212], [0, 1.212]]), 1) },
+    // black bumper with corner reflectors, the satin U-shaped skid plate round a finned diffuser
+    { step: 0.004, mat: 'trim', poly: smooth(both([[0, 0.36], [0.7, 0.36], [0.79, 0.4], [0.8, 0.5], [0.8, 0.745], [0, 0.745]]), 1) },
+    { step: 0.004, mat: 'reflector', layer: 1, mirror: true, poly: rrect(0.65, 0.7, 0.745, 0.73, 0.006) },
+    { step: 0.004, mat: 'satin', layer: 1, poly: smooth(both([[0, 0.4], [0.66, 0.4], [0.69, 0.42], [0.69, 0.56], [0.65, 0.585], [0, 0.585]]), 2) },
+    { step: 0.004, mat: 'trim', layer: 2, depth: 0.012, poly: smooth(both([[0, 0.39], [0.6, 0.39], [0.6, 0.48], [0.55, 0.52], [0, 0.52]]), 1) },
+    ...[0.075, 0.225, 0.375, 0.5].map((z): Decal => ({ step: 0.004, mat: 'gloss', layer: 3, depth: 0.016, mirror: true, poly: rrect(z - 0.012, 0.4, z + 0.012, 0.49, 0.004) })),
+  ],
+  side: [
+    // the tail lamp wrapping onto the rear fender: a smoked wedge with the red guide along its top
+    { step: 0.004, mat: 'reflector', depth: 0.004, poly: smooth([[0.001, 1.212], [0.062, 1.203], [0.05, 1.16], [0.025, 1.06], [0.012, 1.0], [0.001, 1.0]], 1) },
+    { step: 0.004, mat: 'tail', layer: 1, poly: [[0.005, 1.2], [0.055, 1.195], [0.052, 1.183], [0.005, 1.188]] },
+    // satin door handles
+    { step: 0.004, mat: 'satin', depth: 0.01, poly: kylaqU(0.472, 0.99, 0.532, 1.018, 0.012) },
+    { step: 0.004, mat: 'satin', depth: 0.01, poly: kylaqU(0.212, 1.045, 0.268, 1.073, 0.012) },
+  ],
+  plates: { front: 0.54, rear: 0.985 },
+  rails: 'black',
+  mirrors: 'body',
+  paint: '#00395c', // Lava Blue, darkened for the studio lights
+  plate: 'MH 12 KQ 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, KYLAQ]

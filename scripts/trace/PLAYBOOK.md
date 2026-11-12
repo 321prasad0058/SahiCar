@@ -324,3 +324,10 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - Wrap-around tail lamp: `width` 0.92 at u = 0 lets the end-face lamp reach 0.80 m on a 1.775 m car, and the `side` wedge starting
   at u = 0.005 meets it with no gap. Headlamp: the side wedge can start at u = 0.999 to meet a front lamp kept 3.5 cm inside the face.
 - A `gloss` headlamp housing on a raked nose reads body-grey (it mirrors the softbox); `trim` keeps it dark.
+- Kylaq (body-coloured D-pillar beside a raked tailgate glass): a `pillars` body decal whose belt edge reached the tail (u 0.02)
+  tore along the glasshouse foot round the tail; starting it at u 0.075 (a small glass wedge behind it) with its top on `roof.u0`
+  read clean. Moving `roof.u0` two stations back (roof paint forming the spoiler over the glass) eased the far-side crumple.
+- Tail lamps: a `reflector` housing (red, no glow) with `tail` guides and a `silver` reversing panel reads like the photo's red lens;
+  a `gloss` housing disappeared into the black strip joining the lamps. Upright butterfly-grille ribs: `trim` (depth 0.014) on
+  `gloss` gives dark-grey ribs; `chrome` ribs went paper-white.
+- The studio adds roughly 55 of grey to every channel: Lava Blue (studio photo ~31,61,86) needed #00395c (no red at all).
