@@ -69,3 +69,9 @@ Add the id to `READY` in src/webgl/cars/specs.ts **and** to `SHOWCASE_IDS` in sr
   doors), `archSquare` (also squares the cladding flares), `bonnetRidge` (~0.012 m twin creases).
 - After rounding the corners, the nose face is narrower than the car: keep front parts within the end face's
   half-width (≈ width(1) × W/2 … the taper value), or they stripe as they wrap.
+- Dark paint (deep green, black) defeats the `paintTop`/`paintLow` finder: read the belt, window line, pillars and
+  cladding off the side photo with `gridify.cjs` (metres = (groundY − y) ÷ pxPerM; take groundY from the roof top
+  + measuredHeight × pxPerM, the tyre bottoms sit in grass).
+- A pillar can take `mat` (e.g. `'silver'` for the Creta's C-pillar garnish) instead of black/body.
+- Decal skins are pushed out along normals averaged per grid vertex, so skid plates and lamp bars no longer stripe;
+  if stripes come back, look for decals running past the end face's half-width.

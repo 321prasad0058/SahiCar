@@ -52,7 +52,7 @@ export interface CarSpec {
   /** glass that wraps up into the roof edge */
   alpine?: [number, number]
   /** raked pillars: u range at the beltline and at the roof */
-  pillars: { bottom: [number, number]; top: [number, number]; black: boolean }[]
+  pillars: { bottom: [number, number]; top: [number, number]; black: boolean; /** overrides black/body, e.g. a silver C-pillar panel */ mat?: Mat }[]
   /** black plastic over the lower body: its traced top line, and how far the arch flares reach */
   cladding?: { top: Pts; flare: number }
   /** door shut lines: u at the sill and at the beltline */
@@ -507,6 +507,25 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     const P = g.attributes.position as THREE.BufferAttribute
     const outward = new THREE.Vector3(where === 'front' ? 1 : where === 'rear' ? -1 : 0, 0, endOn ? 0 : sideSign)
     const n = new THREE.Vector3()
+    // average the facet normals over each shared grid vertex (oriented outward first), so every copy of a vertex
+    // is pushed out by the same amount: per-facet offsets open cracks between grid rows that read as stripes
+    {
+      const sum = new Map<string, THREE.Vector3>()
+      const keyOf = (k: number) => `${P.getX(k)},${P.getY(k)},${P.getZ(k)}`
+      for (let k = 0; k < P.count; k++) {
+        n.set(nrm.getX(k), nrm.getY(k), nrm.getZ(k))
+        if (endOn && Math.abs(n.z) > 0.2) n.z = Math.sign(P.getZ(k)) * Math.abs(n.z)
+        if (n.dot(outward) < 0 && !(endOn && Math.abs(n.z) > 0.6)) n.negate()
+        const key = keyOf(k)
+        const s = sum.get(key)
+        if (s) s.add(n)
+        else sum.set(key, n.clone())
+      }
+      for (let k = 0; k < P.count; k++) {
+        const s = sum.get(keyOf(k))!
+        if (s.lengthSq() > 1e-12) { n.copy(s).normalize(); nrm.setXYZ(k, n.x, n.y, n.z) }
+      }
+    }
     for (let k = 0; k < P.count; k++) {
       n.set(nrm.getX(k), nrm.getY(k), nrm.getZ(k))
       if (endOn && Math.abs(n.z) > 0.2) n.z = Math.sign(P.getZ(k)) * Math.abs(n.z)
@@ -559,7 +578,6 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     // shiny parts on the nose or tail (skid plates, chrome, gloss housings) reflect as one smooth panel:
     // the projection grid's small row-to-row tilts would otherwise show up as stripes in the reflection
     if (endOn && (d.mat === 'silver' || d.mat === 'chrome' || d.mat === 'gloss')) {
-      g.computeVertexNormals()
       const N = g.attributes.normal as THREE.BufferAttribute
       for (let k = 0; k < N.count; k++) {
         n.set(N.getX(k), N.getY(k), N.getZ(k)).lerp(outward, 0.75).normalize()
@@ -611,7 +629,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
       [p.top[1], yt(p.top[1])],
       [p.top[0], yt(p.top[0])],
     ]
-    for (const w of ['ghLeft', 'ghRight'] as const) decal({ mat: p.black ? 'gloss' : 'body', poly }, w)
+    for (const w of ['ghLeft', 'ghRight'] as const) decal({ mat: p.mat ?? (p.black ? 'gloss' : 'body'), poly, depth: p.mat ? 0 : undefined }, w)
   }
 
   // number plates (India: white, green for EVs)
