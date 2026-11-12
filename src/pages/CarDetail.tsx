@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { CarCard, SafetyStars } from '../components/CarCard'
 import { CarImage } from '../components/CarImage'
 import { Gallery, type Shot } from '../components/Gallery'
+import { ZoomViewer, type ZoomShot } from '../components/ZoomViewer'
 import galleryData from '../data/gallery.json'
 import { Icon } from '../components/Icon'
 import { ScoreRing } from '../components/ScoreRing'
@@ -20,7 +21,7 @@ import type { CarSpec } from '../webgl/cars/build'
 import type { Studio } from '../webgl/Studio'
 
 // cars with an exact 3D model (the rest show a reference body at their real size)
-const SHOWCASE_IDS = ['tata-sierra-ev', 'tata-sierra', 'tata-altroz', 'honda-city', 'maruti-victoris', 'maruti-ertiga', 'tata-nexon']
+const SHOWCASE_IDS = ['tata-sierra-ev', 'tata-sierra', 'tata-altroz', 'honda-city', 'maruti-victoris', 'maruti-ertiga', 'tata-nexon', 'tata-punch']
 // neutral grey for the generic body when the car has no verified colour list
 const NEUTRAL = '#5b6b75'
 
@@ -136,6 +137,19 @@ export default function CarDetail() {
   }, [])
   const [state, setState] = useState(answers.state)
   const [view, setView] = useState<'photo' | '3d'>('photo')
+  // full-screen zoom: every photo in the media box, in order, opened at the one tapped
+  const [zoom, setZoom] = useState<{ shots: ZoomShot[]; start: number } | null>(null)
+  const openZoom = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = (e.target as HTMLElement).closest('img')
+    if (!target || (e.target as HTMLElement).closest('button, a, .credit')) return
+    const imgs = [...e.currentTarget.querySelectorAll<HTMLImageElement>('.car-img img')]
+    const shots = imgs.map((im) => {
+      const src = im.currentSrc || im.src
+      // Wikimedia serves bigger renditions by width in the path
+      return { src, alt: im.alt, caption: im.closest('.gal-slide')?.querySelector('.gal-cap')?.textContent ?? undefined, hd: src.includes('/960px-') ? src.replace('/960px-', '/1600px-') : undefined }
+    })
+    setZoom({ shots, start: Math.max(0, imgs.indexOf(target as HTMLImageElement)) })
+  }
   const fuels = useMemo(() => (car ? [...new Set(car.powertrains.map((p) => p.fuel))] : []), [car])
   const [fuel, setFuel] = useState<Fuel | null>(null)
   const [picked, setPicked] = useState<Variant | null>(null)
@@ -204,7 +218,8 @@ export default function CarDetail() {
               )}
             </div>
             {view === 'photo' ? (
-              (galleryData as unknown as Record<string, Shot[]>)[car.id]?.length ? (
+              <div className="zoomable" onClick={openZoom} title="Tap to zoom">
+              {(galleryData as unknown as Record<string, Shot[]>)[car.id]?.length ? (
                 <Gallery
                   shots={(galleryData as unknown as Record<string, Shot[]>)[car.id]}
                   alt={`${car.brand} ${car.model}`}
@@ -212,8 +227,11 @@ export default function CarDetail() {
                 />
               ) : (
                 <CarImage official={car.official} image={car.image} wiki={car.wiki} body={car.body} alt={`${car.brand} ${car.model}`} eager />
-              )
+              )}
+              <span className="zoom-badge" aria-hidden><Icon name="search" size={13} /> Zoom</span>
+              </div>
             ) : <Studio3D car={car} />}
+            {zoom && <ZoomViewer shots={zoom.shots} start={zoom.start} onClose={() => setZoom(null)} />}
           </div>
 
           <div className="detail-head">

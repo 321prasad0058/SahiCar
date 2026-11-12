@@ -1156,3 +1156,37 @@ button.v-row:hover {
 .gal-dots { position: absolute; right: 14px; bottom: 16px; z-index: 3; display: flex; gap: 6px; }
 .gal-dots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 4px; cursor: pointer; background: rgba(255, 255, 255, 0.65); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12); transition: width 0.25s var(--ease); }
 .gal-dots button.on { width: 20px; background: #fff; }
+
+/* ───────── photo zoom: tap a car photo for a full-screen viewer (src/components/ZoomViewer.tsx) */
+.zoomable { position: relative; cursor: zoom-in; }
+.zoom-badge {
+  position: absolute; left: 12px; bottom: 14px; z-index: 3; pointer-events: none;
+  display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px 6px; border-radius: 999px;
+  background: rgba(21, 23, 27, 0.62); color: #fff; font-size: 12px; font-weight: 600; backdrop-filter: blur(6px);
+}
+.zv { position: fixed; inset: 0; z-index: 1000; background: #0d0f12; color: #fff; display: grid; animation: zv-in 0.2s var(--ease); }
+@keyframes zv-in { from { opacity: 0; } }
+.zv-stage { position: absolute; inset: 0; display: grid; place-items: center; overflow: hidden; touch-action: none; cursor: zoom-in; user-select: none; }
+.zv-stage.zoomed { cursor: grab; }
+.zv-stage.zoomed:active { cursor: grabbing; }
+.zv-stage img {
+  max-width: 100vw; max-height: 100dvh; width: auto; height: auto; object-fit: contain;
+  transform-origin: center center; transition: transform 0.22s var(--ease); will-change: transform;
+  -webkit-user-drag: none; image-rendering: auto;
+}
+.zv-stage img.live { transition: none; }
+.zv-top, .zv-bottom { position: absolute; left: 0; right: 0; display: flex; align-items: center; gap: 12px; pointer-events: none; padding-inline: max(14px, env(safe-area-inset-left)); }
+.zv-top { top: 0; justify-content: space-between; padding-top: max(12px, env(safe-area-inset-top)); background: linear-gradient(rgba(0, 0, 0, 0.5), transparent); padding-bottom: 24px; }
+.zv-bottom { bottom: 0; justify-content: center; padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+.zv-count { font-size: 14px; font-weight: 600; opacity: 0.9; }
+.zv-hint { font-size: 13px; opacity: 0.85; min-width: 150px; text-align: center; font-variant-numeric: tabular-nums; }
+.zv-btn {
+  pointer-events: auto; width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.12); color: #fff; font-size: 22px; line-height: 1; display: grid; place-items: center; cursor: pointer; backdrop-filter: blur(8px);
+}
+.zv-btn:disabled { opacity: 0.35; cursor: default; }
+.zv-btn:hover:not(:disabled) { background: rgba(255, 255, 255, 0.22); }
+.zv-nav { position: absolute; top: 50%; translate: 0 -50%; }
+.zv-nav.prev { left: max(12px, env(safe-area-inset-left)); }
+.zv-nav.next { right: max(12px, env(safe-area-inset-right)); }
+@media (prefers-reduced-motion: reduce) { .zv, .zv-stage img { animation: none; transition: none; } }

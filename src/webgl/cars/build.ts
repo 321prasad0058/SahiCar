@@ -15,8 +15,13 @@ export interface Decal {
   mirror?: boolean
   /** stacking: decals drawn on top of others sit a little further out */
   layer?: number
+  /** relief in metres: how far the part stands proud of the body, with walls round its edge (0 = flat skin).
+   *  Defaults by material give lamps a lens, housings a rim, grilles a lip and solid slats. */
+  depth?: number
 }
-export type WheelStyle = 'turbine' | 'twin' | 'aero' | 'multi' | 'blade'
+/** default relief per material (metres) */
+const RELIEF: Partial<Record<Mat, number>> = { head: 0.014, drl: 0.01, tail: 0.012, amber: 0.01, gloss: 0.006, silver: 0.01, chrome: 0.006, mesh: 0.004, hex: 0.004, slats: 0.004 }
+export type WheelStyle = 'turbine' | 'twin' | 'aero' | 'multi' | 'blade' | 'split'
 
 export interface CarSpec {
   id: string
@@ -60,6 +65,13 @@ export interface CarSpec {
   spoiler?: boolean
   sunroof?: [number, number]
   mirrors: 'black' | 'body'
+  /** fender haunches: the body swells this fraction wider over each wheel and is pinched in between
+   *  (width stays the official width at the haunch peak) */
+  haunch?: number
+  /** height (m) of the twin raised creases along the bonnet */
+  bonnetRidge?: number
+  /** dark gunmetal alloys (machined edges) instead of bright silver */
+  rimTone?: 'dark'
   windowChrome?: boolean
   paint: string
   ev?: boolean
@@ -159,6 +171,7 @@ function makeShared() {
     tyre: new THREE.MeshStandardMaterial({ color: '#111214', roughness: 0.88 }),
     rimDark: new THREE.MeshStandardMaterial({ color: '#3a4147', metalness: 0.75, roughness: 0.32 }),
     rimFace: new THREE.MeshStandardMaterial({ color: '#d7dee4', metalness: 1, roughness: 0.2 }),
+    rimGun: new THREE.MeshStandardMaterial({ color: '#4b5056', metalness: 0.85, roughness: 0.32 }),
     brake: new THREE.MeshStandardMaterial({ color: '#44484c', metalness: 0.8, roughness: 0.5 }),
     well: new THREE.MeshBasicMaterial({ color: '#020203' }),
   }
@@ -240,11 +253,20 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     return y
   }
 
+  // fender haunches: full width over the wheels, pinched in along the doors and at the ends
+  const haunch = spec.haunch ?? 0
+  const haunchK = (x: number) => {
+    if (!haunch) return 1
+    let b = 0
+    for (const ax of axles) b = Math.max(b, Math.exp(-(((x - ax) / (archR * 1.35)) ** 2)))
+    return 1 - haunch + haunch * b
+  }
+
   // double-sided: body-coloured decals (pillars, fins) are wound either way on the glasshouse
   const paint = new THREE.MeshPhysicalMaterial({ color: opt.paint ?? spec.paint, metalness: 0.55, roughness: 0.3, clearcoat: 1, clearcoatRoughness: 0.05, side: THREE.DoubleSide })
   // the roof has its own paint so dual-tone colours (contrasting roof) can be shown
   const roofPaint = paint.clone()
-  if (spec.roof.black) roofPaint.color.set('#0d0e10')
+  if (spec.roof.black) { roofPaint.color.set('#0d0e10'); roofPaint.metalness = 0.25; roofPaint.roughness = 0.42; roofPaint.clearcoatRoughness = 0.3 }
   const disposables: { dispose(): void }[] = [paint, roofPaint]
   const parts = new Map<THREE.Material, THREE.BufferGeometry[]>()
   const add = (mat: THREE.Material, g: THREE.BufferGeometry, m?: THREE.Matrix4) => {
@@ -261,12 +283,13 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     const x = xOf(u)
     const yb = Math.max(sill(u), archLine(x))
     const yt = top(u)
-    const hw = (width(u) * W) / 2
+    const hw = ((width(u) * W) / 2) * haunchK(x)
     return {
       x,
       ring: ring(hw, yb, yt, 0.07, 0.17, seg, {
         bulge: spec.bulge ?? 0.025,
         crown: u > spec.greenhouse.u1 ? spec.crown ?? 0.025 : 0,
+        ridge: u > spec.greenhouse.u1 + 0.02 && u < 0.985 ? spec.bonnetRidge : undefined,
         shoulder: shoulderY ? shoulderY(u) : undefined,
         inset: spec.shoulder?.inset,
       }),
@@ -323,7 +346,9 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
       for (const ax of axles) {
         const d = Math.abs(x - ax)
         const R = archR + flare
-        if (d < R) y = Math.max(y, archY + Math.sqrt(R * R - d * d))
+        // the flare follows the arch's own squareness (a superellipse), not a plain circle
+        const pe = 2 + spec.archSquare * 2.2
+        if (d < R) y = Math.max(y, archY + R * Math.pow(1 - Math.pow(d / R, pe), 1 / pe))
       }
       return y
     }
@@ -333,9 +358,18 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
         const yb = Math.max(sill(u), archLine(x)) - 0.004
         const yt = Math.min(cTop(x), top(u) - 0.04)
         const xx = i === 0 ? x - 0.008 : i === stations.length - 1 ? x + 0.008 : x
-        let out = 0.008
-        for (const ax of axles) if (Math.abs(x - ax) < archR + flare) out = 0.024
-        return { x: xx, ring: ring((width(u) * W) / 2 + out, yb, Math.max(yb + 0.01, yt), 0.075, 0.02, seg) }
+        // the cladding follows the body's own cross-section (same corner radii, bulge and shoulder), offset
+        // outward by its thickness, so the paint can never poke through it in patches
+        let out = 0.012
+        for (const ax of axles) if (Math.abs(x - ax) < archR + flare) out = 0.026
+        return {
+          x: xx,
+          ring: ring(((width(u) * W) / 2) * haunchK(x) + out, yb, Math.max(yb + 0.01, yt), 0.07, 0.17, seg, {
+            bulge: spec.bulge ?? 0.025,
+            shoulder: shoulderY ? shoulderY(u) : undefined,
+            inset: spec.shoulder?.inset,
+          }),
+        }
       }),
       () => 0,
       1,
@@ -479,7 +513,68 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
       if (n.dot(outward) < 0 && !(endOn && Math.abs(n.z) > 0.6)) n.negate()
       P.setXYZ(k, P.getX(k) + n.x * out, P.getY(k) + n.y * out, P.getZ(k) + n.z * out)
     }
+    // ── relief: lift the face along the surface normal and wall its outline, so lamps have lenses,
+    // housings have rims and grilles have a lip that catches the light
+    const relief = d.depth ?? RELIEF[d.mat] ?? 0
+    if (relief > 0) {
+      const e = endOn ? 0.004 : 0.004 / L
+      const normalAt = (a: number, b: number) => {
+        const p = project(a, b), pa = project(a + e, b), pb = project(a, b + e)
+        if (!p || !pa || !pb) return null
+        const nn = pa.clone().sub(p).cross(pb.clone().sub(p)).normalize()
+        if (nn.dot(outward) < 0 && !(endOn && Math.abs(nn.z) > 0.6)) nn.negate()
+        return { p, n: nn }
+      }
+      for (let k = 0; k < P.count; k++) {
+        n.set(nrm.getX(k), nrm.getY(k), nrm.getZ(k))
+        if (endOn && Math.abs(n.z) > 0.2) n.z = Math.sign(P.getZ(k)) * Math.abs(n.z)
+        if (n.dot(outward) < 0 && !(endOn && Math.abs(n.z) > 0.6)) n.negate()
+        P.setXYZ(k, P.getX(k) + n.x * relief, P.getY(k) + n.y * relief, P.getZ(k) + n.z * relief)
+      }
+      const wall: number[] = []
+      const wstep = endOn ? 0.012 : 0.012 / L
+      for (let k = 0; k < poly.length; k++) {
+        const A = poly[k], B = poly[(k + 1) % poly.length]
+        const len = Math.hypot((B[0] - A[0]) * (endOn ? 1 : L), B[1] - A[1])
+        const m = Math.max(1, Math.ceil(len / 0.012))
+        let prev: { b: THREE.Vector3; t: THREE.Vector3 } | null = null
+        for (let t = 0; t <= m; t++) {
+          const a = A[0] + ((B[0] - A[0]) * t) / m, b = A[1] + ((B[1] - A[1]) * t) / m
+          const q = normalAt(a, b)
+          if (!q) { prev = null; continue }
+          const base = q.p.clone().addScaledVector(q.n, out), top = base.clone().addScaledVector(q.n, relief)
+          if (prev) for (const v of [prev.b, base, top, prev.b, top, prev.t]) wall.push(v.x, v.y, v.z)
+          prev = { b: base, t: top }
+        }
+      }
+      void wstep
+      if (wall.length) {
+        const wg = new THREE.BufferGeometry()
+        wg.setAttribute('position', new THREE.Float32BufferAttribute(wall, 3))
+        wg.computeVertexNormals()
+        // lamp lenses keep their own glow on the walls; everything else gets a gloss-black edge
+        add(d.mat === 'head' || d.mat === 'drl' || d.mat === 'tail' || d.mat === 'amber' ? mats[d.mat] : d.mat === 'silver' || d.mat === 'chrome' ? mats[d.mat] : S.gloss, wg)
+      }
+    }
+    // shiny parts on the nose or tail (skid plates, chrome, gloss housings) reflect as one smooth panel:
+    // the projection grid's small row-to-row tilts would otherwise show up as stripes in the reflection
+    if (endOn && (d.mat === 'silver' || d.mat === 'chrome' || d.mat === 'gloss')) {
+      g.computeVertexNormals()
+      const N = g.attributes.normal as THREE.BufferAttribute
+      for (let k = 0; k < N.count; k++) {
+        n.set(N.getX(k), N.getY(k), N.getZ(k)).lerp(outward, 0.75).normalize()
+        N.setXYZ(k, n.x, n.y, n.z)
+      }
+    }
     add(mats[d.mat], g)
+    // solid slats across a slatted grille: raised gloss-black bars clipped to the grille's outline
+    if (d.mat === 'slats' && !d.depth) {
+      for (let y = b0 + 0.025; y < b1 - 0.012; y += 0.042) {
+        let xa = Infinity, xb = -Infinity
+        for (let a = a0; a <= a1; a += (a1 - a0) / 80) if (inside([a, y + 0.007], poly)) { xa = Math.min(xa, a); xb = Math.max(xb, a) }
+        if (xb > xa) decal({ mat: 'gloss', poly: [[xa, y], [xb, y], [xb, y + 0.014], [xa, y + 0.014]], layer: (d.layer ?? 0) + 1, depth: 0.016 }, where)
+      }
+    }
     if (d.mat === 'drl' || d.mat === 'tail' || d.mat === 'head') {
       const color = d.mat === 'tail' ? '#ff3344' : '#cfefff'
       const midB = (b0 + b1) / 2
@@ -546,7 +641,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     const y = top(u) + 0.1
     const zBody = zAt(x, top(u) - 0.03)
     for (const side of [-1, 1]) {
-      add(spec.mirrors === 'black' ? S.gloss : paint, new RoundedBoxGeometry(0.11, 0.1, 0.19, 2, 0.035), new THREE.Matrix4().makeTranslation(x - 0.01, y, side * (zBody + 0.105)))
+      add(spec.mirrors === 'black' ? S.gloss : paint, new RoundedBoxGeometry(0.11, 0.095, 0.17, 2, 0.035), new THREE.Matrix4().makeTranslation(x - 0.01, y, side * (zBody + 0.085)))
       add(S.trim, new RoundedBoxGeometry(0.08, 0.04, 0.16, 2, 0.015), new THREE.Matrix4().makeTranslation(x + 0.01, y - 0.05, side * (zBody + 0.04)))
     }
   }
@@ -577,8 +672,8 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     const r0 = Math.min(...flat) + 0.01, r1 = Math.max(...flat) - 0.01
     const us = Array.from({ length: 18 }, (_, i) => r0 + ((r1 - r0) * i) / 17)
     for (const side of [-1, 1] as const) {
-      tube(us.map((u) => new THREE.Vector3(xOf(u), roofY(u) + 0.04, side * (roofHW(u) - 0.09))), 0.014, railMat)
-      for (const u of [us[0], us[us.length - 1]]) add(S.trim, new THREE.BoxGeometry(0.1, 0.045, 0.04), new THREE.Matrix4().makeTranslation(xOf(u), roofY(u) + 0.02, side * (roofHW(u) - 0.09)))
+      tube(us.map((u) => new THREE.Vector3(xOf(u), roofY(u) + 0.028, side * (roofHW(u) - 0.09))), 0.013, railMat)
+      for (const u of [us[0], us[us.length - 1]]) add(railMat, new THREE.BoxGeometry(0.09, 0.032, 0.036), new THREE.Matrix4().makeTranslation(xOf(u), roofY(u) + 0.014, side * (roofHW(u) - 0.09)))
     }
   }
   if (spec.spoiler) {
@@ -586,7 +681,10 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     let su = gh.u0
     let best = -1
     for (let u = gh.u0; u < spec.roof.u0 + 0.05; u += 0.002) if (ghTop(u) > best - 0.0005) { best = Math.max(best, ghTop(u)); su = u; if (ghTop(u) >= ghTop(spec.roof.u0) - 0.05) break }
-    add(roofPaint, new RoundedBoxGeometry(0.12, 0.025, roofHW(su) * 1.9, 2, 0.01), new THREE.Matrix4().makeTranslation(xOf(su) - 0.02, roofY(su) + 0.008, 0))
+    // a lip that kicks out and slightly down over the tailgate glass, with small fins at its ends
+    const lip = new RoundedBoxGeometry(0.2, 0.03, roofHW(su) * 1.92, 2, 0.012)
+    add(roofPaint, lip, new THREE.Matrix4().makeRotationZ(0.1).premultiply(new THREE.Matrix4().makeTranslation(xOf(su) - 0.07, roofY(su) - 0.004, 0)))
+    for (const side of [-1, 1]) add(roofPaint, new RoundedBoxGeometry(0.16, 0.05, 0.03, 2, 0.01), new THREE.Matrix4().makeTranslation(xOf(su) - 0.06, roofY(su) - 0.03, side * (roofHW(su) * 0.96 - 0.015)))
   }
   if (spec.sunroof) {
     const [a, b] = spec.sunroof
@@ -611,7 +709,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     for (const side of [-1, 1]) {
       const w = new THREE.Group()
       w.add(new THREE.Mesh(tyreG, S.tyre))
-      for (const r of rimG) w.add(new THREE.Mesh(r.g, r.mat === 'face' ? S.rimFace : r.mat === 'dark' ? S.rimDark : S.brake))
+      for (const r of rimG) w.add(new THREE.Mesh(r.g, r.mat === 'face' ? (spec.rimTone === 'dark' ? S.rimGun : S.rimFace) : r.mat === 'edge' ? S.rimFace : r.mat === 'dark' ? S.rimDark : S.brake))
       const bd = new THREE.Mesh(blurG, blurMat)
       bd.visible = false
       w.add(bd)
@@ -630,6 +728,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     p.rotateX(-Math.PI / 2)
     disposables.push(m, p)
     shadowMesh = new THREE.Mesh(p, m)
+    shadowMesh.name = 'contact-shadow'
     shadowMesh.position.y = 0.004
     shadowMesh.renderOrder = -1
     group.add(shadowMesh)
@@ -761,6 +860,10 @@ function rimBlurTexture(spec: CarSpec) {
       case 'turbine':
         bar(a, 0.32, len)
         break
+      case 'split':
+        bar(a - 0.05, 0.1, len)
+        bar(a + 0.05, 0.1, len)
+        break
       case 'aero':
         bar(a, 0.36, len)
         break
@@ -814,7 +917,7 @@ function rimBlurTexture(spec: CarSpec) {
 function rimGeometry(spec: CarSpec, hi: boolean) {
   const R = spec.tyreR * spec.rim
   const face = spec.tyreW / 2 - 0.012
-  const out: { g: THREE.BufferGeometry; mat: 'face' | 'dark' | 'brake' }[] = []
+  const out: { g: THREE.BufferGeometry; mat: 'face' | 'dark' | 'brake' | 'edge' }[] = []
   const cyl = (r: number, d: number, z: number, n: number) => {
     const g = new THREE.CylinderGeometry(r, r, d, n)
     g.rotateX(Math.PI / 2)
@@ -828,8 +931,9 @@ function rimGeometry(spec: CarSpec, hi: boolean) {
   out.push({ g: lip, mat: 'face' })
   out.push({ g: cyl(R * 0.18, 0.04, face - 0.004, 20), mat: 'face' })
   const spokes: THREE.BufferGeometry[] = []
+  const edges: THREE.BufferGeometry[] = []
   const n = spec.wheel.spokes
-  const blade = (angle: number, w: number, len: number, z: number, sweep = 0, off = 0) => {
+  const blade = (angle: number, w: number, len: number, z: number, sweep = 0, off = 0, into = spokes) => {
     const b = new THREE.BoxGeometry(w, len, 0.022, 1, 6, 1)
     b.translate(off, R * 0.18 + len / 2, z)
     if (sweep) {
@@ -842,7 +946,7 @@ function rimGeometry(spec: CarSpec, hi: boolean) {
       }
     }
     b.rotateZ(angle)
-    spokes.push(b)
+    into.push(b)
   }
   const len = R * 0.78
   for (let i = 0; i < n; i++) {
@@ -867,6 +971,13 @@ function rimGeometry(spec: CarSpec, hi: boolean) {
         spokes.push(t)
         break
       }
+      case 'split':
+        // a pair of arms forking towards the rim, each with a machined silver outer edge
+        blade(a - 0.05, R * 0.1, len, face - 0.008, -0.22)
+        blade(a + 0.05, R * 0.1, len, face - 0.008, 0.22)
+        blade(a - 0.1, R * 0.022, len, face - 0.002, -0.22, 0, edges)
+        blade(a + 0.1, R * 0.022, len, face - 0.002, 0.22, 0, edges)
+        break
       case 'aero':
         blade(a, R * 0.36, len, face - 0.006, 0.25)
         break
@@ -877,5 +988,10 @@ function rimGeometry(spec: CarSpec, hi: boolean) {
   const merged = mergeGeometries(spokes.map((s) => s.toNonIndexed()), false)
   spokes.forEach((s) => s.dispose())
   if (merged) out.push({ g: merged, mat: 'face' })
+  if (edges.length) {
+    const me = mergeGeometries(edges.map((s) => s.toNonIndexed()), false)
+    edges.forEach((s) => s.dispose())
+    if (me) out.push({ g: me, mat: 'edge' })
+  }
   return out
 }
