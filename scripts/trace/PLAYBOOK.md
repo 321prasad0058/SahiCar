@@ -190,3 +190,15 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - Read `archGap` off the photo's arch opening (top of opening − 2 × photo tyre radius): 0.08 left the wheels sunk in black wells,
   0.045 matched; raise `cladding.flare` by the same amount to keep the flare's outer edge.
 - Edit exact.ts per spec: a whole-file string replace of a tyre line also hit the Brezza (same 215/60 R16 line).
+- Nexon rework: tyres hidden in grass were patched by painting a dark disc per wheel into the cut-out (hub from the rim
+  centre, radius from hub to tyre top) before extract-side; measured height then came out 1.635 against 1.62.
+- A dark glasshouse running all the way to the tail read as an estate. The mono-tone Nexon's body-coloured C-pillar
+  (`pillars` with `black: false`, a thin black divider ahead of it) gave the sloping window line back.
+- Front/rear decals wider than the end face (width(end) × W/2) wrap round the corner as black slabs on the flank: widen
+  `width` at the ends (0.86–0.88) and keep end decals within ~0.75 m on a 1.8 m car.
+- Black bumper corners (lamp pods, rear lamp surrounds): raise `cladding.top` to the pod tops over the last 2–3 % at each
+  end with `cut: true`; without `cut` the paint pokes through in patches.
+- A slope break in the last few nose `top` points ripples the bonnet's leading edge; keep them on one smooth curve. A light
+  bar's outer ends on the corner rounding (topRadius 0.12) smear into white hooks: stop them ~0.71 m out.
+- A uniform 1.5–2.5 cm blue band over bonnet and roof in the overlay (close gallery camera): lowering both by that much took
+  the Nexon from IoU 0.957 to 0.969.
