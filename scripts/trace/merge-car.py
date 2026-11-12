@@ -28,12 +28,14 @@ def added(path, strip=lambda s: s):
         out += t[j1:j2]
     return '\n'.join(out).strip('\n')
 
-subprocess.run(['git', 'merge', '--no-commit', '--no-ff', branch], capture_output=True, text=True)
-
 EX = re.compile(r"export const EXACT: CarSpec\[\] = \[([^\]]*)\]\n")
 head = show('HEAD', 'src/webgl/cars/exact.ts')
 names = EX.search(head).group(1)
+# check the branch only ADDED to exact.ts before touching anything: a refusal leaves the repo as it was
 section = added('src/webgl/cars/exact.ts', lambda s: EX.sub('', s))
+lessons = added('scripts/trace/PLAYBOOK.md')
+
+subprocess.run(['git', 'merge', '--no-commit', '--no-ff', branch], capture_output=True, text=True)
 exact = EX.sub('', head).rstrip('\n') + '\n\n' + section + f'\n\nexport const EXACT: CarSpec[] = [{names}, {", ".join(exports)}]\n'
 open('src/webgl/cars/exact.ts', 'w').write(exact)
 
@@ -47,7 +49,6 @@ def add_id(path, pattern):
 
 add_id('src/webgl/cars/specs.ts', r"const READY: string\[\] = \[[^\]]*\]")
 add_id('src/pages/CarDetail.tsx', r"const SHOWCASE_IDS = \[[^\]]*\]")
-lessons = added('scripts/trace/PLAYBOOK.md')
 pb = show('HEAD', 'scripts/trace/PLAYBOOK.md').rstrip('\n') + ('\n' + lessons if lessons else '') + '\n'
 open('scripts/trace/PLAYBOOK.md', 'w').write(pb)
 
