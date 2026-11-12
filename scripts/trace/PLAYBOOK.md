@@ -144,3 +144,14 @@ Add the id to `READY` in src/webgl/cars/specs.ts **and** to `SHOWCASE_IDS` in sr
   rectangle turns it into a blob. `sideBand()` is `band()` for side decals (u scaled by the length).
 - Measure belt/cladding heights per pixel column of the levelled cut-out (light paint vs dark runs) instead of by eye:
   the eye read of the Seltos belt was 3 cm off.
+- Big off-roader flares (Thar Roxx): use the cladding's own flare with `cladding.flareOut` (lateral reach, e.g. 0.075) — raised
+  side decals with a large `depth` tore along the arch edge. `cladding.flareU` keeps the flare off an upright nose: the
+  cladding is a full tube, so a flare station in front of the grille face lids the lower grille in black.
+- Black bumpers whose top surface must be black: `cladding.cover: true` (and a traced cladding top above the bumper's `top`).
+- The wheel-well box reaches `archR` ahead of the axle: on a short-nosed upright face keep axle + archR behind the face, or a
+  black slab shows through below the grille (Thar: archGap 0.04, the flare covers the rest of the opening).
+- A spare wheel on the tailgate: `spare: { y }` (its outer face at u = 0; the official length includes it). Model the bumper
+  under it as a short low `top` and lift `top` to the belt at the tailgate face.
+- Body-coloured door frames on a black hard top: pillars with `black: false` plus a 'body' side decal along the window tops
+  (kept below ghTop − 0.075, where the black roof band starts). Thin black pillars on the hard top's corners tore at their
+  tops; the dark quarter glass alone reads right.

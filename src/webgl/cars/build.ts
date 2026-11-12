@@ -58,7 +58,12 @@ export interface CarSpec {
   /** black plastic over the lower body: its traced top line, and how far the arch flares reach */
   /** `cut`: take the cladding's section from the full body height, cut off at its top, so a low band along the
    *  doors shows at its traced height (otherwise the section's rounded top corner tucks a low band under the paint) */
-  cladding?: { top: Pts; flare: number; cut?: boolean }
+  cladding?: { top: Pts; flare: number; cut?: boolean; /** where the traced top reaches the body's own top (black bumpers),
+   *  cover the whole section instead of stopping 4 cm short, so the bumper's top surface is black too */ cover?: boolean
+    /** how far the arch flares stand out from the body (m, default 0.026), and the u range they are kept inside (so a
+     *  flare reaching past an upright nose doesn't lid the face) */ flareOut?: number; flareU?: [number, number] }
+  /** a spare wheel on the tailgate: its outer face at the tail (u = 0), its hub at height y (m) */
+  spare?: { y: number }
   /** door shut lines: u at the sill and at the beltline */
   doors: [number, number][]
   front: Decal[]
@@ -394,9 +399,11 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
   // ── cladding: a thin black skin with its own traced top edge and flared arches
   if (spec.cladding && cladTop) {
     const flare = spec.cladding.flare
+    const fu = spec.cladding.flareU ?? [0, 1]
+    const inFlareU = (x: number) => uOf(x) >= fu[0] && uOf(x) <= fu[1]
     const cTop = (x: number) => {
       let y = cladTop(uOf(x))
-      for (const ax of axles) {
+      if (inFlareU(x)) for (const ax of axles) {
         const d = Math.abs(x - ax)
         const R = archR + flare
         // the flare follows the arch's own squareness (a superellipse), not a plain circle
@@ -414,15 +421,17 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
         // the cladding follows the body's own cross-section (same corner radii, bulge and shoulder), offset
         // outward by its thickness, so the paint can never poke through it in patches
         let out = 0.012
-        for (const ax of axles) if (Math.abs(x - ax) < archR + flare) out = 0.026
+        if (inFlareU(x)) for (const ax of axles) if (Math.abs(x - ax) < archR + flare) out = spec.cladding!.flareOut ?? 0.026
         const cut = !!spec.cladding!.cut
-        const ytc = Math.max(yb + 0.01, yt)
-        const r = ring(((width(u) * W) / 2) * haunchK(x) + out, yb, cut ? Math.max(ytc, top(u)) : ytc, 0.07, spec.topRadius ?? 0.17, seg, {
+        const cover = !!spec.cladding!.cover && cTop(x) >= top(u) - 0.005
+        const ytc = cover ? top(u) + 0.006 : Math.max(yb + 0.01, yt)
+        const r = ring(((width(u) * W) / 2) * haunchK(x) + out, yb, cut || cover ? Math.max(ytc, top(u) + (cover ? 0.006 : 0)) : ytc, 0.07, spec.topRadius ?? 0.17, seg, {
           bulge: spec.bulge ?? 0.025,
+          crown: cover && u > spec.greenhouse.u1 ? spec.crown ?? 0.025 : 0,
           shoulder: shoulderY ? shoulderY(u) : undefined,
           inset: spec.shoulder?.inset,
         })
-        if (cut) r.pts = r.pts.map(([z, y]) => [z, Math.min(y, ytc)])
+        if (cut && !cover) r.pts = r.pts.map(([z, y]) => [z, Math.min(y, ytc)])
         return { x: xx, ring: r }
       }),
       () => 0,
@@ -822,6 +831,17 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     }
   }
 
+  // spare wheel on the tailgate (not spun, not swept with the body)
+  let spareG: THREE.Group | null = null
+  if (spec.spare) {
+    spareG = new THREE.Group()
+    spareG.add(new THREE.Mesh(tyreG, S.tyre))
+    for (const r of rimG) spareG.add(new THREE.Mesh(r.g, r.mat === 'face' ? (spec.rimTone === 'dark' ? S.rimGun : S.rimFace) : r.mat === 'edge' ? S.rimFace : r.mat === 'dark' ? S.rimDark : S.brake))
+    spareG.rotation.y = -Math.PI / 2
+    spareG.position.set(xOf(0) + spec.tyreW / 2, spec.spare.y, 0)
+    group.add(spareG)
+  }
+
   // contact shadow
   let shadowMesh: THREE.Mesh | null = null
   {
@@ -883,7 +903,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     }
     group.traverse((o) => {
       const m = o as THREE.Mesh
-      if (m.isMesh && !wheels.some((w) => w === m.parent) && m.geometry && m !== shadowMesh) bend(m.geometry, m.position.x)
+      if (m.isMesh && !wheels.some((w) => w === m.parent) && m.parent !== spareG && m.geometry && m !== shadowMesh) bend(m.geometry, m.position.x)
       if ((o as THREE.Sprite).isSprite) {
         const zf = Math.min(1.15, (o.position.z / (W / 2)) ** 2)
         o.position.x -= (smooth(L / 2 - zone, L / 2, o.position.x) * nose - smooth(-L / 2 + zone, -L / 2, o.position.x) * tail) * zf

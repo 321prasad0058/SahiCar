@@ -863,4 +863,116 @@ export const SELTOS: CarSpec = {
   plate: 'MH 12 KS 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS]
+const THAR_L = 4.428
+/** a circle outline (many points, so round lamps stay round) */
+const tharCircle = (zc: number, yc: number, r: number, n = 48): P2[] =>
+  Array.from({ length: n }, (_, i) => { const a = (i / n) * Math.PI * 2; return [+(zc + r * Math.cos(a)).toFixed(4), +(yc + r * Math.sin(a)).toFixed(4)] as P2 })
+/** an open ring (C shape) of width w round (zc, yc), radius r, leaving a gap of ±gap rad round angle `at` */
+const tharC = (zc: number, yc: number, r: number, w: number, at: number, gap: number): P2[] => {
+  const n = 40, path: P2[] = []
+  for (let i = 0; i <= n; i++) { const a = at + gap + ((Math.PI * 2 - 2 * gap) * i) / n; path.push([zc + r * Math.cos(a), yc + r * Math.sin(a)]) }
+  return band(path, w).map(([z, y]) => [+z.toFixed(4), +y.toFixed(4)] as P2)
+}
+/** a side outline from a rounded rectangle given in u (0…1) and metres */
+const tharRectU = (u0: number, y0: number, u1: number, y1: number, r: number): P2[] =>
+  rrectS(u0 * THAR_L, y0, u1 * THAR_L, y1, r).map(([x, y]) => [+(x / THAR_L).toFixed(5), y] as P2)
+// the six-slot grille: each slot a tall upper and a short lower mesh panel between body-coloured bars
+const tharSlots: Decal[] = [-0.309, -0.185, -0.0625, 0.0625, 0.185, 0.309].flatMap((z): Decal[] => [
+  { step: 0.005, mat: 'mesh', depth: 0.003, poly: rrect(z - 0.042, 0.866, z + 0.042, 1.006, 0.01) },
+  { step: 0.005, mat: 'mesh', depth: 0.003, poly: rrect(z - 0.042, 0.752, z + 0.042, 0.846, 0.01) },
+])
+
+/** Mahindra Thar Roxx (2024, 5-door). 4428 × 1870 × 1923 (length over the spare wheel), wheelbase 2850, 255/60 R19.
+ *  Side profile from a levelled gallery side photo (roof 1.866 m against the official 1.923); axles at the official
+ *  wheelbase, overhangs split as in the photo. Lamps, grille and bumpers from the straight front and rear photos and
+ *  close-ups. Black hard top, body-coloured door frames, black squared flares, spare wheel on the tailgate. */
+export const THAR_ROXX: CarSpec = {
+  id: 'mahindra-thar-roxx',
+  name: 'Mahindra Thar Roxx',
+  rakedEnds: true,
+  dropSlivers: true,
+  L: THAR_L, W: 1.87, H: 1.923,
+  axles: [0.204, 0.8476],
+  tyreR: 0.394, tyreW: 0.255, rim: 0.612, wheel: { style: 'split', spokes: 5 },
+  archGap: 0.04, archSquare: 0.6,
+  // the rear bumper's lower face slopes in under the spare wheel; the body sits high, flat between the wheels
+  sill: [[0, 0.69], [0.01, 0.62], [0.02, 0.5], [0.026, 0.455], [0.04, 0.45], [0.058, 0.43], [0.075, 0.4], [0.1, 0.39], [0.13, 0.38], [0.28, 0.31], [0.33, 0.29], [0.5, 0.29], [0.65, 0.295], [0.7, 0.3], [0.75, 0.32], [0.93, 0.35], [0.95, 0.385], [0.97, 0.4], [0.985, 0.42], [0.995, 0.45], [1, 0.5]],
+  // the rear bumper under the spare, the upright tail face up to the belt, the flat belt, the flat bonnet and the
+  // upright grille face, then the front bumper standing proud of it
+  top: [[0, 0.745], [0.05, 0.745], [0.054, 0.76], [0.0565, 0.95], [0.059, 1.2], [0.062, 1.236], [0.1, 1.236], [0.2, 1.226], [0.3, 1.215], [0.4, 1.207], [0.5, 1.2], [0.6, 1.205], [0.672, 1.222], [0.7, 1.21], [0.75, 1.198], [0.8, 1.187], [0.84, 1.17], [0.88, 1.149], [0.9, 1.132], [0.92, 1.1], [0.935, 1.075], [0.94, 1.07], [0.944, 1.068], [0.946, 1.064], [0.9475, 0.95], [0.949, 0.8], [0.952, 0.745], [0.956, 0.715], [0.99, 0.71], [0.996, 0.7], [1, 0.67]],
+  // boxy: straight flanks, the tail and nose faces only slightly rounded at the corners; both bumpers wider
+  width: [[0, 0.82], [0.008, 0.9], [0.02, 0.935], [0.05, 0.945], [0.055, 0.94], [0.058, 0.9], [0.062, 0.905], [0.075, 0.915], [0.1, 0.92], [0.5, 0.92], [0.9, 0.92], [0.93, 0.915], [0.94, 0.905], [0.947, 0.89], [0.951, 0.93], [0.96, 0.945], [0.985, 0.94], [0.995, 0.9], [1, 0.84]],
+  crown: 0.01,
+  bulge: 0.004,
+  topRadius: 0.06,
+  noseSweep: 0.03,
+  tailSweep: 0.03,
+  greenhouse: {
+    u0: 0.062, u1: 0.672, tumble: 0.94,
+    // the hard top: upright rear face, a long roof falling gently to the near-upright windscreen
+    top: [[0.062, 1.236], [0.064, 1.4], [0.066, 1.55], [0.069, 1.68], [0.073, 1.76], [0.078, 1.81], [0.085, 1.835], [0.095, 1.846], [0.11, 1.855], [0.13, 1.864], [0.2, 1.866], [0.27, 1.866], [0.35, 1.857], [0.4, 1.85], [0.45, 1.834], [0.5, 1.808], [0.55, 1.775], [0.59, 1.748], [0.605, 1.738], [0.615, 1.728], [0.621, 1.712], [0.626, 1.67], [0.63, 1.625], [0.64, 1.515], [0.65, 1.41], [0.66, 1.306], [0.672, 1.225]],
+  },
+  // the black hard top (the rear glass in its upright back face stays glass)
+  roof: { u0: 0.07487, u1: 0.6214, black: true },
+  pillars: [
+    // the body-coloured C-pillar of the rear door frame (the dark quarter glass behind it), the black divider in the
+    // rear door glass, the body-coloured B- and A-pillars (the door frames are body colour)
+    { bottom: [0.1348, 0.2605], top: [0.243, 0.2605], black: false },
+    { bottom: [0.31, 0.3165], top: [0.31, 0.3165], black: true },
+    { bottom: [0.407, 0.457], top: [0.407, 0.457], black: false },
+    { bottom: [0.6054, 0.662], top: [0.6054, 0.6175], black: false },
+  ],
+  // black bumpers (their tops too), black side steps along the doors, big squared flares standing 7.5 cm proud
+  cladding: { top: [[0, 0.8], [0.05, 0.8], [0.055, 0.745], [0.1, 0.735], [0.115, 0.6], [0.14, 0.42], [0.2, 0.4], [0.7, 0.4], [0.73, 0.45], [0.93, 0.55], [0.944, 0.7], [0.953, 0.7], [0.956, 0.8], [1, 0.8]], flare: 0.17, flareOut: 0.075, flareU: [0.06, 0.944], cut: true, cover: true },
+  doors: [[0.659, 0.659], [0.436, 0.436], [0.4228, 0.4228], [0.2255, 0.2255]],
+  front: [
+    ...tharSlots,
+    // round headlamps in raised body-coloured pods: dark lens, C-shaped LED ring open towards the grille, projector
+    { step: 0.005, mat: 'body', mirror: true, depth: 0.018, poly: tharCircle(0.483, 0.95, 0.105) },
+    { step: 0.005, mat: 'gloss', mirror: true, layer: 1, depth: 0.022, poly: tharCircle(0.483, 0.95, 0.09) },
+    { step: 0.005, mat: 'drl', mirror: true, layer: 2, depth: 0.024, poly: tharC(0.483, 0.95, 0.078, 0.022, Math.PI, 0.5) },
+    { step: 0.005, mat: 'head', mirror: true, layer: 2, depth: 0.024, poly: rrect(0.448, 0.933, 0.518, 0.967, 0.01) },
+    // the slim LED lamps in the front wings, outboard of the headlamps
+    { step: 0.005, mat: 'gloss', mirror: true, depth: 0.012, poly: rrect(0.665, 0.875, 0.775, 0.955, 0.012) },
+    { step: 0.005, mat: 'drl', mirror: true, layer: 1, depth: 0.013, poly: rrect(0.68, 0.902, 0.76, 0.928, 0.006) },
+    // black bumper with its satin-grey centre round the plate and round fog lamps in the black ends
+    { step: 0.005, mat: 'satin', depth: 0.005, poly: smooth(rrect(-0.53, 0.47, 0.53, 0.675, 0.035), 1) },
+    { step: 0.005, mat: 'gloss', mirror: true, depth: 0.006, poly: tharCircle(0.7, 0.585, 0.058) },
+    { step: 0.005, mat: 'head', mirror: true, layer: 1, depth: 0.008, poly: tharCircle(0.7, 0.585, 0.032) },
+  ],
+  rear: [
+    // C-shaped tail lamps: a black box, a thick red frame, dark inner panes with the lit upper pane and amber bar
+    { step: 0.005, mat: 'gloss', mirror: true, depth: 0.022, poly: rrect(0.615, 0.825, 0.815, 1.075, 0.02) },
+    { step: 0.005, mat: 'tail', mirror: true, layer: 1, depth: 0.024, poly: rrect(0.64, 0.835, 0.805, 1.065, 0.016) },
+    { step: 0.005, mat: 'gloss', mirror: true, layer: 2, depth: 0.024, poly: rrect(0.665, 0.857, 0.785, 1.043, 0.008) },
+    { step: 0.005, mat: 'tail', mirror: true, layer: 3, depth: 0.024, poly: rrect(0.678, 0.975, 0.772, 1.032, 0.005) },
+    { step: 0.005, mat: 'amber', mirror: true, layer: 3, depth: 0.024, poly: rrect(0.675, 0.946, 0.775, 0.962, 0.004) },
+    { step: 0.005, mat: 'head', mirror: true, layer: 3, depth: 0.024, poly: rrect(0.712, 0.872, 0.738, 0.93, 0.004) },
+    // the side-hinged tailgate's shut lines and its handle
+    { step: 0.005, mat: 'gloss', mirror: true, depth: 0.001, poly: [[0.579, 0.66], [0.592, 0.66], [0.592, 1.222], [0.579, 1.222]] },
+    { step: 0.005, mat: 'gloss', depth: 0.02, poly: rrect(-0.485, 0.855, -0.445, 1.06, 0.015) },
+    // black bumper: the tailgate's body colour down to the satin-grey centre, red reflectors in the black ends
+    { step: 0.005, mat: 'body', poly: rrect(-0.565, 0.645, 0.565, 0.735, 0.01) },
+    { step: 0.005, mat: 'satin', poly: rrect(-0.575, 0.455, 0.575, 0.64, 0.025) },
+    { step: 0.005, mat: 'reflector', mirror: true, poly: rrect(0.655, 0.575, 0.785, 0.635, 0.008) },
+  ],
+  side: [
+    // the body-coloured window frames along the tops of both doors
+    { step: 0.005, mat: 'body', poly: [[0.2605, 1.645], [0.6054, 1.645], [0.6054, 1.66], [0.6, 1.666], [0.55, 1.7], [0.5, 1.733], [0.45, 1.759], [0.4, 1.775], [0.35, 1.781], [0.3, 1.787], [0.2605, 1.79]] },
+    // shut lines between the door frames
+    { step: 0.005, mat: 'gloss', depth: 0.001, poly: [[0.4292, 1.21], [0.432, 1.21], [0.432, 1.765], [0.4292, 1.765]] },
+    { step: 0.005, mat: 'gloss', depth: 0.001, poly: sideBand([[0.2255, 1.2], [0.2255, 1.68], [0.2285, 1.72], [0.236, 1.745]], 0.012, THAR_L) },
+    // door handles: a dark recess on the front door, the upright handle on the rear door's C-pillar
+    { step: 0.005, mat: 'gloss', poly: tharRectU(0.4575, 0.986, 0.4995, 1.033, 0.012) },
+    { step: 0.005, mat: 'body', layer: 1, depth: 0.014, poly: tharRectU(0.2275, 1.26, 0.2385, 1.42, 0.012) },
+    // the grey top edge of the side step
+    { step: 0.005, mat: 'satin', poly: tharRectU(0.31, 0.384, 0.705, 0.4, 0.006) },
+  ],
+  plates: { front: 0.58, rear: 0.52 },
+  spare: { y: 1.065 },
+  mirrors: 'black',
+  paint: '#cdd0d2', // Everest White, toned down for the studio lights
+  plate: 'MH 12 TR 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, THAR_ROXX]
