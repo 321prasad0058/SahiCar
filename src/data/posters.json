@@ -159,6 +159,10 @@
   "w": "/3d/toyota-fortuner.7f3666f5.w.webp",
   "m": "/3d/toyota-fortuner.72db7011.m.webp"
  },
+ "toyota-glanza": {
+  "w": "/3d/toyota-glanza.f242d653.w.webp",
+  "m": "/3d/toyota-glanza.d6da84d0.m.webp"
+ },
  "toyota-innova-hycross": {
   "w": "/3d/toyota-innova-hycross.9a1b1909.w.webp",
   "m": "/3d/toyota-innova-hycross.c289c290.m.webp"
@@ -166,5 +170,9 @@
  "toyota-urban-cruiser-hyryder": {
   "w": "/3d/toyota-urban-cruiser-hyryder.23740980.w.webp",
   "m": "/3d/toyota-urban-cruiser-hyryder.2c939c84.m.webp"
+ },
+ "toyota-urban-cruiser-taisor": {
+  "w": "/3d/toyota-urban-cruiser-taisor.98f5b8cf.w.webp",
+  "m": "/3d/toyota-urban-cruiser-taisor.e7ee09f9.m.webp"
  }
 }
