@@ -181,3 +181,12 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   ≥ 0.012 and their slats a deeper one still (0.016).
 - A thin black A-pillar or wide D-pillar on dark glass came out with grey scratches / sawtooth edges; left out, the dark
   glass alone reads right. A side wrap of tail lamps above `top(u) − 0.01` near u = 0 tears into red spikes: leave it out.
+- Sonet: `rakedEnds` on a gently raked SUV nose frayed the DRL lines; raising the nose `top` at 0.97–1 to the lamp tops (0.94)
+  and dropping `rakedEnds` made them clean for −0.001 IoU.
+- A bright Fresnel band down the nose in the side view = the face's swept corners seen edge-on. With a hard `width` taper
+  already rounding the plan, keep `noseSweep` ~0.1.
+- A side tail-lamp wedge frayed where the `shoulder` crease ran through it: drop the shoulder below the lamp at the tail
+  (Sonet: y 0.8 at u = 0, rising to the belt by u = 0.12) and set `dropSlivers`.
+- Read `archGap` off the photo's arch opening (top of opening − 2 × photo tyre radius): 0.08 left the wheels sunk in black wells,
+  0.045 matched; raise `cladding.flare` by the same amount to keep the flare's outer edge.
+- Edit exact.ts per spec: a whole-file string replace of a tyre line also hit the Brezza (same 215/60 R16 line).
