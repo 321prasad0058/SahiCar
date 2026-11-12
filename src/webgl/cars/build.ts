@@ -6,7 +6,7 @@ import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeom
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
 import { curve, loft, ring, ringZ, stationsU, type Pts, type Tag } from './loft'
 
-export type Mat = 'gloss' | 'trim' | 'chrome' | 'silver' | 'drl' | 'head' | 'tail' | 'amber' | 'mesh' | 'hex' | 'slats' | 'body' | 'glass'
+export type Mat = 'gloss' | 'trim' | 'chrome' | 'silver' | 'satin' | 'reflector' | 'drl' | 'head' | 'tail' | 'amber' | 'mesh' | 'hex' | 'slats' | 'body' | 'glass'
 /** An outline traced from a photo. Front/rear: [z, y] in metres (z across the car, + = right); side: [u, y]. */
 export interface Decal {
   mat: Mat
@@ -18,9 +18,11 @@ export interface Decal {
   /** relief in metres: how far the part stands proud of the body, with walls round its edge (0 = flat skin).
    *  Defaults by material give lamps a lens, housings a rim, grilles a lip and solid slats. */
   depth?: number
+  /** projection grid size in metres (default 11 mm): finer for small parts on a curved nose, so edges don't stair-step */
+  step?: number
 }
 /** default relief per material (metres) */
-const RELIEF: Partial<Record<Mat, number>> = { head: 0.014, drl: 0.01, tail: 0.012, amber: 0.01, gloss: 0.006, silver: 0.01, chrome: 0.006, mesh: 0.004, hex: 0.004, slats: 0.004 }
+const RELIEF: Partial<Record<Mat, number>> = { head: 0.014, drl: 0.01, tail: 0.012, amber: 0.01, gloss: 0.006, silver: 0.01, satin: 0.006, reflector: 0.004, chrome: 0.006, mesh: 0.004, hex: 0.004, slats: 0.004 }
 export type WheelStyle = 'turbine' | 'twin' | 'aero' | 'multi' | 'blade' | 'split' | 'swirl'
 
 export interface CarSpec {
@@ -64,12 +66,16 @@ export interface CarSpec {
   side?: Decal[]
   plates: { front: number; rear: number }
   rails?: 'silver' | 'black'
-  spoiler?: boolean
+  /** a roof spoiler over the tailgate glass; optionally its reach back (m), thickness (m) and downward tilt (rad) */
+  spoiler?: boolean | { len?: number; thick?: number; tilt?: number }
   sunroof?: [number, number]
   mirrors: 'black' | 'body'
   /** fender haunches: the body swells this fraction wider over each wheel and is pinched in between
    *  (width stays the official width at the haunch peak) */
   haunch?: number
+  /** radius (m) of the body's upper side edge (shoulder roll, bonnet and tail edges); default 0.17. A boxy car
+   *  with lamps tucked under the bonnet edge wants less, so the nose and tail faces stay flat up to the lamps */
+  topRadius?: number
   /** height (m) of the twin raised creases along the bonnet */
   bonnetRidge?: number
   /** dark gunmetal alloys (machined edges) instead of bright silver */
@@ -170,6 +176,10 @@ function makeShared() {
     gloss: new THREE.MeshPhysicalMaterial({ color: '#050607', metalness: 0.5, roughness: 0.12, clearcoat: 1, side: THREE.DoubleSide }),
     chrome: new THREE.MeshStandardMaterial({ color: '#e4eaef', metalness: 1, roughness: 0.14, side: THREE.DoubleSide }),
     silver: new THREE.MeshStandardMaterial({ color: '#b3bbc2', metalness: 0.85, roughness: 0.3, side: THREE.DoubleSide }),
+    // satin light silver for painted skid plates: some metal, soft highlights, never paper-white
+    satin: new THREE.MeshStandardMaterial({ color: '#b9bdc1', metalness: 0.5, roughness: 0.5, envMapIntensity: 0.4, side: THREE.DoubleSide }),
+    // unlit red reflectors (bumper reflectors, reflector bars): red plastic with a faint glow, no lamp halo
+    reflector: new THREE.MeshStandardMaterial({ color: '#9a0f1a', emissive: '#4a0008', metalness: 0.2, roughness: 0.35, side: THREE.DoubleSide }),
     tyre: new THREE.MeshStandardMaterial({ color: '#111214', roughness: 0.88 }),
     rimDark: new THREE.MeshStandardMaterial({ color: '#3a4147', metalness: 0.75, roughness: 0.32 }),
     rimFace: new THREE.MeshStandardMaterial({ color: '#d7dee4', metalness: 1, roughness: 0.2 }),
@@ -268,7 +278,8 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
   const paint = new THREE.MeshPhysicalMaterial({ color: opt.paint ?? spec.paint, metalness: 0.55, roughness: 0.3, clearcoat: 1, clearcoatRoughness: 0.05, side: THREE.DoubleSide })
   // the roof has its own paint so dual-tone colours (contrasting roof) can be shown
   const roofPaint = paint.clone()
-  if (spec.roof.black) { roofPaint.color.set('#0d0e10'); roofPaint.metalness = 0.25; roofPaint.roughness = 0.42; roofPaint.clearcoatRoughness = 0.3 }
+  // satin black: a glossy clearcoat turns a flat roof light grey at the grazing angles of a rear view
+  if (spec.roof.black) { roofPaint.color.set('#0d0e10'); roofPaint.metalness = 0.2; roofPaint.roughness = 0.5; roofPaint.clearcoat = 0.35; roofPaint.clearcoatRoughness = 0.45; roofPaint.envMapIntensity = 0.6 }
   const disposables: { dispose(): void }[] = [paint, roofPaint]
   const parts = new Map<THREE.Material, THREE.BufferGeometry[]>()
   const add = (mat: THREE.Material, g: THREE.BufferGeometry, m?: THREE.Matrix4) => {
@@ -288,7 +299,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     const hw = ((width(u) * W) / 2) * haunchK(x)
     return {
       x,
-      ring: ring(hw, yb, yt, 0.07, 0.17, seg, {
+      ring: ring(hw, yb, yt, 0.07, spec.topRadius ?? 0.17, seg, {
         bulge: spec.bulge ?? 0.025,
         crown: u > spec.greenhouse.u1 ? spec.crown ?? 0.025 : 0,
         ridge: u > spec.greenhouse.u1 + 0.02 && u < 0.985 ? spec.bonnetRidge : undefined,
@@ -366,7 +377,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
         for (const ax of axles) if (Math.abs(x - ax) < archR + flare) out = 0.026
         const cut = !!spec.cladding!.cut
         const ytc = Math.max(yb + 0.01, yt)
-        const r = ring(((width(u) * W) / 2) * haunchK(x) + out, yb, cut ? Math.max(ytc, top(u)) : ytc, 0.07, 0.17, seg, {
+        const r = ring(((width(u) * W) / 2) * haunchK(x) + out, yb, cut ? Math.max(ytc, top(u)) : ytc, 0.07, spec.topRadius ?? 0.17, seg, {
           bulge: spec.bulge ?? 0.025,
           shoulder: shoulderY ? shoulderY(u) : undefined,
           inset: spec.shoulder?.inset,
@@ -449,6 +460,8 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     trim: S.trim,
     chrome: S.chrome,
     silver: S.silver,
+    satin: S.satin,
+    reflector: S.reflector,
     body: paint,
     glass: S.glass,
     drl: lightMat('#e2f6ff', 2.3),
@@ -462,10 +475,10 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
 
   /** Rasterise a traced outline on a fine grid, snap edge vertices onto the outline, project onto the body. */
   const decal = (d: Decal, where: 'front' | 'rear' | 'left' | 'right' | 'ghLeft' | 'ghRight') => {
-    if (opt.generic && d.mat !== 'trim' && d.mat !== 'silver') return
+    if (opt.generic && d.mat !== 'trim' && d.mat !== 'silver' && d.mat !== 'satin') return
     const poly = d.poly
     const endOn = where === 'front' || where === 'rear'
-    const step = hi ? 0.011 : 0.02
+    const step = hi ? d.step ?? 0.011 : 0.02
     const xs = poly.map((p) => p[0]), ys = poly.map((p) => p[1])
     const a0 = Math.min(...xs), a1 = Math.max(...xs), b0 = Math.min(...ys), b1 = Math.max(...ys)
     const sa = endOn ? step : step / L
@@ -556,12 +569,12 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
         wg.setAttribute('position', new THREE.Float32BufferAttribute(wall, 3))
         wg.computeVertexNormals()
         // lamp lenses keep their own glow on the walls; everything else gets a gloss-black edge
-        add(d.mat === 'head' || d.mat === 'drl' || d.mat === 'tail' || d.mat === 'amber' ? mats[d.mat] : d.mat === 'silver' || d.mat === 'chrome' ? mats[d.mat] : S.gloss, wg)
+        add(d.mat === 'head' || d.mat === 'drl' || d.mat === 'tail' || d.mat === 'amber' ? mats[d.mat] : d.mat === 'silver' || d.mat === 'satin' || d.mat === 'chrome' ? mats[d.mat] : S.gloss, wg)
       }
     }
     // shiny parts on the nose or tail (skid plates, chrome, gloss housings) reflect as one smooth panel:
     // the projection grid's small row-to-row tilts would otherwise show up as stripes in the reflection
-    if (endOn && (d.mat === 'silver' || d.mat === 'chrome' || d.mat === 'gloss')) {
+    if (endOn && (d.mat === 'silver' || d.mat === 'satin' || d.mat === 'chrome' || d.mat === 'gloss')) {
       g.computeVertexNormals()
       const N = g.attributes.normal as THREE.BufferAttribute
       for (let k = 0; k < N.count; k++) {
@@ -628,7 +641,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     g.rotateY(end > 0 ? Math.PI / 2 : -Math.PI / 2)
     disposables.push(g)
     const m = new THREE.Mesh(g, plateMat)
-    m.position.set(p.x + end * 0.024, y, 0)
+    m.position.set(p.x + end * 0.032, y, 0)
     group.add(m)
   }
 
@@ -685,8 +698,10 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     let best = -1
     for (let u = gh.u0; u < spec.roof.u0 + 0.05; u += 0.002) if (ghTop(u) > best - 0.0005) { best = Math.max(best, ghTop(u)); su = u; if (ghTop(u) >= ghTop(spec.roof.u0) - 0.05) break }
     // a lip that kicks out and slightly down over the tailgate glass, with small fins at its ends
-    const lip = new RoundedBoxGeometry(0.2, 0.03, roofHW(su) * 1.92, 2, 0.012)
-    add(roofPaint, lip, new THREE.Matrix4().makeRotationZ(0.1).premultiply(new THREE.Matrix4().makeTranslation(xOf(su) - 0.07, roofY(su) - 0.004, 0)))
+    const sp = typeof spec.spoiler === 'object' ? spec.spoiler : {}
+    const sLen = sp.len ?? 0.2, sThick = sp.thick ?? 0.03
+    const lip = new RoundedBoxGeometry(sLen, sThick, roofHW(su) * 1.92, 2, Math.min(0.012, sThick * 0.45))
+    add(roofPaint, lip, new THREE.Matrix4().makeRotationZ(sp.tilt ?? 0.1).premultiply(new THREE.Matrix4().makeTranslation(xOf(su) - sLen * 0.35, roofY(su) - 0.004, 0)))
     for (const side of [-1, 1]) add(roofPaint, new RoundedBoxGeometry(0.16, 0.05, 0.03, 2, 0.01), new THREE.Matrix4().makeTranslation(xOf(su) - 0.06, roofY(su) - 0.03, side * (roofHW(su) * 0.96 - 0.015)))
   }
   if (spec.sunroof) {
@@ -989,8 +1004,9 @@ function rimGeometry(spec: CarSpec, hi: boolean) {
         blade(a, R * 0.36, len, face - 0.006, 0.25)
         break
       case 'swirl':
-        // a wide and a slim machined blade side by side, both curling the same way, dark between them
-        blade(a - 0.1, R * 0.16, len, face - 0.008, 0.38)
+        // a wide machined-silver blade and a slim one in the rim's own tone, both curling the same way, with
+        // dark pockets between (with rimTone 'dark' the rim reads two-tone: silver faces on gunmetal)
+        blade(a - 0.1, R * 0.15, len, face - 0.004, 0.38, 0, edges)
         blade(a + 0.17, R * 0.08, len, face - 0.008, 0.38)
         break
       default:

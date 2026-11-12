@@ -75,4 +75,8 @@ Add the id to `READY` in src/webgl/cars/specs.ts **and** to `SHOWCASE_IDS` in sr
 - Black cladding along the lower doors: set `cladding.cut: true`, or the section's rounded top tucks the band
   under the paint and only a sliver shows.
 - A plate over trim or a skid plate: notch those decals round the plate (≈ ±0.25 × 0.11 m) or it gets buried.
-- Headlamps high on a raked, rounded nose stripe badly with full relief: give them `depth` ~0.004.
+- Lamps striping in streaks = they sit above the end face: the nose/tail `top` at u = 1 / 0 must reach the top of
+  the lamps (decals above it hop between rings). A boxy car also wants `topRadius` ~0.08 so the face stays flat.
+- Same for low skid plates: the `sill` at the ends must sit ~7 cm below them (the bottom corner is rounded).
+- Overlapping decals need distinct `layer`s; fine parts on curved ends get `step: 0.005`. Skid plates: `satin`,
+  bumper reflectors: `reflector` (no lamp glow). Spoiler shape: `spoiler: { len, thick, tilt }`.
