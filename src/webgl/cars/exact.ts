@@ -2678,4 +2678,117 @@ export const I20: CarSpec = {
   plate: 'MH 12 IT 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20]
+const CITY_L = 4.594
+/** the side photo reads 1.7 % tall (close camera): its heights are scaled down by this */
+const CITY_K = 0.983
+const cityK = (pts: P2[]): P2[] => pts.map(([u, y]) => [u, +(y * CITY_K).toFixed(4)] as P2)
+/** a side outline from a rounded rectangle given in u (0…1) and metres */
+const cityU = (u0: number, y0: number, u1: number, y1: number, r: number): P2[] =>
+  rrectS(u0 * CITY_L, y0, u1 * CITY_L, y1, r).map(([x, y]) => [+(x / CITY_L).toFixed(5), y] as P2)
+/** the honeycomb: rows of small dark cells, every other row offset half a cell, inside a half-width hw(y) */
+const cityHoney = (ys: number[], hw: (y: number) => number, mat: Decal['mat'], layer: number, skip?: (z: number, y: number) => boolean): Decal[] =>
+  ys.flatMap((y, row) => {
+    const out: Decal[] = []
+    for (let k = -12; k <= 12; k++) {
+      const zc = k * 0.07 + (row % 2) * 0.035
+      if (Math.abs(zc) + 0.03 > Math.min(hw(y), hw(y + 0.022)) - 0.01) continue
+      if (skip?.(zc, y)) continue
+      out.push({ step: 0.004, mat, layer, depth: 0.01, poly: [[zc - 0.03, y + 0.011], [zc - 0.018, y], [zc + 0.018, y], [zc + 0.03, y + 0.011], [zc + 0.018, y + 0.022], [zc - 0.018, y + 0.022]] })
+    }
+    return out
+  })
+const cityUpperHW = (y: number) => 0.66 - Math.max(0, 0.7 - y) * 1.2
+const cityLowerHW = (y: number) => 0.5 + (y - 0.33) * 0.35
+
+/** Honda City (2026 "New City" facelift of the 5th gen). 4594 × 1748 × 1489, wheelbase 2600, 185/55 R16 (top trim).
+ *  Side profile from a levelled gallery side photo (1.514 m, axles 3 % apart: heights × 0.983, axles at the official
+ *  wheelbase with the overhangs split as in the photo). Belt, glass, shut lines and handles read off a metric grid of the
+ *  cut-out; the full-width light bar, slim headlamps, honeycomb grilles and corner vents from a straight front photo and
+ *  the white studio render; the Z tail lamps and the black diffuser from a straight rear photo. */
+export const CITY_X: CarSpec = {
+  id: 'honda-city',
+  name: 'Honda City',
+  rakedEnds: true,
+  dropSlivers: true,
+  L: CITY_L, W: 1.748, H: 1.489,
+  axles: [0.2217, 0.7877],
+  tyreR: 0.305, tyreW: 0.185, rim: 0.666, wheel: { style: 'split', spokes: 5 }, rimTone: 'dark',
+  archGap: 0.06, archSquare: 0.12,
+  sill: cityK([[0, 0.29], [0.006, 0.3], [0.015, 0.31], [0.03, 0.32], [0.05, 0.322], [0.08, 0.31], [0.11, 0.29], [0.15, 0.275], [0.3, 0.268], [0.5, 0.272], [0.65, 0.268], [0.72, 0.262], [0.85, 0.225], [0.9, 0.215], [0.94, 0.21], [0.97, 0.222], [0.985, 0.23], [0.995, 0.24], [1, 0.26]]),
+  // the boot: lamp tops at the tail face, the ducktail lip and the flat boot lid; the belt under the glass rising to the
+  // C-pillar; the bonnet falling to the nose
+  top: cityK([[0, 1.03], [0.004, 1.075], [0.01, 1.105], [0.02, 1.124], [0.03, 1.13], [0.05, 1.128], [0.07, 1.134], [0.09, 1.145], [0.1, 1.152], [0.13, 1.135], [0.17, 1.115], [0.22, 1.1], [0.3, 1.096], [0.4, 1.088], [0.5, 1.072], [0.6, 1.056], [0.68, 1.05], [0.72, 1.05], [0.745, 1.055], [0.76, 1.05], [0.78, 1.03], [0.8, 1.005], [0.82, 0.988], [0.84, 0.974], [0.86, 0.958], [0.88, 0.94], [0.9, 0.923], [0.92, 0.902], [0.94, 0.88], [0.95, 0.868], [0.96, 0.866], [0.97, 0.863], [0.98, 0.86], [0.99, 0.857], [1, 0.854]]),
+  // round in plan: both ends taper into the corners
+  width: [[0, 0.92], [0.005, 0.935], [0.015, 0.955], [0.035, 0.972], [0.07, 0.985], [0.13, 0.997], [0.2, 1], [0.45, 0.99], [0.8, 0.997], [0.86, 0.99], [0.92, 0.968], [0.955, 0.94], [0.975, 0.91], [0.99, 0.875], [1, 0.84]],
+  crown: 0.02,
+  bulge: 0.04,
+  haunch: 0.05,
+  topRadius: 0.08,
+  noseSweep: 0.25,
+  tailSweep: 0.2,
+  greenhouse: {
+    u0: 0.1, u1: 0.745, tumble: 0.62,
+    // the long rear glass rising off the boot lid, the domed roof (shark-fin left out), the raked windscreen
+    top: cityK([[0.1, 1.153], [0.11, 1.17], [0.12, 1.186], [0.14, 1.23], [0.16, 1.268], [0.18, 1.306], [0.2, 1.339], [0.22, 1.377], [0.24, 1.41], [0.26, 1.442], [0.28, 1.464], [0.3, 1.48], [0.32, 1.49], [0.35, 1.5], [0.38, 1.507], [0.41, 1.51], [0.44, 1.509], [0.47, 1.504], [0.5, 1.497], [0.52, 1.487], [0.54, 1.474], [0.56, 1.46], [0.58, 1.433], [0.6, 1.399], [0.62, 1.364], [0.64, 1.328], [0.66, 1.282], [0.68, 1.237], [0.7, 1.191], [0.72, 1.132], [0.745, 1.06]]),
+  },
+  roof: { u0: 0.2826, u1: 0.5559, black: false },
+  pillars: [
+    // body-coloured C-pillar behind the small quarter glass; black quarter-glass divider and B-pillar
+    { bottom: [0.1, 0.218], top: [0.2, 0.3], black: false },
+    { bottom: [0.279, 0.287], top: [0.283, 0.291], black: true },
+    { bottom: [0.425, 0.458], top: [0.428, 0.456], black: true },
+  ],
+  doors: [[0.3, 0.224], [0.466, 0.456], [0.712, 0.712]],
+  windowChrome: true,
+  front: [
+    // the full-width light bar under the bonnet lip, running into the slim headlamps
+    { step: 0.004, mat: 'drl', layer: 2, poly: rrect(-0.43, 0.762, 0.43, 0.776, 0.006) },
+    // slim headlamps: a dark housing rising to the corners, the LED strip along its lower edge, a small projector
+    { step: 0.004, mat: 'trim', mirror: true, depth: 0.004, poly: smooth([[0.41, 0.756], [0.5, 0.758], [0.6, 0.766], [0.65, 0.772], [0.685, 0.78], [0.695, 0.79], [0.695, 0.82], [0.685, 0.828], [0.62, 0.818], [0.52, 0.795], [0.42, 0.782]], 1) },
+    { step: 0.004, mat: 'drl', mirror: true, layer: 1, poly: [[0.44, 0.762], [0.52, 0.764], [0.6, 0.771], [0.65, 0.777], [0.69, 0.786], [0.69, 0.8], [0.65, 0.791], [0.6, 0.785], [0.52, 0.778], [0.44, 0.776]] },
+    { step: 0.004, mat: 'head', mirror: true, layer: 1, depth: 0.008, poly: rrect(0.62, 0.795, 0.665, 0.815, 0.008) },
+    // the black honeycomb band under the bar, narrowing to the lamps' lower corners
+    { step: 0.004, mat: 'gloss', poly: smooth(both([[0, 0.665], [0.45, 0.67], [0.56, 0.69], [0.64, 0.72], [0.67, 0.745], [0.64, 0.758], [0.5, 0.756], [0.42, 0.755], [0, 0.755]]), 1) },
+    ...cityHoney([0.678, 0.705, 0.732], cityUpperHW, 'trim', 1),
+    // the lower intake: a wide black trapezoid of honeycomb with a satin lip under it, the plate on its top
+    { step: 0.004, mat: 'gloss', poly: smooth(both([[0, 0.33], [0.5, 0.33], [0.56, 0.36], [0.6, 0.47], [0.64, 0.49], [0.66, 0.5], [0.6, 0.505], [0, 0.505]]), 1) },
+    ...cityHoney([0.345, 0.375, 0.405, 0.435, 0.465], cityLowerHW, 'trim', 1, (z, y) => Math.abs(z) < 0.27 && y > 0.43),
+    { step: 0.004, mat: 'satin', layer: 1, depth: 0.008, poly: rrect(-0.54, 0.312, 0.54, 0.328, 0.006) },
+    // the tall black vents at the bumper corners (apex up)
+    { step: 0.004, mat: 'gloss', mirror: true, depth: 0.008, poly: [[0.64, 0.42], [0.705, 0.42], [0.708, 0.62], [0.695, 0.625], [0.665, 0.5]] },
+  ],
+  rear: [
+    // Z tail lamps: smoked housings (outer part on the wing, inner part on the boot lid), the red guide along the lower
+    // edge rising to the outer top, a clear reversing lamp
+    { step: 0.004, mat: 'trim', mirror: true, layer: 1, depth: 0.004, poly: smooth([[0.4, 0.905], [0.55, 0.895], [0.68, 0.875], [0.78, 0.86], [0.795, 0.875], [0.795, 0.995], [0.775, 1.008], [0.62, 0.985], [0.5, 0.97], [0.4, 0.962]], 1) },
+    { step: 0.004, mat: 'tail', mirror: true, layer: 2, poly: [[0.42, 0.91], [0.55, 0.902], [0.68, 0.883], [0.765, 0.871], [0.785, 0.88], [0.785, 0.99], [0.772, 0.99], [0.772, 0.89], [0.68, 0.897], [0.55, 0.916], [0.42, 0.924]] },
+    { step: 0.004, mat: 'silver', mirror: true, layer: 2, depth: 0.006, poly: rrect(0.5, 0.93, 0.6, 0.955, 0.008) },
+    // the chrome line joining the lamps along the top of the plate recess
+    { step: 0.004, mat: 'chrome', layer: 1, depth: 0.006, poly: rrect(-0.43, 0.893, 0.43, 0.906, 0.005) },
+    // the boot lid's shut line round the plate recess
+    { step: 0.004, mat: 'gloss', depth: 0.001, poly: band([[-0.6, 0.89], [-0.59, 0.75], [-0.56, 0.69], [-0.48, 0.655], [0, 0.65], [0.48, 0.655], [0.56, 0.69], [0.59, 0.75], [0.6, 0.89]], 0.012) },
+    // red reflectors in black slots at the bumper corners
+    { step: 0.004, mat: 'gloss', mirror: true, poly: rrect(0.735, 0.34, 0.775, 0.52, 0.01) },
+    { step: 0.004, mat: 'tail', mirror: true, layer: 1, depth: 0.004, poly: rrect(0.745, 0.355, 0.765, 0.505, 0.006) },
+    // the black lower bumper with its honeycomb diffuser
+    { step: 0.004, mat: 'trim', poly: smooth(both([[0, 0.31], [0.66, 0.31], [0.71, 0.33], [0.72, 0.36], [0.62, 0.43], [0, 0.43]]), 1) },
+    { step: 0.004, mat: 'mesh', layer: 1, poly: smooth(both([[0, 0.335], [0.56, 0.335], [0.6, 0.35], [0.54, 0.41], [0, 0.41]]), 1) },
+  ],
+  side: [
+    // body-coloured door handles (the relief gives them a dark rim)
+    { step: 0.004, mat: 'body', depth: 0.01, poly: cityU(0.47, 0.875, 0.52, 0.903, 0.012) },
+    { step: 0.004, mat: 'body', depth: 0.01, poly: cityU(0.246, 0.89, 0.296, 0.918, 0.012) },
+    // the headlamp sweeping back along the wing to a point
+    { step: 0.004, mat: 'trim', depth: 0.004, poly: [[0.999, 0.758], [0.999, 0.82], [0.975, 0.83], [0.945, 0.842], [0.915, 0.853], [0.892, 0.86], [0.91, 0.84], [0.94, 0.81], [0.965, 0.783], [0.985, 0.762]] },
+    { step: 0.004, mat: 'drl', layer: 1, poly: [[0.999, 0.762], [0.999, 0.776], [0.98, 0.78], [0.955, 0.797], [0.93, 0.818], [0.905, 0.845], [0.912, 0.828], [0.94, 0.802], [0.965, 0.781], [0.985, 0.765]] },
+    // the tail lamp wrapping onto the flank to a point, its red guide along the top
+    { step: 0.004, mat: 'trim', depth: 0.004, poly: [[0.005, 0.85], [0.005, 0.995], [0.04, 1.01], [0.08, 1.02], [0.105, 1.025], [0.07, 0.96], [0.035, 0.885]] },
+    { step: 0.004, mat: 'tail', layer: 1, poly: [[0.005, 0.975], [0.04, 0.99], [0.08, 1.0], [0.1, 1.012], [0.08, 1.012], [0.04, 1.002], [0.005, 0.988]] },
+  ],
+  plates: { front: 0.535, rear: 0.74 },
+  mirrors: 'body',
+  paint: '#08307a', // Obsidian Blue Pearl, darkened for the studio lights
+  plate: 'MH 12 HC 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, CITY_X]

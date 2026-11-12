@@ -324,3 +324,13 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - Wrap-around tail lamp: `width` 0.92 at u = 0 lets the end-face lamp reach 0.80 m on a 1.775 m car, and the `side` wedge starting
   at u = 0.005 meets it with no gap. Headlamp: the side wedge can start at u = 0.999 to meet a front lamp kept 3.5 cm inside the face.
 - A `gloss` headlamp housing on a raked nose reads body-grey (it mirrors the softbox); `trim` keeps it dark.
+- City (2026 New City, black gallery car on a dark background): cutout.swift still cut it cleanly; paint-based belt finding was
+  noise, so belt, glass, shut lines and handles came off a brightened `gridify` of the cut-out. The photo read 1.514 m with the
+  axles 3 % apart: heights × 0.983 through a small per-car helper (`cityK`), then a 2.5 cm bonnet band and a 2.5 cm front sill
+  band came off for IoU 0.958 → 0.963.
+- A full-width light bar on a raked sedan nose (Dzire-style `top` falling to 0.6 at u = 1, `rakedEnds`) grew a double vertical
+  mark above the bar at the centre line; raising the nose `top` at 0.95–1 to ~2 cm over the lamps removed it for no IoU cost.
+- Honeycomb grilles: rows of small hexagon `trim` cells (`cityHoney`) over a `gloss` panel read right; `gloss` cells on a `trim`
+  diffuser read as white dots, so the rear diffuser is a `mesh` panel instead.
+- Smoked tail lamps with red light guides: a `trim` housing plus thin `tail` guides; a `reflector` housing read as solid red.
+- Black spokes with thin machined edges: `split` + `rimTone: 'dark'` (`blade` was mostly silver; `blade` + dark was flat grey).
