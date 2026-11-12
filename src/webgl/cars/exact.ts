@@ -2678,4 +2678,122 @@ export const I20: CarSpec = {
   plate: 'MH 12 IT 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20]
+const FORTUNER_L = 4.795
+/** a side outline from a rounded rectangle given in u (0…1) and metres */
+const fortunerU = (u0: number, y0: number, u1: number, y1: number, r: number): P2[] =>
+  rrectS(u0 * FORTUNER_L, y0, u1 * FORTUNER_L, y1, r).map(([x, y]) => [+(x / FORTUNER_L).toFixed(5), y] as P2)
+/** a circle outline (fog lamps) */
+const fortunerCircle = (zc: number, yc: number, r: number, n = 36): P2[] =>
+  Array.from({ length: n }, (_, i) => { const a = (i / n) * Math.PI * 2; return [+(zc + r * Math.cos(a)).toFixed(4), +(yc + r * Math.sin(a)).toFixed(4)] as P2 })
+/** a glasshouse station (u0 0.02 … u1 0.72), for the roof's paint boundaries */
+const fortunerSt = (i: number) => +(0.02 + 0.7 * (0.5 - 0.5 * Math.cos((Math.PI * i) / 140))).toFixed(5)
+/** one of the grille's three chrome bars: a straight bar with raised trapezoid "hats" at the given centres */
+const fortunerBar = (y: number, hw: number, hats: number[]): Decal => {
+  const path: P2[] = [[-hw, y]]
+  for (const c of [...hats.map((h) => -h), ...hats].sort((a, b) => a - b)) path.push([c - 0.05, y], [c - 0.03, y + 0.024], [c + 0.03, y + 0.024], [c + 0.05, y])
+  path.push([hw, y])
+  return { step: 0.004, mat: 'chrome', layer: 2, depth: 0.012, poly: band(path, 0.013) }
+}
+
+/** Toyota Fortuner (2021 facelift, 2025 update). 4795 × 1855 × 1835, wheelbase 2745, 265/60 R18 (top trims).
+ *  Side profile from the gallery's levelled road side photo (1.788 m measured over the low roof rails; the photo's axles
+ *  1.7 % too far apart, so the axles sit at the official wheelbase with the overhangs split as in the photo). Belt kink,
+ *  pillars, shut lines, flares and the side step read off a metric grid of the cut-out; the trapezoid grille with its
+ *  chrome side fangs and wavy bars, the slim headlamps, fog pockets and skid plate from the straight front photo; the split
+ *  tail lamps joined by the chrome strip, the tailgate and the bumper from the straight rear photo. */
+export const FORTUNER: CarSpec = {
+  id: 'toyota-fortuner',
+  name: 'Toyota Fortuner',
+  rakedEnds: true,
+  dropSlivers: true,
+  L: FORTUNER_L, W: 1.855, H: 1.835,
+  axles: [0.215, 0.7875],
+  tyreR: 0.3876, tyreW: 0.265, rim: 0.59, wheel: { style: 'split', spokes: 6 },
+  archGap: 0.13, archSquare: 0.3, wellInset: 0.05,
+  sill: [[0, 0.47], [0.008, 0.45], [0.02, 0.43], [0.03, 0.415], [0.05, 0.4], [0.08, 0.388], [0.1, 0.37], [0.13, 0.35], [0.2, 0.34], [0.3, 0.33], [0.33, 0.3], [0.36, 0.29], [0.5, 0.29], [0.64, 0.29], [0.67, 0.305], [0.7, 0.33], [0.8, 0.34], [0.9, 0.34], [0.92, 0.36], [0.94, 0.39], [0.96, 0.412], [0.97, 0.425], [0.98, 0.436], [0.99, 0.443], [1, 0.45]],
+  // the upright tail up to the tailgate glass, the belt along the quarter glass with its kink down at the C-pillar, the
+  // front doors, the cowl, then the long high bonnet down to the upright grille face
+  top: [[0, 1.3], [0.01, 1.305], [0.02, 1.31], [0.05, 1.315], [0.1, 1.318], [0.2, 1.318], [0.28, 1.316], [0.295, 1.31], [0.31, 1.285], [0.325, 1.264], [0.34, 1.257], [0.4, 1.252], [0.5, 1.248], [0.6, 1.248], [0.66, 1.255], [0.69, 1.27], [0.72, 1.288], [0.74, 1.268], [0.76, 1.254], [0.8, 1.231], [0.84, 1.21], [0.88, 1.183], [0.9, 1.168], [0.92, 1.151], [0.94, 1.136], [0.96, 1.126], [0.97, 1.122], [0.98, 1.119], [0.99, 1.117], [1, 1.116]],
+  width: [[0, 0.93], [0.006, 0.948], [0.02, 0.965], [0.05, 0.985], [0.1, 0.997], [0.2, 1], [0.8, 1], [0.88, 0.99], [0.93, 0.97], [0.96, 0.945], [0.98, 0.915], [0.993, 0.89], [1, 0.87]],
+  crown: 0.012,
+  bulge: 0.02,
+  haunch: 0.03,
+  bonnetRidge: 0.01,
+  topRadius: 0.07,
+  noseSweep: 0.15,
+  tailSweep: 0.1,
+  greenhouse: {
+    u0: 0.02, u1: 0.72, tumble: 0.82,
+    // the raked tailgate glass, the roof spoiler's back face, the long roof (rails left out) and the raked screen
+    top: [[0.02, 1.31], [0.03, 1.385], [0.04, 1.435], [0.044, 1.46], [0.047, 1.58], [0.05, 1.675], [0.06, 1.688], [0.08, 1.702], [0.1, 1.702], [0.12, 1.709], [0.15, 1.719], [0.2, 1.726], [0.25, 1.736], [0.3, 1.738], [0.4, 1.739], [0.43, 1.738], [0.46, 1.728], [0.5, 1.716], [0.52, 1.707], [0.54, 1.684], [0.56, 1.664], [0.58, 1.645], [0.6, 1.62], [0.62, 1.57], [0.64, 1.522], [0.66, 1.467], [0.68, 1.404], [0.7, 1.335], [0.72, 1.288]],
+  },
+  roof: { u0: fortunerSt(18), u1: fortunerSt(91), black: false },
+  pillars: [
+    // the thin black C- and B-pillars (the D-pillar is blacked out behind the quarter glass)
+    { bottom: [0.303, 0.316], top: [0.305, 0.318], black: true },
+    { bottom: [0.454, 0.478], top: [0.456, 0.478], black: true },
+  ],
+  // the thin black arch flares, the black side step under the doors, the black lower rear bumper
+  cladding: { top: [[0, 0.52], [0.03, 0.5], [0.06, 0.46], [0.1, 0.45], [0.3, 0.445], [0.7, 0.445], [0.9, 0.46], [0.96, 0.47], [1, 0.47]], flare: 0.045, cut: true },
+  doors: [[0.69, 0.688], [0.458, 0.46], [0.24, 0.227]],
+  front: [
+    // the trapezoid grille: gloss black, the chrome fangs down its sides from the headlamps, three wavy chrome bars
+    { step: 0.004, mat: 'gloss', poly: both([[0, 0.815], [0.325, 0.815], [0.425, 1.075], [0, 1.075]]) },
+    { step: 0.004, mat: 'satin', layer: 1, mirror: true, depth: 0.012, poly: [[0.316, 0.815], [0.348, 0.818], [0.45, 1.07], [0.398, 1.075]] },
+    fortunerBar(0.995, 0.37, [0.12, 0.27]),
+    fortunerBar(0.932, 0.345, [0.06, 0.2]),
+    fortunerBar(0.868, 0.32, [0.12, 0.26]),
+    // slim headlamps: smoked housing under a chrome brow, the hockey-stick DRL, a projector
+    { step: 0.004, mat: 'trim', mirror: true, depth: 0.006, poly: smooth([[0.43, 1.075], [0.6, 1.08], [0.72, 1.076], [0.775, 1.068], [0.79, 1.05], [0.785, 1.022], [0.76, 0.996], [0.68, 0.984], [0.55, 0.982], [0.47, 0.99], [0.43, 1.02]], 1) },
+    { step: 0.004, mat: 'chrome', layer: 1, mirror: true, depth: 0.008, poly: band([[0.43, 1.079], [0.6, 1.083], [0.72, 1.079], [0.768, 1.07]], 0.012) },
+    { step: 0.004, mat: 'drl', layer: 1, mirror: true, poly: band([[0.455, 1.035], [0.49, 1.006], [0.55, 0.998], [0.66, 0.998], [0.72, 1.008], [0.752, 1.04]], 0.012) },
+    { step: 0.004, mat: 'head', layer: 1, mirror: true, poly: rrect(0.57, 1.02, 0.64, 1.055, 0.014) },
+    // the black slot under the grille
+    { step: 0.005, mat: 'gloss', poly: smooth(both([[0, 0.725], [0.4, 0.725], [0.43, 0.76], [0, 0.76]]), 1) },
+    // honeycomb fog pockets with the round fog lamp, a chrome accent strip under each
+    { step: 0.004, mat: 'gloss', mirror: true, depth: 0.006, poly: smooth([[0.59, 0.835], [0.765, 0.835], [0.778, 0.82], [0.778, 0.7], [0.765, 0.682], [0.62, 0.682], [0.54, 0.735], [0.54, 0.795], [0.555, 0.825]], 1) },
+    { step: 0.004, mat: 'mesh', layer: 1, mirror: true, poly: smooth([[0.6, 0.823], [0.762, 0.823], [0.766, 0.81], [0.766, 0.705], [0.755, 0.694], [0.625, 0.694], [0.553, 0.74], [0.553, 0.79], [0.565, 0.815]], 1) },
+    { step: 0.004, mat: 'head', layer: 2, mirror: true, depth: 0.008, poly: fortunerCircle(0.615, 0.745, 0.021) },
+    { step: 0.004, mat: 'satin', mirror: true, depth: 0.006, poly: band([[0.585, 0.604], [0.68, 0.606], [0.765, 0.612]], 0.014) },
+    // the satin skid plate with its two slotted vents beside the plate, the black edges down its sides, black chin
+    { step: 0.005, mat: 'satin', poly: smooth(both([[0, 0.49], [0.47, 0.49], [0.5, 0.5], [0.62, 0.635], [0.62, 0.66], [0.58, 0.688], [0, 0.69]]), 2) },
+    { step: 0.004, mat: 'gloss', layer: 1, mirror: true, poly: rrect(0.26, 0.622, 0.37, 0.655, 0.012) },
+    { step: 0.004, mat: 'chrome', layer: 2, mirror: true, depth: 0.008, poly: band([[0.265, 0.638], [0.365, 0.638]], 0.012) },
+    { step: 0.004, mat: 'gloss', layer: 1, mirror: true, depth: 0.002, poly: band([[0.5, 0.495], [0.625, 0.638]], 0.014) },
+  ],
+  rear: [
+    // the split tail lamps (outer part on the body corner, inner part on the tailgate): smoked housing, red upper lens,
+    // a grey light-guide strip, the dark lower section
+    { step: 0.004, mat: 'gloss', layer: 1, mirror: true, depth: 0.006, poly: smooth([[0.33, 1.205], [0.4, 1.232], [0.6, 1.24], [0.78, 1.245], [0.828, 1.24], [0.84, 1.22], [0.84, 1.13], [0.825, 1.105], [0.72, 1.1], [0.68, 1.115], [0.62, 1.163], [0.45, 1.19]], 1) },
+    { step: 0.004, mat: 'tail', layer: 2, mirror: true, poly: smooth([[0.36, 1.21], [0.45, 1.226], [0.6, 1.232], [0.78, 1.237], [0.826, 1.232], [0.832, 1.17], [0.7, 1.163], [0.62, 1.176], [0.45, 1.198]], 1) },
+    { step: 0.004, mat: 'silver', layer: 3, mirror: true, depth: 0.004, poly: band([[0.48, 1.212], [0.62, 1.216], [0.81, 1.218]], 0.012) },
+    // the tailgate's shut line splitting the lamps
+    { step: 0.004, mat: 'gloss', layer: 3, mirror: true, depth: 0.001, poly: band([[0.672, 1.11], [0.672, 1.245]], 0.012) },
+    // the chrome strip joining the lamps (no lettering)
+    { step: 0.004, mat: 'satin', depth: 0.008, poly: smooth(both([[0, 1.163], [0.5, 1.163], [0.6, 1.158], [0.6, 1.178], [0.5, 1.19], [0, 1.19]]), 1) },
+    // the tailgate's shut line down its sides and across above the bumper
+    { step: 0.005, mat: 'gloss', depth: 0.001, poly: band([[-0.672, 1.1], [-0.675, 0.95], [-0.672, 0.86], [-0.665, 0.82], [-0.652, 0.788], [-0.632, 0.762], [-0.605, 0.744], [-0.57, 0.731], [-0.52, 0.724], [-0.45, 0.72], [-0.3, 0.717], [0, 0.716], [0.3, 0.717], [0.45, 0.72], [0.52, 0.724], [0.57, 0.731], [0.605, 0.744], [0.632, 0.762], [0.652, 0.788], [0.665, 0.82], [0.672, 0.86], [0.675, 0.95], [0.672, 1.1]], 0.012) },
+    // red reflectors in the bumper corners, the black lower bumper
+    { step: 0.004, mat: 'reflector', mirror: true, poly: rrect(0.6, 0.572, 0.78, 0.618, 0.008) },
+    { step: 0.005, mat: 'trim', poly: smooth(both([[0, 0.47], [0.76, 0.47], [0.82, 0.49], [0.83, 0.53], [0.6, 0.538], [0, 0.538]]), 1) },
+  ],
+  side: [
+    // chrome door handles
+    { step: 0.004, mat: 'chrome', depth: 0.01, poly: fortunerU(0.472, 1.108, 0.518, 1.136, 0.012) },
+    { step: 0.004, mat: 'chrome', depth: 0.01, poly: fortunerU(0.247, 1.112, 0.293, 1.14, 0.012) },
+    // the headlamp's wedge sweeping back along the wing
+    { step: 0.003, mat: 'gloss', depth: 0.003, poly: smooth([[0.999, 0.998], [0.975, 1.0], [0.95, 1.012], [0.925, 1.04], [0.905, 1.075], [0.91, 1.085], [0.94, 1.075], [0.97, 1.068], [0.999, 1.066]], 1) },
+    { step: 0.003, mat: 'drl', layer: 1, depth: 0.004, poly: sideBand([[0.994, 1.008], [0.972, 1.009], [0.95, 1.02], [0.93, 1.042]], 0.01, FORTUNER_L) },
+    // the tail lamp wrapping onto the flank, tapering forwards
+    { step: 0.004, mat: 'gloss', depth: 0.004, poly: [[0.001, 1.245], [0.03, 1.24], [0.058, 1.212], [0.05, 1.195], [0.03, 1.15], [0.02, 1.115], [0.001, 1.112]] },
+    { step: 0.004, mat: 'tail', layer: 1, depth: 0.005, poly: [[0.002, 1.238], [0.03, 1.234], [0.052, 1.212], [0.045, 1.2], [0.028, 1.17], [0.002, 1.17]] },
+  ],
+  plates: { front: 0.63, rear: 1.03 },
+  rails: 'black',
+  mirrors: 'body',
+  windowChrome: true,
+  paint: '#cfd0cf', // Platinum White Pearl, toned down for the studio lights
+  plate: 'MH 12 FT 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, FORTUNER]

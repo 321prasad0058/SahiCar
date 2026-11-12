@@ -324,3 +324,8 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - Wrap-around tail lamp: `width` 0.92 at u = 0 lets the end-face lamp reach 0.80 m on a 1.775 m car, and the `side` wedge starting
   at u = 0.005 meets it with no gap. Headlamp: the side wedge can start at u = 0.999 to meet a front lamp kept 3.5 cm inside the face.
 - A `gloss` headlamp housing on a raked nose reads body-grey (it mirrors the softbox); `trim` keeps it dark.
+- Fortuner (white, road side photo 1.788 m over low rails, axles 1.7 % apart): chrome decals on light paint (grille fangs, the
+  strip joining the tail lamps) vanish, as chrome mirrors the white studio: use `satin` for chrome on the body, chrome only over black.
+- A deep wheel gap (archGap 0.13) showed the body's own paint wall at the arch edges speckling through the cladding inside the
+  wells; `wellInset: 0.05` (new, opt-in) puts black end walls just inside each arch. They hang a little below the sill (reads as mud flaps).
+- A grille "hat" centred on z = 0 read as a badge; keep raised pattern elements off the centre line.

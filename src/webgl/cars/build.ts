@@ -40,6 +40,9 @@ export interface CarSpec {
   /** gap between tyre and arch opening, and how square the arch is (0 round … 1 square) */
   archGap: number
   archSquare: number
+  /** black end walls in each wheel well this far (m) inside the arch edges, out to the skin: they hide the body's own
+   *  paint-coloured wall at the arch edge (light paint speckling through the cladding in deep wheel gaps) */
+  wellInset?: number
   sill: Pts
   top: Pts
   width: Pts
@@ -840,6 +843,8 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
   let blur = 0
   for (const ax of axles) {
     add(S.well, new THREE.BoxGeometry(archR * 2, archR, W - 0.5), new THREE.Matrix4().makeTranslation(ax, archY + archR * 0.45, 0))
+    // black end walls just inside the arch, out to the skin, over the body's own paint-coloured wall at the arch edge
+    if (spec.wellInset) for (const s of [-1, 1]) add(S.well, new THREE.BoxGeometry(0.006, archR * 1.1, W * 0.96), new THREE.Matrix4().makeTranslation(ax + s * (archR - spec.wellInset), archY + archR * 0.4, 0))
     for (const side of [-1, 1]) {
       const w = new THREE.Group()
       w.add(new THREE.Mesh(tyreG, S.tyre))
