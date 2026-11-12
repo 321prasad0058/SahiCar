@@ -3697,4 +3697,134 @@ export const VERNA: CarSpec = {
   plate: 'MH 12 HV 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, KYLAQ, FORTUNER, SAFARI, WINDSOR_EV, CITY_X, SYROS, ALCAZAR, ALTROZ_X, VERNA]
+const VICTORIS_L = 4.36
+// the gallery side photo reads 1.673 m over the rails with its axles (u 0.1849 / 0.8105) 4.9 % too far apart (close
+// camera): heights × 0.989, and every traced u mapped piecewise-linearly so the axles land on the official wheelbase
+const VICTORIS_K = 0.989
+const victorisU = (u: number): number => {
+  const pa = [0, 0.1849, 0.8105, 1], ma = [0, 0.1994, 0.7957, 1]
+  for (let i = 0; i < 3; i++) if (u <= pa[i + 1] || i === 2) return +(ma[i] + ((u - pa[i]) * (ma[i + 1] - ma[i])) / (pa[i + 1] - pa[i])).toFixed(5)
+  return u
+}
+/** photo [u, y] → model [u, y] */
+const victorisP = (pts: P2[]): P2[] => pts.map(([u, y]) => [victorisU(u), +(y * VICTORIS_K).toFixed(4)] as P2)
+/** end-face [z, y] traced at photo heights → model heights */
+const victorisY = (pts: P2[]): P2[] => pts.map(([z, y]) => [z, +(y * VICTORIS_K).toFixed(4)] as P2)
+const victorisD = (d: Decal): Decal => ({ ...d, poly: victorisY(d.poly) })
+/** a side outline from a rounded rectangle given in photo u and metres */
+const victorisRectU = (u0: number, y0: number, u1: number, y1: number, r: number): P2[] =>
+  victorisP(rrectS(u0 * VICTORIS_L, y0, u1 * VICTORIS_L, y1, r).map(([x, y]) => [x / VICTORIS_L, y] as P2))
+const VICTORIS_GH: [number, number] = [victorisU(0.02), victorisU(0.735)]
+/** the glasshouse station nearest photo u (roof paint edges must sit on one) */
+const victorisStation = (u: number): number => {
+  const [a, b] = VICTORIS_GH
+  const m = victorisU(u)
+  let best = a
+  for (let i = 0; i <= 140; i++) { const s = a + (b - a) * (0.5 - 0.5 * Math.cos((Math.PI * i) / 140)); if (Math.abs(s - m) < Math.abs(best - m)) best = s }
+  return +best.toFixed(5)
+}
+/** the tail light bar's red segments, z ±hw */
+const victorisBar = (hw: number): Decal[] => {
+  const out: Decal[] = []
+  const n = 18, pitch = (2 * hw) / n
+  for (let i = 0; i < n; i++) {
+    const z0 = -hw + i * pitch + 0.012, z1 = -hw + (i + 1) * pitch - 0.012
+    out.push({ step: 0.004, mat: 'tail', layer: 2, depth: 0.01, poly: rrect(z0, 1.166, z1, 1.182, 0.003) })
+  }
+  return out
+}
+
+/** Maruti Suzuki Victoris (2025). 4360 × 1795 × 1655 (with roof rails), wheelbase 2600, 215/60 R17 (top trim).
+ *  Side profile from a levelled gallery side photo (tyre bottoms in grass patched with dark discs; 1.673 m measured, the
+ *  close camera's axles 4.9 % apart, so heights × 0.989 and the axles at the official wheelbase with the overhangs split as
+ *  in the photo). Belt, pillars, shut lines, handles, tail-lamp wedge and the black cladding read off a metric grid of the
+ *  cut-out; the slim headlamps joined by a chrome bar, the slatted mid grille with its corner pods, the black lower bumper
+ *  with the satin skid plate, the segmented tail light bar and the rear bumper from the straight front and rear photos. */
+export const VICTORIS_X: CarSpec = {
+  id: 'maruti-victoris',
+  name: 'Maruti Suzuki Victoris',
+  L: VICTORIS_L, W: 1.795, H: 1.655,
+  axles: [0.1994, 0.7957],
+  tyreR: 0.345, tyreW: 0.215, rim: 0.626, wheel: { style: 'swirl', spokes: 5 }, rimTone: 'dark',
+  archGap: 0.1, archSquare: 0.35,
+  sill: victorisP([[0, 0.36], [0.01, 0.37], [0.03, 0.385], [0.05, 0.38], [0.07, 0.371], [0.085, 0.355], [0.1, 0.33], [0.12, 0.3], [0.2, 0.28], [0.3, 0.271], [0.5, 0.285], [0.7, 0.28], [0.85, 0.278], [0.92, 0.278], [0.95, 0.28], [0.97, 0.285], [0.985, 0.28], [1, 0.27]]),
+  // the tail face up to the light bar, the near-flat belt under the glass, the cowl, the bonnet falling to the nose and
+  // lifted at the face over the headlamps
+  top: victorisP([[0, 1.205], [0.006, 1.212], [0.015, 1.215], [0.03, 1.215], [0.1, 1.212], [0.2, 1.207], [0.3, 1.203], [0.4, 1.2], [0.5, 1.198], [0.6, 1.195], [0.68, 1.192], [0.72, 1.188], [0.735, 1.186], [0.75, 1.18], [0.8, 1.17], [0.85, 1.152], [0.88, 1.138], [0.91, 1.12], [0.93, 1.104], [0.95, 1.085], [0.965, 1.07], [0.975, 1.058], [0.985, 1.05], [0.993, 1.046], [1, 1.044]]),
+  // round in plan: both ends taper into the corners
+  width: [[0, 0.92], [0.006, 0.945], [0.02, 0.97], [0.05, 0.988], [0.1, 0.997], [0.5, 1], [0.86, 0.997], [0.91, 0.985], [0.945, 0.97], [0.97, 0.955], [0.988, 0.935], [1, 0.92]],
+  crown: 0.012,
+  bulge: 0.03,
+  haunch: 0.05,
+  topRadius: 0.075,
+  dropSlivers: true,
+  noseSweep: 0.08,
+  tailSweep: 0.06,
+  greenhouse: {
+    u0: VICTORIS_GH[0], u1: VICTORIS_GH[1], tumble: 0.68, followBody: 0.1,
+    // the raked tailgate glass up under the roof spoiler, the long roof (under the rails), the raked windscreen
+    top: victorisP([[0.02, 1.215], [0.03, 1.232], [0.04, 1.258], [0.05, 1.291], [0.06, 1.335], [0.07, 1.378], [0.08, 1.425], [0.09, 1.478], [0.1, 1.528], [0.11, 1.552], [0.125, 1.565], [0.15, 1.577], [0.2, 1.596], [0.25, 1.611], [0.3, 1.623], [0.35, 1.632], [0.4, 1.638], [0.45, 1.641], [0.5, 1.635], [0.52, 1.616], [0.54, 1.6], [0.56, 1.58], [0.58, 1.56], [0.6, 1.533], [0.62, 1.494], [0.64, 1.451], [0.66, 1.402], [0.68, 1.346], [0.7, 1.291], [0.71, 1.263], [0.72, 1.235], [0.73, 1.205], [0.735, 1.186]]),
+  },
+  roof: { u0: victorisStation(0.1), u1: victorisStation(0.55), black: false },
+  pillars: [
+    // the black C-pillar between the rear door glass and the quarter glass, and the wide black B-pillar
+    { bottom: [victorisU(0.245), victorisU(0.268)], top: [victorisU(0.232), victorisU(0.252)], black: true },
+    { bottom: [victorisU(0.418), victorisU(0.452)], top: [victorisU(0.42), victorisU(0.447)], black: true },
+  ],
+  // black arch flares, the black side skirt along the doors, the black bumpers wrapping the corners
+  cladding: { top: victorisP([[0, 0.61], [0.04, 0.61], [0.07, 0.59], [0.085, 0.53], [0.1, 0.42], [0.12, 0.4], [0.3, 0.4], [0.7, 0.4], [0.9, 0.405], [0.93, 0.45], [0.95, 0.48], [1, 0.48]]), flare: 0.08, cut: true },
+  doors: [[victorisU(0.71), victorisU(0.705)], [victorisU(0.45), victorisU(0.452)], [victorisU(0.245), victorisU(0.25)]],
+  front: ([
+    // the slim headlamps: a dark housing, five LED DRL blocks stepping up along the top, the projector at the outer end
+    { step: 0.004, mat: 'gloss', mirror: true, depth: 0.006, poly: smooth([[0.47, 0.9], [0.56, 0.886], [0.65, 0.87], [0.72, 0.857], [0.775, 0.853], [0.8, 0.862], [0.808, 0.9], [0.808, 0.96], [0.8, 0.985], [0.78, 0.992], [0.7, 0.981], [0.6, 0.964], [0.5, 0.948], [0.47, 0.943]], 1) },
+    ...[0.53, 0.58, 0.63, 0.68, 0.73].map((z): Decal => {
+      const y = 0.936 + (z - 0.5) * 0.15
+      return { step: 0.004, mat: 'drl', mirror: true, layer: 1, depth: 0.01, poly: [[z, y - 0.008], [z + 0.04, y - 0.002], [z + 0.048, y + 0.021], [z + 0.008, y + 0.015]] }
+    }),
+    { step: 0.004, mat: 'head', mirror: true, layer: 1, depth: 0.01, poly: rrect(0.7, 0.874, 0.765, 0.914, 0.01) },
+    // the black band joining the headlamps and the chrome bar along it
+    { step: 0.004, mat: 'gloss', poly: both([[0, 0.886], [0.48, 0.894], [0.48, 0.944], [0, 0.95]]) },
+    { step: 0.004, mat: 'chrome', layer: 1, depth: 0.008, poly: both([[0, 0.913], [0.5, 0.913], [0.5, 0.924], [0, 0.924]]) },
+    // the slatted black band across the bumper rising into the black corner pods, a fog lamp in each
+    { step: 0.005, mat: 'trim', poly: smooth(both([[0, 0.66], [0.6, 0.66], [0.68, 0.64], [0.7, 0.52], [0.72, 0.5], [0.79, 0.5], [0.795, 0.6], [0.79, 0.775], [0.74, 0.78], [0.65, 0.76], [0, 0.755]]), 1) },
+    { step: 0.004, mat: 'slats', layer: 1, poly: both([[0, 0.683], [0.56, 0.683], [0.56, 0.733], [0, 0.733]]) },
+    { step: 0.004, mat: 'slats', mirror: true, layer: 1, poly: [[0.745, 0.52], [0.78, 0.52], [0.783, 0.68], [0.755, 0.68]] },
+    { step: 0.004, mat: 'head', mirror: true, layer: 1, depth: 0.01, poly: rrect(0.715, 0.705, 0.75, 0.737, 0.016) },
+    // the body-coloured lip under it is the body itself; the black lower bumper with its grille and the satin skid plate
+    { step: 0.005, mat: 'trim', poly: smooth(both([[0, 0.27], [0.7, 0.27], [0.78, 0.3], [0.795, 0.38], [0.79, 0.48], [0.72, 0.5], [0.66, 0.56], [0.6, 0.595], [0, 0.598]]), 1) },
+    { step: 0.004, mat: 'slats', layer: 1, poly: smooth(both([[0, 0.385], [0.5, 0.385], [0.55, 0.42], [0.56, 0.47], [0.5, 0.48], [0, 0.48]]), 1) },
+    { step: 0.004, mat: 'satin', layer: 2, depth: 0.01, poly: smooth(both([[0, 0.292], [0.62, 0.292], [0.69, 0.3], [0.73, 0.322], [0.738, 0.345], [0.72, 0.366], [0.66, 0.372], [0, 0.374]]), 2) },
+  ] as Decal[]).map(victorisD),
+  rear: ([
+    // the light bar across the top of the tailgate: a smoked housing with segmented red lines, boomerang lamps at the corners
+    { step: 0.004, mat: 'gloss', depth: 0.006, poly: both([[0, 1.152], [0.69, 1.152], [0.69, 1.196], [0, 1.196]]) },
+    ...victorisBar(0.67),
+    { step: 0.004, mat: 'gloss', mirror: true, layer: 1, depth: 0.008, poly: smooth([[0.68, 1.15], [0.74, 1.145], [0.775, 1.1], [0.8, 1.06], [0.812, 1.065], [0.812, 1.15], [0.805, 1.185], [0.785, 1.198], [0.68, 1.198]], 1) },
+    { step: 0.004, mat: 'tail', mirror: true, layer: 2, depth: 0.012, poly: [[0.69, 1.172], [0.765, 1.172], [0.785, 1.14], [0.8, 1.09], [0.81, 1.094], [0.8, 1.15], [0.782, 1.186], [0.69, 1.186]] },
+    // the tailgate's shut lines down its sides
+    { step: 0.004, mat: 'gloss', depth: 0.001, mirror: true, poly: band([[0.69, 1.15], [0.69, 0.66]], 0.012) },
+    // the black rear bumper with red reflectors and the big satin skid plate
+    { step: 0.005, mat: 'trim', poly: smooth(both([[0, 0.39], [0.72, 0.39], [0.78, 0.42], [0.795, 0.5], [0.79, 0.62], [0.7, 0.632], [0, 0.635]]), 1) },
+    { step: 0.004, mat: 'reflector', mirror: true, layer: 1, depth: 0.006, poly: rrect(0.43, 0.545, 0.58, 0.565, 0.005) },
+    { step: 0.004, mat: 'satin', layer: 1, depth: 0.01, poly: smooth(both([[0, 0.402], [0.66, 0.402], [0.71, 0.415], [0.728, 0.46], [0.72, 0.515], [0.68, 0.528], [0, 0.53]]), 2) },
+  ] as Decal[]).map(victorisD),
+  side: [
+    // body-coloured door handles in dark recesses
+    { step: 0.004, mat: 'gloss', depth: 0.002, poly: victorisRectU(0.495, 1.018, 0.545, 1.052, 0.012) },
+    { step: 0.004, mat: 'body', layer: 1, depth: 0.008, poly: victorisRectU(0.498, 1.024, 0.542, 1.046, 0.009) },
+    { step: 0.004, mat: 'gloss', depth: 0.002, poly: victorisRectU(0.272, 1.072, 0.322, 1.106, 0.012) },
+    { step: 0.004, mat: 'body', layer: 1, depth: 0.008, poly: victorisRectU(0.275, 1.078, 0.319, 1.1, 0.009) },
+    // the smoked tail-lamp wedge on the rear quarter with its red guide
+    { step: 0.003, mat: 'gloss', depth: 0.002, poly: victorisP(smooth([[0.004, 1.06], [0.02, 1.045], [0.05, 1.02], [0.085, 0.995], [0.07, 1.04], [0.05, 1.1], [0.035, 1.155], [0.025, 1.175], [0.004, 1.175]], 1)) },
+    { step: 0.003, mat: 'tail', layer: 1, depth: 0.004, poly: victorisP(sideBand([[0.003, 1.163], [0.022, 1.158], [0.034, 1.128], [0.05, 1.082], [0.068, 1.03]], 0.016, VICTORIS_L)) },
+    // the headlamp wrapping onto the wing
+    { step: 0.004, mat: 'gloss', depth: 0.004, poly: victorisP(smooth([[0.999, 0.9], [0.985, 0.912], [0.965, 0.935], [0.945, 0.965], [0.935, 0.99], [0.96, 0.995], [0.985, 1.0], [0.999, 1.0]], 1)) },
+  ],
+  plates: { front: 0.515 * VICTORIS_K, rear: 0.86 * VICTORIS_K },
+  rails: 'silver',
+  mirrors: 'black',
+  paint: '#8c0008', // Sizzling Red, the gallery car's red darkened for the studio lights
+  plate: 'MH 12 VX 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, KYLAQ, FORTUNER, SAFARI, WINDSOR_EV, CITY_X, SYROS, ALCAZAR, ALTROZ_X, VERNA, VICTORIS_X]

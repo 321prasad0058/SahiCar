@@ -399,3 +399,10 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - A wide front (lamp clusters at the bumper corners): `width` 0.9 at u = 1 with `noseSweep` 0.12 put lamps, light bar and grille at
   their photo widths; a side wrap of the corner lamp read as a dark blob on the wing and was dropped. A full-width light bar on a
   crowned nose bends down at its ends from the front: draw it as a `band()` rising ~1 cm at the ends.
+- Victoris (gallery side photo, tyres in grass): the cut-out ended above the tyre bottoms, so extend its canvas ~40 px and paint a
+  dark disc per wheel (hub and radius off a grid of the wheel) before extract-side. It read 1.673 m with the axles 4.9 % apart:
+  heights × 0.989 and every traced u mapped onto the official wheelbase (`victorisP`). IoU 0.952 / upper 0.951.
+- A bright vertical strip down the tail in the side view is the tail-sweep Fresnel band (as at the nose): `tailSweep` 0.06.
+- Light-bar end that turns down the rear corner into a smoked wedge on the flank: rear decal to ~1.4 cm inside the face (`width`
+  0.92 at u = 0) and the side wedge starting at u 0.003 read as one lamp; its red guide is a `sideBand` along the wedge's top edge.
+- Twisted gunmetal spokes with machined silver wedges: `swirl` + `rimTone: 'dark'` (split + dark went almost all grey).
