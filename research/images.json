@@ -96,8 +96,9 @@
   "ai": true
  },
  "hyundai-i20": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Hyundai_i20_%28III%2C_Facelift%29_%E2%80%93_f_11102025.jpg/960px-Hyundai_i20_%28III%2C_Facelift%29_%E2%80%93_f_11102025.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Hyundai_i20"
+  "src": "/cars/ai/hyundai-i20.webp",
+  "page": "",
+  "ai": true
  },
  "hyundai-aura": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bd/Hyundai_Grand_i10_Sedan_2022_%2853703857804%29_%28cropped%29.jpg/960px-Hyundai_Grand_i10_Sedan_2022_%2853703857804%29_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
@@ -371,8 +372,9 @@
   "page": "https://en.wikipedia.org/wiki/Suzuki_Fronx"
  },
  "toyota-urban-cruiser-hyryder": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/2022_Suzuki_Grand_Vitara_GX_Smart_Hybrid_%28Indonesia%29_front_view.jpg/960px-2022_Suzuki_Grand_Vitara_GX_Smart_Hybrid_%28Indonesia%29_front_view.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Suzuki_Grand_Vitara_(2022)"
+  "src": "/cars/ai/toyota-urban-cruiser-hyryder.webp",
+  "page": "",
+  "ai": true
  },
  "toyota-camry": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Toyota_Camry_AXVH80_2.5_HEV_Platinum_White_Pearl_Mica_05.jpg/960px-Toyota_Camry_AXVH80_2.5_HEV_Platinum_White_Pearl_Mica_05.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
@@ -572,8 +574,9 @@
   "page": "https://en.wikipedia.org/wiki/Tata_Tiago"
  },
  "tata-curvv": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/2025_Tata_Curvv_Creative%2B_S_Petrol_%28India%29_front_view.png/960px-2025_Tata_Curvv_Creative%2B_S_Petrol_%28India%29_front_view.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Tata_Curvv"
+  "src": "/cars/ai/tata-curvv.webp",
+  "page": "",
+  "ai": true
  },
  "tata-sierra": {
   "src": "/cars/ai/tata-sierra.webp",

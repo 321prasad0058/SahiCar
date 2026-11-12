@@ -44,7 +44,8 @@ self.addEventListener('fetch', (e) => {
   const sameOrigin = url.origin === location.origin
   const isAsset = sameOrigin && (url.pathname.startsWith('/assets/') || url.pathname.startsWith('/cars/') || url.pathname.startsWith('/3d/'))
   const isPhoto = url.hostname === 'upload.wikimedia.org'
-  if (!isAsset && !isPhoto) return
+  // videos stream in byte ranges, which a cache can't store: let the browser fetch them directly
+  if ((!isAsset && !isPhoto) || url.pathname.endsWith('.mp4')) return
 
   e.respondWith(
     caches.match(req).then(

@@ -1,8 +1,26 @@
 // A swipeable photo carousel for a car page: the car's main photo first, then extra studio photos (src/data/gallery.json).
+// A shot with `video` is a short silent clip: its still (src) shows first, and the clip plays on loop only while that
+// slide is on screen (never with reduced motion, where it gets play controls instead).
 import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { reducedMotion } from '../lib/perf'
 import { Icon } from './Icon'
 
-export type Shot = { src: string; caption: string }
+export type Shot = { src: string; caption: string; video?: string }
+
+function Clip({ shot, alt, active }: { shot: Shot; alt: string; active: boolean }) {
+  const v = useRef<HTMLVideoElement>(null)
+  useEffect(() => {
+    const el = v.current
+    if (!el || reducedMotion) return
+    if (active) el.play().catch(() => {})
+    else el.pause()
+  }, [active])
+  return (
+    <div className="car-img loaded gal-video">
+      <video ref={v} src={shot.video} poster={shot.src} muted loop playsInline preload={active ? 'auto' : 'none'} controls={reducedMotion} aria-label={`${alt}: ${shot.caption}`} />
+    </div>
+  )
+}
 
 export function Gallery({ first, shots, alt }: { first: ReactNode; shots: Shot[]; alt: string }) {
   const [i, setI] = useState(0)
@@ -29,9 +47,13 @@ export function Gallery({ first, shots, alt }: { first: ReactNode; shots: Shot[]
         <div className="gal-slide" aria-hidden={i !== 0}>{first}</div>
         {shots.map((s, k) => (
           <div className="gal-slide" key={s.src} aria-hidden={i !== k + 1}>
-            <div className="car-img loaded">
-              <img src={s.src} alt={`${alt}: ${s.caption}`} loading="lazy" decoding="async" />
-            </div>
+            {s.video ? (
+              <Clip shot={s} alt={alt} active={i === k + 1} />
+            ) : (
+              <div className="car-img loaded">
+                <img src={s.src} alt={`${alt}: ${s.caption}`} loading="lazy" decoding="async" />
+              </div>
+            )}
             <div className="gal-cap">{s.caption}</div>
           </div>
         ))}
