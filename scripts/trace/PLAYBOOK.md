@@ -69,3 +69,10 @@ Add the id to `READY` in src/webgl/cars/specs.ts **and** to `SHOWCASE_IDS` in sr
   doors), `archSquare` (also squares the cladding flares), `bonnetRidge` (~0.012 m twin creases).
 - After rounding the corners, the nose face is narrower than the car: keep front parts within the end face's
   half-width (≈ width(1) × W/2 … the taper value), or they stripe as they wrap.
+- Dark paint (Brezza): `paintTop`/`paintLow` are noise. Read belt, cladding top, shut lines and pillars off a
+  `gridify` of the cut-out (nose left: u = (x_tail − x) / length_px, y_m = (ground_px − y) / pxPerM).
+- When the official height includes roof rails, the greenhouse top is the silhouette minus ~0.05 under the rails.
+- Black cladding along the lower doors: set `cladding.cut: true`, or the section's rounded top tucks the band
+  under the paint and only a sliver shows.
+- A plate over trim or a skid plate: notch those decals round the plate (≈ ±0.25 × 0.11 m) or it gets buried.
+- Headlamps high on a raked, rounded nose stripe badly with full relief: give them `depth` ~0.004.

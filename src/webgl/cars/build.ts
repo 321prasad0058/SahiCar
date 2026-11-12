@@ -21,7 +21,7 @@ export interface Decal {
 }
 /** default relief per material (metres) */
 const RELIEF: Partial<Record<Mat, number>> = { head: 0.014, drl: 0.01, tail: 0.012, amber: 0.01, gloss: 0.006, silver: 0.01, chrome: 0.006, mesh: 0.004, hex: 0.004, slats: 0.004 }
-export type WheelStyle = 'turbine' | 'twin' | 'aero' | 'multi' | 'blade' | 'split'
+export type WheelStyle = 'turbine' | 'twin' | 'aero' | 'multi' | 'blade' | 'split' | 'swirl'
 
 export interface CarSpec {
   id: string
@@ -54,7 +54,9 @@ export interface CarSpec {
   /** raked pillars: u range at the beltline and at the roof */
   pillars: { bottom: [number, number]; top: [number, number]; black: boolean }[]
   /** black plastic over the lower body: its traced top line, and how far the arch flares reach */
-  cladding?: { top: Pts; flare: number }
+  /** `cut`: take the cladding's section from the full body height, cut off at its top, so a low band along the
+   *  doors shows at its traced height (otherwise the section's rounded top corner tucks a low band under the paint) */
+  cladding?: { top: Pts; flare: number; cut?: boolean }
   /** door shut lines: u at the sill and at the beltline */
   doors: [number, number][]
   front: Decal[]
@@ -362,14 +364,15 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
         // outward by its thickness, so the paint can never poke through it in patches
         let out = 0.012
         for (const ax of axles) if (Math.abs(x - ax) < archR + flare) out = 0.026
-        return {
-          x: xx,
-          ring: ring(((width(u) * W) / 2) * haunchK(x) + out, yb, Math.max(yb + 0.01, yt), 0.07, 0.17, seg, {
-            bulge: spec.bulge ?? 0.025,
-            shoulder: shoulderY ? shoulderY(u) : undefined,
-            inset: spec.shoulder?.inset,
-          }),
-        }
+        const cut = !!spec.cladding!.cut
+        const ytc = Math.max(yb + 0.01, yt)
+        const r = ring(((width(u) * W) / 2) * haunchK(x) + out, yb, cut ? Math.max(ytc, top(u)) : ytc, 0.07, 0.17, seg, {
+          bulge: spec.bulge ?? 0.025,
+          shoulder: shoulderY ? shoulderY(u) : undefined,
+          inset: spec.shoulder?.inset,
+        })
+        if (cut) r.pts = r.pts.map(([z, y]) => [z, Math.min(y, ytc)])
+        return { x: xx, ring: r }
       }),
       () => 0,
       1,
@@ -625,7 +628,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     g.rotateY(end > 0 ? Math.PI / 2 : -Math.PI / 2)
     disposables.push(g)
     const m = new THREE.Mesh(g, plateMat)
-    m.position.set(p.x + end * 0.016, y, 0)
+    m.position.set(p.x + end * 0.024, y, 0)
     group.add(m)
   }
 
@@ -864,6 +867,10 @@ function rimBlurTexture(spec: CarSpec) {
         bar(a - 0.05, 0.1, len)
         bar(a + 0.05, 0.1, len)
         break
+      case 'swirl':
+        bar(a - 0.1, 0.16, len)
+        bar(a + 0.17, 0.08, len)
+        break
       case 'aero':
         bar(a, 0.36, len)
         break
@@ -980,6 +987,11 @@ function rimGeometry(spec: CarSpec, hi: boolean) {
         break
       case 'aero':
         blade(a, R * 0.36, len, face - 0.006, 0.25)
+        break
+      case 'swirl':
+        // a wide and a slim machined blade side by side, both curling the same way, dark between them
+        blade(a - 0.1, R * 0.16, len, face - 0.008, 0.38)
+        blade(a + 0.17, R * 0.08, len, face - 0.008, 0.38)
         break
       default:
         blade(a, R * 0.065, len, face - 0.008)
