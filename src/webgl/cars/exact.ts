@@ -863,4 +863,101 @@ export const SELTOS: CarSpec = {
   plate: 'MH 12 KS 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS]
+// one of the facelift grille's three chrome bars: slim across the middle, a flared blade at each end
+const balenoBar = (y: number, hw: number): Decal => ({
+  step: 0.004, mat: 'chrome', layer: 2, depth: 0.01,
+  poly: both([[0, y], [hw - 0.1, y], [hw - 0.03, y - 0.003], [hw + 0.006, y - 0.002], [hw + 0.016, y + 0.008], [hw + 0.006, y + 0.02], [hw - 0.03, y + 0.019], [hw - 0.1, y + 0.012], [0, y + 0.012]]),
+})
+// one of the three L-shaped DRL elements along the headlamp's lower edge: a short upright at its inner end
+const balenoDrl = (z: number, y: number): Decal => ({
+  step: 0.004, mat: 'drl', mirror: true, layer: 2, depth: 0.004,
+  poly: [[z, y], [z + 0.046, y + 0.003], [z + 0.046, y + 0.014], [z + 0.013, y + 0.012], [z + 0.016, y + 0.032], [z + 0.004, y + 0.032]],
+})
+
+/** Maruti Suzuki Baleno (2026 facelift of the 2022 3rd gen). 3990 × 1745 × 1530, wheelbase 2520, 195/55 R16.
+ *  Side profile from a levelled gallery side photo (roof 1.50 m with the shark-fin); the photo's axles sit 2 % too far
+ *  apart, so the axles are at the official wheelbase with the overhangs split as in the photo. Belt, pillars, doors and
+ *  lamps read off a metric grid of the levelled photo; tail lamps from a straight rear photo; the facelift's three-bar
+ *  grille, headlamps and black lower bumper from a straight front photo and a front three-quarter. */
+export const BALENO: CarSpec = {
+  id: 'maruti-baleno',
+  name: 'Maruti Suzuki Baleno',
+  rakedEnds: true,
+  L: 3.99, W: 1.745, H: 1.53,
+  axles: [0.1629, 0.7945],
+  tyreR: 0.31, tyreW: 0.195, rim: 0.655, wheel: { style: 'swirl', spokes: 5 },
+  archGap: 0.06, archSquare: 0.15,
+  sill: [[0, 0.42], [0.006, 0.34], [0.015, 0.285], [0.03, 0.267], [0.05, 0.247], [0.08, 0.23], [0.12, 0.22], [0.2, 0.222], [0.3, 0.22], [0.5, 0.22], [0.6, 0.205], [0.7, 0.18], [0.75, 0.17], [0.85, 0.157], [0.9, 0.153], [0.93, 0.161], [0.95, 0.171], [0.97, 0.187], [0.985, 0.203], [0.995, 0.235], [1, 0.28]],
+  // the tail rounding up to the lamps, the belt rising round the quarter glass, falling along the doors to the
+  // mirror, then the long bonnet curving down to the nose
+  top: [[0, 0.8], [0.004, 0.95], [0.01, 1.05], [0.018, 1.09], [0.025, 1.095], [0.05, 1.13], [0.08, 1.19], [0.11, 1.225], [0.13, 1.235], [0.15, 1.2], [0.16, 1.155], [0.168, 1.115], [0.2, 1.1], [0.3, 1.073], [0.4, 1.05], [0.5, 1.022], [0.6, 0.993], [0.7, 0.98], [0.73, 0.99], [0.76, 1.025], [0.78, 1.009], [0.8, 0.997], [0.82, 0.979], [0.85, 0.953], [0.88, 0.928], [0.9, 0.91], [0.92, 0.891], [0.94, 0.865], [0.96, 0.865], [0.975, 0.858], [0.985, 0.852], [0.993, 0.845], [1, 0.83]],
+  // round in plan: both ends taper hard into the corners
+  width: [[0, 0.7], [0.005, 0.79], [0.015, 0.875], [0.035, 0.935], [0.07, 0.972], [0.13, 0.995], [0.17, 1], [0.45, 0.99], [0.8, 0.995], [0.86, 0.99], [0.92, 0.965], [0.955, 0.93], [0.972, 0.89], [0.986, 0.845], [0.996, 0.805], [1, 0.79]],
+  crown: 0.02,
+  bulge: 0.04,
+  // the crease from the headlamp along the doors, rising over the handles onto the rear haunch
+  shoulder: { y: [[0, 1.0], [0.2, 0.975], [0.5, 0.935], [0.8, 0.9], [1, 0.86]], inset: 0.035 },
+  haunch: 0.06,
+  topRadius: 0.1,
+  noseSweep: 0.26,
+  tailSweep: 0.3,
+  greenhouse: {
+    u0: 0.025, u1: 0.76, tumble: 0.62,
+    // the raked tailgate glass under the roof spoiler, a long gently domed roof, then the raked windscreen
+    top: [[0.025, 1.095], [0.04, 1.135], [0.06, 1.19], [0.08, 1.24], [0.1, 1.28], [0.12, 1.33], [0.13, 1.36], [0.14, 1.385], [0.15, 1.4], [0.2, 1.425], [0.25, 1.445], [0.3, 1.46], [0.35, 1.47], [0.4, 1.475], [0.45, 1.472], [0.5, 1.458], [0.55, 1.436], [0.57, 1.424], [0.6, 1.385], [0.62, 1.347], [0.65, 1.288], [0.68, 1.224], [0.7, 1.181], [0.72, 1.133], [0.74, 1.09], [0.76, 1.03]],
+  },
+  roof: { u0: 0.1212, u1: 0.5593, black: false },
+  pillars: [
+    // body-coloured C-pillar round the pointed quarter glass, a black divider, the black B-pillar, body A-pillar
+    { bottom: [0.218, 0.228], top: [0.218, 0.228], black: true },
+    { bottom: [0.386, 0.421], top: [0.386, 0.421], black: true },
+    { bottom: [0.7, 0.76], top: [0.555, 0.572], black: false },
+  ],
+  doors: [[0.274, 0.215], [0.425, 0.42], [0.694, 0.69]],
+  windowChrome: true,
+  front: [
+    // the wide gloss-black grille under the bonnet edge, narrowing downwards, its 3D pattern and three chrome bars
+    { step: 0.004, mat: 'gloss', poly: both([[0, 0.495], [0.4, 0.495], [0.43, 0.512], [0.465, 0.59], [0.5, 0.655], [0.53, 0.695], [0.55, 0.73], [0.545, 0.762], [0, 0.768]]) },
+    { step: 0.004, mat: 'mesh', layer: 1, poly: both([[0, 0.51], [0.39, 0.51], [0.45, 0.59], [0.485, 0.655], [0.515, 0.7], [0.525, 0.745], [0, 0.752]]) },
+    balenoBar(0.69, 0.52), balenoBar(0.595, 0.46), balenoBar(0.5, 0.405),
+    // big swept headlamps from the grille's top corners, rising back along the bonnet edge: a dark housing, the
+    // projector lens high on the outside, a chrome eyebrow and three L-shaped DRLs along the lower edge
+    { step: 0.004, mat: 'gloss', mirror: true, depth: 0.004, poly: [[0.535, 0.712], [0.55, 0.69], [0.58, 0.668], [0.63, 0.658], [0.7, 0.654], [0.75, 0.656], [0.775, 0.668], [0.79, 0.7], [0.785, 0.75], [0.78, 0.8], [0.765, 0.822], [0.74, 0.815], [0.7, 0.8], [0.64, 0.778], [0.58, 0.756], [0.548, 0.74]] },
+    { step: 0.004, mat: 'head', mirror: true, layer: 1, depth: 0.006, poly: [[0.685, 0.738], [0.69, 0.726], [0.7, 0.721], [0.71, 0.726], [0.715, 0.738], [0.71, 0.75], [0.7, 0.755], [0.69, 0.75]] },
+    balenoDrl(0.575, 0.672), balenoDrl(0.635, 0.666), balenoDrl(0.7, 0.664),
+    // the black lower bumper: a wide band under the grille carrying the plate, its ends sweeping out to the fog lamps
+    { step: 0.004, mat: 'trim', poly: both([[0, 0.285], [0.38, 0.285], [0.46, 0.3], [0.54, 0.322], [0.62, 0.318], [0.69, 0.33], [0.72, 0.36], [0.72, 0.4], [0.69, 0.42], [0.55, 0.45], [0.44, 0.478], [0.4, 0.485], [0, 0.485]]) },
+    { step: 0.004, mat: 'slats', layer: 1, depth: 0.004, poly: both([[0, 0.297], [0.36, 0.297], [0.41, 0.31], [0.36, 0.33], [0, 0.33]]) },
+    { step: 0.004, mat: 'silver', mirror: true, layer: 1, depth: 0.008, poly: [[0.62, 0.345], [0.69, 0.345], [0.7, 0.355], [0.7, 0.378], [0.69, 0.388], [0.62, 0.388], [0.61, 0.378], [0.61, 0.355]] },
+    // the black lip under the bumper
+    { step: 0.005, mat: 'trim', poly: both([[0, 0.2], [0.55, 0.2], [0.62, 0.225], [0.6, 0.245], [0, 0.245]]) },
+  ],
+  rear: [
+    // the chrome strip across the tailgate under the glass
+    { step: 0.004, mat: 'chrome', depth: 0.006, poly: both([[0, 1.072], [0.5, 1.072], [0.55, 1.076], [0.56, 1.084], [0.55, 1.09], [0, 1.09]]) },
+    // C-shaped tail lamps: a red frame round a clear reversing panel, the lower arm running in across the tailgate
+    { step: 0.004, mat: 'gloss', mirror: true, depth: 0.004, poly: [[0.34, 0.925], [0.36, 0.905], [0.45, 0.898], [0.55, 0.892], [0.65, 0.882], [0.7, 0.878], [0.722, 0.89], [0.725, 1.05], [0.71, 1.066], [0.6, 1.068], [0.55, 1.064], [0.53, 1.045], [0.525, 0.952], [0.45, 0.948], [0.36, 0.942]] },
+    { step: 0.004, mat: 'tail', mirror: true, layer: 1, poly: [[0.545, 1.04], [0.56, 1.052], [0.6, 1.055], [0.705, 1.054], [0.716, 1.042], [0.716, 0.97], [0.7, 0.962], [0.54, 0.965], [0.54, 0.978], [0.69, 0.976], [0.702, 0.982], [0.702, 1.035], [0.695, 1.04], [0.56, 1.04]] },
+    { step: 0.004, mat: 'silver', mirror: true, layer: 1, depth: 0.008, poly: [[0.552, 0.992], [0.56, 0.984], [0.684, 0.982], [0.692, 0.99], [0.692, 1.022], [0.684, 1.03], [0.56, 1.03], [0.552, 1.022]] },
+    { step: 0.004, mat: 'tail', mirror: true, layer: 1, poly: [[0.36, 0.926], [0.375, 0.912], [0.45, 0.908], [0.55, 0.902], [0.65, 0.893], [0.7, 0.89], [0.712, 0.9], [0.712, 0.948], [0.53, 0.95], [0.45, 0.937], [0.375, 0.934]] },
+    // the tailgate's shut line under the lamps, round the bottom of the panel
+    { step: 0.005, mat: 'gloss', depth: 0.001, poly: band([[-0.4, 0.9], [-0.38, 0.86], [-0.3, 0.832], [0, 0.825], [0.3, 0.832], [0.38, 0.86], [0.4, 0.9]], 0.012) },
+    // reflectors in the bumper corners, the black lip along the bottom
+    { step: 0.004, mat: 'reflector', mirror: true, poly: [[0.55, 0.668], [0.7, 0.665], [0.71, 0.676], [0.7, 0.705], [0.55, 0.708], [0.545, 0.69]] },
+    { step: 0.005, mat: 'trim', poly: both([[0, 0.32], [0.6, 0.32], [0.68, 0.34], [0.69, 0.37], [0, 0.37]]) },
+  ],
+  side: [
+    // chrome door handles, the rear one higher on the rising belt
+    { step: 0.004, mat: 'chrome', depth: 0.01, poly: [[0.43, 0.887], [0.494, 0.887], [0.494, 0.915], [0.43, 0.915]] },
+    { step: 0.004, mat: 'chrome', depth: 0.01, poly: [[0.196, 0.928], [0.254, 0.928], [0.254, 0.956], [0.196, 0.956]] },
+    // the tail lamp wrapping round onto the flank, narrowing forwards
+    { step: 0.004, mat: 'gloss', depth: 0.004, poly: [[0.085, 1.035], [0.07, 1.056], [0.04, 1.066], [0.014, 1.066], [0.01, 0.91], [0.025, 0.912], [0.05, 0.952], [0.072, 0.995], [0.087, 1.02]] },
+    { step: 0.004, mat: 'tail', layer: 1, poly: [[0.08, 1.036], [0.068, 1.05], [0.04, 1.058], [0.014, 1.058], [0.014, 1.044], [0.04, 1.044], [0.062, 1.037], [0.075, 1.024]] },
+  ],
+  plates: { front: 0.435, rear: 0.6 },
+  mirrors: 'body',
+  paint: '#04294f', // Nexa Blue (Celestial)
+  plate: 'MH 12 BL 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO]

@@ -144,3 +144,18 @@ Add the id to `READY` in src/webgl/cars/specs.ts **and** to `SHOWCASE_IDS` in sr
   rectangle turns it into a blob. `sideBand()` is `band()` for side decals (u scaled by the length).
 - Measure belt/cladding heights per pixel column of the levelled cut-out (light paint vs dark runs) instead of by eye:
   the eye read of the Seltos belt was 3 cm off.
+- Check the gallery folder's model year: the Baleno's main folder is the 2026 facelift (three-bar grille), and the site's
+  data (ADAS) is the facelift too, so model the front from that folder, not an older lone photo.
+- A cut-out from cutout.swift is cropped to the car: to grid the photo in metres, find the cut-out's offset in the photo,
+  rotate both by −levelDeg, then u = (x_tail − x) / span, y = (ground − y) / pxPerM.
+- A side decal for the headlamp's wrap onto a rounded nose corner smears into a streaky band along the bonnet edge:
+  leave it out and keep the front lamp's top ≤ the nose `top` near u = 1 (raising `top` at 0.98–1 gives the lamp room).
+- A `spoiler` over a glasshouse that falls quickly behind the roof floats as a bar on legs: drop it and move `roof.u0`
+  back a station so the body-coloured roof itself overhangs the tailgate glass.
+- Emissive `tail`/`head` over a large area blooms into a flat blob: lamps read better as a `gloss` housing with red
+  light guides and a `silver` reversing panel; a projector is a `silver` lens, not a `head` disc.
+- Holes through a big headlamp on a rounded nose: the part above the nose `top` near u = 1 lands on a near-grazing strip and
+  drops out. Raise `top` at 0.985–1 to the lamps' top (Baleno 0.83–0.85, IoU unchanged), keep the last width step gentle
+  (no 6 % taper in the last 3 cm) and use `topRadius` ~0.1; a `silver` projector disc also reads as a hole (use a small `head`).
+- `rimTone: 'dark'` turns `split`/`turbine` almost all gunmetal; for a mostly-machined alloy, plain `swirl` (no rimTone)
+  gives silver spokes over dark pockets.

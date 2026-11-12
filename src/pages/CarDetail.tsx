@@ -21,7 +21,7 @@ import type { CarSpec } from '../webgl/cars/build'
 import type { Studio } from '../webgl/Studio'
 
 // cars with an exact 3D model (the rest show a reference body at their real size)
-const SHOWCASE_IDS = ['tata-sierra-ev', 'tata-sierra', 'tata-altroz', 'honda-city', 'maruti-victoris', 'maruti-ertiga', 'tata-nexon', 'tata-punch', 'hyundai-creta', 'maruti-brezza', 'maruti-swift', 'maruti-fronx', 'maruti-dzire', 'mahindra-scorpio-n', 'kia-seltos']
+const SHOWCASE_IDS = ['tata-sierra-ev', 'tata-sierra', 'tata-altroz', 'honda-city', 'maruti-victoris', 'maruti-ertiga', 'tata-nexon', 'tata-punch', 'hyundai-creta', 'maruti-brezza', 'maruti-swift', 'maruti-fronx', 'maruti-dzire', 'mahindra-scorpio-n', 'kia-seltos', 'maruti-baleno']
 // neutral grey for the generic body when the car has no verified colour list
 const NEUTRAL = '#5b6b75'
 
