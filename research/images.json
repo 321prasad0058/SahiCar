@@ -183,10 +183,9 @@
   "ai": true
  },
  "kia-carens-clavis": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/2025_kia_Carens_Clavis_Facelift_1.5_T-GDi_7DCT_%282%29.jpg/960px-2025_kia_Carens_Clavis_Facelift_1.5_T-GDi_7DCT_%282%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-  "page": "https://commons.wikimedia.org/wiki/File:2025_kia_Carens_Clavis_Facelift_1.5_T-GDi_7DCT_(2).jpg",
-  "artist": "Avante2025",
-  "license": "CC BY 4.0"
+  "src": "/cars/ai/kia-carens-clavis.webp",
+  "page": "",
+  "ai": true
  },
  "kia-syros-ev": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/2025_Kia_Syros_1.5_HTX%2B_%28O%29_%28India%29_front_view_01.jpg/960px-2025_Kia_Syros_1.5_HTX%2B_%28O%29_%28India%29_front_view_01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
