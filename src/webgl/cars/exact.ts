@@ -2909,4 +2909,109 @@ export const FORTUNER: CarSpec = {
   plate: 'MH 12 FT 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, KYLAQ, FORTUNER]
+const SAFARI_L = 4.668
+/** a side outline from a rounded rectangle given in u (0…1) and metres */
+const safariRectU = (u0: number, y0: number, u1: number, y1: number, r: number): P2[] =>
+  rrectS(u0 * SAFARI_L, y0, u1 * SAFARI_L, y1, r).map(([x, y]) => [+(x / SAFARI_L).toFixed(5), y] as P2)
+
+/** Tata Safari (2023 facelift). 4668 × 1922 × 1795 (with roof rails), wheelbase 2741, 245/55 R19 (top trim).
+ *  Side profile from a long-lens gallery side photo (1.798 m measured over the rails with the roof antenna erased; the
+ *  photo's axles 1.5 % too far apart, so the axles sit at the official wheelbase with the overhangs split as in the
+ *  photo). Belt, pillars, handles, shut lines and cladding read off a metric grid of the cut-out. The front end is the
+ *  Harrier's (light bar on the bonnet edge, split headlamp pods, parametric grilles), re-measured from the straight
+ *  front photo; the stepped roof over the third row, the body-coloured D-pillar round the raked tailgate glass, the
+ *  connected tail light bar and the vertical lamps in the bumper corners from the side, straight rear and close-ups. */
+export const SAFARI: CarSpec = {
+  id: 'tata-safari',
+  name: 'Tata Safari',
+  L: SAFARI_L, W: 1.922, H: 1.795,
+  axles: [0.2264, 0.8136],
+  tyreR: 0.376, tyreW: 0.245, rim: 0.642, wheel: { style: 'blade', spokes: 5 },
+  archGap: 0.1, archSquare: 0.3,
+  sill: [[0, 0.3], [0.01, 0.32], [0.02, 0.35], [0.04, 0.36], [0.06, 0.346], [0.08, 0.326], [0.1, 0.315], [0.12, 0.303], [0.3, 0.258], [0.4, 0.256], [0.5, 0.27], [0.65, 0.27], [0.7, 0.25], [0.88, 0.255], [0.92, 0.255], [0.95, 0.29], [0.97, 0.318], [0.98, 0.33], [0.99, 0.32], [1, 0.3]],
+  // the tail face up to the light bar, the body climbing the raked tailgate to the roof spoiler, the wide D-pillar
+  // block over the third row, its leaning front edge down to the belt, the belt falling to the mirror, the long bonnet
+  // down to the light bar on its leading edge
+  top: [[0, 1.245], [0.005, 1.25], [0.01, 1.256], [0.02, 1.285], [0.03, 1.345], [0.04, 1.445], [0.045, 1.545], [0.05, 1.635], [0.055, 1.69], [0.065, 1.715], [0.08, 1.727], [0.1, 1.735], [0.12, 1.74], [0.127, 1.742], [0.132, 1.7], [0.137, 1.62], [0.143, 1.52], [0.15, 1.4], [0.155, 1.31], [0.16, 1.29], [0.2, 1.28], [0.25, 1.27], [0.3, 1.255], [0.35, 1.24], [0.4, 1.23], [0.45, 1.22], [0.5, 1.21], [0.55, 1.195], [0.6, 1.185], [0.64, 1.181], [0.7, 1.19], [0.75, 1.2], [0.78, 1.197], [0.8, 1.192], [0.84, 1.175], [0.88, 1.152], [0.9, 1.138], [0.92, 1.12], [0.94, 1.099], [0.95, 1.087], [0.96, 1.09], [0.97, 1.084], [0.98, 1.08], [0.99, 1.078], [1, 1.075]],
+  width: [[0, 0.88], [0.006, 0.92], [0.02, 0.955], [0.05, 0.982], [0.1, 0.997], [0.5, 1], [0.88, 0.997], [0.92, 0.985], [0.95, 0.965], [0.975, 0.935], [0.99, 0.9], [1, 0.87]],
+  crown: 0.012,
+  bulge: 0.03,
+  // tumblehome over the third row only (the line sits above the belt elsewhere, so the inset is off there)
+  shoulder: { y: [[0, 1.26], [0.12, 1.29], [0.16, 1.45], [0.2, 1.6], [1, 1.6]], inset: 0.3 },
+  haunch: 0.045,
+  topRadius: 0.1,
+  dropSlivers: true,
+  rakedEnds: true,
+  noseSweep: 0.12,
+  tailSweep: 0.12,
+  greenhouse: {
+    u0: 0.125, u1: 0.75, tumble: 0.7, followBody: 0.14,
+    // the stepped roof over the third row (rails left out), the roof falling gently forwards, the raked screen
+    top: [[0.125, 1.7], [0.13, 1.715], [0.135, 1.735], [0.14, 1.745], [0.15, 1.752], [0.16, 1.755], [0.2, 1.757], [0.22, 1.751], [0.25, 1.746], [0.3, 1.742], [0.35, 1.737], [0.4, 1.73], [0.45, 1.722], [0.48, 1.716], [0.5, 1.709], [0.52, 1.694], [0.54, 1.672], [0.56, 1.649], [0.58, 1.616], [0.6, 1.577], [0.62, 1.54], [0.64, 1.492], [0.66, 1.437], [0.68, 1.387], [0.7, 1.333], [0.72, 1.282], [0.74, 1.228], [0.75, 1.203]],
+  },
+  roof: { u0: 0.125, u1: 0.5473, black: false },
+  pillars: [
+    // the black B-pillar (the thin C-pillar and the A-pillar are left as plain glass)
+    { bottom: [0.448, 0.475], top: [0.452, 0.475], black: true },
+    // the black trim along the D-pillar's leaning front edge, over the joint with the third-row roof block
+    { bottom: [0.126, 0.162], top: [0.125, 0.15], black: true, step: 0.004 },
+  ],
+  // black arch flares, the black band along the doors, the black bumpers
+  cladding: { top: [[0, 0.6], [0.05, 0.6], [0.08, 0.56], [0.11, 0.53], [0.3, 0.518], [0.5, 0.505], [0.7, 0.49], [0.9, 0.5], [0.93, 0.52], [1, 0.52]], flare: 0.055, cut: true },
+  doors: [[0.71, 0.712], [0.476, 0.462], [0.236, 0.242]],
+  front: [
+    // the gloss-black band along the bonnet's leading edge carrying the full-width LED light bar, rising at its ends
+    { step: 0.005, mat: 'trim', layer: 1, depth: 0.006, poly: both([[0, 0.9], [0.5, 0.9], [0.6, 0.935], [0.68, 0.985], [0.735, 1.02], [0.742, 1.045], [0.725, 1.05], [0.67, 1.025], [0.5, 1.012], [0, 1.01]]) },
+    { step: 0.005, mat: 'drl', layer: 2, poly: both([[0, 0.989], [0.5, 0.991], [0.67, 1.003], [0.725, 1.028], [0.734, 1.04], [0.72, 1.041], [0.665, 1.016], [0.5, 1.004], [0, 1.003]]) },
+    // the upper grille: gloss black with staggered satin bars, wider at the top
+    { step: 0.005, mat: 'gloss', poly: both([[0, 0.755], [0.5, 0.755], [0.53, 0.8], [0.548, 0.9], [0.55, 0.94], [0, 0.94]]) },
+    ...harrierBricks([0.922, 0.896, 0.87, 0.844, 0.818, 0.792, 0.768], (y) => 0.49 + (y - 0.755) * 0.3),
+    // the gloss strip under the grille joining the headlamp pods
+    { step: 0.005, mat: 'gloss', poly: both([[0, 0.71], [0.68, 0.71], [0.69, 0.724], [0, 0.724]]) },
+    // the split headlamp pods in the bumper corners: projector on top, a DRL line, a second lamp, a slatted pocket below
+    { step: 0.005, mat: 'gloss', mirror: true, depth: 0.008, poly: smooth([[0.685, 0.62], [0.805, 0.62], [0.81, 0.89], [0.7, 0.89], [0.685, 0.86]], 1) },
+    { step: 0.005, mat: 'head', layer: 1, mirror: true, poly: rrectS(0.705, 0.805, 0.79, 0.868, 0.012) },
+    { step: 0.005, mat: 'drl', layer: 1, mirror: true, poly: rrectS(0.7, 0.787, 0.797, 0.799, 0.004) },
+    { step: 0.005, mat: 'head', layer: 1, mirror: true, poly: rrectS(0.715, 0.728, 0.785, 0.772, 0.008) },
+    { step: 0.005, mat: 'slats', layer: 1, mirror: true, poly: [[0.71, 0.635], [0.795, 0.635], [0.795, 0.705], [0.71, 0.705]] },
+    // the black lower bumper, the lower grille with its bars and the satin skid strip along its foot
+    { step: 0.005, mat: 'trim', poly: smooth(both([[0, 0.33], [0.72, 0.33], [0.79, 0.38], [0.8, 0.52], [0.7, 0.56], [0.62, 0.61], [0, 0.61]]), 1) },
+    { step: 0.005, mat: 'gloss', layer: 1, poly: both([[0, 0.452], [0.53, 0.452], [0.57, 0.6], [0, 0.6]]) },
+    ...harrierBricks([0.582, 0.556, 0.53, 0.504, 0.478], (y) => 0.52 + (y - 0.452) * 0.25, (z, y) => Math.abs(z) < 0.07 && y < 0.55),
+    { step: 0.005, mat: 'satin', layer: 2, depth: 0.01, poly: smooth(both([[0, 0.4], [0.56, 0.4], [0.61, 0.412], [0.62, 0.43], [0.6, 0.448], [0, 0.448]]), 2) },
+  ],
+  rear: [
+    // the tailgate glass on the raked tail, under the roof spoiler, and the high stop lamp in the spoiler
+    { step: 0.004, mat: 'gloss', depth: 0.003, poly: smooth(both([[0, 1.3], [0.56, 1.3], [0.6, 1.33], [0.56, 1.52], [0.51, 1.62], [0, 1.62]]), 2) },
+    { step: 0.004, mat: 'tail', layer: 1, poly: rrectS(-0.15, 1.645, 0.15, 1.662, 0.005) },
+    // the connected light bar: a smoked band, the red line along its top, and the corner units with a brighter red strip
+    { step: 0.005, mat: 'gloss', layer: 1, depth: 0.012, poly: smooth(both([[0, 1.095], [0.62, 1.095], [0.775, 1.09], [0.8, 1.1], [0.805, 1.2], [0.785, 1.225], [0, 1.228]]), 1) },
+    { step: 0.005, mat: 'tail', layer: 2, depth: 0.016, poly: both([[0, 1.176], [0.62, 1.176], [0.795, 1.172], [0.795, 1.188], [0.62, 1.19], [0, 1.19]]) },
+    { step: 0.005, mat: 'tail', layer: 2, mirror: true, depth: 0.016, poly: [[0.6, 1.11], [0.795, 1.106], [0.795, 1.13], [0.66, 1.132], [0.6, 1.124]] },
+    // the tailgate's shut line round the plate
+    { step: 0.005, mat: 'gloss', depth: 0.001, poly: band([[-0.69, 1.09], [-0.69, 0.74], [-0.64, 0.683], [0, 0.683], [0.64, 0.683], [0.69, 0.74], [0.69, 1.09]], 0.012) },
+    // the vertical lamps in the bumper corners
+    { step: 0.005, mat: 'gloss', mirror: true, depth: 0.006, poly: rrectS(0.762, 0.68, 0.828, 0.935, 0.01) },
+    { step: 0.005, mat: 'tail', layer: 1, mirror: true, poly: rrectS(0.775, 0.7, 0.818, 0.915, 0.008) },
+    // the black lower bumper and the satin skid plate
+    { step: 0.005, mat: 'trim', poly: smooth(both([[0, 0.3], [0.72, 0.3], [0.8, 0.34], [0.82, 0.42], [0.82, 0.6], [0, 0.61]]), 1) },
+    { step: 0.005, mat: 'satin', layer: 1, poly: smooth(both([[0, 0.34], [0.6, 0.34], [0.655, 0.37], [0.668, 0.517], [0, 0.517]]), 2) },
+  ],
+  side: [
+    // the tail lamp wedge on the flank: smoked housing round the red lens
+    { step: 0.004, mat: 'gloss', depth: 0.002, poly: [[0.005, 1.1], [0.06, 1.108], [0.1, 1.115], [0.106, 1.128], [0.088, 1.2], [0.06, 1.222], [0.005, 1.232]] },
+    { step: 0.004, mat: 'tail', layer: 1, depth: 0.004, poly: [[0.005, 1.12], [0.06, 1.124], [0.096, 1.128], [0.086, 1.185], [0.06, 1.19], [0.005, 1.195]] },
+    // the dark pocket round the vertical bumper lamp at the tail corner
+    { step: 0.005, mat: 'gloss', poly: [[0.004, 0.66], [0.03, 0.66], [0.033, 0.9], [0.004, 0.91]] },
+    // body-coloured door handles
+    { step: 0.005, mat: 'body', depth: 0.01, poly: safariRectU(0.483, 1.04, 0.542, 1.072, 0.012) },
+    { step: 0.005, mat: 'body', depth: 0.01, poly: safariRectU(0.26, 1.087, 0.318, 1.118, 0.012) },
+  ],
+  plates: { front: 0.64, rear: 1.0 },
+  rails: 'silver',
+  mirrors: 'black',
+  paint: '#a47a5a', // Cosmic Gold, darkened for the studio lights
+  plate: 'MH 12 SF 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, KYLAQ, FORTUNER, SAFARI]

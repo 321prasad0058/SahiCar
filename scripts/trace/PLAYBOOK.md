@@ -336,3 +336,11 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - A deep wheel gap (archGap 0.13) showed the body's own paint wall at the arch edges speckling through the cladding inside the
   wells; `wellInset: 0.05` (new, opt-in) puts black end walls just inside each arch. They hang a little below the sill (reads as mud flaps).
 - A grille "hat" centred on z = 0 read as a badge; keep raised pattern elements off the centre line.
+- Safari (dark-edition gallery car, close camera: 1.89 m measured, axles 6 % apart): another portal's long-lens Cosmic Gold side photo
+  (served as WebP; convert before cutout) read 1.798 m over the rails with the axles 1.5 % apart once the roof antenna was erased.
+- Stepped roof over the third row (Hycross layout): the body climbs the raked tail to a flat D-pillar block, cliffs down along the
+  pillar's leaning front edge, and the glasshouse starts at the cliff. Starting the glass roof *below* the block's top and rising out
+  of it over ~3 cm of u (the step) stopped the roof paint tearing at the joint; a black `pillars` strip over the cliff (top range up
+  to 0.15) hid most of the edge-on glass slivers there (the top 7.5 cm of the glass stays uncovered and shows a faint line).
+- A front decal band whose lower part sat between the grille top and the light bar didn't show (body colour gap); running the band
+  down behind the grille (layer 1 over it, bricks on 2) closed the gap. Fine black ribs on a raised satin skid plate read as holes: left out.
