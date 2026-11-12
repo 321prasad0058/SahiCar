@@ -1,4 +1,8 @@
 // The car page's 3D studio: a turntable you can drag through 360°, with paint, views and lights.
+// Loading fast: the page shows a pre-rendered poster of this exact opening frame (public/3d, made by
+// scripts/posters.cjs) while the studio builds. On capable devices a quick low-detail car goes up first, so it can
+// be dragged at once, and the full-detail car is built and swapped in once the visitor isn't dragging. Shaders are
+// compiled off the main thread where the browser allows (compileAsync), so the first frame doesn't stall.
 // The five showcase cars are modelled exactly; any other car gets its body style's reference model,
 // without the reference car's signature lights, stretched to its real length, width and height.
 import * as THREE from 'three'
@@ -19,8 +23,20 @@ export class Studio {
   private dirty = true
   private userMoved = false
   private idleFrames = 0
+  private dragging = false
+  private disposed = false
+  private colour: [string, string | undefined] | null = null
+  private upgradeTimer = 0
 
-  constructor(private canvas: HTMLCanvasElement, spec: CarSpec, opt: Omit<BuildOptions, 'detail'> = {}) {
+  constructor(
+    private canvas: HTMLCanvasElement,
+    private spec: CarSpec,
+    private opt: Omit<BuildOptions, 'detail'> = {},
+    /** called once the first frame is on screen (the page then fades its poster out) */
+    private onReady?: () => void,
+    /** quick low-detail car first, full detail swapped in when idle (the car page); off = full detail at once */
+    progressive = false,
+  ) {
     const high = getTier() === 'high'
     this.renderer = new THREE.WebGLRenderer({ canvas, antialias: high, alpha: true, powerPreference: 'default' })
     this.renderer.setPixelRatio(Math.min(devicePixelRatio, high ? 2 : 1.25))
@@ -36,7 +52,8 @@ export class Studio {
     ring.rotation.x = -Math.PI / 2
     this.scene.add(ring)
 
-    this.rig = buildCar(spec, { ...opt, detail: high ? 'high' : 'low' })
+    // low detail first (several times quicker to build); the full car follows when the visitor is idle
+    this.rig = buildCar(spec, { ...opt, detail: high && !progressive ? 'high' : 'low' })
     this.scene.add(this.rig.group)
     this.rig.setLights(1)
 
@@ -51,13 +68,52 @@ export class Studio {
     this.controls.maxPolarAngle = Math.PI / 2.04
     this.controls.autoRotate = !reducedMotion
     this.controls.autoRotateSpeed = 0.8
-    this.controls.addEventListener('start', () => ((this.controls.autoRotate = false), (this.userMoved = true)))
+    this.controls.addEventListener('start', () => ((this.controls.autoRotate = false), (this.userMoved = true), (this.dragging = true)))
+    this.controls.addEventListener('end', () => (this.dragging = false))
     this.controls.addEventListener('change', () => (this.dirty = true))
 
     this.ro = new ResizeObserver(() => this.layout())
     this.ro.observe(canvas)
     this.layout()
+    void this.start(high && progressive)
+  }
+
+  private async start(upgrade: boolean) {
+    // compile every shader before the first frame, in parallel where the browser supports it
+    try { await this.renderer.compileAsync(this.scene, this.camera) } catch { /* falls back to compiling on first render */ }
+    if (this.disposed) return
+    this.renderer.render(this.scene, this.camera)
     this.loop()
+    requestAnimationFrame(() => !this.disposed && this.onReady?.())
+    if (upgrade) this.scheduleUpgrade()
+  }
+
+  /** Build the full-detail car when the main thread is free and nobody is dragging, then swap it in. */
+  private scheduleUpgrade() {
+    const idle = (fn: () => void) => ('requestIdleCallback' in window ? requestIdleCallback(fn, { timeout: 1200 }) : setTimeout(fn, 300)) as number
+    const attempt = () => {
+      if (this.disposed) return
+      if (this.dragging) { this.upgradeTimer = window.setTimeout(() => (this.upgradeTimer = idle(attempt)), 400); return }
+      const rig = buildCar(this.spec, { ...this.opt, detail: 'high' })
+      if (this.disposed) { rig.dispose(); return }
+      const swap = () => {
+        if (this.disposed) { rig.dispose(); return }
+        rig.group.rotation.copy(this.rig.group.rotation)
+        this.scene.remove(this.rig.group)
+        this.rig.dispose()
+        this.rig = rig
+        this.scene.add(rig.group)
+        rig.setLights(this.lights)
+        if (this.colour) this.setColor(this.colour[0], this.colour[1])
+        this.dirty = true
+      }
+      // the full car's extra materials compile before it replaces the quick one
+      const tmp = new THREE.Scene()
+      tmp.environment = this.scene.environment
+      tmp.add(rig.group)
+      this.renderer.compileAsync(tmp, this.camera).catch(() => {}).then(() => { tmp.remove(rig.group); swap() })
+    }
+    this.upgradeTimer = idle(attempt)
   }
 
   private layout() {
@@ -93,6 +149,7 @@ export class Studio {
 
   /** Body paint, and the roof: a dual-tone contrast, or otherwise the body colour (or black on black-roof models). */
   setColor(c: string, roof?: string) {
+    this.colour = [c, roof]
     this.rig.paint.color.set(c)
     this.rig.roof.color.set(roof ?? (this.rig.spec.roof.black ? '#0d0e10' : c))
     this.dirty = true
@@ -144,7 +201,29 @@ export class Studio {
     this.dirty = true
   }
 
+  /** Dev: this exact opening frame as a transparent WebP, for the page's loading poster (scripts/posters.cjs). */
+  poster(): string {
+    this.renderer.render(this.scene, this.camera)
+    return this.canvas.toDataURL('image/webp', 0.86)
+  }
+
+  /** Dev: build the full-detail car now (posters are made from it). */
+  async upgradeNow() {
+    const rig = buildCar(this.spec, { ...this.opt, detail: 'high' })
+    this.scene.remove(this.rig.group)
+    this.rig.dispose()
+    this.rig = rig
+    this.scene.add(rig.group)
+    rig.setLights(this.lights)
+    if (this.colour) this.setColor(this.colour[0], this.colour[1])
+    await this.renderer.compileAsync(this.scene, this.camera)
+    this.dirty = true
+  }
+
   dispose() {
+    this.disposed = true
+    clearTimeout(this.upgradeTimer)
+    if ('cancelIdleCallback' in window) cancelIdleCallback(this.upgradeTimer)
     cancelAnimationFrame(this.raf)
     this.ro.disconnect()
     this.controls.dispose()

@@ -5,6 +5,7 @@ import { CarImage } from '../components/CarImage'
 import { Gallery, type Shot } from '../components/Gallery'
 import { ZoomViewer, type ZoomShot } from '../components/ZoomViewer'
 import galleryData from '../data/gallery.json'
+import posterData from '../data/posters.json'
 import { Icon } from '../components/Icon'
 import { ScoreRing } from '../components/ScoreRing'
 import { toast } from '../components/Toast'
@@ -37,29 +38,51 @@ function fitTo(spec: CarSpec, car: Car): CarSpec {
   return { ...spec, sunroof, rails: tall ? spec.rails ?? 'black' : undefined, roof: { ...spec.roof, black: false } }
 }
 
+// pre-rendered opening frames of the 3D cars (scripts/posters.cjs): wide for the 16:10 stage, m for phones (4:3)
+const POSTERS = posterData as Record<string, { w: string; m: string }>
+const PHONE = '(max-width: 640px)'
+/** Start fetching the 3D code (and this car's poster) ahead of a tap on "3D 360°". Safe to call repeatedly. */
+const warmed = new Set<string>()
+function warm3D(id: string) {
+  if (warmed.has(id)) return
+  warmed.add(id)
+  void Promise.all([import('../webgl/Studio'), import('../webgl/cars/specs')]).catch(() => {})
+  const p = POSTERS[id]
+  if (p) new Image().src = matchMedia(PHONE).matches ? p.m : p.w
+}
+
 function Studio3D({ car }: { car: Car }) {
   const canvas = useRef<HTMLCanvasElement>(null)
   const studio = useRef<Studio | null>(null)
   const paints = car.colours ?? []
   const [paint, setPaint] = useState(0)
   const [failed, setFailed] = useState(false)
+  const [ready, setReady] = useState(false)
+  const poster = POSTERS[car.id]
   useEffect(() => {
     let s: Studio | null = null
     let live = true
+    setReady(false)
     Promise.all([import('../webgl/Studio'), import('../webgl/cars/specs')]).then(([{ Studio }, { SPEC_BY_ID, SIERRA_EV, archetype }]) => {
       if (!live) return
-      try {
-        const fuel = car.powertrains[0]?.fuel
-        // the petrol/diesel Sierra shares the EV's body; it just wears a white plate
-        const exact = SPEC_BY_ID[car.id] ?? (car.id === 'tata-sierra' ? { ...SIERRA_EV, ev: false, plate: 'MH 01 SC 2026' } : null)
-        s = exact
-          ? new Studio(canvas.current!, exact, paints[0] ? { paint: paints[0].hex } : {})
-          : new Studio(canvas.current!, fitTo(archetype(car.body, fuel), car), { generic: true, paint: paints[0]?.hex ?? NEUTRAL, size: car.dims })
-        if (paints[0]) s.setColor(paints[0].hex, paints[0].roof)
-        studio.current = s
-      } catch {
-        setFailed(true)
-      }
+      // let the poster paint before the car is built (building holds the main thread for a moment)
+      requestAnimationFrame(() => setTimeout(() => {
+        if (!live) return
+        try {
+          const fuel = car.powertrains[0]?.fuel
+          // the petrol/diesel Sierra shares the EV's body; it just wears a white plate
+          const exact = SPEC_BY_ID[car.id] ?? (car.id === 'tata-sierra' ? { ...SIERRA_EV, ev: false, plate: 'MH 01 SC 2026' } : null)
+          const onReady = () => live && setReady(true)
+          s = exact
+            ? new Studio(canvas.current!, exact, paints[0] ? { paint: paints[0].hex } : {}, onReady, true)
+            : new Studio(canvas.current!, fitTo(archetype(car.body, fuel), car), { generic: true, paint: paints[0]?.hex ?? NEUTRAL, size: car.dims }, onReady, true)
+          if (paints[0]) s.setColor(paints[0].hex, paints[0].roof)
+          studio.current = s
+          if (import.meta.env.DEV) (window as unknown as { __studio?: Studio }).__studio = s
+        } catch {
+          setFailed(true)
+        }
+      }, 0))
     })
     return () => {
       live = false
@@ -69,8 +92,17 @@ function Studio3D({ car }: { car: Car }) {
   }, [car])
   if (failed) return <div className="studio-fail muted">3D needs WebGL, which this browser has turned off.</div>
   return (
-    <div className="studio">
-      <canvas ref={canvas} aria-label={`3D view of a ${BODY_LABEL[car.body]} at the ${car.model}'s proportions. Drag to rotate.`} />
+    <div className={`studio ${ready ? 'ready' : ''}`}>
+      <div className="studio-stage">
+        <canvas ref={canvas} aria-label={`3D view of a ${BODY_LABEL[car.body]} at the ${car.model}'s proportions. Drag to rotate.`} />
+        {poster ? (
+          <picture className="studio-poster" aria-hidden>
+            <source media={PHONE} srcSet={poster.m} />
+            <img src={poster.w} alt="" decoding="async" fetchPriority="high" />
+          </picture>
+        ) : null}
+        {!ready && <div className="studio-loading small dim" aria-live="polite">Loading 3D…</div>}
+      </div>
       <div className="studio-bar">
         {paints.length > 0 && (
           <div className="paints">
@@ -131,10 +163,13 @@ export default function CarDetail() {
   useEffect(() => void (car && track('car_view', { car: car.id, body: car.body })), [car])
   // fetch the 3D code while the visitor reads, so "3D 360°" opens without a wait
   useEffect(() => {
-    const warm = () => void Promise.all([import('../webgl/Studio'), import('../webgl/cars/specs')]).catch(() => {})
-    const id = 'requestIdleCallback' in window ? requestIdleCallback(warm, { timeout: 2500 }) : setTimeout(warm, 1200)
+    if (!car) return
+    const warm = () => warm3D(car.id)
+    // modelled cars warm soon after the page settles; the rest when the browser is idle
+    const t = POSTERS[car.id] ? 600 : 2500
+    const id = 'requestIdleCallback' in window ? requestIdleCallback(warm, { timeout: t }) : setTimeout(warm, Math.min(t, 1200))
     return () => ('cancelIdleCallback' in window ? cancelIdleCallback(id as number) : clearTimeout(id as number))
-  }, [])
+  }, [car])
   const [state, setState] = useState(answers.state)
   const [view, setView] = useState<'photo' | '3d'>('photo')
   // full-screen zoom: every photo in the media box, in order, opened at the one tapped
@@ -212,7 +247,7 @@ export default function CarDetail() {
           <div className="detail-media card">
             <div className="media-tabs">
               <button className={`chip ${view === 'photo' ? 'cyan' : ''}`} onClick={() => setView('photo')}><Icon name="image" size={14} /> Photo</button>
-              <button className={`chip ${view === '3d' ? 'cyan' : ''}`} onClick={() => setView('3d')}><Icon name="cube" size={14} /> 3D 360°</button>
+              <button className={`chip ${view === '3d' ? 'cyan' : ''}`} onPointerEnter={() => warm3D(car.id)} onTouchStart={() => warm3D(car.id)} onFocus={() => warm3D(car.id)} onClick={() => setView('3d')}><Icon name="cube" size={14} /> 3D 360°</button>
               {car.oemUrl && (
                 <a className="chip" href={car.oemUrl} target="_blank" rel="noreferrer">Official site & colours <Icon name="external" size={12} /></a>
               )}

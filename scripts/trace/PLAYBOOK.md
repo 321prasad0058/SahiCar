@@ -53,6 +53,9 @@ Targets: **IoU ≥ 0.94 whole, ≥ 0.90 upper half**. A uniform thin band is pho
 ## 5. Ship it
 Add the id to `READY` in src/webgl/cars/specs.ts **and** to `SHOWCASE_IDS` in src/pages/CarDetail.tsx
 (its caption) only after both checks pass, check /car/<id> → 3D 360°, then delete the reference photos.
+**Then make its loading poster:** `node scripts/posters.cjs <car-id>` (dev server on 5181). The car page shows it
+the instant 3D opens, while the live model builds; re-run it whenever a spec, the studio lights or the camera change
+(no ids = every modelled car).
 
 ## Lessons so far
 - Tan seats seen through glass match some paints: the belt line must be the paint run that contains

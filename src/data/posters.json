@@ -1,0 +1,70 @@
+{
+ "honda-city": {
+  "w": "/3d/honda-city.f62bb3cb.w.webp",
+  "m": "/3d/honda-city.4c6fd6dc.m.webp"
+ },
+ "hyundai-creta": {
+  "w": "/3d/hyundai-creta.a954a5ec.w.webp",
+  "m": "/3d/hyundai-creta.b29e24f3.m.webp"
+ },
+ "kia-seltos": {
+  "w": "/3d/kia-seltos.a3af5b03.w.webp",
+  "m": "/3d/kia-seltos.ad351dee.m.webp"
+ },
+ "mahindra-scorpio-n": {
+  "w": "/3d/mahindra-scorpio-n.3430decd.w.webp",
+  "m": "/3d/mahindra-scorpio-n.4398a952.m.webp"
+ },
+ "mahindra-thar-roxx": {
+  "w": "/3d/mahindra-thar-roxx.4cb1239d.w.webp",
+  "m": "/3d/mahindra-thar-roxx.5b69e05e.m.webp"
+ },
+ "maruti-baleno": {
+  "w": "/3d/maruti-baleno.3516b23b.w.webp",
+  "m": "/3d/maruti-baleno.f7e308ea.m.webp"
+ },
+ "maruti-brezza": {
+  "w": "/3d/maruti-brezza.c0bafcd7.w.webp",
+  "m": "/3d/maruti-brezza.5ca5b2fe.m.webp"
+ },
+ "maruti-dzire": {
+  "w": "/3d/maruti-dzire.f78e3473.w.webp",
+  "m": "/3d/maruti-dzire.2eae7bab.m.webp"
+ },
+ "maruti-ertiga": {
+  "w": "/3d/maruti-ertiga.ca461a4a.w.webp",
+  "m": "/3d/maruti-ertiga.e8a01dab.m.webp"
+ },
+ "maruti-fronx": {
+  "w": "/3d/maruti-fronx.203dabd8.w.webp",
+  "m": "/3d/maruti-fronx.137fe5ef.m.webp"
+ },
+ "maruti-swift": {
+  "w": "/3d/maruti-swift.096aa84d.w.webp",
+  "m": "/3d/maruti-swift.78c06a34.m.webp"
+ },
+ "maruti-victoris": {
+  "w": "/3d/maruti-victoris.87d66de1.w.webp",
+  "m": "/3d/maruti-victoris.26bd0251.m.webp"
+ },
+ "tata-altroz": {
+  "w": "/3d/tata-altroz.e9edfdf7.w.webp",
+  "m": "/3d/tata-altroz.a917bf62.m.webp"
+ },
+ "tata-nexon": {
+  "w": "/3d/tata-nexon.90a40636.w.webp",
+  "m": "/3d/tata-nexon.d8050727.m.webp"
+ },
+ "tata-punch": {
+  "w": "/3d/tata-punch.d3634ede.w.webp",
+  "m": "/3d/tata-punch.f51efedf.m.webp"
+ },
+ "tata-sierra": {
+  "w": "/3d/tata-sierra.645272d2.w.webp",
+  "m": "/3d/tata-sierra.079f9bd1.m.webp"
+ },
+ "tata-sierra-ev": {
+  "w": "/3d/tata-sierra-ev.07b6e5b2.w.webp",
+  "m": "/3d/tata-sierra-ev.f3cc074d.m.webp"
+ }
+}

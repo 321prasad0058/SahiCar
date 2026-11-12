@@ -357,14 +357,35 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     return ringZ(a.ring, y) * (1 - t) + ringZ(b.ring, y) * t
   }
   /** where the body surface is, seen from the nose (end 1) or tail (end -1), at lateral z and height y */
-  const endPoint = (end: 1 | -1, z: number, y: number): THREE.Vector3 | null => {
-    const az = Math.abs(z)
-    const n = rings.length
+  // the rings within 0.3 m of each end (a front/rear outline may wrap round a corner, but never run back along the
+  // flank over a wheel), and per height the z of each: a decal grid row asks the same height for every column
+  const endZone = (end: 1 | -1) => {
+    const n = rings.length, out: number[] = []
     for (let k = 0; k < n; k++) {
       const i = end > 0 ? n - 1 - k : k
-      // a front/rear outline may wrap round a corner, but never run back along the flank over a wheel
-      if (Math.abs(rings[i].x - rings[end > 0 ? n - 1 : 0].x) > 0.3) return null
-      const zi = ringZ(rings[i].ring, y)
+      if (Math.abs(rings[i].x - rings[end > 0 ? n - 1 : 0].x) > 0.3) break
+      out.push(i)
+    }
+    return out
+  }
+  const zone = { 1: endZone(1), [-1]: endZone(-1) } as Record<1 | -1, number[]>
+  const zRows = { 1: new Map<number, Float64Array>(), [-1]: new Map<number, Float64Array>() } as Record<1 | -1, Map<number, Float64Array>>
+  const endRow = (end: 1 | -1, y: number) => {
+    let row = zRows[end].get(y)
+    if (!row) {
+      const zs = zone[end]
+      row = new Float64Array(zs.length)
+      for (let k = 0; k < zs.length; k++) row[k] = ringZ(rings[zs[k]].ring, y)
+      zRows[end].set(y, row)
+    }
+    return row
+  }
+  const endPoint = (end: 1 | -1, z: number, y: number): THREE.Vector3 | null => {
+    const az = Math.abs(z)
+    const zs = zone[end], row = endRow(end, y)
+    for (let k = 0; k < zs.length; k++) {
+      const i = zs[k]
+      const zi = row[k]
       // zi = 0 means the ring does not reach this height (matters on the centre line, where az = 0)
       if (zi > 0 && zi >= az) {
         if (k === 0) return new THREE.Vector3(rings[i].x, y, z)
@@ -557,7 +578,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
       const key = i * 10007 + j
       if (cache.has(key)) return cache.get(key)!
       let p: [number, number] = [a0 + i * da, b0 + j * db]
-      if (!inside(p, poly)) p = nearestOnPoly(p, poly)
+      if (!corner[i * (nb + 1) + j]) p = nearestOnPoly(p, poly)
       const v = project(p[0], p[1])
       cache.set(key, v)
       return v
@@ -565,12 +586,15 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     const pos: number[] = []
     const uv: number[] = []
     const uScale = endOn ? 1 : L
+    // which grid corners lie inside the outline, worked out once per corner (each is shared by four cells)
+    const corner = new Uint8Array((na + 1) * (nb + 1))
+    for (let i = 0; i <= na; i++) for (let j = 0; j <= nb; j++) corner[i * (nb + 1) + j] = inside([a0 + i * da, b0 + j * db], poly) ? 1 : 0
+    const inC = (ii: number, jj: number) => corner[ii * (nb + 1) + jj] === 1
     for (let i = 0; i < na; i++)
       for (let j = 0; j < nb; j++) {
         // edge cells count when their centre or any corner is inside: their outside corners snap onto the outline,
         // so the skin follows slanted and rounded edges instead of stepping along the grid
-        const inC = (ii: number, jj: number) => inside([a0 + ii * da, b0 + jj * db], poly)
-        if (!inside([a0 + (i + 0.5) * da, b0 + (j + 0.5) * db], poly) && !inC(i, j) && !inC(i + 1, j) && !inC(i + 1, j + 1) && !inC(i, j + 1)) continue
+        if (!inC(i, j) && !inC(i + 1, j) && !inC(i + 1, j + 1) && !inC(i, j + 1) && !inside([a0 + (i + 0.5) * da, b0 + (j + 0.5) * db], poly)) continue
         const q = [vert(i, j), vert(i + 1, j), vert(i + 1, j + 1), vert(i, j + 1)]
         if (q.some((v) => !v)) continue
         const [p00, p10, p11, p01] = q as THREE.Vector3[]

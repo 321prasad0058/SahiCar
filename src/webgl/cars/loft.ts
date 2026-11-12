@@ -156,8 +156,21 @@ function centre(s: { ring: Ring }) {
   return [0, y / s.ring.pts.length]
 }
 
+// decals ask the same ring the same height again and again (every column of a grid row shares its y), so answers
+// are remembered per ring: exact same numbers, a fraction of the work
+const ringZMemo = new WeakMap<Ring, Map<number, number>>()
+
 /** Where a horizontal line at height y meets the outer surface of a ring, on the +z side. */
 export function ringZ(r: Ring, y: number) {
+  let memo = ringZMemo.get(r)
+  if (!memo) ringZMemo.set(r, (memo = new Map()))
+  const hit = memo.get(y)
+  if (hit !== undefined) return hit
+  const z = ringZRaw(r, y)
+  memo.set(y, z)
+  return z
+}
+function ringZRaw(r: Ring, y: number) {
   let best = 0
   const p = r.pts
   for (let i = 0; i < p.length; i++) {

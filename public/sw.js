@@ -1,5 +1,5 @@
 // SahiCar service worker: instant repeat visits and a working app offline.
-// - hashed build files (/assets/*) and car images are cache-first: their URLs change when their content does;
+// - hashed build files (/assets/*), 3D loading posters (/3d/*, hashed names) and car images are cache-first: their URLs change when their content does;
 // - pages are network-first with a cached fallback, so a deploy shows up at once but offline still works.
 const VERSION = 'sahicar-v4'
 const ASSETS = `${VERSION}-assets`
@@ -42,7 +42,7 @@ self.addEventListener('fetch', (e) => {
   }
 
   const sameOrigin = url.origin === location.origin
-  const isAsset = sameOrigin && (url.pathname.startsWith('/assets/') || url.pathname.startsWith('/cars/'))
+  const isAsset = sameOrigin && (url.pathname.startsWith('/assets/') || url.pathname.startsWith('/cars/') || url.pathname.startsWith('/3d/'))
   const isPhoto = url.hostname === 'upload.wikimedia.org'
   if (!isAsset && !isPhoto) return
 
