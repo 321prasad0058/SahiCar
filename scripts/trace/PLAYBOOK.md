@@ -211,3 +211,8 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   off), and `greenhouse.followBody` (u) so the glass's foot sits on the leaning body edge instead of sticking out as a ledge.
   The inset is reached at each ring's own top, so on a raked tail keep lamps inside what the rings within 0.3 m reach.
 - A raked black (or body) A-pillar decal saw-toothed on a steep windscreen; leaving the A-pillar as plain glass reads right.
+- Grand Vitara: lamps and the chrome bar under a bonnet lip foreshortened to slivers while the nose `top` (0.955) sat inside the
+  `topRadius` roll; raising the nose `top` at 0.965–1 to the bonnet edge (0.98) put them on an upright face for +0.0015 IoU.
+- A raked tailgate with a body-coloured D-pillar beside the glass left a ragged dark seam along the glass edge;
+  `greenhouse.followBody` up to the quarter glass (0.16) closed it. The roof `spoiler` floated as a plank again: dropped, `roof.u0`
+  moved back a station.
