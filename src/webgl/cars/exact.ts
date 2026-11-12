@@ -2568,7 +2568,7 @@ const i20GrilleHW = (y: number) => (y < 0.6 ? 0.39 + ((y - 0.37) * 0.13) / 0.23 
 const i20Chevrons: Decal[] = [0.612, 0.552, 0.492, 0.432, 0.385].flatMap((y, row) => {
   const out: Decal[] = []
   for (let k = -6; k <= 6; k++) {
-    const zc = k * 0.105 + (row % 2) * 0.0525
+    const zc = k * 0.095 + (row % 2) * 0.0475
     if (Math.abs(zc) + 0.055 > Math.min(i20GrilleHW(y), i20GrilleHW(y + 0.034)) - 0.015) continue
     if (Math.abs(zc) < 0.31 && y > 0.38 && y < 0.55) continue
     out.push({ step: 0.004, mat: 'trim', layer: 1, depth: 0.012, poly: [[zc - 0.05, y], [zc - 0.034, y], [zc, y + 0.02], [zc + 0.034, y], [zc + 0.05, y], [zc, y + 0.034]] })
@@ -3578,4 +3578,123 @@ export const ALTROZ_X: CarSpec = {
   plate: 'MH 12 AZ 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, KYLAQ, FORTUNER, SAFARI, WINDSOR_EV, CITY_X, SYROS, ALCAZAR, ALTROZ_X]
+const VERNA_L = 4.565
+/** a side outline from a rounded rectangle given in u (0…1) and metres */
+const vernaU = (u0: number, y0: number, u1: number, y1: number, r: number): P2[] =>
+  rrectS(u0 * VERNA_L, y0, u1 * VERNA_L, y1, r).map(([x, y]) => [+(x / VERNA_L).toFixed(5), y] as P2)
+/** the parametric grille: rows of silver darts pointing outwards, every other row offset half a pitch, inside hw(y) */
+const vernaDarts = (ys: number[], hw: (y: number) => number, skip?: (z: number, y: number) => boolean): Decal[] =>
+  ys.flatMap((y, row) => {
+    const out: Decal[] = []
+    for (let k = -8; k <= 8; k++) {
+      const zc = k * 0.095 + (row % 2) * 0.0475
+      if (Math.abs(zc) < 0.03 || Math.abs(zc) + 0.05 > hw(y + 0.013) - 0.012) continue
+      if (skip?.(zc, y)) continue
+      const s = zc < 0 ? -1 : 1
+      out.push({ step: 0.004, mat: 'satin', layer: 1, depth: 0.012, poly: [[zc - s * 0.045, y], [zc + s * 0.03, y + 0.01], [zc + s * 0.05, y + 0.032], [zc - s * 0.02, y + 0.014]].map(([z, yy]) => [+z.toFixed(4), +yy.toFixed(4)] as P2) })
+    }
+    return out
+  })
+const vernaGrilleHW = (y: number) => 0.475 + (Math.min(y, 0.59) - 0.27) * 0.2
+/** the gallery camera stood close: the overlay shows a uniform 2 cm band (model high over roof and bonnet, photo low under
+ *  the sill), so every traced height comes down by this */
+const VERNA_DY = 0.02
+const vernaY = (pts: P2[]): P2[] => pts.map(([u, y]) => [u, +(y - VERNA_DY).toFixed(4)] as P2)
+const vernaD = (ds: Decal[]): Decal[] => ds.map((d) => ({ ...d, poly: vernaY(d.poly) }))
+
+/** Hyundai Verna (2026 facelift of the 6th gen). 4565 × 1765 × 1475, wheelbase 2670, 205/55 R16 (top trim).
+ *  Side profile from a levelled gallery side photo (1.470 m, axles 0.2 % apart: no scaling; axles at the official
+ *  wheelbase with the overhangs split as in the photo). Belt, glass, shut lines and handles read off a brightened metric
+ *  grid of the black car's cut-out; the full-width light bar, lamp clusters and parametric grille from a straight front
+ *  photo, the light bar, lamps, boot wing and the silver diffuser from a straight rear photo. */
+export const VERNA: CarSpec = {
+  id: 'hyundai-verna',
+  name: 'Hyundai Verna',
+  rakedEnds: true,
+  dropSlivers: true,
+  L: VERNA_L, W: 1.765, H: 1.475,
+  axles: [0.2238, 0.8087],
+  tyreR: 0.316, tyreW: 0.205, rim: 0.643, wheel: { style: 'swirl', spokes: 5 },
+  archGap: 0.09, archSquare: 0.1,
+  sill: vernaY([[0, 0.29], [0.008, 0.3], [0.02, 0.31], [0.05, 0.3], [0.08, 0.285], [0.1, 0.27], [0.12, 0.25], [0.15, 0.23], [0.25, 0.215], [0.3, 0.205], [0.5, 0.205], [0.7, 0.2], [0.75, 0.195], [0.85, 0.185], [0.9, 0.178], [0.95, 0.19], [0.97, 0.2], [0.98, 0.215], [0.99, 0.232], [1, 0.26]]),
+  // the tail face up to the boot wing, the short boot deck, the belt under the glass rising to the C-pillar, the bonnet
+  // (lowered by the crown) and the nose raised to just over the light bar
+  top: vernaY([[0, 0.98], [0.006, 1.055], [0.012, 1.088], [0.02, 1.098], [0.035, 1.09], [0.05, 1.088], [0.065, 1.1], [0.075, 1.115], [0.09, 1.113], [0.12, 1.103], [0.16, 1.092], [0.2, 1.08], [0.3, 1.05], [0.4, 1.03], [0.5, 1.013], [0.6, 0.998], [0.7, 0.982], [0.73, 0.98], [0.75, 0.985], [0.77, 0.978], [0.8, 0.966], [0.82, 0.952], [0.85, 0.93], [0.88, 0.898], [0.9, 0.874], [0.92, 0.845], [0.94, 0.815], [0.96, 0.783], [0.97, 0.765], [0.98, 0.75], [0.99, 0.74], [1, 0.735]]),
+  // round in plan: both ends taper into the corners
+  width: [[0, 0.9], [0.005, 0.915], [0.015, 0.94], [0.035, 0.965], [0.07, 0.985], [0.13, 0.997], [0.2, 1], [0.45, 0.99], [0.8, 0.997], [0.86, 0.99], [0.92, 0.97], [0.955, 0.95], [0.975, 0.935], [0.99, 0.915], [1, 0.895]],
+  crown: 0.015,
+  bulge: 0.04,
+  haunch: 0.05,
+  bonnetRidge: 0.008,
+  topRadius: 0.08,
+  noseSweep: 0.12,
+  tailSweep: 0.2,
+  greenhouse: {
+    u0: 0.075, u1: 0.75, tumble: 0.62,
+    // the long fastback rear glass rising off the short boot deck, the domed roof, the raked windscreen
+    top: vernaY([[0.075, 1.115], [0.08, 1.122], [0.09, 1.133], [0.1, 1.145], [0.11, 1.161], [0.12, 1.176], [0.14, 1.21], [0.16, 1.245], [0.18, 1.276], [0.2, 1.305], [0.22, 1.332], [0.24, 1.36], [0.26, 1.387], [0.28, 1.405], [0.3, 1.421], [0.32, 1.434], [0.34, 1.444], [0.36, 1.453], [0.38, 1.46], [0.4, 1.466], [0.43, 1.469], [0.46, 1.466], [0.48, 1.461], [0.5, 1.455], [0.52, 1.445], [0.54, 1.432], [0.56, 1.412], [0.58, 1.385], [0.6, 1.353], [0.62, 1.31], [0.64, 1.262], [0.66, 1.216], [0.68, 1.166], [0.7, 1.114], [0.72, 1.06], [0.74, 1.012], [0.75, 0.988]]),
+  },
+  roof: { u0: 0.2869, u1: 0.5521, black: false },
+  pillars: [
+    // body-coloured C-pillar behind the triangular quarter glass; black quarter-glass divider and B-pillar
+    { bottom: [0.27, 0.278], top: [0.282, 0.29], black: true },
+    { bottom: [0.456, 0.478], top: [0.435, 0.459], black: true },
+  ],
+  doors: [[0.295, 0.232], [0.467, 0.47], [0.72, 0.716]],
+  windowChrome: true,
+  front: vernaD([
+    // the full-width "horizon" light bar along the bonnet's leading edge
+    { step: 0.004, mat: 'drl', layer: 2, poly: band([[-0.755, 0.713], [-0.7, 0.706], [-0.6, 0.702], [-0.3, 0.701], [0.3, 0.701], [0.6, 0.702], [0.7, 0.706], [0.755, 0.713]], 0.016) },
+    // lamp clusters at the bumper corners: dark housing, the indicator/DRL strip on top, the projector strip, the low strip
+    { step: 0.004, mat: 'trim', mirror: true, depth: 0.004, poly: smooth([[0.555, 0.42], [0.7, 0.42], [0.76, 0.47], [0.763, 0.6], [0.56, 0.602]], 1) },
+    { step: 0.004, mat: 'drl', mirror: true, layer: 1, poly: rrect(0.575, 0.566, 0.748, 0.584, 0.004) },
+    { step: 0.004, mat: 'head', mirror: true, layer: 1, depth: 0.008, poly: rrect(0.59, 0.515, 0.7, 0.533, 0.004) },
+    { step: 0.004, mat: 'drl', mirror: true, layer: 1, poly: rrect(0.59, 0.462, 0.705, 0.476, 0.004) },
+    // the wide trapezoid grille: gloss black with rows of silver darts, a satin sliver along its sides
+    { step: 0.004, mat: 'gloss', poly: smooth(both([[0, 0.27], [0.46, 0.27], [0.49, 0.29], [0.535, 0.57], [0.53, 0.59], [0, 0.59]]), 1) },
+    ...vernaDarts([0.29, 0.34, 0.39, 0.44, 0.49, 0.54], vernaGrilleHW, (z, y) => Math.abs(z) < 0.3 && y > 0.37 && y < 0.5),
+    { step: 0.004, mat: 'satin', mirror: true, layer: 1, depth: 0.008, poly: [[0.523, 0.43], [0.533, 0.43], [0.565, 0.6], [0.535, 0.6]] },
+    // slatted black vents under the lamps
+    { step: 0.004, mat: 'gloss', mirror: true, depth: 0.006, poly: smooth([[0.55, 0.27], [0.71, 0.27], [0.755, 0.3], [0.755, 0.39], [0.56, 0.39]], 1) },
+    ...[0.3, 0.33, 0.36].map((y): Decal => ({ step: 0.004, mat: 'trim', mirror: true, layer: 1, depth: 0.012, poly: rrect(0.575, y, 0.74, y + 0.014, 0.004) })),
+    // black lower lip
+    { step: 0.004, mat: 'trim', poly: smooth(both([[0, 0.225], [0.66, 0.225], [0.74, 0.24], [0.74, 0.262], [0, 0.262]]), 1) },
+  ]),
+  rear: vernaD([
+    // the boot wing over the lid's trailing edge
+    { step: 0.004, mat: 'gloss', depth: 0.01, poly: smooth([[-0.64, 1.048], [0.64, 1.048], [0.7, 1.07], [0.71, 1.098], [0.64, 1.09], [-0.64, 1.09], [-0.71, 1.098], [-0.7, 1.07]], 1) },
+    // the black band carrying the tail-lamp units, the red light bar across it, crystal red blocks under it
+    { step: 0.004, mat: 'gloss', layer: 1, depth: 0.012, poly: smooth(both([[0, 0.83], [0.74, 0.83], [0.76, 0.85], [0.765, 0.932], [0, 0.932]]), 1) },
+    { step: 0.004, mat: 'tail', layer: 3, depth: 0.016, poly: rrect(-0.75, 0.894, 0.75, 0.906, 0.005) },
+    { step: 0.004, mat: 'tail', mirror: true, layer: 2, depth: 0.014, poly: smooth([[0.585, 0.848], [0.745, 0.848], [0.745, 0.884], [0.6, 0.884]], 1) },
+    { step: 0.004, mat: 'tail', mirror: true, layer: 2, depth: 0.014, poly: smooth([[0.44, 0.852], [0.57, 0.852], [0.57, 0.882], [0.455, 0.882]], 1) },
+    // the red line running down the outer edge, the reversing lamps under the units
+    { step: 0.004, mat: 'tail', mirror: true, layer: 3, depth: 0.016, poly: rrect(0.748, 0.71, 0.76, 0.9, 0.005) },
+    { step: 0.004, mat: 'gloss', mirror: true, layer: 1, depth: 0.006, poly: rrect(0.6, 0.755, 0.742, 0.81, 0.008) },
+    ...[0.762, 0.778, 0.794].map((y): Decal => ({ step: 0.004, mat: 'silver', mirror: true, layer: 2, depth: 0.008, poly: rrect(0.61, y, 0.732, y + 0.011, 0.003) })),
+    // the satin U round the black diffuser, red reflectors and fins in it
+    { step: 0.004, mat: 'satin', depth: 0.008, poly: smooth(both([[0, 0.305], [0.7, 0.305], [0.765, 0.33], [0.77, 0.47], [0.74, 0.492], [0, 0.492]]), 1) },
+    { step: 0.004, mat: 'trim', layer: 1, depth: 0.01, poly: smooth(both([[0, 0.305], [0.67, 0.305], [0.67, 0.457], [0, 0.457]]), 1) },
+    { step: 0.004, mat: 'reflector', mirror: true, layer: 2, depth: 0.012, poly: rrect(0.45, 0.42, 0.66, 0.438, 0.004) },
+    ...[0.1, 0.27].map((z): Decal => ({ step: 0.004, mat: 'gloss', mirror: true, layer: 2, depth: 0.014, poly: [[z - 0.012, 0.31], [z + 0.012, 0.31], [z + 0.012, 0.415], [z - 0.012, 0.415]] })),
+  ]),
+  side: vernaD([
+    // body-coloured door handles (the relief gives them a dark rim)
+    { step: 0.004, mat: 'body', depth: 0.01, poly: vernaU(0.48, 0.88, 0.535, 0.91, 0.012) },
+    { step: 0.004, mat: 'body', depth: 0.01, poly: vernaU(0.255, 0.915, 0.31, 0.945, 0.012) },
+    // the light bar running back along the top of the wing
+    { step: 0.004, mat: 'drl', depth: 0.006, poly: sideBand([[0.999, 0.701], [0.975, 0.712], [0.95, 0.724], [0.925, 0.736]], 0.014, VERNA_L) },
+    // the tail lamp's wedge on the flank: black housing, the red light bar ending in it
+    { step: 0.003, mat: 'gloss', depth: 0.002, poly: smooth([[0.004, 0.72], [0.004, 0.95], [0.03, 0.952], [0.07, 0.94], [0.05, 0.86], [0.025, 0.76]], 1) },
+    { step: 0.003, mat: 'tail', layer: 1, depth: 0.004, poly: [[0.004, 0.845], [0.004, 0.905], [0.04, 0.912], [0.035, 0.85]] },
+    // the satin diffuser running forward along the bumper's lower edge
+    { step: 0.004, mat: 'satin', depth: 0.006, poly: sideBand([[0.004, 0.47], [0.03, 0.41], [0.06, 0.35], [0.09, 0.31]], 0.035, VERNA_L) },
+  ]),
+  plates: { front: 0.42, rear: 0.735 },
+  mirrors: 'body',
+  mirrorU: 0.69,
+  paint: '#030406', // Titanium Black (the gallery car), kept very dark for the studio lights
+  plate: 'MH 12 HV 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, KYLAQ, FORTUNER, SAFARI, WINDSOR_EV, CITY_X, SYROS, ALCAZAR, ALTROZ_X, VERNA]
