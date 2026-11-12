@@ -49,7 +49,8 @@ export interface CarSpec {
   /** how far the corners of the nose / tail sweep back from the centre line (plan view), metres */
   noseSweep?: number
   tailSweep?: number
-  greenhouse: { u0: number; u1: number; top: Pts; tumble: number }
+  greenhouse: { u0: number; u1: number; top: Pts; tumble: number; /** up to this u the glass's foot follows the body's
+   *  own edge (leaning tail sides from `shoulder.inset`) instead of 0.955 × width, so no ledge sticks out under it */ followBody?: number }
   roof: { u0: number; u1: number; black: boolean }
   /** glass that wraps up into the roof edge */
   alpine?: [number, number]
@@ -448,7 +449,14 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     const x = xOf(u)
     const yb = top(u) - 0.025
     const yt = Math.max(yb + 0.004, ghTop(u))
-    return { x, yb, yt, ring: ring(((width(u) * W) / 2) * 0.955, yb, yt, 0.005, 0.11, hi ? 32 : 20, { tumble: gh.tumble }) }
+    let hwG = ((width(u) * W) / 2) * 0.955
+    // opt-in: up to u = followBody the glasshouse foot sits on the body's own edge (a tail whose sides lean in leaves
+    // no ledge under the glass), blending back to the plain width over the next 3 % of the length
+    if (gh.followBody != null) {
+      const zb = zAt(x, yb), k = Math.max(0, Math.min(1, (u - gh.followBody) / 0.03))
+      if (zb > 0) hwG = zb * (1 - k) + hwG * k
+    }
+    return { x, yb, yt, ring: ring(hwG, yb, yt, 0.005, 0.11, hi ? 32 : 20, { tumble: gh.tumble }) }
   })
   const inRange = (u: number, r?: [number, number]) => !!r && u >= r[0] && u <= r[1]
   /** the glasshouse surface at (x, y), for drawing pillars on it */

@@ -1072,4 +1072,104 @@ export const THAR_ROXX: CarSpec = {
   plate: 'MH 12 TR 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX]
+const WAGON_R_L = 3.655
+/** a circle outline for the Wagon R's fog lamps and headlamp bulb */
+const wagonRCircle = (zc: number, yc: number, r: number, n = 40): P2[] =>
+  Array.from({ length: n }, (_, i) => { const a = (i / n) * Math.PI * 2; return [+(zc + r * Math.cos(a)).toFixed(4), +(yc + r * Math.sin(a)).toFixed(4)] as P2 })
+/** a side outline from a rounded rectangle given in u (0…1) and metres */
+const wagonRRectU = (u0: number, y0: number, u1: number, y1: number, r: number): P2[] =>
+  rrectS(u0 * WAGON_R_L, y0, u1 * WAGON_R_L, y1, r).map(([x, y]) => [+(x / WAGON_R_L).toFixed(5), y] as P2)
+
+/** Maruti Suzuki Wagon R (2019 3rd gen, 2022 update). 3655 × 1620 × 1675, wheelbase 2435, 165/70 R14 (ZXi Plus).
+ *  Side profile from a levelled long-lens side photo (roof 1.677 m); axles at the official wheelbase with the overhangs
+ *  split as in the photo. The tall-boy shape: the near-vertical tailgate raked in above the lamps, the tail lamps
+ *  climbing the D-pillars beside the glass, a high flat roof, the short bonnet. Lamps, grille and bumpers from straight
+ *  front and rear studio photos. */
+export const WAGON_R: CarSpec = {
+  id: 'maruti-wagon-r',
+  name: 'Maruti Suzuki Wagon R',
+  rakedEnds: true,
+  dropSlivers: true,
+  L: WAGON_R_L, W: 1.62, H: 1.675,
+  axles: [0.1545, 0.8207],
+  tyreR: 0.2933, tyreW: 0.165, rim: 0.606, wheel: { style: 'twin', spokes: 7 },
+  archGap: 0.04, archSquare: 0.15,
+  sill: [[0, 0.355], [0.005, 0.342], [0.015, 0.335], [0.03, 0.322], [0.05, 0.3], [0.08, 0.28], [0.12, 0.26], [0.2, 0.235], [0.25, 0.222], [0.4, 0.217], [0.55, 0.211], [0.65, 0.2], [0.72, 0.186], [0.8, 0.178], [0.88, 0.172], [0.93, 0.166], [0.96, 0.165], [0.98, 0.168], [0.99, 0.175], [0.996, 0.195], [1, 0.24]],
+  // the rear bumper, the upright tailgate up to the lamps' feet, then raked in beside the glass up to the roof; the
+  // D-pillar falls to the belt, the belt rises gently towards the tail; the short bonnet rounding down to the nose
+  top: [[0, 0.64], [0.005, 0.78], [0.01, 0.9], [0.014, 0.97], [0.018, 1.02], [0.023, 1.1], [0.028, 1.18], [0.036, 1.255], [0.045, 1.32], [0.055, 1.385], [0.065, 1.44], [0.075, 1.49], [0.085, 1.53], [0.09, 1.552], [0.095, 1.575], [0.1, 1.596], [0.11, 1.614], [0.13, 1.641], [0.147, 1.648], [0.151, 1.6], [0.155, 1.48], [0.16, 1.34], [0.164, 1.26], [0.168, 1.235], [0.18, 1.228], [0.2, 1.222], [0.3, 1.2], [0.43, 1.175], [0.6, 1.14], [0.72, 1.105], [0.76, 1.085], [0.81, 1.05], [0.83, 1.025], [0.85, 1.0], [0.87, 0.983], [0.9, 0.955], [0.93, 0.915], [0.95, 0.88], [0.96, 0.858], [0.97, 0.83], [0.98, 0.79], [0.99, 0.7], [0.996, 0.62], [1, 0.555]],
+  // boxy in plan, but the corners at both ends are rounded
+  width: [[0, 0.86], [0.006, 0.915], [0.015, 0.95], [0.03, 0.972], [0.06, 0.988], [0.12, 1], [0.5, 1], [0.86, 1], [0.9, 0.99], [0.94, 0.972], [0.965, 0.95], [0.982, 0.92], [0.993, 0.885], [1, 0.84]],
+  crown: 0.015,
+  bulge: 0.02,
+  // the D-pillars lean in above the tail lamps' feet (tumblehome at the tail only: the shoulder sits above the belt elsewhere)
+  shoulder: { y: [[0, 1.15], [0.152, 1.15], [0.168, 1.3], [0.18, 1.4], [1, 1.4]], inset: 0.2 },
+  haunch: 0.045,
+  topRadius: 0.1,
+  noseSweep: 0.2,
+  tailSweep: 0.12,
+  greenhouse: {
+    u0: 0.147, u1: 0.81, tumble: 0.74, followBody: 0.17,
+    // the short roof overhang over the tailgate, the long flat roof, then the steep windscreen
+    top: [[0.147, 1.645], [0.17, 1.647], [0.2, 1.648], [0.3, 1.645], [0.4, 1.621], [0.5, 1.596], [0.55, 1.574], [0.6, 1.536], [0.62, 1.51], [0.64, 1.487], [0.65, 1.472], [0.66, 1.45], [0.68, 1.401], [0.7, 1.348], [0.72, 1.298], [0.74, 1.245], [0.76, 1.189], [0.78, 1.13], [0.8, 1.07], [0.81, 1.05]],
+  },
+  roof: { u0: 0.147, u1: 0.63559, black: false },
+  pillars: [
+    // the black quarter panel and C-pillar behind the rear door (the body itself forms the D-pillar), the black
+    // B-pillar; the A-pillar is left as dark glass (a raked pillar decal saw-toothed on the steep windscreen)
+    { bottom: [0.165, 0.216], top: [0.147, 0.214], black: true },
+    { bottom: [0.428, 0.447], top: [0.428, 0.447], black: true },
+  ],
+  doors: [[0.736, 0.733], [0.438, 0.437], [0.236, 0.196]],
+  front: [
+    // the gloss-black grille between the headlamps with its dark hexagon pattern and one chrome bar (no badge)
+    { step: 0.005, mat: 'gloss', poly: both([[0, 0.672], [0.45, 0.672], [0.466, 0.685], [0.47, 0.8], [0.478, 0.826], [0, 0.83]]) },
+    { step: 0.005, mat: 'mesh', layer: 1, poly: both([[0, 0.684], [0.44, 0.684], [0.455, 0.695], [0.458, 0.8], [0.462, 0.816], [0, 0.818]]) },
+    { step: 0.004, mat: 'chrome', layer: 2, depth: 0.01, poly: both([[0, 0.738], [0.4, 0.738], [0.432, 0.742], [0.446, 0.75], [0.432, 0.758], [0.4, 0.762], [0, 0.762]]) },
+    // tall headlamps in dark bezels: the chrome reflector bowl above, the clear indicator strip with amber below
+    { step: 0.004, mat: 'gloss', mirror: true, depth: 0.004, poly: smooth([[0.489, 0.655], [0.615, 0.648], [0.722, 0.645], [0.733, 0.665], [0.736, 0.721], [0.733, 0.824], [0.725, 0.882], [0.7, 0.9], [0.594, 0.894], [0.499, 0.88], [0.482, 0.855], [0.472, 0.804], [0.468, 0.683]], 1) },
+    { step: 0.004, mat: 'silver', mirror: true, layer: 1, depth: 0.006, poly: smooth([[0.497, 0.716], [0.72, 0.714], [0.724, 0.8], [0.716, 0.864], [0.695, 0.88], [0.6, 0.876], [0.512, 0.864], [0.497, 0.83], [0.492, 0.75]], 1) },
+    { step: 0.004, mat: 'head', mirror: true, layer: 2, depth: 0.008, poly: wagonRCircle(0.625, 0.795, 0.03) },
+    { step: 0.004, mat: 'silver', mirror: true, layer: 1, depth: 0.006, poly: rrect(0.495, 0.664, 0.722, 0.704, 0.008) },
+    { step: 0.004, mat: 'amber', mirror: true, layer: 2, depth: 0.007, poly: rrect(0.56, 0.668, 0.635, 0.7, 0.005) },
+    // the black lower grille: a wide trapezoid with four slats, its bottom lip running out to the corners
+    { step: 0.005, mat: 'trim', poly: both([[0, 0.185], [0.56, 0.185], [0.575, 0.2], [0.57, 0.23], [0.55, 0.25], [0.4, 0.43], [0.37, 0.454], [0, 0.454]]) },
+    ...[0.3, 0.34, 0.38, 0.415].map((y): Decal => ({ step: 0.004, mat: 'gloss', layer: 1, depth: 0.004, poly: both([[0, y], [0.52 - (y - 0.25) * 0.85, y], [0.52 - (y - 0.25) * 0.85 - 0.01, y + 0.014], [0, y + 0.014]]) })),
+    // fog lamps in black pods at the bumper corners
+    { step: 0.004, mat: 'trim', mirror: true, depth: 0.006, poly: smooth([[0.585, 0.408], [0.58, 0.47], [0.6, 0.486], [0.698, 0.486], [0.71, 0.47], [0.71, 0.37], [0.695, 0.347], [0.638, 0.33]], 2) },
+    { step: 0.004, mat: 'chrome', mirror: true, layer: 1, depth: 0.008, poly: wagonRCircle(0.652, 0.412, 0.042) },
+    { step: 0.004, mat: 'head', mirror: true, layer: 2, depth: 0.01, poly: wagonRCircle(0.652, 0.412, 0.03) },
+  ],
+  rear: [
+    // the tailgate glass between the lamps, under the roof's short overhang
+    { step: 0.005, mat: 'gloss', depth: 0.003, poly: both([[0, 1.24], [0.57, 1.24], [0.585, 1.255], [0.555, 1.33], [0.535, 1.42], [0.524, 1.48], [0.51, 1.5], [0.49, 1.505], [0, 1.505]]) },
+    // tall tail lamps along the D-pillars: red lens, the clear block with the amber indicator and reversing lamp
+    { step: 0.004, mat: 'tail', mirror: true, depth: 0.008, poly: smooth([[0.65, 0.965], [0.762, 0.965], [0.772, 0.985], [0.772, 1.05], [0.765, 1.188], [0.735, 1.26], [0.68, 1.36], [0.628, 1.44], [0.585, 1.49], [0.56, 1.5], [0.535, 1.5], [0.527, 1.48], [0.527, 1.343], [0.579, 1.24], [0.622, 1.2], [0.638, 1.1], [0.642, 0.98]], 1) },
+    { step: 0.004, mat: 'reflector', mirror: true, layer: 1, depth: 0.009, poly: smooth([[0.6, 1.27], [0.69, 1.27], [0.645, 1.36], [0.6, 1.44], [0.56, 1.44], [0.562, 1.35]], 1) },
+    { step: 0.004, mat: 'silver', mirror: true, layer: 1, depth: 0.009, poly: smooth([[0.648, 1.002], [0.758, 1.002], [0.762, 1.06], [0.758, 1.19], [0.648, 1.2], [0.645, 1.1]], 1) },
+    { step: 0.004, mat: 'amber', mirror: true, layer: 2, depth: 0.01, poly: smooth([[0.652, 1.14], [0.756, 1.14], [0.755, 1.186], [0.652, 1.194]], 1) },
+    // the chrome garnish across the tailgate (no lettering)
+    { step: 0.004, mat: 'chrome', depth: 0.008, poly: both([[0, 1.035], [0.4, 1.035], [0.43, 1.042], [0.442, 1.06], [0.442, 1.088], [0.43, 1.104], [0.4, 1.11], [0, 1.11]]) },
+    // the tailgate's shut line round the bottom of the panel
+    { step: 0.005, mat: 'gloss', depth: 0.001, poly: band([[-0.632, 0.96], [-0.625, 0.864], [-0.602, 0.802], [-0.556, 0.748], [-0.465, 0.712], [-0.3, 0.702], [0, 0.7], [0.3, 0.702], [0.465, 0.712], [0.556, 0.748], [0.602, 0.802], [0.625, 0.864], [0.632, 0.96]], 0.012) },
+    // reflectors low in the bumper corners, the black diffuser along the bottom
+    { step: 0.004, mat: 'reflector', mirror: true, poly: rrect(0.57, 0.495, 0.745, 0.528, 0.008) },
+    { step: 0.005, mat: 'trim', poly: both([[0, 0.36], [0.5, 0.36], [0.545, 0.372], [0.56, 0.4], [0.55, 0.425], [0.52, 0.432], [0, 0.432]]) },
+  ],
+  side: [
+    // the tail lamp wrapping onto the flank beside the D-pillar
+    { step: 0.004, mat: 'tail', depth: 0.006, poly: [[0.082, 1.495], [0.078, 1.46], [0.074, 1.4], [0.07, 1.33], [0.069, 1.2], [0.066, 1.05], [0.062, 0.975], [0.024, 0.975], [0.021, 1.0], [0.025, 1.08], [0.03, 1.165], [0.038, 1.24], [0.047, 1.305], [0.057, 1.37], [0.067, 1.425], [0.074, 1.46], [0.079, 1.485]] },
+    // body-coloured door handles in dark recesses
+    { step: 0.004, mat: 'gloss', poly: wagonRRectU(0.47, 0.955, 0.505, 0.992, 0.012) },
+    { step: 0.004, mat: 'body', layer: 1, depth: 0.012, poly: wagonRRectU(0.472, 0.96, 0.503, 0.978, 0.008) },
+    { step: 0.004, mat: 'gloss', poly: wagonRRectU(0.212, 0.993, 0.247, 1.03, 0.012) },
+    { step: 0.004, mat: 'body', layer: 1, depth: 0.012, poly: wagonRRectU(0.214, 0.998, 0.245, 1.016, 0.008) },
+  ],
+  plates: { front: 0.563, rear: 0.94 },
+  mirrors: 'black',
+  rimTone: 'dark',
+  paint: '#8e0f17', // Gallant Red, darkened for the studio lights
+  plate: 'MH 12 WR 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, WAGON_R]

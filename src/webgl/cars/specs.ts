@@ -281,6 +281,6 @@ export function archetype(body: string, fuel?: string): CarSpec {
 }
 
 /** traced models that have passed the side-by-side check against their photos */
-const READY: string[] = ['tata-nexon', 'tata-punch', 'hyundai-creta', 'maruti-brezza', 'maruti-swift', 'maruti-fronx', 'maruti-dzire', 'mahindra-scorpio-n', 'kia-seltos', 'maruti-baleno', 'mahindra-thar-roxx']
+const READY: string[] = ['tata-nexon', 'tata-punch', 'hyundai-creta', 'maruti-brezza', 'maruti-swift', 'maruti-fronx', 'maruti-dzire', 'mahindra-scorpio-n', 'kia-seltos', 'maruti-baleno', 'mahindra-thar-roxx', 'maruti-wagon-r']
 // the five showcase cars; models being traced (exact.ts) join once they match their photos side by side
 export const SPEC_BY_ID: Record<string, CarSpec> = Object.fromEntries([...SHOWCASE, ...EXACT.filter((s) => READY.includes(s.id))].map((s) => [s.id, s]))

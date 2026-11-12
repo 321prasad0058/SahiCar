@@ -170,3 +170,12 @@ Add the id to `READY` in src/webgl/cars/specs.ts **and** to `SHOWCASE_IDS` in sr
 - Body-coloured door frames on a black hard top: pillars with `black: false` plus a 'body' side decal along the window tops
   (kept below ghTop − 0.075, where the black roof band starts). Thin black pillars on the hard top's corners tore at their
   tops; the dark quarter glass alone reads right.
+- Gallery side photos taken close (Wagon R flex-fuel show car: 1.766 m measured vs 1.675, axles 6 % apart) are useless; the
+  listing site's own image gallery on another portal had a long-lens side view (1.677 m) that cut out cleanly.
+- Tall-boy tails (Wagon R): the body forms the D-pillar. Let `top` climb the raked tailgate to the roof, run along the roof to
+  the D-pillar's front edge, then drop in a steep cliff to the belt; start the glasshouse at that edge. A body-coloured pillar
+  decal there crumpled. Make the body's top a hair higher than the glass roof at the joint, or the two z-fight in a seam.
+- Tumblehome at the tail only: `shoulder.inset` with the shoulder line placed above the belt elsewhere (y > top turns the inset
+  off), and `greenhouse.followBody` (u) so the glass's foot sits on the leaning body edge instead of sticking out as a ledge.
+  The inset is reached at each ring's own top, so on a raked tail keep lamps inside what the rings within 0.3 m reach.
+- A raked black (or body) A-pillar decal saw-toothed on a steep windscreen; leaving the A-pillar as plain glass reads right.
