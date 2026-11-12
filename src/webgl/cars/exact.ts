@@ -2678,4 +2678,115 @@ export const I20: CarSpec = {
   plate: 'MH 12 IT 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20]
+const WINDSOR_L = 4.295
+/** a side outline from a rounded rectangle given in u (0…1) and metres */
+const windsorU = (u0: number, y0: number, u1: number, y1: number, r: number): P2[] =>
+  rrectS(u0 * WINDSOR_L, y0, u1 * WINDSOR_L, y1, r).map(([x, y]) => [+(x / WINDSOR_L).toFixed(5), y] as P2)
+/** the lower grille's gloss-black diamonds, staggered rows kept inside its tapering outline */
+const windsorDiamonds: Decal[] = [0.318, 0.348, 0.378, 0.408].flatMap((y, row) => {
+  const out: Decal[] = []
+  const pitch = 0.056, hw = 0.5 + (y - 0.295) * 0.55
+  for (let z = (row % 2 ? pitch / 2 : 0) - 0.7; z < 0.7; z += pitch) {
+    if (Math.abs(z) + 0.026 > hw) continue
+    out.push({ step: 0.004, mat: 'gloss', layer: 2, depth: 0.01, poly: [[z - 0.025, y], [z, y + 0.0135], [z + 0.025, y], [z, y - 0.0135]] })
+  }
+  return out
+})
+
+/** MG Windsor EV (2024). 4295 × 1850 × 1677, wheelbase 2700, 215/55 R18 (Essence).
+ *  Side profile from the gallery's levelled side photo (1.718 m measured from the close camera, so heights scaled by 0.976;
+ *  the axles 1.3 % too far apart, so they sit at the official wheelbase with the overhangs split as in the photo). Belt,
+ *  pillars, handles and trim strips read off the cut-out's pixel columns; the light bar under the bonnet lip, the low
+ *  headlamp pods and the diamond lower grille from the straight front photo, the connected tail lamps from the rear. */
+export const WINDSOR_EV: CarSpec = {
+  id: 'mg-windsor-ev',
+  name: 'MG Windsor EV',
+  ev: true,
+  rakedEnds: true,
+  dropSlivers: true,
+  L: WINDSOR_L, W: 1.85, H: 1.677,
+  axles: [0.1937, 0.8223],
+  tyreR: 0.3469, tyreW: 0.215, rim: 0.659, wheel: { style: 'petal', spokes: 4 },
+  archGap: 0.12, archSquare: 0.15,
+  sill: [[0, 0.33], [0.01, 0.32], [0.03, 0.31], [0.06, 0.3], [0.1, 0.29], [0.3, 0.285], [0.5, 0.28], [0.7, 0.272], [0.8, 0.262], [0.88, 0.245], [0.93, 0.225], [0.96, 0.215], [0.98, 0.222], [0.99, 0.235], [1, 0.26]],
+  // the tail climbing to the black lip under the tailgate glass, the belt falling gently forwards to the mirror, the
+  // front quarter glass's foot rising to the windscreen base, then one smooth curve down the bonnet on the windscreen's
+  // line, over the light bar and down the raked face to the headlamp pods (a stepped bonnet lip rippled the wings)
+  top: [[0, 1.1], [0.008, 1.13], [0.016, 1.16], [0.024, 1.185], [0.03, 1.2], [0.05, 1.205], [0.1, 1.205], [0.2, 1.205], [0.28, 1.2], [0.35, 1.19], [0.42, 1.172], [0.48, 1.16], [0.52, 1.15], [0.58, 1.142], [0.62, 1.132], [0.66, 1.12], [0.7, 1.115], [0.74, 1.113], [0.78, 1.115], [0.805, 1.12], [0.82, 1.126], [0.835, 1.13], [0.845, 1.126], [0.86, 1.112], [0.875, 1.094], [0.89, 1.074], [0.905, 1.052], [0.92, 1.027], [0.932, 1.0], [0.942, 0.968], [0.952, 0.928], [0.962, 0.888], [0.972, 0.851], [0.982, 0.816], [0.991, 0.786], [1, 0.758]],
+  // round in plan: both ends taper hard into the corners
+  width: [[0, 0.86], [0.006, 0.9], [0.015, 0.93], [0.03, 0.955], [0.06, 0.975], [0.1, 0.99], [0.16, 1], [0.75, 1], [0.85, 0.99], [0.9, 0.977], [0.94, 0.958], [0.965, 0.938], [0.985, 0.912], [1, 0.885]],
+  crown: 0.01,
+  bulge: 0.04,
+  haunch: 0.035,
+  topRadius: 0.09,
+  noseSweep: 0.14,
+  tailSweep: 0.12,
+  greenhouse: {
+    u0: 0.03, u1: 0.835, tumble: 0.64, followBody: 0.12,
+    // the raked tailgate glass under the roof spoiler, the long roof, the long raked screen
+    top: [[0.03, 1.2], [0.04, 1.222], [0.06, 1.28], [0.08, 1.345], [0.1, 1.4], [0.11, 1.428], [0.115, 1.46], [0.12, 1.555], [0.13, 1.568], [0.14, 1.578], [0.16, 1.586], [0.18, 1.6], [0.2, 1.61], [0.22, 1.625], [0.24, 1.635], [0.28, 1.648], [0.32, 1.658], [0.36, 1.666], [0.4, 1.672], [0.44, 1.674], [0.47, 1.668], [0.5, 1.657], [0.52, 1.648], [0.54, 1.63], [0.56, 1.608], [0.58, 1.58], [0.6, 1.55], [0.62, 1.518], [0.64, 1.485], [0.66, 1.45], [0.68, 1.415], [0.7, 1.38], [0.72, 1.346], [0.74, 1.306], [0.76, 1.262], [0.78, 1.222], [0.8, 1.19], [0.82, 1.161], [0.835, 1.13]],
+  },
+  // the Essence's full glass roof reads black on every paint
+  roof: { u0: 0.1218, u1: 0.5471, black: true },
+  pillars: [
+    // the black C-pillar between the rear door glass and the quarter glass, the black B-pillar
+    { bottom: [0.268, 0.288], top: [0.27, 0.29], black: true },
+    { bottom: [0.448, 0.478], top: [0.45, 0.478], black: true },
+  ],
+  doors: [[0.215, 0.212], [0.478, 0.48], [0.732, 0.725]],
+  windowChrome: true,
+  front: [
+    // the full-width light bar under the bonnet lip: a dark band, the chrome bar between the DRL blades at its ends
+    { step: 0.005, mat: 'gloss', depth: 0.004, poly: smooth(both([[0, 0.888], [0.5, 0.888], [0.66, 0.892], [0.75, 0.9], [0.758, 0.915], [0.75, 0.935], [0.6, 0.935], [0, 0.935]]), 1) },
+    { step: 0.005, mat: 'chrome', layer: 1, depth: 0.008, poly: rrect(-0.52, 0.902, 0.52, 0.916, 0.005) },
+    { step: 0.005, mat: 'drl', layer: 1, mirror: true, poly: [[0.5, 0.902], [0.66, 0.904], [0.742, 0.909], [0.742, 0.926], [0.66, 0.922], [0.5, 0.917]] },
+    // the low headlamp pods: a dark rounded bowl, the projector lens on top, an LED line, the reflector below
+    { step: 0.005, mat: 'trim', mirror: true, depth: 0.006, poly: smooth([[0.53, 0.53], [0.56, 0.495], [0.74, 0.495], [0.795, 0.52], [0.8, 0.6], [0.8, 0.71], [0.78, 0.738], [0.56, 0.742], [0.53, 0.72]], 1) },
+    { step: 0.005, mat: 'drl', mirror: true, layer: 1, poly: band([[0.585, 0.64], [0.75, 0.64], [0.765, 0.655], [0.765, 0.695], [0.75, 0.71], [0.585, 0.71], [0.57, 0.695], [0.57, 0.655], [0.585, 0.64]], 0.012) },
+    { step: 0.005, mat: 'head', mirror: true, layer: 2, depth: 0.012, poly: rrect(0.635, 0.66, 0.7, 0.69, 0.012) },
+    { step: 0.005, mat: 'silver', mirror: true, layer: 1, depth: 0.004, poly: rrect(0.575, 0.607, 0.77, 0.619, 0.005) },
+    { step: 0.005, mat: 'silver', mirror: true, layer: 1, depth: 0.006, poly: smooth([[0.555, 0.52], [0.76, 0.52], [0.782, 0.54], [0.782, 0.592], [0.555, 0.592]], 1) },
+    // the diamond-mesh lower grille, its silver lip along the bottom
+    { step: 0.005, mat: 'trim', poly: smooth(both([[0, 0.27], [0.56, 0.27], [0.6, 0.285], [0.64, 0.39], [0.63, 0.435], [0.58, 0.448], [0, 0.45]]), 1) },
+    { step: 0.005, mat: 'mesh', layer: 1, poly: smooth(both([[0, 0.295], [0.53, 0.295], [0.57, 0.31], [0.6, 0.39], [0.59, 0.42], [0.55, 0.428], [0, 0.43]]), 1) },
+    ...windsorDiamonds,
+    { step: 0.005, mat: 'satin', layer: 2, depth: 0.01, poly: smooth(both([[0, 0.262], [0.6, 0.262], [0.68, 0.274], [0.685, 0.288], [0.6, 0.28], [0, 0.279]]), 1) },
+  ],
+  rear: [
+    // the black lip along the tailgate under the glass
+    { step: 0.004, mat: 'gloss', depth: 0.004, poly: smooth(both([[0, 1.12], [0.69, 1.12], [0.74, 1.13], [0.74, 1.18], [0.7, 1.186], [0, 1.188]]), 1) },
+    // the tail lamps: smoked housings with an L-shaped red guide along the bottom and up the outer edge, two red bars inside
+    { step: 0.004, mat: 'gloss', mirror: true, layer: 1, depth: 0.006, poly: smooth([[0.64, 0.95], [0.775, 0.95], [0.782, 0.975], [0.78, 1.1], [0.75, 1.112], [0.69, 1.09], [0.648, 1.0]], 1) },
+    { step: 0.004, mat: 'tail', mirror: true, layer: 2, poly: [[0.64, 0.958], [0.768, 0.958], [0.774, 0.972], [0.774, 1.09], [0.758, 1.096], [0.758, 0.974], [0.645, 0.973]] },
+    ...[1.015, 1.05].map((y): Decal => ({ step: 0.004, mat: 'tail', mirror: true, layer: 2, poly: [[0.675 + (y - 1.015) * 0.5, y], [0.745, y], [0.745, y + 0.013], [0.68 + (y - 1.015) * 0.5, y + 0.013]] })),
+    // the connected light bar: a red line over a chrome strip
+    { step: 0.004, mat: 'gloss', depth: 0.004, poly: rrect(-0.66, 0.942, 0.66, 0.975, 0.006) },
+    { step: 0.004, mat: 'tail', layer: 1, poly: [[-0.66, 0.958], [0.66, 0.958], [0.66, 0.971], [-0.66, 0.971]] },
+    { step: 0.004, mat: 'chrome', layer: 1, depth: 0.008, poly: rrect(-0.645, 0.944, 0.645, 0.956, 0.004) },
+    // the black lower bumper, red reflectors at its corners, the chrome strip along its top
+    { step: 0.004, mat: 'trim', poly: smooth(both([[0, 0.335], [0.66, 0.335], [0.74, 0.36], [0.775, 0.41], [0.7, 0.44], [0, 0.445]]), 1) },
+    { step: 0.004, mat: 'reflector', mirror: true, layer: 1, poly: [[0.66, 0.39], [0.69, 0.39], [0.745, 0.455], [0.725, 0.47]] },
+    { step: 0.004, mat: 'chrome', layer: 1, depth: 0.008, poly: rrect(-0.56, 0.445, 0.56, 0.459, 0.005) },
+  ],
+  side: [
+    // the tail lamp's wrap onto the flank: a wedge pointing forwards, its red guide along the lower edge
+    { step: 0.004, mat: 'gloss', depth: 0.004, poly: smooth([[0.005, 0.95], [0.03, 0.955], [0.05, 0.99], [0.07, 1.04], [0.092, 1.085], [0.088, 1.1], [0.005, 1.1]], 1) },
+    { step: 0.004, mat: 'tail', layer: 1, poly: [[0.005, 0.958], [0.028, 0.962], [0.048, 0.996], [0.068, 1.045], [0.086, 1.085], [0.075, 1.085], [0.058, 1.05], [0.04, 1.005], [0.022, 0.975], [0.005, 0.973]] },
+    // the rear side marker
+    { step: 0.004, mat: 'silver', depth: 0.004, poly: windsorU(0.04, 0.595, 0.06, 0.612, 0.006) },
+    // flush door handles
+    { step: 0.004, mat: 'chrome', depth: 0.006, poly: windsorU(0.505, 0.93, 0.55, 0.948, 0.008) },
+    { step: 0.004, mat: 'chrome', depth: 0.006, poly: windsorU(0.233, 0.965, 0.278, 0.983, 0.008) },
+    // chrome strips low on the doors, the silver blade along the side skirt
+    { step: 0.004, mat: 'chrome', depth: 0.004, poly: windsorU(0.3, 0.572, 0.452, 0.594, 0.008) },
+    { step: 0.004, mat: 'chrome', depth: 0.004, poly: windsorU(0.462, 0.572, 0.48, 0.594, 0.006) },
+    { step: 0.004, mat: 'satin', depth: 0.004, poly: smooth([[0.33, 0.283], [0.67, 0.283], [0.68, 0.296], [0.66, 0.303], [0.34, 0.303], [0.325, 0.296]], 1) },
+  ],
+  plates: { front: 0.525, rear: 0.64 },
+  mirrors: 'body',
+  mirrorU: 0.735,
+  paint: '#05070a', // Starry Black (the gallery car), kept very dark for the studio lights
+  plate: 'MH 12 WE 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, WINDSOR_EV]
