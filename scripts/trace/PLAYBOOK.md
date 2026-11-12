@@ -211,3 +211,15 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   off), and `greenhouse.followBody` (u) so the glass's foot sits on the leaning body edge instead of sticking out as a ledge.
   The inset is reached at each ring's own top, so on a raked tail keep lamps inside what the rings within 0.3 m reach.
 - A raked black (or body) A-pillar decal saw-toothed on a steep windscreen; leaving the A-pillar as plain glass reads right.
+- Tiago (raked hatch, body-coloured D-pillar up to the roof): a full pillar decal crumpled where the glasshouse wraps round
+  the tail; letting the body climb the tailgate (Wagon R style, shoulder inset) left a zigzag glass/body seam (body and glass
+  stations don't line up on a steep climb), and a rear tailgate-glass decal can't reach past 0.3 m from the end. What worked:
+  a Fronx-style belt kick (~1.24 m) plus a short body pillar decal only where the glasshouse still faces sideways (u ≥ 0.13).
+- With `cladding` set, decals ride 16 mm out, so sliver normals on a slanted lower edge throw 1.5 cm drips (Tiago side tail
+  lamp). Keep that edge horizontal or steep. Arch flares as side decals tear at the opening: keep the cladding for them.
+- A shoulder crease where `top` changes fast (belt kick at the mirror/cowl) ripples the front wing: drop the shoulder there.
+  Keep the windscreen base (`greenhouse.u1` top) level with the body's `top`, or the wing peaks at the cowl.
+- Headlamps tucked under the bonnet edge: with `crown`, the face's sides sit lower than `top`, so raise the nose `top` ~3 cm
+  above the lamp tops (Tiago 0.867 vs lamps 0.832) and keep `topRadius` ≤ 0.09, or the lamps' outer ends hook back.
+- Front/rear end decals running past the end face's half-width wrap back along the flank and show as spikes in the side view
+  (Tiago tail lamps at z 0.705 on a 0.707 face): keep them ~3 cm inside it.
