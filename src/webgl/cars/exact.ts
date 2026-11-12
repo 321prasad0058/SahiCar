@@ -3974,4 +3974,224 @@ export const SIERRA_EV_X: CarSpec = sierraK({
   plate: 'MH 12 EV 2026',
 }, 0.988)
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, KYLAQ, FORTUNER, SAFARI, WINDSOR_EV, CITY_X, SYROS, ALCAZAR, ALTROZ_X, VERNA, VICTORIS_X, SIERRA_X, SIERRA_EV_X]
+const NIOS_L = 3.815
+/** the gallery side photo reads 1.554 m over the low roof rails against the official 1.52: heights × 0.978 */
+const NIOS_K = 0.978
+const niosK = (pts: P2[]): P2[] => pts.map(([u, y]) => [u, +(y * NIOS_K).toFixed(4)] as P2)
+/** the close camera spreads the photo's axles (0.1538, 0.8267) 4.8 % too far apart: map a photo u so they land on the
+ *  official wheelbase (overhangs split as in the photo) */
+const niosU = (u: number): number => {
+  const a = 0.1538, b = 0.8267, A = 0.1682, B = 0.8104
+  const m = u < a ? (u / a) * A : u > b ? B + ((u - b) / (1 - b)) * (1 - B) : A + ((u - a) / (b - a)) * (B - A)
+  return +m.toFixed(5)
+}
+/** side features traced in photo u / photo metres → model u / metres */
+const niosS = (pts: P2[]): P2[] => pts.map(([u, y]) => [niosU(u), +(y * NIOS_K).toFixed(4)] as P2)
+const niosRectU = (u0: number, y0: number, u1: number, y1: number, r: number): P2[] =>
+  rrectS(u0 * NIOS_L, y0, u1 * NIOS_L, y1, r).map(([x, y]) => [+(x / NIOS_L).toFixed(5), y] as P2)
+/** the sideways Y of the LED DRL in each bumper pod: a short inner arm and two arms opening outwards */
+const niosY = (cz: number, cy: number, s: number): P2[] => [
+  [cz - 0.07 * s, cy - 0.009], [cz - 0.012, cy - 0.011], [cz + 0.045 * s, cy - 0.118 * s], [cz + 0.066 * s, cy - 0.108 * s],
+  [cz + 0.018, cy], [cz + 0.066 * s, cy + 0.108 * s], [cz + 0.045 * s, cy + 0.118 * s], [cz - 0.012, cy + 0.011], [cz - 0.07 * s, cy + 0.009],
+]
+
+/** the grille's big honeycomb: rows of dark hexagon cells (pitch 0.1 m, every other row offset half a pitch) inside
+ *  half-width hw, skipping the number plate */
+const niosHoney = (ys: number[], hw: (y: number) => number): Decal[] =>
+  ys.flatMap((y, row) => {
+    const out: Decal[] = []
+    for (let k = -8; k <= 8; k++) {
+      const zc = k * 0.1 + (row % 2) * 0.05
+      if (Math.abs(zc) + 0.042 > Math.min(hw(y), hw(y + 0.042))) continue
+      if (Math.abs(zc) < 0.29 && y + 0.042 > 0.375 && y < 0.51) continue
+      out.push({ step: 0.004, mat: 'trim', layer: 2, depth: 0.012, poly: [[zc - 0.042, y + 0.021], [zc - 0.024, y], [zc + 0.024, y], [zc + 0.042, y + 0.021], [zc + 0.024, y + 0.042], [zc - 0.024, y + 0.042]] })
+    }
+    return out
+  })
+
+/** Hyundai Grand i10 Nios (Jan 2023 facelift). 3815 × 1680 × 1520 (over the low roof rails), wheelbase 2450, 175/60 R15.
+ *  Side profile from a levelled gallery side photo (1.554 m over the rails, the close camera's axles 4.8 % too far apart:
+ *  heights × 0.978, the axles at the official wheelbase with the overhangs split as in the photo, and the doors, handles,
+ *  fuel lid and lamp wraps mapped with them; the silhouette kept in photo u). Belt kick, tailgate-glass wrap, shut lines
+ *  and lamps read off a metric grid of the cut-out; the swept headlamps, the wide honeycomb grille with its body-coloured
+ *  DRL pods, the wrap-around tail lamps and the bumpers from the straight front and rear photos. */
+export const GRAND_I10_NIOS: CarSpec = {
+  id: 'hyundai-grand-i10-nios',
+  name: 'Hyundai Grand i10 Nios',
+  rakedEnds: true,
+  dropSlivers: true,
+  L: NIOS_L, W: 1.68, H: 1.52,
+  axles: [0.1682, 0.8104],
+  tyreR: 0.2955, tyreW: 0.175, rim: 0.645, wheel: { style: 'blade', spokes: 5 },
+  archGap: 0.045, archSquare: 0.15,
+  sill: niosK([[0, 0.33], [0.005, 0.29], [0.01, 0.275], [0.02, 0.265], [0.03, 0.258], [0.05, 0.245], [0.08, 0.235], [0.15, 0.22], [0.25, 0.202], [0.4, 0.205], [0.6, 0.21], [0.72, 0.205], [0.8, 0.2], [0.9, 0.2], [0.95, 0.2], [0.97, 0.212], [0.98, 0.22], [0.99, 0.235], [0.996, 0.26], [1, 0.32]]),
+  // the raked tail under the tailgate glass; the body rising under the glass's wrap to the C-pillar, the belt falling
+  // along the doors, the cowl, then the bonnet curving down to the nose (lowered by the crown)
+  top: niosK([[0, 1.045], [0.01, 1.05], [0.02, 1.054], [0.03, 1.058], [0.04, 1.062], [0.06, 1.076], [0.08, 1.098], [0.1, 1.125], [0.12, 1.15], [0.14, 1.168], [0.16, 1.178], [0.175, 1.178], [0.19, 1.163], [0.2, 1.14], [0.21, 1.112], [0.22, 1.088], [0.24, 1.06], [0.27, 1.042], [0.3, 1.034], [0.4, 1.025], [0.5, 1.015], [0.6, 1.003], [0.68, 0.994], [0.71, 0.995], [0.725, 1.008], [0.74, 1.04], [0.755, 1.062], [0.77, 1.064], [0.79, 1.054], [0.81, 1.042], [0.83, 1.033], [0.85, 1.018], [0.87, 0.998], [0.89, 0.976], [0.91, 0.951], [0.93, 0.92], [0.95, 0.88], [0.96, 0.855], [0.97, 0.845], [0.98, 0.83], [0.99, 0.812], [0.996, 0.797], [1, 0.78]]),
+  // round in plan: both ends taper hard into the corners
+  width: [[0, 0.9], [0.006, 0.925], [0.018, 0.95], [0.04, 0.973], [0.08, 0.99], [0.15, 1], [0.45, 0.99], [0.8, 0.995], [0.86, 0.99], [0.92, 0.97], [0.955, 0.945], [0.978, 0.91], [0.992, 0.875], [1, 0.85]],
+  crown: 0.015,
+  bulge: 0.04,
+  haunch: 0.06,
+  topRadius: 0.06,
+  noseSweep: 0.3,
+  tailSweep: 0.24,
+  greenhouse: {
+    u0: 0.03, u1: 0.75, tumble: 0.62,
+    // the tailgate glass wrapping round the tail up under the roof spoiler, the roof (rails left out), the windscreen
+    top: niosK([[0.03, 1.06], [0.04, 1.08], [0.05, 1.11], [0.06, 1.15], [0.07, 1.195], [0.08, 1.237], [0.09, 1.278], [0.1, 1.318], [0.11, 1.37], [0.115, 1.408], [0.12, 1.432], [0.13, 1.443], [0.14, 1.45], [0.16, 1.464], [0.18, 1.479], [0.2, 1.493], [0.25, 1.505], [0.3, 1.516], [0.35, 1.524], [0.4, 1.528], [0.45, 1.526], [0.48, 1.52], [0.5, 1.511], [0.52, 1.5], [0.54, 1.486], [0.56, 1.469], [0.58, 1.444], [0.6, 1.414], [0.62, 1.374], [0.64, 1.333], [0.66, 1.292], [0.68, 1.247], [0.7, 1.205], [0.72, 1.163], [0.735, 1.125], [0.75, 1.07]]),
+  },
+  // the body-coloured roof spoiler overhangs the tailgate glass
+  roof: { u0: 0.11889, u1: 0.55344, black: false },
+  pillars: [
+    // the black B-pillar (the black C-pillar panel and A-pillar read as glass)
+    { bottom: [niosU(0.4125), niosU(0.435)], top: [niosU(0.4025), niosU(0.425)], black: true },
+  ],
+  doors: [[niosU(0.715), niosU(0.728)], [niosU(0.4375), niosU(0.4325)]],
+  front: [
+    // the swept headlamps up on the corners: dark housing, projector, amber indicator at the inner end
+    { step: 0.004, mat: 'trim', mirror: true, depth: 0.004, poly: smooth([[0.52, 0.692], [0.62, 0.7], [0.69, 0.71], [0.725, 0.73], [0.735, 0.79], [0.73, 0.86], [0.712, 0.888], [0.68, 0.872], [0.63, 0.82], [0.57, 0.745]], 1) },
+    { step: 0.004, mat: 'head', mirror: true, layer: 1, depth: 0.008, poly: rrect(0.64, 0.765, 0.712, 0.837, 0.034) },
+    { step: 0.004, mat: 'amber', mirror: true, layer: 1, depth: 0.006, poly: smooth([[0.57, 0.712], [0.635, 0.716], [0.64, 0.736], [0.6, 0.738]], 1) },
+    { step: 0.004, mat: 'drl', mirror: true, layer: 1, depth: 0.006, poly: band([[0.545, 0.703], [0.62, 0.709], [0.7, 0.719], [0.738, 0.735]], 0.012) },
+    // the wide gloss-black honeycomb grille across the bumper, out round the DRL pods
+    { step: 0.004, mat: 'gloss', poly: smooth(both([[0, 0.232], [0.55, 0.236], [0.64, 0.256], [0.7, 0.3], [0.724, 0.38], [0.73, 0.5], [0.722, 0.565], [0.7, 0.59], [0, 0.59]]), 1) },
+    ...niosHoney([0.252, 0.302, 0.352, 0.402, 0.452, 0.502], (y) => (y < 0.3 ? 0.46 + (y - 0.25) * 1.2 : 0.53)),
+    // the body-coloured pods at the grille's corners carrying the sideways-Y LED DRLs
+    { step: 0.004, mat: 'body', mirror: true, layer: 2, depth: 0.01, poly: smooth([[0.53, 0.3], [0.6, 0.285], [0.68, 0.29], [0.69, 0.33], [0.69, 0.545], [0.67, 0.558], [0.53, 0.558], [0.53, 0.3]], 1) },
+    { step: 0.004, mat: 'drl', mirror: true, layer: 3, depth: 0.014, poly: niosY(0.615, 0.42, 0.75) },
+    // the black lower lip
+    { step: 0.005, mat: 'trim', poly: smooth(both([[0, 0.205], [0.58, 0.205], [0.64, 0.22], [0.66, 0.24], [0, 0.24]]), 1) },
+  ],
+  rear: [
+    // the tail lamps: red lens, a red light guide round the top and outer edge, the clear reversing lamp low inside
+    { step: 0.004, mat: 'trim', mirror: true, depth: 0.006, poly: smooth([[0.6, 0.99], [0.728, 1.0], [0.744, 0.95], [0.744, 0.86], [0.725, 0.805], [0.65, 0.8], [0.615, 0.855]], 1) },
+    { step: 0.004, mat: 'tail', mirror: true, layer: 1, depth: 0.01, poly: smooth([[0.612, 0.982], [0.726, 0.991], [0.738, 0.95], [0.738, 0.885], [0.632, 0.882], [0.615, 0.92]], 1) },
+    { step: 0.004, mat: 'silver', mirror: true, layer: 1, depth: 0.008, poly: rrect(0.645, 0.818, 0.735, 0.87, 0.012) },
+    // the dark garnish along the tailgate's top edge between the lamps
+    { step: 0.004, mat: 'gloss', poly: both([[0, 0.97], [0.6, 0.975], [0.6, 0.99], [0, 0.985]]) },
+    // the lower tailgate panel's shut line, dipping under the lamps
+    { step: 0.004, mat: 'gloss', depth: 0.001, poly: band([[-0.612, 0.83], [-0.6, 0.762], [-0.565, 0.705], [-0.5, 0.677], [-0.3, 0.666], [0, 0.664], [0.3, 0.666], [0.5, 0.677], [0.565, 0.705], [0.6, 0.762], [0.612, 0.83]], 0.012) },
+    // slanted reflectors in the bumper corners, the black lower bumper
+    { step: 0.004, mat: 'reflector', mirror: true, depth: 0.004, poly: [[0.64, 0.37], [0.695, 0.362], [0.715, 0.49], [0.66, 0.505]] },
+    { step: 0.005, mat: 'trim', poly: smooth(both([[0, 0.24], [0.58, 0.24], [0.64, 0.255], [0.66, 0.29], [0.6, 0.305], [0, 0.305]]), 1) },
+  ],
+  side: [
+    // chrome door handles in dark recesses
+    { step: 0.004, mat: 'gloss', depth: 0.002, poly: niosRectU(niosU(0.448), 0.872, niosU(0.5), 0.906, 0.012) },
+    { step: 0.004, mat: 'chrome', layer: 1, depth: 0.008, poly: niosRectU(niosU(0.452), 0.878, niosU(0.497), 0.898, 0.008) },
+    { step: 0.004, mat: 'gloss', depth: 0.002, poly: niosRectU(niosU(0.18), 0.872, niosU(0.248), 0.906, 0.012) },
+    { step: 0.004, mat: 'chrome', layer: 1, depth: 0.008, poly: niosRectU(niosU(0.184), 0.878, niosU(0.244), 0.898, 0.008) },
+    // the rear door's curved rear edge, from under the C-pillar round over the arch
+    { step: 0.004, mat: 'gloss', depth: 0.001, poly: sideBand(niosS([[0.287, 0.3], [0.265, 0.365], [0.22, 0.48], [0.18, 0.655], [0.16, 0.77], [0.152, 0.92], [0.155, 1.06], [0.162, 1.12]]), 0.012, NIOS_L) },
+    // the round fuel lid
+    { step: 0.004, mat: 'gloss', depth: 0.001, poly: sideBand([...Array.from({ length: 33 }, (_, i) => { const a = (i / 32) * Math.PI * 2; return [niosU(0.11) + (0.085 * Math.cos(a)) / NIOS_L, 0.83 * NIOS_K + 0.085 * Math.sin(a)] as P2 })], 0.012, NIOS_L) },
+    // the tail lamp wrapping onto the flank to a point
+    { step: 0.003, mat: 'trim', depth: 0.002, poly: smooth(niosS([[0.002, 0.83], [0.02, 0.815], [0.04, 0.85], [0.06, 0.888], [0.085, 0.94], [0.103, 0.99], [0.09, 1.002], [0.06, 1.004], [0.03, 1.0], [0.002, 0.99]]), 1) },
+    { step: 0.003, mat: 'tail', layer: 1, depth: 0.006, poly: smooth(niosS([[0.002, 0.9], [0.05, 0.9], [0.065, 0.91], [0.085, 0.948], [0.095, 0.988], [0.06, 0.994], [0.03, 0.99], [0.002, 0.982]]), 1) },
+    { step: 0.003, mat: 'silver', layer: 1, depth: 0.006, poly: smooth(niosS([[0.002, 0.835], [0.018, 0.828], [0.04, 0.86], [0.05, 0.888], [0.002, 0.888]]), 1) },
+    // the headlamp sweeping back along the wing
+    { step: 0.004, mat: 'trim', depth: 0.004, poly: smooth(niosS([[0.985, 0.73], [0.983, 0.79], [0.97, 0.84], [0.94, 0.892], [0.9, 0.92], [0.868, 0.925], [0.885, 0.894], [0.92, 0.818], [0.95, 0.752], [0.972, 0.73]]), 1) },
+    { step: 0.004, mat: 'drl', layer: 1, depth: 0.006, poly: sideBand(niosS([[0.982, 0.742], [0.968, 0.742], [0.948, 0.772], [0.925, 0.822]]), 0.012, NIOS_L) },
+  ],
+  plates: { front: 0.44, rear: 0.445 },
+  mirrors: 'body',
+  paint: '#860010', // Fiery Red, darkened for the studio lights
+  plate: 'MH 12 GN 2026',
+}
+
+const AURA_L = 3.995
+/** the gallery side photo reads 1.562 m against the official 1.52: heights × 0.973 */
+const AURA_K = 0.973
+const auraK = (pts: P2[]): P2[] => pts.map(([u, y]) => [u, +(y * AURA_K).toFixed(4)] as P2)
+/** the close camera spreads the photo's axles (0.1965, 0.8346) 4 % too far apart: map a photo u so they land on the
+ *  official wheelbase (overhangs split as in the photo) */
+const auraU = (u: number): number => {
+  const a = 0.1965, b = 0.8346, A = 0.21, B = 0.8233
+  const m = u < a ? (u / a) * A : u > b ? B + ((u - b) / (1 - b)) * (1 - B) : A + ((u - a) / (b - a)) * (B - A)
+  return +m.toFixed(5)
+}
+const auraS = (pts: P2[]): P2[] => pts.map(([u, y]) => [auraU(u), +(y * AURA_K).toFixed(4)] as P2)
+const auraRectU = (u0: number, y0: number, u1: number, y1: number, r: number): P2[] =>
+  rrectS(u0 * AURA_L, y0, u1 * AURA_L, y1, r).map(([x, y]) => [+(x / AURA_L).toFixed(5), y] as P2)
+
+/** Hyundai Aura (Jan 2023 facelift), the Grand i10 Nios's sedan. 3995 × 1680 × 1520, wheelbase 2450, 175/60 R15.
+ *  Built from the Nios: the same headlamps, plan rounding and sections, with the Aura's own side profile (a levelled
+ *  gallery side photo: 1.562 m, axles 4 % too far apart, so heights × 0.973 and the axles at the official wheelbase,
+ *  doors, handles and lamps mapped with them), the rear glass running down to a short boot with its lip, the wide
+ *  hexagon grille with L-shaped DRLs under a slim upper grille, and the wide tail lamps joined by a chrome strip, from
+ *  the straight front and rear photos. */
+export const AURA: CarSpec = {
+  ...GRAND_I10_NIOS,
+  id: 'hyundai-aura',
+  name: 'Hyundai Aura',
+  L: AURA_L, W: 1.68, H: 1.52,
+  axles: [0.21, 0.8233],
+  wheel: { style: 'split', spokes: 4 }, rimTone: 'dark',
+  sill: auraK([[0, 0.36], [0.005, 0.34], [0.01, 0.33], [0.02, 0.31], [0.03, 0.298], [0.05, 0.279], [0.08, 0.261], [0.11, 0.245], [0.2, 0.225], [0.28, 0.21], [0.35, 0.222], [0.5, 0.228], [0.7, 0.23], [0.75, 0.224], [0.85, 0.21], [0.93, 0.198], [0.95, 0.2], [0.97, 0.212], [0.98, 0.22], [0.99, 0.235], [0.996, 0.255], [1, 0.3]]),
+  // the boot: its upright tail face and lip, the flat deck to the rear glass; the belt rising along the rear glass's
+  // foot to the C-pillar, falling along the doors, the cowl, then the Nios's bonnet line (lowered by the crown)
+  top: auraK([[0, 1.0], [0.004, 1.1], [0.01, 1.148], [0.02, 1.163], [0.04, 1.168], [0.07, 1.172], [0.1, 1.18], [0.15, 1.183], [0.2, 1.176], [0.215, 1.162], [0.23, 1.135], [0.25, 1.11], [0.28, 1.09], [0.3, 1.077], [0.35, 1.066], [0.42, 1.056], [0.5, 1.046], [0.6, 1.036], [0.7, 1.027], [0.72, 1.028], [0.735, 1.05], [0.75, 1.083], [0.765, 1.093], [0.78, 1.087], [0.8, 1.066], [0.82, 1.054], [0.84, 1.046], [0.86, 1.028], [0.88, 1.009], [0.9, 0.986], [0.92, 0.952], [0.94, 0.922], [0.95, 0.9], [0.96, 0.878], [0.97, 0.86], [0.98, 0.845], [0.99, 0.83], [0.996, 0.815], [1, 0.8]]),
+  width: [[0, 0.88], [0.006, 0.91], [0.018, 0.94], [0.04, 0.965], [0.08, 0.985], [0.15, 1], [0.45, 0.99], [0.8, 0.995], [0.86, 0.99], [0.92, 0.97], [0.955, 0.945], [0.978, 0.91], [0.992, 0.875], [1, 0.85]],
+  greenhouse: {
+    u0: 0.1, u1: 0.755, tumble: 0.62,
+    // the rear glass rising off the boot deck, the roof (shark-fin left out), the windscreen
+    top: auraK([[0.1, 1.18], [0.11, 1.212], [0.12, 1.238], [0.13, 1.263], [0.14, 1.286], [0.15, 1.309], [0.16, 1.331], [0.17, 1.353], [0.18, 1.372], [0.19, 1.39], [0.2, 1.408], [0.21, 1.425], [0.22, 1.442], [0.23, 1.459], [0.24, 1.474], [0.25, 1.488], [0.27, 1.506], [0.3, 1.523], [0.35, 1.546], [0.4, 1.556], [0.43, 1.559], [0.46, 1.556], [0.5, 1.549], [0.52, 1.539], [0.55, 1.524], [0.58, 1.501], [0.6, 1.476], [0.62, 1.442], [0.64, 1.405], [0.66, 1.364], [0.68, 1.322], [0.7, 1.28], [0.72, 1.24], [0.74, 1.198], [0.755, 1.14]]),
+  },
+  roof: { u0: 0.25326, u1: 0.55622, black: false },
+  pillars: [
+    // the black B-pillar (the black C-pillar panel and A-pillar read as glass)
+    { bottom: [auraU(0.435), auraU(0.461)], top: [auraU(0.44), auraU(0.466)], black: true },
+  ],
+  doors: [[auraU(0.729), auraU(0.745)], [auraU(0.466), auraU(0.465)]],
+  front: [
+    // the Nios's swept headlamps
+    ...GRAND_I10_NIOS.front.slice(0, 4),
+    // the slim gloss-black upper grille between the headlamps' inner tips
+    { step: 0.004, mat: 'gloss', poly: smooth(both([[0, 0.722], [0.47, 0.722], [0.53, 0.73], [0.535, 0.745], [0.5, 0.768], [0, 0.77]]), 1) },
+    // the wide hexagon grille, its lower corners cut away by body-coloured wedges, the L-shaped DRLs at its outer ends
+    { step: 0.004, mat: 'gloss', poly: smooth(both([[0, 0.252], [0.43, 0.252], [0.52, 0.326], [0.6, 0.452], [0.635, 0.53], [0.665, 0.545], [0.7, 0.545], [0.725, 0.58], [0.72, 0.614], [0, 0.614]]), 1) },
+    ...niosHoney([0.27, 0.32, 0.37, 0.42, 0.47, 0.52, 0.565], (y) => Math.min(0.66, 0.4 + (y - 0.252) * 1.2)),
+    { step: 0.004, mat: 'drl', mirror: true, layer: 2, depth: 0.012, poly: [[0.67, 0.37], [0.692, 0.37], [0.692, 0.566], [0.6, 0.566], [0.6, 0.548], [0.67, 0.548]] },
+    // the black lower lip
+    { step: 0.005, mat: 'trim', poly: smooth(both([[0, 0.205], [0.58, 0.205], [0.64, 0.22], [0.66, 0.24], [0, 0.24]]), 1) },
+  ],
+  rear: [
+    // the boot lid's shut line round the lamps and plate panel
+    { step: 0.004, mat: 'gloss', depth: 0.001, poly: band([[-0.64, 0.97], [-0.634, 0.86], [-0.625, 0.77], [-0.6, 0.725], [-0.52, 0.708], [0, 0.705], [0.52, 0.708], [0.6, 0.725], [0.625, 0.77], [0.634, 0.86], [0.64, 0.97]], 0.012) },
+    // the wide tail lamps: smoked housing, red light guides along the top and the bottom, a clear lamp inside
+    { step: 0.004, mat: 'trim', mirror: true, layer: 1, depth: 0.006, poly: smooth([[0.38, 0.82], [0.47, 0.848], [0.57, 0.905], [0.7, 0.935], [0.735, 0.925], [0.735, 0.845], [0.71, 0.81], [0.52, 0.8]], 1) },
+    { step: 0.004, mat: 'tail', mirror: true, layer: 2, depth: 0.01, poly: band([[0.47, 0.84], [0.57, 0.893], [0.7, 0.922], [0.725, 0.915]], 0.014) },
+    { step: 0.004, mat: 'tail', mirror: true, layer: 2, depth: 0.01, poly: band([[0.33, 0.792], [0.52, 0.808], [0.7, 0.82], [0.725, 0.83]], 0.013) },
+    { step: 0.004, mat: 'silver', mirror: true, layer: 2, depth: 0.008, poly: smooth([[0.6, 0.85], [0.7, 0.86], [0.715, 0.9], [0.66, 0.895], [0.6, 0.875]], 1) },
+    // the chrome strip across the boot lid joining the lamps' lower guides
+    { step: 0.004, mat: 'chrome', layer: 1, depth: 0.006, poly: both([[0, 0.772], [0.33, 0.775], [0.36, 0.788], [0, 0.786]]) },
+    // the black wedges round the bumper's corner reflectors, the black lower bumper
+    { step: 0.004, mat: 'trim', mirror: true, depth: 0.004, poly: smooth([[0.52, 0.53], [0.722, 0.53], [0.722, 0.39], [0.68, 0.39]], 1) },
+    { step: 0.004, mat: 'reflector', mirror: true, layer: 1, depth: 0.006, poly: rrect(0.682, 0.4, 0.712, 0.515, 0.008) },
+    { step: 0.005, mat: 'trim', poly: smooth(both([[0, 0.3], [0.6, 0.3], [0.68, 0.31], [0.72, 0.34], [0.72, 0.37], [0, 0.37]]), 1) },
+  ],
+  side: [
+    // chrome door handles in dark recesses
+    { step: 0.004, mat: 'gloss', depth: 0.002, poly: auraRectU(auraU(0.484), 0.873, auraU(0.547), 0.91, 0.012) },
+    { step: 0.004, mat: 'chrome', layer: 1, depth: 0.008, poly: auraRectU(auraU(0.488), 0.879, auraU(0.543), 0.9, 0.008) },
+    { step: 0.004, mat: 'gloss', depth: 0.002, poly: auraRectU(auraU(0.222), 0.873, auraU(0.29), 0.91, 0.012) },
+    { step: 0.004, mat: 'chrome', layer: 1, depth: 0.008, poly: auraRectU(auraU(0.226), 0.879, auraU(0.286), 0.9, 0.008) },
+    // the rear door's curved rear edge, from under the C-pillar round over the arch
+    { step: 0.004, mat: 'gloss', depth: 0.001, poly: sideBand(auraS([[0.344, 0.3], [0.3125, 0.32], [0.281, 0.38], [0.24, 0.5], [0.208, 0.67], [0.195, 0.86], [0.198, 1.0], [0.212, 1.12]]), 0.012, AURA_L) },
+    // the round fuel lid
+    { step: 0.004, mat: 'gloss', depth: 0.001, poly: sideBand([...Array.from({ length: 33 }, (_, i) => { const a = (i / 32) * Math.PI * 2; return [auraU(0.159) + (0.085 * Math.cos(a)) / AURA_L, 0.84 * AURA_K + 0.085 * Math.sin(a)] as P2 })], 0.012, AURA_L) },
+    // the tail lamp wrapping round the corner, a dark slot running forward from it
+    { step: 0.003, mat: 'trim', depth: 0.002, poly: smooth(auraS([[0.002, 0.85], [0.03, 0.85], [0.06, 0.87], [0.085, 0.94], [0.09, 0.965], [0.06, 0.968], [0.03, 0.97], [0.002, 0.97]]), 1) },
+    { step: 0.003, mat: 'tail', layer: 1, depth: 0.006, poly: smooth(auraS([[0.002, 0.9], [0.03, 0.905], [0.035, 0.955], [0.002, 0.958]]), 1) },
+    // the headlamp sweeping back along the wing
+    { step: 0.004, mat: 'trim', depth: 0.004, poly: smooth(auraS([[0.985, 0.76], [0.983, 0.81], [0.97, 0.855], [0.94, 0.905], [0.9, 0.932], [0.875, 0.94], [0.89, 0.91], [0.915, 0.84], [0.95, 0.78], [0.972, 0.76]]), 1) },
+    { step: 0.004, mat: 'drl', layer: 1, depth: 0.006, poly: sideBand(auraS([[0.982, 0.77], [0.968, 0.77], [0.948, 0.795], [0.93, 0.83]]), 0.012, AURA_L) },
+  ],
+  plates: { front: 0.46, rear: 0.46 },
+  mirrors: 'body',
+  paint: '#8d9093', // Typhoon Silver, darkened for the studio lights
+  plate: 'MH 12 AU 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, KYLAQ, FORTUNER, SAFARI, WINDSOR_EV, CITY_X, SYROS, ALCAZAR, ALTROZ_X, VERNA, VICTORIS_X, SIERRA_X, SIERRA_EV_X, GRAND_I10_NIOS, AURA]
