@@ -65,3 +65,7 @@ reference photos.
 - Round the plan-view corners with a hard `width` taper over the last 2–3 % at each end plus `noseSweep`
   ~0.2 / `tailSweep` ~0.12 — without it a small SUV reads as a van.
 - The cladding shell now follows the body's own cross-section; a torn cladding edge means a builder bug.
+- Sculpting knobs: `shoulder` (character line + inset), `haunch` (~0.03: swell over the wheels, pinch at the
+  doors), `archSquare` (also squares the cladding flares), `bonnetRidge` (~0.012 m twin creases).
+- After rounding the corners, the nose face is narrower than the car: keep front parts within the end face's
+  half-width (≈ width(1) × W/2 … the taper value), or they stripe as they wrap.
