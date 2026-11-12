@@ -283,3 +283,12 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   'dark' went all gunmetal).
 - A body-coloured D-pillar over a dark tailgate-glass wrap: `pillars` with `black: false`, a near-zero belt range, the top
   range starting exactly on `roof.u0`, and a curved `rearEdge`; a top starting past `roof.u0` left a torn patch at the roof.
+- Carens Clavis (raked MPV tail under a roof spoiler, Hycross layout): end decals only land within 0.3 m of the end (`endZone`), so the
+  tailgate glass decal stopped where the tail `top` passed 0.3 m in (1.45 of 1.57 m). Steepening the raked run so the glass top sits
+  inside 0.3 m filled it (−0.3 % IoU). A side 'gloss' wrap of the tail glass over the climbing body crumpled; the photo's D-pillar was
+  body colour with only a thin glass strip at the edge, so it was dropped.
+- Even a long-lens side photo (1.714 m, wheelbase within 0.5 %) gave a uniform 2.2 cm blue band over roof and bonnet in the overlay;
+  lowering both by it took IoU 0.956 → 0.969. A bumpy bonnet `top` (uneven steps from the −crown shift) shows as ripples: refit it
+  as one smooth curve.
+- Tail-only `shoulder.inset`: start the line a few cm above the tail lamps and climb it gradually across the quarter-glass cliff, or
+  the tail corner wrinkles. Black double spokes with silver wedges at the rim: `split` + `rimTone: 'dark'` was closest.
