@@ -624,19 +624,22 @@ export const DZIRE: CarSpec = {
   plate: 'MH 12 DZ 2026',
 }
 
-// the Baleno's chrome smile: from under one headlamp, down round the bottom of the grille and up under the other
-const BALENO_SMILE: [number, number][] = [[0.535, 0.702], [0.515, 0.684], [0.49, 0.662], [0.46, 0.642], [0.42, 0.624], [0.36, 0.61], [0.28, 0.602], [0.15, 0.598]]
+// one of the facelift grille's three chrome bars: slim across the middle, a flared blade at each end
+const balenoBar = (y: number, hw: number): Decal => ({
+  step: 0.004, mat: 'chrome', layer: 2, depth: 0.01,
+  poly: both([[0, y], [hw - 0.1, y], [hw - 0.03, y - 0.003], [hw + 0.006, y - 0.002], [hw + 0.016, y + 0.008], [hw + 0.006, y + 0.02], [hw - 0.03, y + 0.019], [hw - 0.1, y + 0.012], [0, y + 0.012]]),
+})
 // one of the three L-shaped DRL elements along the headlamp's lower edge: a short upright at its inner end
 const balenoDrl = (z: number, y: number): Decal => ({
   step: 0.004, mat: 'drl', mirror: true, layer: 2, depth: 0.004,
-  poly: [[z, y], [z + 0.04, y + 0.003], [z + 0.04, y + 0.013], [z + 0.012, y + 0.011], [z + 0.015, y + 0.026], [z + 0.004, y + 0.026]],
+  poly: [[z, y], [z + 0.046, y + 0.003], [z + 0.046, y + 0.014], [z + 0.013, y + 0.012], [z + 0.016, y + 0.032], [z + 0.004, y + 0.032]],
 })
 
-/** Maruti Suzuki Baleno (2022, 3rd gen). 3990 × 1745 × 1530, wheelbase 2520, 195/55 R16.
+/** Maruti Suzuki Baleno (2026 facelift of the 2022 3rd gen). 3990 × 1745 × 1530, wheelbase 2520, 195/55 R16.
  *  Side profile from a levelled gallery side photo (roof 1.50 m with the shark-fin); the photo's axles sit 2 % too far
  *  apart, so the axles are at the official wheelbase with the overhangs split as in the photo. Belt, pillars, doors and
- *  lamps read off a metric grid of the levelled photo; tail lamps from a straight rear photo; the 2022 grille, chrome
- *  smile and fog-lamp pods from a front three-quarter photo (the later facelift's three-bar grille is not modelled). */
+ *  lamps read off a metric grid of the levelled photo; tail lamps from a straight rear photo; the facelift's three-bar
+ *  grille, headlamps and black lower bumper from a straight front photo and a front three-quarter. */
 export const BALENO: CarSpec = {
   id: 'maruti-baleno',
   name: 'Maruti Suzuki Baleno',
@@ -648,15 +651,16 @@ export const BALENO: CarSpec = {
   sill: [[0, 0.42], [0.006, 0.34], [0.015, 0.285], [0.03, 0.267], [0.05, 0.247], [0.08, 0.23], [0.12, 0.22], [0.2, 0.222], [0.3, 0.22], [0.5, 0.22], [0.6, 0.205], [0.7, 0.18], [0.75, 0.17], [0.85, 0.157], [0.9, 0.153], [0.93, 0.161], [0.95, 0.171], [0.97, 0.187], [0.985, 0.203], [0.995, 0.235], [1, 0.28]],
   // the tail rounding up to the lamps, the belt rising round the quarter glass, falling along the doors to the
   // mirror, then the long bonnet curving down to the nose
-  top: [[0, 0.8], [0.004, 0.95], [0.01, 1.05], [0.018, 1.09], [0.025, 1.095], [0.05, 1.13], [0.08, 1.19], [0.11, 1.225], [0.13, 1.235], [0.15, 1.2], [0.16, 1.155], [0.168, 1.115], [0.2, 1.1], [0.3, 1.073], [0.4, 1.05], [0.5, 1.022], [0.6, 0.993], [0.7, 0.98], [0.73, 0.99], [0.76, 1.025], [0.78, 1.009], [0.8, 0.997], [0.82, 0.979], [0.85, 0.953], [0.88, 0.928], [0.9, 0.91], [0.92, 0.891], [0.94, 0.865], [0.96, 0.845], [0.975, 0.825], [0.985, 0.803], [0.993, 0.783], [1, 0.75]],
+  top: [[0, 0.8], [0.004, 0.95], [0.01, 1.05], [0.018, 1.09], [0.025, 1.095], [0.05, 1.13], [0.08, 1.19], [0.11, 1.225], [0.13, 1.235], [0.15, 1.2], [0.16, 1.155], [0.168, 1.115], [0.2, 1.1], [0.3, 1.073], [0.4, 1.05], [0.5, 1.022], [0.6, 0.993], [0.7, 0.98], [0.73, 0.99], [0.76, 1.025], [0.78, 1.009], [0.8, 0.997], [0.82, 0.979], [0.85, 0.953], [0.88, 0.928], [0.9, 0.91], [0.92, 0.891], [0.94, 0.865], [0.96, 0.865], [0.975, 0.858], [0.985, 0.852], [0.993, 0.845], [1, 0.83]],
   // round in plan: both ends taper hard into the corners
-  width: [[0, 0.7], [0.005, 0.79], [0.015, 0.875], [0.035, 0.935], [0.07, 0.972], [0.13, 0.995], [0.17, 1], [0.45, 0.99], [0.8, 0.995], [0.86, 0.99], [0.92, 0.965], [0.955, 0.92], [0.978, 0.85], [0.992, 0.77], [1, 0.68]],
+  width: [[0, 0.7], [0.005, 0.79], [0.015, 0.875], [0.035, 0.935], [0.07, 0.972], [0.13, 0.995], [0.17, 1], [0.45, 0.99], [0.8, 0.995], [0.86, 0.99], [0.92, 0.965], [0.955, 0.93], [0.972, 0.89], [0.986, 0.845], [0.996, 0.805], [1, 0.79]],
   crown: 0.02,
   bulge: 0.04,
   // the crease from the headlamp along the doors, rising over the handles onto the rear haunch
   shoulder: { y: [[0, 1.0], [0.2, 0.975], [0.5, 0.935], [0.8, 0.9], [1, 0.86]], inset: 0.035 },
   haunch: 0.06,
-  noseSweep: 0.32,
+  topRadius: 0.1,
+  noseSweep: 0.26,
   tailSweep: 0.3,
   greenhouse: {
     u0: 0.025, u1: 0.76, tumble: 0.62,
@@ -673,23 +677,20 @@ export const BALENO: CarSpec = {
   doors: [[0.274, 0.215], [0.425, 0.42], [0.694, 0.69]],
   windowChrome: true,
   front: [
-    // the wide gloss-black grille under the bonnet edge, from lamp to lamp, its 3D mesh
-    { step: 0.005, mat: 'gloss', poly: both([[0, 0.597], [0.28, 0.601], [0.36, 0.609], [0.42, 0.623], [0.46, 0.641], [0.49, 0.661], [0.515, 0.683], [0.533, 0.705], [0.54, 0.74], [0.54, 0.782], [0.528, 0.795], [0, 0.795]]) },
-    { step: 0.005, mat: 'mesh', layer: 1, poly: both([[0, 0.62], [0.28, 0.623], [0.36, 0.631], [0.41, 0.645], [0.45, 0.664], [0.48, 0.688], [0.5, 0.715], [0.51, 0.76], [0.5, 0.782], [0, 0.782]]) },
-    // the chrome smile along its bottom, rising under the headlamps
-    { step: 0.004, mat: 'chrome', layer: 2, depth: 0.008, poly: band([...BALENO_SMILE.map(([z, y]) => [-z, y] as [number, number]), ...BALENO_SMILE.slice().reverse()], 0.016) },
-    // swept-back headlamps: a dark housing, the projector high on the outside, three L-shaped DRLs along the bottom
-    { step: 0.004, mat: 'gloss', mirror: true, depth: 0.004, poly: [[0.548, 0.705], [0.56, 0.69], [0.6, 0.674], [0.65, 0.663], [0.69, 0.659], [0.708, 0.664], [0.71, 0.69], [0.71, 0.78], [0.7, 0.8], [0.69, 0.802], [0.65, 0.795], [0.6, 0.781], [0.56, 0.769], [0.548, 0.758]] },
-    { step: 0.004, mat: 'silver', mirror: true, layer: 1, depth: 0.01, poly: [[0.64, 0.74], [0.648, 0.722], [0.666, 0.715], [0.684, 0.722], [0.692, 0.74], [0.684, 0.758], [0.666, 0.765], [0.648, 0.758]] },
-    { step: 0.004, mat: 'silver', mirror: true, layer: 1, depth: 0.006, poly: band([[0.565, 0.745], [0.6, 0.753], [0.628, 0.758]], 0.012) },
-    balenoDrl(0.57, 0.69), balenoDrl(0.616, 0.68), balenoDrl(0.66, 0.674),
-    // fog lamps in black pods at the bumper corners, a chrome sweep over each
-    { step: 0.004, mat: 'gloss', mirror: true, poly: [[0.53, 0.33], [0.6, 0.315], [0.65, 0.318], [0.68, 0.34], [0.685, 0.41], [0.675, 0.455], [0.64, 0.45], [0.58, 0.418], [0.54, 0.38]] },
-    { step: 0.004, mat: 'silver', mirror: true, layer: 1, depth: 0.008, poly: [[0.615, 0.37], [0.626, 0.346], [0.65, 0.338], [0.674, 0.346], [0.685, 0.37], [0.674, 0.394], [0.65, 0.402], [0.626, 0.394]] },
-    { step: 0.004, mat: 'chrome', mirror: true, layer: 1, depth: 0.006, poly: [[0.565, 0.405], [0.6, 0.418], [0.635, 0.428], [0.662, 0.434], [0.668, 0.442], [0.662, 0.449], [0.635, 0.444], [0.6, 0.434], [0.568, 0.42], [0.56, 0.412]] },
-    // black lower grille with slats, curving up into the fog pods, and the black lip under the bumper
-    { step: 0.005, mat: 'trim', poly: both([[0, 0.28], [0.45, 0.28], [0.52, 0.3], [0.55, 0.335], [0.5, 0.35], [0.4, 0.36], [0, 0.36]]) },
-    { step: 0.005, mat: 'slats', layer: 1, depth: 0.004, poly: both([[0, 0.292], [0.44, 0.292], [0.48, 0.31], [0.44, 0.348], [0, 0.348]]) },
+    // the wide gloss-black grille under the bonnet edge, narrowing downwards, its 3D pattern and three chrome bars
+    { step: 0.004, mat: 'gloss', poly: both([[0, 0.495], [0.4, 0.495], [0.43, 0.512], [0.465, 0.59], [0.5, 0.655], [0.53, 0.695], [0.55, 0.73], [0.545, 0.762], [0, 0.768]]) },
+    { step: 0.004, mat: 'mesh', layer: 1, poly: both([[0, 0.51], [0.39, 0.51], [0.45, 0.59], [0.485, 0.655], [0.515, 0.7], [0.525, 0.745], [0, 0.752]]) },
+    balenoBar(0.69, 0.52), balenoBar(0.595, 0.46), balenoBar(0.5, 0.405),
+    // big swept headlamps from the grille's top corners, rising back along the bonnet edge: a dark housing, the
+    // projector lens high on the outside, a chrome eyebrow and three L-shaped DRLs along the lower edge
+    { step: 0.004, mat: 'gloss', mirror: true, depth: 0.004, poly: [[0.535, 0.712], [0.55, 0.69], [0.58, 0.668], [0.63, 0.658], [0.7, 0.654], [0.75, 0.656], [0.775, 0.668], [0.79, 0.7], [0.785, 0.75], [0.78, 0.8], [0.765, 0.822], [0.74, 0.815], [0.7, 0.8], [0.64, 0.778], [0.58, 0.756], [0.548, 0.74]] },
+    { step: 0.004, mat: 'head', mirror: true, layer: 1, depth: 0.006, poly: [[0.685, 0.738], [0.69, 0.726], [0.7, 0.721], [0.71, 0.726], [0.715, 0.738], [0.71, 0.75], [0.7, 0.755], [0.69, 0.75]] },
+    balenoDrl(0.575, 0.672), balenoDrl(0.635, 0.666), balenoDrl(0.7, 0.664),
+    // the black lower bumper: a wide band under the grille carrying the plate, its ends sweeping out to the fog lamps
+    { step: 0.004, mat: 'trim', poly: both([[0, 0.285], [0.38, 0.285], [0.46, 0.3], [0.54, 0.322], [0.62, 0.318], [0.69, 0.33], [0.72, 0.36], [0.72, 0.4], [0.69, 0.42], [0.55, 0.45], [0.44, 0.478], [0.4, 0.485], [0, 0.485]]) },
+    { step: 0.004, mat: 'slats', layer: 1, depth: 0.004, poly: both([[0, 0.297], [0.36, 0.297], [0.41, 0.31], [0.36, 0.33], [0, 0.33]]) },
+    { step: 0.004, mat: 'silver', mirror: true, layer: 1, depth: 0.008, poly: [[0.62, 0.345], [0.69, 0.345], [0.7, 0.355], [0.7, 0.378], [0.69, 0.388], [0.62, 0.388], [0.61, 0.378], [0.61, 0.355]] },
+    // the black lip under the bumper
     { step: 0.005, mat: 'trim', poly: both([[0, 0.2], [0.55, 0.2], [0.62, 0.225], [0.6, 0.245], [0, 0.245]]) },
   ],
   rear: [
@@ -714,9 +715,8 @@ export const BALENO: CarSpec = {
     { step: 0.004, mat: 'gloss', depth: 0.004, poly: [[0.085, 1.035], [0.07, 1.056], [0.04, 1.066], [0.014, 1.066], [0.01, 0.91], [0.025, 0.912], [0.05, 0.952], [0.072, 0.995], [0.087, 1.02]] },
     { step: 0.004, mat: 'tail', layer: 1, poly: [[0.08, 1.036], [0.068, 1.05], [0.04, 1.058], [0.014, 1.058], [0.014, 1.044], [0.04, 1.044], [0.062, 1.037], [0.075, 1.024]] },
   ],
-  plates: { front: 0.46, rear: 0.6 },
+  plates: { front: 0.435, rear: 0.6 },
   mirrors: 'body',
-  rimTone: 'dark',
   paint: '#04294f', // Nexa Blue (Celestial)
   plate: 'MH 12 BL 2026',
 }
