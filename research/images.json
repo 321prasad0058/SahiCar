@@ -215,8 +215,9 @@
   "page": "https://en.wikipedia.org/wiki/Kia_EV9"
  },
  "mahindra-xuv-3xo": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/2025_Mahindra_XUV_3XO_AX7L_front.jpg/960px-2025_Mahindra_XUV_3XO_AX7L_front.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Mahindra_XUV_3XO"
+  "src": "/cars/ai/mahindra-xuv-3xo.webp",
+  "page": "",
+  "ai": true
  },
  "mahindra-bolero": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Mahindra_Bolero_ZLX.jpg/960px-Mahindra_Bolero_ZLX.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
@@ -453,8 +454,9 @@
   "ai": true
  },
  "maruti-grand-vitara": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/2022_Suzuki_Grand_Vitara_GX_Smart_Hybrid_%28Indonesia%29_front_view.jpg/960px-2022_Suzuki_Grand_Vitara_GX_Smart_Hybrid_%28Indonesia%29_front_view.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Suzuki_Grand_Vitara_(2022)"
+  "src": "/cars/ai/maruti-grand-vitara.webp",
+  "page": "",
+  "ai": true
  },
  "maruti-e-vitara": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Suzuki_e_Vitara_in_Hamamatsu_Sta_front.jpg/960px-Suzuki_e_Vitara_in_Hamamatsu_Sta_front.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
