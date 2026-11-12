@@ -624,4 +624,135 @@ export const DZIRE: CarSpec = {
   plate: 'MH 12 DZ 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE]
+/** Chaikin corner-cutting on a closed outline: rounds its corners (n passes) */
+function smooth(poly: [number, number][], n = 2): [number, number][] {
+  let p = poly
+  for (let k = 0; k < n; k++) {
+    const q: [number, number][] = []
+    for (let i = 0; i < p.length; i++) {
+      const a = p[i], b = p[(i + 1) % p.length]
+      q.push([a[0] * 0.75 + b[0] * 0.25, a[1] * 0.75 + b[1] * 0.25], [a[0] * 0.25 + b[0] * 0.75, a[1] * 0.25 + b[1] * 0.75])
+    }
+    p = q
+  }
+  return p.map(([a, b]) => [+a.toFixed(4), +b.toFixed(4)] as [number, number])
+}
+/** a thin band along a side path given as [u, y]: offsets are taken in metres (u scaled by the car's length) */
+function sideBand(path: [number, number][], w: number, L: number): [number, number][] {
+  return band(path.map(([u, y]) => [u * L, y] as [number, number]), w).map(([x, y]) => [+(x / L).toFixed(5), +y.toFixed(4)] as [number, number])
+}
+// the Seltos's "tiger nose": a row of tall faceted teeth, each with a silver cap over a slimmer lower blade
+const seltosTooth = (z: number): Decal[] => [
+  { step: 0.005, mat: 'satin', layer: 2, depth: 0.012, poly: [[z - 0.012, 0.856], [z, 0.842], [z + 0.012, 0.856], [z + 0.012, 0.893], [z - 0.012, 0.893]] },
+  { step: 0.005, mat: 'chrome', layer: 2, depth: 0.01, poly: [[z - 0.008, 0.745], [z + 0.008, 0.745], [z + 0.008, 0.8], [z, 0.812], [z - 0.008, 0.8]] },
+]
+const SELTOS_L = 4.46
+/** a rounded rectangle outline (corner radius r, in the outline's own units) */
+function rrect(x0: number, y0: number, x1: number, y1: number, r: number): [number, number][] {
+  const out: [number, number][] = []
+  const c: [number, number, number][] = [[x1 - r, y0 + r, -Math.PI / 2], [x1 - r, y1 - r, 0], [x0 + r, y1 - r, Math.PI / 2], [x0 + r, y0 + r, Math.PI]]
+  for (const [cx, cy, a0] of c) for (let i = 0; i <= 4; i++) { const a = a0 + (i / 4) * (Math.PI / 2); out.push([+(cx + r * Math.cos(a)).toFixed(4), +(cy + r * Math.sin(a)).toFixed(4)]) }
+  return out
+}
+
+/** Kia Seltos (2026, 2nd gen). 4460 × 1830 × 1635, wheelbase 2690, 215/55 R18.
+ *  Side profile from a levelled gallery side photo (roof 1.65 m over slim rails; the close camera spreads the axles by
+ *  3.7 %, so the axles sit at the official wheelbase and the lower-body lines are mapped onto them). Belt, cladding and
+ *  shut lines read off the cut-out's pixel columns; lamps, grille and bumpers from the straight front and rear photos. */
+export const SELTOS: CarSpec = {
+  id: 'kia-seltos',
+  name: 'Kia Seltos',
+  L: SELTOS_L, W: 1.83, H: 1.635,
+  axles: [0.1924, 0.7955],
+  tyreR: 0.347, tyreW: 0.215, rim: 0.659, wheel: { style: 'swirl', spokes: 5 }, rimTone: 'dark',
+  archGap: 0.08, archSquare: 0.45,
+  sill: [[0, 0.4], [0.007, 0.39], [0.02, 0.375], [0.035, 0.365], [0.06, 0.345], [0.08, 0.32], [0.1, 0.27], [0.3, 0.265], [0.6, 0.265], [0.7, 0.265], [0.88, 0.25], [0.92, 0.24], [0.95, 0.25], [0.975, 0.25], [0.99, 0.25], [1, 0.27]],
+  // the upright tail up to the light bar, the belt sweeping up round the rear quarter glass (the body-coloured kick),
+  // the flat belt along the doors, then the long bonnet that rolls down to the upright nose
+  top: [[0, 0.96], [0.006, 1.08], [0.012, 1.15], [0.02, 1.2], [0.03, 1.21], [0.047, 1.215], [0.06, 1.24], [0.08, 1.3], [0.1, 1.355], [0.12, 1.375], [0.14, 1.37], [0.16, 1.348], [0.18, 1.31], [0.2, 1.275], [0.227, 1.235], [0.253, 1.205], [0.28, 1.198], [0.333, 1.192], [0.4, 1.186], [0.467, 1.174], [0.52, 1.169], [0.56, 1.163], [0.6, 1.153], [0.65, 1.15], [0.7, 1.165], [0.725, 1.178], [0.74, 1.172], [0.76, 1.158], [0.8, 1.138], [0.84, 1.116], [0.88, 1.098], [0.9, 1.081], [0.92, 1.063], [0.94, 1.036], [0.96, 1.004], [0.97, 0.985], [0.98, 0.962], [0.99, 0.945], [1, 0.93]],
+  // square-ish in plan, but the corners round off hard at both ends
+  width: [[0, 0.86], [0.006, 0.92], [0.02, 0.96], [0.05, 0.985], [0.1, 0.997], [0.5, 1], [0.88, 0.997], [0.93, 0.985], [0.96, 0.96], [0.985, 0.92], [1, 0.86]],
+  crown: 0.015,
+  bulge: 0.02,
+  shoulder: { y: [[0, 1.05], [0.5, 1.03], [1, 1.0]], inset: 0.02 },
+  haunch: 0.035,
+  bonnetRidge: 0.01,
+  topRadius: 0.1,
+  noseSweep: 0.22,
+  tailSweep: 0.14,
+  greenhouse: {
+    u0: 0.03, u1: 0.725, tumble: 0.78,
+    // the tailgate glass leaning back under the long roof spoiler, the flat roof, the raked screen
+    top: [[0.03, 1.21], [0.04, 1.25], [0.05, 1.3], [0.06, 1.36], [0.07, 1.43], [0.08, 1.5], [0.09, 1.55], [0.1, 1.575], [0.12, 1.59], [0.16, 1.605], [0.2, 1.613], [0.28, 1.622], [0.4, 1.63], [0.48, 1.63], [0.5, 1.622], [0.52, 1.607], [0.55, 1.57], [0.57, 1.535], [0.6, 1.48], [0.65, 1.378], [0.7, 1.25], [0.725, 1.178]],
+  },
+  roof: { u0: 0.1107, u1: 0.5283, black: false },
+  pillars: [
+    // black C-pillar between the rear door and quarter glass (it leans forward at the top), B- and A-pillars
+    { bottom: [0.222, 0.245], top: [0.252, 0.268], black: true },
+    { bottom: [0.415, 0.437], top: [0.415, 0.437], black: true },
+    { bottom: [0.7, 0.725], top: [0.552, 0.567], black: true },
+  ],
+  // squared black arch flares, a black band along the lower doors under the silver skirt, black bumper corners
+  cladding: { top: [[0, 0.74], [0.02, 0.7], [0.04, 0.58], [0.06, 0.55], [0.072, 0.6], [0.085, 0.81], [0.106, 0.86], [0.127, 0.89], [0.148, 0.92], [0.17, 0.935], [0.191, 0.937], [0.21, 0.93], [0.236, 0.913], [0.261, 0.87], [0.287, 0.79], [0.297, 0.63], [0.31, 0.6], [0.4, 0.604], [0.52, 0.598], [0.56, 0.592], [0.596, 0.57], [0.63, 0.52], [0.66, 0.47], [0.688, 0.46], [0.698, 0.6], [0.705, 0.8], [0.724, 0.85], [0.75, 0.9], [0.776, 0.925], [0.802, 0.925], [0.83, 0.907], [0.859, 0.877], [0.887, 0.818], [0.905, 0.78], [0.915, 0.63], [0.93, 0.58], [1, 0.56]], flare: 0.13, cut: true },
+  doors: [[0.689, 0.693], [0.4446, 0.4446], [0.227, 0.2145]],
+  front: [
+    // gloss-black band across the face: the square headlamps at its ends, the tiger-nose teeth between them
+    { step: 0.005, mat: 'gloss', poly: both([[0, 0.652], [0.45, 0.654], [0.62, 0.662], [0.7, 0.676], [0.74, 0.697], [0.755, 0.722], [0.76, 0.76], [0.76, 0.9], [0.755, 0.918], [0.74, 0.928], [0.6, 0.928], [0.3, 0.914], [0, 0.91]]) },
+    ...[-8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8].flatMap((k) => seltosTooth(k * 0.07)),
+    { step: 0.005, mat: 'mesh', layer: 1, poly: both([[0, 0.665], [0.55, 0.668], [0.62, 0.676], [0.62, 0.72], [0, 0.72]]) },
+    // headlamps: dark lens, an L of light along the top and outer edge, three thin vertical guides, the projector strip
+    { step: 0.005, mat: 'gloss', layer: 1, mirror: true, depth: 0.004, poly: smooth([[0.6, 0.745], [0.75, 0.745], [0.75, 0.922], [0.6, 0.922]], 1) },
+    { step: 0.005, mat: 'drl', layer: 2, mirror: true, poly: [[0.728, 0.77], [0.742, 0.77], [0.742, 0.914], [0.615, 0.914], [0.615, 0.9], [0.728, 0.9]] },
+    ...[0.645, 0.675, 0.705].map((z): Decal => ({ step: 0.005, mat: 'drl', layer: 2, mirror: true, poly: [[z - 0.006, 0.815], [z + 0.006, 0.815], [z + 0.006, 0.885], [z - 0.006, 0.885]] })),
+    { step: 0.005, mat: 'head', layer: 2, mirror: true, poly: [[0.62, 0.762], [0.72, 0.762], [0.72, 0.784], [0.62, 0.784]] },
+    // black lower bumper, the satin pods round the fog lamps, the slatted lower grille and the satin skid plate
+    { step: 0.005, mat: 'trim', poly: both([[0, 0.265], [0.6, 0.265], [0.72, 0.285], [0.77, 0.32], [0.785, 0.4], [0.785, 0.55], [0.75, 0.57], [0.6, 0.566], [0, 0.563]]) },
+    { step: 0.005, mat: 'satin', layer: 1, mirror: true, poly: rrect(0.6, 0.315, 0.775, 0.545, 0.035) },
+    { step: 0.005, mat: 'gloss', layer: 2, mirror: true, depth: 0.004, poly: rrect(0.635, 0.35, 0.765, 0.505, 0.025) },
+    { step: 0.005, mat: 'silver', layer: 3, mirror: true, poly: smooth([[0.66, 0.36], [0.74, 0.36], [0.74, 0.385], [0.66, 0.385]], 1) },
+    { step: 0.005, mat: 'slats', layer: 1, poly: smooth([[-0.555, 0.345], [0.555, 0.345], [0.555, 0.46], [-0.555, 0.46]], 1) },
+    { step: 0.005, mat: 'satin', layer: 2, poly: smooth(both([[0, 0.27], [0.6, 0.27], [0.65, 0.285], [0.665, 0.31], [0.64, 0.33], [0.55, 0.325], [0, 0.325]]), 2) },
+  ],
+  rear: [
+    // the full-width light bar along the top of the tailgate, brighter segments either side of the camera
+    { step: 0.005, mat: 'gloss', poly: [[-0.76, 1.14], [0.76, 1.14], [0.765, 1.186], [-0.765, 1.186]] },
+    { step: 0.005, mat: 'tail', layer: 1, poly: [[-0.74, 1.156], [0.74, 1.156], [0.74, 1.169], [-0.74, 1.169]] },
+    { step: 0.005, mat: 'tail', layer: 2, mirror: true, poly: [[0.12, 1.15], [0.26, 1.153], [0.26, 1.172], [0.12, 1.172]] },
+    // the boomerang lamps down the corners: a red bar down the outer edge, a wedge at the bottom
+    { step: 0.005, mat: 'gloss', layer: 1, mirror: true, depth: 0.004, poly: [[0.696, 1.14], [0.765, 1.14], [0.765, 0.815], [0.75, 0.798], [0.64, 0.872], [0.66, 0.9], [0.696, 1.09]] },
+    { step: 0.005, mat: 'tail', layer: 2, mirror: true, poly: [[0.665, 0.875], [0.73, 0.835], [0.73, 0.85], [0.68, 0.882]] },
+    // the tailgate's lower shut line, dipping from the lamps to run straight across
+    { step: 0.005, mat: 'gloss', depth: 0.001, poly: band([[-0.645, 0.815], [-0.6, 0.758], [-0.5, 0.752], [0, 0.75], [0.5, 0.752], [0.6, 0.758], [0.645, 0.815]], 0.012) },
+    // black lower bumper with a gloss plate recess, satin pods with twin red reflectors, the grey skid bar
+    { step: 0.005, mat: 'trim', poly: both([[0, 0.38], [0.76, 0.38], [0.785, 0.42], [0.785, 0.7], [0.74, 0.722], [0.6, 0.73], [0.55, 0.745], [0, 0.745]]) },
+    { step: 0.005, mat: 'gloss', layer: 1, depth: 0.004, poly: smooth([[-0.37, 0.52], [0.37, 0.52], [0.38, 0.74], [-0.38, 0.74]], 1) },
+    { step: 0.005, mat: 'satin', layer: 1, mirror: true, poly: rrect(0.575, 0.45, 0.775, 0.72, 0.035) },
+    { step: 0.005, mat: 'gloss', layer: 2, mirror: true, depth: 0.004, poly: rrect(0.615, 0.48, 0.765, 0.69, 0.025) },
+    { step: 0.005, mat: 'reflector', layer: 3, mirror: true, poly: [[0.655, 0.5], [0.672, 0.5], [0.672, 0.655], [0.655, 0.655]] },
+    { step: 0.005, mat: 'reflector', layer: 3, mirror: true, poly: [[0.685, 0.5], [0.702, 0.5], [0.702, 0.655], [0.685, 0.655]] },
+    { step: 0.005, mat: 'satin', layer: 2, poly: band([[-0.6, 0.52], [-0.58, 0.465], [-0.5, 0.44], [0, 0.44], [0.5, 0.44], [0.58, 0.465], [0.6, 0.52]], 0.03) },
+    { step: 0.005, mat: 'satin', layer: 2, mirror: true, poly: smooth([[0.28, 0.395], [0.5, 0.395], [0.5, 0.418], [0.28, 0.418]], 1) },
+  ],
+  side: [
+    // the star-map DRL: a light bar down the front corner, turning back along the bonnet's edge, on a black strip
+    { step: 0.005, mat: 'gloss', depth: 0.004, poly: sideBand([[0.877, 1.05], [0.925, 1.03], [0.934, 1.015], [0.941, 0.8], [0.947, 0.655]], 0.05, SELTOS_L) },
+    { step: 0.005, mat: 'drl', layer: 1, poly: sideBand([[0.88, 1.052], [0.925, 1.034], [0.933, 1.02], [0.94, 0.8], [0.945, 0.665]], 0.018, SELTOS_L) },
+    // the tail lamp wrapping round the corner: a black wedge with the red bar at the back and along the top
+    { step: 0.005, mat: 'gloss', depth: 0.004, poly: [[0.018, 0.79], [0.04, 0.79], [0.06, 0.95], [0.084, 1.13], [0.084, 1.185], [0.018, 1.19]] },
+    { step: 0.005, mat: 'tail', layer: 1, poly: [[0.022, 0.81], [0.035, 0.81], [0.035, 1.155], [0.022, 1.155]] },
+    { step: 0.005, mat: 'tail', layer: 1, poly: [[0.022, 1.157], [0.078, 1.162], [0.078, 1.175], [0.022, 1.172]] },
+    // the satin skirt on the black band along the doors, and the body-coloured flush door handles
+    { step: 0.005, mat: 'satin', poly: smooth([[0.315, 0.395], [0.6, 0.39], [0.645, 0.425], [0.635, 0.47], [0.5, 0.485], [0.355, 0.495], [0.33, 0.49], [0.315, 0.47]], 3) },
+    { step: 0.005, mat: 'body', depth: 0.01, poly: smooth([[0.4565, 0.99], [0.5017, 0.99], [0.5017, 1.02], [0.4565, 1.02]], 1) },
+    { step: 0.005, mat: 'body', depth: 0.01, poly: smooth([[0.2492, 1.015], [0.2934, 1.015], [0.2934, 1.045], [0.2492, 1.045]], 1) },
+  ],
+  plates: { front: 0.58, rear: 0.66 },
+  rails: 'black',
+  spoiler: { len: 0.2, thick: 0.045, tilt: 0.2 },
+  sunroof: [0.16, 0.46],
+  mirrors: 'black',
+  paint: '#9fa89c', // the light sage of the reference photos, darkened for the studio lights
+  plate: 'MH 12 KS 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SELTOS]

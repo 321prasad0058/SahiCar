@@ -122,3 +122,11 @@ Add the id to `READY` in src/webgl/cars/specs.ts **and** to `SHOWCASE_IDS` in sr
 - Chrome grille slats: one thin chrome decal per slat (14 mm, `depth` ~0.012) over a gloss grille, instead of `slats`.
 - `exact.ts` has `band(path, w)` (thin lines along a path, e.g. a boot-lid shut line) and `both(half)` (mirror a half outline).
 - A gallery photo with tyres in grass: patch the hidden tyre bottom in the cut-out before extract-side, or it mis-levels.
+- Bonnet `crown` raises the centre line above the traced `top`: lower the bonnet `top` by about the crown (Seltos: 1.5 cm)
+  or the side silhouette sits high over the whole bonnet.
+- Lamps that sit on the corner chamfer (Seltos DRL bars, boomerang tail lamps) go on the flank as `side` decals; the end
+  face only carries the parts inside its half-width. A vertical bar on both faces reads as two bars from the rear.
+- `rrect()` (rounded rectangle) and `smooth()` (Chaikin) in exact.ts give pods and skirts clean outlines; Chaikin on a plain
+  rectangle turns it into a blob. `sideBand()` is `band()` for side decals (u scaled by the length).
+- Measure belt/cladding heights per pixel column of the levelled cut-out (light paint vs dark runs) instead of by eye:
+  the eye read of the Seltos belt was 3 cm off.
