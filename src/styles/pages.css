@@ -1,6 +1,49 @@
 /* ── results */
-.res-head {
+.res-head,
+.res-sub {
   max-width: 860px;
+}
+.res-sub > p:first-child {
+  margin-top: 14px;
+}
+.res-top {
+  display: flex;
+  flex-direction: column;
+}
+/* the whole pick card opens the car */
+.pick-card.tap {
+  cursor: pointer;
+}
+.pick-card.tap:hover {
+  border-color: var(--line-2);
+}
+.pick-card.tap:active {
+  transform: scale(0.995);
+}
+/* phones: the answer first. The #1 car straight under the headline, then the pay note that explains it, then the
+   summary, chips and Share, then picks #2 and #3 (the podium's cards join this column via display: contents) */
+@media (max-width: 640px) {
+  .res-head h1 {
+    font-size: 32px;
+  }
+  .res-top .podium {
+    display: contents;
+  }
+  .res-top .podium > * {
+    order: 3;
+    margin-top: 18px;
+  }
+  .res-top .podium > .pick-card.first {
+    order: 0;
+    margin-top: 20px;
+  }
+  .res-top .res-notes {
+    order: 1;
+  }
+  .res-top .res-sub {
+    order: 2;
+    margin-top: 6px;
+  }
 }
 .res-head h1 {
   font-size: clamp(34px, 5.4vw, 64px);

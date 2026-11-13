@@ -1,5 +1,5 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
-import { Link, Navigate } from 'react-router-dom'
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type MouseEvent } from 'react'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { CarImage } from '../components/CarImage'
 import { Fixes } from '../components/Fixes'
 import { Icon } from '../components/Icon'
@@ -28,8 +28,15 @@ function Pick({ s, i }: { s: Scored; i: number }) {
   const a = useStore((x) => x.answers)
   const saved = useStore((x) => x.garage.includes(s.car.id))
   const timing = useMemo(() => timingFor(s, upcoming, a), [s, a])
+  const nav = useNavigate()
+  // a tap anywhere on the card opens the car, except on its own buttons and links, or while selecting text
+  const open = (e: MouseEvent) => {
+    if ((e.target as HTMLElement).closest('a, button, input, select, label')) return
+    if (window.getSelection()?.toString()) return
+    nav(`/car/${s.car.id}`)
+  }
   return (
-    <article className={`pick-card card ${i === 0 ? 'first' : ''}`}>
+    <article className={`pick-card card tap ${i === 0 ? 'first' : ''}`} onClick={open}>
       <div className="pick-rank mono">{String(i + 1).padStart(2, '0')} · {RANK[i]}</div>
       <div className="pick-media">
         <CarImage official={s.car.official} image={s.car.image} wiki={s.car.wiki} body={s.car.body} alt={`${s.car.brand} ${s.car.model}`} eager />
@@ -173,7 +180,7 @@ export default function Results() {
   useLayoutEffect(() => {
     if (reducedMotion || !root.current) return
     const ctx = gsap.context(() => {
-      gsap.from('.res-head > *', { y: 30, autoAlpha: 0, duration: 0.8, stagger: 0.08, ease: 'power3.out' })
+      gsap.from('.res-head > *, .res-sub > *', { y: 30, autoAlpha: 0, duration: 0.8, stagger: 0.08, ease: 'power3.out' })
       gsap.from('.pick-card', { y: 80, autoAlpha: 0, rotateX: -12, transformPerspective: 1000, duration: 1.1, stagger: 0.15, ease: 'expo.out', delay: 0.25 })
       gsap.from('.res-section', { y: 40, autoAlpha: 0, duration: 0.9, stagger: 0.1, ease: 'power3.out', delay: 0.9 })
     }, root)
@@ -200,6 +207,11 @@ export default function Results() {
         <header className="res-head">
           <div className="eyebrow">Your SahiScore results</div>
           <h1>{res.picks.length ? <>Your right car is the <span className="grad">{res.picks[0].car.model}</span>.</> : 'Nothing fits — yet.'}</h1>
+        </header>
+
+        {/* on phones the #1 car comes straight after the headline, then the notes, the summary and the rest (CSS order) */}
+        <div className="res-top">
+        <div className="res-sub">
           <p className="muted">
             We scored {res.considered} models and {res.ranked.length} fit your must-haves and budget of {lakh(answers.budget)} on-road in {st.name}.
             {!res.picks.length ? '' : locked || res.picks.length === 1 ? ' Here’s the one that fits your life best.' : res.picks.length === 2 ? ' Here are the two that fit your life best.' : ' Here are the three that fit your life best.'}
@@ -220,8 +232,9 @@ export default function Results() {
               <span className="muted small">Send it to family before you visit the showroom.</span>
             </div>
           )}
-        </header>
+        </div>
 
+        {(tight || hold || (ignorePay && answers.income > 0)) && <div className="res-notes">
         {tight && (
           <div className="res-section pay-hold card">
             <Icon name="wallet" size={22} />
@@ -263,6 +276,7 @@ export default function Results() {
             <button className="btn btn-ghost btn-sm" onClick={() => setIgnorePay(false)}>Use my pay again</button>
           </div>
         )}
+        </div>}
 
         {res.picks.length ? (
           <div className="podium">
@@ -281,6 +295,7 @@ export default function Results() {
             <button className="link-arrow fb-link" onClick={() => openFeedback('no')}>Tell us what you were looking for</button>
           </div>
         )}
+        </div>
 
         {res.picks.length > 0 && (
           <div className="rate-match card">
