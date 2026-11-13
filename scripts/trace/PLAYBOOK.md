@@ -483,3 +483,12 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - XL6 roof spoiler: raising the first glasshouse stations (1.6 → 1.70 m over u 0.057–0.07) reads as the spoiler lip without a
   `spoiler` box. Silver rails over a raised roof: the official height is over the rails, so the glass roof stays ~4 cm under it.
 - /car/<id> paints from cars.json colours (first swatch), not `paint`; judge the spec paint in /dev/cars shots.
+- XL6 rework: raising the nose `top` 4–6 cm over the lamps for room left a body-colour band above lamps and grille in the
+  front view (the photo's bonnet lip sits right on them). Keeping `top(1)` near the lamp tops with `crown` 0.012 and a wider
+  end face (`width` 0.9 at u = 1, lamps to 0.80 m) gave the lamps their size; a `silver` interior over most of the housing
+  reads as the clear lens (a gloss housing beside a gloss grille panel merged into one black band).
+- Mid-grey skid plates: `Decal.color` (new, opt-in) tints that decal's material (`satin` with '#5d6166'); plain satin read near-white.
+- Rails off a roof spoiler that stands as high as the roof: `railsU` (new, opt-in) sets their u range.
+- Wheels: XL6 machined double-spoke alloy → `blade` (split + dark was all gunmetal, twin too thin); Rumion 10-spoke → `split`
+  without rimTone (swirl read as a pinwheel, blade + dark flat grey).
+- The blotchy dark smear across the rear glass in rear/r34 shots is shared with ERTIGA_X (its rear 'gloss' glass decal).

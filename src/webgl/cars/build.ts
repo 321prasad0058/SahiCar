@@ -20,6 +20,8 @@ export interface Decal {
   depth?: number
   /** projection grid size in metres (default 11 mm): finer for small parts on a curved nose, so edges don't stair-step */
   step?: number
+  /** opt-in tint (hex) for this decal's material, e.g. a mid-grey `satin` skid plate */
+  color?: string
 }
 /** default relief per material (metres) */
 const RELIEF: Partial<Record<Mat, number>> = { head: 0.014, drl: 0.01, tail: 0.012, amber: 0.01, gloss: 0.006, silver: 0.01, satin: 0.008, reflector: 0.004, chrome: 0.006, mesh: 0.004, hex: 0.004, slats: 0.004 }
@@ -77,6 +79,9 @@ export interface CarSpec {
   side?: Decal[]
   plates: { front: number; rear: number }
   rails?: 'silver' | 'black'
+  /** opt-in u range of the roof rails (default: the listed glasshouse-top points within 6 cm of the peak), e.g. to keep
+   *  them off a roof spoiler that stands as high as the roof */
+  railsU?: [number, number]
   /** a roof spoiler over the tailgate glass; optionally its reach back (m), thickness (m) and downward tilt (rad) */
   spoiler?: boolean | { len?: number; thick?: number; tilt?: number }
   sunroof?: [number, number]
@@ -571,6 +576,19 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     slats: texMat(S.slats, 0.4),
   }
 
+  // per-decal tints (Decal.color): a clone of the material in that colour, shared by decals asking for the same one
+  const tinted = new Map<string, THREE.Material>()
+  const matOf = (d: Decal): THREE.Material => {
+    if (!d.color) return mats[d.mat]
+    const key = d.mat + d.color
+    if (!tinted.has(key)) {
+      const m = (mats[d.mat] as THREE.MeshStandardMaterial).clone()
+      m.color.set(d.color)
+      disposables.push(m)
+      tinted.set(key, m)
+    }
+    return tinted.get(key)!
+  }
   /** Rasterise a traced outline on a fine grid, snap edge vertices onto the outline, project onto the body. */
   const decal = (d: Decal, where: 'front' | 'rear' | 'left' | 'right' | 'ghLeft' | 'ghRight') => {
     if (opt.generic && d.mat !== 'trim' && d.mat !== 'silver' && d.mat !== 'satin') return
@@ -697,7 +715,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
         wg.setAttribute('position', new THREE.Float32BufferAttribute(wall, 3))
         wg.computeVertexNormals()
         // lamp lenses keep their own glow on the walls; everything else gets a gloss-black edge
-        add(d.mat === 'head' || d.mat === 'drl' || d.mat === 'tail' || d.mat === 'amber' ? mats[d.mat] : d.mat === 'silver' || d.mat === 'satin' || d.mat === 'chrome' ? mats[d.mat] : S.gloss, wg)
+        add(d.mat === 'head' || d.mat === 'drl' || d.mat === 'tail' || d.mat === 'amber' ? mats[d.mat] : d.mat === 'silver' || d.mat === 'satin' || d.mat === 'chrome' ? matOf(d) : S.gloss, wg)
       }
     }
     // shiny parts on the nose or tail (skid plates, chrome, gloss housings) reflect as one smooth panel:
@@ -709,7 +727,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
         N.setXYZ(k, n.x, n.y, n.z)
       }
     }
-    add(mats[d.mat], g)
+    add(matOf(d), g)
     // solid slats across a slatted grille: raised gloss-black bars clipped to the grille's outline
     if (d.mat === 'slats' && !d.depth) {
       for (let y = b0 + 0.025; y < b1 - 0.012; y += 0.042) {
@@ -818,7 +836,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     const railMat = spec.rails === 'silver' ? S.silver : S.gloss
     const peak = Math.max(...spec.greenhouse.top.map((p) => p[1]))
     const flat = spec.greenhouse.top.filter((p) => p[1] > peak - 0.06).map((p) => p[0])
-    const r0 = Math.min(...flat) + 0.01, r1 = Math.max(...flat) - 0.01
+    const [r0, r1] = spec.railsU ?? [Math.min(...flat) + 0.01, Math.max(...flat) - 0.01]
     const us = Array.from({ length: 18 }, (_, i) => r0 + ((r1 - r0) * i) / 17)
     for (const side of [-1, 1] as const) {
       tube(us.map((u) => new THREE.Vector3(xOf(u), roofY(u) + 0.028, side * (roofHW(u) - 0.09))), 0.013, railMat)
