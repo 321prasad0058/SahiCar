@@ -473,3 +473,12 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - A gloss tail bar that "turns body colour" from behind is the red glow sprites over it, not a hole: check with a `satin` swap.
 - Tyres hidden in grass that the cut-out crops off: pad the canvas, paint dark discs at the hubs, and clear grass by colour
   only where it can't be pale paint (Empowered Oxide is grey-green: a plain g > b test ate the doors).
+- Kiger / Magnite (CMF-A+ pair, separate bodies): Kiger gallery side read 1.658 m (rails + antenna, close camera, axles 2 % apart);
+  heights × 0.968 (`kigerK`, which also brought the photo tyre to 195/60 R16) cost a uniform red roof band, and lifting the roof
+  2 cm (photo m) back to the official height took IoU 0.942 → 0.962. Magnite's side photo read 1.581 m: × 0.994, IoU 0.964.
+- Low side decals (door garnish under ~0.4 m) land on the body's bottom roll and read thinner than traced from the shot camera;
+  a thin body-coloured line on top of such a garnish made it read as a single line, so it was dropped.
+- A cowl peak in `top` (windscreen base above the belt and the bonnet) rippled the wing; a monotonic rise belt → cowl → bonnet fixed it.
+- Big hex grille (Magnite): staggered six-sided `trim` blocks on a `gloss` panel inside a `trim` surround, chrome side frames as `band()`s.
+  A swept headlamp whose face part rides the top corner reads tiny: keep the front part ≤ the photo's nose height (side photo), not the
+  straight-front read, and let the `side` wedge carry the sweep back along the wing.
