@@ -5150,6 +5150,7 @@ export const ELEVATE: CarSpec = {
   plates: { front: 0.53, rear: 0.9 },
   rails: 'silver',
   mirrors: 'body',
+  satinColor: '#5c6166', // the skid plates and door strip are mid-grey satin, not bright silver
   paint: '#00465c', // the gallery car's teal blue, darkened for the studio lights
   plate: 'MH 12 HE 2026',
 }
@@ -5192,20 +5193,20 @@ const AMAZE_BASE: CarSpec = {
   dropSlivers: true,
   L: AMAZE_L, W: 1.733, H: 1.5,
   axles: [0.1764, 0.7947],
-  tyreR: 0.3015, tyreW: 0.185, rim: 0.632, wheel: { style: 'twin', spokes: 10 },
+  tyreR: 0.3015, tyreW: 0.185, rim: 0.632, wheel: { style: 'split', spokes: 10 }, rimTone: 'dark',
   archGap: 0.075, archSquare: 0.12,
   sill: [[0, 0.29], [0.01, 0.265], [0.02, 0.252], [0.05, 0.24], [0.1, 0.245], [0.15, 0.22], [0.25, 0.185], [0.3, 0.175], [0.5, 0.175], [0.7, 0.175], [0.75, 0.185], [0.85, 0.195], [0.92, 0.2], [0.95, 0.2], [0.97, 0.192], [0.99, 0.2], [1, 0.215]],
   // the tail face up to the lamps, the short ducktail boot lid, the belt under the glass, the bonnet down to the nose
   // (lifted at the face over the headlamps)
   top: [[0, 0.985], [0.006, 1.02], [0.012, 1.042], [0.02, 1.055], [0.035, 1.063], [0.05, 1.073], [0.07, 1.092], [0.09, 1.12], [0.105, 1.146], [0.12, 1.126], [0.14, 1.1], [0.17, 1.076], [0.2, 1.062], [0.3, 1.052], [0.4, 1.047], [0.5, 1.042], [0.6, 1.038], [0.65, 1.04], [0.68, 1.046], [0.705, 1.052], [0.72, 1.045], [0.75, 1.02], [0.8, 0.99], [0.85, 0.965], [0.9, 0.936], [0.93, 0.912], [0.95, 0.898], [0.965, 0.882], [0.98, 0.866], [0.99, 0.855], [1, 0.845]],
   // round in plan: both ends taper into the corners
-  width: [[0, 0.93], [0.005, 0.945], [0.015, 0.962], [0.04, 0.98], [0.08, 0.992], [0.15, 1], [0.8, 1], [0.86, 0.99], [0.92, 0.966], [0.955, 0.935], [0.98, 0.895], [1, 0.855]],
+  width: [[0, 0.95], [0.005, 0.958], [0.015, 0.968], [0.04, 0.982], [0.08, 0.992], [0.15, 1], [0.8, 1], [0.86, 0.99], [0.92, 0.968], [0.955, 0.942], [0.98, 0.912], [1, 0.885]],
   crown: 0.015,
   bulge: 0.04,
   haunch: 0.04,
   topRadius: 0.08,
-  noseSweep: 0.1,
-  tailSweep: 0.07,
+  noseSweep: 0.03,
+  tailSweep: 0.02,
   greenhouse: {
     u0: 0.105, u1: 0.705, tumble: 0.62,
     // the long raked rear glass off the short boot lid (shark-fin left out), the roof, the raked windscreen
@@ -5221,19 +5222,19 @@ const AMAZE_BASE: CarSpec = {
   doors: [[0.69, 0.685], [0.424, 0.424], [0.235, 0.192]],
   front: [
     // the chrome bar under the bonnet's edge, running over the headlamps
-    { step: 0.004, mat: 'chrome', layer: 2, depth: 0.008, poly: smooth(both([[0, 0.8], [0.4, 0.8], [0.55, 0.808], [0.67, 0.818], [0.675, 0.83], [0.55, 0.822], [0.4, 0.815], [0, 0.815]]), 1) },
+    { step: 0.004, mat: 'chrome', layer: 2, depth: 0.004, poly: smooth(both([[0, 0.8], [0.4, 0.8], [0.55, 0.808], [0.67, 0.818], [0.675, 0.83], [0.55, 0.822], [0.4, 0.815], [0, 0.815]]), 1) },
     // slim headlamps: a dark housing, two LED blocks, a DRL line along the top
-    { step: 0.004, mat: 'trim', mirror: true, depth: 0.006, poly: smooth([[0.405, 0.79], [0.42, 0.765], [0.46, 0.738], [0.55, 0.716], [0.65, 0.708], [0.685, 0.718], [0.695, 0.748], [0.69, 0.79], [0.672, 0.81], [0.55, 0.806], [0.42, 0.8]], 1) },
+    { step: 0.004, mat: 'trim', mirror: true, depth: 0.004, poly: smooth([[0.405, 0.79], [0.42, 0.765], [0.46, 0.738], [0.55, 0.716], [0.65, 0.708], [0.685, 0.718], [0.695, 0.748], [0.69, 0.79], [0.672, 0.81], [0.55, 0.806], [0.42, 0.8]], 1) },
     { step: 0.004, mat: 'drl', layer: 1, mirror: true, poly: band([[0.44, 0.785], [0.55, 0.792], [0.68, 0.797]], 0.012) },
-    { step: 0.004, mat: 'head', layer: 1, mirror: true, depth: 0.008, poly: rrect(0.565, 0.73, 0.665, 0.765, 0.008) },
-    { step: 0.004, mat: 'head', layer: 1, mirror: true, depth: 0.008, poly: rrect(0.47, 0.738, 0.555, 0.768, 0.008) },
+    { step: 0.004, mat: 'head', layer: 1, mirror: true, depth: 0.004, poly: rrect(0.565, 0.73, 0.665, 0.765, 0.008) },
+    { step: 0.004, mat: 'head', layer: 1, mirror: true, depth: 0.004, poly: rrect(0.47, 0.738, 0.555, 0.768, 0.008) },
     // the honeycomb grille: a gloss panel with rows of small hexagons
     { step: 0.004, mat: 'gloss', depth: 0.004, poly: smooth(both([[0, 0.53], [0.34, 0.53], [0.362, 0.545], [0.42, 0.628], [0.427, 0.66], [0.418, 0.79], [0, 0.795]]), 1) },
     ...cityHoney([0.545, 0.575, 0.605, 0.635, 0.665, 0.695, 0.725, 0.755], amazeGrilleHW, 'trim', 1),
     // the corner fog pods: a dark recess with the lamp, a gloss blade over it
-    { step: 0.004, mat: 'trim', mirror: true, depth: 0.006, poly: smooth([[0.6, 0.38], [0.705, 0.375], [0.712, 0.4], [0.712, 0.49], [0.6, 0.49]], 1) },
-    { step: 0.004, mat: 'gloss', mirror: true, layer: 1, depth: 0.01, poly: smooth([[0.5, 0.488], [0.712, 0.49], [0.715, 0.51], [0.7, 0.52], [0.52, 0.505]], 1) },
-    { step: 0.004, mat: 'head', mirror: true, layer: 1, depth: 0.01, poly: amazeCircle(0.665, 0.42, 0.018) },
+    { step: 0.004, mat: 'trim', mirror: true, depth: 0.004, poly: smooth([[0.6, 0.38], [0.705, 0.375], [0.712, 0.4], [0.712, 0.49], [0.6, 0.49]], 1) },
+    { step: 0.004, mat: 'gloss', mirror: true, layer: 1, depth: 0.004, poly: smooth([[0.5, 0.488], [0.712, 0.49], [0.715, 0.51], [0.7, 0.52], [0.52, 0.505]], 1) },
+    { step: 0.004, mat: 'head', mirror: true, layer: 1, depth: 0.004, poly: amazeCircle(0.665, 0.42, 0.018) },
     // the slatted lower grille and the black chin
     { step: 0.005, mat: 'slats', poly: smooth(both([[0, 0.345], [0.46, 0.345], [0.49, 0.36], [0.5, 0.452], [0, 0.455]]), 1) },
     { step: 0.005, mat: 'trim', layer: 1, poly: smooth(both([[0, 0.27], [0.68, 0.27], [0.715, 0.29], [0.72, 0.325], [0, 0.325]]), 1) },

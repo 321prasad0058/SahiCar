@@ -483,3 +483,8 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   grass were patched with discs (ground 3 cm lower). The close camera then left a 1.5 cm band (model high on top, photo low under the
   sill): lift traced heights by 1 cm only and lower the sill 1.5 cm (IoU 0.927 → 0.952). Sweeps 0.2/0.16 → 0.1/0.07 removed the white
   end bands and gained 0.3 % IoU. A cowl peak (belt rising into the windscreen base above the bonnet) rippled the wing: keep it level.
+- The thin white band down both end faces in a sedan's side view is the swept corners (`noseSweep`/`tailSweep`) seen edge-on:
+  Amaze 0.1/0.07 → 0.03/0.02 removed it (IoU 0.959 → 0.962); the `width` taper alone keeps the plan round. Blunter `width`
+  ends or lower decal relief did nothing.
+- Skid plates reading paper-white even in 'satin': `satinColor` (opt-in) gives a per-car grey (Elevate '#5c6166').
+- The dark smear on a Hycross-layout tailgate glass decal in the straight rear shot is the softbox reflection; the Hycross shows it too.

@@ -102,6 +102,8 @@ export interface CarSpec {
   bonnetRidge?: number
   /** dark gunmetal alloys (machined edges) instead of bright silver */
   rimTone?: 'dark'
+  /** colour of the 'satin' decal material for this car (default light satin silver), e.g. a darker grey bumper panel */
+  satinColor?: string
   windowChrome?: boolean
   paint: string
   ev?: boolean
@@ -425,6 +427,8 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     cladMat = new THREE.MeshStandardMaterial({ color: spec.cladding.color, metalness: 0.1, roughness: 0.75, side: THREE.DoubleSide })
     disposables.push(cladMat)
   }
+  // a per-car satin grey when the spec asks for it (satinColor), else the shared light satin silver
+  let satinMat: THREE.Material = S.satin; if (spec.satinColor) { satinMat = new THREE.MeshStandardMaterial({ color: spec.satinColor, metalness: 0.45, roughness: 0.55, envMapIntensity: 0.4, side: THREE.DoubleSide }); disposables.push(satinMat) }
   // ── cladding: a thin black skin with its own traced top edge and flared arches
   if (spec.cladding && cladTop) {
     const flare = spec.cladding.flare
@@ -558,7 +562,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     clad: cladMat,
     chrome: S.chrome,
     silver: S.silver,
-    satin: S.satin,
+    satin: satinMat,
     reflector: S.reflector,
     body: paint,
     glass: S.glass,
