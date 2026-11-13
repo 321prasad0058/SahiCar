@@ -123,6 +123,10 @@
   "w": "/3d/maruti-wagon-r.4436970e.w.webp",
   "m": "/3d/maruti-wagon-r.0a7bd158.m.webp"
  },
+ "maruti-xl6": {
+  "w": "/3d/maruti-xl6.baca2264.w.webp",
+  "m": "/3d/maruti-xl6.6a7ea784.m.webp"
+ },
  "mg-windsor-ev": {
   "w": "/3d/mg-windsor-ev.c26c481e.w.webp",
   "m": "/3d/mg-windsor-ev.283683ca.m.webp"
@@ -194,6 +198,10 @@
  "toyota-innova-hycross": {
   "w": "/3d/toyota-innova-hycross.9a1b1909.w.webp",
   "m": "/3d/toyota-innova-hycross.c289c290.m.webp"
+ },
+ "toyota-rumion": {
+  "w": "/3d/toyota-rumion.c8fc8648.w.webp",
+  "m": "/3d/toyota-rumion.ace42a2f.m.webp"
  },
  "toyota-urban-cruiser-hyryder": {
   "w": "/3d/toyota-urban-cruiser-hyryder.23740980.w.webp",
