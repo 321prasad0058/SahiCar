@@ -151,9 +151,17 @@
   "w": "/3d/tata-curvv.84c9206d.w.webp",
   "m": "/3d/tata-curvv.b9e09222.m.webp"
  },
+ "tata-curvv-ev": {
+  "w": "/3d/tata-curvv-ev.1dd2194f.w.webp",
+  "m": "/3d/tata-curvv-ev.963981f9.m.webp"
+ },
  "tata-harrier": {
   "w": "/3d/tata-harrier.ce61fa7a.w.webp",
   "m": "/3d/tata-harrier.d4eca6c0.m.webp"
+ },
+ "tata-harrier-ev": {
+  "w": "/3d/tata-harrier-ev.2896160e.w.webp",
+  "m": "/3d/tata-harrier-ev.83a911e4.m.webp"
  },
  "tata-nexon": {
   "w": "/3d/tata-nexon.8a97250c.w.webp",
@@ -186,6 +194,10 @@
  "tata-tiago": {
   "w": "/3d/tata-tiago.c58139a6.w.webp",
   "m": "/3d/tata-tiago.cf79140d.m.webp"
+ },
+ "tata-tiago-ev": {
+  "w": "/3d/tata-tiago-ev.27f81912.w.webp",
+  "m": "/3d/tata-tiago-ev.bbb656a8.m.webp"
  },
  "toyota-fortuner": {
   "w": "/3d/toyota-fortuner.7f3666f5.w.webp",
