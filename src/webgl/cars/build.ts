@@ -55,7 +55,9 @@ export interface CarSpec {
   noseSweep?: number
   tailSweep?: number
   greenhouse: { u0: number; u1: number; top: Pts; tumble: number; /** up to this u the glass's foot follows the body's
-   *  own edge (leaning tail sides from `shoulder.inset`) instead of 0.955 × width, so no ledge sticks out under it */ followBody?: number }
+   *  own edge (leaning tail sides from `shoulder.inset`) instead of 0.955 × width, so no ledge sticks out under it */ followBody?: number
+    /** u range where the glasshouse's rounded top edges take the roof paint instead of black: body-coloured edges framing a
+     *  rear glass on a fastback slope (only the flat top stays glass) */ paintedEdge?: [number, number] }
   roof: { u0: number; u1: number; black: boolean }
   /** glass that wraps up into the roof edge */
   alpine?: [number, number]
@@ -83,7 +85,9 @@ export interface CarSpec {
    *  them off a roof spoiler that stands as high as the roof */
   railsU?: [number, number]
   /** a roof spoiler over the tailgate glass; optionally its reach back (m), thickness (m) and downward tilt (rad) */
-  spoiler?: boolean | { len?: number; thick?: number; tilt?: number }
+  spoiler?: boolean | { len?: number; thick?: number; tilt?: number
+    /** a floating roof wing instead of a lip: raised `lift` (m) on taller end supports, thinning and narrowing to `taper` × its
+     *  thickness and chord at the tips, and thinning towards the trailing (rear) edge */ wing?: { lift: number; taper: number } }
   sunroof?: [number, number]
   mirrors: 'black' | 'body'
   /** u of the door mirrors (default 0.04 behind the glasshouse's front end), for a long screen running into the bonnet */
@@ -520,7 +524,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
       const u = uOf(c.x)
       const roofed = u >= spec.roof.u0 && u <= spec.roof.u1 && !inRange(u, spec.alpine)
       if (tag === 'top') return roofed ? 1 : 0
-      if (tag === 'tarc') return roofed ? 1 : inRange(u, spec.alpine) ? 0 : 2
+      if (tag === 'tarc') return roofed || inRange(u, gh.paintedEdge) ? 1 : inRange(u, spec.alpine) ? 0 : 2
       if (tag === 'side') return 0 // pillars are drawn as traced outlines on top (below)
       return 2
     },
@@ -860,8 +864,21 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     const sp = typeof spec.spoiler === 'object' ? spec.spoiler : {}
     const sLen = sp.len ?? 0.2, sThick = sp.thick ?? 0.03
     const lip = new RoundedBoxGeometry(sLen, sThick, roofHW(su) * 1.92, 2, Math.min(0.012, sThick * 0.45))
-    add(roofPaint, lip, new THREE.Matrix4().makeRotationZ(sp.tilt ?? 0.1).premultiply(new THREE.Matrix4().makeTranslation(xOf(su) - sLen * 0.35, roofY(su) - 0.004, 0)))
-    for (const side of [-1, 1]) add(roofPaint, new RoundedBoxGeometry(0.16, 0.05, 0.03, 2, 0.01), new THREE.Matrix4().makeTranslation(xOf(su) - 0.06, roofY(su) - 0.03, side * (roofHW(su) * 0.96 - 0.015)))
+    const wing = sp.wing
+    if (wing) {
+      // thin the blade towards its tips and its trailing (rear) edge
+      const pos = lip.attributes.position, hz = roofHW(su) * 0.96
+      for (let i = 0; i < pos.count; i++) {
+        const fz = Math.min(1, Math.abs(pos.getZ(i)) / hz), fx = Math.max(0, Math.min(1, (pos.getX(i) + sLen / 2) / sLen))
+        pos.setY(i, pos.getY(i) * (1 - (1 - wing.taper) * fz * fz) * (wing.taper + (1 - wing.taper) * fx))
+        pos.setX(i, pos.getX(i) * (1 - (1 - wing.taper) * fz * fz))
+      }
+      lip.computeVertexNormals()
+    }
+    const lift = wing?.lift ?? 0
+    add(roofPaint, lip, new THREE.Matrix4().makeRotationZ(sp.tilt ?? 0.1).premultiply(new THREE.Matrix4().makeTranslation(xOf(su) - sLen * 0.35, roofY(su) - 0.004 + lift, 0)))
+    const finH = 0.05 + lift
+    for (const side of [-1, 1]) add(roofPaint, new RoundedBoxGeometry(0.16, finH, 0.03, 2, 0.01), new THREE.Matrix4().makeTranslation(xOf(su) - 0.06, roofY(su) - 0.055 + finH / 2, side * (roofHW(su) * 0.96 - 0.015)))
   }
   if (spec.sunroof) {
     const [a, b] = spec.sunroof

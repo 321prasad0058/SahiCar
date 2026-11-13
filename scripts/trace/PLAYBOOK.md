@@ -571,3 +571,19 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   ends or lower decal relief did nothing.
 - Skid plates reading paper-white even in 'satin': `satinColor` (opt-in) gives a per-car grey (Elevate '#5c6166').
 - The dark smear on a Hycross-layout tailgate glass decal in the straight rear shot is the softbox reflection; the Hycross shows it too.
+- XEV 9e / BE 6 (INGLO twins, very different bodies): the XEV gallery side photo was a close camera (1.76 m, axles 5.6 % apart);
+  another portal's long-lens side photo read 1.697 m with the axles 1.5 % apart once the shark fin was erased. Both still showed a
+  uniform 1.2–1.5 cm band over roof and bonnet; lowering them (`xev9eY`, `be6Y`) took IoU 0.955 → 0.966 / 0.948 → 0.955.
+- Fastback rear glass framed by body-coloured roof edges: `greenhouse.paintedEdge` (new, opt-in) paints the glasshouse's rounded
+  top edges over that u range, so only the flat top stays glass; without it the black edges read as a grey "pickup bed" from behind.
+  The sail round a pointed quarter glass is a `side` 'body' decal on the glasshouse (polygon with the glass notch), ~1.5 cm under
+  the roof line.
+- Light-bar corners that sit 0.3 m back on a swept nose (XEV): a front decal at |z| ≈ face half-width − 4 cm with `noseSweep` 0.28
+  lands them on the swept corner and reads from the front too; the side copy was dropped. Dozens of thin raised rib decals on a
+  closed grille panel came out as dashes: left plain.
+- BE 6 brow: a black band under the bonnet edge vanished above ~0.89 m until the nose `top` sat ~3 cm over it with `topRadius` 0.06.
+- Dark aero wheels with silver accents: `split` + `rimTone: 'dark'` (XEV 9e) and `blade` + `rimTone: 'dark'` (BE 6); `swirl` + dark
+  still read as a white pinwheel, `aero`/`turbine`/`twin` + dark went flat gunmetal.
+- BE 6 floating roof wing: the plain `spoiler` box read as a plank. `spoiler.wing` (new, opt-in: `{ lift, taper }`) raises it on
+  taller end supports and thins/narrows it towards the tips and trailing edge; with a short chord (len 0.3) and `roof.u0` moved back
+  so the wing sits at the roof's rear (0.26), it reads as a blade on supports.
