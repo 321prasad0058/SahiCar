@@ -544,3 +544,15 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   Machined-face alloys: `swirl` + 'dark' is the only two-tone (`blade` + 'dark' goes all gunmetal).
 - On dark red paint the sill's rounded lower edge and the bumper corners catch the studio light as thin white lines; a black
   `trim` side band along the sill bottom (between the arches) and black lower-bumper wraps behind/ahead of the arches hide them.
+- Kushaq / Taigun (one MQB body, two cars): the Kushaq's gallery side photo (1.629 m over the rails, axles 0.4 % apart) traced cleanly;
+  the Taigun spreads `...KUSHAQ` and overrides ends, sill, decals and its own axles (its close-camera photo put them 2.4 % apart).
+  Its tail and nose are much rounder than the Kushaq's (tail lamps 9 cm in from the bumper, lamps ~3 cm back on the nose): a
+  raked `top` at u 0–0.03 / 0.97–1 with `rakedEnds` took IoU 0.961 → 0.971 and the lamps stayed clean.
+- A centre-line "U" mark in a rear light bar came from the side tail-lamp wrap starting where the raked tail `top` was still below
+  it (u 0.002 vs top 0.86): start side wraps where `top(u) − 0.01` clears them (u 0.012–0.03 on a raked tail).
+- A body-coloured D-pillar decal under a black roof (Taigun) folded up as a flap when its top range started on `roof.u0` over the
+  spoiler's steep glass drop; starting the top range one station later (and the belt range a little later) made it a clean panel.
+- Upright chrome grille bars read paper-white in 'chrome' on a gloss grille; 'silver' (depth 0.012) kept them bright but metallic.
+- `satinColor` (opt-in) darkens a car's 'satin' decals: Kushaq skid plates and grille bars at '#5c6166' read mid grey like the photo
+  instead of paper-white. A twin that spreads the spec (Taigun) gets `satinColor: undefined` to keep the default. Two-tone machined
+  alloys with bright faces on dark pockets: `swirl` + `rimTone: 'dark'` (split/blade/twin + dark went almost all gunmetal).
