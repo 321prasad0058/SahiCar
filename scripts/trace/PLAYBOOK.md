@@ -529,3 +529,18 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   `split` + `rimTone: 'dark'` (`swirl` read as a white pinwheel).
 - Tiago.ev: the front lamps placed 3 cm above the side photo's lamp height forced a nose `top` plateau that showed as a bump on the
   wing in the side view; lamps at the photo's height let the bonnet fall in one smooth curve (IoU up 0.001).
+- Slavia / Virtus (twin sedans): the listing's own Slavia side photo was a close camera (1.541 m, axles 6 % apart) and the Virtus
+  had none; another portal's long-lens road side photos of both (served as WebP) cut out cleanly once the tyre bottoms hidden in
+  grass were replaced by dark discs at the hubs (and everything under the sill outside them cleared). The axles still read
+  4.5 % / 2.5 % apart, so side details go through `slaviaU`/`virtusU` while the silhouette stays in photo u. Both overlays showed
+  the usual uniform 1.5 cm band; `SLAVIA_DY`/`VIRTUS_DY` took IoU 0.952 → 0.968 and 0.954 → 0.967.
+- Twins traced from different photos disagree by a few cm (Virtus roof 2 cm under the Slavia's, screen base 2 % of u further back):
+  spread the sibling for the shared knobs, but give the twin its own top/greenhouse/sill from its photo.
+- Five broad machined spokes split by a dark groove (Slavia 16"): `blade` with no `rimTone`; all-black GT alloys: `twin` + 'dark'.
+- Sedan boot deck traced up to 1.18 at the C-pillar foot (the centre-line deck) stood 8 cm over the belt and read as a hump on
+  the rear fender in side/r34: the side top is the deck there. Keep the tail `top` nearly flat from the ducktail to the belt
+  (Slavia 1.108 → 1.121 → 1.098) and start the glasshouse at that height with a steeper first 3 % (−0.2 % IoU).
+- Grille slats in `chrome`/`satin` with 12 mm relief read as white bars from the front; `satin` with `depth` 0.004 reads grey.
+  Machined-face alloys: `swirl` + 'dark' is the only two-tone (`blade` + 'dark' goes all gunmetal).
+- On dark red paint the sill's rounded lower edge and the bumper corners catch the studio light as thin white lines; a black
+  `trim` side band along the sill bottom (between the arches) and black lower-bumper wraps behind/ahead of the arches hide them.
