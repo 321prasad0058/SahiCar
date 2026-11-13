@@ -480,3 +480,6 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   ~4.5 cm over the pods, one straight (collinear) raked run down to the bumper and `rakedEnds` made them clean.
 - Red streaks either side of the spare on a black rear bumper were the body poking through the swept cladding end cap: a full-width
   `trim` rear decal over the bumper face (satin and reflectors on layer 1) covered it. Wide flat 5-spoke machined alloys: `blade`.
+- Thar review: the shared `satin` read near-white on the bumper centres from every angle; `satinColor` (new, opt-in per spec,
+  Thar '#5c6166') gives a mid-grey satin. Two-tone Y-spoke alloys: `split` + `rimTone: 'dark'` (plain `blade` read light silver).
+  Rear decals land only on body rings, never on the glasshouse, so a framed window on a hard top's rear face can't be drawn.

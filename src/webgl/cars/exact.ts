@@ -5057,7 +5057,7 @@ export const THAR: CarSpec = {
   dropSlivers: true,
   L: THAR3_L, W: 1.87, H: 1.855,
   axles: [0.2355, 0.8295],
-  tyreR: 0.394, tyreW: 0.255, rim: 0.58, wheel: { style: 'blade', spokes: 5 },
+  tyreR: 0.394, tyreW: 0.255, rim: 0.58, wheel: { style: 'split', spokes: 5 }, rimTone: 'dark',
   archGap: 0.05, archSquare: 0.6,
   // a small tow block under the spare, the rear bumper, the chassis behind it, the side steps, the front bumper
   sill: [[0, 0.72], [0.03, 0.72], [0.034, 0.5], [0.038, 0.48], [0.1, 0.465], [0.12, 0.44], [0.13, 0.43], [0.3, 0.31], [0.35, 0.3], [0.5, 0.3], [0.69, 0.31], [0.72, 0.33], [0.93, 0.4], [0.96, 0.41], [0.98, 0.44], [0.995, 0.46], [1, 0.5]],
@@ -5140,6 +5140,7 @@ export const THAR: CarSpec = {
   spare: { y: 1.09 },
   mirrors: 'black',
   mirrorU: thar3U(0.575),
+  satinColor: '#5c6166',
   paint: '#800c1a', // Tango Red, darkened for the studio lights
   plate: 'MH 12 TH 2026',
 }
