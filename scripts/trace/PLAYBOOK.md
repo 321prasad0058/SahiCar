@@ -473,3 +473,12 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - A gloss tail bar that "turns body colour" from behind is the red glow sprites over it, not a hole: check with a `satin` swap.
 - Tyres hidden in grass that the cut-out crops off: pad the canvas, paint dark discs at the hubs, and clear grass by colour
   only where it can't be pale paint (Empowered Oxide is grey-green: a plain g > b test ate the doors).
+- Kushaq / Taigun (one MQB body, two cars): the Kushaq's gallery side photo (1.629 m over the rails, axles 0.4 % apart) traced cleanly;
+  the Taigun spreads `...KUSHAQ` and overrides ends, sill, decals and its own axles (its close-camera photo put them 2.4 % apart).
+  Its tail and nose are much rounder than the Kushaq's (tail lamps 9 cm in from the bumper, lamps ~3 cm back on the nose): a
+  raked `top` at u 0–0.03 / 0.97–1 with `rakedEnds` took IoU 0.961 → 0.971 and the lamps stayed clean.
+- A centre-line "U" mark in a rear light bar came from the side tail-lamp wrap starting where the raked tail `top` was still below
+  it (u 0.002 vs top 0.86): start side wraps where `top(u) − 0.01` clears them (u 0.012–0.03 on a raked tail).
+- A body-coloured D-pillar decal under a black roof (Taigun) folded up as a flap when its top range started on `roof.u0` over the
+  spoiler's steep glass drop; starting the top range one station later (and the belt range a little later) made it a clean panel.
+- Upright chrome grille bars read paper-white in 'chrome' on a gloss grille; 'silver' (depth 0.012) kept them bright but metallic.
