@@ -139,6 +139,10 @@
   "w": "/3d/renault-kiger.6c691fee.w.webp",
   "m": "/3d/renault-kiger.91c40c9c.m.webp"
  },
+ "skoda-kushaq": {
+  "w": "/3d/skoda-kushaq.cdf79163.w.webp",
+  "m": "/3d/skoda-kushaq.85d2d612.m.webp"
+ },
  "skoda-kylaq": {
   "w": "/3d/skoda-kylaq.397c9d84.w.webp",
   "m": "/3d/skoda-kylaq.873bda8b.m.webp"
@@ -226,6 +230,10 @@
  "toyota-urban-cruiser-taisor": {
   "w": "/3d/toyota-urban-cruiser-taisor.98f5b8cf.w.webp",
   "m": "/3d/toyota-urban-cruiser-taisor.e7ee09f9.m.webp"
+ },
+ "volkswagen-taigun": {
+  "w": "/3d/volkswagen-taigun.cf340e03.w.webp",
+  "m": "/3d/volkswagen-taigun.cc0c5f41.m.webp"
  },
  "volkswagen-virtus": {
   "w": "/3d/volkswagen-virtus.10f8450f.w.webp",
