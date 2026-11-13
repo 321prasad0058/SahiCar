@@ -23,7 +23,7 @@
       ],
       "taxCap": 3000000,
       "notes": "Rates for individuals; companies pay ~2x. From 1 Apr 2025 private CNG/LPG +1% (now 8/9/10%) and the one-time tax cap raised from Rs 20L to Rs 30L. Diesel = petrol + 2%.",
-      "evNote": "EV Policy 2025-30: road tax and registration waived. A 6% tax on EVs above Rs 30L was proposed in the 2025 budget; reports conflict on whether it took effect — show 0% but flag 'verify' for EVs above Rs 30L.",
+      "evNote": "Maharashtra EV Policy 2025 (1 Apr 2025 - 31 Mar 2030): road tax and registration waived for all EVs, no price cap. The 6% tax on EVs above Rs 30L proposed in the 10 Mar 2025 budget was withdrawn on 26 Mar 2025 and never took effect.",
       "registrationFee": 600,
       "fuel": { "petrol": 111.21, "diesel": 97.83, "cng": 86.0, "electricity": 10.0 }
     },
@@ -43,7 +43,7 @@
         { "fuel": "ev", "upTo": null, "pct": 10 }
       ],
       "notes": "Diesel attracts a 25% surcharge over petrol rates. Delhi EV Policy 2.0 (1 Jul 2026 - 31 Mar 2030) phases out some new ICE/CNG registrations (mainly 2W/3W/commercial) from 2027 — check before advising a CNG/petrol purchase.",
-      "evNote": "EV Policy 2.0 (notified 1 Jul 2026): 100% road tax + registration waiver for EVs up to Rs 30L ex-showroom; above Rs 30L standard rate. Strong hybrids/PHEVs: reports conflict (50% vs none) — treat as standard.",
+      "evNote": "Delhi EV Policy 2026 (gazette F. No. JC/EV/TPT/2026/02/281, 30 Jun 2026; in force 1 Jul 2026 - 31 Mar 2030), clause 4.7: 100% road tax + registration waiver for electric cars up to Rs 30L ex-showroom; above Rs 30L no exemption, so the standard 10% (Delhi MV Taxation Act, Schedule I Part B) applies. The draft's 50% hybrid exemption is not in the final policy: hybrids pay the standard rate. Battery cars' registration fee is waived nationally (MoRTH G.S.R. 525(E), 2 Aug 2021).",
       "registrationFee": 600,
       "fuel": { "petrol": 102.12, "diesel": 95.2, "cng": 86.98, "electricity": 7.0 }
     },
@@ -273,6 +273,10 @@
     }
   },
   "sources": [
+    "https://jmkresearch.com/wp-content/uploads/2026/07/Delhi-EV-Policy-2026.pdf",
+    "https://transport.delhi.gov.in/sites/default/files/generic_multiple_files/the_delhi_motor_vehicle_taxation_act-r.pdf",
+    "https://www.autocarindia.com/industry/6-percent-luxury-ev-tax-withdrawn-by-maharashtra-government-434957",
+    "https://www.autocarpro.in/news-national/registration-fees-for-evs-waived-off-by-road-transport-ministry-79762",
     "https://www.angelone.in/news/market-updates/maharashtra-budget-cng-lpg-cars-costlier-high-end-evs-6-percent-tax-april-1",
     "https://www.punekarnews.in/maharashtra-to-increase-tax-on-private-cng-lpg-and-high-end-electric-vehicles-from-april-1/",
     "https://autocarpro.in/news/maharashtra-budget-2025-motorists-brace-for-higher-taxes-electric-vehicle-push-takes-a-turn-125344",

@@ -44,7 +44,8 @@ export function onRoad(data: OnRoadData, stateCode: string, body: Body, fuel: Fu
   const insPct = fuel === 'ev' ? pctOf('ev') ?? 3.6 : exShowroom > 4000000 ? pctOf('luxury') ?? 2.8 : pctOf(body) ?? 3.4
   const insurance = Math.round((exShowroom * insPct) / 100)
   const tcs = exShowroom > 1000000 ? Math.round((exShowroom * (data.tcsPctAbove10L ?? 1)) / 100) : 0
-  const registration = st.registrationFee ?? 600
+  // battery cars pay no registration fee anywhere in India (MoRTH G.S.R. 525(E), 2 Aug 2021)
+  const registration = fuel === 'ev' ? 0 : st.registrationFee ?? 600
   const fastag = data.fastag ?? 500
   return { exShowroom, roadTax, roadTaxPct: pct, registration, insurance, tcs, fastag, total: exShowroom + roadTax + registration + insurance + tcs + fastag }
 }

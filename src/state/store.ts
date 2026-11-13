@@ -4,6 +4,9 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { DEFAULT_ANSWERS, type Answers } from '../engine/answers'
 
+/** Answers that can't contradict each other: the down payment is never more than the budget. */
+const tidy = (a: Answers): Answers => (a.downPayment > a.budget ? { ...a, downPayment: a.budget } : a)
+
 interface Store {
   answers: Answers
   /** true once the wizard has been completed at least once */
@@ -26,7 +29,7 @@ export const useStore = create<Store>()(
       done: false,
       garage: [],
       compare: [],
-      setAnswers: (patch) => set({ answers: { ...get().answers, ...patch } }),
+      setAnswers: (patch) => set({ answers: tidy({ ...get().answers, ...patch }) }),
       finish: () => set({ done: true }),
       reset: () => set({ answers: DEFAULT_ANSWERS, done: false }),
       toggleGarage: (id) => {
@@ -46,7 +49,7 @@ export const useStore = create<Store>()(
       version: 1,
       merge: (saved, cur) => {
         const s = saved as Partial<Store>
-        return { ...cur, ...s, answers: { ...DEFAULT_ANSWERS, ...s.answers, priorities: { ...DEFAULT_ANSWERS.priorities, ...s.answers?.priorities } } }
+        return { ...cur, ...s, answers: tidy({ ...DEFAULT_ANSWERS, ...s.answers, priorities: { ...DEFAULT_ANSWERS.priorities, ...s.answers?.priorities } }) }
       },
     },
   ),

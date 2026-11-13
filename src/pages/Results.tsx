@@ -9,7 +9,8 @@ import { toast } from '../components/Toast'
 import { cars, onroad, upcoming } from '../data'
 import { BODY_LABEL, FUEL_LABEL } from '../data/types'
 import { stateOf } from '../engine/costs'
-import { DIM_LABEL, GEAR_LABEL, relaxations, sahiScore, withStretchHint, type Dim, type Scored } from '../engine/sahiscore'
+import { affordFor, comfortableBudget } from '../engine/afford'
+import { DIM_LABEL, GEAR_LABEL, payHold, relaxations, sahiScore, withStretchHint, type Dim, type Scored } from '../engine/sahiscore'
 import { expectedLabel, timingFor } from '../engine/timing'
 import { inr, lakh } from '../lib/format'
 import { cardPhoto, shareUrl, type CardData } from '../lib/shareCard'
@@ -145,12 +146,23 @@ export default function Results() {
   const root = useRef<HTMLDivElement>(null)
   const [sharing, setSharing] = useState(false)
 
-  const res = useMemo(() => withStretchHint(cars, answers, onroad, sahiScore(cars, answers, onroad)), [answers])
+  // take-home pay ranks pricier cars lower; the buyer can choose to see the picks without it
+  const [ignorePay, setIgnorePay] = useState(false)
+  const scored = useMemo(() => (ignorePay && answers.income > 0 ? { ...answers, income: 0 } : answers), [answers, ignorePay])
+  const res = useMemo(() => withStretchHint(cars, scored, onroad, sahiScore(cars, scored, onroad)), [scored])
+  const hold = useMemo(() => (ignorePay ? null : payHold(cars, answers, onroad, res)), [answers, res, ignorePay])
+  // even the best match is too much for the pay given: say so plainly, with what would be comfortable
+  const tight = useMemo(() => {
+    if (ignorePay || !(answers.income > 0) || !res.picks.length) return null
+    const cheapest = res.ranked.reduce((x, y) => (y.cost.onRoad.total < x.cost.onRoad.total ? y : x))
+    const pay = affordFor(cheapest.cost, answers)
+    return pay.verdict === 'no' ? { car: cheapest, pay, comfy: comfortableBudget(answers.income, answers) } : null
+  }, [answers, res, ignorePay])
   const st = stateOf(onroad, answers.state)
-  const fixes = useMemo(() => (res.picks.length ? [] : relaxations(cars, answers, onroad)), [res, answers])
+  const fixes = useMemo(() => (res.picks.length ? [] : relaxations(cars, scored, onroad)), [res, scored])
 
   useEffect(() => {
-    if (done && !res.picks.length) trackNoMatch('results', 'results', answers, res)
+    if (done && !res.picks.length) trackNoMatch('results', 'results', scored, res)
     if (done && res.picks.length) track('results_view', { top: res.picks[0].car.id, fits: res.ranked.length, signed_in: user ? 1 : 0 })
   }, [done, res, answers, user])
 
@@ -190,7 +202,7 @@ export default function Results() {
           <h1>{res.picks.length ? <>Your right car is the <span className="grad">{res.picks[0].car.model}</span>.</> : 'Nothing fits — yet.'}</h1>
           <p className="muted">
             We scored {res.considered} models and {res.ranked.length} fit your must-haves and budget of {lakh(answers.budget)} on-road in {st.name}.
-            {!res.picks.length ? '' : locked ? ' Here’s the one that fits your life best.' : ' Here are the three that fit your life best.'}
+            {!res.picks.length ? '' : locked || res.picks.length === 1 ? ' Here’s the one that fits your life best.' : res.picks.length === 2 ? ' Here are the two that fit your life best.' : ' Here are the three that fit your life best.'}
           </p>
           <div className="profile-chips">
             <span className="chip">{answers.dailyKm} km/day</span>
@@ -209,6 +221,48 @@ export default function Results() {
             </div>
           )}
         </header>
+
+        {tight && (
+          <div className="res-section pay-hold card">
+            <Icon name="wallet" size={22} />
+            <div>
+              <b>Every car that fits is a lot for your {inr(answers.income)} take-home pay</b>
+              <p className="muted small">
+                Even the cheapest, the {tight.car.car.brand} {tight.car.car.model} at {lakh(tight.car.cost.onRoad.total)} on-road,
+                {answers.payment === 'cash'
+                  ? <> costs {(tight.car.cost.onRoad.total / answers.income).toFixed(1)} months of your pay.</>
+                  : <> means an EMI of about {inr(Math.round(tight.pay.emi / 100) * 100)}, {Math.round(tight.pay.emiShare * 100)}% of your pay.</>}
+                {' '}A comfortable budget on your pay is about {lakh(tight.comfy)}{answers.payment === 'cash' ? '' : ' — a bigger down payment or a longer loan raises it'}.
+              </p>
+            </div>
+            <Link to="/emi" className="btn btn-ghost btn-sm">Check the EMI</Link>
+          </div>
+        )}
+        {hold && !tight && (
+          <div className="res-section pay-hold card">
+            <Icon name="wallet" size={22} />
+            <div>
+              <b>Your take-home pay is keeping these picks below your {lakh(answers.budget)} budget</b>
+              <p className="muted small">
+                Without it, the {hold.car.car.brand} {hold.car.car.model} ({lakh(hold.car.cost.onRoad.total)} on-road) would come first
+                {hold.cash
+                  ? <> — that’s {hold.months.toFixed(1)} months of your {inr(answers.income)} pay.</>
+                  : <> — an EMI of about {inr(Math.round(hold.emi / 100) * 100)}, {Math.round(hold.emiShare * 100)}% of your {inr(answers.income)} pay. We suggest keeping EMIs under 15%.</>}
+              </p>
+            </div>
+            <button className="btn btn-ghost btn-sm" onClick={() => setIgnorePay(true)}>Show picks without my pay</button>
+          </div>
+        )}
+        {ignorePay && answers.income > 0 && (
+          <div className="res-section pay-hold card">
+            <Icon name="wallet" size={22} />
+            <div>
+              <b>Showing picks without your take-home pay</b>
+              <p className="muted small">Ranked on your budget alone. Check the EMI before you commit.</p>
+            </div>
+            <button className="btn btn-ghost btn-sm" onClick={() => setIgnorePay(false)}>Use my pay again</button>
+          </div>
+        )}
 
         {res.picks.length ? (
           <div className="podium">

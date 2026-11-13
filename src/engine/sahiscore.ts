@@ -14,7 +14,7 @@ import { MUST_HAVES } from './answers.ts'
 
 const SOFT_MUST = new Set(MUST_HAVES.filter((m) => m.soft).map((m) => m.id))
 import { tco, type Tco } from './costs.ts'
-import { affordFor, COMFORT } from './afford.ts'
+import { affordFor, comfortableBudget, COMFORT } from './afford.ts'
 import type { Body, Car, Fuel, OnRoadData, Powertrain } from '../data/types.ts'
 
 export type Dim = 'budget' | 'tco' | 'fuel' | 'safety' | 'space' | 'terrain' | 'drive' | 'performance' | 'features' | 'ownership' | 'fresh'
@@ -46,6 +46,12 @@ const PRIORITY_DIMS: Record<Priority, Dim[]> = {
   reliability: ['ownership', 'fresh'],
 }
 
+/** The fuel a buyer actually puts in: a mild hybrid is a petrol (or, like the Fortuner, a diesel) car with a small
+ *  battery assist, so ruling out petrol rules out petrol mild-hybrids too. */
+export function baseFuel(pt: Pick<Powertrain, 'fuel' | 'engine'>): Fuel {
+  return pt.fuel === 'mild-hybrid' ? (/diesel/i.test(pt.engine ?? '') ? 'diesel' : 'petrol') : pt.fuel
+}
+
 export type GearKind = 'MT' | 'iMT' | 'AMT' | 'AT' | 'CVT' | 'DCT' | 'eCVT'
 
 export function gearKind(t: string, fuel?: Fuel): GearKind {
@@ -72,6 +78,8 @@ export interface Config {
   /** 0 = base trim, 1 = top trim */
   trim: number
   trimCompromise: boolean
+  /** this gearbox isn't sold in a trim high enough for the buyer's must-haves */
+  mustMissing?: boolean
 }
 
 export interface Scored extends Config {
@@ -129,21 +137,52 @@ function trimTarget(car: Car, a: Answers) {
   return t
 }
 
+/** How far up the trim ladder the hard must-haves sit, 0..1 (0 when there are none). */
+function mustTier(car: Car, a: Answers) {
+  let t = 0
+  for (const id of a.mustHave) {
+    const m = MUST_HAVES.find((x) => x.id === id)
+    if (!m || m.soft) continue
+    t = Math.max(t, id === '6-airbags' && (car.safety.airbagsStd ?? 0) < 6 ? 0.5 : m.tier)
+  }
+  return t
+}
+
 // ── configurations
 
-function variantsFor(car: Car, pt: Powertrain, gear: GearKind) {
+const isTurbo = (pt: Powertrain) => /turbo|t-?gdi|tsi|tce/i.test(pt.engine ?? '')
+
+function variantsFor(car: Car, pt: Powertrain, gear: GearKind | null) {
+  const siblings = car.powertrains.filter((p) => p !== pt && p.fuel === pt.fuel)
+  // gearboxes another engine of the same fuel has: an AMT variant belongs to the NA engine, not the turbo-CVT one
+  const theirs = new Set(siblings.flatMap((p) => p.transmissions.map((t) => gearKind(t, p.fuel))))
+  // a turbo and an NA engine of the same fuel: when variant names say "Turbo", each engine keeps its own variants
+  const split = siblings.some((p) => isTurbo(p) !== isTurbo(pt)) && car.variants.some((v) => v.fuel === pt.fuel && /turbo/i.test(v.name))
   return car.variants
     .filter((v) => v.fuel === pt.fuel && v.price > 0)
+    .filter((v) => !split || /turbo/i.test(v.name) === isTurbo(pt))
     .filter((v) => {
+      if (gear == null) return true
       const k = gearKind(v.transmission, v.fuel)
-      return k === gear || (isAuto(k) && isAuto(gear) && pt.transmissions.filter((t) => isAuto(gearKind(t, pt.fuel))).length === 1)
+      return k === gear || (isAuto(k) && isAuto(gear) && !theirs.has(k) && pt.transmissions.filter((t) => isAuto(gearKind(t, pt.fuel))).length === 1)
     })
     .sort((x, y) => x.price - y.price)
+}
+
+/** How far up the ladder spare budget may lift the trim, 0..1: nothing for buyers who rank cost first or don't care
+ *  about features, a better-equipped trim for everyone else when the budget is well clear of the car's price. */
+const HEADROOM_TRIM = [0, 0, 0.5, 0.75, 1, 1]
+function headroomCap(a: Answers) {
+  return a.priorities.cost >= 4 ? 0 : HEADROOM_TRIM[a.priorities.features]
 }
 
 export function configs(car: Car, a: Answers, budgetEx: (fuel: Fuel) => number): Config[] {
   const out: Config[] = []
   const target = trimTarget(car, a)
+  const cap = headroomCap(a)
+  // spare budget: the trim may rise while its price stays under 70% of what the buyer can spend (or, when their pay
+  // is given, of a comfortable budget on it), so a bigger budget buys a better-equipped car rather than the base one
+  const spare = (fuel: Fuel) => 0.7 * Math.min(budgetEx(fuel), a.income > 0 ? comfortableBudget(a.income, a) / (fuel === 'ev' ? 1.05 : 1.17) : Infinity)
   for (const pt of car.powertrains) {
     const gears = [...new Set((pt.transmissions.length ? pt.transmissions : ['MT']).map((t) => gearKind(t, pt.fuel)))]
     for (const gear of gears) {
@@ -152,9 +191,17 @@ export function configs(car: Car, a: Answers, budgetEx: (fuel: Fuel) => number):
       if (ladder.length) {
         let idx = Math.round(target * (ladder.length - 1))
         const wanted = idx
+        const top = Math.round(cap * (ladder.length - 1))
+        while (idx < top && ladder[idx + 1].price <= spare(pt.fuel)) idx++
         while (idx > 0 && ladder[idx].price > maxEx) idx--
         const v = ladder[idx]
-        out.push({ car, pt, gear, variant: v.name, price: v.price, trim: ladder.length > 1 ? idx / (ladder.length - 1) : 0.5, trimCompromise: idx < wanted })
+        // the must-haves sit at a point on the whole ladder for this engine (every gearbox); a gearbox sold only in
+        // lower trims can't have them, and a trim chosen below that point is a compromise even on a one-trim ladder
+        const all = variantsFor(car, pt, null)
+        const mt = mustTier(car, a)
+        const mustPrice = mt > 0 && all.length > 1 ? all[Math.round(mt * (all.length - 1))].price * 0.97 : 0
+        const mustMissing = mustPrice > 0 && ladder[ladder.length - 1].price < mustPrice
+        out.push({ car, pt, gear, variant: v.name, price: v.price, trim: ladder.length > 1 ? idx / (ladder.length - 1) : 0.5, trimCompromise: idx < wanted || v.price < mustPrice, mustMissing })
       } else {
         // no variant ladder: interpolate between this powertrain's entry price and the model's top price
         const from = pt.priceFrom ?? car.price.min
@@ -162,6 +209,10 @@ export function configs(car: Car, a: Answers, budgetEx: (fuel: Fuel) => number):
         const autoPremium = isAuto(gear) && !car.powertrains.every((p) => p.transmissions.every((t) => isAuto(gearKind(t, p.fuel)))) ? 90000 : 0
         let trim = target
         let price = from + autoPremium + trim * (top - from) * 0.8
+        while (trim + 0.15 <= cap && from + autoPremium + (trim + 0.15) * (top - from) * 0.8 <= spare(pt.fuel)) {
+          trim += 0.15
+          price = from + autoPremium + trim * (top - from) * 0.8
+        }
         while (trim > 0 && price > maxEx) {
           trim = Math.max(0, trim - 0.15)
           price = from + autoPremium + trim * (top - from) * 0.8
@@ -424,9 +475,10 @@ export function sahiScore(cars: Car[], a: Answers, data: OnRoadData): Result {
     const why: string[] = []
     let any = false
     for (const c of candidates) {
-      if (a.avoidFuels.includes(c.pt.fuel)) { why.push('A fuel you ruled out'); continue }
+      if (a.avoidFuels.includes(c.pt.fuel) || a.avoidFuels.includes(baseFuel(c.pt))) { why.push('A fuel you ruled out'); continue }
       if (a.gearbox === 'auto' && !isAuto(c.gear)) { why.push('Manual only'); continue }
       if (a.gearbox === 'manual' && isAuto(c.gear)) { why.push('Automatic only'); continue }
+      if (c.mustMissing) { why.push('Missing a must-have feature'); continue }
       const cost = tco(car, c.pt, c.price, a, data)
       if (cost.onRoad.total > limit) { why.push('Over your budget'); continue }
       any = true
@@ -462,7 +514,8 @@ export function sahiScore(cars: Car[], a: Answers, data: OnRoadData): Result {
       if (a.income > 0) {
         const pay = affordFor(cost, a)
         const over = a.payment === 'cash' ? (Math.max(0, cost.onRoad.total / a.income - 6) / 6) * 0.15 : Math.max(0, pay.emiShare - COMFORT) * 0.6
-        if (over > 0) penalties.push({ label: pay.verdict === 'no' ? 'Too much of your monthly pay' : 'A stretch on your pay', factor: Math.max(0.7, 1 - over) })
+        // past a 30% cut it keeps falling, more gently, so when every car is too much the cheaper ones still rank higher
+        if (over > 0) penalties.push({ label: pay.verdict === 'no' ? 'Too much of your monthly pay' : 'A stretch on your pay', factor: over <= 0.3 ? 1 - over : 0.7 * Math.exp(-(over - 0.3) * 1.5) })
       }
       for (const id of unconfirmed) penalties.push({ label: `${MUST_HAVES.find((m) => m.id === id)?.label ?? id} not confirmed`, factor: 0.94 })
 
@@ -481,8 +534,15 @@ export function sahiScore(cars: Car[], a: Answers, data: OnRoadData): Result {
     }
   }
 
-  // 5-year cost is scored against the cheapest candidate the buyer could actually buy
-  const minPerKm = Math.min(...all.map((s) => s.cost.perKm))
+  // 5-year cost is scored against the cheapest-to-run car in the buyer's price range (on-road at least 60% of the
+  // budget), so a bigger budget isn't spent marking every car against a far cheaper one; cars below the range score 100.
+  // The range reaches down far enough to hold at least five models, so it never jumps to the whole list at once.
+  const byPrice = [...all].sort((x, y) => y.cost.onRoad.total - x.cost.onRoad.total)
+  const seen = new Set<string>()
+  let floor = 0
+  for (const s of byPrice) { seen.add(s.car.id); if (seen.size >= 5) { floor = s.cost.onRoad.total; break } }
+  const inRange = all.filter((s) => s.cost.onRoad.total >= Math.min(a.budget * 0.6, floor))
+  const minPerKm = Math.min(...inRange.map((s) => s.cost.perKm))
   for (const s of all) {
     s.dims.tco = clamp(100 * (minPerKm / s.cost.perKm) ** 1.3)
     let total = 0
@@ -529,8 +589,10 @@ function addBadges(ranked: Scored[]) {
   const top = ranked.slice(0, 10)
   if (!top.length) return
   const best = (f: (s: Scored) => number) => top.reduce((x, y) => (f(y) > f(x) ? y : x))
-  best((s) => -s.cost.perKm).badges.push('Lowest 5-yr cost')
-  best((s) => s.dims.safety).badges.push('Safest')
+  best((s) => -s.cost.perKm).badges.push('Lowest running cost')
+  // "Safest" only goes to a car with a real crash-test result, never to one rated on its equipment alone
+  const tested = top.filter((s) => s.car.safety.agency !== 'none' && s.car.safety.adult != null)
+  if (tested.length) tested.reduce((x, y) => (y.dims.safety > x.dims.safety ? y : x)).badges.push('Safest')
   best((s) => s.dims.space).badges.push('Most spacious')
   best((s) => s.score / (s.cost.onRoad.total / 100000)).badges.push('Best value')
   best((s) => s.dims.features).badges.push('Most loaded')
@@ -544,6 +606,18 @@ export function withStretchHint(cars: Car[], a: Answers, data: OnRoadData, res: 
   const top = more.ranked[0]
   if (top && top.car.id !== res.picks[0].car.id && top.score - res.picks[0].score >= 2.5) return { ...res, stretchHint: { car: top, extra } }
   return res
+}
+
+export type PayHold = { car: Scored; emi: number; emiShare: number; months: number; cash: boolean }
+
+/** When take-home pay is what keeps the top pick cheaper than the budget allows: the car that would win without it,
+ *  and what it would cost the month. Null when pay wasn't given or doesn't change the winner. */
+export function payHold(cars: Car[], a: Answers, data: OnRoadData, res: Result): PayHold | null {
+  if (!(a.income > 0) || !res.picks.length) return null
+  const top = sahiScore(cars, { ...a, income: 0 }, data).picks[0]
+  if (!top || top.car.id === res.picks[0].car.id || top.cost.onRoad.total <= res.picks[0].cost.onRoad.total) return null
+  const pay = affordFor(top.cost, a)
+  return { car: top, emi: pay.emi, emiShare: pay.emiShare, months: top.cost.onRoad.total / a.income, cash: a.payment === 'cash' }
 }
 
 export type Relaxation = { label: string; patch: Partial<Answers>; fits: number }
@@ -564,14 +638,53 @@ export function relaxations(cars: Car[], a: Answers, data: OnRoadData): Relaxati
   if (a.avoidFuels.length) tryPatch('Allow every fuel', { avoidFuels: [] })
   if (a.gearbox !== 'any') tryPatch('Either gearbox', { gearbox: 'any' })
   if (a.avoidBrands.length) tryPatch('Allow every brand', { avoidBrands: [] })
-  // the smallest budget rise that lets something in, in 10% steps up to the slider's ₹1 crore
+  // a 7-seater is often the blocker: 5 seats on most days, with the extra row counted as a plus where it exists
+  if (a.people >= 6) tryPatch(SEATS_LABEL, SEATS_PATCH)
+  const raise = minBudgetRaise(cars, a, data)
+  if (raise) out.push(raise)
+  if (out.length > 1) return out.sort((x, y) => y.fits - x.fits).slice(0, 4)
+
+  // at most one single change works (often a big budget jump): add two changes together, each choice relaxation with the smallest budget rise it then needs,
+  // and pairs of choices (e.g. any body style plus either gearbox)
+  const singles = choiceRelaxations(a)
+  const pairs: Relaxation[] = []
+  for (const s of singles) {
+    const r = minBudgetRaise(cars, { ...a, ...s.patch }, data)
+    if (r) pairs.push({ label: `${s.label} and ${r.label.charAt(0).toLowerCase()}${r.label.slice(1)}`, patch: { ...s.patch, ...r.patch }, fits: r.fits })
+  }
+  for (let i = 0; i < singles.length; i++) {
+    for (let j = i + 1; j < singles.length; j++) {
+      const patch = { ...singles[i].patch, ...singles[j].patch }
+      const fits = sahiScore(cars, { ...a, ...patch }, data).ranked.length
+      if (fits) pairs.push({ label: `${singles[i].label} and ${singles[j].label.charAt(0).toLowerCase()}${singles[j].label.slice(1)}`, patch, fits })
+    }
+  }
+  // the single change first, then the pairs that need the smallest budget, then the most cars
+  pairs.sort((x, y) => (x.patch.budget ?? 0) - (y.patch.budget ?? 0) || y.fits - x.fits)
+  return [...out, ...pairs].slice(0, 4)
+}
+
+/** The single choice-relaxations tried when nothing fits (budget aside). */
+function choiceRelaxations(a: Answers): { label: string; patch: Partial<Answers> }[] {
+  const out: { label: string; patch: Partial<Answers> }[] = []
+  if (a.mustHave.length) out.push({ label: a.mustHave.length > 1 ? 'Drop all must-haves' : 'Drop the must-have', patch: { mustHave: [] } })
+  if (a.bodies.length) out.push({ label: 'Any body style', patch: { bodies: [] } })
+  if (a.avoidFuels.length) out.push({ label: 'Allow every fuel', patch: { avoidFuels: [] } })
+  if (a.gearbox !== 'any') out.push({ label: 'Either gearbox', patch: { gearbox: 'any' } })
+  if (a.avoidBrands.length) out.push({ label: 'Allow every brand', patch: { avoidBrands: [] } })
+  if (a.people >= 6) out.push({ label: SEATS_LABEL, patch: SEATS_PATCH })
+  return out
+}
+
+const SEATS_LABEL = 'Seat 5 on most days (7 only sometimes)'
+const SEATS_PATCH: Partial<Answers> = { people: 5, sevenOccasional: true }
+
+/** The smallest budget rise that lets something in, in 10% steps up to the slider's ₹1 crore. */
+function minBudgetRaise(cars: Car[], a: Answers, data: OnRoadData): Relaxation | null {
   for (let b = a.budget * 1.1; b <= 10000000 * 1.0001; b *= 1.1) {
     const budget = b < 2000000 ? Math.round(b / 25000) * 25000 : Math.round(b / 100000) * 100000
     const fits = sahiScore(cars, { ...a, budget }, data).ranked.length
-    if (fits) {
-      out.push({ label: `Raise budget to ₹${parseFloat((budget / 100000).toFixed(2))} L`, patch: { budget }, fits })
-      break
-    }
+    if (fits) return { label: `Raise budget to ₹${parseFloat((budget / 100000).toFixed(2))} L`, patch: { budget }, fits }
   }
-  return out.sort((x, y) => y.fits - x.fits).slice(0, 4)
+  return null
 }

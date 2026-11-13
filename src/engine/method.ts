@@ -2,7 +2,7 @@
 import type { Dim } from './sahiscore'
 
 export const DIM_HOW: Record<Dim, string> = {
-  tco: 'On-road price for your state + fuel or charging at real-world mileage + service, tyres and insurance renewals + loan interest − resale value, over the years you’ll keep it. Scored against the cheapest car you could actually buy.',
+  tco: 'On-road price for your state + fuel or charging at real-world mileage + service, tyres and insurance renewals + loan interest − resale value, over the years you’ll keep it. Scored against the cheapest-to-run car in your price range (on-road at least 60% of your budget), so a bigger budget isn’t judged against a far cheaper car.',
   safety: 'Bharat NCAP adult and child stars (child stars count double if you have kids). Older, easier Global NCAP results are discounted. Untested cars get a cautious score from airbags and ESC. ADAS adds a little, more if you drive highways.',
   space: 'Wheelbase against how many people ride, boot against your luggage (CNG cylinders eat boot space), cabin height for elderly passengers, and a third row if you sometimes need one.',
   fuel: 'Does the fuel suit your life? EVs need home or office charging and enough real range for your day. Diesel needs high mileage, and Delhi-NCR’s 10-year rule counts against it. CNG needs a pump nearby and suffers in the hills. Strong hybrids shine in city traffic.',

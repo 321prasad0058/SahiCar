@@ -48,7 +48,14 @@ export default function Emi() {
   const [typed, setTyped] = useState(() => num('price', 100000, 50000000, 1000000))
   const [carId, setCarId] = useState(initialCar)
   const car = carId ? carById.get(carId) : undefined
-  const [variantIdx, setVariantIdx] = useState(0)
+  // a car opens on its middle variant by price: what most buyers pick, rather than the stripped-down base
+  const midIdx = (id: string) => {
+    const vs = carById.get(id)?.variants ?? []
+    if (vs.length < 2) return 0
+    const byPrice = vs.map((v, i) => [v.price, i] as const).sort((x, y) => x[0] - y[0])
+    return byPrice[Math.floor((byPrice.length - 1) / 2)][1]
+  }
+  const [variantIdx, setVariantIdx] = useState(() => midIdx(initialCar))
   const [st, setSt] = useState(homeState)
   const [downPct, setDownPct] = useState(() => num('down', 0, 80, 20))
   const [years, setYears] = useState(() => num('years', 1, 7, 5))
@@ -80,7 +87,8 @@ export default function Emi() {
     return () => (io.disconnect(), removeEventListener('scroll', update))
   })
 
-  useEffect(() => setVariantIdx(0), [carId])
+  const firstCar = useRef(carId)
+  useEffect(() => { if (carId !== firstCar.current) { firstCar.current = carId; setVariantIdx(midIdx(carId)) } }, [carId])
   useEffect(() => track('emi_open', { from: initialCar ? 'car' : params.get('from') ?? 'direct' }), [initialCar, params])
 
   // the price the loan is for: typed, or the chosen variant's on-road price in the chosen state
@@ -91,7 +99,9 @@ export default function Emi() {
     const pt = car.powertrains.find((p) => p.fuel === variant.fuel) ?? car.powertrains[0]
     return onRoad(onroad, st, car.body, variant.fuel, variant.price, pt.cc)
   }, [mode, car, variant, st])
-  const price = road ? road.total : typed
+  // a typed price below ₹1 lakh (or a cleared box) is still being typed: work it out on ₹1 lakh until it's done
+  const MIN_PRICE = 100000, MAX_PRICE = 50000000
+  const price = road ? road.total : Math.max(MIN_PRICE, typed)
   const ev = mode === 'car' ? variant?.fuel === 'ev' : evManual
   const down = Math.round((price * downPct) / 100)
   const loan = Math.max(0, price - down)
@@ -118,7 +128,7 @@ export default function Emi() {
   ]
   const partsTotal = parts.reduce((s, p) => s + p.v, 0)
   const shown = showAll ? all : all.slice(0, phone ? 3 : 6)
-  const maxYear = Math.max(...base.years.map((y) => y.principal + y.interest))
+  const maxYear = Math.max(1, ...base.years.map((y) => y.principal + y.interest))
   const saved = base.totalInterest - plan.totalInterest
   const monthsSaved = base.months - plan.months
 
@@ -151,10 +161,12 @@ export default function Emi() {
                 <label className="emi-label" htmlFor="emi-price">On-road price</label>
                 <div className="money-input">
                   <span>₹</span>
-                  <input id="emi-price" inputMode="numeric" value={typed.toLocaleString('en-IN')} onChange={(e) => { const v = Number(e.target.value.replace(/\D/g, '')); if (v <= 50000000) setTyped(v) }} />
+                  <input id="emi-price" inputMode="numeric" value={typed.toLocaleString('en-IN')} onChange={(e) => setTyped(Math.min(MAX_PRICE, Number(e.target.value.replace(/\D/g, '').slice(0, 10)) || 0))} />
                   <span className="dim">{lakh(typed)}</span>
                 </div>
-                <Range label="On-road price" min={0} max={1000} value={fromPrice(typed)} onChange={(i) => setTyped(toPrice(i))} />
+                {typed < MIN_PRICE && <p className="dim small">Enter at least ₹1 lakh. Until then the numbers below use ₹1 lakh.</p>}
+                {typed >= MAX_PRICE && <p className="dim small">The calculator goes up to ₹5 crore.</p>}
+                <Range label="On-road price" min={0} max={1000} value={fromPrice(price)} onChange={(i) => setTyped(toPrice(i))} />
                 <label className="check">
                   <input type="checkbox" checked={evManual} onChange={(e) => setEvManual(e.target.checked)} />
                   <span>It’s an electric car <span className="dim">(some banks charge less)</span></span>
@@ -259,9 +271,9 @@ export default function Emi() {
                 <summary><h2 className="h-card">Can you afford it?</h2></summary>
                 {income > 0 ? (
                   <>
-                    <div className="meter" aria-label={`EMI is ${share.toFixed(0)}% of take-home pay`}>
+                    <div className="meter" aria-label={`EMI is ${share > 100 ? 'more than 100' : share.toFixed(0)}% of take-home pay`}>
                       <div className="meter-zones"><span /><span /><span /></div>
-                      <div className="meter-pin" style={{ left: `${Math.min(100, (share / 40) * 100)}%` }}><b>{share.toFixed(0)}%</b></div>
+                      <div className="meter-pin" style={{ left: `${Math.min(100, (share / 40) * 100)}%` }}><b>{share > 100 ? '100%+' : `${share.toFixed(0)}%`}</b></div>
                     </div>
                     <div className="meter-scale dim small"><span>0%</span><span>15% comfortable</span><span>25% stretched</span><span>40%</span></div>
                     <p className="small">{share <= 15 ? 'Comfortable: the EMI leaves room for fuel, insurance and savings.' : share <= 25 ? 'Manageable, but fuel, insurance and service add another few thousand a month.' : 'Stretched: a bigger down payment or a cheaper variant would ease this.'}</p>
@@ -272,7 +284,7 @@ export default function Emi() {
                 <ul className="rule">
                   <li className={downPct >= 20 ? 'ok' : ''}><b>20%</b> or more down <span className="dim">— you have {downPct}%</span></li>
                   <li className={years <= 4 ? 'ok' : ''}><b>4 years</b> or less <span className="dim">— you have {years}</span></li>
-                  <li className={income > 0 && share <= 10 ? 'ok' : ''}><b>10%</b> of income or less on the EMI <span className="dim">— {income > 0 ? `${share.toFixed(0)}%` : 'add your pay'}</span></li>
+                  <li className={income > 0 && share <= 10 ? 'ok' : ''}><b>10%</b> of income or less on the EMI <span className="dim">— {income > 0 ? (share > 100 ? '100%+' : `${share.toFixed(0)}%`) : 'add your pay'}</span></li>
                 </ul>
                 <p className="dim small">The 20/4/10 rule of thumb keeps a car from straining your finances. Missing one isn’t a red flag; missing all three is.</p>
               </details>
@@ -360,7 +372,7 @@ export default function Emi() {
                 ))}
               </div>
               <div className="split-legend small"><span><i className="split-principal" />Principal</span><span><i className="split-interest" />Interest</span></div>
-              <p className="dim small">Interest is front-loaded: in year 1 about {Math.round((base.years[0].interest / (base.years[0].interest + base.years[0].principal)) * 100)}% of what you pay is interest.</p>
+              {base.years[0] && <p className="dim small">Interest is front-loaded: in year 1 about {Math.round((base.years[0].interest / (base.years[0].interest + base.years[0].principal)) * 100)}% of what you pay is interest.</p>}
             </details>
 
             <details className="emi-extra card fold" open={!phone}>

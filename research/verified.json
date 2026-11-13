@@ -478,18 +478,19 @@
  },
  "maruti-ertiga": {
   "safety": {
-   "agency": null,
-   "adult": null,
-   "child": null,
-   "adultScore": null,
+   "agency": "GNCAP",
+   "adult": 3,
+   "child": 3,
+   "adultScore": 9.25,
    "childScore": null,
-   "year": null,
+   "year": 2019,
    "airbagsStd": 6,
    "airbagsMax": 6,
    "esc": true,
    "adas": "none",
-   "older": false,
-   "source": "https://www.autocarindia.com/car-news/africa-spec-maruti-ertiga-renault-triber-score-poorly-in-gncap-crash-tests-432408"
+   "source": "https://www.globalncap.org/news/three-star-ertiga-and-one-star-redigo-in-latest-crash-test-results-for-india",
+   "oldProtocol": true,
+   "preFacelift": true
   },
   "dims": {
    "length": 4435,
@@ -524,7 +525,8 @@
    "https://www.marutisuzuki.com/ertiga",
    "https://www.carwale.com/maruti-suzuki-cars/ertiga/",
    "https://www.autocarindia.com/car-news/africa-spec-maruti-ertiga-renault-triber-score-poorly-in-gncap-crash-tests-432408",
-   "https://www.rushlane.com/2025-maruti-ertiga-arrives-at-showroom-bigger-size-12528422.html"
+   "https://www.rushlane.com/2025-maruti-ertiga-arrives-at-showroom-bigger-size-12528422.html",
+   "https://www.globalncap.org/news/three-star-ertiga-and-one-star-redigo-in-latest-crash-test-results-for-india"
   ]
  },
  "maruti-victoris": {

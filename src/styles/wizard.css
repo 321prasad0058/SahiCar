@@ -322,13 +322,6 @@
   }
 }
 
-.more summary {
-  cursor: pointer;
-  color: var(--muted);
-  font-weight: 600;
-  margin-bottom: 12px;
-}
-
 .wz-side {
   position: sticky;
   top: 150px;

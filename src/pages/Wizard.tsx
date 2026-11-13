@@ -296,7 +296,7 @@ const STEPS: Step[] = [
         <Field label="Is there a CNG pump near you?">
           <Cards value={a.cngNearby} cols={3} onChange={(v) => set({ cngNearby: v })} options={[{ v: 'yes', label: 'Yes' }, { v: 'unsure', label: 'Not sure' }, { v: 'no', label: 'No' }]} />
         </Field>
-        <Field label="Any fuel you’d never buy?" note="Leave empty and let SahiScore decide — that’s usually best.">
+        <Field label="Any fuel you’d never buy?" note="Leave empty and let SahiScore decide — that’s usually best. Petrol and diesel include their mild hybrids.">
           <Chips value={a.avoidFuels} onChange={(v) => set({ avoidFuels: v })} options={(['petrol', 'diesel', 'cng', 'strong-hybrid', 'ev'] as Fuel[]).map((f) => ({ v: f, label: FUEL_LABEL[f] }))} />
         </Field>
       </>
@@ -337,10 +337,9 @@ const STEPS: Step[] = [
         <Field label="Body style" note="Leave empty if you’re open — we’ll show you why one shape fits.">
           <Chips value={a.bodies} onChange={(v) => set({ bodies: v })} options={(['hatchback', 'sedan', 'compact-suv', 'suv', 'mpv'] as Body[]).map((b) => ({ v: b, label: BODY_LABEL[b] }))} />
         </Field>
-        <details className="more">
-          <summary>Brands to leave out</summary>
+        <Field label="Brands to leave out" note="Tap any brand you’d never buy. Leave empty to consider all.">
           <Chips value={a.avoidBrands} onChange={(v) => set({ avoidBrands: v })} options={brands.map((b) => ({ v: b, label: b }))} />
-        </details>
+        </Field>
       </>
     ),
   },
