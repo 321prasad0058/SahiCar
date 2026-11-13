@@ -5023,4 +5023,209 @@ export const NEXON_EV: CarSpec = {
   plate: 'MH 12 NE 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, KYLAQ, FORTUNER, SAFARI, WINDSOR_EV, CITY_X, SYROS, ALCAZAR, ALTROZ_X, VERNA, VICTORIS_X, SIERRA_X, SIERRA_EV_X, GRAND_I10_NIOS, AURA, CELERIO, ALTO_K10, GLANZA, TAISOR, BOLERO_NEO, BOLERO, NEXON_EV, PUNCH_EV]
+const XEV9E_L = 4.789
+// the side photo's axles (u 0.225 / 0.8134) sit 1.5 % too far apart: side details traced off it are mapped piecewise-linearly
+// so its axles land on the official wheelbase, the overhangs split as in the photo (the silhouette is kept in photo u)
+const xev9eU = (u: number): number => {
+  const pa = [0, 0.225, 0.8134, 1], ma = [0, 0.2299, 0.8094, 1]
+  for (let i = 0; i < 3; i++) if (u <= pa[i + 1] || i === 2) return +(ma[i] + ((u - pa[i]) * (ma[i + 1] - ma[i])) / (pa[i + 1] - pa[i])).toFixed(5)
+  return u
+}
+const xev9eP = (pts: P2[]): P2[] => pts.map(([u, y]) => [xev9eU(u), y] as P2)
+/** a side outline from a rounded rectangle given in photo u and metres */
+const xev9eRectU = (u0: number, y0: number, u1: number, y1: number, r: number): P2[] =>
+  xev9eP(rrectS(u0 * XEV9E_L, y0, u1 * XEV9E_L, y1, r).map(([x, y]) => [x / XEV9E_L, y] as P2))
+const XEV9E_GH: [number, number] = [0.04, 0.735]
+// the compare overlay showed a uniform band over the roof and bonnet (the render runs a little short): lower them by it
+const XEV9E_DY = 0.015
+const xev9eY = (pts: P2[]): P2[] => pts.map(([u, y]) => [u, +(y - XEV9E_DY).toFixed(4)] as P2)
+/** the glasshouse station nearest u (roof paint edges must sit on one) */
+const xev9eStation = (u: number): number => {
+  const [a, b] = XEV9E_GH
+  let best = a
+  for (let i = 0; i <= 140; i++) { const s = a + (b - a) * (0.5 - 0.5 * Math.cos((Math.PI * i) / 140)); if (Math.abs(s - u) < Math.abs(best - u)) best = s }
+  return +best.toFixed(5)
+}
+
+/** Mahindra XEV 9e (2024, electric, INGLO platform). 4789 × 1907 × 1694, wheelbase 2775, 245/55 R19 (the photo car's
+ *  aero alloys; 245/50 R20 is the same diameter). Side profile from a long-lens road photo of a Tango Red car from another
+ *  portal's gallery (shark fin erased; 1.697 m measured, the axles 1.5 % apart, so side details are mapped onto the
+ *  official wheelbase). The coupe SUV: a long fastback roof falling into a short rear glass under a roof spoiler, the
+ *  body-coloured sail round a pointed quarter glass, tall square black arch cladding joined by a grey band along the doors,
+ *  the full-width light bar along the bonnet's leading edge turning down the nose corners, the closed body-coloured panel
+ *  where a grille would be, and the full-width tail light bar turning down the tail corners. */
+export const XEV_9E: CarSpec = {
+  id: 'mahindra-xev-9e',
+  name: 'Mahindra XEV 9e',
+  dropSlivers: true,
+  rakedEnds: true,
+  L: XEV9E_L, W: 1.907, H: 1.694,
+  axles: [0.2299, 0.8094],
+  tyreR: 0.376, tyreW: 0.245, rim: 0.642, wheel: { style: 'swirl', spokes: 5 },
+  archGap: 0.08, archSquare: 0.35,
+  sill: [[0, 0.52], [0.02, 0.49], [0.05, 0.455], [0.08, 0.41], [0.1, 0.38], [0.12, 0.35], [0.2, 0.3], [0.33, 0.25], [0.5, 0.24], [0.7, 0.23], [0.73, 0.22], [0.9, 0.22], [0.93, 0.23], [0.95, 0.26], [0.97, 0.285], [0.99, 0.31], [1, 0.33]],
+  // the tail face climbing to the light bar's lip, the belt falling gently forward under the windows into the cowl, the
+  // long bonnet falling to the light bar along its leading edge
+  top: xev9eY([[0, 1.3], [0.006, 1.325], [0.012, 1.343], [0.02, 1.352], [0.03, 1.358], [0.04, 1.36], [0.06, 1.355], [0.1, 1.345], [0.15, 1.33], [0.2, 1.318], [0.25, 1.31], [0.3, 1.302], [0.35, 1.295], [0.4, 1.29], [0.45, 1.283], [0.5, 1.275], [0.55, 1.265], [0.6, 1.256], [0.65, 1.246], [0.7, 1.238], [0.72, 1.234], [0.735, 1.232], [0.75, 1.214], [0.76, 1.205], [0.78, 1.196], [0.8, 1.188], [0.82, 1.18], [0.84, 1.17], [0.86, 1.158], [0.88, 1.145], [0.9, 1.128], [0.92, 1.108], [0.94, 1.075], [0.95, 1.052], [0.96, 1.027], [0.97, 1.003], [0.98, 0.985], [0.99, 0.975], [1, 0.97]]),
+  width: [[0, 0.9], [0.006, 0.93], [0.02, 0.955], [0.05, 0.975], [0.1, 0.99], [0.2, 1], [0.5, 1], [0.85, 0.997], [0.9, 0.985], [0.94, 0.975], [0.97, 0.96], [0.99, 0.945], [1, 0.935]],
+  crown: 0.01,
+  bulge: 0.03,
+  haunch: 0.045,
+  topRadius: 0.08,
+  noseSweep: 0.28,
+  tailSweep: 0.12,
+  greenhouse: {
+    u0: XEV9E_GH[0], u1: XEV9E_GH[1], tumble: 0.62, paintedEdge: [0.03, 0.2],
+    // the short rear glass rising into the long fastback roof, the raked windscreen
+    top: xev9eY([[0.04, 1.36], [0.05, 1.368], [0.06, 1.378], [0.07, 1.39], [0.08, 1.402], [0.09, 1.416], [0.1, 1.432], [0.11, 1.446], [0.12, 1.461], [0.13, 1.476], [0.14, 1.49], [0.15, 1.503], [0.16, 1.518], [0.17, 1.532], [0.18, 1.548], [0.19, 1.565], [0.2, 1.58], [0.21, 1.596], [0.22, 1.61], [0.23, 1.622], [0.24, 1.63], [0.26, 1.639], [0.28, 1.647], [0.3, 1.658], [0.32, 1.667], [0.34, 1.675], [0.36, 1.683], [0.38, 1.689], [0.4, 1.693], [0.42, 1.696], [0.44, 1.697], [0.46, 1.696], [0.48, 1.693], [0.5, 1.688], [0.52, 1.68], [0.54, 1.667], [0.56, 1.643], [0.58, 1.614], [0.6, 1.574], [0.62, 1.535], [0.64, 1.486], [0.66, 1.437], [0.68, 1.383], [0.7, 1.326], [0.72, 1.264], [0.735, 1.232]]),
+  },
+  roof: { u0: xev9eStation(0.165), u1: xev9eStation(0.55), black: false },
+  pillars: [
+    // the black B-pillar (the A-pillar is left as plain glass)
+    { bottom: [xev9eU(0.468), xev9eU(0.49)], top: [xev9eU(0.47), xev9eU(0.49)], black: true },
+  ],
+  // the tall square black arch flares joined by a band along the doors, the black bumpers
+  cladding: { top: xev9eP([[0, 0.8], [0.06, 0.81], [0.09, 0.77], [0.115, 0.73], [0.125, 0.76], [0.14, 0.85], [0.16, 0.92], [0.19, 0.98], [0.22, 1.0], [0.25, 0.99], [0.27, 0.95], [0.29, 0.88], [0.305, 0.78], [0.315, 0.66], [0.325, 0.585], [0.4, 0.6], [0.5, 0.6], [0.6, 0.6], [0.68, 0.58], [0.7, 0.58], [0.71, 0.66], [0.725, 0.77], [0.745, 0.85], [0.77, 0.905], [0.8, 0.93], [0.84, 0.935], [0.87, 0.9], [0.89, 0.84], [0.905, 0.75], [0.915, 0.62], [0.925, 0.52], [0.96, 0.51], [1, 0.5]]), flare: 0.08, cut: true },
+  doors: [[xev9eU(0.255), xev9eU(0.255)], [xev9eU(0.488), xev9eU(0.482)], [xev9eU(0.695), xev9eU(0.69)]],
+  front: [
+    // the light bar along the bonnet's leading edge
+    { step: 0.005, mat: 'drl', poly: both([[0, 0.945], [0.74, 0.946], [0.79, 0.949], [0.83, 0.952], [0.83, 0.965], [0.79, 0.961], [0.74, 0.958], [0, 0.958]]) },
+    // turning down the nose corners as tall bars
+    { step: 0.005, mat: 'drl', mirror: true, poly: [[0.83, 0.958], [0.845, 0.958], [0.85, 0.94], [0.85, 0.55], [0.843, 0.54], [0.838, 0.55], [0.838, 0.935]] },
+    // the headlamp modules at the corners: black housing, two projector strips
+    { step: 0.005, mat: 'gloss', mirror: true, poly: smooth([[0.66, 0.915], [0.815, 0.915], [0.828, 0.9], [0.828, 0.665], [0.815, 0.645], [0.75, 0.645], [0.7, 0.74]], 1) },
+    { step: 0.005, mat: 'head', layer: 1, mirror: true, poly: rrectS(0.725, 0.855, 0.805, 0.878, 0.008) },
+    { step: 0.005, mat: 'head', layer: 1, mirror: true, poly: rrectS(0.765, 0.74, 0.805, 0.765, 0.006) },
+    // the black lower bumper (over the cladding's end cap), its mesh intake and silver lip
+    { step: 0.005, mat: 'trim', poly: both([[0, 0.3], [0.78, 0.3], [0.8, 0.33], [0.8, 0.52], [0, 0.52]]) },
+    { step: 0.005, mat: 'mesh', layer: 1, poly: smooth(both([[0, 0.39], [0.52, 0.39], [0.58, 0.41], [0.6, 0.5], [0, 0.5]]), 1) },
+    { step: 0.005, mat: 'satin', layer: 1, poly: smooth(both([[0, 0.34], [0.7, 0.34], [0.74, 0.35], [0.7, 0.36], [0, 0.36]]), 1) },
+  ],
+  rear: [
+    // the full-width light bar along the top of the tail: a smoked band, its red line turning down the corners
+    { step: 0.005, mat: 'gloss', layer: 2, depth: 0.012, poly: both([[0, 1.225], [0.7, 1.225], [0.75, 1.235], [0.8, 1.25], [0.8, 1.31], [0, 1.31]]) },
+    { step: 0.005, mat: 'reflector', layer: 2, mirror: true, poly: rrectS(0.765, 0.87, 0.805, 1.28, 0.01) },
+    { step: 0.005, mat: 'tail', layer: 3, depth: 0.016, poly: both([[0, 1.283], [0.74, 1.283], [0.785, 1.272], [0.79, 0.875], [0.803, 0.875], [0.803, 1.29], [0.76, 1.3], [0, 1.3]]) },
+    // the gloss strip over the bumper with the small lamps at its ends
+    { step: 0.005, mat: 'gloss', layer: 1, poly: both([[0, 0.79], [0.8, 0.79], [0.8, 0.83], [0, 0.83]]) },
+    { step: 0.005, mat: 'reflector', layer: 2, mirror: true, poly: rrectS(0.7, 0.796, 0.79, 0.822, 0.006) },
+    { step: 0.005, mat: 'silver', layer: 2, mirror: true, poly: rrectS(0.64, 0.796, 0.69, 0.822, 0.006) },
+    // the black bumper (over the cladding's end cap) and the silver strip across it
+    { step: 0.005, mat: 'trim', poly: both([[0, 0.5], [0.76, 0.5], [0.8, 0.56], [0.8, 0.79], [0, 0.79]]) },
+    { step: 0.005, mat: 'satin', layer: 1, poly: smooth(both([[0, 0.545], [0.6, 0.545], [0.66, 0.52], [0.675, 0.53], [0.62, 0.56], [0, 0.56]]), 1) },
+  ],
+  side: [
+    // the body-coloured sail round the pointed quarter glass, up to the roof's edge
+    { step: 0.004, mat: 'body', depth: 0.002, poly: xev9eP([[0.04, 1.33], [0.262, 1.3], [0.262, 1.335], [0.178, 1.42], [0.272, 1.505], [0.276, 1.6], [0.24, 1.6], [0.2, 1.55], [0.15, 1.475], [0.1, 1.404], [0.06, 1.352], [0.045, 1.338]]) },
+    // the tail lamp wedge on the flank: red lens with a red light guide along its top edge
+    { step: 0.004, mat: 'reflector', depth: 0.003, poly: xev9eP([[0.012, 1.3], [0.02, 1.31], [0.09, 1.225], [0.06, 1.19], [0.055, 0.87], [0.048, 0.87], [0.035, 1.1], [0.022, 1.25], [0.012, 1.28]]) },
+    { step: 0.004, mat: 'tail', layer: 1, depth: 0.005, poly: xev9eP(sideBand([[0.014, 1.297], [0.02, 1.302], [0.088, 1.222]], 0.012, XEV9E_L)) },
+    // the dark grey band along the lower doors, over the black cladding
+    { step: 0.004, mat: 'gloss', depth: 0.003, poly: xev9eP([[0.325, 0.52], [0.69, 0.545], [0.7, 0.575], [0.68, 0.585], [0.4, 0.595], [0.33, 0.58]]) },
+    // the flush front door handle
+    { step: 0.005, mat: 'body', depth: 0.006, poly: xev9eRectU(0.53, 0.972, 0.57, 0.995, 0.01) },
+  ],
+  plates: { front: 0.617, rear: 0.7 },
+  mirrors: 'body',
+  paint: '#8f0614', // Tango Red, darkened for the studio lights
+  ev: true,
+  plate: 'MH 12 XE 2026',
+}
+
+const BE6_L = 4.371
+// the gallery side photo's axles (u 0.1681 / 0.8209) sit 2.8 % too far apart: side details traced off it are mapped
+// piecewise-linearly so its axles land on the official wheelbase, the overhangs split as in the photo
+const be6U = (u: number): number => {
+  const pa = [0, 0.1681, 0.8209, 1], ma = [0, 0.1768, 0.8117, 1]
+  for (let i = 0; i < 3; i++) if (u <= pa[i + 1] || i === 2) return +(ma[i] + ((u - pa[i]) * (ma[i + 1] - ma[i])) / (pa[i + 1] - pa[i])).toFixed(5)
+  return u
+}
+const be6P = (pts: P2[]): P2[] => pts.map(([u, y]) => [be6U(u), y] as P2)
+const be6RectU = (u0: number, y0: number, u1: number, y1: number, r: number): P2[] =>
+  be6P(rrectS(u0 * BE6_L, y0, u1 * BE6_L, y1, r).map(([x, y]) => [x / BE6_L, y] as P2))
+const BE6_GH: [number, number] = [0.04, 0.745]
+// the overlay showed a uniform band over the roof and bonnet: lower them by it
+const BE6_DY = 0.012
+const be6Y = (pts: P2[]): P2[] => pts.map(([u, y]) => [u, +(y - (u > 0.3 ? BE6_DY : (BE6_DY * u) / 0.3)).toFixed(4)] as P2)
+const be6Station = (u: number): number => {
+  const [a, b] = BE6_GH
+  let best = a
+  for (let i = 0; i <= 140; i++) { const s = a + (b - a) * (0.5 - 0.5 * Math.cos((Math.PI * i) / 140)); if (Math.abs(s - u) < Math.abs(best - u)) best = s }
+  return +best.toFixed(5)
+}
+
+/** Mahindra BE 6 (2024, electric, INGLO platform, the XEV 9e's sibling). 4371 × 1907 × 1627, wheelbase 2775, 245/50 R20
+ *  (top trim). Side profile from the gallery's road side photo of a Tango Red car (1.638 m measured, the axles 2.8 % apart, so
+ *  side details are mapped onto the official wheelbase). The low wedge: a short bonnet with the scoop over a black brow, the
+ *  C-shaped lamps at the nose corners round red pockets, a fastback roof (black) under a floating roof wing, a short tail with
+ *  the light bar under a black lip turning down into C-shaped corners, square black arch flares and a black lower body, the
+ *  twin satin skid pods in the rear bumper. */
+export const BE_6: CarSpec = {
+  ...XEV_9E,
+  id: 'mahindra-be-6',
+  name: 'Mahindra BE 6',
+  L: BE6_L, W: 1.907, H: 1.627,
+  axles: [0.1768, 0.8117],
+  tyreR: 0.3765, tyreW: 0.245, rim: 0.675, wheel: { style: 'blade', spokes: 5 }, rimTone: undefined,
+  archGap: 0.07, archSquare: 0.45,
+  sill: [[0, 0.42], [0.01, 0.41], [0.02, 0.39], [0.03, 0.36], [0.05, 0.32], [0.07, 0.29], [0.1, 0.28], [0.3, 0.27], [0.7, 0.26], [0.9, 0.24], [0.93, 0.25], [0.95, 0.28], [0.97, 0.31], [0.99, 0.33], [1, 0.34]],
+  // the short tail climbing to the black lip, the belt falling forward under the windows, the short bonnet over the brow
+  top: be6Y([[0, 1.27], [0.006, 1.285], [0.012, 1.295], [0.02, 1.3], [0.04, 1.305], [0.1, 1.29], [0.2, 1.27], [0.3, 1.25], [0.4, 1.225], [0.5, 1.205], [0.6, 1.185], [0.65, 1.185], [0.7, 1.19], [0.73, 1.198], [0.745, 1.2], [0.76, 1.175], [0.78, 1.169], [0.8, 1.158], [0.82, 1.152], [0.84, 1.141], [0.86, 1.13], [0.88, 1.114], [0.9, 1.09], [0.92, 1.06], [0.94, 1.025], [0.95, 1.008], [0.96, 0.997], [0.97, 0.99], [0.98, 0.986], [0.99, 0.984], [1, 0.983]]),
+  width: [[0, 0.9], [0.006, 0.93], [0.02, 0.955], [0.05, 0.975], [0.1, 0.99], [0.2, 1], [0.6, 1], [0.85, 0.995], [0.9, 0.982], [0.94, 0.965], [0.97, 0.95], [0.99, 0.935], [1, 0.925]],
+  noseSweep: 0.2,
+  topRadius: 0.06,
+  greenhouse: {
+    u0: BE6_GH[0], u1: BE6_GH[1], tumble: 0.62, paintedEdge: [0.03, 0.215],
+    // the short rear glass rising into the fastback roof (the roof wing over it left out), the raked windscreen
+    top: be6Y([[0.04, 1.305], [0.05, 1.318], [0.06, 1.332], [0.07, 1.348], [0.08, 1.362], [0.09, 1.38], [0.1, 1.396], [0.11, 1.412], [0.12, 1.428], [0.13, 1.445], [0.14, 1.46], [0.15, 1.475], [0.16, 1.49], [0.17, 1.505], [0.18, 1.52], [0.19, 1.535], [0.2, 1.548], [0.22, 1.565], [0.24, 1.58], [0.26, 1.592], [0.28, 1.604], [0.3, 1.615], [0.32, 1.622], [0.34, 1.626], [0.36, 1.63], [0.38, 1.633], [0.4, 1.634], [0.42, 1.635], [0.44, 1.635], [0.46, 1.632], [0.48, 1.627], [0.5, 1.62], [0.52, 1.607], [0.54, 1.592], [0.56, 1.568], [0.58, 1.54], [0.6, 1.506], [0.62, 1.468], [0.64, 1.43], [0.66, 1.395], [0.68, 1.353], [0.7, 1.31], [0.72, 1.268], [0.735, 1.232], [0.745, 1.205]]),
+  },
+  roof: { u0: be6Station(0.215), u1: be6Station(0.54), black: true },
+  spoiler: { len: 0.5, thick: 0.035, tilt: -0.02 },
+  pillars: [
+    { bottom: [be6U(0.425), be6U(0.445)], top: [be6U(0.43), be6U(0.445)], black: true },
+  ],
+  // the square black arch flares, the black lower body rising to the rear, the black bumpers
+  cladding: { top: be6P([[0, 0.62], [0.05, 0.62], [0.065, 0.66], [0.08, 0.8], [0.095, 0.93], [0.11, 1.0], [0.13, 1.02], [0.2, 1.02], [0.215, 0.98], [0.235, 0.93], [0.26, 0.85], [0.28, 0.75], [0.295, 0.65], [0.31, 0.58], [0.34, 0.55], [0.4, 0.5], [0.5, 0.47], [0.6, 0.45], [0.68, 0.44], [0.7, 0.45], [0.71, 0.6], [0.73, 0.78], [0.75, 0.87], [0.78, 0.92], [0.82, 0.94], [0.86, 0.925], [0.89, 0.87], [0.91, 0.78], [0.925, 0.62], [0.935, 0.55], [0.97, 0.55], [1, 0.55]]), flare: 0.07, cut: true },
+  doors: [[be6U(0.212), be6U(0.212)], [be6U(0.445), be6U(0.44)], [be6U(0.695), be6U(0.69)]],
+  front: [
+    // the gloss-black brow across the nose under the bonnet edge, the DRL eyebrows in it
+    { step: 0.005, mat: 'gloss', poly: both([[0, 0.82], [0.48, 0.82], [0.55, 0.85], [0.835, 0.855], [0.845, 0.875], [0.845, 0.95], [0, 0.95]]) },
+    { step: 0.005, mat: 'drl', layer: 2, mirror: true, poly: [[0.5, 0.874], [0.835, 0.866], [0.845, 0.878], [0.835, 0.882], [0.5, 0.889]] },
+    { step: 0.005, mat: 'head', layer: 2, mirror: true, poly: rrectS(0.68, 0.893, 0.77, 0.908, 0.006) },
+    // the C-shaped lamps: the tall outer bar and the lower arm angling in round the red pocket
+    { step: 0.005, mat: 'drl', layer: 2, mirror: true, poly: [[0.83, 0.87], [0.845, 0.87], [0.845, 0.6], [0.835, 0.59], [0.825, 0.6], [0.83, 0.86]] },
+    { step: 0.005, mat: 'drl', layer: 2, mirror: true, poly: band([[0.835, 0.598], [0.7, 0.66], [0.57, 0.738]], 0.014) },
+    // the black centre panel under the brow, down to the bumper
+    { step: 0.005, mat: 'gloss', layer: 1, poly: smooth(both([[0, 0.55], [0.58, 0.55], [0.56, 0.7], [0.5, 0.84], [0, 0.84]]), 1) },
+    // the black lower bumper (over the cladding's end cap) and the satin chin
+    { step: 0.005, mat: 'trim', poly: both([[0, 0.3], [0.8, 0.3], [0.84, 0.34], [0.84, 0.555], [0, 0.555]]) },
+    { step: 0.005, mat: 'satin', layer: 1, poly: smooth(both([[0, 0.43], [0.6, 0.43], [0.66, 0.45], [0.62, 0.48], [0, 0.48]]), 1) },
+  ],
+  rear: [
+    // the black lip at the top of the tail, the red light line under it turning down into the C-shaped corners
+    { step: 0.005, mat: 'gloss', layer: 2, depth: 0.012, poly: both([[0, 1.205], [0.8, 1.205], [0.8, 1.27], [0, 1.27]]) },
+    { step: 0.005, mat: 'tail', layer: 3, depth: 0.016, poly: both([[0, 1.208], [0.79, 1.208], [0.79, 1.222], [0, 1.222]]) },
+    { step: 0.005, mat: 'tail', layer: 4, depth: 0.016, mirror: true, poly: [[0.785, 1.215], [0.802, 1.215], [0.802, 0.72], [0.57, 0.648], [0.565, 0.662], [0.785, 0.735]] },
+    // the black bumper (over the cladding's end cap) with the twin satin skid pods and their red reflector lines
+    { step: 0.005, mat: 'trim', poly: both([[0, 0.4], [0.78, 0.4], [0.82, 0.45], [0.82, 0.64], [0.6, 0.64], [0, 0.64]]) },
+    { step: 0.005, mat: 'satin', layer: 1, depth: 0.012, mirror: true, poly: rrectS(0.16, 0.45, 0.7, 0.53, 0.03) },
+    { step: 0.005, mat: 'mesh', layer: 2, depth: 0.014, mirror: true, poly: rrectS(0.2, 0.46, 0.66, 0.505, 0.015) },
+    { step: 0.005, mat: 'reflector', layer: 2, depth: 0.014, mirror: true, poly: rrectS(0.3, 0.513, 0.62, 0.525, 0.004) },
+  ],
+  side: [
+    // the body-coloured sail round the pointed quarter glass, up to the roof's edge
+    { step: 0.004, mat: 'body', depth: 0.002, poly: be6P([[0.04, 1.28], [0.285, 1.235], [0.285, 1.27], [0.2, 1.36], [0.29, 1.43], [0.295, 1.585], [0.26, 1.577], [0.2, 1.533], [0.15, 1.46], [0.1, 1.38], [0.06, 1.315], [0.045, 1.29]]) },
+    // the light line's end wrapping onto the flank
+    { step: 0.004, mat: 'tail', depth: 0.004, poly: be6P([[0.004, 1.208], [0.03, 1.204], [0.03, 1.216], [0.004, 1.222]]) },
+    // the gloss-black panel along the lower doors, deepening to the rear
+    { step: 0.004, mat: 'gloss', depth: 0.003, poly: be6P([[0.31, 0.5], [0.68, 0.43], [0.7, 0.44], [0.68, 0.465], [0.34, 0.575], [0.31, 0.57]]) },
+    // the flush front door handle
+    { step: 0.005, mat: 'body', depth: 0.006, poly: be6RectU(0.5, 1.025, 0.545, 1.045, 0.01) },
+  ],
+  plates: { front: 0.61, rear: 0.59 },
+  mirrors: 'black',
+  paint: '#8f0614', // Tango Red, darkened for the studio lights
+  plate: 'MH 12 BE 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, KYLAQ, FORTUNER, SAFARI, WINDSOR_EV, CITY_X, SYROS, ALCAZAR, ALTROZ_X, VERNA, VICTORIS_X, SIERRA_X, SIERRA_EV_X, GRAND_I10_NIOS, AURA, CELERIO, ALTO_K10, GLANZA, TAISOR, BOLERO_NEO, BOLERO, NEXON_EV, PUNCH_EV, XEV_9E, BE_6]

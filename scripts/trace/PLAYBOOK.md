@@ -473,3 +473,14 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - A gloss tail bar that "turns body colour" from behind is the red glow sprites over it, not a hole: check with a `satin` swap.
 - Tyres hidden in grass that the cut-out crops off: pad the canvas, paint dark discs at the hubs, and clear grass by colour
   only where it can't be pale paint (Empowered Oxide is grey-green: a plain g > b test ate the doors).
+- XEV 9e / BE 6 (INGLO twins, very different bodies): the XEV gallery side photo was a close camera (1.76 m, axles 5.6 % apart);
+  another portal's long-lens side photo read 1.697 m with the axles 1.5 % apart once the shark fin was erased. Both still showed a
+  uniform 1.2–1.5 cm band over roof and bonnet; lowering them (`xev9eY`, `be6Y`) took IoU 0.955 → 0.966 / 0.948 → 0.955.
+- Fastback rear glass framed by body-coloured roof edges: `greenhouse.paintedEdge` (new, opt-in) paints the glasshouse's rounded
+  top edges over that u range, so only the flat top stays glass; without it the black edges read as a grey "pickup bed" from behind.
+  The sail round a pointed quarter glass is a `side` 'body' decal on the glasshouse (polygon with the glass notch), ~1.5 cm under
+  the roof line.
+- Light-bar corners that sit 0.3 m back on a swept nose (XEV): a front decal at |z| ≈ face half-width − 4 cm with `noseSweep` 0.28
+  lands them on the swept corner and reads from the front too; the side copy was dropped. Dozens of thin raised rib decals on a
+  closed grille panel came out as dashes: left plain.
+- BE 6 brow: a black band under the bonnet edge vanished above ~0.89 m until the nose `top` sat ~3 cm over it with `topRadius` 0.06.

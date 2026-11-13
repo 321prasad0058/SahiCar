@@ -53,7 +53,9 @@ export interface CarSpec {
   noseSweep?: number
   tailSweep?: number
   greenhouse: { u0: number; u1: number; top: Pts; tumble: number; /** up to this u the glass's foot follows the body's
-   *  own edge (leaning tail sides from `shoulder.inset`) instead of 0.955 × width, so no ledge sticks out under it */ followBody?: number }
+   *  own edge (leaning tail sides from `shoulder.inset`) instead of 0.955 × width, so no ledge sticks out under it */ followBody?: number
+    /** u range where the glasshouse's rounded top edges take the roof paint instead of black: body-coloured edges framing a
+     *  rear glass on a fastback slope (only the flat top stays glass) */ paintedEdge?: [number, number] }
   roof: { u0: number; u1: number; black: boolean }
   /** glass that wraps up into the roof edge */
   alpine?: [number, number]
@@ -507,7 +509,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
       const u = uOf(c.x)
       const roofed = u >= spec.roof.u0 && u <= spec.roof.u1 && !inRange(u, spec.alpine)
       if (tag === 'top') return roofed ? 1 : 0
-      if (tag === 'tarc') return roofed ? 1 : inRange(u, spec.alpine) ? 0 : 2
+      if (tag === 'tarc') return roofed || inRange(u, gh.paintedEdge) ? 1 : inRange(u, spec.alpine) ? 0 : 2
       if (tag === 'side') return 0 // pillars are drawn as traced outlines on top (below)
       return 2
     },
