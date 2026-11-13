@@ -483,3 +483,16 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - Thar review: the shared `satin` read near-white on the bumper centres from every angle; `satinColor` (new, opt-in per spec,
   Thar '#5c6166') gives a mid-grey satin. Two-tone Y-spoke alloys: `split` + `rimTone: 'dark'` (plain `blade` read light silver).
   Rear decals land only on body rings, never on the glasshouse, so a framed window on a hard top's rear face can't be drawn.
+- Kiger / Magnite (CMF-A+ pair, separate bodies): Kiger gallery side read 1.658 m (rails + antenna, close camera, axles 2 % apart);
+  heights × 0.968 (`kigerK`, which also brought the photo tyre to 195/60 R16) cost a uniform red roof band, and lifting the roof
+  2 cm (photo m) back to the official height took IoU 0.942 → 0.962. Magnite's side photo read 1.581 m: × 0.994, IoU 0.964.
+- Low side decals (door garnish under ~0.4 m) land on the body's bottom roll and read thinner than traced from the shot camera;
+  a thin body-coloured line on top of such a garnish made it read as a single line, so it was dropped.
+- A cowl peak in `top` (windscreen base above the belt and the bonnet) rippled the wing; a monotonic rise belt → cowl → bonnet fixed it.
+- Big hex grille (Magnite): staggered six-sided `trim` blocks on a `gloss` panel inside a `trim` surround, chrome side frames as `band()`s.
+  A swept headlamp whose face part rides the top corner reads tiny: keep the front part ≤ the photo's nose height (side photo), not the
+  straight-front read, and let the `side` wedge carry the sweep back along the wing.
+- `satinColor` (new, opt-in, build.ts) darkens one car's 'satin' decals: big skid plates read near-white at the default #9da2a7;
+  #62676c reads as silver plastic (Kiger, Magnite). Lowering `sill` at the ends to fit low skid plates exposes paint under the
+  bumper: run the black bumper decal down to the new sill. A raised decal (mesh depth 0.012) under a flat plate on a swept nose
+  pokes through the plate's centre as specks; 0.008 cleared it.
