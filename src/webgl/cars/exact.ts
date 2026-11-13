@@ -5047,6 +5047,12 @@ const kigerK = (s: CarSpec, k: number): CarSpec => {
   }
 }
 
+/** the upper grille's row of gloss blocks (wider at the top), kept off the centre line where the badge mount sits */
+const kigerBlocks: Decal[] = [0.1, 0.19, 0.28, 0.37, 0.455].map((z): Decal => ({
+  step: 0.004, mat: 'gloss', layer: 2, depth: 0.01, mirror: true,
+  poly: smooth([[z - 0.042, 0.92], [z + 0.042, 0.92], [z + 0.03, 0.878], [z - 0.03, 0.878]], 1),
+}))
+
 /** Renault Kiger (2025 facelift). 3990 × 1750 × 1605 (with roof rails), wheelbase 2500, 195/60 R16.
  *  Side profile from the gallery's levelled side photo (1.658 m measured over the rails and antenna, the axles 2 % apart):
  *  heights × 0.968 (the photo's tyre then matches 195/60 R16), axles at the official wheelbase with the overhangs split as
@@ -5061,16 +5067,16 @@ export const KIGER: CarSpec = kigerK({
   axles: [0.1689, 0.7955],
   tyreR: 0.32, tyreW: 0.195, rim: 0.635, wheel: { style: 'split', spokes: 4 }, rimTone: 'dark',
   archGap: 0.13, archSquare: 0.35, wellInset: 0.05,
-  sill: [[0, 0.45], [0.01, 0.4], [0.02, 0.37], [0.03, 0.34], [0.05, 0.3], [0.08, 0.28], [0.27, 0.265], [0.35, 0.24], [0.5, 0.235], [0.7, 0.225], [0.88, 0.24], [0.95, 0.243], [0.97, 0.255], [0.985, 0.265], [1, 0.285]],
+  sill: [[0, 0.3], [0.01, 0.31], [0.02, 0.32], [0.03, 0.32], [0.05, 0.3], [0.08, 0.28], [0.27, 0.265], [0.35, 0.24], [0.5, 0.235], [0.7, 0.225], [0.88, 0.24], [0.95, 0.243], [0.97, 0.25], [0.985, 0.235], [1, 0.22]],
   // the tail up to the lamp tops, the belt kicking up to the quarter-glass corner, falling along the doors to the mirror,
   // the cowl, then the bonnet (lowered by its crown) rolling down to the upright face
   top: [[0, 1.17], [0.005, 1.176], [0.012, 1.182], [0.02, 1.19], [0.04, 1.205], [0.07, 1.23], [0.1, 1.258], [0.13, 1.284], [0.16, 1.306], [0.19, 1.323], [0.21, 1.33], [0.222, 1.326], [0.235, 1.305], [0.25, 1.275], [0.26, 1.252], [0.27, 1.228], [0.285, 1.205], [0.3, 1.193], [0.4, 1.177], [0.5, 1.161], [0.6, 1.146], [0.65, 1.139], [0.69, 1.136], [0.71, 1.14], [0.735, 1.148], [0.76, 1.143], [0.8, 1.124], [0.85, 1.098], [0.9, 1.07], [0.93, 1.044], [0.95, 1.016], [0.965, 0.996], [0.975, 0.984], [0.985, 0.975], [1, 0.97]],
-  width: [[0, 0.94], [0.008, 0.96], [0.02, 0.975], [0.05, 0.988], [0.1, 0.997], [0.5, 1], [0.88, 0.996], [0.93, 0.98], [0.96, 0.962], [0.985, 0.94], [1, 0.925]],
+  width: [[0, 0.94], [0.008, 0.96], [0.02, 0.975], [0.05, 0.988], [0.1, 0.997], [0.5, 1], [0.88, 0.996], [0.93, 0.978], [0.96, 0.956], [0.985, 0.928], [1, 0.91]],
   crown: 0.012,
   bulge: 0.02,
   haunch: 0.05,
-  topRadius: 0.08,
-  noseSweep: 0.12,
+  topRadius: 0.09,
+  noseSweep: 0.17,
   tailSweep: 0.1,
   dropSlivers: true,
   greenhouse: {
@@ -5088,19 +5094,20 @@ export const KIGER: CarSpec = kigerK({
   doors: [[kigerU(0.675), kigerU(0.7)], [kigerU(0.444), kigerU(0.437)], [kigerU(0.205), kigerU(0.217)]],
   front: [
     // the slim DRL lamps under the bonnet edge, joined by the gloss-black upper grille
-    { step: 0.004, mat: 'trim', poly: smooth(both([[0, 0.858], [0.5, 0.862], [0.74, 0.865], [0.77, 0.885], [0.77, 0.93], [0.74, 0.948], [0.5, 0.947], [0, 0.952]]), 1) },
-    { step: 0.004, mat: 'slats', layer: 1, poly: smooth(both([[0, 0.872], [0.47, 0.876], [0.49, 0.9], [0.47, 0.932], [0, 0.938]]), 1) },
-    { step: 0.004, mat: 'drl', layer: 1, mirror: true, poly: band([[0.53, 0.922], [0.65, 0.926], [0.755, 0.925]], 0.014) },
-    { step: 0.004, mat: 'amber', layer: 1, mirror: true, poly: band([[0.6, 0.9], [0.75, 0.902]], 0.012) },
+    { step: 0.004, mat: 'trim', poly: smooth(both([[0, 0.858], [0.5, 0.862], [0.729, 0.865], [0.758, 0.885], [0.758, 0.93], [0.729, 0.948], [0.5, 0.947], [0, 0.952]]), 1) },
+    { step: 0.004, mat: 'chrome', layer: 1, depth: 0.006, poly: band([[-0.48, 0.932], [0.48, 0.932]], 0.012) },
+    ...kigerBlocks,
+    { step: 0.004, mat: 'drl', layer: 1, mirror: true, poly: band([[0.522, 0.922], [0.64, 0.926], [0.744, 0.925]], 0.014) },
+    { step: 0.004, mat: 'amber', layer: 1, mirror: true, poly: band([[0.591, 0.9], [0.739, 0.902]], 0.012) },
     // the headlamp pods: black housings, three LED lenses each
-    { step: 0.004, mat: 'gloss', mirror: true, poly: smooth([[0.42, 0.7], [0.45, 0.64], [0.5, 0.612], [0.73, 0.602], [0.765, 0.625], [0.772, 0.7], [0.76, 0.752], [0.6, 0.765], [0.45, 0.758]], 1) },
+    { step: 0.004, mat: 'gloss', mirror: true, poly: smooth([[0.42, 0.7], [0.45, 0.64], [0.5, 0.612], [0.719, 0.602], [0.754, 0.625], [0.76, 0.7], [0.749, 0.752], [0.591, 0.765], [0.45, 0.758]], 1) },
     ...[0.53, 0.6, 0.67].map((z): Decal => ({ step: 0.004, mat: 'head', layer: 1, mirror: true, poly: rrect(z, 0.66, z + 0.055, 0.712, 0.01) })),
     // the black slot between the pods
     { step: 0.004, mat: 'gloss', poly: rrect(-0.42, 0.672, 0.42, 0.698, 0.008) },
     // the black lower bumper, the satin frame round the lower grille, the fog lamps in the corners
-    { step: 0.004, mat: 'trim', poly: smooth(both([[0, 0.27], [0.72, 0.27], [0.765, 0.3], [0.778, 0.36], [0.778, 0.505], [0.62, 0.505], [0.55, 0.6], [0, 0.6]]), 1) },
-    { step: 0.004, mat: 'satin', layer: 1, poly: smooth(both([[0, 0.32], [0.63, 0.32], [0.67, 0.345], [0.68, 0.5], [0.53, 0.625], [0.46, 0.655], [0, 0.655]]), 1) },
-    { step: 0.004, mat: 'mesh', layer: 2, depth: 0.012, poly: smooth(both([[0, 0.365], [0.6, 0.365], [0.62, 0.385], [0.62, 0.49], [0.5, 0.6], [0, 0.61]]), 1) },
+    { step: 0.004, mat: 'trim', poly: smooth(both([[0, 0.21], [0.709, 0.21], [0.754, 0.26], [0.766, 0.36], [0.766, 0.505], [0.611, 0.505], [0.542, 0.6], [0, 0.6]]), 1) },
+    { step: 0.004, mat: 'satin', layer: 1, poly: smooth(both([[0, 0.32], [0.621, 0.32], [0.66, 0.345], [0.67, 0.5], [0.522, 0.625], [0.46, 0.655], [0, 0.655]]), 1) },
+    { step: 0.004, mat: 'mesh', layer: 2, depth: 0.008, poly: smooth(both([[0, 0.365], [0.591, 0.365], [0.611, 0.385], [0.611, 0.49], [0.5, 0.6], [0, 0.61]]), 1) },
     { step: 0.004, mat: 'head', layer: 1, mirror: true, poly: rrect(0.712, 0.418, 0.762, 0.448, 0.008) },
   ],
   rear: [
@@ -5114,7 +5121,7 @@ export const KIGER: CarSpec = kigerK({
     // the satin strip across the tailgate
     { step: 0.004, mat: 'satin', depth: 0.006, poly: rrect(-0.63, 0.798, 0.63, 0.814, 0.005) },
     // the black bumper, the satin skid plate with red reflectors at its top corners
-    { step: 0.004, mat: 'trim', poly: smooth(both([[0, 0.33], [0.72, 0.33], [0.78, 0.37], [0.795, 0.45], [0.795, 0.62], [0.77, 0.74], [0.7, 0.775], [0, 0.775]]), 1) },
+    { step: 0.004, mat: 'trim', poly: smooth(both([[0, 0.29], [0.72, 0.29], [0.78, 0.34], [0.795, 0.45], [0.795, 0.62], [0.77, 0.74], [0.7, 0.775], [0, 0.775]]), 1) },
     { step: 0.004, mat: 'satin', layer: 1, poly: smooth(both([[0, 0.432], [0.65, 0.432], [0.685, 0.46], [0.67, 0.52], [0.61, 0.585], [0.4, 0.585], [0.36, 0.555], [0, 0.555]]), 1) },
     { step: 0.004, mat: 'trim', layer: 2, depth: 0.012, poly: smooth(both([[0, 0.505], [0.6, 0.505], [0.632, 0.53], [0.6, 0.567], [0, 0.567]]), 1) },
     { step: 0.004, mat: 'reflector', layer: 3, depth: 0.016, mirror: true, poly: rrect(0.43, 0.522, 0.55, 0.555, 0.006) },
@@ -5135,6 +5142,7 @@ export const KIGER: CarSpec = kigerK({
   mirrors: 'black',
   paint: '#b8901c', // Oasis Yellow, darkened for the studio lights
   plate: 'MH 12 KG 2026',
+  satinColor: '#62676c',
 }, 0.968)
 
 const MAGNITE_L = 3.994
@@ -5171,9 +5179,9 @@ export const MAGNITE: CarSpec = kigerK({
   name: 'Nissan Magnite',
   L: MAGNITE_L, W: 1.758, H: 1.572,
   axles: [0.1778, 0.8037],
-  tyreR: 0.32, tyreW: 0.195, rim: 0.635, wheel: { style: 'split', spokes: 5 },
+  tyreR: 0.32, tyreW: 0.195, rim: 0.635, wheel: { style: 'split', spokes: 5 }, rimTone: 'dark',
   archGap: 0.13, archSquare: 0.3, wellInset: 0.05,
-  sill: [[0, 0.44], [0.01, 0.38], [0.02, 0.34], [0.04, 0.304], [0.06, 0.275], [0.08, 0.257], [0.28, 0.24], [0.36, 0.215], [0.5, 0.215], [0.7, 0.205], [0.9, 0.213], [0.95, 0.217], [0.97, 0.23], [0.985, 0.245], [1, 0.27]],
+  sill: [[0, 0.27], [0.01, 0.285], [0.02, 0.295], [0.04, 0.29], [0.06, 0.275], [0.08, 0.257], [0.28, 0.24], [0.36, 0.215], [0.5, 0.215], [0.7, 0.205], [0.9, 0.213], [0.95, 0.217], [0.97, 0.225], [0.985, 0.215], [1, 0.2]],
   // the tail up over the lamps, the belt rising gently to the quarter glass, the cowl, the bonnet falling to the nose
   // (kept above the swept headlamps)
   top: [[0, 1.13], [0.01, 1.143], [0.02, 1.15], [0.06, 1.18], [0.12, 1.21], [0.18, 1.235], [0.21, 1.245], [0.24, 1.222], [0.26, 1.2], [0.3, 1.168], [0.4, 1.145], [0.5, 1.126], [0.6, 1.113], [0.7, 1.104], [0.755, 1.102], [0.78, 1.088], [0.8, 1.076], [0.85, 1.045], [0.9, 1.007], [0.93, 0.983], [0.96, 0.962], [0.98, 0.955], [1, 0.95]],
@@ -5213,7 +5221,7 @@ export const MAGNITE: CarSpec = kigerK({
     { step: 0.004, mat: 'chrome', mirror: true, depth: 0.008, poly: band([[0.775, 0.71], [0.77, 0.5], [0.755, 0.462], [0.66, 0.44]], 0.03) },
     { step: 0.004, mat: 'drl', layer: 1, mirror: true, poly: band([[0.768, 0.7], [0.763, 0.505], [0.75, 0.47], [0.67, 0.452]], 0.012) },
     // the black lower bumper, the silver U skid plate with the fog lamps in its arms
-    { step: 0.004, mat: 'trim', poly: smooth(both([[0, 0.25], [0.72, 0.25], [0.77, 0.29], [0.778, 0.38], [0.6, 0.43], [0, 0.43]]), 1) },
+    { step: 0.004, mat: 'trim', poly: smooth(both([[0, 0.19], [0.72, 0.19], [0.77, 0.25], [0.778, 0.38], [0.6, 0.43], [0, 0.43]]), 1) },
     { step: 0.004, mat: 'satin', layer: 1, poly: smooth(both([[0, 0.468], [0.52, 0.468], [0.58, 0.488], [0.62, 0.47], [0.72, 0.29], [0.7, 0.262], [0.64, 0.268], [0.56, 0.36], [0.5, 0.44], [0, 0.44]]), 1) },
     { step: 0.004, mat: 'trim', layer: 2, depth: 0.012, mirror: true, poly: rrect(0.56, 0.33, 0.64, 0.39, 0.01) },
     { step: 0.004, mat: 'head', layer: 3, mirror: true, poly: rrect(0.575, 0.345, 0.625, 0.375, 0.008) },
@@ -5227,8 +5235,8 @@ export const MAGNITE: CarSpec = kigerK({
     // the satin bar joining them, dipping under the lamps' inner tips
     { step: 0.004, mat: 'satin', layer: 2, depth: 0.008, poly: smooth(both([[0, 1.04], [0.35, 1.035], [0.46, 0.995], [0.5, 0.99], [0.49, 1.006], [0.4, 1.05], [0, 1.068]]), 1) },
     // the black bumper, the silver skid plate round a black slot with red reflectors
-    { step: 0.004, mat: 'trim', poly: smooth(both([[0, 0.27], [0.72, 0.27], [0.78, 0.32], [0.795, 0.45], [0.785, 0.6], [0.74, 0.67], [0, 0.675]]), 1) },
-    { step: 0.004, mat: 'satin', layer: 1, poly: smooth(both([[0, 0.585], [0.62, 0.585], [0.7, 0.55], [0.745, 0.45], [0.73, 0.34], [0.65, 0.33], [0.6, 0.42], [0.55, 0.47], [0, 0.47]]), 1) },
+    { step: 0.004, mat: 'trim', poly: smooth(both([[0, 0.25], [0.72, 0.25], [0.78, 0.3], [0.795, 0.45], [0.785, 0.6], [0.74, 0.67], [0, 0.675]]), 1) },
+    { step: 0.004, mat: 'satin', layer: 1, poly: smooth(both([[0, 0.585], [0.6, 0.585], [0.66, 0.575], [0.71, 0.54], [0.735, 0.49], [0.742, 0.43], [0.735, 0.375], [0.715, 0.348], [0.685, 0.34], [0.655, 0.348], [0.635, 0.375], [0.6, 0.43], [0.56, 0.462], [0.5, 0.47], [0, 0.47]]), 2) },
     { step: 0.004, mat: 'reflector', layer: 2, mirror: true, poly: rrect(0.4, 0.45, 0.55, 0.468, 0.005) },
   ],
   side: [
@@ -5249,6 +5257,7 @@ export const MAGNITE: CarSpec = kigerK({
   mirrors: 'black',
   paint: '#9a4219', // Sunrise Copper Orange, darkened for the studio lights
   plate: 'MH 12 MG 2026',
+  satinColor: '#62676c',
 }, 0.994)
 
 export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, KYLAQ, FORTUNER, SAFARI, WINDSOR_EV, CITY_X, SYROS, ALCAZAR, ALTROZ_X, VERNA, VICTORIS_X, SIERRA_X, SIERRA_EV_X, GRAND_I10_NIOS, AURA, CELERIO, ALTO_K10, GLANZA, TAISOR, BOLERO_NEO, BOLERO, NEXON_EV, PUNCH_EV, KIGER, MAGNITE]

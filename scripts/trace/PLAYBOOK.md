@@ -482,3 +482,7 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - Big hex grille (Magnite): staggered six-sided `trim` blocks on a `gloss` panel inside a `trim` surround, chrome side frames as `band()`s.
   A swept headlamp whose face part rides the top corner reads tiny: keep the front part ≤ the photo's nose height (side photo), not the
   straight-front read, and let the `side` wedge carry the sweep back along the wing.
+- `satinColor` (new, opt-in, build.ts) darkens one car's 'satin' decals: big skid plates read near-white at the default #9da2a7;
+  #62676c reads as silver plastic (Kiger, Magnite). Lowering `sill` at the ends to fit low skid plates exposes paint under the
+  bumper: run the black bumper decal down to the new sill. A raised decal (mesh depth 0.012) under a flat plate on a swept nose
+  pokes through the plate's centre as specks; 0.008 cleared it.

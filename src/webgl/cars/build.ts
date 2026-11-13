@@ -102,6 +102,8 @@ export interface CarSpec {
   bonnetRidge?: number
   /** dark gunmetal alloys (machined edges) instead of bright silver */
   rimTone?: 'dark'
+  /** a darker tone (hex) for this car's 'satin' decals, for skid plates that read near-white at the default */
+  satinColor?: string
   windowChrome?: boolean
   paint: string
   ev?: boolean
@@ -552,13 +554,20 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     disposables.push(m)
     return m
   }
+  let satinMat: THREE.Material = S.satin
+  if (spec.satinColor) {
+    const m = (S.satin as THREE.MeshStandardMaterial).clone()
+    m.color.set(spec.satinColor)
+    satinMat = m
+    disposables.push(m)
+  }
   const mats: Record<Mat, THREE.Material> = {
     gloss: S.gloss,
     trim: S.trim,
     clad: cladMat,
     chrome: S.chrome,
     silver: S.silver,
-    satin: S.satin,
+    satin: satinMat,
     reflector: S.reflector,
     body: paint,
     glass: S.glass,
