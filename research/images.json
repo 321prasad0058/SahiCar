@@ -67,14 +67,14 @@
   "page": "https://en.wikipedia.org/wiki/Honda_Amaze"
  },
  "honda-amaze": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Honda_Amaze_India_Side_View.jpg/960px-Honda_Amaze_India_Side_View.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-  "page": "https://commons.wikimedia.org/wiki/File:Honda_Amaze_India_Side_View.jpg",
-  "artist": "Saiphani02",
-  "license": "CC0"
+  "src": "/cars/ai/honda-amaze.webp",
+  "page": "",
+  "ai": true
  },
  "honda-elevate": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/2022_Honda_WR-V_RS_with_Honda_Sensing_%28Indonesia%29_front_view.jpg/960px-2022_Honda_WR-V_RS_with_Honda_Sensing_%28Indonesia%29_front_view.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Honda_WR-V"
+  "src": "/cars/ai/honda-elevate.webp",
+  "page": "",
+  "ai": true
  },
  "honda-city": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/Honda_City_1.5_i-VTEC_V_%28VIII%2C_Facelift%29_%E2%80%93_f_22032025.jpg/960px-Honda_City_1.5_i-VTEC_V_%28VIII%2C_Facelift%29_%E2%80%93_f_22032025.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
@@ -256,8 +256,9 @@
   "license": "CC BY-SA 4.0"
  },
  "mahindra-be-6": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Mahindra_BE6_pic_1_%28cropped%29.jpg/960px-Mahindra_BE6_pic_1_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Mahindra_BE_6"
+  "src": "/cars/ai/mahindra-be-6.webp",
+  "page": "",
+  "ai": true
  },
  "mahindra-xev-9e": {
   "src": "/cars/ai/mahindra-xev-9e.webp",
@@ -299,8 +300,9 @@
   "ai": true
  },
  "maruti-xl6": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Suzuki_Ertiga_NC_FL_1.5_GLX_Hybrid_Snow_White_Pearl.jpg/960px-Suzuki_Ertiga_NC_FL_1.5_GLX_Hybrid_Snow_White_Pearl.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Suzuki_Ertiga"
+  "src": "/cars/ai/maruti-xl6.webp",
+  "page": "",
+  "ai": true
  },
  "maruti-jimny": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/Suzuki_Jimny_4x4_GLX_2023.jpg/960px-Suzuki_Jimny_4x4_GLX_2023.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
@@ -360,10 +362,9 @@
   "ai": true
  },
  "tata-harrier-ev": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/4th_International_Auto_Show%2C_Bangalore_%282025%29_110.jpg/960px-4th_International_Auto_Show%2C_Bangalore_%282025%29_110.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-  "page": "https://commons.wikimedia.org/wiki/File:4th_International_Auto_Show,_Bangalore_(2025)_110.jpg",
-  "artist": "Gpkp",
-  "license": "CC BY-SA 4.0"
+  "src": "/cars/ai/tata-harrier-ev.webp",
+  "page": "",
+  "ai": true
  },
  "tesla-model-y": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/Tesla_Model_Y_Premium_%28Facelift%29_%E2%80%93_f_05052026.jpg/960px-Tesla_Model_Y_Premium_%28Facelift%29_%E2%80%93_f_05052026.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
@@ -508,8 +509,9 @@
   "page": "https://en.wikipedia.org/wiki/MG_Cyberster"
  },
  "nissan-magnite": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Nissan_Magnite_2025_1.0_Exclusive_at_WTC_Montevideo_-_04.jpg/960px-Nissan_Magnite_2025_1.0_Exclusive_at_WTC_Montevideo_-_04.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Nissan_Magnite"
+  "src": "/cars/ai/nissan-magnite.webp",
+  "page": "",
+  "ai": true
  },
  "nissan-gravite": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/4th_International_Auto_Show%2C_Bangalore_%282025%29_26.jpg/960px-4th_International_Auto_Show%2C_Bangalore_%282025%29_26.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
@@ -531,8 +533,9 @@
   "page": "https://en.wikipedia.org/wiki/Renault_Triber"
  },
  "renault-kiger": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Renault_Kiger_front_20230602.jpg/960px-Renault_Kiger_front_20230602.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Renault_Kiger"
+  "src": "/cars/ai/renault-kiger.webp",
+  "page": "",
+  "ai": true
  },
  "renault-duster": {
   "src": "/cars/ai/renault-duster.webp",
@@ -545,12 +548,14 @@
   "ai": true
  },
  "skoda-slavia": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/2021_%C5%A0koda_Slavia_1.5_TSI_Style_%28India%29_front_view.png/960px-2021_%C5%A0koda_Slavia_1.5_TSI_Style_%28India%29_front_view.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/%C5%A0koda_Slavia"
+  "src": "/cars/ai/skoda-slavia.webp",
+  "page": "",
+  "ai": true
  },
  "skoda-kushaq": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/2021_%C5%A0koda_Kushaq_%28India%29_front_view.png/960px-2021_%C5%A0koda_Kushaq_%28India%29_front_view.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/%C5%A0koda_Kushaq"
+  "src": "/cars/ai/skoda-kushaq.webp",
+  "page": "",
+  "ai": true
  },
  "skoda-kodiaq": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/67/%C5%A0koda_Kodiaq_II_IMG_9825.jpg/960px-%C5%A0koda_Kodiaq_II_IMG_9825.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
@@ -573,8 +578,9 @@
   "ai": true
  },
  "tata-tiago-ev": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/2022_Tata_Tiago_XZA%2B_front_20230512.jpg/960px-2022_Tata_Tiago_XZA%2B_front_20230512.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Tata_Tiago"
+  "src": "/cars/ai/tata-tiago-ev.webp",
+  "page": "",
+  "ai": true
  },
  "tata-curvv": {
   "src": "/cars/ai/tata-curvv.webp",
@@ -592,8 +598,9 @@
   "ai": true
  },
  "tata-curvv-ev": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/2025_Tata_Curvv_Creative%2B_S_Petrol_%28India%29_front_view.png/960px-2025_Tata_Curvv_Creative%2B_S_Petrol_%28India%29_front_view.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Tata_Curvv"
+  "src": "/cars/ai/tata-curvv-ev.webp",
+  "page": "",
+  "ai": true
  },
  "tata-sierra-ev": {
   "src": "/cars/ai/tata-sierra-ev.webp",
@@ -658,12 +665,14 @@
   "page": "https://en.wikipedia.org/wiki/VinFast_VF_MPV_7"
  },
  "volkswagen-virtus": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9e/2022_Volkswagen_Virtus_1.5_GT_%28India%29_front_view_02.png/960px-2022_Volkswagen_Virtus_1.5_GT_%28India%29_front_view_02.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Volkswagen_Virtus"
+  "src": "/cars/ai/volkswagen-virtus.webp",
+  "page": "",
+  "ai": true
  },
  "volkswagen-taigun": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Volkswagen_Taigun_front_20230528.jpg/960px-Volkswagen_Taigun_front_20230528.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Volkswagen_Taigun"
+  "src": "/cars/ai/volkswagen-taigun.webp",
+  "page": "",
+  "ai": true
  },
  "upcoming:vinfast-vf3": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/2025_VinFast_VF_3%2C_front_left.jpg/960px-2025_VinFast_VF_3%2C_front_left.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
