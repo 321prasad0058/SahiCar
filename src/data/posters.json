@@ -143,6 +143,10 @@
   "w": "/3d/skoda-kylaq.397c9d84.w.webp",
   "m": "/3d/skoda-kylaq.873bda8b.m.webp"
  },
+ "skoda-slavia": {
+  "w": "/3d/skoda-slavia.890f2b4f.w.webp",
+  "m": "/3d/skoda-slavia.eaadda8c.m.webp"
+ },
  "tata-altroz": {
   "w": "/3d/tata-altroz.d1a9f673.w.webp",
   "m": "/3d/tata-altroz.06f87f6e.m.webp"
@@ -222,5 +226,9 @@
  "toyota-urban-cruiser-taisor": {
   "w": "/3d/toyota-urban-cruiser-taisor.98f5b8cf.w.webp",
   "m": "/3d/toyota-urban-cruiser-taisor.e7ee09f9.m.webp"
+ },
+ "volkswagen-virtus": {
+  "w": "/3d/volkswagen-virtus.10f8450f.w.webp",
+  "m": "/3d/volkswagen-virtus.958156b6.m.webp"
  }
 }
