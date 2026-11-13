@@ -614,8 +614,9 @@
   "license": "CC BY 3.0"
  },
  "toyota-rumion": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Suzuki_Ertiga_NC_FL_1.5_GLX_Hybrid_Snow_White_Pearl.jpg/960px-Suzuki_Ertiga_NC_FL_1.5_GLX_Hybrid_Snow_White_Pearl.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Suzuki_Ertiga"
+  "src": "/cars/ai/toyota-rumion.webp",
+  "page": "",
+  "ai": true
  },
  "toyota-innova-hycross": {
   "src": "/cars/ai/toyota-innova-hycross.webp",
@@ -701,8 +702,9 @@
   "ai": true
  },
  "mahindra-thar": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/Mahindra_Thar_SUV_in_%22Red_Rage%22_color_at_Ashiana_Brahmanda%2C_East_Singbhum_India_%28Ank_Kumar%2C_Infosys_limited%29_02_%28cropped%29.jpg/960px-Mahindra_Thar_SUV_in_%22Red_Rage%22_color_at_Ashiana_Brahmanda%2C_East_Singbhum_India_%28Ank_Kumar%2C_Infosys_limited%29_02_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Mahindra_Thar"
+  "src": "/cars/ai/mahindra-thar.webp",
+  "page": "",
+  "ai": true
  },
  "mahindra-scorpio-n": {
   "src": "/cars/ai/mahindra-scorpio-n.webp",
