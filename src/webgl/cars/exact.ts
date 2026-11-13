@@ -5023,4 +5023,144 @@ export const NEXON_EV: CarSpec = {
   plate: 'MH 12 NE 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, KYLAQ, FORTUNER, SAFARI, WINDSOR_EV, CITY_X, SYROS, ALCAZAR, ALTROZ_X, VERNA, VICTORIS_X, SIERRA_X, SIERRA_EV_X, GRAND_I10_NIOS, AURA, CELERIO, ALTO_K10, GLANZA, TAISOR, BOLERO_NEO, BOLERO, NEXON_EV, PUNCH_EV]
+/** Maruti Suzuki XL6 (2025): the Ertiga's body with black arch and sill cladding, silver sill garnish, roof rails, a taller
+ *  nose (LED projector lamps over a DRL bar, a chrome-bar grille, black lower bumpers with silver skid plates) and the roof
+ *  spoiler. 4485 × 1775 × 1745 (over the rails), wheelbase 2740, 195/60 R16 (Alpha Plus). Side profile refitted from a
+ *  gallery road photo (the cut-out lost the silver sill garnish, patched back from the photo; 1.80 m over the rails with the
+ *  axles 2.8 % apart from the close camera, so the Ertiga's traced body was fitted to the overlay rather than rescaled). */
+const XL6_L = 4.485
+/** a right-half grille panel: black with a mesh over it */
+const xl6Grille = (half: P2[], layer: number): Decal[] => [
+  { step: 0.004, mat: 'gloss', layer, poly: both(half) },
+  { step: 0.004, mat: 'mesh', layer: layer + 1, depth: 0.004, poly: both(half.map(([z, y]) => [Math.max(0, z - 0.012), y] as P2)) },
+]
+
+export const XL6: CarSpec = {
+  ...ERTIGA_X,
+  id: 'maruti-xl6',
+  name: 'Maruti Suzuki XL6',
+  L: XL6_L, W: 1.775, H: 1.745,
+  axles: [0.2077, 0.8186],
+  tyreR: 0.3202, tyreW: 0.195, rim: 0.6346, wheel: { style: 'split', spokes: 5 },
+  archGap: 0.08,
+  sill: [[0, 0.5], [0.004, 0.44], [0.01, 0.41], [0.02, 0.4], [0.04, 0.39], [0.06, 0.338], [0.08, 0.315], [0.1, 0.293], [0.12, 0.272], [0.2, 0.2555], [0.3, 0.262], [0.33, 0.255], [0.4, 0.253], [0.5, 0.246], [0.6, 0.242], [0.7, 0.232], [0.74, 0.212], [0.8, 0.2047], [0.88, 0.2047], [0.91, 0.2], [0.93, 0.209], [0.95, 0.222], [0.96, 0.227], [0.97, 0.248], [0.98, 0.266], [0.99, 0.293], [0.996, 0.36], [1, 0.45]],
+  // the Ertiga's tail and belt; a taller bonnet and nose
+  top: [[0, 0.6825], [0.002, 0.8775], [0.005, 1.0237], [0.008, 1.1212], [0.011, 1.19], [0.015, 1.225], [0.02, 1.262], [0.03, 1.325], [0.04, 1.39], [0.05, 1.45], [0.06, 1.495], [0.07, 1.518], [0.078, 1.525], [0.085, 1.515], [0.093, 1.4723], [0.1, 1.443], [0.11, 1.3991], [0.12, 1.3601], [0.13, 1.3211], [0.14, 1.2821], [0.15, 1.248], [0.16, 1.2236], [0.17, 1.209], [0.19, 1.1973], [0.22, 1.1895], [0.3, 1.17], [0.4, 1.1534], [0.5, 1.1339], [0.6, 1.1115], [0.7, 1.0891], [0.74, 1.0774], [0.76, 1.0852], [0.78, 1.0998], [0.8, 1.1134], [0.82, 1.11], [0.85, 1.088], [0.88, 1.07], [0.9, 1.052], [0.92, 1.03], [0.94, 1.005], [0.96, 0.98], [0.975, 0.967], [0.985, 0.96], [0.993, 0.955], [1, 0.95]],
+  // the Ertiga's plan, a touch narrower: the official width is over the cladding flares
+  width: [[0, 0.8], [0.005, 0.86], [0.015, 0.91], [0.035, 0.947], [0.07, 0.968], [0.12, 0.978], [0.85, 0.978], [0.9, 0.968], [0.94, 0.951], [0.965, 0.929], [0.98, 0.908], [0.992, 0.88], [1, 0.856]],
+  greenhouse: {
+    u0: 0.057, u1: 0.8, tumble: 0.72, followBody: 0.1,
+    // the spoiler standing proud at the back of the roof, the roof a little higher under the rails
+    top: [[0.057, 1.6], [0.06, 1.645], [0.065, 1.685], [0.07, 1.7], [0.08, 1.708], [0.1, 1.712], [0.13, 1.712], [0.2, 1.722], [0.3, 1.728], [0.38, 1.728], [0.45, 1.708], [0.5, 1.686], [0.55, 1.66], [0.58, 1.632], [0.6, 1.607], [0.62, 1.5796], [0.64, 1.5455], [0.66, 1.5036], [0.68, 1.4558], [0.7, 1.4071], [0.72, 1.3554], [0.74, 1.295], [0.76, 1.24], [0.78, 1.19], [0.8, 1.135]],
+  },
+  // black arch flares, a black band along the lower doors, black lower bumpers
+  cladding: { top: [[0, 0.54], [0.08, 0.54], [0.1, 0.5], [0.125, 0.4], [0.3, 0.375], [0.7, 0.375], [0.88, 0.385], [0.93, 0.41], [0.955, 0.46], [1, 0.47]], flare: 0.07, cut: true },
+  front: [
+    // the big swept headlamps: a dark housing, the LED reflector and projector, the DRL bar along the lower edge, amber at
+    // the outer corner
+    { step: 0.004, mat: 'gloss', mirror: true, depth: 0.004, poly: smooth([[0.384, 0.845], [0.4, 0.815], [0.425, 0.793], [0.466, 0.758], [0.603, 0.748], [0.74, 0.75], [0.772, 0.785], [0.782, 0.84], [0.78, 0.9], [0.77, 0.922], [0.72, 0.92], [0.603, 0.901], [0.466, 0.872]], 1) },
+    { step: 0.004, mat: 'silver', mirror: true, layer: 1, depth: 0.006, poly: smooth([[0.45, 0.812], [0.6, 0.8], [0.7, 0.805], [0.76, 0.83], [0.768, 0.88], [0.75, 0.908], [0.6, 0.893], [0.47, 0.865], [0.43, 0.84]], 1) },
+    { step: 0.004, mat: 'gloss', mirror: true, layer: 2, depth: 0.008, poly: smooth([[0.6, 0.835], [0.71, 0.84], [0.72, 0.89], [0.6, 0.882]], 1) },
+    { step: 0.004, mat: 'head', mirror: true, layer: 3, depth: 0.01, poly: ertigaCircle(0.66, 0.861, 0.02) },
+    { step: 0.004, mat: 'drl', mirror: true, layer: 1, depth: 0.008, poly: band([[0.47, 0.776], [0.6, 0.768], [0.72, 0.774]], 0.024) },
+    { step: 0.004, mat: 'amber', mirror: true, layer: 2, depth: 0.008, poly: smooth([[0.735, 0.77], [0.76, 0.775], [0.772, 0.8], [0.745, 0.8]], 1) },
+    // the chrome-bar grille: a slim bar under the bonnet lip, a thick wing between the lamps, a chrome U round the lower half
+    ...xl6Grille([[0, 0.775], [0.43, 0.775], [0.395, 0.832], [0, 0.832]], 0),
+    ...xl6Grille([[0, 0.632], [0.39, 0.632], [0.42, 0.655], [0.462, 0.722], [0, 0.722]], 0),
+    { step: 0.004, mat: 'chrome', layer: 2, depth: 0.008, poly: both([[0, 0.832], [0.39, 0.834], [0.4, 0.848], [0, 0.848]]) },
+    { step: 0.004, mat: 'chrome', layer: 2, depth: 0.01, poly: smooth(both([[0, 0.722], [0.3, 0.726], [0.44, 0.742], [0.475, 0.762], [0.44, 0.78], [0.3, 0.778], [0, 0.784]]), 1) },
+    { step: 0.004, mat: 'chrome', layer: 2, depth: 0.008, poly: both([[0, 0.62], [0.39, 0.62], [0.428, 0.648], [0.485, 0.725], [0.462, 0.725], [0.415, 0.66], [0.385, 0.635], [0, 0.635]]) },
+    // fog lamps in black pods, the black intake and the silver skid plate in the black lower bumper
+    { step: 0.004, mat: 'trim', mirror: true, layer: 1, depth: 0.006, poly: smooth([[0.56, 0.565], [0.74, 0.57], [0.772, 0.55], [0.776, 0.39], [0.755, 0.37], [0.56, 0.37], [0.535, 0.4]], 1) },
+    { step: 0.004, mat: 'chrome', mirror: true, layer: 2, depth: 0.008, poly: ertigaCircle(0.67, 0.462, 0.04) },
+    { step: 0.004, mat: 'head', mirror: true, layer: 3, depth: 0.01, poly: ertigaCircle(0.67, 0.462, 0.029) },
+    { step: 0.004, mat: 'gloss', layer: 1, poly: both([[0, 0.375], [0.47, 0.375], [0.49, 0.39], [0.47, 0.44], [0, 0.44]]) },
+    ...[0.392, 0.414].map((y): Decal => ({ step: 0.004, mat: 'trim', layer: 2, depth: 0.008, poly: both([[0, y], [0.45, y], [0.45, y + 0.012], [0, y + 0.012]]) })),
+    { step: 0.004, mat: 'satin', layer: 1, depth: 0.01, poly: both([[0, 0.27], [0.47, 0.27], [0.5, 0.282], [0.52, 0.345], [0.505, 0.364], [0, 0.364]]) },
+  ],
+  rear: [
+    ERTIGA_X.rear[0],
+    // the gloss-black tailgate garnish between the lamps, under the glass
+    { step: 0.005, mat: 'gloss', depth: 0.003, poly: both([[0, 0.997], [0.6, 0.997], [0.6, 1.2], [0, 1.2]]) },
+    // the Ertiga's tail lamps and chrome strip over it
+    ...ERTIGA_X.rear.slice(1, 8).map((d): Decal => ({ ...d, layer: (d.layer ?? 0) + 1 })),
+    ERTIGA_X.rear[8],
+    // the silver skid plate in the black lower bumper, red reflectors upright in the bumper corners
+    { step: 0.004, mat: 'satin', depth: 0.01, poly: both([[0, 0.35], [0.38, 0.35], [0.41, 0.372], [0.41, 0.468], [0.39, 0.485], [0, 0.485]]) },
+    { step: 0.004, mat: 'reflector', mirror: true, poly: rrect(0.688, 0.565, 0.71, 0.68, 0.008) },
+  ],
+  side: [
+    ...ERTIGA_X.side!.slice(0, 4),
+    // the silver garnish under the doors
+    { step: 0.004, mat: 'satin', depth: 0.006, poly: [[0.33, 0.27], [0.345, 0.26], [0.7, 0.256], [0.712, 0.264], [0.716, 0.284], [0.705, 0.296], [0.345, 0.3], [0.334, 0.29]] },
+  ],
+  plates: { front: 0.533, rear: 0.93 },
+  rails: 'silver',
+  mirrors: 'body',
+  paint: '#00234a', // NEXA Blue (Celestial), darkened for the studio lights
+  plate: 'MH 12 XL 2026',
+}
+
+/** Toyota Rumion: the Ertiga's body (before its 2025 roof spoiler) with Toyota's front end — a big honeycomb grille in a chrome
+ *  surround, triangular fog-lamp pods and a chrome-lined lower grille. 4460 × 1735 × 1690, wheelbase 2740, 185/65 R15 (V).
+ *  Its gallery side photo (1.696 m, axles 2 % apart) put the Ertiga's traced body ~3.5 cm high over the tyres (close camera),
+ *  so the body and its decals are lowered by `RUMION_DY`; the tail is the plain roof end without the spoiler. */
+const RUMION_L = 4.46
+const RUMION_DY = 0.035
+const rumionY = (pts: P2[]): P2[] => pts.map(([a, y]) => [a, +(y - RUMION_DY).toFixed(4)] as P2)
+const rumionD = (ds: Decal[]): Decal[] => ds.map((d) => ({ ...d, poly: rumionY(d.poly) }))
+const rumionSt = (i: number) => +(0.068 + 0.732 * (0.5 - 0.5 * Math.cos((Math.PI * i) / 140))).toFixed(5)
+const rumionGrilleHW = (y: number) => (y < 0.632 ? 0.396 + ((y - 0.572) / 0.06) * 0.064 : 0.46 - ((y - 0.632) / 0.176) * 0.035)
+/** the grille's big honeycomb: rows of dark-grey hexagon cells over the gloss-black panel */
+const rumionHoney: Decal[] = [0.58, 0.61, 0.64, 0.67, 0.7, 0.73, 0.76, 0.788].flatMap((y, row) => {
+  const out: Decal[] = []
+  for (let k = -8; k <= 8; k++) {
+    const zc = k * 0.064 + (row % 2) * 0.032
+    if (Math.abs(zc) + 0.028 > Math.min(rumionGrilleHW(y), rumionGrilleHW(y + 0.02)) - 0.012) continue
+    out.push({ step: 0.004, mat: 'trim', layer: 2, depth: 0.01, poly: [[zc - 0.028, y + 0.01], [zc - 0.016, y], [zc + 0.016, y], [zc + 0.028, y + 0.01], [zc + 0.016, y + 0.02], [zc - 0.016, y + 0.02]] })
+  }
+  return out
+})
+
+export const RUMION: CarSpec = {
+  ...ERTIGA_X,
+  id: 'toyota-rumion',
+  name: 'Toyota Rumion',
+  L: RUMION_L, W: 1.735, H: 1.69,
+  axles: [0.2029, 0.8173],
+  tyreR: 0.3108, tyreW: 0.185, rim: 0.613, wheel: { style: 'swirl', spokes: 5 }, rimTone: 'dark',
+  sill: [[0, 0.41], [0.005, 0.384], [0.01, 0.353], [0.02, 0.34], [0.04, 0.323], [0.06, 0.274], [0.08, 0.26], [0.1, 0.235], [0.12, 0.228], [0.2, 0.2255], [0.3, 0.2196], [0.4, 0.2137], [0.5, 0.2059], [0.6, 0.2011], [0.7, 0.1933], [0.74, 0.18], [0.8, 0.175], [0.88, 0.175], [0.91, 0.172], [0.93, 0.175], [0.95, 0.183], [0.97, 0.205], [0.98, 0.222], [0.99, 0.245], [0.996, 0.3], [1, 0.39]],
+  // the Ertiga's, lowered; the tail runs up to a plain roof end, the nose a little fuller
+  top: [[0, 0.6475], [0.002, 0.8425], [0.005, 0.9887], [0.008, 1.0862], [0.011, 1.15], [0.015, 1.19], [0.02, 1.232], [0.03, 1.275], [0.04, 1.315], [0.05, 1.375], [0.06, 1.435], [0.07, 1.485], [0.078, 1.495], [0.085, 1.485], [0.093, 1.4373], ...rumionY([[0.1, 1.443], [0.11, 1.3991], [0.12, 1.3601], [0.13, 1.3211], [0.14, 1.2821], [0.15, 1.248], [0.16, 1.2236], [0.17, 1.209], [0.19, 1.1973], [0.22, 1.1895], [0.3, 1.17], [0.4, 1.1534], [0.5, 1.1339], [0.6, 1.1115], [0.7, 1.0891], [0.74, 1.0774], [0.76, 1.0852], [0.78, 1.0998], [0.8, 1.1134], [0.82, 1.1066]]), [0.85, 1.042], [0.88, 1.015], [0.9, 0.995], [0.92, 0.97], [0.94, 0.942], [0.96, 0.912], [0.975, 0.885], [0.985, 0.866], [0.993, 0.855], [1, 0.845]],
+  shoulder: { y: rumionY(ERTIGA_X.shoulder!.y), inset: 0.035 },
+  greenhouse: {
+    u0: 0.068, u1: 0.8, tumble: 0.72, followBody: 0.1,
+    top: [[0.068, 1.5], [0.072, 1.55], [0.076, 1.585], [0.08, 1.605], [0.09, 1.618], [0.1, 1.628], [0.13, 1.64], [0.2, 1.6635], [0.3, 1.676], [0.38, 1.678], [0.45, 1.6635], [0.5, 1.644], [0.55, 1.607], [0.58, 1.578], [0.6, 1.555], [0.62, 1.528], [0.64, 1.494], [0.66, 1.452], [0.68, 1.404], [0.7, 1.355], [0.72, 1.303], [0.74, 1.254], [0.76, 1.204], [0.78, 1.154], [0.8, 1.1]],
+  },
+  roof: { u0: 0.068, u1: rumionSt(89), black: false },
+  front: [
+    // the chrome surround: a slim bar under the bonnet lip, down from the lamps' inner corners and round the grille's foot
+    { step: 0.004, mat: 'chrome', depth: 0.008, poly: both([[0, 0.535], [0.44, 0.545], [0.465, 0.565], [0.515, 0.632], [0.47, 0.77], [0.448, 0.79], [0.445, 0.826], [0, 0.826]]) },
+    { step: 0.004, mat: 'gloss', layer: 1, poly: both([[0, 0.565], [0.396, 0.572], [0.462, 0.632], [0.428, 0.765], [0.43, 0.81], [0, 0.81]]) },
+    ...rumionHoney,
+    // the Ertiga's headlamps
+    ...rumionD(ERTIGA_X.front.slice(13, 20)),
+    // fog lamps in black triangular pods
+    { step: 0.004, mat: 'trim', mirror: true, depth: 0.006, poly: smooth([[0.735, 0.655], [0.644, 0.655], [0.556, 0.497], [0.596, 0.429], [0.72, 0.424], [0.74, 0.51]], 1) },
+    { step: 0.004, mat: 'chrome', mirror: true, layer: 1, depth: 0.008, poly: ertigaCircle(0.668, 0.536, 0.04) },
+    { step: 0.004, mat: 'head', mirror: true, layer: 2, depth: 0.01, poly: ertigaCircle(0.668, 0.536, 0.029) },
+    // the lower grille: black slots with chrome slats in a chrome U, the black lip under it
+    { step: 0.004, mat: 'gloss', poly: both([[0, 0.31], [0.47, 0.31], [0.49, 0.325], [0.48, 0.375], [0, 0.375]]) },
+    ...[0.325, 0.348].map((y): Decal => ({ step: 0.004, mat: 'chrome', layer: 1, depth: 0.008, poly: both([[0, y], [0.46, y], [0.46, y + 0.012], [0, y + 0.012]]) })),
+    { step: 0.004, mat: 'chrome', layer: 1, depth: 0.008, poly: both([[0, 0.292], [0.5, 0.292], [0.53, 0.31], [0.535, 0.39], [0.52, 0.395], [0.512, 0.318], [0.49, 0.306], [0, 0.306]]) },
+    { step: 0.004, mat: 'trim', poly: both([[0, 0.255], [0.6, 0.255], [0.63, 0.27], [0.62, 0.29], [0, 0.29]]) },
+  ],
+  rear: rumionD(ERTIGA_X.rear),
+  side: rumionD(ERTIGA_X.side!),
+  plates: { front: 0.44, rear: 0.895 },
+  mirrors: 'body',
+  paint: '#4c4e50', // Iconic Grey, darkened for the studio lights
+  plate: 'MH 12 RU 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, KYLAQ, FORTUNER, SAFARI, WINDSOR_EV, CITY_X, SYROS, ALCAZAR, ALTROZ_X, VERNA, VICTORIS_X, SIERRA_X, SIERRA_EV_X, GRAND_I10_NIOS, AURA, CELERIO, ALTO_K10, GLANZA, TAISOR, BOLERO_NEO, BOLERO, NEXON_EV, PUNCH_EV, XL6, RUMION]

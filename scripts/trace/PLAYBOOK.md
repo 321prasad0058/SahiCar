@@ -473,3 +473,13 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - A gloss tail bar that "turns body colour" from behind is the red glow sprites over it, not a hole: check with a `satin` swap.
 - Tyres hidden in grass that the cut-out crops off: pad the canvas, paint dark discs at the hubs, and clear grass by colour
   only where it can't be pale paint (Empowered Oxide is grey-green: a plain g > b test ate the doors).
+- XL6 / Rumion (Ertiga twins): `{ ...ERTIGA_X }` with the body refitted to each car's own overlay; fitting per-u photo-vs-model
+  heights read straight off the compare overlay (green/red/blue columns, metres = px × L / 1000) was quicker than re-tracing.
+  The overlay reads ~1 % taller than the spec, so spec target ≈ overlay photo height ÷ 1.011.
+- A silver sill garnish on a bright background vanished in the cut-out (sill read 6 cm high); copying the photo's pixels back
+  under the doors down to the garnish line (find the cut-out's offset in the photo first) took the XL6 from IoU 0.950 to 0.967.
+- Rumion gallery photo (tyres in short grass, 1.696 m, axles 2 % apart): a uniform ~3.5 cm band (model high over roof and
+  sill); lowering the Ertiga body and every decal by `RUMION_DY` gave IoU 0.972 / upper 0.983.
+- XL6 roof spoiler: raising the first glasshouse stations (1.6 → 1.70 m over u 0.057–0.07) reads as the spoiler lip without a
+  `spoiler` box. Silver rails over a raised roof: the official height is over the rails, so the glass roof stays ~4 cm under it.
+- /car/<id> paints from cars.json colours (first swatch), not `paint`; judge the spec paint in /dev/cars shots.
