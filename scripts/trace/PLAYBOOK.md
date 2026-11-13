@@ -473,3 +473,11 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - A gloss tail bar that "turns body colour" from behind is the red glow sprites over it, not a hole: check with a `satin` swap.
 - Tyres hidden in grass that the cut-out crops off: pad the canvas, paint dark discs at the hubs, and clear grass by colour
   only where it can't be pale paint (Empowered Oxide is grey-green: a plain g > b test ate the doors).
+- Slavia / Virtus (twin sedans): the listing's own Slavia side photo was a close camera (1.541 m, axles 6 % apart) and the Virtus
+  had none; another portal's long-lens road side photos of both (served as WebP) cut out cleanly once the tyre bottoms hidden in
+  grass were replaced by dark discs at the hubs (and everything under the sill outside them cleared). The axles still read
+  4.5 % / 2.5 % apart, so side details go through `slaviaU`/`virtusU` while the silhouette stays in photo u. Both overlays showed
+  the usual uniform 1.5 cm band; `SLAVIA_DY`/`VIRTUS_DY` took IoU 0.952 → 0.968 and 0.954 → 0.967.
+- Twins traced from different photos disagree by a few cm (Virtus roof 2 cm under the Slavia's, screen base 2 % of u further back):
+  spread the sibling for the shared knobs, but give the twin its own top/greenhouse/sill from its photo.
+- Five broad machined spokes split by a dark groove (Slavia 16"): `blade` with no `rimTone`; all-black GT alloys: `twin` + 'dark'.

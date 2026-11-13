@@ -5023,4 +5023,226 @@ export const NEXON_EV: CarSpec = {
   plate: 'MH 12 NE 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, KYLAQ, FORTUNER, SAFARI, WINDSOR_EV, CITY_X, SYROS, ALCAZAR, ALTROZ_X, VERNA, VICTORIS_X, SIERRA_X, SIERRA_EV_X, GRAND_I10_NIOS, AURA, CELERIO, ALTO_K10, GLANZA, TAISOR, BOLERO_NEO, BOLERO, NEXON_EV, PUNCH_EV]
+const SLAVIA_L = 4.552
+/** the side photo's axles sit 4.5 % apart (2.77 m against 2.651): side details (doors, handles) go through this map from
+ *  photo u onto the official wheelbase, with the overhangs split as in the photo; the silhouette stays in photo u */
+const slaviaU = (u: number): number => {
+  const a = 0.2181, b = 0.8265, A = 0.2326, B = 0.815
+  const v = u < a ? (u / a) * A : u > b ? B + ((u - b) / (1 - b)) * (1 - B) : A + ((u - a) / (b - a)) * (B - A)
+  return +v.toFixed(5)
+}
+/** a side outline from a rounded rectangle given in photo u (0…1) and metres, mapped onto the official wheelbase */
+const slaviaRectU = (u0: number, y0: number, u1: number, y1: number, r: number, map = true): P2[] =>
+  rrectS(u0 * SLAVIA_L, y0, u1 * SLAVIA_L, y1, r).map(([x, y]) => [map ? slaviaU(x / SLAVIA_L) : +(x / SLAVIA_L).toFixed(5), y] as P2)
+/** the photo's roof and bonnet sit a uniform band above the model's camera view: every traced height comes down by this */
+const SLAVIA_DY = 0.015
+const slaviaY = (pts: P2[]): P2[] => pts.map(([u, y]) => [u, +(y - SLAVIA_DY).toFixed(4)] as P2)
+const slaviaD = (ds: Decal[]): Decal[] => ds.map((d) => ({ ...d, poly: slaviaY(d.poly) }))
+/** upper grille: top edge, pointed sides, lower edge with chamfered corners (half outline) */
+const slaviaGrilleTop = (z: number) => (z < 0.49 ? 0.748 - z * 0.035 : 0.731 - ((z - 0.49) / 0.045) * 0.068)
+const slaviaGrilleBot = (z: number) => (z < 0.447 ? 0.506 : 0.506 + ((z - 0.447) / 0.088) * 0.157)
+/** the vertical chrome slats of the upper grille */
+const slaviaSlats: Decal[] = Array.from({ length: 19 }, (_, i) => (i - 9) * 0.054).map((z): Decal => {
+  const a = Math.abs(z) + 0.007
+  const y0 = +(slaviaGrilleBot(a) + 0.016).toFixed(4), y1 = +(slaviaGrilleTop(a) - 0.014).toFixed(4)
+  return { step: 0.004, mat: 'chrome', layer: 2, depth: 0.012, poly: rrect(+(z - 0.007).toFixed(4), y0, +(z + 0.007).toFixed(4), y1, 0.004) }
+})
+/** the lower grille's 3D diamonds: rows of small dark rhombi, every other row offset half a pitch */
+const slaviaDiamonds: Decal[] = [0.268, 0.305, 0.342].flatMap((y, row) => {
+  const out: Decal[] = []
+  for (let k = -9; k <= 9; k++) {
+    const zc = k * 0.075 + (row % 2) * 0.0375
+    if (Math.abs(zc) + 0.035 > 0.6 + (y - 0.25) * 1.0) continue
+    out.push({ step: 0.004, mat: 'trim', layer: 2, depth: 0.012, poly: [[zc - 0.034, y], [zc, y - 0.013], [zc + 0.034, y], [zc, y + 0.013]].map(([z, yy]) => [+z.toFixed(4), +yy.toFixed(4)] as P2) })
+  }
+  return out
+})
+
+/** Skoda Slavia (Oct 2026 facelift). 4552 × 1752 × 1507, wheelbase 2651, 205/55 R16 (top trim).
+ *  Side profile from a long-lens road side photo on another portal (tyres in grass patched with dark discs; 1.486 m
+ *  without the shark-fin, the axles 4.5 % apart: axles at the official wheelbase, overhangs split as in the photo, doors
+ *  and handles mapped with them). Belt, glass, pillars and lamps from a metric grid of the cut-out; the pointed grille
+ *  with vertical chrome slats, slim lamps, chrome bumper line and diamond lower grille from a straight front photo; the
+ *  split tail lamps joined by a black bar (lettering left out), boot-lid shut line and the bumper's chrome strip,
+ *  reflectors and black diffuser from a straight rear photo. */
+export const SLAVIA: CarSpec = {
+  id: 'skoda-slavia',
+  name: 'Skoda Slavia',
+  rakedEnds: true,
+  dropSlivers: true,
+  L: SLAVIA_L, W: 1.752, H: 1.507,
+  axles: [0.2326, 0.815],
+  tyreR: 0.316, tyreW: 0.205, rim: 0.643, wheel: { style: 'blade', spokes: 5 },
+  archGap: 0.07, archSquare: 0.1,
+  sill: slaviaY([[0, 0.33], [0.006, 0.34], [0.02, 0.345], [0.05, 0.33], [0.08, 0.31], [0.1, 0.29], [0.12, 0.265], [0.15, 0.24], [0.2, 0.22], [0.3, 0.205], [0.5, 0.205], [0.65, 0.198], [0.75, 0.2], [0.85, 0.2], [0.9, 0.198], [0.95, 0.2], [0.97, 0.205], [0.985, 0.205], [0.995, 0.2], [1, 0.2]]),
+  // the tail face up to the lamp tops, the ducktail lip and the sloping boot deck; the belt under the glass falling from
+  // the C-pillar to the windscreen base; the bonnet (lowered by the crown) and the nose raised over the lamps
+  top: slaviaY([[0, 1.01], [0.006, 1.06], [0.013, 1.093], [0.022, 1.106], [0.035, 1.11], [0.05, 1.117], [0.08, 1.14], [0.1, 1.157], [0.12, 1.172], [0.13, 1.18], [0.145, 1.15], [0.165, 1.12], [0.19, 1.1], [0.215, 1.092], [0.25, 1.087], [0.3, 1.077], [0.4, 1.061], [0.5, 1.046], [0.6, 1.031], [0.65, 1.022], [0.7, 1.012], [0.735, 1.005], [0.755, 1.014], [0.77, 1.022], [0.78, 1.0105], [0.8, 0.995], [0.82, 0.98], [0.84, 0.96], [0.86, 0.944], [0.88, 0.924], [0.9, 0.903], [0.92, 0.878], [0.94, 0.852], [0.955, 0.833], [0.97, 0.822], [0.98, 0.817], [0.99, 0.814], [1, 0.81]]),
+  // round in plan: both ends taper into the corners
+  width: [[0, 0.92], [0.005, 0.935], [0.015, 0.952], [0.035, 0.97], [0.07, 0.985], [0.13, 0.997], [0.2, 1], [0.45, 0.99], [0.8, 0.997], [0.86, 0.99], [0.92, 0.972], [0.955, 0.955], [0.975, 0.93], [0.99, 0.9], [1, 0.875]],
+  crown: 0.012,
+  bulge: 0.04,
+  haunch: 0.05,
+  topRadius: 0.08,
+  noseSweep: 0.15,
+  tailSweep: 0.14,
+  greenhouse: {
+    u0: 0.13, u1: 0.77, tumble: 0.62,
+    // the long rear glass rising off the boot deck, the domed roof (shark-fin left out), the raked windscreen
+    top: slaviaY([[0.13, 1.18], [0.14, 1.197], [0.15, 1.214], [0.16, 1.234], [0.17, 1.254], [0.18, 1.272], [0.19, 1.29], [0.2, 1.307], [0.22, 1.338], [0.24, 1.366], [0.26, 1.394], [0.28, 1.417], [0.3, 1.436], [0.32, 1.452], [0.34, 1.463], [0.36, 1.47], [0.38, 1.476], [0.4, 1.481], [0.43, 1.484], [0.46, 1.481], [0.48, 1.476], [0.5, 1.47], [0.52, 1.463], [0.54, 1.454], [0.56, 1.44], [0.58, 1.419], [0.6, 1.392], [0.62, 1.358], [0.64, 1.318], [0.66, 1.274], [0.68, 1.225], [0.7, 1.177], [0.72, 1.126], [0.74, 1.076], [0.76, 1.036], [0.77, 1.024]]),
+  },
+  roof: { u0: 0.2984, u1: 0.5624, black: false },
+  pillars: [
+    // body-coloured C-pillar sail behind the pointed quarter glass; black quarter-glass divider and B-pillar
+    { bottom: [0.13, 0.207], top: [0.2, 0.2984], black: false },
+    { bottom: [0.312, 0.319], top: [0.309, 0.316], black: true },
+    { bottom: [0.447, 0.476], top: [0.445, 0.472], black: true },
+  ],
+  doors: [[slaviaU(0.33), slaviaU(0.265)], [slaviaU(0.482), slaviaU(0.478)], [slaviaU(0.73), slaviaU(0.733)]],
+  windowChrome: true,
+  front: slaviaD([
+    // the pointed grille: a dark frame, gloss black inside, vertical chrome slats
+    { step: 0.004, mat: 'trim', depth: 0.006, poly: smooth(both([[0, 0.758], [0.3, 0.752], [0.495, 0.74], [0.548, 0.665], [0.455, 0.496], [0, 0.496]]), 1) },
+    { step: 0.004, mat: 'gloss', layer: 1, poly: smooth(both([[0, 0.748], [0.3, 0.741], [0.49, 0.731], [0.535, 0.663], [0.447, 0.506], [0, 0.506]]), 1) },
+    ...slaviaSlats,
+    // slim headlamps sloping down to the grille's top corners: dark housing, the LED strip along the lower edge, projector
+    { step: 0.004, mat: 'trim', mirror: true, depth: 0.004, poly: smooth([[0.5, 0.672], [0.62, 0.664], [0.72, 0.66], [0.77, 0.662], [0.775, 0.7], [0.772, 0.79], [0.74, 0.795], [0.65, 0.768], [0.56, 0.742], [0.505, 0.725]], 1) },
+    { step: 0.004, mat: 'drl', mirror: true, layer: 1, poly: [[0.515, 0.682], [0.62, 0.676], [0.72, 0.673], [0.768, 0.675], [0.768, 0.688], [0.72, 0.686], [0.62, 0.689], [0.515, 0.695]] },
+    { step: 0.004, mat: 'head', mirror: true, layer: 1, depth: 0.008, poly: rrect(0.66, 0.71, 0.72, 0.75, 0.016) },
+    // the chrome line across the bumper (behind the plate), rising at the outer ends
+    { step: 0.004, mat: 'chrome', layer: 2, depth: 0.006, poly: band([[-0.765, 0.418], [-0.7, 0.405], [-0.6, 0.392], [-0.4, 0.38], [0, 0.375], [0.4, 0.38], [0.6, 0.392], [0.7, 0.405], [0.765, 0.418]], 0.013) },
+    // black fog-lamp pods at the corners with the lamp in them
+    { step: 0.004, mat: 'gloss', mirror: true, depth: 0.006, poly: smooth([[0.63, 0.29], [0.76, 0.29], [0.765, 0.41], [0.68, 0.4], [0.63, 0.37]], 1) },
+    { step: 0.004, mat: 'head', mirror: true, layer: 1, depth: 0.008, poly: rrect(0.69, 0.37, 0.735, 0.395, 0.01) },
+    // the wide lower grille: gloss black with rows of dark diamonds
+    { step: 0.004, mat: 'gloss', poly: smooth(both([[0, 0.25], [0.6, 0.25], [0.66, 0.29], [0.72, 0.36], [0, 0.36]]), 1) },
+    ...slaviaDiamonds,
+  ]),
+  rear: slaviaD([
+    // split tail lamps: red housing on the wing and the lid, the light guide along the top turning down the outer edge,
+    // the clear reversing block
+    { step: 0.004, mat: 'reflector', mirror: true, layer: 1, depth: 0.006, poly: smooth([[0.405, 0.958], [0.42, 0.982], [0.6, 0.986], [0.76, 0.99], [0.788, 0.984], [0.792, 0.95], [0.788, 0.872], [0.77, 0.858], [0.69, 0.86], [0.665, 0.875], [0.645, 0.935], [0.42, 0.936]], 1) },
+    { step: 0.004, mat: 'tail', mirror: true, layer: 2, poly: [[0.43, 0.965], [0.6, 0.968], [0.765, 0.972], [0.775, 0.965], [0.775, 0.9], [0.763, 0.9], [0.763, 0.96], [0.6, 0.956], [0.43, 0.953]] },
+    { step: 0.004, mat: 'silver', mirror: true, layer: 2, depth: 0.008, poly: rrect(0.69, 0.874, 0.755, 0.915, 0.008) },
+    // the black bar joining the lamps (its lettering left out)
+    { step: 0.004, mat: 'gloss', layer: 1, depth: 0.006, poly: rrect(-0.42, 0.936, 0.42, 0.977, 0.006) },
+    // the boot lid's shut line under the lamps and round the plate
+    { step: 0.004, mat: 'gloss', depth: 0.001, poly: band([[-0.655, 0.93], [-0.652, 0.75], [-0.635, 0.685], [-0.58, 0.645], [-0.45, 0.632], [0, 0.63], [0.45, 0.632], [0.58, 0.645], [0.635, 0.685], [0.652, 0.75], [0.655, 0.93]], 0.012) },
+    // the bumper: black honeycomb band, red reflectors at its ends, the chrome strip along its top
+    { step: 0.004, mat: 'trim', layer: 1, depth: 0.006, poly: smooth(both([[0, 0.415], [0.66, 0.415], [0.78, 0.42], [0.8, 0.44], [0.8, 0.462], [0, 0.462]]), 1) },
+    { step: 0.004, mat: 'mesh', layer: 2, poly: rrect(-0.62, 0.42, 0.62, 0.456, 0.006) },
+    { step: 0.004, mat: 'reflector', mirror: true, layer: 2, depth: 0.01, poly: rrect(0.655, 0.422, 0.79, 0.455, 0.008) },
+    { step: 0.004, mat: 'chrome', layer: 3, depth: 0.012, poly: rrect(-0.79, 0.459, 0.79, 0.471, 0.005) },
+  ]),
+  side: slaviaD([
+    // body-coloured door handles (the relief gives them a dark rim)
+    { step: 0.004, mat: 'body', depth: 0.01, poly: slaviaRectU(0.488, 0.89, 0.538, 0.92, 0.012) },
+    { step: 0.004, mat: 'body', depth: 0.01, poly: slaviaRectU(0.267, 0.935, 0.318, 0.965, 0.012) },
+    // the headlamp wrapping back along the wing to a point
+    { step: 0.004, mat: 'trim', depth: 0.004, poly: [[0.998, 0.665], [0.998, 0.765], [0.975, 0.782], [0.95, 0.797], [0.928, 0.802], [0.932, 0.79], [0.95, 0.758], [0.97, 0.718], [0.985, 0.68]] },
+    { step: 0.004, mat: 'drl', layer: 1, poly: [[0.998, 0.675], [0.998, 0.688], [0.985, 0.693], [0.97, 0.728], [0.955, 0.755], [0.945, 0.762], [0.955, 0.74], [0.97, 0.712], [0.985, 0.68]] },
+    // the tail lamp wrapping onto the flank: red housing to a point, its light guide along the top
+    { step: 0.003, mat: 'reflector', depth: 0.002, poly: smooth([[0.004, 0.875], [0.004, 0.988], [0.05, 0.99], [0.09, 0.987], [0.098, 0.978], [0.09, 0.95], [0.077, 0.885], [0.06, 0.876]], 1) },
+    { step: 0.003, mat: 'tail', layer: 1, poly: [[0.004, 0.962], [0.05, 0.966], [0.088, 0.968], [0.088, 0.978], [0.05, 0.977], [0.004, 0.974]] },
+    { step: 0.003, mat: 'silver', layer: 1, depth: 0.004, poly: slaviaRectU(0.006, 0.888, 0.03, 0.935, 0.008, false) },
+    // the red reflector at the rear bumper corner
+    { step: 0.004, mat: 'reflector', depth: 0.004, poly: slaviaRectU(0.004, 0.428, 0.035, 0.458, 0.01, false) },
+  ]),
+  plates: { front: 0.41, rear: 0.835 },
+  mirrors: 'body',
+  mirrorU: slaviaU(0.705),
+  paint: '#4f7a82', // the gallery car's pale blue-green, darkened for the studio lights
+  plate: 'MH 12 SS 2026',
+}
+
+const VIRTUS_L = 4.561
+/** the side photo's axles sit 2.5 % apart (2.718 m against 2.651): side details go through this map from photo u onto the
+ *  official wheelbase, with the overhangs split as in the photo; the silhouette stays in photo u */
+const virtusU = (u: number): number => {
+  const a = 0.2204, b = 0.8163, A = 0.2284, B = 0.8096
+  const v = u < a ? (u / a) * A : u > b ? B + ((u - b) / (1 - b)) * (1 - B) : A + ((u - a) / (b - a)) * (B - A)
+  return +v.toFixed(5)
+}
+const virtusRectU = (u0: number, y0: number, u1: number, y1: number, r: number): P2[] =>
+  rrectS(u0 * VIRTUS_L, y0, u1 * VIRTUS_L, y1, r).map(([x, y]) => [virtusU(x / VIRTUS_L), y] as P2)
+/** uniform band between the photo and the model's camera view: every traced height moves by this */
+const VIRTUS_DY = 0.015
+const virtusY = (pts: P2[]): P2[] => pts.map(([u, y]) => [u, +(y - VIRTUS_DY).toFixed(4)] as P2)
+const virtusD = (ds: Decal[]): Decal[] => ds.map((d) => ({ ...d, poly: virtusY(d.poly) }))
+
+/** Volkswagen Virtus GT (current pre-facelift car; the light-bar facelift is due Dec 2026). 4561 × 1752 × 1507, wheelbase
+ *  2651, 205/55 R16 (GT Plus). The Slavia's body (same platform), refitted to its own long-lens road side photo from another
+ *  portal (black Topline car, tyres in grass patched, shark-fin erased: 1.462 m, axles 2.5 % apart). VW front from a straight
+ *  front photo: slim lamps joined by twin chrome grille bars, the wide black intake with slats framed by a chrome C at each
+ *  corner, fog lamps in it; smoked tail lamps with red guides, the plain boot lid and the black lower bumper with its chrome U
+ *  and reflectors from a straight rear photo. GT Plus black alloys and Wild Cherry Red as on the gallery's GT. */
+export const VIRTUS: CarSpec = {
+  ...SLAVIA,
+  id: 'volkswagen-virtus',
+  name: 'Volkswagen Virtus',
+  L: VIRTUS_L,
+  axles: [0.2284, 0.8096],
+  wheel: { style: 'twin', spokes: 5 }, rimTone: 'dark',
+  sill: virtusY([[0, 0.27], [0.006, 0.3], [0.02, 0.33], [0.05, 0.33], [0.08, 0.3], [0.1, 0.28], [0.12, 0.26], [0.15, 0.235], [0.2, 0.215], [0.3, 0.2], [0.5, 0.2], [0.6, 0.198], [0.75, 0.205], [0.85, 0.205], [0.9, 0.205], [0.95, 0.21], [0.97, 0.215], [0.99, 0.215], [1, 0.215]]),
+  // the tail face up to the lamp tops, the ducktail and boot deck; the belt falling to the windscreen base; the bonnet
+  // (lowered by the crown) and the nose raised over the lamps
+  top: virtusY([[0, 1.0], [0.006, 1.05], [0.013, 1.08], [0.022, 1.093], [0.035, 1.097], [0.06, 1.101], [0.08, 1.117], [0.1, 1.133], [0.12, 1.154], [0.13, 1.164], [0.145, 1.14], [0.165, 1.115], [0.19, 1.1], [0.21, 1.095], [0.25, 1.088], [0.3, 1.077], [0.4, 1.05], [0.5, 1.024], [0.6, 1.006], [0.65, 0.998], [0.7, 0.992], [0.725, 0.995], [0.74, 1.008], [0.75, 1.018], [0.76, 1.008], [0.78, 0.992], [0.8, 0.982], [0.82, 0.967], [0.84, 0.956], [0.86, 0.936], [0.88, 0.92], [0.9, 0.9], [0.92, 0.874], [0.94, 0.843], [0.955, 0.815], [0.965, 0.802], [0.975, 0.796], [0.985, 0.791], [1, 0.786]]),
+  greenhouse: {
+    u0: 0.13, u1: 0.75, tumble: 0.62,
+    top: virtusY([[0.13, 1.164], [0.14, 1.18], [0.15, 1.196], [0.16, 1.214], [0.17, 1.231], [0.18, 1.247], [0.19, 1.263], [0.2, 1.28], [0.22, 1.313], [0.24, 1.344], [0.26, 1.374], [0.28, 1.4], [0.3, 1.42], [0.32, 1.434], [0.34, 1.444], [0.36, 1.451], [0.38, 1.456], [0.4, 1.46], [0.43, 1.462], [0.46, 1.46], [0.48, 1.455], [0.5, 1.45], [0.52, 1.442], [0.54, 1.431], [0.56, 1.415], [0.58, 1.392], [0.6, 1.364], [0.62, 1.326], [0.64, 1.28], [0.66, 1.233], [0.68, 1.181], [0.7, 1.13], [0.72, 1.08], [0.74, 1.036], [0.75, 1.022]]),
+  },
+  roof: { u0: 0.2993, u1: 0.5489, black: false },
+  pillars: [
+    { bottom: [0.13, 0.206], top: [0.2, 0.2993], black: false },
+    { bottom: [0.31, 0.317], top: [0.307, 0.314], black: true },
+    { bottom: [0.447, 0.473], top: [0.445, 0.469], black: true },
+  ],
+  doors: [[virtusU(0.3), virtusU(0.28)], [virtusU(0.476), virtusU(0.474)], [virtusU(0.712), virtusU(0.712)]],
+  front: virtusD([
+    // slim headlamps: dark housing, the DRL running along the top, down the outer edge and back along the bottom, projector
+    { step: 0.004, mat: 'trim', mirror: true, depth: 0.004, poly: smooth([[0.52, 0.652], [0.62, 0.648], [0.72, 0.652], [0.762, 0.662], [0.768, 0.7], [0.765, 0.785], [0.74, 0.796], [0.63, 0.77], [0.53, 0.748]], 1) },
+    { step: 0.004, mat: 'drl', mirror: true, layer: 1, poly: band([[0.545, 0.738], [0.64, 0.759], [0.735, 0.776]], 0.013) },
+    { step: 0.004, mat: 'drl', mirror: true, layer: 1, poly: band([[0.58, 0.666], [0.66, 0.665], [0.74, 0.672]], 0.012) },
+    { step: 0.004, mat: 'head', mirror: true, layer: 1, depth: 0.008, poly: rrect(0.66, 0.69, 0.725, 0.738, 0.02) },
+    { step: 0.004, mat: 'silver', mirror: true, layer: 1, depth: 0.006, poly: rrect(0.56, 0.69, 0.635, 0.735, 0.018) },
+    // the thin black grille between two chrome bars, the lower bar running on under the lamps
+    { step: 0.004, mat: 'gloss', poly: rrect(-0.53, 0.652, 0.53, 0.738, 0.01) },
+    { step: 0.004, mat: 'chrome', layer: 2, depth: 0.008, poly: rrect(-0.52, 0.724, 0.52, 0.738, 0.005) },
+    { step: 0.004, mat: 'chrome', layer: 2, depth: 0.008, poly: rrect(-0.62, 0.64, 0.62, 0.654, 0.005) },
+    // the wide black intake with horizontal slats, a chrome C framing each corner and the strip along its foot
+    { step: 0.004, mat: 'gloss', poly: smooth(both([[0, 0.262], [0.62, 0.262], [0.72, 0.28], [0.762, 0.33], [0.762, 0.49], [0.72, 0.515], [0.6, 0.52], [0, 0.52]]), 1) },
+    ...[0.32, 0.36, 0.4].map((y): Decal => ({ step: 0.004, mat: 'trim', layer: 1, depth: 0.012, poly: rrect(-0.56, y, 0.56, y + 0.014, 0.005) })),
+    { step: 0.004, mat: 'chrome', layer: 2, depth: 0.008, poly: band([[-0.715, 0.505], [-0.74, 0.47], [-0.74, 0.31], [-0.715, 0.282], [-0.6, 0.272], [0, 0.272], [0.6, 0.272], [0.715, 0.282], [0.74, 0.31], [0.74, 0.47], [0.715, 0.505]], 0.013) },
+    { step: 0.004, mat: 'head', mirror: true, layer: 2, depth: 0.01, poly: rrect(0.665, 0.37, 0.725, 0.43, 0.02) },
+  ]),
+  rear: virtusD([
+    // smoked tail lamps: dark housing, the red light guide along the top turning down the outer edge, a red lower block
+    { step: 0.004, mat: 'trim', mirror: true, layer: 1, depth: 0.006, poly: smooth([[0.39, 0.95], [0.42, 0.982], [0.6, 0.985], [0.79, 0.983], [0.805, 0.965], [0.805, 0.865], [0.785, 0.835], [0.66, 0.848], [0.5, 0.892], [0.42, 0.915]], 1) },
+    { step: 0.004, mat: 'silver', mirror: true, layer: 2, depth: 0.006, poly: band([[0.44, 0.958], [0.6, 0.964], [0.77, 0.966]], 0.012) },
+    { step: 0.004, mat: 'tail', mirror: true, layer: 2, poly: band([[0.47, 0.937], [0.6, 0.942], [0.775, 0.946], [0.785, 0.935], [0.785, 0.875]], 0.014) },
+    { step: 0.004, mat: 'tail', mirror: true, layer: 2, poly: rrect(0.68, 0.856, 0.77, 0.884, 0.006) },
+    // the boot lid's shut line under the lamps and round the plate
+    { step: 0.004, mat: 'gloss', depth: 0.001, poly: band([[-0.62, 0.86], [-0.62, 0.72], [-0.6, 0.678], [-0.53, 0.658], [0, 0.655], [0.53, 0.658], [0.6, 0.678], [0.62, 0.72], [0.62, 0.86]], 0.012) },
+    // the black lower bumper under a chrome U, red reflectors at its ends
+    { step: 0.004, mat: 'trim', depth: 0.006, poly: smooth(both([[0, 0.305], [0.72, 0.305], [0.79, 0.33], [0.805, 0.37], [0.8, 0.462], [0.76, 0.46], [0.62, 0.39], [0.5, 0.368], [0, 0.366]]), 1) },
+    { step: 0.004, mat: 'chrome', layer: 2, depth: 0.01, poly: band([[-0.795, 0.465], [-0.7, 0.432], [-0.6, 0.392], [-0.5, 0.372], [0, 0.37], [0.5, 0.372], [0.6, 0.392], [0.7, 0.432], [0.795, 0.465]], 0.012) },
+    { step: 0.004, mat: 'reflector', mirror: true, layer: 1, depth: 0.01, poly: smooth([[0.64, 0.38], [0.785, 0.4], [0.79, 0.44], [0.7, 0.42], [0.64, 0.395]], 1) },
+  ]),
+  side: virtusD([
+    // body-coloured door handles (the relief gives them a dark rim)
+    { step: 0.004, mat: 'body', depth: 0.01, poly: virtusRectU(0.49, 0.85, 0.535, 0.88, 0.012) },
+    { step: 0.004, mat: 'body', depth: 0.01, poly: virtusRectU(0.265, 0.92, 0.315, 0.95, 0.012) },
+    // the headlamp wrapping back along the wing to a point
+    { step: 0.004, mat: 'trim', depth: 0.004, poly: [[0.998, 0.665], [0.998, 0.765], [0.97, 0.785], [0.935, 0.797], [0.9, 0.802], [0.91, 0.79], [0.935, 0.762], [0.96, 0.718], [0.98, 0.68]] },
+    { step: 0.004, mat: 'drl', layer: 1, poly: [[0.998, 0.752], [0.998, 0.764], [0.97, 0.783], [0.935, 0.795], [0.905, 0.799], [0.912, 0.79], [0.935, 0.784], [0.97, 0.772]] },
+    // the smoked tail lamp wrapping onto the flank, its red guide
+    { step: 0.003, mat: 'trim', depth: 0.002, poly: smooth([[0.004, 0.86], [0.004, 0.982], [0.035, 0.98], [0.066, 0.972], [0.06, 0.93], [0.045, 0.87], [0.03, 0.862]], 1) },
+    { step: 0.003, mat: 'tail', layer: 1, poly: [[0.004, 0.935], [0.035, 0.937], [0.058, 0.94], [0.058, 0.952], [0.035, 0.95], [0.004, 0.948]] },
+  ]),
+  plates: { front: 0.5, rear: 0.835 },
+  mirrorU: virtusU(0.667),
+  paint: '#5e0614', // Wild Cherry Red, darkened for the studio lights
+  plate: 'MH 12 VV 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, KYLAQ, FORTUNER, SAFARI, WINDSOR_EV, CITY_X, SYROS, ALCAZAR, ALTROZ_X, VERNA, VICTORIS_X, SIERRA_X, SIERRA_EV_X, GRAND_I10_NIOS, AURA, CELERIO, ALTO_K10, GLANZA, TAISOR, BOLERO_NEO, BOLERO, NEXON_EV, PUNCH_EV, SLAVIA, VIRTUS]
