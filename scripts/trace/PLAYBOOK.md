@@ -473,3 +473,13 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - A gloss tail bar that "turns body colour" from behind is the red glow sprites over it, not a hole: check with a `satin` swap.
 - Tyres hidden in grass that the cut-out crops off: pad the canvas, paint dark discs at the hubs, and clear grass by colour
   only where it can't be pale paint (Empowered Oxide is grey-green: a plain g > b test ate the doors).
+- Thar (3-door, 2026 update): the gallery side photo's bumper-to-bumper span at the official 3.995 m gave 1.865 m tall over a 4.125 m
+  length over the spare (Bolero rule again); axles 2.3 % apart, so side details go through `thar3U`. The current grille has five
+  slots, not six or seven: count them in the photo. A uniform 1.5 cm blue band on roof and bonnet came off for IoU 0.959 → 0.967.
+- Round headlamps on an upright face frayed into white hooks at the ring tops while the pod reached the face's `top`; a face `top`
+  ~4.5 cm over the pods, one straight (collinear) raked run down to the bumper and `rakedEnds` made them clean.
+- Red streaks either side of the spare on a black rear bumper were the body poking through the swept cladding end cap: a full-width
+  `trim` rear decal over the bumper face (satin and reflectors on layer 1) covered it. Wide flat 5-spoke machined alloys: `blade`.
+- Thar review: the shared `satin` read near-white on the bumper centres from every angle; `satinColor` (new, opt-in per spec,
+  Thar '#5c6166') gives a mid-grey satin. Two-tone Y-spoke alloys: `split` + `rimTone: 'dark'` (plain `blade` read light silver).
+  Rear decals land only on body rings, never on the glasshouse, so a framed window on a hard top's rear face can't be drawn.

@@ -5023,4 +5023,125 @@ export const NEXON_EV: CarSpec = {
   plate: 'MH 12 NE 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, KYLAQ, FORTUNER, SAFARI, WINDSOR_EV, CITY_X, SYROS, ALCAZAR, ALTROZ_X, VERNA, VICTORIS_X, SIERRA_X, SIERRA_EV_X, GRAND_I10_NIOS, AURA, CELERIO, ALTO_K10, GLANZA, TAISOR, BOLERO_NEO, BOLERO, NEXON_EV, PUNCH_EV]
+const THAR3_L = 4.125
+/** the side photo's axles (u 0.2275 / 0.8349, 2.3 % apart from the close camera) mapped onto the official wheelbase,
+ *  overhangs in the photo's ratio; applied to everything traced along the side except the silhouette */
+const thar3U = (u: number): number => {
+  const k: [number, number][] = [[0, 0], [0.2275, 0.2355], [0.8349, 0.8295], [1, 1]]
+  for (let i = 1; i < k.length; i++) if (u <= k[i][0]) return +(k[i - 1][1] + ((u - k[i - 1][0]) * (k[i][1] - k[i - 1][1])) / (k[i][0] - k[i - 1][0])).toFixed(5)
+  return 1
+}
+const thar3P = (pts: P2[]): P2[] => pts.map(([u, y]) => [thar3U(u), y] as P2)
+/** a side outline from a rounded rectangle given in photo u and metres */
+const thar3RectU = (u0: number, y0: number, u1: number, y1: number, r: number): P2[] =>
+  thar3P(rrectS(u0 * THAR3_L, y0, u1 * THAR3_L, y1, r).map(([x, y]) => [x / THAR3_L, y] as P2))
+const THAR3_LID: P2[] = rrectS(0.12 * THAR3_L, 0.985, 0.156 * THAR3_L, 1.1, 0.02).map(([x, y]) => [x / THAR3_L, y] as P2)
+const THAR3_GH: [number, number] = [0.08, 0.64]
+/** a glasshouse station (roof and pillar edges sit on them) */
+const thar3St = (i: number) => +(THAR3_GH[0] + (THAR3_GH[1] - THAR3_GH[0]) * (0.5 - 0.5 * Math.cos((Math.PI * i) / 140))).toFixed(5)
+// the five-slot grille: tall mesh slots between body-coloured bars
+const thar3Slots: Decal[] = [-0.284, -0.142, 0, 0.142, 0.284].map((z): Decal => (
+  { step: 0.005, mat: 'mesh', depth: 0.004, poly: rrect(z - 0.055, 0.748, z + 0.055, 1.0, 0.012) }
+))
+
+/** Mahindra Thar (3-door, Sept 2026 update). 3995 × 1870 × 1855, wheelbase 2450, 255/65 R18 (LXT / ZXT 4WD). The
+ *  official length is to the rear bumper; over the tailgate spare it is 4.125 m (the photo's bumper-to-bumper span at
+ *  the official scale). Side profile from a levelled gallery side photo (1.865 m measured, axles 2.3 % apart: axles at
+ *  the official wheelbase, side details mapped with them). Lamps, grille and bumpers from the straight front and rear
+ *  photos and the close-ups. Black hard top over body-coloured door frames, black flat-topped flares and bumpers. */
+export const THAR: CarSpec = {
+  id: 'mahindra-thar',
+  name: 'Mahindra Thar',
+  rakedEnds: true,
+  dropSlivers: true,
+  L: THAR3_L, W: 1.87, H: 1.855,
+  axles: [0.2355, 0.8295],
+  tyreR: 0.394, tyreW: 0.255, rim: 0.58, wheel: { style: 'split', spokes: 5 }, rimTone: 'dark',
+  archGap: 0.05, archSquare: 0.6,
+  // a small tow block under the spare, the rear bumper, the chassis behind it, the side steps, the front bumper
+  sill: [[0, 0.72], [0.03, 0.72], [0.034, 0.5], [0.038, 0.48], [0.1, 0.465], [0.12, 0.44], [0.13, 0.43], [0.3, 0.31], [0.35, 0.3], [0.5, 0.3], [0.69, 0.31], [0.72, 0.33], [0.93, 0.4], [0.96, 0.41], [0.98, 0.44], [0.995, 0.46], [1, 0.5]],
+  // the tow block, the bumper, the upright tailgate up to its top, the flat belt under the hard top, the door's lower
+  // window sill, the flat bonnet falling to the upright grille face, the front bumper standing proud of it
+  top: [[0, 0.74], [0.03, 0.74], [0.034, 0.735], [0.038, 0.75], [0.0465, 0.75], [0.0475, 0.76], [0.049, 0.905], [0.0505, 1.05], [0.052, 1.195], [0.053, 1.28], [0.08, 1.282], [0.1, 1.277], [0.2, 1.272], [0.3, 1.27], [0.38, 1.266], [0.386, 1.24], [0.392, 1.212], [0.45, 1.206], [0.5, 1.205], [0.57, 1.21], [0.62, 1.222], [0.64, 1.227], [0.7, 1.206], [0.75, 1.198], [0.8, 1.176], [0.85, 1.157], [0.88, 1.136], [0.9, 1.112], [0.92, 1.091], [0.93, 1.088], [0.937, 1.085], [0.9395, 0.997], [0.942, 0.905], [0.9445, 0.812], [0.947, 0.72], [0.952, 0.7], [0.958, 0.69], [0.97, 0.688], [0.98, 0.68], [0.99, 0.672], [0.997, 0.66], [1, 0.645]],
+  // boxy: flat flanks with rounded corners; both bumpers as wide as the flares, the tow block narrow
+  width: [[0, 0.2], [0.03, 0.2], [0.033, 0.9], [0.037, 0.95], [0.042, 0.965], [0.0455, 0.96], [0.048, 0.9], [0.052, 0.91], [0.06, 0.915], [0.08, 0.918], [0.5, 0.92], [0.9, 0.918], [0.93, 0.912], [0.94, 0.905], [0.948, 0.93], [0.96, 0.965], [0.985, 0.965], [0.995, 0.93], [1, 0.87]],
+  crown: 0.01,
+  bulge: 0.004,
+  haunch: 0.008,
+  topRadius: 0.06,
+  noseSweep: 0.04,
+  tailSweep: 0.03,
+  greenhouse: {
+    u0: THAR3_GH[0], u1: THAR3_GH[1], tumble: 0.94,
+    // the hard top: upright back face, a roof falling gently over the front door to the near-upright windscreen
+    top: [[0.08, 1.282], [0.0815, 1.45], [0.083, 1.6], [0.085, 1.705], [0.088, 1.77], [0.092, 1.805], [0.098, 1.825], [0.105, 1.836], [0.12, 1.842], [0.2, 1.847], [0.3, 1.843], [0.35, 1.834], [0.4, 1.824], [0.45, 1.803], [0.5, 1.785], [0.55, 1.76], [0.57, 1.754], [0.576, 1.748], [0.582, 1.732], [0.587, 1.705], [0.597, 1.615], [0.607, 1.517], [0.617, 1.42], [0.628, 1.318], [0.64, 1.227]],
+  },
+  // the black hard top (the glass in its upright back face stays glass)
+  roof: { u0: thar3St(11), u1: thar3St(112), black: true },
+  pillars: [
+    // the body-coloured door frame's rear edge and the windscreen frame
+    { bottom: [thar3U(0.39), thar3U(0.412)], top: [thar3U(0.39), thar3U(0.412)], black: false },
+    { bottom: [thar3U(0.574), 0.635], top: [thar3U(0.57), thar3U(0.592)], black: false },
+  ],
+  // black bumpers (their tops too), the black side steps, big flat-topped flares
+  cladding: { top: thar3P([[0, 0.76], [0.03, 0.76], [0.033, 0.78], [0.046, 0.78], [0.048, 0.755], [0.12, 0.755], [0.135, 0.6], [0.15, 0.45], [0.7, 0.45], [0.72, 0.5], [0.93, 0.56], [0.942, 0.6], [0.946, 0.69], [0.952, 0.72], [1, 0.72]]), flare: 0.15, flareOut: 0.07, flareU: [0.06, 0.944], cut: true, cover: true },
+  doors: [[thar3U(0.586), thar3U(0.586)], [thar3U(0.39), thar3U(0.39)]],
+  front: [
+    ...thar3Slots,
+    // round headlamps in raised body-coloured pods: dark lens, LED ring open towards the grille, square projector
+    { step: 0.005, mat: 'body', mirror: true, depth: 0.018, poly: tharCircle(0.484, 0.94, 0.112) },
+    { step: 0.005, mat: 'gloss', mirror: true, layer: 1, depth: 0.022, poly: tharCircle(0.484, 0.94, 0.096) },
+    { step: 0.005, mat: 'drl', mirror: true, layer: 2, depth: 0.024, poly: tharC(0.484, 0.94, 0.084, 0.016, Math.PI * 1.08, 0.3) },
+    { step: 0.005, mat: 'head', mirror: true, layer: 2, depth: 0.024, poly: rrect(0.451, 0.926, 0.517, 0.954, 0.008) },
+    // the LED lamps in black boxes on the front wings, outboard of the headlamps
+    { step: 0.005, mat: 'gloss', mirror: true, depth: 0.012, poly: rrect(0.665, 0.862, 0.805, 0.936, 0.01) },
+    { step: 0.005, mat: 'drl', mirror: true, layer: 1, depth: 0.013, poly: rrect(0.678, 0.898, 0.792, 0.924, 0.005) },
+    // the black panels under the lamps with two small lamps each, down to the bumper
+    { step: 0.005, mat: 'trim', mirror: true, depth: 0.006, poly: [[0.37, 0.69], [0.815, 0.69], [0.815, 0.838], [0.64, 0.838], [0.6, 0.8], [0.4, 0.8], [0.37, 0.775]] },
+    { step: 0.005, mat: 'head', mirror: true, layer: 1, depth: 0.01, poly: rrect(0.678, 0.75, 0.708, 0.776, 0.005) },
+    { step: 0.005, mat: 'head', mirror: true, layer: 1, depth: 0.01, poly: rrect(0.764, 0.75, 0.794, 0.776, 0.005) },
+    // the bumper: a satin-grey face with two black blocks either side of the plate
+    { step: 0.005, mat: 'satin', depth: 0.006, poly: rrect(-0.85, 0.48, 0.85, 0.66, 0.03) },
+    { step: 0.005, mat: 'trim', mirror: true, layer: 1, depth: 0.012, poly: rrect(0.36, 0.49, 0.52, 0.645, 0.02) },
+  ],
+  rear: [
+    // square tail lamps: a black box, a red frame open to the outside, a lit red upper pane, the amber bar, the
+    // clear reversing pane
+    { step: 0.005, mat: 'gloss', mirror: true, depth: 0.018, poly: rrect(0.64, 0.84, 0.83, 1.07, 0.02) },
+    { step: 0.005, mat: 'tail', mirror: true, layer: 1, depth: 0.02, poly: rrect(0.65, 0.848, 0.785, 1.062, 0.014) },
+    { step: 0.005, mat: 'gloss', mirror: true, layer: 2, depth: 0.02, poly: rrect(0.672, 0.87, 0.775, 1.04, 0.006) },
+    { step: 0.005, mat: 'tail', mirror: true, layer: 3, depth: 0.02, poly: rrect(0.68, 0.975, 0.768, 1.032, 0.005) },
+    { step: 0.005, mat: 'amber', mirror: true, layer: 3, depth: 0.02, poly: rrect(0.678, 0.952, 0.77, 0.966, 0.004) },
+    { step: 0.005, mat: 'silver', mirror: true, layer: 3, depth: 0.02, poly: rrect(0.68, 0.878, 0.768, 0.942, 0.005) },
+    // the side-hinged tailgate's shut lines and its upright handle
+    { step: 0.005, mat: 'gloss', mirror: true, depth: 0.001, poly: [[0.59, 0.77], [0.603, 0.77], [0.603, 1.27], [0.59, 1.27]] },
+    { step: 0.005, mat: 'trim', depth: 0.016, poly: rrect(-0.5, 0.89, -0.44, 1.07, 0.02) },
+    // the black bumper face (covers the swept end cap), its satin-grey centre, red reflectors in its black ends
+    { step: 0.005, mat: 'trim', depth: 0.003, poly: rrect(-0.86, 0.49, 0.86, 0.74, 0.02) },
+    { step: 0.005, mat: 'satin', layer: 1, depth: 0.01, poly: rrect(-0.6, 0.5, 0.6, 0.66, 0.02) },
+    { step: 0.005, mat: 'reflector', mirror: true, layer: 1, depth: 0.006, poly: rrect(0.79, 0.57, 0.84, 0.7, 0.008) },
+  ],
+  side: [
+    // the body-coloured window frame along the top of the door
+    { step: 0.005, mat: 'body', poly: thar3P([[0.392, 1.695], [0.53, 1.695], [0.5, 1.707], [0.45, 1.725], [0.392, 1.748]]) },
+    // the hard top's black side panel round the quarter glass
+    { step: 0.005, mat: 'trim', layer: 1, poly: thar3RectU(0.095, 1.29, 0.388, 1.74, 0.03) },
+    { step: 0.005, mat: 'glass', layer: 2, poly: thar3RectU(0.12, 1.37, 0.356, 1.7, 0.035) },
+    // the door's rear shut line up the frame
+    { step: 0.005, mat: 'gloss', depth: 0.001, poly: thar3P([[0.3885, 1.21], [0.3915, 1.21], [0.3915, 1.755], [0.3885, 1.755]]) },
+    // door handle, fuel lid, the amber marker on the front flare
+    { step: 0.005, mat: 'gloss', depth: 0.012, poly: thar3RectU(0.41, 0.976, 0.45, 1.014, 0.012) },
+    { step: 0.005, mat: 'gloss', depth: 0.001, poly: thar3P(sideBand([...THAR3_LID, THAR3_LID[0]], 0.012, THAR3_L)) },
+    // the grey top edge of the side step
+    { step: 0.005, mat: 'satin', poly: thar3RectU(0.37, 0.415, 0.69, 0.43, 0.006) },
+  ],
+  plates: { front: 0.56, rear: 0.55 },
+  spare: { y: 1.09 },
+  mirrors: 'black',
+  mirrorU: thar3U(0.575),
+  satinColor: '#5c6166',
+  paint: '#800c1a', // Tango Red, darkened for the studio lights
+  plate: 'MH 12 TH 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, KYLAQ, FORTUNER, SAFARI, WINDSOR_EV, CITY_X, SYROS, ALCAZAR, ALTROZ_X, VERNA, VICTORIS_X, SIERRA_X, SIERRA_EV_X, GRAND_I10_NIOS, AURA, CELERIO, ALTO_K10, GLANZA, TAISOR, BOLERO_NEO, BOLERO, NEXON_EV, PUNCH_EV, THAR]
