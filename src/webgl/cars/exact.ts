@@ -5023,4 +5023,165 @@ export const NEXON_EV: CarSpec = {
   plate: 'MH 12 NE 2026',
 }
 
-export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, KYLAQ, FORTUNER, SAFARI, WINDSOR_EV, CITY_X, SYROS, ALCAZAR, ALTROZ_X, VERNA, VICTORIS_X, SIERRA_X, SIERRA_EV_X, GRAND_I10_NIOS, AURA, CELERIO, ALTO_K10, GLANZA, TAISOR, BOLERO_NEO, BOLERO, NEXON_EV, PUNCH_EV]
+const TIAGO_EV_L = 3.825
+/** a side outline from a rounded rectangle given in u (0…1) and metres */
+const tiagoEvRectU = (u0: number, y0: number, u1: number, y1: number, r: number): P2[] =>
+  rrectS(u0 * TIAGO_EV_L, y0, u1 * TIAGO_EV_L, y1, r).map(([x, y]) => [+(x / TIAGO_EV_L).toFixed(5), y] as P2)
+/** the charging lid's outline on the rear wing */
+const TIAGO_EV_LID: P2[] = tiagoEvRectU(0.122, 0.7, 0.183, 0.858, 0.045)
+
+/** Tata Tiago.ev (2026 facelift). 3825 × 1684 × 1562, wheelbase 2400, 175/65 R14 (top trim, as on the gallery car).
+ *  The Tiago's body with the EV's closed nose; scored afresh against the gallery's side photo (1.563 m measured over the
+ *  roof fin, axles 1.3 % apart, so the axles sit at the official wheelbase with the overhangs split as in the photo).
+ *  Charging lid, tail lamp wrap and nose read off a metric grid of the cut-out; the body-coloured panel between the
+ *  headlamps, the slatted lower grille, the corner slots and the black rear bumper from the straight front and rear photos. */
+export const TIAGO_EV: CarSpec = {
+  ...TIAGO,
+  id: 'tata-tiago-ev',
+  name: 'Tata Tiago.ev',
+  L: TIAGO_EV_L, W: 1.684, H: 1.562,
+  axles: [0.1503, 0.7778],
+  tyreR: 0.2916, tyreW: 0.175, rim: 0.61, wheel: { style: 'split', spokes: 4 }, rimTone: 'dark',
+  sill: [[0, 0.3], [0.005, 0.28], [0.015, 0.268], [0.03, 0.258], [0.05, 0.25], [0.1, 0.238], [0.2, 0.232], [0.3, 0.23], [0.5, 0.228], [0.6, 0.224], [0.7, 0.212], [0.8, 0.207], [0.9, 0.207], [0.94, 0.21], [0.97, 0.215], [0.985, 0.22], [0.995, 0.23], [1, 0.25]],
+  // the Tiago's tail and belt; the bonnet traced a little lower, the nose kept ~3 cm over the headlamps
+  top: [...TIAGO.top.filter(([u]) => u < 0.755), [0.755, 1.034], [0.77, 1.036], [0.785, 1.031], [0.8, 1.017], [0.82, 0.998], [0.84, 0.982], [0.86, 0.965], [0.88, 0.948], [0.9, 0.93], [0.92, 0.91], [0.94, 0.89], [0.955, 0.879], [0.965, 0.873], [0.975, 0.869], [0.985, 0.867], [0.993, 0.866], [1, 0.865]],
+  // black arch flares; the black lip under the closed nose, the black lower rear bumper's corners
+  cladding: { top: [[0, 0.37], [0.025, 0.34], [0.05, 0.15], [0.95, 0.15], [0.975, 0.2], [0.99, 0.22], [1, 0.22]], flare: 0.045, cut: true },
+  front: [
+    // the slim swept headlamps, the body-coloured panel between them (no grille, no badge)
+    { step: 0.004, mat: 'trim', mirror: true, poly: smooth([[0.458, 0.765], [0.468, 0.718], [0.58, 0.725], [0.635, 0.738], [0.675, 0.75], [0.7, 0.765], [0.706, 0.79], [0.704, 0.83], [0.69, 0.84], [0.58, 0.824], [0.48, 0.806]], 1) },
+    ...TIAGO.front.slice(1, 6),
+    // the panel's shut line under the lamps
+    { step: 0.004, mat: 'gloss', depth: 0.001, poly: band([[-0.47, 0.705], [-0.3, 0.698], [0.3, 0.698], [0.47, 0.705]], 0.012) },
+    // the slatted lower grille under the plate
+    { step: 0.004, mat: 'gloss', poly: rrect(-0.31, 0.295, 0.31, 0.425, 0.008) },
+    ...punchEvRibs(0.3, 0.305, 0.415, 0.026, 'body', 1, 0.008),
+    // the upright black slots at the bumper's corners
+    { step: 0.004, mat: 'gloss', mirror: true, depth: 0.008, poly: rrect(0.64, 0.33, 0.685, 0.6, 0.01) },
+  ],
+  rear: [
+    // the Tiago's light bar and the tailgate's shut line, a dark handle notch under it
+    ...TIAGO.rear.slice(0, 7),
+    { step: 0.004, mat: 'gloss', poly: rrect(-0.06, 0.652, 0.06, 0.676, 0.008) },
+    // the black lower bumper round the plate, the reversing lamp and the slim red reflectors at its corners
+    { step: 0.005, mat: 'trim', poly: smooth(both([[0, 0.3], [0.6, 0.3], [0.655, 0.315], [0.675, 0.36], [0.675, 0.45], [0.665, 0.53], [0.635, 0.562], [0, 0.565]]), 1) },
+    { step: 0.004, mat: 'silver', layer: 1, depth: 0.006, poly: rrect(-0.095, 0.315, 0.095, 0.36, 0.01) },
+    { step: 0.004, mat: 'reflector', mirror: true, layer: 1, poly: rrect(0.648, 0.32, 0.668, 0.58, 0.006) },
+  ],
+  side: [
+    ...TIAGO.side!.slice(0, 6),
+    // the headlamp sweeping back along the wing, meeting the front decal at the corner
+    { step: 0.004, mat: 'trim', depth: 0.005, poly: smooth([[0.992, 0.768], [0.96, 0.776], [0.94, 0.786], [0.91, 0.802], [0.885, 0.83], [0.866, 0.876], [0.876, 0.886], [0.91, 0.876], [0.94, 0.865], [0.96, 0.855], [0.992, 0.84]], 1) },
+    TIAGO.side![7],
+    // the charging lid on the rear wing
+    { step: 0.004, mat: 'gloss', depth: 0.001, poly: sideBand([...TIAGO_EV_LID, TIAGO_EV_LID[0]], 0.012, TIAGO_EV_L) },
+  ],
+  plates: { front: 0.49, rear: 0.47 },
+  paint: '#98ad7c', // Dehradun Dew, the gallery car's pale green, darkened for the studio lights
+  ev: true,
+  plate: 'MH 12 TE 2026',
+}
+
+const CURVV_EV_L = 4.31
+
+/** Tata Curvv.ev (2024–26, 55 kWh). 4310 × 1810 × 1637, wheelbase 2560, 215/55 R18 (top trim).
+ *  The Curvv's body with the EV's closed nose; scored afresh against the gallery's road side photo (tyres hidden in grass
+ *  patched as dark discs under a sill line read off a brightened crop, the shark fin erased; 1.695 m measured from the
+ *  close camera, so the cut-out was squeezed to the official height). The closed panel under the light bar, the dark
+ *  slot joining the headlamp pods and the lower grille's upright and raked silver slats from the straight front photo;
+ *  the tail as the Curvv's. */
+export const CURVV_EV: CarSpec = {
+  ...CURVV,
+  id: 'tata-curvv-ev',
+  name: 'Tata Curvv.ev',
+  L: CURVV_EV_L, W: 1.81, H: 1.637,
+  wheel: { style: 'turbine', spokes: 5 }, rimTone: 'dark',
+  sill: [[0, 0.38], [0.01, 0.38], [0.02, 0.38], [0.05, 0.372], [0.07, 0.362], [0.1, 0.345], [0.12, 0.335], [0.32, 0.303], [0.5, 0.3], [0.6, 0.3], [0.68, 0.287], [0.72, 0.28], [0.93, 0.29], [0.95, 0.31], [0.97, 0.325], [0.99, 0.328], [1, 0.32]],
+  // the Curvv's tail and belt; the closed nose's bonnet traced lower, ~2 cm over the light bar at the face
+  top: [...CURVV.top.filter(([u]) => u < 0.76), [0.76, 1.148], [0.78, 1.132], [0.8, 1.118], [0.82, 1.106], [0.84, 1.096], [0.86, 1.086], [0.88, 1.075], [0.9, 1.06], [0.92, 1.033], [0.94, 1.003], [0.95, 0.989], [0.96, 0.977], [0.97, 0.968], [0.98, 0.959], [0.99, 0.954], [1, 0.951]],
+  front: [
+    // the light bar along the bonnet's leading edge over the closed, body-coloured panel (no grille, no badge)
+    { step: 0.005, mat: 'gloss', poly: both([[0, 0.902], [0.55, 0.903], [0.64, 0.906], [0.7, 0.911], [0.712, 0.9], [0.722, 0.918], [0.712, 0.934], [0.6, 0.931], [0, 0.929]]) },
+    ...CURVV.front.slice(1, 3).map((d): Decal => ({ ...d, poly: d.poly.map(([z, y]) => [z, +(y - 0.032).toFixed(4)] as P2) })),
+    // the split headlamp pods at the bumper corners
+    { step: 0.005, mat: 'gloss', mirror: true, depth: 0.008, poly: smooth([[0.665, 0.835], [0.7, 0.845], [0.765, 0.845], [0.772, 0.82], [0.775, 0.45], [0.755, 0.44], [0.725, 0.52], [0.68, 0.64], [0.665, 0.68]], 1) },
+    { step: 0.005, mat: 'head', layer: 1, mirror: true, poly: rrectS(0.69, 0.75, 0.762, 0.825, 0.016) },
+    { step: 0.005, mat: 'head', layer: 1, mirror: true, poly: rrectS(0.695, 0.668, 0.762, 0.7, 0.008) },
+    { step: 0.005, mat: 'slats', layer: 1, mirror: true, poly: [[0.755, 0.47], [0.767, 0.47], [0.767, 0.645], [0.7, 0.645]] },
+    // the dark slot joining the pods under the closed panel
+    { step: 0.005, mat: 'gloss', poly: smooth(both([[0, 0.652], [0.6, 0.652], [0.672, 0.665], [0.672, 0.715], [0.6, 0.72], [0, 0.72]]), 1) },
+    // the black lower bumper, the trapezoid lower grille: upright silver slats in the middle, raked ones at the sides
+    { step: 0.005, mat: 'trim', poly: both([[0, 0.325], [0.7, 0.325], [0.755, 0.345], [0.77, 0.41], [0.73, 0.4], [0, 0.4]]) },
+    { step: 0.005, mat: 'gloss', layer: 1, poly: smooth(both([[0, 0.365], [0.7, 0.365], [0.725, 0.385], [0.68, 0.48], [0.655, 0.53], [0, 0.53]]), 1) },
+    ...punchEvRibs(0.36, 0.38, 0.515, 0.026, 'satin', 2, 0.01),
+    ...nexonEvStripes(0.405, 0.66, 0.38, 0.515, -0.055, 0.03, 2).map((d): Decal => ({ ...d, poly: d.poly.map(([z, y]) => [Math.min(z, 0.7 - (y - 0.38) * 0.4), y] as P2) })),
+    // the satin lip along the grille's bottom edge
+    { step: 0.005, mat: 'satin', layer: 2, poly: smooth(both([[0, 0.338], [0.64, 0.338], [0.7, 0.345], [0.72, 0.355], [0.66, 0.364], [0, 0.364]]), 1) },
+  ],
+  rear: [
+    // the Curvv's light bar, shut line and corner lamps; its tall black bumper and skid plate ending a little higher
+    ...CURVV.rear.slice(0, 3),
+    { step: 0.005, mat: 'trim', poly: both([[0, 0.39], [0.7, 0.39], [0.77, 0.42], [0.775, 0.89], [0.718, 0.895], [0.71, 0.74], [0.68, 0.685], [0.6, 0.665], [0, 0.66]]) },
+    CURVV.rear[4],
+    { step: 0.005, mat: 'satin', layer: 1, poly: smooth(both([[0, 0.405], [0.55, 0.405], [0.62, 0.412], [0.632, 0.44], [0.58, 0.455], [0, 0.458]]), 2) },
+  ],
+  side: [
+    // the tail lamp wedge, the black strip along the bottom of the side glass, flush door handles
+    ...CURVV.side!.slice(0, 2),
+    { step: 0.004, mat: 'gloss', depth: 0.003, poly: sideBand([[0.19, 1.244], [0.3, 1.215], [0.4, 1.188], [0.5, 1.16], [0.6, 1.133], [0.7, 1.111], [0.722, 1.115]], 0.012, CURVV_EV_L) },
+    ...CURVV.side!.slice(3, 5),
+  ],
+  paint: '#34486a', // the gallery car's blue-grey, darkened for the studio lights
+  ev: true,
+  plate: 'MH 12 CE 2026',
+}
+
+const HARRIER_EV_L = 4.607
+
+/** Tata Harrier.ev (2025, 65/75 kWh). 4607 × 1922 × 1740 (with roof rails), wheelbase 2741, 245/55 R19 (top trim).
+ *  The Harrier's body with the EV's closed nose; scored afresh against the gallery's road side photo (1.769 m measured over
+ *  the rails and roof fin, axles 2.9 % apart, so the axles sit at the official wheelbase with the overhangs split as in the
+ *  photo). The slatted closed panel under the light bar, the lower grille's upright and raked silver slats, the big satin
+ *  skid plates and the black rear bumper from the straight front and rear photos; the tail lamps as the Harrier's. */
+export const HARRIER_EV: CarSpec = {
+  ...HARRIER,
+  id: 'tata-harrier-ev',
+  name: 'Tata Harrier.ev',
+  L: HARRIER_EV_L, W: 1.922, H: 1.74,
+  wheel: { style: 'swirl', spokes: 5 }, rimTone: 'dark',
+  sill: [[0, 0.305], [0.01, 0.31], [0.02, 0.325], [0.04, 0.335], [0.06, 0.33], [0.08, 0.305], [0.12, 0.29], [0.3, 0.255], [0.4, 0.25], [0.6, 0.247], [0.68, 0.247], [0.72, 0.232], [0.9, 0.232], [0.94, 0.24], [0.96, 0.265], [0.98, 0.28], [0.99, 0.28], [1, 0.275]],
+  // the Harrier's glasshouse, its roof ~1 cm higher (the EV stands taller), fading out towards the belt
+  greenhouse: { ...HARRIER.greenhouse, top: HARRIER.greenhouse.top.map(([u, y]): P2 => [u, +(y + Math.max(0, Math.min(1, (y - 1.3) / 0.3)) * 0.008).toFixed(4)]) },
+  front: [
+    // the light bar along the bonnet's leading edge
+    ...HARRIER.front.slice(0, 2),
+    // the closed upper panel: gloss black with fine horizontal slats, and the gloss strip joining the headlamp pods
+    { step: 0.005, mat: 'gloss', poly: both([[0, 0.745], [0.55, 0.745], [0.585, 0.8], [0.59, 0.9], [0, 0.9]]) },
+    { step: 0.005, mat: 'slats', layer: 1, poly: both([[0, 0.76], [0.54, 0.76], [0.57, 0.8], [0.575, 0.885], [0, 0.885]]) },
+    { step: 0.005, mat: 'gloss', poly: both([[0, 0.705], [0.72, 0.705], [0.74, 0.74], [0, 0.74]]) },
+    // the split headlamp pods in the bumper corners: projector on top, fog lamp, slatted pocket below
+    { step: 0.005, mat: 'gloss', mirror: true, depth: 0.008, poly: smooth([[0.69, 0.8], [0.705, 0.83], [0.8, 0.84], [0.805, 0.5], [0.775, 0.5], [0.72, 0.665], [0.69, 0.71]], 1) },
+    { step: 0.005, mat: 'head', layer: 1, mirror: true, poly: rrectS(0.715, 0.765, 0.79, 0.815, 0.014) },
+    { step: 0.005, mat: 'head', layer: 1, mirror: true, poly: rrectS(0.735, 0.68, 0.79, 0.702, 0.006) },
+    { step: 0.005, mat: 'slats', layer: 1, mirror: true, poly: [[0.775, 0.52], [0.792, 0.52], [0.792, 0.662], [0.735, 0.662]] },
+    // the black lower bumper, the lower grille (upright silver slats, raked ones at its sides), the big satin skid plate
+    { step: 0.005, mat: 'trim', poly: smooth(both([[0, 0.29], [0.66, 0.29], [0.74, 0.31], [0.79, 0.38], [0.8, 0.45], [0.72, 0.43], [0, 0.43]]), 1) },
+    { step: 0.005, mat: 'gloss', layer: 1, poly: smooth(both([[0, 0.39], [0.66, 0.39], [0.7, 0.41], [0.7, 0.44], [0.67, 0.545], [0, 0.545]]), 1) },
+    ...punchEvRibs(0.5, 0.4, 0.535, 0.026, 'satin', 2, 0.01),
+    ...nexonEvStripes(0.55, 0.69, 0.4, 0.535, -0.05, 0.03, 2).map((d): Decal => ({ ...d, poly: d.poly.map(([z, y]) => [Math.min(z, 0.695), y] as P2) })),
+    { step: 0.005, mat: 'satin', layer: 2, poly: smooth(both([[0, 0.3], [0.6, 0.3], [0.66, 0.315], [0.69, 0.36], [0.68, 0.385], [0, 0.385]]), 1) },
+  ],
+  rear: [
+    // the Harrier's connected light bar and the tailgate's shut line round the plate recess
+    ...HARRIER.rear.slice(0, 4),
+    // the tall black bumper wrapping the corners, the big satin skid plate in it
+    { step: 0.005, mat: 'trim', poly: smooth(both([[0, 0.322], [0.68, 0.322], [0.76, 0.34], [0.79, 0.4], [0.79, 0.62], [0.74, 0.64], [0.66, 0.67], [0.6, 0.71], [0, 0.72]]), 1) },
+    { step: 0.005, mat: 'satin', layer: 1, poly: smooth(both([[0, 0.375], [0.56, 0.375], [0.6, 0.395], [0.6, 0.49], [0.58, 0.505], [0, 0.505]]), 1) },
+  ],
+  plates: { front: 0.58, rear: 1.04 },
+  paint: '#08204e', // Nainital Nocturne, the gallery car's deep navy, darkened for the studio lights
+  ev: true,
+  plate: 'MH 12 HE 2026',
+}
+
+export const EXACT: CarSpec[] = [NEXON, PUNCH, CRETA, BREZZA, SWIFT, FRONX, DZIRE, SCORPIO_N, SELTOS, BALENO, THAR_ROXX, VENUE, SONET, WAGON_R, GRAND_VITARA, XUV_3XO, ERTIGA_X, TIAGO, HARRIER, INNOVA_HYCROSS, XUV_7XO, EXTER, CARENS_CLAVIS, HYRYDER, CURVV, I20, KYLAQ, FORTUNER, SAFARI, WINDSOR_EV, CITY_X, SYROS, ALCAZAR, ALTROZ_X, VERNA, VICTORIS_X, SIERRA_X, SIERRA_EV_X, GRAND_I10_NIOS, AURA, CELERIO, ALTO_K10, GLANZA, TAISOR, BOLERO_NEO, BOLERO, NEXON_EV, PUNCH_EV, TIAGO_EV, CURVV_EV, HARRIER_EV]
