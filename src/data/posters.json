@@ -1,7 +1,15 @@
 {
+ "honda-amaze": {
+  "w": "/3d/honda-amaze.cf4e289d.w.webp",
+  "m": "/3d/honda-amaze.cec83706.m.webp"
+ },
  "honda-city": {
   "w": "/3d/honda-city.c1b79356.w.webp",
   "m": "/3d/honda-city.7c97d141.m.webp"
+ },
+ "honda-elevate": {
+  "w": "/3d/honda-elevate.336ae3cf.w.webp",
+  "m": "/3d/honda-elevate.f3debab7.m.webp"
  },
  "hyundai-alcazar": {
   "w": "/3d/hyundai-alcazar.e1b0b39d.w.webp",
