@@ -484,3 +484,8 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   lands them on the swept corner and reads from the front too; the side copy was dropped. Dozens of thin raised rib decals on a
   closed grille panel came out as dashes: left plain.
 - BE 6 brow: a black band under the bonnet edge vanished above ~0.89 m until the nose `top` sat ~3 cm over it with `topRadius` 0.06.
+- Dark aero wheels with silver accents: `split` + `rimTone: 'dark'` (XEV 9e) and `blade` + `rimTone: 'dark'` (BE 6); `swirl` + dark
+  still read as a white pinwheel, `aero`/`turbine`/`twin` + dark went flat gunmetal.
+- BE 6 floating roof wing: the plain `spoiler` box read as a plank. `spoiler.wing` (new, opt-in: `{ lift, taper }`) raises it on
+  taller end supports and thins/narrows it towards the tips and trailing edge; with a short chord (len 0.3) and `roof.u0` moved back
+  so the wing sits at the roof's rear (0.26), it reads as a blade on supports.

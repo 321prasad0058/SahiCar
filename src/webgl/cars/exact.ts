@@ -5061,7 +5061,7 @@ export const XEV_9E: CarSpec = {
   rakedEnds: true,
   L: XEV9E_L, W: 1.907, H: 1.694,
   axles: [0.2299, 0.8094],
-  tyreR: 0.376, tyreW: 0.245, rim: 0.642, wheel: { style: 'swirl', spokes: 5 },
+  tyreR: 0.376, tyreW: 0.245, rim: 0.642, wheel: { style: 'split', spokes: 5 }, rimTone: 'dark',
   archGap: 0.08, archSquare: 0.35,
   sill: [[0, 0.52], [0.02, 0.49], [0.05, 0.455], [0.08, 0.41], [0.1, 0.38], [0.12, 0.35], [0.2, 0.3], [0.33, 0.25], [0.5, 0.24], [0.7, 0.23], [0.73, 0.22], [0.9, 0.22], [0.93, 0.23], [0.95, 0.26], [0.97, 0.285], [0.99, 0.31], [1, 0.33]],
   // the tail face climbing to the light bar's lip, the belt falling gently forward under the windows into the cowl, the
@@ -5166,7 +5166,7 @@ export const BE_6: CarSpec = {
   name: 'Mahindra BE 6',
   L: BE6_L, W: 1.907, H: 1.627,
   axles: [0.1768, 0.8117],
-  tyreR: 0.3765, tyreW: 0.245, rim: 0.675, wheel: { style: 'blade', spokes: 5 }, rimTone: undefined,
+  tyreR: 0.3765, tyreW: 0.245, rim: 0.675, wheel: { style: 'blade', spokes: 5 }, rimTone: 'dark',
   archGap: 0.07, archSquare: 0.45,
   sill: [[0, 0.42], [0.01, 0.41], [0.02, 0.39], [0.03, 0.36], [0.05, 0.32], [0.07, 0.29], [0.1, 0.28], [0.3, 0.27], [0.7, 0.26], [0.9, 0.24], [0.93, 0.25], [0.95, 0.28], [0.97, 0.31], [0.99, 0.33], [1, 0.34]],
   // the short tail climbing to the black lip, the belt falling forward under the windows, the short bonnet over the brow
@@ -5175,12 +5175,12 @@ export const BE_6: CarSpec = {
   noseSweep: 0.2,
   topRadius: 0.06,
   greenhouse: {
-    u0: BE6_GH[0], u1: BE6_GH[1], tumble: 0.62, paintedEdge: [0.03, 0.215],
+    u0: BE6_GH[0], u1: BE6_GH[1], tumble: 0.62, paintedEdge: [0.03, 0.26],
     // the short rear glass rising into the fastback roof (the roof wing over it left out), the raked windscreen
     top: be6Y([[0.04, 1.305], [0.05, 1.318], [0.06, 1.332], [0.07, 1.348], [0.08, 1.362], [0.09, 1.38], [0.1, 1.396], [0.11, 1.412], [0.12, 1.428], [0.13, 1.445], [0.14, 1.46], [0.15, 1.475], [0.16, 1.49], [0.17, 1.505], [0.18, 1.52], [0.19, 1.535], [0.2, 1.548], [0.22, 1.565], [0.24, 1.58], [0.26, 1.592], [0.28, 1.604], [0.3, 1.615], [0.32, 1.622], [0.34, 1.626], [0.36, 1.63], [0.38, 1.633], [0.4, 1.634], [0.42, 1.635], [0.44, 1.635], [0.46, 1.632], [0.48, 1.627], [0.5, 1.62], [0.52, 1.607], [0.54, 1.592], [0.56, 1.568], [0.58, 1.54], [0.6, 1.506], [0.62, 1.468], [0.64, 1.43], [0.66, 1.395], [0.68, 1.353], [0.7, 1.31], [0.72, 1.268], [0.735, 1.232], [0.745, 1.205]]),
   },
-  roof: { u0: be6Station(0.215), u1: be6Station(0.54), black: true },
-  spoiler: { len: 0.5, thick: 0.035, tilt: -0.02 },
+  roof: { u0: be6Station(0.26), u1: be6Station(0.54), black: true },
+  spoiler: { len: 0.3, thick: 0.04, tilt: -0.03, wing: { lift: 0.04, taper: 0.3 } },
   pillars: [
     { bottom: [be6U(0.425), be6U(0.445)], top: [be6U(0.43), be6U(0.445)], black: true },
   ],
