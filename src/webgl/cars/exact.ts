@@ -5151,6 +5151,7 @@ export const SLAVIA: CarSpec = {
   plates: { front: 0.41, rear: 0.835 },
   mirrors: 'body',
   mirrorU: slaviaU(0.705),
+  satinColor: '#6a6f75',
   paint: '#4f7a82', // the gallery car's pale blue-green, darkened for the studio lights
   plate: 'MH 12 SS 2026',
 }
@@ -5183,6 +5184,7 @@ export const VIRTUS: CarSpec = {
   L: VIRTUS_L,
   axles: [0.2284, 0.8096],
   wheel: { style: 'twin', spokes: 5 }, rimTone: 'dark',
+  satinColor: undefined,
   noseSweep: 0.1,
   tailSweep: 0.08,
   sill: virtusY([[0, 0.27], [0.006, 0.3], [0.02, 0.33], [0.05, 0.33], [0.08, 0.3], [0.1, 0.28], [0.12, 0.26], [0.15, 0.235], [0.2, 0.215], [0.3, 0.2], [0.5, 0.2], [0.6, 0.198], [0.75, 0.205], [0.85, 0.205], [0.9, 0.205], [0.95, 0.21], [0.97, 0.215], [0.99, 0.215], [1, 0.215]]),
