@@ -482,3 +482,6 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - A body-coloured D-pillar decal under a black roof (Taigun) folded up as a flap when its top range started on `roof.u0` over the
   spoiler's steep glass drop; starting the top range one station later (and the belt range a little later) made it a clean panel.
 - Upright chrome grille bars read paper-white in 'chrome' on a gloss grille; 'silver' (depth 0.012) kept them bright but metallic.
+- `satinColor` (opt-in) darkens a car's 'satin' decals: Kushaq skid plates and grille bars at '#5c6166' read mid grey like the photo
+  instead of paper-white. A twin that spreads the spec (Taigun) gets `satinColor: undefined` to keep the default. Two-tone machined
+  alloys with bright faces on dark pockets: `swirl` + `rimTone: 'dark'` (split/blade/twin + dark went almost all gunmetal).

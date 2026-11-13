@@ -5027,9 +5027,9 @@ const KUSHAQ_L = 4.229
 /** a side outline from a rounded rectangle given in u (0…1) and metres */
 const kushaqU = (u0: number, y0: number, u1: number, y1: number, r: number): P2[] =>
   rrectS(u0 * KUSHAQ_L, y0, u1 * KUSHAQ_L, y1, r).map(([x, y]) => [+(x / KUSHAQ_L).toFixed(5), y] as P2)
-/** the grille's upright chrome bars, one every 57.5 mm across the gloss-black grille */
+/** the grille's upright bright bars (satin grey, as chrome against the black reads in the photos), one every 57.5 mm across the gloss-black grille */
 const kushaqBars: Decal[] = [0, 0.0575, 0.115, 0.1725, 0.23, 0.2875, 0.345, 0.4025, 0.46, 0.5175].map((z): Decal => ({
-  step: 0.004, mat: 'silver', layer: 2, depth: 0.012, mirror: z > 0,
+  step: 0.004, mat: 'satin', layer: 2, depth: 0.012, mirror: z > 0,
   poly: rrect(z - 0.007, 0.697 + Math.max(0, z - 0.38) * 0.12, z + 0.007, 0.852 + z * 0.02, 0.003),
 }))
 
@@ -5054,7 +5054,7 @@ export const KUSHAQ: CarSpec = {
   rakedEnds: true,
   L: KUSHAQ_L, W: 1.76, H: 1.612,
   axles: [0.1692, 0.7961],
-  tyreR: 0.3287, tyreW: 0.205, rim: 0.657, wheel: { style: 'blade', spokes: 5 },
+  tyreR: 0.3287, tyreW: 0.205, rim: 0.657, wheel: { style: 'swirl', spokes: 5 }, rimTone: 'dark',
   archGap: 0.085, archSquare: 0.45,
   sill: [[0, 0.43], [0.01, 0.35], [0.02, 0.322], [0.04, 0.296], [0.06, 0.272], [0.1, 0.252], [0.28, 0.235], [0.5, 0.228], [0.7, 0.225], [0.88, 0.212], [0.92, 0.215], [0.95, 0.222], [0.97, 0.24], [0.98, 0.252], [0.99, 0.265], [1, 0.275]],
   // the tail's top at the light bar, the belt rising gently to the quarter glass and falling to the mirror, the bonnet
@@ -5090,7 +5090,7 @@ export const KUSHAQ: CarSpec = {
     // the tall grille: gloss black behind upright chrome bars and a thin chrome tie bar
     { step: 0.004, mat: 'gloss', poly: smooth(both([[0, 0.68], [0.3, 0.684], [0.42, 0.693], [0.5, 0.712], [0.528, 0.76], [0.545, 0.835], [0.542, 0.86], [0.52, 0.872], [0.3, 0.864], [0, 0.858]]), 1) },
     ...kushaqBars,
-    { step: 0.004, mat: 'chrome', layer: 3, depth: 0.014, poly: band([[-0.52, 0.814], [0, 0.814], [0.52, 0.814]], 0.008) },
+    { step: 0.004, mat: 'satin', layer: 3, depth: 0.014, poly: band([[-0.52, 0.814], [0, 0.814], [0.52, 0.814]], 0.008) },
     // slim headlamps under the bonnet edge: a black pocket with a DRL brow along the top and a vertical DRL tick
     { step: 0.004, mat: 'trim', mirror: true, depth: 0.004, poly: smooth([[0.512, 0.836], [0.54, 0.822], [0.7, 0.826], [0.775, 0.842], [0.79, 0.866], [0.788, 0.915], [0.772, 0.93], [0.62, 0.898], [0.518, 0.872]], 1) },
     { step: 0.004, mat: 'gloss', layer: 1, mirror: true, poly: smooth([[0.53, 0.84], [0.55, 0.832], [0.7, 0.836], [0.765, 0.85], [0.776, 0.868], [0.774, 0.905], [0.62, 0.882], [0.535, 0.862]], 1) },
@@ -5137,6 +5137,7 @@ export const KUSHAQ: CarSpec = {
   rails: 'silver',
   mirrors: 'body',
   mirrorU: 0.668,
+  satinColor: '#5c6166', // mid-grey skid plates and grille bars, as in the photos
   paint: '#25473f', // Shimla Green, darkened for the studio lights
   plate: 'MH 12 KS 2026',
 }
@@ -5159,6 +5160,7 @@ export const TAIGUN: CarSpec = {
   axles: [0.1716, 0.7997],
   wheel: { style: 'twin', spokes: 5 },
   rimTone: 'dark',
+  satinColor: undefined,
   sill: [[0, 0.46], [0.01, 0.38], [0.02, 0.345], [0.04, 0.302], [0.06, 0.285], [0.1, 0.262], [0.28, 0.25], [0.5, 0.246], [0.7, 0.238], [0.88, 0.215], [0.92, 0.22], [0.95, 0.228], [0.97, 0.24], [0.98, 0.25], [0.99, 0.262], [1, 0.275]],
   // the Kushaq's sides, a tail face standing up to the smoked lamp panel and a rounder nose falling to the light bar
   top: [[0, 0.62], [0.005, 0.7], [0.01, 0.78], [0.015, 0.85], [0.02, 0.93], [0.023, 1.02], [0.026, 1.09], [0.029, 1.112], [0.032, 1.122], [0.05, 1.16], [0.1, 1.195], [0.15, 1.212], [0.17, 1.2], [0.2, 1.168], [0.25, 1.148], [0.3, 1.14], [0.4, 1.122], [0.5, 1.105], [0.6, 1.083], [0.66, 1.072], [0.7, 1.077], [0.745, 1.08], [0.76, 1.078], [0.8, 1.07], [0.85, 1.05], [0.9, 1.018], [0.93, 0.988], [0.95, 0.955], [0.96, 0.934], [0.965, 0.92], [0.97, 0.905], [0.975, 0.888], [0.98, 0.86], [0.985, 0.81], [0.99, 0.745], [0.995, 0.695], [1, 0.675]],
