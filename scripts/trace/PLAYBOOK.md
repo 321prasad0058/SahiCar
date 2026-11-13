@@ -481,3 +481,10 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - Twins traced from different photos disagree by a few cm (Virtus roof 2 cm under the Slavia's, screen base 2 % of u further back):
   spread the sibling for the shared knobs, but give the twin its own top/greenhouse/sill from its photo.
 - Five broad machined spokes split by a dark groove (Slavia 16"): `blade` with no `rimTone`; all-black GT alloys: `twin` + 'dark'.
+- Sedan boot deck traced up to 1.18 at the C-pillar foot (the centre-line deck) stood 8 cm over the belt and read as a hump on
+  the rear fender in side/r34: the side top is the deck there. Keep the tail `top` nearly flat from the ducktail to the belt
+  (Slavia 1.108 → 1.121 → 1.098) and start the glasshouse at that height with a steeper first 3 % (−0.2 % IoU).
+- Grille slats in `chrome`/`satin` with 12 mm relief read as white bars from the front; `satin` with `depth` 0.004 reads grey.
+  Machined-face alloys: `swirl` + 'dark' is the only two-tone (`blade` + 'dark' goes all gunmetal).
+- On dark red paint the sill's rounded lower edge and the bumper corners catch the studio light as thin white lines; a black
+  `trim` side band along the sill bottom (between the arches) and black lower-bumper wraps behind/ahead of the arches hide them.
