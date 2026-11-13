@@ -134,8 +134,9 @@
   "ai": true
  },
  "hyundai-alcazar": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/79/2021_Hyundai_Alcazar_2.0_Signature_%28India%29_front_view.png/960px-2021_Hyundai_Alcazar_2.0_Signature_%28India%29_front_view.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Hyundai_Alcazar"
+  "src": "/cars/ai/hyundai-alcazar.webp",
+  "page": "",
+  "ai": true
  },
  "hyundai-creta-electric": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/21/2024_Hyundai_Creta_1.5_MPi_SX%28O%29_%28India%29_front_view.png/960px-2024_Hyundai_Creta_1.5_MPi_SX%28O%29_%28India%29_front_view.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
@@ -320,8 +321,9 @@
   "page": "https://en.wikipedia.org/wiki/MG_ZS_(crossover)"
  },
  "mg-windsor-ev": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/Baojun_Yunduo_010.jpg/960px-Baojun_Yunduo_010.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Baojun_Yunduo"
+  "src": "/cars/ai/mg-windsor-ev.webp",
+  "page": "",
+  "ai": true
  },
  "mg-zs-ev": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/MG_ZS_%28crossover%2C_second_generation%29_DSC_8542.jpg/960px-MG_ZS_%28crossover%2C_second_generation%29_DSC_8542.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
@@ -538,8 +540,9 @@
   "ai": true
  },
  "skoda-kylaq": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/2025_Skoda_Kylaq.png/960px-2025_Skoda_Kylaq.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/%C5%A0koda_Kylaq"
+  "src": "/cars/ai/skoda-kylaq.webp",
+  "page": "",
+  "ai": true
  },
  "skoda-slavia": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/2021_%C5%A0koda_Slavia_1.5_TSI_Style_%28India%29_front_view.png/960px-2021_%C5%A0koda_Slavia_1.5_TSI_Style_%28India%29_front_view.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
