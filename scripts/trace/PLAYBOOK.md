@@ -473,3 +473,13 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
 - A gloss tail bar that "turns body colour" from behind is the red glow sprites over it, not a hole: check with a `satin` swap.
 - Tyres hidden in grass that the cut-out crops off: pad the canvas, paint dark discs at the hubs, and clear grass by colour
   only where it can't be pale paint (Empowered Oxide is grey-green: a plain g > b test ate the doors).
+- Elevate (2026 facelift; gallery side 1.646 m over the rails, axles 3.7 % apart, `elevateU` maps cladding/doors/pillars/handles): a wide
+  body-coloured D-pillar beside a raked tailgate glass worked with the Hycross layout (body climbs the tail to the roof, flat to the
+  quarter glass, cliff to the belt, tailgate glass as a `rear` decal with `endReach` 0.56). The tail-only `shoulder.inset` line climbing
+  from 1.22 to 1.65 m within 5 % of u crumpled the D-pillar; climbing it over ~17 % of u (past the quarter glass) made it smooth.
+- `extract-side`'s `axles` can be off on a grass photo (Amaze: 0.206/0.819 against hubs at 0.170/0.802 read off the cut-out's rims):
+  check the hubs on a grid before splitting the overhangs.
+- Amaze: the cut-out's dark band under the doors is the real body bottom (172 mm ground clearance), not shadow; tyre bottoms hidden in
+  grass were patched with discs (ground 3 cm lower). The close camera then left a 1.5 cm band (model high on top, photo low under the
+  sill): lift traced heights by 1 cm only and lower the sill 1.5 cm (IoU 0.927 → 0.952). Sweeps 0.2/0.16 → 0.1/0.07 removed the white
+  end bands and gained 0.3 % IoU. A cowl peak (belt rising into the windscreen base above the bonnet) rippled the wing: keep it level.
