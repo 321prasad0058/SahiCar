@@ -482,3 +482,8 @@ the instant 3D opens, while the live model builds; re-run it whenever a spec, th
   placing it from the sibling's long-lens sill height gave 0.9595. Then squeeze the cut-out to the official height (1.695 → 1.637).
 - A pale-paint hatch with a `gloss` headlamp housing read as tiny lamps (the housing mirrors the softbox and blends with light
   paint); `trim` housings, pushed to ~1.5 cm inside the face with the side wrap starting at u 0.992, show the lamp's true size.
+- `satinColor` (new, opt-in) sets the car's 'satin' decal grey: grille slats and skid plates read paper-white in the default
+  satin on dark paint; mid greys (#686d73 … #6f747b) match the photos. Aero wheels with gunmetal faces and thin silver edges:
+  `split` + `rimTone: 'dark'` (`swirl` read as a white pinwheel).
+- Tiago.ev: the front lamps placed 3 cm above the side photo's lamp height forced a nose `top` plateau that showed as a bump on the
+  wing in the side view; lamps at the photo's height let the bonnet fall in one smooth curve (IoU up 0.001).

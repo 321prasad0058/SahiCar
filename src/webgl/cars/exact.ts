@@ -5043,19 +5043,19 @@ export const TIAGO_EV: CarSpec = {
   axles: [0.1503, 0.7778],
   tyreR: 0.2916, tyreW: 0.175, rim: 0.61, wheel: { style: 'split', spokes: 4 }, rimTone: 'dark',
   sill: [[0, 0.3], [0.005, 0.28], [0.015, 0.268], [0.03, 0.258], [0.05, 0.25], [0.1, 0.238], [0.2, 0.232], [0.3, 0.23], [0.5, 0.228], [0.6, 0.224], [0.7, 0.212], [0.8, 0.207], [0.9, 0.207], [0.94, 0.21], [0.97, 0.215], [0.985, 0.22], [0.995, 0.23], [1, 0.25]],
-  // the Tiago's tail and belt; the bonnet traced a little lower, the nose kept ~3 cm over the headlamps
-  top: [...TIAGO.top.filter(([u]) => u < 0.755), [0.755, 1.034], [0.77, 1.036], [0.785, 1.031], [0.8, 1.017], [0.82, 0.998], [0.84, 0.982], [0.86, 0.965], [0.88, 0.948], [0.9, 0.93], [0.92, 0.91], [0.94, 0.89], [0.955, 0.879], [0.965, 0.873], [0.975, 0.869], [0.985, 0.867], [0.993, 0.866], [1, 0.865]],
+  // the Tiago's tail and belt; the bonnet falling in one smooth curve to the nose, ~2.5 cm over the (photo-height) headlamps
+  top: [...TIAGO.top.filter(([u]) => u < 0.755), [0.755, 1.034], [0.77, 1.036], [0.785, 1.031], [0.8, 1.017], [0.82, 0.998], [0.84, 0.982], [0.86, 0.965], [0.88, 0.947], [0.9, 0.927], [0.92, 0.903], [0.94, 0.88], [0.955, 0.865], [0.965, 0.856], [0.975, 0.849], [0.985, 0.844], [0.993, 0.841], [1, 0.84]],
   // black arch flares; the black lip under the closed nose, the black lower rear bumper's corners
   cladding: { top: [[0, 0.37], [0.025, 0.34], [0.05, 0.15], [0.95, 0.15], [0.975, 0.2], [0.99, 0.22], [1, 0.22]], flare: 0.045, cut: true },
   front: [
     // the slim swept headlamps, the body-coloured panel between them (no grille, no badge)
-    { step: 0.004, mat: 'trim', mirror: true, poly: smooth([[0.458, 0.765], [0.468, 0.718], [0.58, 0.725], [0.635, 0.738], [0.675, 0.75], [0.7, 0.765], [0.706, 0.79], [0.704, 0.83], [0.69, 0.84], [0.58, 0.824], [0.48, 0.806]], 1) },
-    ...TIAGO.front.slice(1, 6),
+    { step: 0.004, mat: 'trim', mirror: true, poly: smooth([[0.458, 0.735], [0.468, 0.688], [0.58, 0.695], [0.635, 0.708], [0.675, 0.72], [0.7, 0.735], [0.706, 0.76], [0.704, 0.8], [0.69, 0.81], [0.58, 0.794], [0.48, 0.776]], 1) },
+    ...TIAGO.front.slice(1, 6).map((d): Decal => ({ ...d, poly: d.poly.map(([z, y]) => [z, +(y - 0.03).toFixed(4)] as P2) })),
     // the panel's shut line under the lamps
-    { step: 0.004, mat: 'gloss', depth: 0.001, poly: band([[-0.47, 0.705], [-0.3, 0.698], [0.3, 0.698], [0.47, 0.705]], 0.012) },
+    { step: 0.004, mat: 'gloss', depth: 0.001, poly: band([[-0.47, 0.678], [-0.3, 0.672], [0.3, 0.672], [0.47, 0.678]], 0.012) },
     // the slatted lower grille under the plate
     { step: 0.004, mat: 'gloss', poly: rrect(-0.31, 0.295, 0.31, 0.425, 0.008) },
-    ...punchEvRibs(0.3, 0.305, 0.415, 0.026, 'body', 1, 0.008),
+    ...punchEvRibs(0.3, 0.305, 0.415, 0.026, 'satin', 1, 0.008),
     // the upright black slots at the bumper's corners
     { step: 0.004, mat: 'gloss', mirror: true, depth: 0.008, poly: rrect(0.64, 0.33, 0.685, 0.6, 0.01) },
   ],
@@ -5069,14 +5069,17 @@ export const TIAGO_EV: CarSpec = {
     { step: 0.004, mat: 'reflector', mirror: true, layer: 1, poly: rrect(0.648, 0.32, 0.668, 0.58, 0.006) },
   ],
   side: [
-    ...TIAGO.side!.slice(0, 6),
-    // the headlamp sweeping back along the wing, meeting the front decal at the corner
-    { step: 0.004, mat: 'trim', depth: 0.005, poly: smooth([[0.992, 0.768], [0.96, 0.776], [0.94, 0.786], [0.91, 0.802], [0.885, 0.83], [0.866, 0.876], [0.876, 0.886], [0.91, 0.876], [0.94, 0.865], [0.96, 0.855], [0.992, 0.84]], 1) },
-    TIAGO.side![7],
+    ...TIAGO.side!.slice(0, 5),
+    // the bonnet's shut line down the wing to the headlamp's rear end
+    { step: 0.004, mat: 'gloss', depth: 0.001, poly: sideBand([[0.765, 1.03], [0.79, 0.99], [0.83, 0.915], [0.86, 0.85], [0.885, 0.8]], 0.012, TIAGO_EV_L) },
+    // the headlamp sweeping back along the wing as in the side photo, its DRL along the top edge
+    { step: 0.004, mat: 'trim', depth: 0.003, poly: smooth([[0.992, 0.722], [0.96, 0.714], [0.93, 0.716], [0.905, 0.73], [0.89, 0.762], [0.895, 0.796], [0.93, 0.796], [0.96, 0.79], [0.992, 0.782]], 1) },
+    { step: 0.004, mat: 'drl', layer: 1, depth: 0.005, poly: sideBand([[0.985, 0.77], [0.95, 0.778], [0.915, 0.783], [0.9, 0.782]], 0.012, TIAGO_EV_L) },
     // the charging lid on the rear wing
     { step: 0.004, mat: 'gloss', depth: 0.001, poly: sideBand([...TIAGO_EV_LID, TIAGO_EV_LID[0]], 0.012, TIAGO_EV_L) },
   ],
   plates: { front: 0.49, rear: 0.47 },
+  satinColor: '#6b7068', // the grille slats' mid grey
   paint: '#98ad7c', // Dehradun Dew, the gallery car's pale green, darkened for the studio lights
   ev: true,
   plate: 'MH 12 TE 2026',
@@ -5131,6 +5134,7 @@ export const CURVV_EV: CarSpec = {
     { step: 0.004, mat: 'gloss', depth: 0.003, poly: sideBand([[0.19, 1.244], [0.3, 1.215], [0.4, 1.188], [0.5, 1.16], [0.6, 1.133], [0.7, 1.111], [0.722, 1.115]], 0.012, CURVV_EV_L) },
     ...CURVV.side!.slice(3, 5),
   ],
+  satinColor: '#6f747b', // the slats and skid strips' mid grey
   paint: '#34486a', // the gallery car's blue-grey, darkened for the studio lights
   ev: true,
   plate: 'MH 12 CE 2026',
@@ -5148,7 +5152,7 @@ export const HARRIER_EV: CarSpec = {
   id: 'tata-harrier-ev',
   name: 'Tata Harrier.ev',
   L: HARRIER_EV_L, W: 1.922, H: 1.74,
-  wheel: { style: 'swirl', spokes: 5 }, rimTone: 'dark',
+  wheel: { style: 'split', spokes: 5 }, rimTone: 'dark',
   sill: [[0, 0.305], [0.01, 0.31], [0.02, 0.325], [0.04, 0.335], [0.06, 0.33], [0.08, 0.305], [0.12, 0.29], [0.3, 0.255], [0.4, 0.25], [0.6, 0.247], [0.68, 0.247], [0.72, 0.232], [0.9, 0.232], [0.94, 0.24], [0.96, 0.265], [0.98, 0.28], [0.99, 0.28], [1, 0.275]],
   // the Harrier's glasshouse, its roof ~1 cm higher (the EV stands taller), fading out towards the belt
   greenhouse: { ...HARRIER.greenhouse, top: HARRIER.greenhouse.top.map(([u, y]): P2 => [u, +(y + Math.max(0, Math.min(1, (y - 1.3) / 0.3)) * 0.008).toFixed(4)]) },
@@ -5179,6 +5183,7 @@ export const HARRIER_EV: CarSpec = {
     { step: 0.005, mat: 'satin', layer: 1, poly: smooth(both([[0, 0.375], [0.56, 0.375], [0.6, 0.395], [0.6, 0.49], [0.58, 0.505], [0, 0.505]]), 1) },
   ],
   plates: { front: 0.58, rear: 1.04 },
+  satinColor: '#686d73', // the slats and skid plates' mid grey
   paint: '#08204e', // Nainital Nocturne, the gallery car's deep navy, darkened for the studio lights
   ev: true,
   plate: 'MH 12 HE 2026',
