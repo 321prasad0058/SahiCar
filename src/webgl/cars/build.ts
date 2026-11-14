@@ -51,6 +51,9 @@ export interface CarSpec {
   top: Pts
   width: Pts
   crown?: number
+  /** opt-in: the bonnet crown per u (overrides `crown` ahead of the windscreen), so the bonnet's centre can rise to the
+   *  cowl while the shoulders (`top`) follow a lower belt into the front wing */
+  crownAt?: Pts
   bulge?: number
   shoulder?: { y: Pts; inset: number }
   /** how far the corners of the nose / tail sweep back from the centre line (plan view), metres */
@@ -59,7 +62,8 @@ export interface CarSpec {
   greenhouse: { u0: number; u1: number; top: Pts; tumble: number; /** up to this u the glass's foot follows the body's
    *  own edge (leaning tail sides from `shoulder.inset`) instead of 0.955 × width, so no ledge sticks out under it */ followBody?: number
     /** u range where the glasshouse's rounded top edges take the roof paint instead of black: body-coloured edges framing a
-     *  rear glass on a fastback slope (only the flat top stays glass) */ paintedEdge?: [number, number] }
+     *  rear glass on a fastback slope (only the flat top stays glass) */ paintedEdge?: [number, number]
+    /** opt-in: tumble per u (overrides `tumble`), e.g. a glasshouse that narrows more towards a coupe-like tail */ tumbleAt?: Pts }
   roof: { u0: number; u1: number; black: boolean }
   /** glass that wraps up into the roof edge */
   alpine?: [number, number]
@@ -294,6 +298,9 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
   const { L, W } = spec
   const sill = curve(spec.sill), top = curve(spec.top), width = curve(spec.width), ghTop = curve(spec.greenhouse.top)
   const shoulderY = spec.shoulder ? curve(spec.shoulder.y) : null
+  const crownAt = spec.crownAt ? curve(spec.crownAt) : null
+  const tumbleAt = spec.greenhouse.tumbleAt ? curve(spec.greenhouse.tumbleAt) : null
+  const ghTumble = (u: number) => (tumbleAt ? tumbleAt(u) : spec.greenhouse.tumble)
   const cladTop = spec.cladding ? curve(spec.cladding.top) : null
   const xOf = (u: number) => (u - 0.5) * L
   const uOf = (x: number) => x / L + 0.5
@@ -348,7 +355,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
       x,
       ring: ring(hw, yb, yt, 0.07, spec.topRadius ?? 0.17, seg, {
         bulge: spec.bulge ?? 0.025,
-        crown: u > spec.greenhouse.u1 ? spec.crown ?? 0.025 : 0,
+        crown: u > spec.greenhouse.u1 ? (crownAt ? crownAt(u) : spec.crown ?? 0.025) : 0,
         ridge: u > spec.greenhouse.u1 + 0.02 && u < 0.985 ? spec.bonnetRidge : undefined,
         shoulder: shoulderY ? shoulderY(u) : undefined,
         inset: spec.shoulder?.inset,
@@ -513,7 +520,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
       const zb = zAt(x, yb), k = Math.max(0, Math.min(1, (u - gh.followBody) / 0.03))
       if (zb > 0) hwG = zb * (1 - k) + hwG * k
     }
-    return { x, yb, yt, ring: ring(hwG, yb, yt, 0.005, 0.11, hi ? 32 : 20, { tumble: gh.tumble }) }
+    return { x, yb, yt, ring: ring(hwG, yb, yt, 0.005, 0.11, hi ? 32 : 20, { tumble: ghTumble(u) }) }
   })
   const inRange = (u: number, r?: [number, number]) => !!r && u >= r[0] && u <= r[1]
   /** the glasshouse surface at (x, y), for drawing pillars on it */
@@ -855,7 +862,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     for (const side of [-1, 1] as const) tube(us.map((u) => new THREE.Vector3(xOf(u), top(u) - 0.015, side * (zAt(xOf(u), top(u) - 0.015) + 0.004))), 0.007, S.chrome)
   }
   const roofY = (u: number) => ghTop(u)
-  const roofHW = (u: number) => ((width(u) * W) / 2) * 0.955 * gh.tumble
+  const roofHW = (u: number) => ((width(u) * W) / 2) * 0.955 * ghTumble(u)
   if (spec.rails) {
     const railMat = spec.rails === 'silver' ? S.silver : S.gloss
     const peak = Math.max(...spec.greenhouse.top.map((p) => p[1]))
