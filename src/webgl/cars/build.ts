@@ -38,7 +38,9 @@ export interface CarSpec {
   tyreR: number
   tyreW: number
   rim: number
-  wheel: { style: WheelStyle; spokes: number }
+  wheel: { style: WheelStyle; spokes: number
+    /** 'twin' only, opt-in: half-angle (rad) between the two spokes of a pair (default 0.09) and each spoke's width as a
+     *  fraction of the rim radius (default 0.085), e.g. thin pairs splaying apart towards the rim */ pairGap?: number; spokeW?: number }
   /** gap between tyre and arch opening, and how square the arch is (0 round … 1 square) */
   archGap: number
   archSquare: number
@@ -92,6 +94,8 @@ export interface CarSpec {
   mirrors: 'black' | 'body'
   /** u of the door mirrors (default 0.04 behind the glasshouse's front end), for a long screen running into the bonnet */
   mirrorU?: number
+  /** opt-in height (m) of the mirror head's centre above the belt `top(u)` (default 0.1); lower for mirrors mounted on the door */
+  mirrorLift?: number
   /** fender haunches: the body swells this fraction wider over each wheel and is pinched in between
    *  (width stays the official width at the haunch peak) */
   haunch?: number
@@ -113,6 +117,8 @@ export interface CarSpec {
   rimTone?: 'dark'
   /** colour of the 'satin' decal material for this car (default light satin silver), e.g. a darker grey bumper panel */
   satinColor?: string
+  /** opt-in: duller, darker glass for this car (less softbox sheen), so a raked rear window reads near-black from behind */
+  darkGlass?: boolean
   windowChrome?: boolean
   paint: string
   ev?: boolean
@@ -436,6 +442,12 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     cladMat = new THREE.MeshStandardMaterial({ color: spec.cladding.color, metalness: 0.1, roughness: 0.75, side: THREE.DoubleSide })
     disposables.push(cladMat)
   }
+  // duller, darker glass when the spec asks for it (darkGlass), else the shared glass
+  let glassMat: THREE.Material = S.glass
+  if (spec.darkGlass) {
+    glassMat = new THREE.MeshPhysicalMaterial({ color: '#000000', metalness: 0, roughness: 0.08, specularIntensity: 0.18, envMapIntensity: 0.03 })
+    disposables.push(glassMat)
+  }
   // a per-car satin grey when the spec asks for it (satinColor), else the shared light satin silver
   let satinMat: THREE.Material = S.satin
   if (spec.satinColor) {
@@ -531,7 +543,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     4,
   )
   disposables.push(glassHouse.geometry)
-  group.add(new THREE.Mesh(glassHouse.geometry, [S.glass, roofPaint, S.gloss, paint]))
+  group.add(new THREE.Mesh(glassHouse.geometry, [glassMat, roofPaint, S.gloss, paint]))
 
   // ── lights and decals
   const lightMats: { mat: THREE.MeshBasicMaterial; base: THREE.Color; k: number }[] = []
@@ -817,7 +829,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     // door mirrors on a stalk at the base of the A-pillar
     const u = spec.mirrorU ?? gh.u1 - 0.04
     const x = xOf(u)
-    const y = top(u) + 0.1
+    const y = top(u) + (spec.mirrorLift ?? 0.1)
     const zBody = zAt(x, top(u) - 0.03)
     for (const side of [-1, 1]) {
       add(spec.mirrors === 'black' ? S.gloss : paint, new RoundedBoxGeometry(0.11, 0.095, 0.17, 2, 0.035), new THREE.Matrix4().makeTranslation(x - 0.01, y, side * (zBody + 0.085)))
@@ -882,7 +894,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
   }
   if (spec.sunroof) {
     const [a, b] = spec.sunroof
-    add(S.glass, new RoundedBoxGeometry((b - a) * L, 0.012, roofHW((a + b) / 2) * 1.3, 2, 0.005), new THREE.Matrix4().makeTranslation(xOf((a + b) / 2), roofY((a + b) / 2) + 0.004, 0))
+    add(glassMat, new RoundedBoxGeometry((b - a) * L, 0.012, roofHW((a + b) / 2) * 1.3, 2, 0.005), new THREE.Matrix4().makeTranslation(xOf((a + b) / 2), roofY((a + b) / 2) + 0.004, 0))
   }
 
   // ── wheels
@@ -1062,8 +1074,8 @@ function rimBlurTexture(spec: CarSpec) {
     const a = (i / n) * Math.PI * 2
     switch (spec.wheel.style) {
       case 'twin':
-        bar(a - 0.09, 0.085, len)
-        bar(a + 0.09, 0.085, len)
+        bar(a - (spec.wheel.pairGap ?? 0.09), spec.wheel.spokeW ?? 0.085, len)
+        bar(a + (spec.wheel.pairGap ?? 0.09), spec.wheel.spokeW ?? 0.085, len)
         break
       case 'turbine':
         bar(a, 0.32, len)
@@ -1167,10 +1179,12 @@ function rimGeometry(spec: CarSpec, hi: boolean) {
   for (let i = 0; i < n; i++) {
     const a = (i / n) * Math.PI * 2
     switch (spec.wheel.style) {
-      case 'twin':
-        blade(a - 0.09, R * 0.085, len, face - 0.008)
-        blade(a + 0.09, R * 0.085, len, face - 0.008)
+      case 'twin': {
+        const gap = spec.wheel.pairGap ?? 0.09, w = R * (spec.wheel.spokeW ?? 0.085)
+        blade(a - gap, w, len, face - 0.008)
+        blade(a + gap, w, len, face - 0.008)
         break
+      }
       case 'turbine':
         blade(a, R * 0.32, len, face - 0.008, 0.6)
         break
