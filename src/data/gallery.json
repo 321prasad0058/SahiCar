@@ -28,5 +28,35 @@
    "video": "/cars/gallery/tata-curvv/1-motion.mp4",
    "caption": "In motion: the full-width light bar switching on"
   }
+ ],
+ "mercedes-benz-glc-electric": [
+  {
+   "src": "/cars/gallery/mercedes-benz-glc-electric/2-rear.webp",
+   "caption": "Rear: red ring tail lamps on a black band, no exhaust pipes"
+  },
+  {
+   "src": "/cars/gallery/mercedes-benz-glc-electric/3-grille.webp",
+   "caption": "Illuminated grille: about 942 lit dots and a glowing star"
+  },
+  {
+   "src": "/cars/gallery/mercedes-benz-glc-electric/4-dashboard.webp",
+   "caption": "39.1-inch MBUX Hyperscreen, right-hand drive"
+  },
+  {
+   "src": "/cars/gallery/mercedes-benz-glc-electric/5-roof.webp",
+   "caption": "Panoramic glass roof that tints electrically"
+  },
+  {
+   "src": "/cars/gallery/mercedes-benz-glc-electric/6-seats.webp",
+   "caption": "Front seats: heated and massaging (ventilation not confirmed for India)"
+  },
+  {
+   "src": "/cars/gallery/mercedes-benz-glc-electric/7-frunk.webp",
+   "caption": "About 128-litre frunk under the bonnet"
+  },
+  {
+   "src": "/cars/gallery/mercedes-benz-glc-electric/8-boot.webp",
+   "caption": "570-litre boot"
+  }
  ]
 }
