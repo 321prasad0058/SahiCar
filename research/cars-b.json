@@ -10468,10 +10468,11 @@
   ],
   "weaknesses": [
    "Introductory price: Mercedes has not said how long it lasts",
-   "Mercedes says it is sold out until March 2027",
-   "Front seats heated and massaging but not ventilated",
-   "No air suspension; not crash-tested in India",
-   "Range is the WLTP claim; no ARAI/MIDC figure published"
+   "Deliveries start mid-November 2026, but it is reportedly sold out until March 2027",
+   "India spec: no air suspension or rear-axle steering (passive dampers), and no spare tyre",
+   "Not crash-tested yet (no Bharat NCAP or Euro NCAP rating)",
+   "Range is the WLTP claim; no ARAI/MIDC figure published",
+   "Front-seat ventilation not confirmed for India (heated and massaging seats are)"
   ],
   "serviceCost": 4,
   "resale": 2,
@@ -10482,7 +10483,9 @@
    "https://www.autocarindia.com/car-news/mercedes-glc-electric-launched-at-rs-785-lakh-441238",
    "https://www.timesdrive.in/news/mercedes-benz-glc-ev-launched-in-india-at-rs-7850-lakh-gets-94kwh-battery-490bhp-power-article-156463978",
    "https://www.cardekho.com/mercedes-benz/glc-electric/specs",
-   "https://www.businesstoday.in/auto/story/mercedes-benz-electric-glc-launched-at-rs78-50-lakh-deliveries-to-begin-in-november-565777-2026-11-05"
+   "https://www.businesstoday.in/auto/story/mercedes-benz-electric-glc-launched-at-rs78-50-lakh-deliveries-to-begin-in-november-565777-2026-11-05",
+   "https://www.motorbeam.com/mercedes-benz-glc-electric-launched-india-price-range-specifications/",
+   "https://www.rushlane.com/new-mercedes-glc-electric-launch-price-rs-78-50-lakh-12560447.html"
   ],
   "verifiedOn": "2026-11"
  },

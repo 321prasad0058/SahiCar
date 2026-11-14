@@ -23,6 +23,10 @@ import type { Studio } from '../webgl/Studio'
 
 // cars with an exact 3D model (the rest show a reference body at their real size)
 const SHOWCASE_IDS = ['tata-sierra-ev', 'tata-sierra', 'tata-altroz', 'honda-city', 'maruti-victoris', 'maruti-ertiga', 'tata-nexon', 'tata-punch', 'hyundai-creta', 'maruti-brezza', 'maruti-swift', 'maruti-fronx', 'maruti-dzire', 'mahindra-scorpio-n', 'kia-seltos', 'maruti-baleno', 'mahindra-thar-roxx', 'hyundai-venue', 'kia-sonet', 'maruti-wagon-r', 'maruti-grand-vitara', 'mahindra-xuv-3xo', 'tata-tiago', 'tata-harrier', 'toyota-innova-hycross', 'mahindra-xuv-7xo', 'hyundai-exter', 'kia-carens-clavis', 'toyota-urban-cruiser-hyryder', 'tata-curvv', 'hyundai-i20', 'skoda-kylaq', 'toyota-fortuner', 'tata-safari', 'mg-windsor-ev', 'kia-syros', 'hyundai-alcazar', 'hyundai-verna', 'hyundai-grand-i10-nios', 'hyundai-aura', 'maruti-celerio', 'maruti-alto-k10', 'toyota-glanza', 'toyota-urban-cruiser-taisor', 'mahindra-bolero-neo', 'mahindra-bolero', 'tata-nexon-ev', 'tata-punch-ev', 'mahindra-thar', 'renault-kiger', 'nissan-magnite', 'maruti-xl6', 'toyota-rumion', 'tata-tiago-ev', 'tata-curvv-ev', 'tata-harrier-ev', 'skoda-slavia', 'volkswagen-virtus', 'skoda-kushaq', 'volkswagen-taigun', 'honda-elevate', 'honda-amaze', 'mahindra-xev-9e', 'mahindra-be-6']
+// cars whose exact 3D model is being built (next modelling round): their page says so
+const MODEL_SOON = ['mercedes-benz-glc-electric']
+// the body type inside a sentence: lower case, except acronyms (SUV, MPV)
+const bodyWord = (b: Car['body']) => BODY_LABEL[b].split(' ').map((w) => (/^[A-Z]{2,}$/.test(w) ? w : w.toLowerCase())).join(' ')
 // neutral grey for the generic body when the car has no verified colour list
 const NEUTRAL = '#5b6b75'
 
@@ -132,7 +136,9 @@ function Studio3D({ car }: { car: Car }) {
       <div className="studio-note dim small">
         {SHOWCASE_IDS.includes(car.id)
           ? `Our 3D model of the ${car.model} at its real dimensions · drag to spin 360°`
-          : `Illustrative ${BODY_LABEL[car.body].toLowerCase()} at the ${car.model}’s real length, width and height · drag to spin 360°`}
+          : MODEL_SOON.includes(car.id)
+            ? `3D model coming soon · for now, an illustrative ${bodyWord(car.body)} at its real length, width and height · drag to spin 360°`
+            : `Illustrative ${bodyWord(car.body)} at the ${car.model}’s real length, width and height · drag to spin 360°`}
       </div>
     </div>
   )

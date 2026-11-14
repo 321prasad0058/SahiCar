@@ -5645,5 +5645,42 @@
   "source": "https://www.carwale.com/audi-cars/q3/colours/",
   "sourceType": "aggregator",
   "checked": "2026-11-01"
+ },
+ "mercedes-benz-glc-electric": {
+  "colours": [
+   {
+    "name": "Lavender Silver",
+    "hex": "#bdbcc4",
+    "hexEstimated": true
+   },
+   {
+    "name": "Sheer Blue",
+    "hex": "#1f6dbf",
+    "hexEstimated": true
+   },
+   {
+    "name": "Obsidian Black",
+    "hex": "#1e1f23",
+    "hexEstimated": true
+   },
+   {
+    "name": "Opalite White Bright",
+    "hex": "#eeeeea",
+    "hexEstimated": true
+   },
+   {
+    "name": "Patagonia Red Metallic (Manufaktur)",
+    "hex": "#8a1c22",
+    "hexEstimated": true
+   },
+   {
+    "name": "Alpine Grey Solid (Manufaktur)",
+    "hex": "#a3a6a5",
+    "hexEstimated": true
+   }
+  ],
+  "source": "https://www.motorbeam.com/mercedes-benz-glc-electric-launched-india-price-range-specifications/",
+  "sourceType": "aggregator",
+  "checked": "2026-11-14"
  }
 }
