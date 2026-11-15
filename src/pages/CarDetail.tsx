@@ -1,3 +1,4 @@
+import { SITE, crumbs, setSeo } from '../lib/seo'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { CarCard, SafetyStars } from '../components/CarCard'
@@ -198,7 +199,31 @@ export default function CarDetail() {
   const [picked, setPicked] = useState<Variant | null>(null)
 
   useEffect(() => {
-    if (car) document.title = `${car.brand} ${car.model} · price, variants, 5-year cost · SahiCar`
+    // an unknown car address: keep it out of search results
+    let robots = document.head.querySelector<HTMLMetaElement>('meta[name="robots"]')
+    if (!car) {
+      if (!robots) { robots = document.createElement('meta'); robots.name = 'robots'; document.head.appendChild(robots) }
+      robots.content = 'noindex'
+    } else robots?.remove()
+    if (car) {
+      const name = `${car.brand} ${car.model}`, p = car.price, vv = car.valueVariant, sf = car.safety
+      const stars = sf?.adult ? `${sf.adult}-star ${sf.agency === 'BNCAP' ? 'Bharat NCAP' : sf.agency ?? 'NCAP'} safety` : 'safety rating'
+      setSeo({
+        title: `${name} price, on-road cost, variants and verdict · SahiCar`,
+        description: `${name} price in India: ${priceRange(p)} (ex-showroom). On-road price, ${vv ? `best-value variant (${vv.name}), ` : ''}5-year running cost, ${stars} and SahiCar's honest verdict.`,
+        path: `/car/${car.id}`,
+        image: car.image?.src,
+        ld: [
+          {
+            '@type': 'Car', name, brand: { '@type': 'Brand', name: car.brand }, model: car.model, bodyType: car.body,
+            ...(car.image?.src ? { image: SITE + car.image.src } : {}),
+            ...(car.seats?.length ? { vehicleSeatingCapacity: Math.max(...car.seats) } : {}),
+            ...(p.min ? { offers: { '@type': 'AggregateOffer', priceCurrency: 'INR', lowPrice: p.min, highPrice: p.max || p.min, offerCount: car.variants?.length || 1 } } : {}),
+          },
+          crumbs([['Home', '/'], ['Explore', '/explore'], [name, `/car/${car.id}`]]),
+        ],
+      })
+    }
     setPicked(null)
     setFuel(null)
   }, [car])

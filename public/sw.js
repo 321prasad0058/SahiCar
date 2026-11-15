@@ -1,7 +1,7 @@
 // SahiCar service worker: instant repeat visits and a working app offline.
 // - hashed build files (/assets/*), 3D loading posters (/3d/*, hashed names) and car images are cache-first: their URLs change when their content does;
 // - pages are network-first with a cached fallback, so a deploy shows up at once but offline still works.
-const VERSION = 'sahicar-v5'
+const VERSION = 'sahicar-v6'
 const ASSETS = `${VERSION}-assets`
 const PAGES = `${VERSION}-pages`
 const IMAGES = `${VERSION}-images`
@@ -32,8 +32,8 @@ self.addEventListener('fetch', (e) => {
     e.respondWith(
       fetch(req)
         .then((res) => {
-          const copy = res.clone()
-          caches.open(PAGES).then((c) => c.put('/', copy))
+          // keep the last good page for offline use (never a 404)
+          if (res.ok) { const copy = res.clone(); caches.open(PAGES).then((c) => c.put('/', copy)) }
           return res
         })
         .catch(() => caches.match('/')),

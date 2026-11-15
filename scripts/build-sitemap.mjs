@@ -16,16 +16,16 @@ const pages = [
   ['/compare', '0.5'],
   ['/about', '0.5'],
   ['/app', '0.5'],
-  ...cars.map((c) => [`/car/${c.id}`, '0.8']),
+  ...cars.map((c) => [`/car/${c.id}`, '0.8', /^\d{4}-\d{2}$/.test(c.verifiedOn ?? '') ? `${c.verifiedOn}-01` : today]),
 ]
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${pages.map(([p, pr]) => `  <url><loc>${SITE}${p}</loc><lastmod>${today}</lastmod><priority>${pr}</priority></url>`).join('\n')}
+${pages.map(([p, pr, lm]) => `  <url><loc>${SITE}${p}</loc><lastmod>${lm ?? today}</lastmod><priority>${pr}</priority></url>`).join('\n')}
 </urlset>
 `
 writeFileSync(new URL('../public/sitemap.xml', import.meta.url), xml)
 writeFileSync(
   new URL('../public/robots.txt', import.meta.url),
-  `User-agent: *\nAllow: /\nDisallow: /garage\nDisallow: /login\nDisallow: /results\nDisallow: /dev/\n\nSitemap: ${SITE}/sitemap.xml\n`,
+  `User-agent: *\nAllow: /\nDisallow: /garage\nDisallow: /login\nDisallow: /results\nDisallow: /dev/\nDisallow: /shell.html\n\nSitemap: ${SITE}/sitemap.xml\n`,
 )
 console.log(`sitemap: ${pages.length} urls → public/sitemap.xml, robots.txt`)
