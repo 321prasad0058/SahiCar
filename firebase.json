@@ -30,7 +30,13 @@
         "type": 302
       }
     ],
-    "rewrites": [{ "source": "**", "destination": "/index.html" }],
+    "rewrites": [
+      { "source": "/results", "destination": "/shell.html" },
+      { "source": "/garage", "destination": "/shell.html" },
+      { "source": "/login", "destination": "/shell.html" },
+      { "source": "/car/**", "destination": "/shell.html" },
+      { "source": "/dev/**", "destination": "/shell.html" }
+    ],
     "headers": [
       { "source": "/", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] },
       { "source": "**/*.html", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] },

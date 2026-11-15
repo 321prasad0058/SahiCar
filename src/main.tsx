@@ -14,19 +14,42 @@ import './styles/emi.css'
 import './styles/growth.css'
 import './styles/app-install.css'
 
-createRoot(document.getElementById('root')!).render(
+// A pre-rendered page (scripts/prerender.mjs) is already on screen with real content. Draw the app into a hidden
+// twin and swap only once it shows the same page (its route code loaded, no spinner), so there is no flash.
+const pre = document.getElementById('root')!
+let mount = pre
+if (pre.dataset.pre) {
+  mount = document.createElement('div')
+  mount.style.display = 'none'
+  pre.after(mount)
+  const swap = () => {
+    if (!pre.isConnected) return
+    pre.remove()
+    mount.id = 'root'
+    mount.style.display = ''
+    obs.disconnect()
+  }
+  const obs = new MutationObserver(() => {
+    if (mount.querySelector('main')?.childElementCount && !mount.querySelector('.page-loading')) requestAnimationFrame(swap)
+  })
+  obs.observe(mount, { childList: true, subtree: true })
+  setTimeout(swap, 6000)
+}
+
+createRoot(mount).render(
   <BrowserRouter>
     <App />
   </BrowserRouter>,
 )
 
 // offline support and instant repeat visits (production only; the dev server must never be cached)
-if (import.meta.env.PROD && 'serviceWorker' in navigator) {
+if (import.meta.env.PROD && 'serviceWorker' in navigator && !navigator.webdriver) {
   addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}))
 }
 
 // analytics after load, when the browser is idle (production only)
-if (import.meta.env.PROD && import.meta.env.VITE_FIREBASE_MEASUREMENT_ID) {
+// (never from the pre-render browser, which would count as visits)
+if (import.meta.env.PROD && import.meta.env.VITE_FIREBASE_MEASUREMENT_ID && !navigator.webdriver) {
   addEventListener('load', () => {
     const go = () => import('./fb/analytics').then((m) => m.startAnalytics()).catch(() => {})
     'requestIdleCallback' in window ? requestIdleCallback(go, { timeout: 4000 }) : setTimeout(go, 2000)

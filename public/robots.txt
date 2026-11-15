@@ -4,5 +4,6 @@ Disallow: /garage
 Disallow: /login
 Disallow: /results
 Disallow: /dev/
+Disallow: /shell.html
 
 Sitemap: https://sahicar-in.web.app/sitemap.xml
