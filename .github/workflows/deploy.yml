@@ -46,6 +46,12 @@ jobs:
           channelId: live
           projectId: sahicar-in
 
+      # IndexNow: tell Bing (and ChatGPT search, Copilot, DuckDuckGo via Bing) about every page, now that it's live
+      - name: Notify IndexNow
+        if: env.HAS_SA == 'true' && github.event_name == 'push'
+        continue-on-error: true
+        run: node scripts/indexnow.mjs
+
       # alerts: once the new data is live, tell subscribers about price changes on their saved cars and new launches
       # (skips itself when the car data didn't change, or when the push secrets aren't set)
       - name: Send alerts about what changed
