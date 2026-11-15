@@ -442,8 +442,9 @@
   "ai": true
  },
  "maruti-celerio": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/2021_Maruti_Suzuki_Celerio_ZXi_%28India%29_front_view_02.png/960px-2021_Maruti_Suzuki_Celerio_ZXi_%28India%29_front_view_02.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Suzuki_Celerio"
+  "src": "/cars/ai/maruti-celerio.webp",
+  "page": "",
+  "ai": true
  },
  "maruti-wagon-r": {
   "src": "/cars/ai/maruti-wagon-r.webp",
@@ -525,8 +526,9 @@
   "ai": true
  },
  "renault-kwid": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/2023_Renault_Kwid_Iconic_%28Colombia%29_front_view_01.png/960px-2023_Renault_Kwid_Iconic_%28Colombia%29_front_view_01.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Renault_Kwid"
+  "src": "/cars/ai/renault-kwid.webp",
+  "page": "",
+  "ai": true
  },
  "renault-triber": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f3/2021_Renault_Triber_RXZ_%28Indonesia%29_front_view.jpg/960px-2021_Renault_Triber_RXZ_%28Indonesia%29_front_view.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
