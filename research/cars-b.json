@@ -161,7 +161,7 @@
   "resale": 3,
   "network": 4,
   "wiki": "Tata Tiago",
-  "oemUrl": "https://cars.tatamotors.com/tiago/ice.html",
+  "oemUrl": "https://tata.cars/tiago/ice.html",
   "sources": [
    "https://www.cardekho.com/tata/tiago",
    "https://www.zigwheels.com/newcars/tata"
@@ -278,7 +278,7 @@
   "resale": 2,
   "network": 4,
   "wiki": "Tata Tiago",
-  "oemUrl": "https://ev.tatamotors.com/tiago/ev.html",
+  "oemUrl": "https://ev.tata.cars/tiago/ev.html",
   "sources": [
    "https://www.cardekho.com/tata/tiago-ev"
   ],
@@ -482,7 +482,7 @@
   "resale": 3,
   "network": 4,
   "wiki": null,
-  "oemUrl": "https://cars.tatamotors.com/",
+  "oemUrl": "https://tata.cars/aeris/ice.html",
   "sources": [
    "https://www.cardekho.com/tata/aeris",
    "https://www.zigwheels.com/newcars/tata"
@@ -695,7 +695,7 @@
   "resale": 4,
   "network": 4,
   "wiki": "Tata Punch",
-  "oemUrl": "https://cars.tatamotors.com/punch/ice.html",
+  "oemUrl": "https://tata.cars/punch/ice.html",
   "sources": [
    "https://www.cardekho.com/tata/punch"
   ],
@@ -825,7 +825,7 @@
   "resale": 3,
   "network": 4,
   "wiki": "Tata Punch",
-  "oemUrl": "https://ev.tatamotors.com/punch/ev.html",
+  "oemUrl": "https://ev.tata.cars/punch/ev.html",
   "sources": [
    "https://www.cardekho.com/tata/punch-ev",
    "https://www.bharatncap.gov.in/"
@@ -1027,7 +1027,7 @@
   "resale": 3,
   "network": 4,
   "wiki": "Tata Altroz",
-  "oemUrl": "https://cars.tatamotors.com/altroz/ice.html",
+  "oemUrl": "https://tata.cars/altroz/ice.html",
   "sources": [
    "https://www.cardekho.com/tata/altroz"
   ],
@@ -1224,7 +1224,7 @@
   "resale": 4,
   "network": 4,
   "wiki": "Tata Nexon",
-  "oemUrl": "https://cars.tatamotors.com/nexon/ice.html",
+  "oemUrl": "https://tata.cars/nexon/ice.html",
   "sources": [
    "https://www.cardekho.com/tata/nexon"
   ],
@@ -1356,7 +1356,7 @@
   "resale": 3,
   "network": 4,
   "wiki": "Tata Nexon EV",
-  "oemUrl": "https://ev.tatamotors.com/nexon/ev.html",
+  "oemUrl": "https://ev.tata.cars/nexon/ev.html",
   "sources": [
    "https://www.cardekho.com/tata/nexon-ev"
   ],
@@ -1511,7 +1511,7 @@
   "resale": 3,
   "network": 4,
   "wiki": "Tata Curvv",
-  "oemUrl": "https://cars.tatamotors.com/curvv/ice.html",
+  "oemUrl": "https://tata.cars/curvv/ice.html",
   "sources": [
    "https://www.cardekho.com/tata/curvv"
   ],
@@ -1614,7 +1614,7 @@
   "resale": 2,
   "network": 4,
   "wiki": "Tata Curvv",
-  "oemUrl": "https://ev.tatamotors.com/curvv/ev.html",
+  "oemUrl": "https://ev.tata.cars/curvv/ev.html",
   "sources": [
    "https://www.cardekho.com/tata/curvv-ev"
   ],
@@ -1787,7 +1787,7 @@
   "resale": 4,
   "network": 4,
   "wiki": "Tata Sierra",
-  "oemUrl": "https://cars.tatamotors.com/sierra/ice.html",
+  "oemUrl": "https://tata.cars/sierra/ice.html",
   "sources": [
    "https://www.cardekho.com/tata/sierra"
   ],
@@ -1951,7 +1951,7 @@
   "resale": 3,
   "network": 4,
   "wiki": "Tata Sierra",
-  "oemUrl": "https://ev.tatamotors.com/",
+  "oemUrl": "https://ev.tata.cars/sierra/ev.html",
   "sources": [
    "https://www.cardekho.com/tata/sierra-ev"
   ],
@@ -2116,7 +2116,7 @@
   "resale": 3,
   "network": 4,
   "wiki": "Tata Harrier",
-  "oemUrl": "https://cars.tatamotors.com/harrier/ice.html",
+  "oemUrl": "https://tata.cars/harrier/ice.html",
   "sources": [
    "https://www.cardekho.com/tata/harrier"
   ],
@@ -2275,7 +2275,7 @@
   "resale": 3,
   "network": 4,
   "wiki": "Tata Harrier",
-  "oemUrl": "https://ev.tatamotors.com/harrier/ev.html",
+  "oemUrl": "https://ev.tata.cars/harrier/ev/overview.html",
   "sources": [
    "https://www.cardekho.com/tata/harrier-ev"
   ],
@@ -2436,7 +2436,7 @@
   "resale": 3,
   "network": 4,
   "wiki": "Tata Safari",
-  "oemUrl": "https://cars.tatamotors.com/safari/ice.html",
+  "oemUrl": "https://tata.cars/safari/ice.html",
   "sources": [
    "https://www.cardekho.com/tata/safari"
   ],
@@ -3050,7 +3050,7 @@
   "resale": 3,
   "network": 5,
   "wiki": "Mahindra XUV 3XO",
-  "oemUrl": "https://auto.mahindra.com/",
+  "oemUrl": "https://auto.mahindra.com/suv/xuv3xo-ev.html",
   "sources": [
    "https://www.cardekho.com/mahindra/xuv-3xo-ev"
   ],
@@ -3164,7 +3164,7 @@
   "resale": 2,
   "network": 5,
   "wiki": "Mahindra XUV400",
-  "oemUrl": "https://auto.mahindra.com/",
+  "oemUrl": "https://auto.mahindra.com/suv/xuv400/X400.html",
   "sources": [
    "https://www.cardekho.com/mahindra/xuv400-ev",
    "https://www.bharatncap.gov.in/"
@@ -3373,7 +3373,7 @@
   "resale": 3,
   "network": 5,
   "wiki": "Mahindra Bolero",
-  "oemUrl": "https://auto.mahindra.com/suv/bolero-neo",
+  "oemUrl": "https://auto.mahindra.com/suv/bolero-neo/NEO.html",
   "sources": [
    "https://www.cardekho.com/mahindra/bolero-neo"
   ],
@@ -3469,7 +3469,7 @@
   "resale": 4,
   "network": 5,
   "wiki": "Mahindra Scorpio",
-  "oemUrl": "https://auto.mahindra.com/suv/scorpio-classic",
+  "oemUrl": "https://auto.mahindra.com/suv/scorpio-classic/SCRC.html",
   "sources": [
    "https://www.cardekho.com/mahindra/scorpio"
   ],
@@ -3803,7 +3803,7 @@
   "resale": 5,
   "network": 5,
   "wiki": "Mahindra XUV700",
-  "oemUrl": "https://auto.mahindra.com/suv/xuv7xo",
+  "oemUrl": "https://auto.mahindra.com/suv/xuv-7xo.html",
   "sources": [
    "https://www.cardekho.com/mahindra/xuv-7xo",
    "https://www.bharatncap.gov.in/"
@@ -3963,7 +3963,7 @@
   "resale": 3,
   "network": 5,
   "wiki": "Mahindra BE 6",
-  "oemUrl": "https://www.mahindraelectricsuv.com/",
+  "oemUrl": "https://www.mahindraelectricsuv.com/esuv/be6sporteq.html",
   "sources": [
    "https://www.cardekho.com/mahindra/be-6",
    "https://www.bharatncap.gov.in/"
@@ -4105,7 +4105,7 @@
   "resale": 3,
   "network": 5,
   "wiki": "Mahindra XEV 9e",
-  "oemUrl": "https://www.mahindraelectricsuv.com/",
+  "oemUrl": "https://www.mahindraelectricsuv.com/esuv/xev-9e/MXV9.html",
   "sources": [
    "https://www.cardekho.com/mahindra/xev-9e",
    "https://www.bharatncap.gov.in/"
@@ -4260,7 +4260,7 @@
   "resale": 3,
   "network": 5,
   "wiki": null,
-  "oemUrl": "https://www.mahindraelectricsuv.com/",
+  "oemUrl": "https://www.mahindraelectricsuv.com/esuv/xev-9s.html",
   "sources": [
    "https://www.cardekho.com/mahindra/xev-9s"
   ],
@@ -4737,7 +4737,7 @@
   "resale": 3,
   "network": 3,
   "wiki": "Kia Syros",
-  "oemUrl": "https://www.kia.com/in/",
+  "oemUrl": "https://www.kia.com/in/our-vehicles/syros-ev/showroom.html",
   "sources": [
    "https://www.cardekho.com/kia/syros-ev"
   ],
@@ -5259,7 +5259,7 @@
   "resale": 3,
   "network": 3,
   "wiki": "Kia Carens",
-  "oemUrl": "https://www.kia.com/in/",
+  "oemUrl": "https://www.kia.com/in/our-vehicles/carens-clavis-ev/showroom.html",
   "sources": [
    "https://www.cardekho.com/kia/carens-clavis-ev"
   ],
@@ -5404,7 +5404,7 @@
   "resale": 3,
   "network": 3,
   "wiki": "Kia Sorento",
-  "oemUrl": "https://www.kia.com/in/",
+  "oemUrl": "https://www.kia.com/in/our-vehicles/sorento/showroom.html",
   "sources": [
    "https://www.cardekho.com/kia/sorento"
   ],
@@ -5920,7 +5920,7 @@
   "resale": 3,
   "network": 3,
   "wiki": "Wuling Cloud",
-  "oemUrl": "https://www.mgmotor.co.in/vehicles/windsor-ev",
+  "oemUrl": "https://www.mgmotor.co.in/vehicles/windsor-ev-electric-car-in-india",
   "sources": [
    "https://www.cardekho.com/mg/windsor-ev"
   ],
@@ -6045,7 +6045,7 @@
   "resale": 2,
   "network": 2,
   "wiki": "MG ZS (crossover)",
-  "oemUrl": "https://www.mgmotor.co.in/vehicles/astor",
+  "oemUrl": "https://www.mgmotor.co.in/vehicles/mgastor",
   "sources": [
    "https://www.cardekho.com/mg/astor"
   ],
@@ -6156,7 +6156,7 @@
   "resale": 2,
   "network": 2,
   "wiki": "MG ZS EV",
-  "oemUrl": "https://www.mgmotor.co.in/vehicles/zs-ev",
+  "oemUrl": "https://www.mgmotor.co.in/vehicles/mgzsev-electric-car-in-india",
   "sources": [
    "https://www.cardekho.com/mg/zs-ev"
   ],
@@ -6287,7 +6287,7 @@
   "resale": 2,
   "network": 2,
   "wiki": "MG Hector",
-  "oemUrl": "https://www.mgmotor.co.in/vehicles/hector",
+  "oemUrl": "https://www.mgmotor.co.in/vehicles/mghector",
   "sources": [
    "https://www.cardekho.com/mg/hector"
   ],
@@ -6387,7 +6387,7 @@
   "resale": 2,
   "network": 2,
   "wiki": "MG Hector",
-  "oemUrl": "https://www.mgmotor.co.in/vehicles/hector-plus",
+  "oemUrl": "https://www.mgmotor.co.in/vehicles/mghector",
   "sources": [
    "https://www.cardekho.com/mg/hector-plus"
   ],
@@ -6496,7 +6496,7 @@
   "resale": 2,
   "network": 2,
   "wiki": null,
-  "oemUrl": "https://www.mgmotor.co.in/",
+  "oemUrl": "https://www.mgmotor.co.in/vehicles/hector-tomahawk/ev",
   "sources": [
    "https://www.cardekho.com/mg/hector-tomahawk-ev"
   ],
@@ -6592,7 +6592,7 @@
   "resale": 2,
   "network": 2,
   "wiki": null,
-  "oemUrl": "https://www.mgmotor.co.in/",
+  "oemUrl": "https://www.mgmotor.co.in/vehicles/hector-tomahawk/phev",
   "sources": [
    "https://www.cardekho.com/mg/hector-tomahawk-phev"
   ],
@@ -6689,7 +6689,7 @@
   "resale": 2,
   "network": 2,
   "wiki": null,
-  "oemUrl": "https://www.mgmotor.co.in/",
+  "oemUrl": "https://www.mgmotor.co.in/vehicles/mg-majestor-biggest-suv-india",
   "sources": [
    "https://www.cardekho.com/mg/majestor"
   ],
@@ -6776,7 +6776,7 @@
   "resale": 2,
   "network": 1,
   "wiki": "MG Mifa 9",
-  "oemUrl": "https://www.mgselect.co.in/",
+  "oemUrl": "https://www.mgselect.co.in/m9",
   "sources": [
    "https://www.cardekho.com/mg-cars"
   ],
@@ -6858,7 +6858,7 @@
   "resale": 2,
   "network": 1,
   "wiki": "MG Cyberster",
-  "oemUrl": "https://www.mgselect.co.in/",
+  "oemUrl": "https://www.mgselect.co.in/cyberster",
   "sources": [
    "https://www.cardekho.com/mg-cars"
   ],
@@ -7000,7 +7000,7 @@
   "resale": 3,
   "network": 2,
   "wiki": "Škoda Kylaq",
-  "oemUrl": "https://www.skoda-auto.co.in/models/kylaq",
+  "oemUrl": "https://www.skoda-auto.co.in/models/kylaq/kylaq",
   "sources": [
    "https://www.cardekho.com/skoda/kylaq",
    "https://www.bharatncap.gov.in/"
@@ -7152,7 +7152,7 @@
   "resale": 3,
   "network": 2,
   "wiki": "Škoda Kushaq",
-  "oemUrl": "https://www.skoda-auto.co.in/models/kushaq",
+  "oemUrl": "https://www.skoda-auto.co.in/models/kushaq/kushaq",
   "sources": [
    "https://www.cardekho.com/skoda/kushaq"
   ],
@@ -7309,7 +7309,7 @@
   "resale": 3,
   "network": 2,
   "wiki": "Škoda Slavia",
-  "oemUrl": "https://www.skoda-auto.co.in/models/slavia",
+  "oemUrl": "https://www.skoda-auto.co.in/models/slavia/slavia",
   "sources": [
    "https://www.cardekho.com/skoda/slavia"
   ],
@@ -7412,7 +7412,7 @@
   "resale": 3,
   "network": 2,
   "wiki": "Škoda Kodiaq",
-  "oemUrl": "https://www.skoda-auto.co.in/models/kodiaq",
+  "oemUrl": "https://www.skoda-auto.co.in/models/kodiaq/kodiaq",
   "sources": [
    "https://www.cardekho.com/skoda/kodiaq"
   ],
@@ -7497,7 +7497,7 @@
   "resale": 3,
   "network": 2,
   "wiki": "Škoda Octavia",
-  "oemUrl": "https://www.skoda-auto.co.in/",
+  "oemUrl": "https://www.skoda-auto.co.in/models/octavia-rs/octavia-rs",
   "sources": [
    "https://www.cardekho.com/skoda-cars"
   ],
@@ -7877,7 +7877,7 @@
   "resale": 3,
   "network": 2,
   "wiki": "Volkswagen Tayron",
-  "oemUrl": "https://www.volkswagen.co.in/",
+  "oemUrl": "https://www.volkswagen.co.in/en/models/tayron.html",
   "sources": [
    "https://www.cardekho.com/volkswagen/tayron"
   ],
@@ -8047,7 +8047,7 @@
   "resale": 3,
   "network": 2,
   "wiki": "Volkswagen Golf GTI",
-  "oemUrl": "https://www.volkswagen.co.in/",
+  "oemUrl": "https://www.volkswagen.co.in/en/models/golf-gti.html",
   "sources": [
    "https://www.cardekho.com/volkswagen-cars"
   ],
@@ -8312,7 +8312,7 @@
   "resale": 1,
   "network": 2,
   "wiki": "Citroën C3 (India)",
-  "oemUrl": "https://www.citroen.in/",
+  "oemUrl": "https://www.citroen.in/models/new-e-c3.html",
   "sources": [
    "https://www.cardekho.com/citroen/ec3"
   ],
@@ -8686,7 +8686,7 @@
   "resale": 1,
   "network": 1,
   "wiki": "Citroën C5 Aircross",
-  "oemUrl": "https://www.citroen.in/",
+  "oemUrl": "https://www.citroen.in/models/c5-aircross.html",
   "sources": [
    "https://www.cardekho.com/citroen-cars"
   ],
@@ -9043,7 +9043,7 @@
   "resale": 3,
   "network": 2,
   "wiki": "Jeep Wrangler (JL)",
-  "oemUrl": "https://www.jeep-india.com/wrangler.html",
+  "oemUrl": "https://www.jeep-india.com/wrangler-jl.html",
   "sources": [
    "https://www.cardekho.com/jeep-cars"
   ],
@@ -9129,7 +9129,7 @@
   "resale": 2,
   "network": 2,
   "wiki": "Jeep Grand Cherokee (WL)",
-  "oemUrl": "https://www.jeep-india.com/",
+  "oemUrl": "https://www.jeep-india.com/new-grand-cherokee.html",
   "sources": [
    "https://www.cardekho.com/jeep-cars"
   ],
@@ -9244,7 +9244,7 @@
   "resale": 2,
   "network": 2,
   "wiki": "BYD Atto 3",
-  "oemUrl": "https://www.bydautoindia.com/atto3",
+  "oemUrl": "https://bydautoindia.com/bydatto3",
   "sources": [
    "https://www.cardekho.com/byd/atto-3"
   ],
@@ -9378,7 +9378,7 @@
   "resale": 2,
   "network": 2,
   "wiki": "BYD e6",
-  "oemUrl": "https://www.bydautoindia.com/",
+  "oemUrl": "https://bydautoindia.com/bydemax7",
   "sources": [
    "https://www.cardekho.com/byd/emax-7"
   ],
@@ -9505,7 +9505,7 @@
   "resale": 2,
   "network": 2,
   "wiki": "BYD Seal",
-  "oemUrl": "https://www.bydautoindia.com/",
+  "oemUrl": "https://bydautoindia.com/bydseal",
   "sources": [
    "https://www.cardekho.com/byd/seal"
   ],
@@ -10282,7 +10282,7 @@
   "resale": 3,
   "network": 2,
   "wiki": "Mercedes-Benz GLA",
-  "oemUrl": "https://www.mercedes-benz.co.in/",
+  "oemUrl": "https://www.mercedes-benz.co.in/passengercars/models/suv/gla/overview.html",
   "sources": [
    "https://www.cardekho.com/mercedes-benz-cars"
   ],
@@ -10382,7 +10382,7 @@
   "resale": 3,
   "network": 2,
   "wiki": "Mercedes-Benz GLC",
-  "oemUrl": "https://www.mercedes-benz.co.in/",
+  "oemUrl": "https://www.mercedes-benz.co.in/passengercars/models/suv/glc/overview.html",
   "sources": [
    "https://www.cardekho.com/mercedes-benz-cars"
   ],
@@ -10860,7 +10860,7 @@
   "resale": 2,
   "network": 2,
   "wiki": "BMW X1",
-  "oemUrl": "https://www.bmw.in/",
+  "oemUrl": "https://www.bmw.in/en/all-models/bmw-i/iX1/2025/bmw-ix1-highlights.html",
   "sources": [
    "https://www.cardekho.com/bmw-cars"
   ],
@@ -10949,7 +10949,7 @@
   "resale": 2,
   "network": 2,
   "wiki": "Audi A4",
-  "oemUrl": "https://www.audi.in/",
+  "oemUrl": "https://www.audi.in/en/models/a4/a4-sedan/",
   "sources": [
    "https://www.cardekho.com/audi-cars"
   ],

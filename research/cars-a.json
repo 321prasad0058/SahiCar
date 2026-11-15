@@ -6422,7 +6422,7 @@
     "resale": 4,
     "network": 3,
     "wiki": "Suzuki Fronx",
-    "oemUrl": "https://www.toyotabharat.com/showroom/urban-cruiser-taisor/",
+    "oemUrl": "https://www.toyotabharat.com/showroom/urbancruiser-taisor/",
     "sources": [
       "https://www.cardekho.com/toyota/urban-cruiser-taisor/price-in-new-delhi",
       "https://www.cardekho.com/toyota/urban-cruiser-taisor/specs",
@@ -6837,7 +6837,7 @@
     "resale": 4,
     "network": 3,
     "wiki": "Toyota Urban Cruiser Hyryder",
-    "oemUrl": "https://www.toyotabharat.com/showroom/urban-cruiser-hyryder/",
+    "oemUrl": "https://www.toyotabharat.com/showroom/urbancruiser-hyryder/",
     "sources": [
       "https://www.cardekho.com/toyota/urban-cruiser-hyryder/price-in-new-delhi",
       "https://www.cardekho.com/toyota/urban-cruiser-hyryder/specs",
@@ -7145,7 +7145,7 @@
     "resale": 5,
     "network": 3,
     "wiki": "Toyota Innova",
-    "oemUrl": "https://www.toyotabharat.com/showroom/innova-hycross/",
+    "oemUrl": "https://www.toyotabharat.com/showroom/innova/",
     "sources": [
       "https://www.cardekho.com/toyota/innova-hycross/price-in-new-delhi",
       "https://www.cardekho.com/toyota/innova-hycross/specs",
@@ -7311,7 +7311,7 @@
     "resale": 5,
     "network": 3,
     "wiki": "Toyota Fortuner",
-    "oemUrl": "https://www.toyotabharat.com/showroom/fortuner/",
+    "oemUrl": "https://www.toyotabharat.com/showroom/fortuner/index-fortuner.html",
     "sources": [
       "https://www.cardekho.com/toyota/fortuner/price-in-new-delhi",
       "https://www.carwale.com/toyota-cars/fortuner/price-in-delhi/",
@@ -7434,7 +7434,7 @@
     "resale": 5,
     "network": 3,
     "wiki": "Toyota Fortuner",
-    "oemUrl": "https://www.toyotabharat.com/showroom/legender/",
+    "oemUrl": "https://www.toyotabharat.com/showroom/fortuner/index-legender.html",
     "sources": [
       "https://www.cardekho.com/toyota/fortuner-legender/price-in-new-delhi",
       "https://www.cardekho.com/toyota/fortuner-legender/specs",
@@ -7747,7 +7747,7 @@
     "resale": 3,
     "network": 3,
     "wiki": "Suzuki e Vitara",
-    "oemUrl": "https://www.toyotabharat.com/showroom/urban-cruiser-ebella/",
+    "oemUrl": "https://www.toyotabharat.com/showroom/urbancruiser-ebella/",
     "sources": [
       "https://www.cardekho.com/toyota/urban-cruiser-ebella/price-in-new-delhi",
       "https://www.cardekho.com/toyota/urban-cruiser-ebella/specs",
@@ -7952,7 +7952,7 @@
     "resale": 4,
     "network": 2,
     "wiki": "Toyota Land Cruiser (J300)",
-    "oemUrl": "https://www.toyotabharat.com/showroom/land-cruiser-300/",
+    "oemUrl": "https://www.toyotabharat.com/showroom/lc300/",
     "sources": [
       "https://www.cardekho.com/toyota/land-cruiser-300/price-in-new-delhi",
       "https://www.cardekho.com/toyota/land-cruiser-300/specs",
@@ -8717,7 +8717,7 @@
     "resale": 2,
     "network": 3,
     "wiki": "Renault Kwid",
-    "oemUrl": "https://www.renault.co.in/cars/kwid.html",
+    "oemUrl": "https://www.renault.co.in/cars/renault-kwid.html",
     "sources": [
       "https://www.cardekho.com/renault/kwid/price-in-new-delhi",
       "https://www.cardekho.com/renault/kwid/specs",
@@ -9071,7 +9071,7 @@
     "resale": 2,
     "network": 3,
     "wiki": "Renault Kiger",
-    "oemUrl": "https://www.renault.co.in/cars/kiger.html",
+    "oemUrl": "https://www.renault.co.in/cars/renault-kiger.html",
     "sources": [
       "https://www.cardekho.com/renault/kiger/price-in-new-delhi",
       "https://www.cardekho.com/renault/kiger/specs",
@@ -9298,7 +9298,7 @@
     "resale": 3,
     "network": 3,
     "wiki": "Dacia Duster",
-    "oemUrl": "https://www.renault.co.in/cars/duster.html",
+    "oemUrl": "https://www.renault.co.in/cars/renault-duster.html",
     "sources": [
       "https://www.cardekho.com/renault/duster/price-in-new-delhi",
       "https://www.cardekho.com/renault/duster/specs",
@@ -9765,7 +9765,7 @@
     "resale": 2,
     "network": 2,
     "wiki": null,
-    "oemUrl": "https://www.nissan.in/vehicles/new/gravite.html",
+    "oemUrl": "https://www.nissan.in/vehicles/new/nissan-gravite.html",
     "sources": [
       "https://www.cardekho.com/nissan/gravite/price-in-new-delhi",
       "https://www.cardekho.com/nissan/gravite/specs",
@@ -9937,7 +9937,7 @@
     "resale": 2,
     "network": 2,
     "wiki": null,
-    "oemUrl": "https://www.nissan.in/vehicles/new/tekton.html",
+    "oemUrl": "https://www.nissan.in/tekton-offer.html",
     "sources": [
       "https://www.cardekho.com/nissan/tekton/price-in-new-delhi",
       "https://www.cardekho.com/nissan/tekton/specs",
