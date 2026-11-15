@@ -6581,19 +6581,10 @@ export const BE_6: CarSpec = {
 }
 
 const GLC_L = 4.856
-// the side photo's hubs (u 0.178 / 0.857) sit 11 % too far apart (a close camera): side details traced off it are mapped
-// piecewise-linearly so its axles land on the official wheelbase, the overhangs split as in the photo (the silhouette is
-// kept in photo u)
-const glcU = (u: number): number => {
-  const pa = [0, 0.178, 0.857, 1], ma = [0, 0.2152, 0.8272, 1]
-  for (let i = 0; i < 3; i++) if (u <= pa[i + 1] || i === 2) return +(ma[i] + ((u - pa[i]) * (ma[i + 1] - ma[i])) / (pa[i + 1] - pa[i])).toFixed(5)
-  return u
-}
-const glcP = (pts: P2[]): P2[] => pts.map(([u, y]) => [glcU(u), y] as P2)
-/** a side outline from a rounded rectangle given in photo u and metres */
+/** a side outline from a rounded rectangle given in u (0…1) and metres */
 const glcRectU = (u0: number, y0: number, u1: number, y1: number, r: number): P2[] =>
-  glcP(rrectS(u0 * GLC_L, y0, u1 * GLC_L, y1, r).map(([x, y]) => [x / GLC_L, y] as P2))
-const GLC_GH: [number, number] = [0.03, 0.73]
+  rrectS(u0 * GLC_L, y0, u1 * GLC_L, y1, r).map(([x, y]) => [+(x / GLC_L).toFixed(5), y] as P2)
+const GLC_GH: [number, number] = [0.03, 0.69]
 /** the glasshouse station nearest u (roof paint edges must sit on one) */
 const glcStation = (u: number): number => {
   const [a, b] = GLC_GH
@@ -6601,81 +6592,120 @@ const glcStation = (u: number): number => {
   for (let i = 0; i <= 140; i++) { const s = a + (b - a) * (0.5 - 0.5 * Math.cos((Math.PI * i) / 140)); if (Math.abs(s - u) < Math.abs(best - u)) best = s }
   return +best.toFixed(5)
 }
-/** a ring (outer radius r, width w) as one outline, split at the bottom */
-const glcRing = (zc: number, yc: number, r: number, w: number, n = 40): P2[] => {
-  const outer = Array.from({ length: n + 1 }, (_, i) => { const a = -Math.PI / 2 + 0.06 + (i / n) * (Math.PI * 2 - 0.12); return [+(zc + r * Math.cos(a)).toFixed(4), +(yc + r * Math.sin(a)).toFixed(4)] as P2 })
+/** a ring (outer radius r, width w) as one outline, with a hairline split at the bottom */
+const glcRing = (zc: number, yc: number, r: number, w: number, gap = 0.006, n = 48): P2[] => {
+  const outer = Array.from({ length: n + 1 }, (_, i) => { const a = -Math.PI / 2 + gap + (i / n) * (Math.PI * 2 - 2 * gap); return [+(zc + r * Math.cos(a)).toFixed(4), +(yc + r * Math.sin(a)).toFixed(4)] as P2 })
   const inner = outer.map(([z, y]): P2 => [+(zc + ((z - zc) * (r - w)) / r).toFixed(4), +(yc + ((y - yc) * (r - w)) / r).toFixed(4)]).reverse()
   return [...outer, ...inner]
 }
+/** a disc outline */
+const glcDisc = (zc: number, yc: number, r: number, n = 48): P2[] =>
+  Array.from({ length: n }, (_, i) => { const a = (i / n) * Math.PI * 2; return [+(zc + r * Math.cos(a)).toFixed(4), +(yc + r * Math.sin(a)).toFixed(4)] as P2 })
+/** the three-pointed star: three tapered blades from the centre (up, lower left, lower right), tips at radius r */
+const glcStar = (zc: number, yc: number, r: number): P2[] => {
+  const ri = r * 0.2
+  const out: P2[] = []
+  for (let k = 0; k < 3; k++) {
+    const t = Math.PI / 2 + (k * 2 * Math.PI) / 3, m = t + Math.PI / 3
+    out.push([+(zc + r * Math.cos(t)).toFixed(4), +(yc + r * Math.sin(t)).toFixed(4)], [+(zc + ri * Math.cos(m)).toFixed(4), +(yc + ri * Math.sin(m)).toFixed(4)])
+  }
+  return out
+}
+/** a closed outline as a thin frame (band along it, back to its start) */
+const glcFrame = (poly: P2[], w: number): P2[] => band([...poly, poly[0], poly[1]], w)
+// the grille's central ring (centre height and radius from the straight front photo)
+const GLC_STAR_Y = 0.716
 
 /** Mercedes-Benz GLC Electric (GLC 400 4MATIC, X540; India, Nov 2026). 4856 × 1913 × 1652, wheelbase 2972, 255/45 R20
  *  (the India tyre size isn't published; 20-inch twin five-spoke alloys). Side profile from the India launch car's side
- *  photo (a close camera: 1.814 m tall at the official length and the hubs 11 % apart, so the cut-out was squeezed to the
- *  official height and side details mapped onto the official wheelbase). The tall upright grille in a bright frame with
- *  its dark dot-matrix panel and two horizontal bars (no star: the models carry no badges), the slim smoked headlamps
- *  with their three-blade light elements, the silver-framed corner pods and the thin silver lip from the straight front
- *  photo; the smoked tail lamps with their red rings on the gloss-black band across the tailgate and the rear bumper's
- *  curved silver trim (no exhaust) from the straight rear photo. */
+ *  photo, a close camera: the side plane is at true scale but the ends curve away and read short, so the cut-out was
+ *  scaled uniformly from its hubs to the official wheelbase (1.63 m tall then, against 1.652) and only the overhangs were
+ *  stretched (× 1.35) to the official length: front 0.84 m, rear 1.04 m. The tall upright grille in a bright frame with its
+ *  dark dot-matrix panel, the two horizontal bars stopping at the central ring and its star, the slim smoked headlamps
+ *  with their three-blade light elements wrapping round the corners, the silver-framed corner pods and the thin silver lip
+ *  from the straight front photo; the smoked tail lamps with their red rings on the gloss-black band across the tailgate,
+ *  the star in the band and the rear bumper's curved silver trim (no exhaust) from the rear photos. */
 export const GLC_ELECTRIC: CarSpec = {
   id: 'mercedes-benz-glc-electric',
   name: 'Mercedes-Benz GLC Electric',
   dropSlivers: true,
   L: GLC_L, W: 1.913, H: 1.652,
-  axles: [0.2152, 0.8272],
-  tyreR: 0.3688, tyreW: 0.255, rim: 0.689, wheel: { style: 'twin', spokes: 5 },
+  axles: [0.2144, 0.8264],
+  tyreR: 0.3688, tyreW: 0.255, rim: 0.689, wheel: { style: 'twin', spokes: 5, pairGap: 0.15, spokeW: 0.06 },
   archGap: 0.04, archSquare: 0.2,
-  sill: [[0, 0.38], [0.01, 0.355], [0.02, 0.343], [0.04, 0.335], [0.06, 0.328], [0.08, 0.316], [0.12, 0.31], [0.2, 0.305], [0.28, 0.3], [0.3, 0.28], [0.315, 0.245], [0.33, 0.236], [0.5, 0.235], [0.71, 0.235], [0.725, 0.245], [0.74, 0.275], [0.76, 0.29], [0.9, 0.29], [0.93, 0.275], [0.95, 0.258], [0.97, 0.252], [0.98, 0.256], [0.99, 0.262], [1, 0.27]],
-  // the tail face up past the lamps to the tailgate lip, a high, near-level belt under the windows (about 1.2 m, as
-  // in the India side photo) flowing straight into the cowl, then the long bonnet down to the upright grille face
-  top: [[0, 1.095], [0.006, 1.11], [0.015, 1.128], [0.03, 1.15], [0.06, 1.176], [0.1, 1.185], [0.15, 1.19], [0.2, 1.19], [0.3, 1.192], [0.4, 1.194], [0.5, 1.196], [0.6, 1.198], [0.68, 1.2], [0.72, 1.203], [0.745, 1.206], [0.76, 1.206], [0.8, 1.188], [0.85, 1.15], [0.9, 1.092], [0.93, 1.052], [0.95, 1.022], [0.97, 0.988], [0.98, 0.975], [0.99, 0.965], [0.995, 0.955], [1, 0.945]],
-  width: [[0, 0.92], [0.006, 0.945], [0.02, 0.965], [0.05, 0.985], [0.1, 0.996], [0.2, 1], [0.8, 1], [0.88, 0.99], [0.93, 0.975], [0.96, 0.955], [0.98, 0.93], [0.993, 0.91], [1, 0.9]],
+  sill: [[0, 0.38], [0.01, 0.36], [0.03, 0.345], [0.05, 0.335], [0.08, 0.322], [0.11, 0.31], [0.2, 0.305], [0.29, 0.3], [0.31, 0.27], [0.325, 0.24], [0.34, 0.232], [0.5, 0.23], [0.7, 0.23], [0.715, 0.245], [0.73, 0.27], [0.75, 0.29], [0.9, 0.29], [0.93, 0.27], [0.95, 0.25], [0.97, 0.25], [0.98, 0.256], [0.99, 0.262], [1, 0.27]],
+  // the tail face up past the lamps to the tailgate lip, the window line falling from 1.19 m at the quarter glass to
+  // 1.08 m at the mirror, a ramp up the A-pillar's black base into the cowl, then the bonnet's shoulders down to the
+  // upright grille face (its centre stands higher: `crownAt`)
+  top: [[0, 1.09], [0.006, 1.105], [0.015, 1.115], [0.03, 1.125], [0.06, 1.16], [0.1, 1.183], [0.15, 1.19], [0.2, 1.19], [0.25, 1.178], [0.3, 1.165], [0.35, 1.155], [0.4, 1.146], [0.45, 1.14], [0.5, 1.133], [0.55, 1.115], [0.6, 1.097], [0.63, 1.088], [0.645, 1.084], [0.655, 1.09], [0.665, 1.108], [0.675, 1.135], [0.685, 1.163], [0.69, 1.175], [0.7, 1.175], [0.72, 1.172], [0.75, 1.16], [0.8, 1.138], [0.85, 1.098], [0.9, 1.058], [0.93, 1.035], [0.95, 1.008], [0.97, 0.98], [0.98, 0.966], [0.99, 0.955], [0.995, 0.95], [1, 0.945]],
+  width: [[0, 0.92], [0.006, 0.942], [0.02, 0.958], [0.05, 0.973], [0.1, 0.987], [0.15, 0.995], [0.22, 1], [0.8, 1], [0.88, 0.993], [0.93, 0.982], [0.96, 0.968], [0.98, 0.95], [0.993, 0.928], [1, 0.912]],
   crown: 0.015,
+  // the bonnet's centre rising to the cowl above its shoulders, as the side photo's silhouette shows
+  crownAt: [[0.69, 0], [0.7, 0.02], [0.715, 0.045], [0.74, 0.055], [0.77, 0.052], [0.8, 0.05], [0.85, 0.04], [0.9, 0.03], [0.95, 0.015], [0.98, 0.008], [1, 0.004]],
   bulge: 0.02,
-  haunch: 0.04,
-  topRadius: 0.08,
-  noseSweep: 0.15,
+  haunch: 0.03,
+  topRadius: 0.065,
+  // a soft shoulder running back from the headlamp over the front arch and along the doors
+  shoulder: { y: [[0, 0.98], [0.1, 1.04], [0.3, 1.04], [0.6, 1.0], [0.75, 0.99], [0.86, 0.97], [0.92, 1.2], [1, 1.2]], inset: 0.012 },
+  noseSweep: 0.1,
   tailSweep: 0.1,
   greenhouse: {
-    u0: GLC_GH[0], u1: GLC_GH[1], tumble: 0.78,
-    // the raked tailgate glass up under the roof spoiler, the long roof (rails left out), the raked screen into the cowl
-    top: [[0.03, 1.15], [0.04, 1.175], [0.05, 1.193], [0.06, 1.227], [0.07, 1.267], [0.08, 1.315], [0.088, 1.365], [0.095, 1.415], [0.1, 1.445], [0.11, 1.465], [0.12, 1.473], [0.14, 1.478], [0.16, 1.485], [0.18, 1.5], [0.2, 1.515], [0.23, 1.53], [0.26, 1.543], [0.3, 1.56], [0.33, 1.569], [0.36, 1.575], [0.39, 1.578], [0.42, 1.577], [0.45, 1.573], [0.48, 1.566], [0.5, 1.56], [0.52, 1.548], [0.54, 1.532], [0.56, 1.513], [0.58, 1.49], [0.6, 1.458], [0.62, 1.415], [0.64, 1.355], [0.66, 1.3], [0.68, 1.255], [0.7, 1.22], [0.715, 1.212], [0.73, 1.198]],
+    u0: GLC_GH[0], u1: GLC_GH[1], tumble: 0.65,
+    // the glasshouse narrowing towards the tail
+    tumbleAt: [[0.03, 0.58], [0.1, 0.6], [0.2, 0.63], [0.35, 0.66], [0.69, 0.66]],
+    // body-coloured D-pillars framing the raked rear glass from behind
+    paintedEdge: [0.03, 0.125],
+    // the raked tailgate glass up under the roof spoiler, the roof falling gently from mid-car to the spoiler (rails left
+    // out), the raked screen into the cowl
+    top: [[0.03, 1.125], [0.04, 1.15], [0.05, 1.1767], [0.06, 1.2013], [0.07, 1.23], [0.08, 1.2637], [0.09, 1.2933], [0.1, 1.33], [0.105, 1.37], [0.11, 1.41], [0.115, 1.435], [0.12, 1.4447], [0.13, 1.4493], [0.15, 1.456], [0.17, 1.462], [0.2, 1.467], [0.23, 1.488], [0.25, 1.503], [0.3, 1.5377], [0.35, 1.559], [0.4, 1.565], [0.45, 1.566], [0.48, 1.563], [0.5, 1.555], [0.52, 1.543], [0.54, 1.525], [0.56, 1.502], [0.58, 1.485], [0.6, 1.448], [0.62, 1.391], [0.64, 1.338], [0.66, 1.28], [0.675, 1.225], [0.69, 1.175]],
   },
-  roof: { u0: glcStation(0.09), u1: glcStation(0.56), black: false },
+  roof: { u0: glcStation(0.125), u1: glcStation(0.56), black: false },
   pillars: [
     // the black B-pillar and the rear door glass's rear frame (the A-pillar is left as plain glass)
-    { bottom: [glcU(0.452), glcU(0.466)], top: [glcU(0.452), glcU(0.466)], black: true },
-    { bottom: [0.198, 0.206], top: [0.243, 0.251], black: true },
+    { bottom: [0.456, 0.47], top: [0.456, 0.47], black: true },
+    { bottom: [0.226, 0.234], top: [0.256, 0.264], black: true },
   ],
-  doors: [[glcU(0.722), glcU(0.703)], [glcU(0.459), glcU(0.459)], [glcU(0.208), glcU(0.19)]],
+  doors: [[0.705, 0.7], [0.468, 0.466], [0.236, 0.226]],
   front: [
-    // the tall upright grille: bright frame, gloss-black panel with the dot matrix, two horizontal bars (no star)
+    // the tall upright grille: bright frame, gloss-black panel with the dot matrix
     { step: 0.004, mat: 'silver', depth: 0.012, poly: smooth(both([[0, 0.408], [0.4, 0.41], [0.47, 0.425], [0.5, 0.47], [0.508, 0.6], [0.508, 0.88], [0.5, 0.912], [0.47, 0.92], [0, 0.922]]), 1) },
     { step: 0.004, mat: 'gloss', layer: 1, depth: 0.014, poly: smooth(both([[0, 0.43], [0.4, 0.432], [0.455, 0.445], [0.48, 0.48], [0.485, 0.6], [0.485, 0.88], [0.478, 0.895], [0.46, 0.9], [0, 0.902]]), 1) },
     { step: 0.004, mat: 'mesh', layer: 2, depth: 0.015, poly: smooth(both([[0, 0.44], [0.4, 0.442], [0.45, 0.455], [0.47, 0.49], [0.474, 0.6], [0.474, 0.875], [0.465, 0.888], [0, 0.89]]), 1) },
-    { step: 0.004, mat: 'silver', layer: 3, depth: 0.017, poly: rrect(-0.47, 0.766, 0.47, 0.78, 0.005) },
-    { step: 0.004, mat: 'silver', layer: 3, depth: 0.017, poly: rrect(-0.47, 0.662, 0.47, 0.676, 0.005) },
-    // slim smoked headlamps sloping down to the grille's top corners: a DRL line along the top, the three-blade element
-    { step: 0.004, mat: 'trim', mirror: true, depth: 0.006, poly: smooth([[0.515, 0.9], [0.6, 0.91], [0.7, 0.918], [0.77, 0.924], [0.795, 0.918], [0.802, 0.875], [0.795, 0.81], [0.775, 0.792], [0.72, 0.795], [0.62, 0.818], [0.54, 0.86]], 1) },
-    { step: 0.004, mat: 'drl', layer: 1, mirror: true, poly: band([[0.54, 0.896], [0.62, 0.903], [0.72, 0.909], [0.785, 0.912]], 0.008) },
-    { step: 0.004, mat: 'silver', layer: 1, mirror: true, depth: 0.008, poly: [[0.698, 0.855], [0.708, 0.855], [0.711, 0.889], [0.695, 0.889]] },
-    { step: 0.004, mat: 'silver', layer: 1, mirror: true, depth: 0.008, poly: [[0.698, 0.853], [0.703, 0.844], [0.672, 0.828], [0.664, 0.84]] },
-    { step: 0.004, mat: 'silver', layer: 1, mirror: true, depth: 0.008, poly: [[0.707, 0.844], [0.712, 0.853], [0.743, 0.84], [0.735, 0.828]] },
-    // the corner pods: a dark gap along their inner side, a silver frame round the body-coloured pod, the C-shaped
-    // black vent at its outer end
-    { step: 0.004, mat: 'trim', mirror: true, poly: band([[0.6, 0.652], [0.55, 0.62], [0.5, 0.52], [0.485, 0.42], [0.505, 0.35], [0.55, 0.322]], 0.022) },
-    { step: 0.004, mat: 'trim', mirror: true, poly: smooth([[0.705, 0.612], [0.812, 0.612], [0.812, 0.392], [0.705, 0.392], [0.688, 0.44], [0.688, 0.56]], 1) },
-    { step: 0.004, mat: 'silver', layer: 1, mirror: true, depth: 0.006, poly: band([[0.815, 0.632], [0.62, 0.632], [0.595, 0.615], [0.535, 0.5], [0.52, 0.42], [0.54, 0.37], [0.58, 0.342], [0.815, 0.348]], 0.01) },
+    // the two horizontal bars, stopping at the central ring
+    { step: 0.004, mat: 'silver', layer: 3, depth: 0.017, mirror: true, poly: rrect(0.148, 0.766, 0.47, 0.78, 0.005) },
+    { step: 0.004, mat: 'silver', layer: 3, depth: 0.017, mirror: true, poly: rrect(0.148, 0.662, 0.47, 0.676, 0.005) },
+    // the central ring: a dark surround, a bright silver ring and the three-pointed star
+    { step: 0.003, mat: 'gloss', layer: 3, depth: 0.018, poly: glcDisc(0, GLC_STAR_Y, 0.142) },
+    { step: 0.003, mat: 'chrome', layer: 4, depth: 0.022, poly: glcRing(0, GLC_STAR_Y, 0.124, 0.014) },
+    { step: 0.003, mat: 'chrome', layer: 4, depth: 0.024, poly: glcStar(0, GLC_STAR_Y, 0.108) },
+    // smoked headlamps sloping down to the grille's top corners and running out round the corners: a DRL line along
+    // the top, the three-blade element
+    { step: 0.004, mat: 'trim', mirror: true, depth: 0.006, poly: smooth([[0.513, 0.905], [0.6, 0.915], [0.7, 0.925], [0.79, 0.932], [0.835, 0.928], [0.848, 0.905], [0.848, 0.81], [0.835, 0.782], [0.79, 0.772], [0.72, 0.778], [0.62, 0.805], [0.55, 0.845], [0.515, 0.875]], 1) },
+    { step: 0.004, mat: 'drl', layer: 1, mirror: true, poly: band([[0.54, 0.9], [0.62, 0.907], [0.72, 0.915], [0.8, 0.919]], 0.008) },
+    { step: 0.004, mat: 'silver', layer: 1, mirror: true, depth: 0.008, poly: [[0.7076, 0.8567], [0.7211, 0.8567], [0.7251, 0.9026], [0.7035, 0.9026]] },
+    { step: 0.004, mat: 'silver', layer: 1, mirror: true, depth: 0.008, poly: [[0.7076, 0.854], [0.7143, 0.8419], [0.6725, 0.8203], [0.6617, 0.8365]] },
+    { step: 0.004, mat: 'silver', layer: 1, mirror: true, depth: 0.008, poly: [[0.7197, 0.8419], [0.7265, 0.854], [0.7683, 0.8365], [0.7575, 0.8203]] },
+    // the corner pods: a dark gap along their inner side, a rounded-triangle silver frame round the body-coloured pod,
+    // the C-shaped black vent at its outer end
+    { step: 0.004, mat: 'trim', mirror: true, poly: band([[0.62, 0.652], [0.565, 0.625], [0.515, 0.54], [0.49, 0.44], [0.5, 0.36], [0.55, 0.322]], 0.022) },
+    { step: 0.004, mat: 'trim', mirror: true, poly: smooth([[0.815, 0.6], [0.74, 0.597], [0.712, 0.565], [0.702, 0.5], [0.712, 0.435], [0.74, 0.402], [0.815, 0.4]], 1) },
+    { step: 0.004, mat: 'silver', layer: 1, mirror: true, depth: 0.006, poly: glcFrame(smooth([[0.825, 0.632], [0.61, 0.628], [0.528, 0.46], [0.57, 0.343], [0.825, 0.35]], 2), 0.011) },
     // the black lower grille band and the thin silver lip along the bottom
     { step: 0.004, mat: 'trim', poly: smooth(both([[0, 0.29], [0.6, 0.292], [0.75, 0.3], [0.8, 0.31], [0.8, 0.33], [0.5, 0.33], [0.47, 0.395], [0, 0.398]]), 1) },
     { step: 0.004, mat: 'mesh', layer: 1, poly: rrect(-0.36, 0.33, 0.36, 0.385, 0.01) },
     { step: 0.004, mat: 'silver', layer: 2, depth: 0.008, poly: band([[-0.82, 0.33], [-0.75, 0.306], [-0.6, 0.297], [0, 0.295], [0.6, 0.297], [0.75, 0.306], [0.82, 0.33]], 0.012) },
   ],
   rear: [
-    // the gloss-black band across the tailgate joining the smoked tail lamps, each with a red ring and a red line inboard
-    { step: 0.004, mat: 'gloss', layer: 1, depth: 0.008, poly: smooth(both([[0, 0.9], [0.5, 0.903], [0.6, 0.91], [0.62, 1.066], [0, 1.07]]), 1) },
-    { step: 0.004, mat: 'trim', layer: 2, mirror: true, depth: 0.012, poly: smooth([[0.56, 0.91], [0.75, 0.918], [0.81, 0.94], [0.825, 0.99], [0.815, 1.05], [0.78, 1.066], [0.56, 1.069]], 1) },
-    { step: 0.004, mat: 'tail', layer: 3, mirror: true, depth: 0.016, poly: glcRing(0.69, 0.988, 0.064, 0.013) },
-    { step: 0.004, mat: 'tail', layer: 3, mirror: true, depth: 0.016, poly: band([[0.36, 0.988], [0.62, 0.988]], 0.01) },
+    // the gloss-black band across the tailgate joining the smoked tail lamps; each lamp with two red rings (the outer one
+    // on the body corner) and a red line running inboard from the inner ring
+    { step: 0.004, mat: 'gloss', layer: 1, depth: 0.008, poly: smooth(both([[0, 0.9], [0.5, 0.903], [0.55, 0.91], [0.57, 1.066], [0, 1.07]]), 1) },
+    { step: 0.004, mat: 'trim', layer: 2, mirror: true, depth: 0.012, poly: smooth([[0.53, 0.908], [0.75, 0.915], [0.82, 0.935], [0.84, 0.99], [0.83, 1.05], [0.79, 1.066], [0.53, 1.069]], 1) },
+    { step: 0.004, mat: 'tail', layer: 3, mirror: true, depth: 0.016, poly: glcRing(0.62, 0.986, 0.056, 0.012, 0.06) },
+    { step: 0.004, mat: 'tail', layer: 3, mirror: true, depth: 0.016, poly: glcRing(0.765, 0.988, 0.062, 0.013, 0.06) },
+    { step: 0.004, mat: 'tail', layer: 3, mirror: true, depth: 0.016, poly: band([[0.36, 0.986], [0.567, 0.986]], 0.009) },
+    // the star in the middle of the band, in its ring
+    { step: 0.003, mat: 'chrome', layer: 2, depth: 0.014, poly: glcRing(0, 0.985, 0.076, 0.009) },
+    { step: 0.003, mat: 'chrome', layer: 2, depth: 0.016, poly: glcStar(0, 0.985, 0.066) },
     // the red reflectors low on the bumper corners
     { step: 0.004, mat: 'reflector', mirror: true, poly: rrect(0.66, 0.632, 0.81, 0.648, 0.006) },
     // the black lower bumper with the thin curved silver trim, a short silver strip under each end
@@ -6685,25 +6715,32 @@ export const GLC_ELECTRIC: CarSpec = {
   ],
   side: [
     // the body-coloured D-pillar between the tailgate glass and the curved quarter glass, up to the roof's edge
-    { step: 0.004, mat: 'body', depth: 0.002, poly: [[0.062, 1.175], [0.145, 1.193], [0.15, 1.24], [0.157, 1.29], [0.167, 1.34], [0.18, 1.385], [0.2, 1.425], [0.225, 1.455], [0.225, 1.515], [0.2, 1.503], [0.18, 1.488], [0.16, 1.473], [0.14, 1.466], [0.125, 1.46], [0.112, 1.448], [0.104, 1.425], [0.095, 1.36], [0.078, 1.26]] },
-    // the smoked tail lamp wrapping onto the flank with a red light element
-    { step: 0.004, mat: 'trim', depth: 0.004, poly: smooth([[0.003, 0.965], [0.003, 1.07], [0.04, 1.072], [0.058, 1.06], [0.062, 1.02], [0.056, 0.98], [0.04, 0.968]], 1) },
-    { step: 0.004, mat: 'tail', layer: 1, depth: 0.005, poly: [[0.004, 1.0], [0.004, 1.025], [0.03, 1.02], [0.03, 1.002]] },
+    { step: 0.004, mat: 'body', depth: 0.002, poly: [[0.065, 1.17], [0.165, 1.2], [0.168, 1.24], [0.175, 1.28], [0.185, 1.32], [0.2, 1.36], [0.215, 1.39], [0.235, 1.42], [0.26, 1.45], [0.26, 1.5], [0.23, 1.48], [0.2, 1.46], [0.17, 1.454], [0.155, 1.44], [0.14, 1.39], [0.12, 1.33], [0.1, 1.27], [0.08, 1.21]] },
+    // the smoked tail lamp wrapping onto the flank with its red element
+    { step: 0.004, mat: 'trim', depth: 0.004, poly: smooth([[0.003, 0.965], [0.003, 1.065], [0.025, 1.075], [0.05, 1.082], [0.07, 1.072], [0.077, 1.03], [0.07, 0.985], [0.05, 0.968]], 1) },
+    { step: 0.004, mat: 'tail', layer: 1, depth: 0.005, poly: smooth([[0.02, 1.0], [0.055, 1.0], [0.062, 1.02], [0.055, 1.042], [0.02, 1.042], [0.026, 1.021]], 1) },
+    // the headlamp continuing round the nose corner
+    { step: 0.004, mat: 'trim', depth: 0.004, poly: smooth([[0.997, 0.79], [0.997, 0.93], [0.975, 0.93], [0.955, 0.916], [0.942, 0.886], [0.946, 0.84], [0.962, 0.802], [0.982, 0.79]], 1) },
+    // the black A-pillar base behind the mirror, over the climb from the window line into the cowl
+    { step: 0.004, mat: 'gloss', depth: 0.002, poly: [[0.646, 1.072], [0.692, 1.074], [0.692, 1.158], [0.684, 1.148], [0.674, 1.12], [0.664, 1.094], [0.655, 1.078]] },
     // flush door handles
-    { step: 0.005, mat: 'body', depth: 0.006, poly: glcRectU(0.488, 0.975, 0.538, 0.998, 0.01) },
-    { step: 0.005, mat: 'body', depth: 0.006, poly: glcRectU(0.222, 1.002, 0.28, 1.025, 0.01) },
+    { step: 0.005, mat: 'body', depth: 0.006, poly: glcRectU(0.494, 0.905, 0.543, 0.928, 0.01) },
+    { step: 0.005, mat: 'body', depth: 0.006, poly: glcRectU(0.256, 0.945, 0.31, 0.968, 0.01) },
     // the black rocker under the doors and the silver side step along it
-    { step: 0.004, mat: 'trim', depth: 0.003, poly: glcRectU(0.292, 0.24, 0.745, 0.3, 0.01) },
-    { step: 0.004, mat: 'satin', layer: 1, depth: 0.006, poly: glcRectU(0.3, 0.242, 0.738, 0.262, 0.008) },
+    { step: 0.004, mat: 'trim', depth: 0.003, poly: glcRectU(0.33, 0.236, 0.715, 0.3, 0.01) },
+    { step: 0.004, mat: 'satin', layer: 1, depth: 0.006, poly: glcRectU(0.335, 0.238, 0.71, 0.258, 0.008) },
   ],
   plates: { front: 0.49, rear: 0.59 },
   rails: 'silver',
-  railsU: [0.14, 0.565],
+  railsU: [0.17, 0.57],
   // the panoramic glass roof
   sunroof: [0.28, 0.5],
   mirrors: 'body',
-  mirrorU: 0.69,
+  mirrorU: 0.645,
+  // the door-mounted mirror sits on the window line
+  mirrorLift: -0.03,
   windowChrome: true,
+  darkGlass: true,
   paint: '#6e6d79', // Lavender Silver, darkened for the studio lights
   ev: true,
   plate: 'MH 01 GL 2026',

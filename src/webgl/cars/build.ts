@@ -38,7 +38,9 @@ export interface CarSpec {
   tyreR: number
   tyreW: number
   rim: number
-  wheel: { style: WheelStyle; spokes: number }
+  wheel: { style: WheelStyle; spokes: number
+    /** 'twin' only, opt-in: half-angle (rad) between the two spokes of a pair (default 0.09) and each spoke's width as a
+     *  fraction of the rim radius (default 0.085), e.g. thin pairs splaying apart towards the rim */ pairGap?: number; spokeW?: number }
   /** gap between tyre and arch opening, and how square the arch is (0 round … 1 square) */
   archGap: number
   archSquare: number
@@ -49,6 +51,9 @@ export interface CarSpec {
   top: Pts
   width: Pts
   crown?: number
+  /** opt-in: the bonnet crown per u (overrides `crown` ahead of the windscreen), so the bonnet's centre can rise to the
+   *  cowl while the shoulders (`top`) follow a lower belt into the front wing */
+  crownAt?: Pts
   bulge?: number
   shoulder?: { y: Pts; inset: number }
   /** how far the corners of the nose / tail sweep back from the centre line (plan view), metres */
@@ -57,7 +62,8 @@ export interface CarSpec {
   greenhouse: { u0: number; u1: number; top: Pts; tumble: number; /** up to this u the glass's foot follows the body's
    *  own edge (leaning tail sides from `shoulder.inset`) instead of 0.955 × width, so no ledge sticks out under it */ followBody?: number
     /** u range where the glasshouse's rounded top edges take the roof paint instead of black: body-coloured edges framing a
-     *  rear glass on a fastback slope (only the flat top stays glass) */ paintedEdge?: [number, number] }
+     *  rear glass on a fastback slope (only the flat top stays glass) */ paintedEdge?: [number, number]
+    /** opt-in: tumble per u (overrides `tumble`), e.g. a glasshouse that narrows more towards a coupe-like tail */ tumbleAt?: Pts }
   roof: { u0: number; u1: number; black: boolean }
   /** glass that wraps up into the roof edge */
   alpine?: [number, number]
@@ -92,6 +98,8 @@ export interface CarSpec {
   mirrors: 'black' | 'body'
   /** u of the door mirrors (default 0.04 behind the glasshouse's front end), for a long screen running into the bonnet */
   mirrorU?: number
+  /** opt-in height (m) of the mirror head's centre above the belt `top(u)` (default 0.1); lower for mirrors mounted on the door */
+  mirrorLift?: number
   /** fender haunches: the body swells this fraction wider over each wheel and is pinched in between
    *  (width stays the official width at the haunch peak) */
   haunch?: number
@@ -113,6 +121,8 @@ export interface CarSpec {
   rimTone?: 'dark'
   /** colour of the 'satin' decal material for this car (default light satin silver), e.g. a darker grey bumper panel */
   satinColor?: string
+  /** opt-in: duller, darker glass for this car (less softbox sheen), so a raked rear window reads near-black from behind */
+  darkGlass?: boolean
   windowChrome?: boolean
   paint: string
   ev?: boolean
@@ -288,6 +298,9 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
   const { L, W } = spec
   const sill = curve(spec.sill), top = curve(spec.top), width = curve(spec.width), ghTop = curve(spec.greenhouse.top)
   const shoulderY = spec.shoulder ? curve(spec.shoulder.y) : null
+  const crownAt = spec.crownAt ? curve(spec.crownAt) : null
+  const tumbleAt = spec.greenhouse.tumbleAt ? curve(spec.greenhouse.tumbleAt) : null
+  const ghTumble = (u: number) => (tumbleAt ? tumbleAt(u) : spec.greenhouse.tumble)
   const cladTop = spec.cladding ? curve(spec.cladding.top) : null
   const xOf = (u: number) => (u - 0.5) * L
   const uOf = (x: number) => x / L + 0.5
@@ -342,7 +355,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
       x,
       ring: ring(hw, yb, yt, 0.07, spec.topRadius ?? 0.17, seg, {
         bulge: spec.bulge ?? 0.025,
-        crown: u > spec.greenhouse.u1 ? spec.crown ?? 0.025 : 0,
+        crown: u > spec.greenhouse.u1 ? (crownAt ? crownAt(u) : spec.crown ?? 0.025) : 0,
         ridge: u > spec.greenhouse.u1 + 0.02 && u < 0.985 ? spec.bonnetRidge : undefined,
         shoulder: shoulderY ? shoulderY(u) : undefined,
         inset: spec.shoulder?.inset,
@@ -436,6 +449,12 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     cladMat = new THREE.MeshStandardMaterial({ color: spec.cladding.color, metalness: 0.1, roughness: 0.75, side: THREE.DoubleSide })
     disposables.push(cladMat)
   }
+  // duller, darker glass when the spec asks for it (darkGlass), else the shared glass
+  let glassMat: THREE.Material = S.glass
+  if (spec.darkGlass) {
+    glassMat = new THREE.MeshPhysicalMaterial({ color: '#000000', metalness: 0, roughness: 0.08, specularIntensity: 0.18, envMapIntensity: 0.03 })
+    disposables.push(glassMat)
+  }
   // a per-car satin grey when the spec asks for it (satinColor), else the shared light satin silver
   let satinMat: THREE.Material = S.satin
   if (spec.satinColor) {
@@ -501,7 +520,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
       const zb = zAt(x, yb), k = Math.max(0, Math.min(1, (u - gh.followBody) / 0.03))
       if (zb > 0) hwG = zb * (1 - k) + hwG * k
     }
-    return { x, yb, yt, ring: ring(hwG, yb, yt, 0.005, 0.11, hi ? 32 : 20, { tumble: gh.tumble }) }
+    return { x, yb, yt, ring: ring(hwG, yb, yt, 0.005, 0.11, hi ? 32 : 20, { tumble: ghTumble(u) }) }
   })
   const inRange = (u: number, r?: [number, number]) => !!r && u >= r[0] && u <= r[1]
   /** the glasshouse surface at (x, y), for drawing pillars on it */
@@ -531,7 +550,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     4,
   )
   disposables.push(glassHouse.geometry)
-  group.add(new THREE.Mesh(glassHouse.geometry, [S.glass, roofPaint, S.gloss, paint]))
+  group.add(new THREE.Mesh(glassHouse.geometry, [glassMat, roofPaint, S.gloss, paint]))
 
   // ── lights and decals
   const lightMats: { mat: THREE.MeshBasicMaterial; base: THREE.Color; k: number }[] = []
@@ -817,7 +836,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     // door mirrors on a stalk at the base of the A-pillar
     const u = spec.mirrorU ?? gh.u1 - 0.04
     const x = xOf(u)
-    const y = top(u) + 0.1
+    const y = top(u) + (spec.mirrorLift ?? 0.1)
     const zBody = zAt(x, top(u) - 0.03)
     for (const side of [-1, 1]) {
       add(spec.mirrors === 'black' ? S.gloss : paint, new RoundedBoxGeometry(0.11, 0.095, 0.17, 2, 0.035), new THREE.Matrix4().makeTranslation(x - 0.01, y, side * (zBody + 0.085)))
@@ -843,7 +862,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
     for (const side of [-1, 1] as const) tube(us.map((u) => new THREE.Vector3(xOf(u), top(u) - 0.015, side * (zAt(xOf(u), top(u) - 0.015) + 0.004))), 0.007, S.chrome)
   }
   const roofY = (u: number) => ghTop(u)
-  const roofHW = (u: number) => ((width(u) * W) / 2) * 0.955 * gh.tumble
+  const roofHW = (u: number) => ((width(u) * W) / 2) * 0.955 * ghTumble(u)
   if (spec.rails) {
     const railMat = spec.rails === 'silver' ? S.silver : S.gloss
     const peak = Math.max(...spec.greenhouse.top.map((p) => p[1]))
@@ -882,7 +901,7 @@ export function buildCar(spec: CarSpec, opt: BuildOptions): CarRig {
   }
   if (spec.sunroof) {
     const [a, b] = spec.sunroof
-    add(S.glass, new RoundedBoxGeometry((b - a) * L, 0.012, roofHW((a + b) / 2) * 1.3, 2, 0.005), new THREE.Matrix4().makeTranslation(xOf((a + b) / 2), roofY((a + b) / 2) + 0.004, 0))
+    add(glassMat, new RoundedBoxGeometry((b - a) * L, 0.012, roofHW((a + b) / 2) * 1.3, 2, 0.005), new THREE.Matrix4().makeTranslation(xOf((a + b) / 2), roofY((a + b) / 2) + 0.004, 0))
   }
 
   // ── wheels
@@ -1062,8 +1081,8 @@ function rimBlurTexture(spec: CarSpec) {
     const a = (i / n) * Math.PI * 2
     switch (spec.wheel.style) {
       case 'twin':
-        bar(a - 0.09, 0.085, len)
-        bar(a + 0.09, 0.085, len)
+        bar(a - (spec.wheel.pairGap ?? 0.09), spec.wheel.spokeW ?? 0.085, len)
+        bar(a + (spec.wheel.pairGap ?? 0.09), spec.wheel.spokeW ?? 0.085, len)
         break
       case 'turbine':
         bar(a, 0.32, len)
@@ -1167,10 +1186,12 @@ function rimGeometry(spec: CarSpec, hi: boolean) {
   for (let i = 0; i < n; i++) {
     const a = (i / n) * Math.PI * 2
     switch (spec.wheel.style) {
-      case 'twin':
-        blade(a - 0.09, R * 0.085, len, face - 0.008)
-        blade(a + 0.09, R * 0.085, len, face - 0.008)
+      case 'twin': {
+        const gap = spec.wheel.pairGap ?? 0.09, w = R * (spec.wheel.spokeW ?? 0.085)
+        blade(a - gap, w, len, face - 0.008)
+        blade(a + gap, w, len, face - 0.008)
         break
+      }
       case 'turbine':
         blade(a, R * 0.32, len, face - 0.008, 0.6)
         break
