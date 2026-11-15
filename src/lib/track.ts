@@ -1,5 +1,7 @@
 // Product events for Analytics. Never anything personal: only the choices that shaped a result.
-const on = import.meta.env.PROD && Boolean(import.meta.env.VITE_FIREBASE_MEASUREMENT_ID)
+import { isLiveSite } from './seo'
+
+const on = import.meta.env.PROD && Boolean(import.meta.env.VITE_FIREBASE_MEASUREMENT_ID) && isLiveSite()
 const sent = new Set<string>()
 
 /** Send an event once per distinct set of params per visit, without pulling Analytics into the page bundle. */

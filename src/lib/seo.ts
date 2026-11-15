@@ -3,6 +3,9 @@
 // into a static HTML file per page, so search engines read it without running the app.
 export const SITE = 'https://sahicar-in.web.app'
 
+/** true only on the real site, never on localhost, previews or other copies (analytics counts only these visits) */
+export const isLiveSite = () => typeof location !== 'undefined' && location.hostname === new URL(SITE).hostname
+
 export const ORG = {
   '@type': 'Organization',
   '@id': `${SITE}/#org`,

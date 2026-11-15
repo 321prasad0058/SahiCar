@@ -5,6 +5,7 @@ import './lib/install'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
+import { isLiveSite } from './lib/seo'
 import './styles/base.css'
 import './styles/app.css'
 import './styles/landing.css'
@@ -48,8 +49,8 @@ if (import.meta.env.PROD && 'serviceWorker' in navigator && !navigator.webdriver
 }
 
 // analytics after load, when the browser is idle (production only)
-// (never from the pre-render browser, which would count as visits)
-if (import.meta.env.PROD && import.meta.env.VITE_FIREBASE_MEASUREMENT_ID && !navigator.webdriver) {
+// (only on the real site address, never from localhost, preview copies or the pre-render browser)
+if (import.meta.env.PROD && import.meta.env.VITE_FIREBASE_MEASUREMENT_ID && isLiveSite() && !navigator.webdriver) {
   addEventListener('load', () => {
     const go = () => import('./fb/analytics').then((m) => m.startAnalytics()).catch(() => {})
     'requestIdleCallback' in window ? requestIdleCallback(go, { timeout: 4000 }) : setTimeout(go, 2000)
