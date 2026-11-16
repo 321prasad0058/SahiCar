@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://sahicar-in.web.app/</loc><lastmod>2026-11-15</lastmod><priority>1.0</priority></url>
-  <url><loc>https://sahicar-in.web.app/sahifit</loc><lastmod>2026-11-15</lastmod><priority>0.9</priority></url>
-  <url><loc>https://sahicar-in.web.app/explore</loc><lastmod>2026-11-15</lastmod><priority>0.8</priority></url>
-  <url><loc>https://sahicar-in.web.app/emi</loc><lastmod>2026-11-15</lastmod><priority>0.8</priority></url>
-  <url><loc>https://sahicar-in.web.app/how-we-score</loc><lastmod>2026-11-15</lastmod><priority>0.7</priority></url>
-  <url><loc>https://sahicar-in.web.app/upcoming</loc><lastmod>2026-11-15</lastmod><priority>0.7</priority></url>
-  <url><loc>https://sahicar-in.web.app/compare</loc><lastmod>2026-11-15</lastmod><priority>0.5</priority></url>
-  <url><loc>https://sahicar-in.web.app/about</loc><lastmod>2026-11-15</lastmod><priority>0.5</priority></url>
-  <url><loc>https://sahicar-in.web.app/app</loc><lastmod>2026-11-15</lastmod><priority>0.5</priority></url>
+  <url><loc>https://sahicar-in.web.app/</loc><lastmod>2026-11-16</lastmod><priority>1.0</priority></url>
+  <url><loc>https://sahicar-in.web.app/sahifit</loc><lastmod>2026-11-16</lastmod><priority>0.9</priority></url>
+  <url><loc>https://sahicar-in.web.app/explore</loc><lastmod>2026-11-16</lastmod><priority>0.8</priority></url>
+  <url><loc>https://sahicar-in.web.app/emi</loc><lastmod>2026-11-16</lastmod><priority>0.8</priority></url>
+  <url><loc>https://sahicar-in.web.app/how-we-score</loc><lastmod>2026-11-16</lastmod><priority>0.7</priority></url>
+  <url><loc>https://sahicar-in.web.app/upcoming</loc><lastmod>2026-11-16</lastmod><priority>0.7</priority></url>
+  <url><loc>https://sahicar-in.web.app/compare</loc><lastmod>2026-11-16</lastmod><priority>0.5</priority></url>
+  <url><loc>https://sahicar-in.web.app/about</loc><lastmod>2026-11-16</lastmod><priority>0.5</priority></url>
+  <url><loc>https://sahicar-in.web.app/app</loc><lastmod>2026-11-16</lastmod><priority>0.5</priority></url>
   <url><loc>https://sahicar-in.web.app/car/audi-a4</loc><lastmod>2026-10-01</lastmod><priority>0.8</priority></url>
   <url><loc>https://sahicar-in.web.app/car/audi-q3</loc><lastmod>2026-11-01</lastmod><priority>0.8</priority></url>
   <url><loc>https://sahicar-in.web.app/car/bmw-2-series-gran-coupe</loc><lastmod>2026-10-01</lastmod><priority>0.8</priority></url>
-  <url><loc>https://sahicar-in.web.app/car/bmw-x1</loc><lastmod>2026-10-01</lastmod><priority>0.8</priority></url>
-  <url><loc>https://sahicar-in.web.app/car/bmw-ix1</loc><lastmod>2026-10-01</lastmod><priority>0.8</priority></url>
+  <url><loc>https://sahicar-in.web.app/car/bmw-ix1</loc><lastmod>2026-11-01</lastmod><priority>0.8</priority></url>
+  <url><loc>https://sahicar-in.web.app/car/bmw-x1</loc><lastmod>2026-11-01</lastmod><priority>0.8</priority></url>
   <url><loc>https://sahicar-in.web.app/car/bmw-3-series-lwb</loc><lastmod>2026-10-01</lastmod><priority>0.8</priority></url>
   <url><loc>https://sahicar-in.web.app/car/byd-atto-3</loc><lastmod>2026-10-01</lastmod><priority>0.8</priority></url>
   <url><loc>https://sahicar-in.web.app/car/byd-emax-7</loc><lastmod>2026-10-01</lastmod><priority>0.8</priority></url>
@@ -24,6 +24,7 @@
   <url><loc>https://sahicar-in.web.app/car/citroen-aircross</loc><lastmod>2026-10-01</lastmod><priority>0.8</priority></url>
   <url><loc>https://sahicar-in.web.app/car/citroen-ec3</loc><lastmod>2026-10-01</lastmod><priority>0.8</priority></url>
   <url><loc>https://sahicar-in.web.app/car/citroen-c5-aircross</loc><lastmod>2026-10-01</lastmod><priority>0.8</priority></url>
+  <url><loc>https://sahicar-in.web.app/car/denza-z9-gt</loc><lastmod>2026-11-01</lastmod><priority>0.8</priority></url>
   <url><loc>https://sahicar-in.web.app/car/honda-amaze-2nd-gen</loc><lastmod>2026-10-01</lastmod><priority>0.8</priority></url>
   <url><loc>https://sahicar-in.web.app/car/honda-amaze</loc><lastmod>2026-10-01</lastmod><priority>0.8</priority></url>
   <url><loc>https://sahicar-in.web.app/car/honda-elevate</loc><lastmod>2026-10-01</lastmod><priority>0.8</priority></url>
@@ -89,7 +90,7 @@
   <url><loc>https://sahicar-in.web.app/car/maruti-invicto</loc><lastmod>2026-10-01</lastmod><priority>0.8</priority></url>
   <url><loc>https://sahicar-in.web.app/car/mercedes-benz-gla</loc><lastmod>2026-10-01</lastmod><priority>0.8</priority></url>
   <url><loc>https://sahicar-in.web.app/car/mercedes-benz-c-class</loc><lastmod>2026-10-01</lastmod><priority>0.8</priority></url>
-  <url><loc>https://sahicar-in.web.app/car/mercedes-benz-glc</loc><lastmod>2026-10-01</lastmod><priority>0.8</priority></url>
+  <url><loc>https://sahicar-in.web.app/car/mercedes-benz-glc</loc><lastmod>2026-11-01</lastmod><priority>0.8</priority></url>
   <url><loc>https://sahicar-in.web.app/car/mercedes-benz-glc-electric</loc><lastmod>2026-11-01</lastmod><priority>0.8</priority></url>
   <url><loc>https://sahicar-in.web.app/car/mg-comet-ev</loc><lastmod>2026-10-01</lastmod><priority>0.8</priority></url>
   <url><loc>https://sahicar-in.web.app/car/mg-astor</loc><lastmod>2026-10-01</lastmod><priority>0.8</priority></url>

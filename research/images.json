@@ -760,5 +760,17 @@
  "volvo-ex90": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Volvo_EX90_autoMOBIL_T%C3%BCbingen_2025_DSC_2740.jpg/960px-Volvo_EX90_autoMOBIL_T%C3%BCbingen_2025_DSC_2740.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Volvo_EX90"
+ },
+ "denza-z9-gt": {
+  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Denza_Z9_GT_MIAS_2026_preview_01.jpg/960px-Denza_Z9_GT_MIAS_2026_preview_01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+  "page": "https://en.wikipedia.org/wiki/Denza_Z9"
+ },
+ "upcoming:audi-a5": {
+  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Audi_A5_B10_DSC_7314.jpg/960px-Audi_A5_B10_DSC_7314.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+  "page": "https://en.wikipedia.org/wiki/Audi_A5"
+ },
+ "upcoming:genesis-gv90": {
+  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/Genesis_GV90_JG1_Baena_Green_%285%29.jpg/960px-Genesis_GV90_JG1_Baena_Green_%285%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+  "page": "https://en.wikipedia.org/wiki/Genesis_GV90"
  }
 }
