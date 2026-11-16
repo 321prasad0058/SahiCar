@@ -153,7 +153,7 @@ const STEPS: Step[] = [
               </div>
             </div>
           )}
-          <Field label="Your monthly take-home pay (optional)" note={<><Icon name="shield" size={12} /> Stays on this device — never uploaded or shared. We use it to rank cars you can comfortably afford higher.</>}>
+          <Field label="Your monthly take-home pay (optional)" note={<span className="pay-private"><Icon name="shield" size={14} /> <span><b>Your salary stays with you.</b> It is kept only on this device. We never upload it, save it on our servers or share it, even when you sign in. We use it only to show which cars you can comfortably afford.</span></span>}>
             <div className="money-input">
               <span>₹</span>
               <input

@@ -2,6 +2,7 @@
 // the EMI, total cost and every lender's quote for this buyer out — updated as you move anything.
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
+import { Icon } from '../components/Icon'
 import { carById, cars, onroad, states } from '../data'
 import { LENDERS, RATES_AS_OF, REPO, SCORE_LABEL, type ScoreBand } from '../data/loans'
 import { onRoad } from '../engine/costs'
@@ -238,6 +239,7 @@ export default function Emi() {
                 <span>₹</span>
                 <input id="emi-income" inputMode="numeric" placeholder="e.g. 80,000" value={income ? income.toLocaleString('en-IN') : ''} onChange={(e) => setIncome(Number(e.target.value.replace(/\D/g, '')) || 0)} />
               </div>
+              <p className="pay-private small"><Icon name="shield" size={14} /> <span><b>Your salary stays with you.</b> It is used only on this page to check the EMI. We never upload it, save it or share it.</span></p>
             </div>
           </section>
 

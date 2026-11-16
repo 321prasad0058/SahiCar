@@ -388,3 +388,26 @@
 .fix:hover {
   border-color: var(--ink);
 }
+
+/* "Your salary stays with you": the privacy promise under every salary field */
+.pay-private {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin: 2px 0 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  color: var(--ink-2);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.pay-private svg {
+  flex: none;
+  margin-top: 2px;
+  color: var(--accent);
+}
+.pay-private b {
+  color: var(--ink);
+}
