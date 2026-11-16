@@ -1345,3 +1345,75 @@ button.v-row:hover {
 .zv-nav.prev { left: max(12px, env(safe-area-inset-left)); }
 .zv-nav.next { right: max(12px, env(safe-area-inset-right)); }
 @media (prefers-reduced-motion: reduce) { .zv, .zv-stage img { animation: none; transition: none; } }
+
+/* Garage: past quizzes */
+.quiz-history {
+  margin-top: 28px;
+}
+.qh-head h2 {
+  font-size: 20px;
+  margin: 0 0 4px;
+}
+.qh-head p {
+  margin: 0 0 12px;
+}
+.qh-empty {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 20px;
+  margin: 0;
+}
+.qh-empty p {
+  margin: 0;
+}
+.qh-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+}
+.qh-item {
+  display: grid;
+  gap: 8px;
+  padding: 16px 18px;
+}
+.qh-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.qh-date {
+  font-weight: 700;
+}
+.qh-latest {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 999px;
+  padding: 2px 10px;
+}
+.qh-sum {
+  margin: 0;
+}
+.qh-picks {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 2px;
+}
+.qh-picks a {
+  font-weight: 600;
+}
+.qh-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}

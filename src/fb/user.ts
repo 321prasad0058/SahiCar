@@ -1,5 +1,5 @@
-// Reading and writing a signed-in user's answers and garage.
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, orderBy, query, serverTimestamp, setDoc } from 'firebase/firestore'
+// Reading and writing a signed-in user's answers, top picks, quiz history and garage.
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, limit, orderBy, query, serverTimestamp, setDoc } from 'firebase/firestore'
 import type { User } from 'firebase/auth'
 import type { Answers } from '../engine/answers'
 import { db } from './firebase'
@@ -48,6 +48,29 @@ export async function addRun(uid: string, answers: Answers, picks: SavedPick[], 
   await addDoc(runs, { answers: { ...answers, income: 0 }, picks: picks.slice(0, 3), fits, at: serverTimestamp() })
   const all = await getDocs(query(runs, orderBy('at', 'desc')))
   await Promise.all(all.docs.slice(RUNS_KEPT).map((d) => deleteDoc(d.ref)))
+}
+
+/** One finished quiz from the history, newest first. */
+export interface Run {
+  id: string
+  at: Date | null
+  answers: Answers
+  picks: SavedPick[]
+  fits: number
+}
+
+export async function loadRuns(uid: string): Promise<Run[]> {
+  if (!db) return []
+  const snap = await getDocs(query(collection(db, 'users', uid, 'runs'), orderBy('at', 'desc'), limit(RUNS_KEPT)))
+  return snap.docs.map((d) => {
+    const r = d.data({ serverTimestamps: 'estimate' })
+    return { id: d.id, at: r.at?.toDate?.() ?? null, answers: r.answers as Answers, picks: (r.picks ?? []) as SavedPick[], fits: Number(r.fits ?? 0) }
+  })
+}
+
+export async function removeRun(uid: string, id: string) {
+  if (!db) return
+  await deleteDoc(doc(db, 'users', uid, 'runs', id))
 }
 
 export async function loadProfile(uid: string) {

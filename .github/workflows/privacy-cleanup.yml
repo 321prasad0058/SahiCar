@@ -1,0 +1,36 @@
+# Data retention (DPDP Act): every week, delete accounts nobody has signed in to for six months, with everything in
+# them (profile, saved cars, quiz history). Run it by hand from the Actions tab too: "check" only counts.
+name: Privacy cleanup
+
+on:
+  schedule:
+    - cron: '30 21 * * 6' # Sundays 03:00 IST
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'check = count what would be deleted, change nothing; apply = delete'
+        type: choice
+        options: [check, apply]
+        default: check
+
+permissions:
+  contents: read
+
+concurrency:
+  group: privacy-cleanup
+  cancel-in-progress: false
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Delete inactive accounts
+        env:
+          FIREBASE_ADMIN_SA: ${{ secrets.FIREBASE_ADMIN_SA }}
+        run: node scripts/privacy-cleanup.mjs ${{ (github.event_name == 'schedule' || inputs.mode == 'apply') && '--apply' || '' }}
