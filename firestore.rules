@@ -1,7 +1,7 @@
 rules_version = '2';
 
-// SahiCar keeps very little about a person: their SahiFit answers, the top cars SahiFit showed them and the cars
-// they saved.
+// SahiCar keeps very little about a person: their SahiFit answers (never their pay), the top cars SahiFit showed
+// them, their last 10 finished quizzes and the cars they saved.
 // Every document lives under the owner's uid and only that signed-in user can read or write it.
 // Anonymous feedback can be written but never read back from the app.
 service cloud.firestore {
@@ -10,16 +10,30 @@ service cloud.firestore {
     function signedIn() { return request.auth != null; }
     function owner(userId) { return signedIn() && request.auth.uid == userId; }
     function small() { return request.resource.size() <= 40; }
+    // quiz answers are a map, and take-home pay is never stored: it must be missing or 0
+    function validAnswers(a) { return a is map && (!('income' in a) || a.income == 0); }
 
     match /users/{userId} {
       allow read, delete: if owner(userId);
       allow create, update: if owner(userId) && small()
         && request.resource.data.keys().hasOnly(['name', 'email', 'photo', 'answers', 'picks', 'fits', 'picksAt', 'updatedAt', 'createdAt'])
-        && (!('answers' in request.resource.data) || request.resource.data.answers is map)
+        && (!('answers' in request.resource.data) || validAnswers(request.resource.data.answers))
         // the top 3 cars from their latest results (car, trim, fuel, gearbox, score, on-road price), and how many fit
         && (!('picks' in request.resource.data) || (request.resource.data.picks is list && request.resource.data.picks.size() <= 3))
         && (!('fits' in request.resource.data) || (request.resource.data.fits is int && request.resource.data.fits >= 0))
         && (!('picksAt' in request.resource.data) || request.resource.data.picksAt is timestamp);
+
+      // quiz history: one document per finished quiz (answers without pay, the top 3 it gave, how many fit).
+      // Written once, never edited; the app keeps the latest 10 and deletes older ones.
+      match /runs/{runId} {
+        allow read, delete: if owner(userId);
+        allow create: if owner(userId) && runId.size() <= 64
+          && request.resource.data.keys().hasOnly(['answers', 'picks', 'fits', 'at'])
+          && validAnswers(request.resource.data.answers)
+          && request.resource.data.picks is list && request.resource.data.picks.size() <= 3
+          && request.resource.data.fits is int && request.resource.data.fits >= 0
+          && request.resource.data.at == request.time;
+      }
 
       // saved cars: one document per car id
       match /garage/{carId} {

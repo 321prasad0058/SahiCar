@@ -62,8 +62,10 @@ if (!apply) {
 }
 
 for (const u of stale) {
-  const garage = await call(`${FS}/users/${u.localId}/garage?pageSize=300`)
-  for (const d of garage.documents ?? []) await call(`https://firestore.googleapis.com/v1/${d.name}`, { method: 'DELETE' })
+  for (const sub of ['garage', 'runs']) {
+    const docs = await call(`${FS}/users/${u.localId}/${sub}?pageSize=300`)
+    for (const d of docs.documents ?? []) await call(`https://firestore.googleapis.com/v1/${d.name}`, { method: 'DELETE' })
+  }
   await call(`${FS}/users/${u.localId}`, { method: 'DELETE' })
   await call(`https://identitytoolkit.googleapis.com/v1/projects/${PROJECT}/accounts:delete`, { method: 'POST', body: JSON.stringify({ localId: u.localId }) })
   console.log(`deleted inactive account ${u.localId.slice(0, 6)}…`)

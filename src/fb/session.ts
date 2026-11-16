@@ -43,13 +43,15 @@ export const reset = (email: string) => sendPasswordResetEmail(need(), email)
 export const logout = async () => void (auth && (await signOut(auth)))
 export const watch = (fn: (u: User | null) => void) => (auth ? onAuthStateChanged(auth, fn) : () => {})
 
-/** Right to erasure (DPDP Act): delete the saved cars, the profile, then the account itself. */
+/** Right to erasure (DPDP Act): delete the saved cars, the quiz history, the profile, then the account itself. */
 export async function deleteAccount() {
   const u = need().currentUser
   if (!u) return
   if (db) {
-    const garage = await getDocs(collection(db, 'users', u.uid, 'garage'))
-    await Promise.all(garage.docs.map((d) => deleteDoc(d.ref)))
+    for (const sub of ['garage', 'runs']) {
+      const docs = await getDocs(collection(db, 'users', u.uid, sub))
+      await Promise.all(docs.docs.map((d) => deleteDoc(d.ref)))
+    }
     await deleteDoc(doc(db, 'users', u.uid))
   }
   // Firebase asks for a recent sign-in before deleting an account; the caller explains that if it happens

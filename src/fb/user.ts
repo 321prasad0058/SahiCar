@@ -1,5 +1,5 @@
 // Reading and writing a signed-in user's answers and garage.
-import { collection, deleteDoc, doc, getDoc, getDocs, serverTimestamp, setDoc } from 'firebase/firestore'
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, orderBy, query, serverTimestamp, setDoc } from 'firebase/firestore'
 import type { User } from 'firebase/auth'
 import type { Answers } from '../engine/answers'
 import { db } from './firebase'
@@ -33,6 +33,21 @@ export interface SavedPick {
 export async function savePicks(uid: string, picks: SavedPick[], fits: number) {
   if (!db) return
   await setDoc(doc(db, 'users', uid), { picks: picks.slice(0, 3), fits, picksAt: serverTimestamp() }, { merge: true })
+}
+
+/** How many finished quizzes we keep per person; older ones are deleted. */
+export const RUNS_KEPT = 10
+
+/**
+ * Log one finished quiz: the answers (take-home pay removed) and the top 3 it gave, so we can see how people change
+ * their answers and which cars they end up with. Keeps only the latest RUNS_KEPT.
+ */
+export async function addRun(uid: string, answers: Answers, picks: SavedPick[], fits: number) {
+  if (!db) return
+  const runs = collection(db, 'users', uid, 'runs')
+  await addDoc(runs, { answers: { ...answers, income: 0 }, picks: picks.slice(0, 3), fits, at: serverTimestamp() })
+  const all = await getDocs(query(runs, orderBy('at', 'desc')))
+  await Promise.all(all.docs.slice(RUNS_KEPT).map((d) => deleteDoc(d.ref)))
 }
 
 export async function loadProfile(uid: string) {

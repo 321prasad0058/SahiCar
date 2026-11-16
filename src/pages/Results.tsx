@@ -17,6 +17,7 @@ import { cardPhoto, shareUrl, type CardData } from '../lib/shareCard'
 import { openFeedback } from '../lib/feedback'
 import { gate, toggleCompareGated, toggleSave } from '../lib/gate'
 import { reducedMotion } from '../lib/perf'
+import { clearRun, runPending } from '../lib/run'
 import { track, trackNoMatch } from '../lib/track'
 import { gsap } from '../lib/scroll'
 import { fb, useAuth } from '../state/auth'
@@ -190,10 +191,15 @@ export default function Results() {
       onRoad: Math.round(p.cost.onRoad.total),
     }))
     const key = `${user.uid}|${res.ranked.length}|${picks.map((p) => `${p.car}:${p.variant}:${p.gear}:${p.score}`).join(',')}`
+    // a quiz just finished: log it to their history once (cleared first, so a re-render can't log it twice)
+    if (runPending()) {
+      clearRun()
+      fb().then((m) => m.addRun(user.uid, answers, picks, res.ranked.length)).catch(() => {})
+    }
     if (key === savedPicks.current) return
     savedPicks.current = key
     fb().then((m) => m.savePicks(user.uid, picks, res.ranked.length)).catch(() => { savedPicks.current = '' })
-  }, [user, done, res])
+  }, [user, done, res, answers])
 
   useLayoutEffect(() => {
     if (reducedMotion || !root.current) return

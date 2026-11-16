@@ -13,6 +13,7 @@ import { relaxations, sahiScore } from '../engine/sahiscore'
 import { inr, lakh } from '../lib/format'
 import { reducedMotion } from '../lib/perf'
 import { gsap } from '../lib/scroll'
+import { markRun } from '../lib/run'
 import { track, trackNoMatch } from '../lib/track'
 import { useStore } from '../state/store'
 
@@ -386,6 +387,7 @@ export default function Wizard() {
     if (n >= STEPS.length) {
       track('quiz_complete', { fits, budget_lakh: Math.round(answers.budget / 10000) / 10, pay_given: answers.income > 0 ? 1 : 0 })
       useStore.getState().finish()
+      markRun()
       nav('/results')
       return
     }
