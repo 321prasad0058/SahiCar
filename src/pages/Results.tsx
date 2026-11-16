@@ -177,6 +177,24 @@ export default function Results() {
     if (user && done) fb().then((m) => m.saveProfile(user, answers)).catch(() => {})
   }, [user, done, answers])
 
+  // the top 3 they were shown (with or without their pay, as on screen), saved only when it changes
+  const savedPicks = useRef('')
+  useEffect(() => {
+    if (!user || !done || !res.picks.length) return
+    const picks = res.picks.slice(0, 3).map((p) => ({
+      car: p.car.id,
+      variant: p.variant ?? '',
+      fuel: p.pt.fuel,
+      gear: p.gear,
+      score: Math.round(p.score),
+      onRoad: Math.round(p.cost.onRoad.total),
+    }))
+    const key = `${user.uid}|${res.ranked.length}|${picks.map((p) => `${p.car}:${p.variant}:${p.gear}:${p.score}`).join(',')}`
+    if (key === savedPicks.current) return
+    savedPicks.current = key
+    fb().then((m) => m.savePicks(user.uid, picks, res.ranked.length)).catch(() => { savedPicks.current = '' })
+  }, [user, done, res])
+
   useLayoutEffect(() => {
     if (reducedMotion || !root.current) return
     const ctx = gsap.context(() => {

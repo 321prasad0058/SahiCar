@@ -85,7 +85,7 @@ export default function Login() {
               <button className="btn btn-primary full" disabled={busy}>{busy ? 'Please wait…' : mode === 'in' ? 'Sign in' : 'Create account'}</button>
             </form>
             <p className="consent dim small">
-              By continuing you agree that SahiCar stores your name, email, quiz answers and saved cars to keep them in sync across your
+              By continuing you agree that SahiCar stores your name, email, quiz answers, top matches and saved cars to keep them in sync across your
               devices and to understand how the site is used. We never sell them or share them with dealers or advertisers, and you can
               delete your account and data at any time from your garage. <Link to="/about#privacy">Privacy</Link>
             </p>

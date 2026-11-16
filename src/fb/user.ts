@@ -16,6 +16,25 @@ export async function saveProfile(u: User, answers?: Answers) {
   )
 }
 
+/** One car from the results the user saw: enough to tell which car and trim, nothing about the person. */
+export interface SavedPick {
+  car: string
+  variant: string
+  fuel: string
+  gear: string
+  score: number
+  onRoad: number
+}
+
+/**
+ * The top matches from their latest results, so we can see which cars SahiFit recommends to signed-in users.
+ * Saved on its own: if this write is refused, the answers saved by saveProfile are not affected.
+ */
+export async function savePicks(uid: string, picks: SavedPick[], fits: number) {
+  if (!db) return
+  await setDoc(doc(db, 'users', uid), { picks: picks.slice(0, 3), fits, picksAt: serverTimestamp() }, { merge: true })
+}
+
 export async function loadProfile(uid: string) {
   if (!db) return null
   const snap = await getDoc(doc(db, 'users', uid))
