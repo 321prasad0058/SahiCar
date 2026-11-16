@@ -10298,7 +10298,7 @@
   "lastUpdate": null,
   "price": {
    "min": 7700000,
-   "max": 7700000
+   "max": 7800000
   },
   "seats": [
    5
@@ -10384,9 +10384,10 @@
   "wiki": "Mercedes-Benz GLC",
   "oemUrl": "https://www.mercedes-benz.co.in/passengercars/models/suv/glc/overview.html",
   "sources": [
-   "https://www.cardekho.com/mercedes-benz-cars"
+   "https://www.cardekho.com/mercedes-benz-cars",
+   "https://www.zigwheels.com/mercedes-benz-cars/glc-2023/"
   ],
-  "verifiedOn": "2026-10"
+  "verifiedOn": "2026-11"
  },
  {
   "id": "mercedes-benz-glc-electric",
@@ -10689,7 +10690,7 @@
   "launched": "2023-01",
   "lastUpdate": "2026-01",
   "price": {
-   "min": 4990000,
+   "min": 5090000,
    "max": 5290000
   },
   "seats": [
@@ -10778,9 +10779,10 @@
   "wiki": "BMW X1",
   "oemUrl": "https://www.bmw.in/",
   "sources": [
-   "https://www.cardekho.com/bmw-cars"
+   "https://www.cardekho.com/bmw-cars",
+   "https://www.carwale.com/bmw-cars/x1/"
   ],
-  "verifiedOn": "2026-10"
+  "verifiedOn": "2026-11"
  },
  {
   "id": "bmw-ix1",
@@ -10791,8 +10793,8 @@
   "launched": "2025-01",
   "lastUpdate": null,
   "price": {
-   "min": 5240000,
-   "max": 5240000
+   "min": 4990000,
+   "max": 4990000
   },
   "seats": [
    5
@@ -10862,9 +10864,10 @@
   "wiki": "BMW X1",
   "oemUrl": "https://www.bmw.in/en/all-models/bmw-i/iX1/2025/bmw-ix1-highlights.html",
   "sources": [
-   "https://www.cardekho.com/bmw-cars"
+   "https://www.cardekho.com/bmw-cars",
+   "https://www.zigwheels.com/bmw-cars/x1/"
   ],
-  "verifiedOn": "2026-10"
+  "verifiedOn": "2026-11"
  },
  {
   "id": "audi-a4",
@@ -11142,6 +11145,121 @@
    "https://www.evoindia.com/news/car-news/evoindiacomvolvo-ex90-launch-news-587802",
    "https://www.zigwheels.com/news-features/general-news/volvo-launches-ex90-flagship-suv-at-rs-1.26-cr-swedish-ev-luxury-with-625-km-range/58349/",
    "https://www.autocarindia.com/cars/volvo/ex90"
+  ],
+  "verifiedOn": "2026-11"
+ },
+ {
+  "id": "denza-z9-gt",
+  "brand": "Denza",
+  "model": "Z9 GT",
+  "body": "hatchback",
+  "segment": "luxury",
+  "launched": "2026-11",
+  "lastUpdate": null,
+  "price": {
+   "min": 15680000,
+   "max": 15680000
+  },
+  "seats": [
+   5
+  ],
+  "dims": {
+   "length": 5180,
+   "width": 1990,
+   "height": 1490,
+   "wheelbase": 3125,
+   "groundClearance": null,
+   "boot": 495,
+   "kerbWeight": null,
+   "fuelTank": null,
+   "turningRadius": null
+  },
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "year": null,
+   "airbagsStd": 9,
+   "airbagsMax": null,
+   "esc": null,
+   "adas": "L2+"
+  },
+  "powertrains": [
+   {
+    "engine": "Tri-motor AWD",
+    "cc": null,
+    "powerPs": 1156,
+    "torqueNm": 1210,
+    "transmissions": [
+     "single-speed"
+    ],
+    "efficiency": 670,
+    "batteryKwh": 122.49,
+    "priceFrom": 15680000,
+    "fuel": "ev"
+   }
+  ],
+  "variants": [
+   {
+    "name": "Premium",
+    "fuel": "ev",
+    "transmission": "AT",
+    "price": 15680000
+   }
+  ],
+  "features": [
+   "13.2-inch digital instrument cluster",
+   "17.3-inch central touchscreen",
+   "13.2-inch front passenger display",
+   "20-speaker Devialet sound system",
+   "powered front seats",
+   "heated-seats",
+   "ventilated-seats",
+   "massage-seats",
+   "adas",
+   "panoramic-sunroof",
+   "electric-tailgate",
+   "frameless-doors",
+   "active-air-vent",
+   "electric-rear-spoiler",
+   "crab-walk",
+   "360-degree-turn",
+   "rear-wheel-steering",
+   "augmented-reality-hud",
+   "wireless-charging"
+  ],
+  "highlights": [
+   "Flagship electric shooting brake",
+   "1156 PS, 1210 Nm",
+   "0-100 kmph in 2.7 seconds",
+   "670 km claimed range (NEDC)",
+   "Crab Walk and 360-degree turn",
+   "1500 kW DC fast charging"
+  ],
+  "weaknesses": [
+   "Rs 1.56 crore price",
+   "Single fully-loaded variant",
+   "Fully imported model (CBU)"
+  ],
+  "serviceCost": null,
+  "resale": null,
+  "network": 2,
+  "wiki": "Denza Z9",
+  "oemUrl": null,
+  "sources": [
+   "https://mycarjunction.com/news/denza-z9-gt-price-range-specs",
+   "https://www.autocarindia.com/auto-features/denza-z9-gt-all-you-need-to-know-441306",
+   "https://www.team-bhp.com/news/heres-closer-look-denza-z9-gt-priced-rs-157-crore",
+   "https://www.topgearmag.in/news/cars/denza-z9-gt-launched-in-india-at-rs157-crore",
+   "https://www.v3cars.com/denza-cars/z9-gt",
+   "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGkvm_Airqq6OrQLATxJQnfdDW0TO9bu2O9GqJpfTnU78T-4-SbIwxgJVuyhhWZmhZdjRDZlYqbxi8UueOYW8TZxmIF5Po0Wu8NkHeppKUBg1YBLnR8EI0HASO7kUkMXhLxCbmoYjHHmjGEZKZynBmG9njUeV_OAncukO9vf84XukbMBuSOldnRm_b7TfR97lly_2U-L0-pCjQoKhbGJCULAi9xHXPojszeg7e14cS4f1WjRkhzCocaXbHhGOmBXB3VN_KkBh4Y_Fu8TjAPx8ZlOV3oDEVtsTRhVktmjvfMnFc3Q3E-yfOrdaCk",
+   "https://www.autocarindia.com/cars/denza/z9-gt",
+   "https://www.indiatoday.in/auto/cars/story/denza-z9-gt-launched-in-india-at-rs-157-crore-packs-1156bhp-3038097-2026-11-13",
+   "https://www.cardekho.com/news/new-launches/byds-denza-luxury-brand-makes-its-entry-in-india-launches-the-d9-mpv-at-rs-90-lakh-and-z9-gt-at-rs-156-crore-36962.htm",
+   "https://ackodrive.com/news/denza-india-launch-tomorrow-what-to-expect-from-byd-s-luxury-brand/",
+   "https://www.rushlane.com/byd-denza-z9-gt-india-launch-price-rs-1-57-cr-670-km-range-270-km-h-topspeed-12561013.html",
+   "https://www.autopunditz.com/post/denza-z9-gt-india-launch-price-range-specifications-2026",
+   "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH25PwPXbu01bkOI1mKq9L5mkDj4eMTp3UltbBujtNZM_hNnKv93hKEsNqbEIHomCoMmFI7AnO5N0rCSIwaCnQvYLP8bkancOb1y_on3poXUa6fu1E-sIYG7fL639SyVs4yYlE2rQU8inR4wm6giPySIyyvbP_v1k4fcKJp356VFWCs1PDe9aCKSgI="
   ],
   "verifiedOn": "2026-11"
  }
