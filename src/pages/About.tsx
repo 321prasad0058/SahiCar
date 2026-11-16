@@ -85,6 +85,7 @@ export default function About() {
               <li><b>Without an account:</b> your quiz answers, garage and compare list stay in this browser. We record anonymous page views and product events (for example “quiz finished” or “no car matched”, with the choices but never your name or email) to improve SahiCar.</li>
               <li><b>With a free account:</b> we store your name, email, quiz answers, the top 3 cars SahiFit showed you (for your last 10 quizzes) and your saved cars in Google Firebase, in Mumbai, so they sync across your devices. We look at which cars SahiFit recommends to improve our picks. Your take-home pay is never stored. Your activity is linked to a random account ID, not your email.</li>
               <li><b>How long we keep it:</b> for as long as you use your account. If you don’t sign in for six months, we delete the account and everything in it.</li>
+              <li><b>When you delete your account:</b> your profile, saved cars, quiz answers and quiz history are erased immediately. We keep no copy and no backup.</li>
               <li><b>What we never do:</b> sell your data, or share it with dealers, lenders, insurers or advertisers. No sales calls, ever.</li>
               <li><b>Your rights:</b> you can see and change your answers and saved cars any time, see or delete your past quizzes in your garage, and delete your account and all its data from your garage in one step, under India’s Digital Personal Data Protection Act, 2023.</li>
             </ul>

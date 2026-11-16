@@ -4,7 +4,8 @@
 //   npm run privacy:cleanup            show what would be deleted (changes nothing)
 //   npm run privacy:cleanup -- --apply delete it
 //
-// It acts as you, through your Firebase CLI login (`npx firebase login` as an owner of the project).
+// Locally it acts as you, through your Firebase CLI login (`npx firebase login` as an owner of the project).
+// In GitHub Actions (privacy-cleanup.yml, weekly) it uses the FIREBASE_ADMIN_SA service account instead.
 import { readFileSync } from 'node:fs'
 import { homedir } from 'node:os'
 import { join } from 'node:path'
@@ -15,6 +16,12 @@ const INACTIVE_DAYS = 183
 const apply = process.argv.includes('--apply')
 
 async function token() {
+  // GitHub Actions: the project's service account
+  if (process.env.FIREBASE_ADMIN_SA) {
+    const { cert } = await import('firebase-admin/app')
+    const t = await cert(JSON.parse(process.env.FIREBASE_ADMIN_SA)).getAccessToken()
+    return t.access_token
+  }
   const cfg = JSON.parse(readFileSync(join(homedir(), '.config/configstore/firebase-tools.json'), 'utf8'))
   const refresh = cfg.tokens?.refresh_token
   if (!refresh) throw new Error('Not logged in: run `npx firebase login` first.')
