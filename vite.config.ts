@@ -1,8 +1,18 @@
 import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
+import { defineConfig, type Plugin } from 'vite'
+import { LOADER_CSS, LOADER_HTML } from './src/loader.ts'
+
+// the SahiCar loader goes straight into index.html, so even the very first paint is never a blank page
+const loader = (): Plugin => ({
+  name: 'sahicar-loader',
+  transformIndexHtml: {
+    order: 'pre', // before Vite reads the inline <style>
+    handler: (html) => html.replace('<!--scl-css-->', LOADER_CSS.replace(/\n/g, '')).replace('<!--scl-html-->', LOADER_HTML),
+  },
+})
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), loader()],
   build: {
     target: 'es2022',
     rollupOptions: {

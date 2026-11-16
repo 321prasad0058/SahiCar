@@ -13,6 +13,7 @@ import { relaxations, sahiScore } from '../engine/sahiscore'
 import { inr, lakh } from '../lib/format'
 import { reducedMotion } from '../lib/perf'
 import { gsap } from '../lib/scroll'
+import { startReveal } from '../lib/reveal'
 import { markRun } from '../lib/run'
 import { track, trackNoMatch } from '../lib/track'
 import { useStore } from '../state/store'
@@ -383,12 +384,23 @@ export default function Wizard() {
 
   useEffect(() => track('quiz_start', {}), [])
 
+  // near the end, fetch the results page ahead, so on a slow connection it is ready by the time the headlights are on
+  const [revealing, setRevealing] = useState(false)
+  useEffect(() => {
+    if (reducedMotion || step < STEPS.length - 2) return
+    import('./Results').catch(() => {})
+  }, [step])
+
   const go = (n: number) => {
+    if (revealing) return
     if (n >= STEPS.length) {
       track('quiz_complete', { fits, budget_lakh: Math.round(answers.budget / 10000) / 10, pay_given: answers.income > 0 ? 1 : 0 })
       useStore.getState().finish()
       markRun()
-      nav('/results')
+      // the headlight reveal: the route changes once night has fallen, so the swap is never seen
+      if (reducedMotion) return nav('/results')
+      setRevealing(true)
+      startReveal(() => nav('/results'))
       return
     }
     dir.current = n > step ? 1 : -1
@@ -465,7 +477,7 @@ export default function Wizard() {
           <button className="btn btn-ghost" onClick={() => (step ? go(step - 1) : nav('/'))}>
             <Icon name="back" /> {step ? 'Back' : 'Home'}
           </button>
-          <button className="btn btn-primary" onClick={() => go(step + 1)}>
+          <button className="btn btn-primary" disabled={revealing} onClick={() => go(step + 1)}>
             {step === STEPS.length - 1 ? 'Reveal my cars' : 'Next'} <Icon name="arrow" />
           </button>
         </div>

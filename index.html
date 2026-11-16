@@ -30,19 +30,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style id="scl-css"><!--scl-css--></style>
   </head>
   <body>
-    <!-- shown instantly on any connection; React replaces it when the app has loaded -->
-    <div id="root">
-      <div style="min-height:100vh;display:flex;align-items:center;padding:100px clamp(16px,4vw,56px) 60px;background:#f5f3ee;color:#15171b;font-family:'Instrument Sans',system-ui,sans-serif">
-        <div style="max-width:1240px;margin:0 auto;width:100%">
-          <div style="font:600 14px/1 'Instrument Sans',sans-serif;color:#0b6b4f">India’s free, unbiased car advisor</div>
-          <h1 style="font:600 clamp(40px,6vw,92px)/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:-.03em;margin:18px 0 22px">The right car.<br /><span style="color:#0b6b4f">Honestly.</span></h1>
-          <p style="max-width:560px;color:#5d6168;font-size:17px;line-height:1.6;margin:0">No dealer leads. No sponsored rankings. Answer nine quick questions and SahiScore ranks every car, fuel and variant for your life.</p>
-          <p style="margin-top:28px;color:#8c8f95;font:13px 'Instrument Sans',sans-serif">loading…</p>
-        </div>
-      </div>
-    </div>
+    <!-- shown instantly on any connection, before the app's code arrives: the SahiCar loader (src/loader.ts) -->
+    <div id="root"><!--scl-html--></div>
     <noscript><p style="padding:2rem;color:#15171b;font-family:sans-serif">SahiCar needs JavaScript to find your right car.</p></noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>

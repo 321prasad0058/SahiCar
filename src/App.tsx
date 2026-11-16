@@ -1,7 +1,10 @@
-import { Suspense, lazy, useEffect } from 'react'
+import { Suspense, lazy, useEffect, useSyncExternalStore, type ComponentType } from 'react'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
+import { ErrorBoundary } from './components/ErrorBoundary'
 import { Footer } from './components/Footer'
 import { Nav } from './components/Nav'
+import { PageLoader } from './components/PageLoader'
+import Reveal from './components/Reveal'
 import { Toasts } from './components/Toast'
 import { useFeedback } from './lib/feedback'
 import { maybeNudge, useInstall } from './lib/install'
@@ -9,25 +12,32 @@ import { setGateNavigator } from './lib/gate'
 import { useStore } from './state/store'
 import Landing from './pages/Landing'
 import { SITE, crumbs, setSeo } from './lib/seo'
+import { getRevealPhase, subscribeReveal } from './lib/reveal'
+import { isChunkError, reloadOnce } from './lib/reload'
+
+// lazy() that survives a deploy: if the page's code is gone (new version), reload once instead of a blank page
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const lazyPage = <T extends ComponentType<any>>(load: () => Promise<{ default: T }>) =>
+  lazy(() => load().catch((e) => (isChunkError(e) && reloadOnce() ? new Promise<never>(() => {}) : Promise.reject(e))))
 
 // the compare tray needs the car database; load it only once something is being compared
-const CompareTray = lazy(() => import('./components/CompareTray').then((m) => ({ default: m.CompareTray })))
-const Wizard = lazy(() => import('./pages/Wizard'))
-const Results = lazy(() => import('./pages/Results'))
-const CarDetail = lazy(() => import('./pages/CarDetail'))
-const Explore = lazy(() => import('./pages/Explore'))
-const Compare = lazy(() => import('./pages/Compare'))
-const Upcoming = lazy(() => import('./pages/Upcoming'))
-const Garage = lazy(() => import('./pages/Garage'))
-const Login = lazy(() => import('./pages/Login'))
-const About = lazy(() => import('./pages/About'))
-const Emi = lazy(() => import('./pages/Emi'))
-const AppPage = lazy(() => import('./pages/AppPage'))
-const HowWeScore = lazy(() => import('./pages/HowWeScore'))
-const FeedbackSheet = lazy(() => import('./components/Feedback'))
-const GetApp = lazy(() => import('./components/GetApp'))
-const AppCoach = lazy(() => import('./components/AppCoach'))
-const DevCars = import.meta.env.DEV ? lazy(() => import('./pages/DevCars')) : null
+const CompareTray = lazyPage(() => import('./components/CompareTray').then((m) => ({ default: m.CompareTray })))
+const Wizard = lazyPage(() => import('./pages/Wizard'))
+const Results = lazyPage(() => import('./pages/Results'))
+const CarDetail = lazyPage(() => import('./pages/CarDetail'))
+const Explore = lazyPage(() => import('./pages/Explore'))
+const Compare = lazyPage(() => import('./pages/Compare'))
+const Upcoming = lazyPage(() => import('./pages/Upcoming'))
+const Garage = lazyPage(() => import('./pages/Garage'))
+const Login = lazyPage(() => import('./pages/Login'))
+const About = lazyPage(() => import('./pages/About'))
+const Emi = lazyPage(() => import('./pages/Emi'))
+const AppPage = lazyPage(() => import('./pages/AppPage'))
+const HowWeScore = lazyPage(() => import('./pages/HowWeScore'))
+const FeedbackSheet = lazyPage(() => import('./components/Feedback'))
+const GetApp = lazyPage(() => import('./components/GetApp'))
+const AppCoach = lazyPage(() => import('./components/AppCoach'))
+const DevCars = import.meta.env.DEV ? lazyPage(() => import('./pages/DevCars')) : null
 
 // search title + description for each fixed page (car pages set their own in CarDetail)
 const PAGES: Record<string, [string, string]> = {
@@ -43,6 +53,14 @@ const PAGES: Record<string, [string, string]> = {
   '/emi': ['Car loan EMI calculator India · SahiCar', 'Calculate your car loan EMI, down payment and total interest for any new car in India, and check what your salary can comfortably afford.'],
   '/app': ['Get the SahiCar app · free, no app store', 'Install SahiCar on your phone in one tap: free, no app store, works offline.'],
   '/how-we-score': ['How SahiScore works · SahiCar', 'How SahiCar scores every car: 5-year cost of ownership, Bharat NCAP safety and fit for your roads and family, explained in plain words.'],
+}
+
+
+/** The headlight reveal before the results, drawn above every route while it runs. */
+function RevealHost() {
+  const phase = useSyncExternalStore(subscribeReveal, getRevealPhase)
+  // part of the app itself (5 KB), so tapping "Reveal my cars" never waits on a download
+  return phase === 'idle' ? null : <Reveal />
 }
 
 export default function App() {
@@ -73,7 +91,8 @@ export default function App() {
       <a className="skip" href="#main">Skip to content</a>
       {!dev && <Nav />}
       <main id="main">
-        <Suspense fallback={<div className="page-loading"><span className="spinner" /></div>}>
+        <ErrorBoundary key={pathname}>
+        <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/sahifit" element={<Wizard />} />
@@ -92,7 +111,9 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
+        </ErrorBoundary>
       </main>
+      <RevealHost />
       {!bare && <Footer />}
       {comparing && (
         <Suspense fallback={null}>
