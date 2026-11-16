@@ -17,6 +17,7 @@ import { cardPhoto, shareUrl, type CardData } from '../lib/shareCard'
 import { openFeedback } from '../lib/feedback'
 import { gate, toggleCompareGated, toggleSave } from '../lib/gate'
 import { reducedMotion } from '../lib/perf'
+import { getRevealPhase, markResultsReady, whenRevealed } from '../lib/reveal'
 import { clearRun, runPending } from '../lib/run'
 import { track, trackNoMatch } from '../lib/track'
 import { gsap } from '../lib/scroll'
@@ -201,14 +202,30 @@ export default function Results() {
     fb().then((m) => m.savePicks(user.uid, picks, res.ranked.length)).catch(() => { savedPicks.current = '' })
   }, [user, done, res, answers])
 
+  // tell the reveal (if one is running over us) that the results are on screen behind it — only once we know whether
+  // the person is signed in, so it shows the same cars the page does (one when signed out)
+  useEffect(() => {
+    if (!enabled || authReady) markResultsReady()
+  }, [enabled, authReady])
+
   useLayoutEffect(() => {
     if (reducedMotion || !root.current) return
+    // the reveal flies its cards onto ours: then ours simply appear under them as they land
+    const landing = getRevealPhase() !== 'idle'
+    let off = () => {}
     const ctx = gsap.context(() => {
-      gsap.from('.res-head > *, .res-sub > *', { y: 30, autoAlpha: 0, duration: 0.8, stagger: 0.08, ease: 'power3.out' })
-      gsap.from('.pick-card', { y: 80, autoAlpha: 0, rotateX: -12, transformPerspective: 1000, duration: 1.1, stagger: 0.15, ease: 'expo.out', delay: 0.25 })
-      gsap.from('.res-section', { y: 40, autoAlpha: 0, duration: 0.9, stagger: 0.1, ease: 'power3.out', delay: 0.9 })
+      // set up hidden, and play the moment the curtain starts to part (or straight away without one)
+      const tl = gsap.timeline({ paused: true })
+      tl.from('.res-head > *, .res-sub > *', { y: 30, autoAlpha: 0, duration: 0.8, stagger: 0.08, ease: 'power3.out' }, 0)
+      if (landing) tl.from('.pick-card', { autoAlpha: 0, duration: 0.25, ease: 'power1.out' }, 0.72)
+      else tl.from('.pick-card', { y: 80, autoAlpha: 0, rotateX: -12, transformPerspective: 1000, duration: 1.1, stagger: 0.15, ease: 'expo.out' }, 0.25)
+      tl.from('.res-section', { y: 40, autoAlpha: 0, duration: 0.9, stagger: 0.1, ease: 'power3.out' }, 0.9)
+      off = whenRevealed(() => tl.play())
     }, root)
-    return () => ctx.revert()
+    return () => {
+      off()
+      ctx.revert()
+    }
   }, [res])
 
   const top = res.picks[0]

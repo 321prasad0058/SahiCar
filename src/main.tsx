@@ -5,6 +5,8 @@ import './lib/install'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
+import { bootLoader, playLoaderExit } from './components/PageLoader'
+import { reloadOnce } from './lib/reload'
 import { isLiveSite } from './lib/seo'
 import './styles/base.css'
 import './styles/app.css'
@@ -36,6 +38,36 @@ if (pre.dataset.pre) {
   obs.observe(mount, { childList: true, subtree: true })
   setTimeout(swap, 6000)
 }
+
+// An app-only page starts on the SahiCar loader from index.html. React would wipe it the moment it renders, so keep a
+// copy on screen until the page has real content, then let it drop away. (Under 200 ms it was never visible: skip it.)
+const boot = !pre.dataset.pre ? pre.querySelector<HTMLElement>('.scl') : null
+if (boot && performance.now() > 200) {
+  const copy = boot.cloneNode(true) as HTMLElement
+  copy.classList.add('scl-still')
+  copy.classList.remove('page-loading')
+  document.body.appendChild(copy)
+  bootLoader.el = copy
+  const done = () => {
+    if (!bootLoader.el) return
+    bootLoader.el = null
+    seen.disconnect()
+    playLoaderExit(copy)
+    copy.remove()
+  }
+  const seen = new MutationObserver(() => {
+    const main = document.querySelector('#root main')
+    if (main?.childElementCount && !main.querySelector('.page-loading')) requestAnimationFrame(done)
+  })
+  seen.observe(pre, { childList: true, subtree: true })
+  setTimeout(done, 10000)
+}
+
+// After a deploy, a tab opened earlier asks for page code that no longer exists. Reload once to get the new version,
+// instead of leaving a blank page.
+addEventListener('vite:preloadError', (e) => {
+  if (reloadOnce()) e.preventDefault()
+})
 
 createRoot(mount).render(
   <BrowserRouter>
