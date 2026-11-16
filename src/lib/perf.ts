@@ -57,6 +57,9 @@ export class FrameGuard {
 type Conn = { saveData?: boolean; effectiveType?: string }
 /** Whether to start the 3D scene at all: never on Save-Data or 2G, never without WebGL; `?3d=0|1` overrides. */
 export function canRun3D() {
+  // never while the build pre-renders pages (scripts/prerender.mjs): the 3D canvas isn't saved, and on a build server
+  // without a graphics chip, drawing it in software can stall the page for minutes
+  if ((window as Window & { __SC_PRERENDER__?: boolean }).__SC_PRERENDER__) return false
   try {
     const forced = new URLSearchParams(location.search).get('3d')
     if (forced === '0') return false

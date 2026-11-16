@@ -7,12 +7,18 @@ name: Weekly inventory update
 
 on:
   schedule:
-    # Mondays 03:13 UTC = 08:43 IST. GitHub delays scheduled jobs most at round times (:00, :30); an odd minute
-    # usually runs on time, so the email arrives before 9 AM.
-    - cron: '13 3 * * 1'
-  workflow_dispatch: # "Run workflow" button, for an update on demand
+    # Mondays 03:13 UTC = 08:43 IST: odd minutes, since GitHub delays scheduled jobs most at round times (:00, :30).
+    # GitHub may also drop a scheduled run when it is busy (16 Nov 2026 never started), so there are backups later
+    # on Monday and on Tuesday morning. Each one first checks whether this week's update already ran (the "guard"
+    # job below) and stops if it did, so a week never gets two pull requests.
+    - cron: '13 3 * * 1' # Monday 08:43 IST
+    - cron: '47 5 * * 1' # Monday 11:17 IST, backup
+    - cron: '23 9 * * 1' # Monday 14:53 IST, backup
+    - cron: '13 3 * * 2' # Tuesday 08:43 IST, last backup
+  workflow_dispatch: # "Run workflow" button, for an update on demand (always runs)
 
 permissions:
+  actions: read # the guard reads this workflow's past runs
   contents: write
   pull-requests: write
 
@@ -21,7 +27,29 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Has this week's update already run? This week starts Monday 00:00 IST. A run by hand always goes ahead.
+  guard:
+    runs-on: ubuntu-latest
+    outputs:
+      go: ${{ steps.check.outputs.go }}
+    steps:
+      - id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT: ${{ github.event_name }}
+        run: |
+          if [ "$EVENT" != "schedule" ]; then echo "go=true" >> "$GITHUB_OUTPUT"; echo "Started by hand: running."; exit 0; fi
+          # this Monday 00:00 IST, in UTC (Python is on every GitHub runner)
+          since=$(python3 -c "import datetime as d; ist=d.timezone(d.timedelta(hours=5,minutes=30)); n=d.datetime.now(ist); m=(n-d.timedelta(days=n.weekday())).replace(hour=0,minute=0,second=0,microsecond=0); print(m.astimezone(d.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'))")
+          done=$(gh run list -R "$GITHUB_REPOSITORY" --workflow weekly-update.yml --limit 30 \
+            --json databaseId,status,conclusion,createdAt \
+            --jq "[.[] | select(.databaseId != $GITHUB_RUN_ID and .createdAt >= \"$since\" and (.conclusion == \"success\" or .status == \"in_progress\" or .status == \"queued\"))] | length")
+          if [ "$done" -gt 0 ]; then echo "go=false" >> "$GITHUB_OUTPUT"; echo "This week's update already ran (since $since): skipping."
+          else echo "go=true" >> "$GITHUB_OUTPUT"; echo "No update yet this week (since $since): running."; fi
+
   update:
+    needs: guard
+    if: needs.guard.outputs.go == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 40
     env:

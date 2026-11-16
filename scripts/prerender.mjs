@@ -42,9 +42,21 @@ const browser = await puppeteer.launch({ executablePath: chrome, headless: 'new'
 const SEO_TAG = /^\s*(<title>.*<\/title>|<meta (name|property)="(description|og:title|og:description|og:url|og:image|twitter:title|twitter:description|twitter:image|robots)"[^>]*>|<link rel="canonical"[^>]*>)\s*$/
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
 
+// Each page: wait for its own content to be drawn (not for the network to fall silent, which a slow font or image can
+// delay), then give late requests a moment to finish. The 3D scene is switched off (lib/perf canRun3D): it isn't saved,
+// and on a build server without a graphics chip it is drawn in software and can stall the home page for minutes.
+async function newPage() {
+  const page = await browser.newPage()
+  await page.setViewport({ width: 1280, height: 900 })
+  await page.evaluateOnNewDocument(() => { window.__SC_PRERENDER__ = true })
+  return page
+}
+
 async function render(page, path) {
-  await page.goto(`http://localhost:${PORT}${path}`, { waitUntil: 'networkidle0', timeout: 90000 })
-  await page.waitForFunction(() => !document.querySelector('[data-pre]') && document.querySelector('#root main')?.childElementCount && !document.querySelector('.page-loading'), { timeout: 30000 })
+  await page.goto(`http://localhost:${PORT}${path}`, { waitUntil: 'domcontentloaded', timeout: 60000 })
+  // polled on a timer: the default re-checks on animation frames, which tabs in the background never get
+  await page.waitForFunction(() => !document.querySelector('[data-pre]') && document.querySelector('#root main')?.childElementCount && !document.querySelector('.page-loading'), { timeout: 45000, polling: 250 })
+  await page.waitForNetworkIdle({ idleTime: 400, timeout: 10000 }).catch(() => {})
   await new Promise((r) => setTimeout(r, 300))
   return page.evaluate(() => {
     const q = (s) => document.head.querySelector(s)
@@ -80,12 +92,17 @@ function bake(r, notFound) {
 let done = 0, failed = []
 const queue = [...jobs]
 await Promise.all(Array.from({ length: CONCURRENCY }, async () => {
-  const page = await browser.newPage()
-  await page.setViewport({ width: 1280, height: 900 })
+  let page = await newPage()
   while (queue.length) {
     const [path, out] = queue.shift()
     try {
-      const r = await render(page, path)
+      // one retry in a fresh tab before a page counts as failed (a busy build server can stall a single load)
+      const r = await render(page, path).catch(async (e) => {
+        console.log(`prerender: retrying ${path} (${e.message.split('\n')[0]})`)
+        await page.close().catch(() => {})
+        page = await newPage()
+        return render(page, path)
+      })
       const file = out === '/' ? join(DIST, 'index.html') : join(DIST, out.slice(1) + '.html')
       mkdirSync(dirname(file), { recursive: true })
       writeFileSync(file, bake(r, out === '/404'))
