@@ -43,7 +43,7 @@ function Chips<T extends string>({ value, options, onChange }: { value: T[]; opt
         const on = value.includes(o.v)
         return (
           <button key={o.v} className={`pick ${on ? 'on' : ''}`} aria-pressed={on} onClick={() => onChange(on ? value.filter((x) => x !== o.v) : [...value, o.v])}>
-            {on && <Icon name="check" size={14} />} {o.label}
+            {o.label}
           </button>
         )
       })}
