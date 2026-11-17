@@ -62,6 +62,14 @@ async function render(page, path) {
     const q = (s) => document.head.querySelector(s)
     const root = document.getElementById('root').cloneNode(true)
     root.querySelectorAll('canvas, script, .toast').forEach((el) => el.remove())
+    // Headlines mid-animation are split into one hidden box per letter (GSAP SplitText), which a crawler reads as
+    // "T h e r i g h t c a r". Save them as the plain words SplitText keeps in aria-label; the app re-splits them live.
+    root.querySelectorAll('[aria-label]').forEach((el) => {
+      const label = el.getAttribute('aria-label')
+      if (!el.querySelector(':scope > [aria-hidden="true"]') || el.textContent.replace(/\s/g, '') !== label.replace(/\s/g, '')) return
+      el.textContent = label
+      el.removeAttribute('aria-label')
+    })
     return {
       title: document.title,
       metas: [...document.head.querySelectorAll('meta[name="description"], meta[property^="og:"], meta[name^="twitter:"]')].map((m) => [m.hasAttribute('name') ? 'name' : 'property', m.getAttribute('name') || m.getAttribute('property'), m.content]),
