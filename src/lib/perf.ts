@@ -55,7 +55,7 @@ export class FrameGuard {
 }
 
 type Conn = { saveData?: boolean; effectiveType?: string }
-/** Whether to start the 3D scene at all: never on Save-Data or 2G, never without WebGL; `?3d=0|1` overrides. */
+/** Whether to start the 3D scene at all: never on Save-Data, 2G/3G or ≤2 GB phones, never without WebGL; `?3d=0|1` overrides. */
 export function canRun3D() {
   // never while the build pre-renders pages (scripts/prerender.mjs): the 3D canvas isn't saved, and on a build server
   // without a graphics chip, drawing it in software can stall the page for minutes
@@ -66,7 +66,10 @@ export function canRun3D() {
     if (forced === '1') return true
   } catch { /* ignore */ }
   const c = (navigator as Navigator & { connection?: Conn }).connection
-  if (c?.saveData || c?.effectiveType === 'slow-2g' || c?.effectiveType === '2g') return false
+  if (c?.saveData || c?.effectiveType === 'slow-2g' || c?.effectiveType === '2g' || c?.effectiveType === '3g') return false
+  // phones with 2 GB or less stutter on the 3D and the download costs them most: they keep the car pictures
+  const mem = (navigator as Navigator & { deviceMemory?: number }).deviceMemory
+  if (mem !== undefined && mem <= 2) return false
   try {
     const canvas = document.createElement('canvas')
     return !!(canvas.getContext('webgl2') || canvas.getContext('webgl'))

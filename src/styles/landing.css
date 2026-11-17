@@ -669,3 +669,36 @@
 .versus + .emi-home {
   margin-top: -6vh;
 }
+
+/* the car picture on stage until the 3D takes over (or for good, where the 3D doesn't run) */
+.car-zone {
+  position: relative;
+}
+.car-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: 50% 100%;
+  /* the renders sit on white: multiply drops the white into the stage's own warm studio */
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  animation: poster-in 0.5s var(--ease) both;
+  transition: opacity 0.8s var(--ease);
+}
+.car-poster.gone {
+  animation: none;
+  opacity: 0;
+}
+@keyframes poster-in {
+  from { opacity: 0; transform: translateX(4%); }
+  to { opacity: 1; transform: none; }
+}
+@media (max-width: 959px) {
+  /* the renders have air around the car: enlarge a little so it fills the stage like the 3D does */
+  .car-poster { inset: auto; left: -10%; width: 120%; bottom: -12%; height: 135%; object-position: 50% 60%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .car-poster { animation: none; }
+}

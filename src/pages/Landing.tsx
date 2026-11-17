@@ -5,6 +5,7 @@ import { EmiTeaser } from '../components/EmiTeaser'
 import { Icon } from '../components/Icon'
 import { YouTubeHook, YouTubeLink } from '../components/YouTube'
 import summary from '../data/summary.json'
+import posterData from '../data/posters.json'
 import { expectedLabel, monthsUntil } from '../engine/timing'
 import { lakh } from '../lib/format'
 import { setupCounts, setupReveals } from '../lib/motion'
@@ -28,6 +29,13 @@ const STYLES: { key: StyleKey; car: number; kicker: string; short: string; line:
   { key: 'mpv', car: 4, kicker: 'MPV', short: 'MPV', line: 'Three real rows: grandparents in the middle, kids at the back, luggage still fits.', best: 'Joint families, 6–7 regular riders', explore: 'body=mpv' },
 ]
 const DWELL = 2 // seconds each style stays on stage
+
+// Pictures of the same 3D cars (scripts/posters.cjs), in SHOWCASE order (webgl/cars/specs.ts). They show at once —
+// they're even in the pre-rendered page — so slow phones and slow networks see a car while the 3D downloads,
+// and keep seeing one where the 3D doesn't run at all.
+const SHOWCASE_IDS = ['tata-sierra-ev', 'tata-altroz', 'honda-city', 'maruti-victoris', 'maruti-ertiga']
+const POSTERS = posterData as Record<string, { w: string; m: string }>
+const posterOf = (car: number) => POSTERS[SHOWCASE_IDS[car]]
 
 function styleFacts(k: StyleKey) {
   const s = summary.styles[k]
@@ -287,7 +295,20 @@ export default function Landing() {
 
           {/* the stage: the car fills .car-zone; the card says what you're looking at */}
           <div className="stage hero-in" onPointerEnter={() => setHover(true)} onPointerLeave={() => setHover(false)}>
-            <div className="car-zone" ref={zone} onPointerDown={onDown} onPointerUp={onUp} aria-hidden />
+            <div className="car-zone" ref={zone} onPointerDown={onDown} onPointerUp={onUp} aria-hidden>
+              {posterOf(st.car) && (
+                <img
+                  key={st.key}
+                  className={`car-poster ${live3d ? 'gone' : ''}`}
+                  src={posterOf(st.car).m}
+                  srcSet={`${posterOf(st.car).m} 712w, ${posterOf(st.car).w} 967w`}
+                  sizes="(max-width: 959px) 100vw, 50vw"
+                  alt=""
+                  decoding="async"
+                  fetchPriority={active === 0 ? 'high' : 'auto'}
+                />
+              )}
+            </div>
             <div className={`style-card ${paused ? 'paused' : ''}`} ref={card} aria-roledescription="carousel" aria-label="Body styles">
               <div className="sc-tabs" role="tablist" aria-label="Body style" onKeyDown={onTabKey}>
                 {STYLES.map((s, i) => (
