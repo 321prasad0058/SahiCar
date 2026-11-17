@@ -88,3 +88,18 @@ if (import.meta.env.PROD && import.meta.env.VITE_FIREBASE_MEASUREMENT_ID && isLi
     'requestIdleCallback' in window ? requestIdleCallback(go, { timeout: 4000 }) : setTimeout(go, 2000)
   })
 }
+
+// Microsoft Clarity (heatmaps and anonymous session replays; it masks what people type), same rules as Analytics
+if (import.meta.env.PROD && isLiveSite() && !navigator.webdriver) {
+  addEventListener('load', () => {
+    const go = () => {
+      const w = window as Window & { clarity?: { (...a: unknown[]): void; q?: unknown[][] } }
+      w.clarity = w.clarity || Object.assign((...a: unknown[]) => { (w.clarity!.q = w.clarity!.q || []).push(a) }, {})
+      const s = document.createElement('script')
+      s.async = true
+      s.src = 'https://www.clarity.ms/tag/zewx67v5ot?ref=bwt'
+      document.head.appendChild(s)
+    }
+    'requestIdleCallback' in window ? requestIdleCallback(go, { timeout: 4000 }) : setTimeout(go, 2000)
+  })
+}
