@@ -8,6 +8,7 @@ import App from './App'
 import { bootLoader, playLoaderExit } from './components/PageLoader'
 import { reloadOnce } from './lib/reload'
 import { isLiveSite } from './lib/seo'
+import { afterHero } from './lib/perf'
 import './styles/base.css'
 import './styles/app.css'
 import './styles/landing.css'
@@ -63,6 +64,20 @@ if (boot && performance.now() > 200) {
   setTimeout(done, 10000)
 }
 
+// The homepage keeps the road loader (bottom sheet on phones, full scene on desktop) until its 3D cars are moving,
+// and never longer than 15 s; taps pass through it meanwhile.
+const heroLoader = document.querySelector<HTMLElement>('#hero-loader .scl')
+if (heroLoader) {
+  const down = () => {
+    if (!heroLoader.isConnected) return
+    // it only becomes visible 160 ms after first paint: before that, just remove it
+    if (performance.now() > 200) playLoaderExit(heroLoader)
+    heroLoader.parentElement?.remove()
+  }
+  addEventListener('sc:hero-done', down, { once: true })
+  setTimeout(down, 15000)
+}
+
 // After a deploy, a tab opened earlier asks for page code that no longer exists. Reload once to get the new version,
 // instead of leaving a blank page.
 addEventListener('vite:preloadError', (e) => {
@@ -85,7 +100,7 @@ if (import.meta.env.PROD && 'serviceWorker' in navigator && !navigator.webdriver
 if (import.meta.env.PROD && import.meta.env.VITE_FIREBASE_MEASUREMENT_ID && isLiveSite() && !navigator.webdriver) {
   addEventListener('load', () => {
     const go = () => import('./fb/analytics').then((m) => m.startAnalytics()).catch(() => {})
-    'requestIdleCallback' in window ? requestIdleCallback(go, { timeout: 4000 }) : setTimeout(go, 2000)
+    afterHero(() => ('requestIdleCallback' in window ? requestIdleCallback(go, { timeout: 4000 }) : setTimeout(go, 2000)))
   })
 }
 
@@ -100,6 +115,6 @@ if (import.meta.env.PROD && isLiveSite() && !navigator.webdriver) {
       s.src = 'https://www.clarity.ms/tag/zewx67v5ot?ref=bwt'
       document.head.appendChild(s)
     }
-    'requestIdleCallback' in window ? requestIdleCallback(go, { timeout: 4000 }) : setTimeout(go, 2000)
+    afterHero(() => ('requestIdleCallback' in window ? requestIdleCallback(go, { timeout: 4000 }) : setTimeout(go, 2000)))
   })
 }

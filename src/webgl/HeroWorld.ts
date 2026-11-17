@@ -11,11 +11,11 @@
 // - resolution adapts to the frame rate; rendering stops when the hero is scrolled away or the tab is hidden;
 //   a lost WebGL context hands over to the static poster.
 import * as THREE from 'three'
-import { getTier, reducedMotion } from '../lib/perf'
+import { reducedMotion } from '../lib/perf'
 import { gsap } from '../lib/scroll'
 import { buildCar, type CarRig } from './cars/build'
 import { MODEL_FILES, loadModel } from './cars/models'
-import { SHOWCASE } from './cars/specs'
+import { SHOWCASE } from './cars/showcase'
 import { bakeEnvironment } from './env'
 
 // camera framing per car (indexed like SHOWCASE): angle around the car (0 = side-on, + toward the nose),
@@ -72,7 +72,6 @@ export class HeroWorld {
   private disposed = false
   private firstFrame = false
   private idleHandle = 0
-  private tier = getTier()
   private dpr: number
   private maxDpr: number
   private frameTimes: number[] = []
@@ -95,9 +94,10 @@ export class HeroWorld {
   constructor(private canvas: HTMLCanvasElement, private events: HeroEvents = {}, start = 0) {
     this.active = start
     this.cam = { ...SHOTS[start], theta: SHOTS[start].theta - 0.5, elev: SHOTS[start].elev + 0.06, zoom: 1.25 }
-    const high = this.tier === 'high'
-    this.renderer = new THREE.WebGLRenderer({ canvas, antialias: high, powerPreference: 'default', alpha: false, stencil: false })
-    this.maxDpr = Math.min(devicePixelRatio, high ? 2 : 1.25)
+    // every phone gets the full-quality car: the road loader covers the extra load time. A phone that can't keep
+    // it smooth only lowers its resolution, step by step while it runs (adapt), never below 1x
+    this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'default', alpha: false, stencil: false })
+    this.maxDpr = Math.min(devicePixelRatio, 2)
     this.dpr = this.maxDpr
     this.renderer.setPixelRatio(this.dpr)
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping
@@ -137,7 +137,7 @@ export class HeroWorld {
   private ensure(i: number) {
     let car = this.cars[i]
     if (!car) {
-      car = buildCar(SHOWCASE[i], { detail: this.tier === 'high' ? 'high' : 'low' })
+      car = buildCar(SHOWCASE[i], { detail: 'high' })
       car.group.visible = false
       car.setLights(this.lights)
       this.scene.add(car.group)
@@ -279,10 +279,10 @@ export class HeroWorld {
     if (this.frameTimes.length < 30) return
     const avg = this.frameTimes.reduce((a, b) => a + b, 0) / this.frameTimes.length
     this.frameTimes = []
-    if (avg > 24 && this.dpr > 0.75) this.setDpr(this.dpr - 0.25)
+    if (avg > 24 && this.dpr > 1) this.setDpr(this.dpr - 0.25)
   }
   private setDpr(v: number) {
-    this.dpr = Math.max(0.75, Math.min(this.maxDpr, v))
+    this.dpr = Math.max(Math.min(1, this.maxDpr), Math.min(this.maxDpr, v))
     this.renderer.setPixelRatio(this.dpr)
     this.layout()
   }

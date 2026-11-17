@@ -6,7 +6,7 @@
 //   dist/404.html  the "Wrong turn" page; Firebase serves it with status 404 for any unknown address
 // The app takes over each page in the browser as usual (src/main.tsx swaps in without a flash).
 import { createServer } from 'node:http'
-import { readFileSync, writeFileSync, mkdirSync, existsSync, statSync } from 'node:fs'
+import { readFileSync, writeFileSync, mkdirSync, existsSync, statSync, rmSync } from 'node:fs'
 import { dirname, extname, join } from 'node:path'
 import { createRequire } from 'node:module'
 
@@ -80,13 +80,35 @@ async function render(page, path) {
   })
 }
 
-function bake(r, notFound) {
+// the SahiCar road loader, as index.html has it (minus page-loading, which the app reads as "a page is still loading")
+const LOADER = (shell.match(/<div id="root">(<div class="page-loading scl".*)<\/div>\s*$/m)?.[1] ?? '').replace('page-loading scl', 'scl')
+
+// The homepage's 3D files start downloading while the page itself loads, not after the app has started. Only where the
+// 3D will run (WebGL, Data Saver off), so other phones don't pay for it. The list comes from Vite's build manifest.
+const MANIFEST = join(DIST, '.vite', 'manifest.json')
+let heroPreload = ''
+if (existsSync(MANIFEST)) {
+  const m = JSON.parse(readFileSync(MANIFEST, 'utf8'))
+  const files = new Set()
+  const walk = (key) => { const e = m[key]; if (!e || files.has('/' + e.file)) return; files.add('/' + e.file); (e.imports || []).forEach(walk) }
+  walk('src/webgl/HeroWorld.ts')
+  const entry = Object.values(m).find((e) => e.isEntry)
+  const already = new Set(['/' + entry?.file, ...(entry?.imports || []).map((k) => '/' + m[k]?.file)])
+  const list = [...files].filter((f) => !already.has(f))
+  // on phones that can't run the 3D (or with Data Saver on) the homepage road loader is hidden straight away
+  if (list.length) heroPreload = `<script>(function(){var ok=0;try{var c=navigator.connection;if(!(c&&c.saveData)&&!(/^(localhost|127\\.0\\.0\\.1|192\\.168\\.)/.test(location.hostname)&&/[?&]3d=0/.test(location.search))){var x=document.createElement('canvas');ok=!!(x.getContext('webgl2')||x.getContext('webgl'))}}catch(e){}if(!ok){document.documentElement.classList.add('no-hero3d');return}${JSON.stringify(list)}.forEach(function(h){var l=document.createElement('link');l.rel='modulepreload';l.crossOrigin='';l.fetchPriority='low';l.href=h;document.head.appendChild(l)})})()</script><style>.no-hero3d #hero-loader{display:none}</style>`
+  rmSync(join(DIST, '.vite'), { recursive: true, force: true })
+  console.log(`prerender: homepage preloads ${list.length} 3D files`)
+}
+
+function bake(r, notFound, path = '') {
   const head = [
     `<title>${esc(notFound ? 'Page not found · SahiCar' : r.title)}</title>`,
     ...(notFound ? ['<meta name="description" content="That page doesn’t exist on SahiCar. Find the right car for you, free and unbiased." />'] : r.metas.map(([a, k, v]) => `<meta ${a}="${k}" content="${esc(v)}" />`)),
     ...(notFound ? ['<meta name="robots" content="noindex" />'] : []),
     ...(r.canonical && !notFound ? [`<link rel="canonical" href="${esc(r.canonical)}" />`] : []),
     ...(r.ld && !notFound ? [`<script type="application/ld+json" id="ld">${r.ld.replace(/</g, '\\u003c')}</script>`] : []),
+    ...(path === '/' && heroPreload ? [heroPreload] : []),
   ].map((l) => '    ' + l)
   const lines = shell.split('\n').filter((l) => !SEO_TAG.test(l) && !/^\s*<meta (name|property)="(og:title|og:description|og:url|og:image|twitter:image)"/.test(l))
   const at = lines.findIndex((l) => l.includes('name="viewport"')) + 1
@@ -94,7 +116,9 @@ function bake(r, notFound) {
   const html = lines.join('\n')
   const a = html.indexOf('<div id="root">'), b = html.indexOf('<noscript>')
   if (a < 0 || b < 0) throw new Error('unexpected index.html: no #root / <noscript>')
-  return html.slice(0, a) + `<div id="root" data-pre="1">${r.body}</div>\n    ` + html.slice(b)
+  // the homepage keeps the road loader up until its 3D cars are moving (main.tsx takes it down)
+  const loader = path === '/' && heroPreload && LOADER ? `<div id="hero-loader">${LOADER}</div>\n    ` : ''
+  return html.slice(0, a) + loader + `<div id="root" data-pre="1">${r.body}</div>\n    ` + html.slice(b)
 }
 
 let done = 0, failed = []
@@ -113,7 +137,7 @@ await Promise.all(Array.from({ length: CONCURRENCY }, async () => {
       })
       const file = out === '/' ? join(DIST, 'index.html') : join(DIST, out.slice(1) + '.html')
       mkdirSync(dirname(file), { recursive: true })
-      writeFileSync(file, bake(r, out === '/404'))
+      writeFileSync(file, bake(r, out === '/404', out))
       if (++done % 25 === 0) console.log(`prerender: ${done}/${jobs.length}`)
     } catch (e) { failed.push(`${path}: ${e.message.split('\n')[0]}`) }
   }
