@@ -15,6 +15,8 @@ export default defineConfig({
   plugins: [react(), loader()],
   build: {
     target: 'es2022',
+    // read by scripts/prerender.mjs to preload the homepage 3D, then deleted
+    manifest: true,
     rollupOptions: {
       output: {
         manualChunks: (id) => {

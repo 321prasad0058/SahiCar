@@ -5,12 +5,11 @@ import { EmiTeaser } from '../components/EmiTeaser'
 import { Icon } from '../components/Icon'
 import { YouTubeHook, YouTubeLink } from '../components/YouTube'
 import summary from '../data/summary.json'
-import posterData from '../data/posters.json'
 import { expectedLabel, monthsUntil } from '../engine/timing'
 import { lakh } from '../lib/format'
 import { setupCounts, setupReveals } from '../lib/motion'
 import { sharedMatch } from '../lib/entry'
-import { canRun3D, reducedMotion, whenIdle } from '../lib/perf'
+import { afterHero, canRun3D, markHeroDone, reducedMotion, whenIdle } from '../lib/perf'
 import { SplitText, gsap, startScroll } from '../lib/scroll'
 import { useStore } from '../state/store'
 import type { HeroWorld } from '../webgl/HeroWorld'
@@ -30,12 +29,6 @@ const STYLES: { key: StyleKey; car: number; kicker: string; short: string; line:
 ]
 const DWELL = 2 // seconds each style stays on stage
 
-// Pictures of the same 3D cars (scripts/posters.cjs), in SHOWCASE order (webgl/cars/specs.ts). They show at once —
-// they're even in the pre-rendered page — so slow phones and slow networks see a car while the 3D downloads,
-// and keep seeing one where the 3D doesn't run at all.
-const SHOWCASE_IDS = ['tata-sierra-ev', 'tata-altroz', 'honda-city', 'maruti-victoris', 'maruti-ertiga']
-const POSTERS = posterData as Record<string, { w: string; m: string }>
-const posterOf = (car: number) => POSTERS[SHOWCASE_IDS[car]]
 
 function styleFacts(k: StyleKey) {
   const s = summary.styles[k]
@@ -157,6 +150,7 @@ export default function Landing() {
             {
               onFirstFrame: () => {
                 setLive3d(true)
+                markHeroDone()
                 const intro = w?.intro(scrollY > innerHeight * 0.5)
                 // start the clock once the opening sweep has brought the first car fully into view
                 if (!intro || intro.duration() === 0) setReady(true)
@@ -165,6 +159,7 @@ export default function Landing() {
               onFail: () => {
                 setLive3d(false)
                 setReady(true)
+                markHeroDone()
               },
             },
             // if the captions already moved on (slow load), start on the car they are showing
@@ -176,15 +171,17 @@ export default function Landing() {
         .catch(() => {
           setLive3d(false)
           setReady(true)
+          markHeroDone()
         })
-    }
+    } else markHeroDone()
     addEventListener('resize', onResize)
     const ro = new ResizeObserver(onResize)
     if (zone.current) ro.observe(zone.current)
     // the visitor will most likely press "Find my car" next
-    whenIdle(() => void import('./Wizard'))
+    afterHero(() => whenIdle(() => void import('./Wizard')))
     return () => {
       disposed = true
+      markHeroDone()
       clearTimeout(fallback)
       removeEventListener('resize', onResize)
       ro.disconnect()
@@ -295,20 +292,7 @@ export default function Landing() {
 
           {/* the stage: the car fills .car-zone; the card says what you're looking at */}
           <div className="stage hero-in" onPointerEnter={() => setHover(true)} onPointerLeave={() => setHover(false)}>
-            <div className="car-zone" ref={zone} onPointerDown={onDown} onPointerUp={onUp} aria-hidden>
-              {posterOf(st.car) && (
-                <img
-                  key={st.key}
-                  className={`car-poster ${live3d ? 'gone' : ''}`}
-                  src={posterOf(st.car).m}
-                  srcSet={`${posterOf(st.car).m} 712w, ${posterOf(st.car).w} 967w`}
-                  sizes="(max-width: 959px) 100vw, 50vw"
-                  alt=""
-                  decoding="async"
-                  fetchPriority={active === 0 ? 'high' : 'auto'}
-                />
-              )}
-            </div>
+            <div className="car-zone" ref={zone} onPointerDown={onDown} onPointerUp={onUp} aria-hidden />
             <div className={`style-card ${paused ? 'paused' : ''}`} ref={card} aria-roledescription="carousel" aria-label="Body styles">
               <div className="sc-tabs" role="tablist" aria-label="Body style" onKeyDown={onTabKey}>
                 {STYLES.map((s, i) => (

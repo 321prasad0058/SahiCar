@@ -2,6 +2,7 @@
 // The Firebase SDK is loaded lazily from fb/session; without a config it is never downloaded.
 import type { User } from 'firebase/auth'
 import { create } from 'zustand'
+import { afterHero } from '../lib/perf'
 import { identify } from '../lib/track'
 import { useStore } from './store'
 
@@ -57,6 +58,8 @@ if (enabled) {
         if (user) sync(user).catch(() => {})
       }),
     )
-  if (document.readyState === 'complete') setTimeout(start, 300)
-  else addEventListener('load', () => setTimeout(start, 300), { once: true })
+  // after page load, and on the homepage after its 3D is up (sign-in is 160 KB that the first screen doesn't need)
+  const later = () => afterHero(() => setTimeout(start, 300))
+  if (document.readyState === 'complete') later()
+  else addEventListener('load', later, { once: true })
 }
