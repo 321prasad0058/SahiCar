@@ -10690,7 +10690,7 @@
   "launched": "2023-01",
   "lastUpdate": "2026-01",
   "price": {
-   "min": 5090000,
+   "min": 5220000,
    "max": 5290000
   },
   "seats": [
@@ -10780,7 +10780,8 @@
   "oemUrl": "https://www.bmw.in/",
   "sources": [
    "https://www.cardekho.com/bmw-cars",
-   "https://www.carwale.com/bmw-cars/x1/"
+   "https://www.carwale.com/bmw-cars/x1/",
+   "https://www.cardekho.com/bmw/x1"
   ],
   "verifiedOn": "2026-11"
  },
@@ -11260,6 +11261,133 @@
    "https://www.rushlane.com/byd-denza-z9-gt-india-launch-price-rs-1-57-cr-670-km-range-270-km-h-topspeed-12561013.html",
    "https://www.autopunditz.com/post/denza-z9-gt-india-launch-price-range-specifications-2026",
    "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH25PwPXbu01bkOI1mKq9L5mkDj4eMTp3UltbBujtNZM_hNnKv93hKEsNqbEIHomCoMmFI7AnO5N0rCSIwaCnQvYLP8bkancOb1y_on3poXUa6fu1E-sIYG7fL639SyVs4yYlE2rQU8inR4wm6giPySIyyvbP_v1k4fcKJp356VFWCs1PDe9aCKSgI="
+  ],
+  "verifiedOn": "2026-11"
+ },
+ {
+  "id": "denza-d9",
+  "brand": "Denza",
+  "model": "D9",
+  "body": "mpv",
+  "segment": "luxury",
+  "launched": "2026-11",
+  "lastUpdate": null,
+  "price": {
+   "min": 9000000,
+   "max": 9000000
+  },
+  "seats": [
+   7
+  ],
+  "dims": {
+   "length": 5250,
+   "width": 1960,
+   "height": 1920,
+   "wheelbase": 3110,
+   "groundClearance": null,
+   "boot": 689,
+   "kerbWeight": 2915,
+   "fuelTank": null,
+   "turningRadius": null
+  },
+  "safety": {
+   "agency": null,
+   "adult": null,
+   "child": null,
+   "year": null,
+   "airbagsStd": 9,
+   "airbagsMax": null,
+   "esc": null,
+   "adas": "L2"
+  },
+  "powertrains": [
+   {
+    "engine": "Single electric motor, front-axle-mounted",
+    "cc": null,
+    "powerPs": 462,
+    "torqueNm": 365,
+    "transmissions": [
+     "single-speed"
+    ],
+    "efficiency": 730,
+    "batteryKwh": 115.07,
+    "priceFrom": 9000000,
+    "fuel": "ev"
+   }
+  ],
+  "variants": [
+   {
+    "name": "Premium",
+    "fuel": "ev",
+    "transmission": "AT",
+    "price": 9000000
+   }
+  ],
+  "features": [
+   "15.6-inch-touchscreen",
+   "10.25-inch-digital-instrument-cluster",
+   "dual-sunroof",
+   "ventilated-seats",
+   "massage-seats",
+   "captain-seats",
+   "powered-sliding-doors",
+   "powered-tailgate",
+   "adas",
+   "360-camera",
+   "9-airbags",
+   "wireless-charging",
+   "16-speaker-audio"
+  ],
+  "highlights": [
+   "Luxury 7-seater electric MPV",
+   "730 km claimed NEDC range",
+   "Single fully-loaded variant",
+   "Advanced comfort features for all rows"
+  ],
+  "weaknesses": [
+   "Fully imported CBU",
+   "High price"
+  ],
+  "serviceCost": null,
+  "resale": null,
+  "network": 6,
+  "wiki": "Denza D9",
+  "oemUrl": null,
+  "sources": [
+   "https://www.autocarindia.com/car-news/denza-d9-launched-in-india-at-rs-90-lakh-441320",
+   "https://www.carwale.com/news/byd-denza-d9-revealed-for-india/",
+   "https://cnevpost.com/2026/11/17/byd-denza-enters-india/",
+   "https://www.cardekho.com/denza/d9",
+   "https://www.team-bhp.com/news/denza-d9-launched-rs-90-lakh",
+   "https://auto.timesofindia.com/news/cars/byd-denza-d9-long-wheelbase-version-patented-redesigned-grille-revised-lighting-details-revealed/articleshow/135757521.cms",
+   "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFxyi_JNfrt0-GCOYticvNpRAYYObMgOU-aebG_j2CSlAzNDK1E4j59W8LAD-vVL_NLv7Zchfc06tO2zxMY1MfWGKB27rDDbM4Lz5V0qpTp1laCqTjvuV1neCkM2b1c-sfjjLTzflQUdV2n-yiJyD5PtOBHjOo4tSXLb9YpxDp-MfjFTh8YCmvlMb1DOJII8Ln3LTRSDmNAwQREgjJRzl5SAOPb3e3jMO7epxEYXpFmFx5HCKHzD1VGQ8ciVmURog=",
+   "https://english.news18a.com/news/english_315647.html",
+   "https://www.rushlane.com/byd-denza-luxury-brand-india-debut-confirmed-for-13th-nov-2026-12559377.html",
+   "https://www.team-bhp.com/forum/electric-cars/314275-denza-d9-launched-rs-90-lakh.html",
+   "https://www.team-bhp.com/news/byd-denza-d9-spotted-mumbai-ahead-november-13-launch",
+   "https://www.carwale.com/news/denza-to-make-india-debut-on-november-13/",
+   "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGb0ZooQ0zdWSnXkIuSshZF4mGn3K0Ogdn6wS9o6w3EhH0MDOcukK9PkbmxNpDfdDA8O7_tVGCPbuzu25pxZEiIu_6SdktzcHGeLzkjE8ifzm5JeiS6Po-VKIJDhTxAKPCIs_mOX7tMXfoMADFa4MnXBZmgHxMMUuKsz2EsrEhVCWVl3_WlbJCXUxHL2CCWeXsoY2FNrlykTNii7BeplVPis",
+   "https://www.businesstoday.in/auto/story/byds-denza-d9-luxury-electric-mpv-spotted-in-india-ahead-of-official-november-13-debut-566522-2026-11-10",
+   "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEpNGzPqUiksABXpzawLsEa8QWRB2QHRhuMrsoNV05Sf45cb3Wg3y4oHUjX7rRPBDSJvpzdSEpH6ZesYbnnaaH94pn4m5jlcuVfGfmo4AaJxFMFlGzmr6tdqvz3L15u8ln7H5LKm1sXBmfxouWwov9NIniFlVAawxraBaKMcGg8BDIlaszwpxgkrasRRjt1eZUfJa0YutzDcnX9amPtgVvyndx3qsSIV3BOlv9qOQ6Keg=",
+   "https://www.autogrid.shop/news/denza-d9-z9-gt-india-launch-price",
+   "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEJ4GYr4R11End7U-gbJQSbCd_BGaw9BwSeq8Ntb7oc2ESgfVoKkjfBN8UuZ7K8OgbMZT-DaquuO46U1Ia8DIZtpZJ1MlxtaQYk0KWwZe0i2Esmgx0s7EAjltYSkSczsBG5ioJF0fftmfFcUBfPUatocA4PAMZ8cJEUIl5fwxERZA=",
+   "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGiogp35NIaTpsXs1c77bUSrec4logxG-Q5YA5uC2KN1z_sbr70iKxMv0ykJ0c0drPkDcPBs2LzGlRQGe-NRT_1MKzLux7JiUnZyn57waQ2IJ3Dcs1h3KjpM4X1uYDtbg=",
+   "https://www.autocarindia.com/auto-features/denza-d9-all-you-need-to-know-441310",
+   "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFCpa3KD23s7ykeuQGuO2dkTskFGw88ryTPKXX3I6ydT6rfoOFDlHg7xIOvM__FNN6ijep1zBeYAg4E8XALFKdXY-FHBahcHCCJb33_ZuoC0GMfFmzgESQSRllH64B4986YlBSltAlGJaI_ECG9c2aC8A2KnqmuV4smJGqebPOoxBZclAMIoAV-UJ0kga04KN3ztlIvKWpOuHKVKO-hGtmEBsvKQOOWnMYVYPfIRLNqqYFgNzLCvMdQux3jCK2S",
+   "https://evelectree.com/article/denza-d9-launched-in-india-how-the-luxury-mpv-segment-performs-1363",
+   "https://parkplus.io/car-news/byd-denza-d9-india-debut-on-nov-13-price-range-and-specs",
+   "https://www.autocarindia.com/auto-videos/denza-d9-walkaround-video-440251",
+   "https://www.carwale.com/denza-cars/",
+   "https://auto.timesofindia.com/news/cars/denza-india-unveil-on-november-13-byds-luxury-ev-brand-set-to-debut-with-z9-gt-and-d9/articleshow/135141880.cms",
+   "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGrKeXRp0AciXX5znkfsUkjXRuCgEKdz9INsgJ5VR5O1JWK1JEAipUFvK1goWHxokk_ubTT_PFRdgwx5mnfcKfOq70vvKMHrZP_c0jE95_OSbIa3djds0Mj40nv4f38DIXxQQHSnaqnJqtTUoC4JeRYspwqGYZOhUodZQv9e4qgcMUHYVzYQBxaAqtpVOvfeWSBRjOdXbi3IQvoPvX4gbWNr6DvmT8UljK6OwhQK9sfYBB36dkvtCS36fWI9IXdfuVQ5SDmrqLobe_yY6kIksWJqGXMA9h9GA3W1vYTu8Ke",
+   "https://www.evoindia.com/article/denza-d9-launched-in-india-at-90-lakh",
+   "https://www.cardekho.com/news/general/denza-d9-spotted-in-india-ahead-of-brands-launch-later-this-month-36944.htm",
+   "https://www.just-auto.com/news/denza-luxury-brand-india-debut/",
+   "https://www.zigwheels.com/denza-cars/d9/",
+   "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE_fYvymgamaMmV1vU6R-P-_hzAmL4BHaB__ol6S53r79VllgbHhTwFPAGztyt9b9X2IxgZF1KoIHb4NYrgg5Hg8Q1Y0xVbTICmby92Jcxls5giHzJskJ0qUdogzfrpvVmY79isfPL21KO_QCzaEz4RSs4y1hPNiumQiAYJUE9aX2i7VePJ__VcqOCVbUZLFwVJ85I",
+   "https://www.zigwheels.com/denza-cars/",
+   "https://id.tradingview.com/news/moodys:900df715c7039:0-byd-denza-d9-spotted-in-india-ahead-of-november-13-launch-expected-price-features-and-what-buyers-can-expect/?mobileapp_new=true",
+   "https://autonews.gasgoo.com/articles/news/denza-enters-india-with-z9-gt-d9-flagship-models-launched-2122883299458080769"
   ],
   "verifiedOn": "2026-11"
  }

@@ -772,5 +772,9 @@
  "upcoming:genesis-gv90": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/Genesis_GV90_JG1_Baena_Green_%285%29.jpg/960px-Genesis_GV90_JG1_Baena_Green_%285%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
   "page": "https://en.wikipedia.org/wiki/Genesis_GV90"
+ },
+ "denza-d9": {
+  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/Denza_D9_DM-i_IAA_2025_DSC_2042.jpg/960px-Denza_D9_DM-i_IAA_2025_DSC_2042.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+  "page": "https://en.wikipedia.org/wiki/Denza_D9"
  }
 }
