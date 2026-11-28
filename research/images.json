@@ -51,8 +51,9 @@
   "page": "https://en.wikipedia.org/wiki/Citro%C3%ABn_Basalt"
  },
  "citroen-aircross": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Citro%C3%ABn_%C3%AB-C3_Aircross_IMG_3525.jpg/960px-Citro%C3%ABn_%C3%AB-C3_Aircross_IMG_3525.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Citro%C3%ABn_C3_Aircross"
+  "src": "/cars/ai/citroen-aircross.webp",
+  "page": "",
+  "ai": true
  },
  "citroen-ec3": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/Citro%C3%ABn_C3_Hybrid_110_%C3%AB-DSC6_Max_%28IV%29_%E2%80%93_f_05042026.jpg/960px-Citro%C3%ABn_C3_Hybrid_110_%C3%AB-DSC6_Max_%28IV%29_%E2%80%93_f_05042026.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
@@ -315,8 +316,9 @@
   "page": "https://en.wikipedia.org/wiki/Mercedes-Benz_GLC"
  },
  "mg-comet-ev": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/2023_Wuling_Air_EV_Standard_Range.jpg/960px-2023_Wuling_Air_EV_Standard_Range.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Wuling_Air_EV"
+  "src": "/cars/ai/mg-comet-ev.webp",
+  "page": "",
+  "ai": true
  },
  "mg-astor": {
   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/MG_ZS_%28crossover%2C_second_generation%29_DSC_8542.jpg/960px-MG_ZS_%28crossover%2C_second_generation%29_DSC_8542.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
@@ -515,10 +517,9 @@
   "ai": true
  },
  "nissan-gravite": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/4th_International_Auto_Show%2C_Bangalore_%282025%29_26.jpg/960px-4th_International_Auto_Show%2C_Bangalore_%282025%29_26.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-  "page": "https://commons.wikimedia.org/wiki/File:4th_International_Auto_Show,_Bangalore_(2025)_26.jpg",
-  "artist": "Gpkp",
-  "license": "CC BY-SA 4.0"
+  "src": "/cars/ai/nissan-gravite.webp",
+  "page": "",
+  "ai": true
  },
  "nissan-tekton": {
   "src": "/cars/ai/nissan-tekton.webp",
@@ -531,8 +532,9 @@
   "ai": true
  },
  "renault-triber": {
-  "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f3/2021_Renault_Triber_RXZ_%28Indonesia%29_front_view.jpg/960px-2021_Renault_Triber_RXZ_%28Indonesia%29_front_view.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-  "page": "https://en.wikipedia.org/wiki/Renault_Triber"
+  "src": "/cars/ai/renault-triber.webp",
+  "page": "",
+  "ai": true
  },
  "renault-kiger": {
   "src": "/cars/ai/renault-kiger.webp",

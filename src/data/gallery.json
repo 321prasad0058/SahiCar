@@ -31,12 +31,22 @@
  ],
  "mercedes-benz-glc-electric": [
   {
+   "src": "/cars/gallery/mercedes-benz-glc-electric/1-motion.webp",
+   "video": "/cars/gallery/mercedes-benz-glc-electric/1-motion.mp4",
+   "caption": "Studio orbit: the long, low electric GLC from every angle"
+  },
+  {
    "src": "/cars/gallery/mercedes-benz-glc-electric/2-rear.webp",
    "caption": "Rear: red ring tail lamps on a black band, no exhaust pipes"
   },
   {
    "src": "/cars/gallery/mercedes-benz-glc-electric/3-grille.webp",
    "caption": "Illuminated grille: about 942 lit dots and a glowing star"
+  },
+  {
+   "src": "/cars/gallery/mercedes-benz-glc-electric/3-grille-motion.webp",
+   "video": "/cars/gallery/mercedes-benz-glc-electric/3-grille-motion.mp4",
+   "caption": "The illuminated grille and star lighting up"
   },
   {
    "src": "/cars/gallery/mercedes-benz-glc-electric/4-dashboard.webp",
